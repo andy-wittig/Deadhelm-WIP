@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsmtbe5hbqsrc"]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_menu.gd" id="1_cqruj"]
+[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_wrkft"]
+[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_ashv2"]
+
+[node name="multiplayer_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cqruj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -54.0
+offset_bottom = 54.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_wrkft")
+theme_override_font_sizes/font_size = 16
+text = "PORT:"
+horizontal_alignment = 1
+
+[node name="portEntry" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ashv2")
+theme_override_font_sizes/font_size = 24
+text = "8080"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_wrkft")
+theme_override_font_sizes/font_size = 16
+text = "SERVER IP:"
+horizontal_alignment = 1
+
+[node name="ipEntry" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ashv2")
+theme_override_font_sizes/font_size = 24
+text = "127.0.0.1"
+expand_to_text_length = true
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_wrkft")
+theme_override_font_sizes/font_size = 16
+text = "NAME:"
+horizontal_alignment = 1
+
+[node name="nameEntry" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ashv2")
+theme_override_font_sizes/font_size = 24
+placeholder_text = "player 2"
+expand_to_text_length = true
+
+[node name="hostButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_wrkft")
+theme_override_font_sizes/font_size = 24
+text = "host game"
+
+[node name="joinButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_wrkft")
+theme_override_font_sizes/font_size = 24
+text = "join game"
+
+[node name="backButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ashv2")
+theme_override_font_sizes/font_size = 24
+text = "back"
+
+[connection signal="text_changed" from="VBoxContainer/portEntry" to="." method="_on_port_entry_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/ipEntry" to="." method="_on_ip_entry_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/nameEntry" to="." method="_on_name_entry_text_changed"]
+[connection signal="pressed" from="VBoxContainer/hostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/joinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/backButton" to="." method="_on_back_button_pressed"]

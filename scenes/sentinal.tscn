@@ -1,0 +1,228 @@
+[gd_scene load_steps=18 format=3 uid="uid://dmhxqps832npn"]
+
+[ext_resource type="Script" path="res://scripts/sentinal.gd" id="1_onipe"]
+[ext_resource type="Texture2D" uid="uid://bm4fxsyxftyp2" path="res://assets/sprites/sentinal.png" id="1_vs5s6"]
+[ext_resource type="Texture2D" uid="uid://dcquwtc8vbwww" path="res://assets/sprites/sentinal arm.png" id="2_ohr3g"]
+[ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/bombshell_blink.tres" id="2_yj1bm"]
+[ext_resource type="Texture2D" uid="uid://ckqalx0dmu00f" path="res://assets/sprites/energy ring.png" id="4_xlb1g"]
+[ext_resource type="AudioStream" uid="uid://cm0mb03v6df6" path="res://assets/sound effects/sentinal_player_entered.mp3" id="5_gmvqt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7xacb"]
+radius = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lopnc"]
+shader = ExtResource("2_yj1bm")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(0.92549, 0.152941, 0.247059, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ftgnw"]
+shader = ExtResource("2_yj1bm")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(0.92549, 0.152941, 0.247059, 1)
+
+[sub_resource type="Animation" id="Animation_2g8vt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.10472]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../GunSprite:material:shader_parameter/enabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4hul6"]
+resource_name = "body_rock"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.10472, -0.10472]
+}
+
+[sub_resource type="Animation" id="Animation_6ecqx"]
+resource_name = "enemy_blink"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../GunSprite:material:shader_parameter/enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dwsq2"]
+_data = {
+"RESET": SubResource("Animation_2g8vt"),
+"body_rock": SubResource("Animation_4hul6"),
+"enemy_blink": SubResource("Animation_6ecqx")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vrh32"]
+
+[sub_resource type="Curve" id="Curve_86jod"]
+_data = [Vector2(0, 0.750417), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.750417), 0.0, 0.0, 0, 0, Vector2(1, 0.153589), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_7s2sg"]
+offsets = PackedFloat32Array(0.242152, 1)
+colors = PackedColorArray(1, 1, 1, 0.882353, 1, 1, 1, 0)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cx5gq"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("BodySprite:flip_h")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("GunSprite:flip_v")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("GunSprite:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="sentinal" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_onipe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_7xacb")
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_lopnc")
+position = Vector2(0, -8)
+rotation = 0.10472
+texture = ExtResource("1_vs5s6")
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ftgnw")
+position = Vector2(-2.38419e-07, -7)
+rotation = -0.785398
+texture = ExtResource("2_ohr3g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BodySprite")
+libraries = {
+"": SubResource("AnimationLibrary_dwsq2")
+}
+autoplay = "body_rock"
+
+[node name="chase player" type="Area2D" parent="."]
+visible = false
+collision_mask = 2
+
+[node name="detection_radius" type="CollisionShape2D" parent="chase player"]
+position = Vector2(0, -7)
+scale = Vector2(8, 8)
+shape = SubResource("CircleShape2D_vrh32")
+
+[node name="RayCastDown" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(0, 7)
+collision_mask = 4
+
+[node name="RayCastUp" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(0, -7)
+collision_mask = 4
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(7, 0)
+collision_mask = 4
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(-7, 0)
+collision_mask = 4
+
+[node name="RoamTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 4.0
+
+[node name="Rocket Marker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -7)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+amount = 4
+lifetime = 0.15
+speed_scale = 0.18
+texture = ExtResource("4_xlb1g")
+gravity = Vector2(0, 2500)
+angular_velocity_min = -10.0
+angular_velocity_max = 10.0
+scale_amount_curve = SubResource("Curve_86jod")
+color_ramp = SubResource("Gradient_7s2sg")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_gmvqt")
+volume_db = -15.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_cx5gq")
+
+[connection signal="body_entered" from="chase player" to="." method="_on_chase_player_body_entered"]
+[connection signal="body_exited" from="chase player" to="." method="_on_chase_player_body_exited"]
+[connection signal="timeout" from="RoamTimer" to="." method="_on_roam_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmhxqps832npn"]
+
+[ext_resource type="Script" path="res://scripts/sentinal.gd" id="1_onipe"]
+[ext_resource type="Texture2D" uid="uid://bm4fxsyxftyp2" path="res://assets/sprites/sentinal.png" id="1_vs5s6"]
+[ext_resource type="Texture2D" uid="uid://dcquwtc8vbwww" path="res://assets/sprites/sentinal arm.png" id="2_ohr3g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7xacb"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_2g8vt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.10472]
+}
+
+[sub_resource type="Animation" id="Animation_4hul6"]
+resource_name = "body_rock"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.10472, -0.10472]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dwsq2"]
+_data = {
+"RESET": SubResource("Animation_2g8vt"),
+"body_rock": SubResource("Animation_4hul6")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vrh32"]
+radius = 9.50082
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cx5gq"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("BodySprite:flip_h")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="sentinal" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_onipe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_7xacb")
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+rotation = 0.10472
+texture = ExtResource("1_vs5s6")
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+position = Vector2(-2.38419e-07, -7)
+rotation = -0.785398
+texture = ExtResource("2_ohr3g")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BodySprite")
+libraries = {
+"": SubResource("AnimationLibrary_dwsq2")
+}
+autoplay = "body_rock"
+
+[node name="RoamTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="RayCastDown" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(0, 7)
+
+[node name="RayCastUp" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(0, -7)
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(7, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(-7, 0)
+
+[node name="chase player" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="detection_radius" type="CollisionShape2D" parent="chase player"]
+position = Vector2(0, -7)
+scale = Vector2(8, 8)
+shape = SubResource("CircleShape2D_vrh32")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_cx5gq")
+
+[connection signal="timeout" from="RoamTimer" to="." method="_on_roam_timer_timeout"]
+[connection signal="body_entered" from="chase player" to="." method="_on_chase_player_body_entered"]
+[connection signal="body_exited" from="chase player" to="." method="_on_chase_player_body_exited"]

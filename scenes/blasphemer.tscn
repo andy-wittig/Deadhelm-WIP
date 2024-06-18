@@ -1,0 +1,102 @@
+[gd_scene load_steps=10 format=3 uid="uid://cy85nfl1yblvo"]
+
+[ext_resource type="Texture2D" uid="uid://yahxduawgq3j" path="res://assets/sprites/blasphemer.png" id="1_qghqt"]
+
+[sub_resource type="Curve" id="Curve_ls151"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.87251, 13.3556), -246.012, -246.012, 0, 0, Vector2(1, 52.4207), -462.205, -462.205, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_lnyf8"]
+_data = [Vector2(0.00398406, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.651968), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_yna4w"]
+offsets = PackedFloat32Array(0.0852018, 0.538117, 0.843049, 0.995516)
+colors = PackedColorArray(0.909804, 0.823529, 0.509804, 1, 0.913725, 0.521569, 0.215686, 1, 0.92549, 0.152941, 0.247059, 1, 0.92549, 0.152941, 0.247059, 0)
+
+[sub_resource type="Gradient" id="Gradient_q1wph"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q3tdg"]
+gradient = SubResource("Gradient_q1wph")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_7virq"]
+resource_name = "flame"
+length = 0.4
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.92549, 0.152941, 0.247059, 1), Color(0.913725, 0.521569, 0.215686, 1), Color(0.968627, 0.952941, 0.717647, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_58jkn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.92549, 0.152941, 0.247059, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mkj0e"]
+_data = {
+"RESET": SubResource("Animation_58jkn"),
+"flame": SubResource("Animation_7virq")
+}
+
+[node name="blasphemer" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("1_qghqt")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+amount = 500
+lifetime = 0.5
+speed_scale = 0.3
+explosiveness = 0.02
+randomness = 0.1
+lifetime_randomness = 0.1
+emission_shape = 1
+emission_sphere_radius = 5.0
+orbit_velocity_min = -0.05
+orbit_velocity_max = 0.05
+radial_accel_min = -100.0
+radial_accel_curve = SubResource("Curve_ls151")
+angle_min = -45.0
+angle_max = 45.0
+scale_amount_min = 1.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_lnyf8")
+color_ramp = SubResource("Gradient_yna4w")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+z_index = 1
+color = Color(0.92549, 0.152941, 0.247059, 1)
+energy = 0.6
+texture = SubResource("GradientTexture2D_q3tdg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
+libraries = {
+"": SubResource("AnimationLibrary_mkj0e")
+}
+autoplay = "flame"
