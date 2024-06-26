@@ -2,25 +2,56 @@ extends TextureRect
 
 var dragging = false
 var current_item = null
+var currently_selected = false
+
+@onready var select_texture = %SelectTexture
 
 @onready var item_texture_dict = {
+	"empty" : null,
 	"lock" : preload("res://assets/sprites/placeholder_lock.png"),
-	"meteor" : preload("res://assets/sprites/placeholder_meteor.png")
+	"meteor" : preload("res://assets/sprites/placeholder_meteor.png"),
+	"shield" : preload("res://assets/sprites/placeholder_shield.png"),
+	"lightning" : preload("res://assets/sprites/placeholder_lightning.png")
+}
+
+@onready var item_instance_dict = {
+	"meteor" : "res://scenes/meteor.tscn"
 }
 
 @onready var items = item_texture_dict.keys()
 
 func _ready():
-	current_item = items.find("meteor")
-	self.texture = item_texture_dict[items[current_item]]
+	current_item = items.find("empty")
+	texture = item_texture_dict[items[current_item]]
+
+func _process(delta):
+	if (currently_selected):
+		select_texture.visible = true
+	else:
+		select_texture.visible = false
+		
+	if (dragging):
+		if (Input.is_action_just_released("left_click")):
+			dragging = false
+
+func get_slot_item():
+	return items[current_item]
+	
+func get_spell_instance():
+	return item_instance_dict[items[current_item]]
+	
+func set_slot_item(item_name):
+	current_item = items.find(item_name)
+	texture = item_texture_dict[items[current_item]]
 
 func _get_drag_data(_pos):
-	if (current_item != null): #there is item to drag
+	if (items[current_item] != "empty" && items[current_item] != "lock"): #there is item to drag
 		var data = {}
+		data["original_slot"] = self
 		data["original_texture"] = texture
+		data["item_type"] = items[current_item]
 		
 		var drag_texture = TextureRect.new()
-		#drag_texture.expand = true
 		drag_texture.texture = texture
 		drag_texture.size = Vector2(get_global_transform().get_scale().x * texture.get_width(), get_global_transform().get_scale().y * texture.get_height())
 		set_drag_preview(drag_texture)
@@ -28,25 +59,17 @@ func _get_drag_data(_pos):
 		return data
 	
 func _can_drop_data(_pos, data):
+	if (data["item_type"] == "lock"):
+		return false
 	return true
 	
 func _drop_data(_pos, data):
-	texture = data["original_texture"]
-	
-func _process(delta):
-	#if (dragging):
-	#	self.visible = false
-		#var mouse_pos = get_global_mouse_position()
-		#placeholder_item.global_position.x = mouse_pos.x - placeholder_item.texture.get_width() / 2
-		#placeholder_item.global_position.y = mouse_pos.y - placeholder_item.texture.get_height() / 2
-	#else:
-	#	self.visible = true
-	pass
+	data["original_slot"].set_slot_item(get_slot_item())
+	set_slot_item(data["item_type"])
+
+#var mouse_pos = get_global_mouse_position()
+#placeholder_item.global_position.x = mouse_pos.x - placeholder_item.texture.get_width() / 2
 
 func _on_slot_base_gui_input(event):
-	#if (not dragging && event.is_action_pressed("left_click")):
-	#	dragging = true
-		
-	#if (dragging && event.is_action_released("left_click")):
-	#	dragging = false
-	pass
+	if (event.is_action_pressed("left_click")):
+		dragging = true

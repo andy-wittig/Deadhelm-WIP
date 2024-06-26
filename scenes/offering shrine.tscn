@@ -1,10 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://6fmdfddl6dkc"]
+[gd_scene load_steps=16 format=3 uid="uid://6fmdfddl6dkc"]
 
 [ext_resource type="Texture2D" uid="uid://dnmihy1luvbmi" path="res://assets/sprites/offering shrine.png" id="1_qyktf"]
 [ext_resource type="Script" path="res://scripts/offering shrine.gd" id="1_ueftv"]
+[ext_resource type="Shader" path="res://shaders/soul.gdshader" id="2_h7ffm"]
+[ext_resource type="AudioStream" uid="uid://uswapymi1wdl" path="res://assets/sound effects/offering_shrine_chime.mp3" id="3_ojaql"]
+[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_kwcm2"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dbwly"]
-radius = 13.0384
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hcyye"]
+shader = ExtResource("2_h7ffm")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/enabled = false
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_naqoh"]
+radius = 12.0
 
 [sub_resource type="Curve" id="Curve_fbfds"]
 min_value = -200.0
@@ -94,15 +102,21 @@ _data = {
 }
 
 [node name="offering shrine" type="Area2D"]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_ueftv")
 
 [node name="ShrineSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hcyye")
 position = Vector2(0, -16)
 texture = ExtResource("1_qyktf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -13)
-shape = SubResource("CircleShape2D_dbwly")
+[node name="DetectPlayer" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="PickupShape" type="CollisionShape2D" parent="DetectPlayer"]
+position = Vector2(0, -12)
+shape = SubResource("CircleShape2D_naqoh")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_index = 1
@@ -165,3 +179,29 @@ libraries = {
 "": SubResource("AnimationLibrary_tnn82")
 }
 autoplay = "flame"
+
+[node name="ShrineChimeAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ojaql")
+volume_db = -10.0
+
+[node name="SoulLabel" type="Label" parent="."]
+z_index = 10
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.0
+offset_top = -33.0
+offset_right = 37.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_kwcm2")
+theme_override_font_sizes/font_size = 8
+text = "0/10 souls"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="DetectPlayer" to="." method="_on_detect_player_body_entered"]
+[connection signal="body_exited" from="DetectPlayer" to="." method="_on_detect_player_body_exited"]
+[connection signal="input_event" from="DetectPlayer" to="." method="_on_input_event"]

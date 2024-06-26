@@ -1,9 +1,12 @@
 extends Area2D
 
 var direction : Vector2
-const SPEED = 80.0
+const SPEED = 70.0
 
 @onready var meteor_sprite = $MeteorSprite
+
+func get_sprite_path():
+	return $MeteorSprite.texture.resource_path
 
 func _process(delta):
 	meteor_sprite.rotation = direction.angle()

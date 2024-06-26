@@ -55,7 +55,7 @@ func fire_spell(peer_position, peer_dir, radius):
 	spell_instance.position = peer_position + peer_dir * radius
 	get_parent().add_child(spell_instance)
 
-func _process(delta):
+func _process(_delta):
 	if multiplayer.get_unique_id() == player_id:
 		healthbar_label.text = str(player_health) + "/100"
 		soul_label.text = str(souls_collected)
@@ -83,7 +83,7 @@ func _process(delta):
 				attack_cooldown = true
 				dial_created = false
 
-func _apply_animations(delta):
+func _apply_animations(_delta):
 	#flips sprite
 	if (hor_direction > 0):
 		animated_sprite.flip_h = false

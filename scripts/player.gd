@@ -8,12 +8,22 @@ var player_health = 100
 var souls_collected = 0
 var coins_collected = 0
 var attack_cooldown = false
+var dial_instance = null
+var dial_created = false
+var selected_slot_pos = 0
+var currently_selected_slot = null
+var spell_instance = null
 
 enum state_type {
 	MOVING,
 	CLIMBING
 }
 var state := state_type.MOVING
+
+@onready var inventory = {
+	"slot_1" : %hud/Control/HBoxContainer/ItemSlot1.get_node("Item"),
+	"slot_2" : %hud/Control/HBoxContainer/ItemSlot2.get_node("Item")
+}
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
@@ -26,43 +36,80 @@ var state := state_type.MOVING
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var dial_instance = null
-var dial_created = false
-
 func _on_attack_cooldown_timer_timeout():
 	attack_cooldown = false
-
+	
+@rpc ("call_local", "any_peer")
+func drop_inventory_item(spell_type, pos):
+	var tome = load("res://scenes/tome.tscn").instantiate()
+	tome.spell_type = spell_type
+	tome.position.x = pos.x
+	tome.position.y = pos.y - 16
+	get_tree().get_root().add_child(tome)
+	
+func _ready():
+	currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
+	currently_selected_slot.currently_selected = true
+	
 func _process(delta):
 	healthbar_label.text = str(player_health) + "/100"
 	soul_label.text = str(souls_collected)
 	money_label.text = "$" + str(coins_collected)
 	
-	#trigger mystic dial
-	if not attack_cooldown:
-		if Input.is_action_just_pressed("right_click"):
-			dial_instance = load("res://scenes/mystic_dial.tscn").instantiate()
-			get_parent().add_child(dial_instance)
-			dial_instance.player = self
-			dial_created = true
-	
-	if Input.is_action_just_released("right_click"):
-		if (dial_created):
-			dial_instance.destroy()
-			dial_created = false
-	
-	#fire mystic dial
-	if (dial_created):
-		if Input.is_action_just_pressed("left_click"):
-			var spell_instance = load("res://scenes/meteor.tscn").instantiate()
-			spell_instance.direction = dial_instance.mouse_dir
-			spell_instance.position = dial_instance.position + dial_instance.mouse_dir * dial_instance.DIAL_RADIUS
-			get_parent().add_child(spell_instance)
-			
-			dial_instance.destroy()
-			attack_cooldown_timer.start(2)
-			attack_cooldown = true
-			dial_created = false
+	#handle inventory input
+	if (Input.is_action_just_pressed("scroll_up")):
+		selected_slot_pos += 1
+		selected_slot_pos = clamp(selected_slot_pos, 0 , inventory.size() - 1)
+		currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
+		for slot in inventory:
+			inventory[slot].currently_selected = false
+		currently_selected_slot.currently_selected = true
 		
+	if (Input.is_action_just_pressed("scroll_down")):
+		selected_slot_pos -= 1
+		selected_slot_pos = clamp(selected_slot_pos, 0 , inventory.size() - 1)
+		currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
+		for slot in inventory:
+			inventory[slot].currently_selected = false
+		currently_selected_slot.currently_selected = true
+		
+	if (Input.is_action_just_pressed("drop_item")):
+		if (currently_selected_slot.get_slot_item() != "empty" && !currently_selected_slot.dragging):
+			rpc("drop_inventory_item", currently_selected_slot.get_slot_item(), global_position)
+			currently_selected_slot.set_slot_item("empty")
+	
+	if (currently_selected_slot.get_slot_item() != "empty"):
+		#trigger mystic dial
+		if not attack_cooldown:
+			if Input.is_action_just_pressed("right_click"):
+				spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
+				dial_instance = load("res://scenes/mystic_dial.tscn").instantiate()
+				get_parent().add_child(dial_instance)
+				dial_instance.position.x = position.x
+				dial_instance.position.y = position.y - 16
+				dial_instance.player = self
+				dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
+				dial_created = true
+		
+		#fire mystic dial
+		if (dial_created):
+			if Input.is_action_just_pressed("left_click"):
+				get_parent().add_child(spell_instance)
+				var mouse_pos = get_global_mouse_position()
+				var mouse_dir = (mouse_pos - dial_instance.global_position).normalized()
+				spell_instance.direction = mouse_dir
+				spell_instance.position = dial_instance.position + dial_instance.mouse_dir * dial_instance.DIAL_RADIUS
+				
+				dial_instance.destroy()
+				attack_cooldown_timer.start(2)
+				attack_cooldown = true
+				dial_created = false
+				
+	if Input.is_action_just_released("right_click"):
+			if (dial_created):
+				dial_instance.destroy()
+				dial_created = false
+
 func _physics_process(delta):
 	#simple state machine
 	match state:
@@ -129,3 +176,15 @@ func collect_soul():
 func collect_coin():
 	coin_pickup_audio_player.play()
 	coins_collected += 1
+	
+func colllect_spell(spell_type):
+	for slot in inventory:
+		if inventory[slot].get_slot_item() == "empty":
+			inventory[slot].set_slot_item(spell_type)
+			break
+	
+func is_inventory_full():
+	for slot in inventory:
+		if inventory[slot].get_slot_item() == "empty":
+			return false
+	return true

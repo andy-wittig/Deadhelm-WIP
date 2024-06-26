@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=6 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="1_l1je8"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_lami0"]
+[ext_resource type="Texture2D" uid="uid://b213dlq1guphc" path="res://assets/sprites/title_ui.png" id="2_u7tpf"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_w2m3k"]
 [ext_resource type="AudioStream" uid="uid://b5ycopyaj1oif" path="res://assets/music/title_screen.mp3" id="4_4asvc"]
 
@@ -30,6 +31,12 @@ offset_bottom = 54.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_u7tpf")
+expand_mode = 5
+stretch_mode = 6
+
 [node name="startButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_w2m3k")
@@ -41,6 +48,12 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_w2m3k")
 theme_override_font_sizes/font_size = 24
 text = "multiplayer"
+
+[node name="settingsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_l1je8")
+theme_override_font_sizes/font_size = 24
+text = "settings"
 
 [node name="quitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -55,4 +68,5 @@ autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/startButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/multiplayerButton" to="." method="_on_multiplayer_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/settingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/quitButton" to="." method="_on_quit_button_pressed"]

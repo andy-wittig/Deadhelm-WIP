@@ -11,6 +11,7 @@ var rand_state_timer = RandomNumberGenerator.new()
 var init_position: Vector2
 var gravity = -250
 var enemy_health = 40
+var marked_for_death = false
 
 enum state_type {
 	MOVING,
@@ -36,12 +37,21 @@ func apply_knockback(other_pos):
 	
 	move_and_slide()
 	
-@rpc("any_peer", "call_local", "reliable")
+@rpc("any_peer", "call_local")
 func hurt_enemy(damage: int, other_pos: float):
 	animation_player.play("enemy_blink")
 	apply_knockback(other_pos)
 	enemy_health -= damage
 	enemy_health = max(enemy_health, 0)
+	
+@rpc("call_local", "any_peer")
+func destroy_self():
+	var soul = load("res://scenes/soul.tscn").instantiate()
+	soul.transform = transform
+	owner.add_child(soul)
+	
+	marked_for_death = true
+	queue_free()
 
 @rpc("call_local")
 func update_direction():
@@ -77,21 +87,14 @@ func _ready():
 	if multiplayer.is_server():
 		init_position = global_position
 		%RoamTimer.start()
-		
-func _on_roam_timer_timeout():
-	if not chasing_player:
-		rpc("update_direction")
-		
-func _on_chase_player_body_entered(body):
-	if (body.get_parent().get_name() == "players") && multiplayer.is_server():
-		if (player == null): #only one player can be targeted
-			rpc("player_entered", body)
-
-func _on_chase_player_body_exited(body):
-		if (body == player):
-			rpc("player_exited")
 
 func _physics_process(delta):
+	#deal with enemy death
+	if multiplayer.is_server():
+		if (enemy_health <= 0):
+			if (!marked_for_death):
+				rpc("destroy_self")
+			
 	#flip sprite
 	if (roam_direction == Vector2.RIGHT):
 		body_sprite.flip_h = true
@@ -137,7 +140,24 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 			
 	move_and_slide()
+	
+func _on_chase_player_body_entered(body):
+	if (body.get_parent().get_name() == "players") && multiplayer.is_server():
+		if (player == null): #only one player can be targeted
+			if (!marked_for_death):
+				rpc("player_entered", body)
+
+func _on_chase_player_body_exited(body):
+		if (body == player):
+			if (!marked_for_death):
+				rpc("player_exited")
+			
+func _on_roam_timer_timeout():
+	if not chasing_player:
+		if (!marked_for_death):
+			rpc("update_direction")
 
 func _on_attack_timer_timeout():
 	if multiplayer.is_server():
-		rpc("attack", player_direction)
+		if (!marked_for_death):
+			rpc("attack", player_direction)

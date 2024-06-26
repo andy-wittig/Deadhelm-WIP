@@ -10,14 +10,11 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="SelectTexture" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
+unique_name_in_owner = true
+layout_mode = 0
 offset_top = -15.0
 offset_right = 16.0
 offset_bottom = 1.0
-grow_vertical = 0
 texture = ExtResource("3_c7cxh")
 
 [node name="SlotBase" type="TextureRect" parent="."]
@@ -28,8 +25,8 @@ texture = ExtResource("1_fq4ae")
 
 [node name="Item" type="TextureRect" parent="."]
 layout_mode = 2
+offset_right = 16.0
+offset_bottom = 16.0
 script = ExtResource("1_v4srt")
 
-[connection signal="gui_input" from="SlotBase" to="." method="_on_slot_base_gui_input"]
-[connection signal="mouse_entered" from="SlotBase" to="." method="_on_slot_base_mouse_entered"]
-[connection signal="mouse_exited" from="SlotBase" to="." method="_on_slot_base_mouse_exited"]
+[connection signal="gui_input" from="Item" to="Item" method="_on_slot_base_gui_input"]
