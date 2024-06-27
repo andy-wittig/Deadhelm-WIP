@@ -13,6 +13,7 @@ var controls_list = [
 ]
 
 @onready var check_windowed = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed
+@onready var check_vsync = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckVsync
 @onready var remap_container = $VBoxContainer/SettingsTabs/CONTROLS/RemapContainer
 
 func _ready():
@@ -21,6 +22,11 @@ func _ready():
 	elif (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN):
 		check_windowed.button_pressed = false
 		
+	if (DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_ENABLED):
+		check_vsync.button_pressed = true
+	elif (DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_DISABLED):
+		check_vsync.button_pressed = false
+
 	for action in controls_list:
 		var label = Label.new()
 		var button = custom_action.new()
@@ -34,15 +40,18 @@ func _ready():
 func _on_back_button_pressed():
 	queue_free()
 
-func _on_scale_slider_value_changed(value):
-	pass
-
 func _on_check_windowed_toggled(toggled):
 	if (toggled):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		
+func _on_check_vsync_toggled(toggled):
+	if (toggled):
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
 class custom_action extends Button:
 	var action: String
 	
@@ -70,4 +79,3 @@ class custom_action extends Button:
 		
 	func update_action_text():
 		text = InputMap.action_get_events(action)[0].as_text()
-	

@@ -22,6 +22,9 @@ GameManager="*res://scripts/game_manager.gd"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://assets/sprites/cursor pointer.png"
 
 [input]
