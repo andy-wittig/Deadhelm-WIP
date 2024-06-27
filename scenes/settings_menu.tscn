@@ -20,9 +20,9 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -186.0
-offset_top = -56.0
-offset_bottom = 56.0
+offset_left = -407.0
+offset_top = -223.0
+offset_bottom = 224.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -37,18 +37,71 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ScaleLabel" type="Label" parent="VBoxContainer"]
+[node name="SettingsTabs" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 16
+tab_alignment = 1
+current_tab = 1
+clip_tabs = false
+
+[node name="DISPLAY" type="TabBar" parent="VBoxContainer/SettingsTabs"]
+visible = false
+layout_mode = 2
+tab_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SettingsTabs/DISPLAY"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -32.0
+offset_right = 93.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScaleLabel" type="Label" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_k5orc")
 theme_override_font_sizes/font_size = 16
 text = "UI SCALE:"
 horizontal_alignment = 1
 
-[node name="ScaleSlider" type="HSlider" parent="VBoxContainer"]
+[node name="ScaleSlider" type="HSlider" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
 layout_mode = 2
 min_value = 1.0
 max_value = 3.0
 value = 1.0
+
+[node name="CheckWindowed" type="CheckBox" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 16
+text = "WINDOWED:"
+
+[node name="CONTROLS" type="TabBar" parent="VBoxContainer/SettingsTabs"]
+layout_mode = 2
+
+[node name="RemapContainer" type="GridContainer" parent="VBoxContainer/SettingsTabs/CONTROLS"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
 
 [node name="backButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -56,5 +109,6 @@ theme_override_fonts/font = ExtResource("2_5htnj")
 theme_override_font_sizes/font_size = 24
 text = "back"
 
-[connection signal="value_changed" from="VBoxContainer/ScaleSlider" to="." method="_on_scale_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/ScaleSlider" to="." method="_on_scale_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed" to="." method="_on_check_windowed_toggled"]
 [connection signal="pressed" from="VBoxContainer/backButton" to="." method="_on_back_button_pressed"]

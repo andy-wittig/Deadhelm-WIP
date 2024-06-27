@@ -1,7 +1,73 @@
 extends Control
 
+var controls_list = [
+	"move_left",
+	"move_right",
+	"move_up",
+	"move_down",
+	"jump",
+	"pickup",
+	"drop_item",
+	"scroll_up",
+	"scroll_down",
+]
+
+@onready var check_windowed = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed
+@onready var remap_container = $VBoxContainer/SettingsTabs/CONTROLS/RemapContainer
+
+func _ready():
+	if (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED):
+		check_windowed.button_pressed = true
+	elif (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN):
+		check_windowed.button_pressed = false
+		
+	for action in controls_list:
+		var label = Label.new()
+		var button = custom_action.new()
+		label.add_theme_font_override("font", load("res://assets/fonts/PixelOperator8.ttf"))
+		button.add_theme_font_override("font", load("res://assets/fonts/PixelOperator8.ttf"))
+		label.text = action
+		button.action = action
+		remap_container.add_child(label)
+		remap_container.add_child(button)
+
 func _on_back_button_pressed():
 	queue_free()
 
 func _on_scale_slider_value_changed(value):
 	pass
+
+func _on_check_windowed_toggled(toggled):
+	if (toggled):
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		
+class custom_action extends Button:
+	var action: String
+	
+	func _init():
+		toggle_mode = true
+		
+	func _ready():
+		set_process_unhandled_input(false)
+		update_action_text()
+		
+	func _toggled(button_pressed):
+		set_process_unhandled_input(button_pressed)
+		if (button_pressed):
+			text = "awaiting input"
+			release_focus()
+		else:
+			update_action_text()
+			grab_focus()
+			
+	func _unhandled_input(event):
+		if (event.pressed):
+			InputMap.action_erase_events(action)
+			InputMap.action_add_event(action, event)
+			button_pressed = false
+		
+	func update_action_text():
+		text = InputMap.action_get_events(action)[0].as_text()
+	
