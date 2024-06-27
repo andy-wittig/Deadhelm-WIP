@@ -12,13 +12,13 @@ func _process(_delta):
 func destroy_self():
 	var explosion = load("res://scenes/explosion.tscn").instantiate()
 	get_parent().add_child(explosion)
-	explosion.transform = self.global_transform
+	explosion.position = position
 	queue_free()
 
 func _on_destroy_timer_timeout():
 	var explosion = load("res://scenes/explosion.tscn").instantiate()
 	get_parent().add_child(explosion)
-	explosion.transform = self.global_transform
+	explosion.position = self.position
 	queue_free()
 	
 func _on_area_2d_body_entered(body):

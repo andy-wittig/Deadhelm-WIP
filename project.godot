@@ -22,7 +22,6 @@ GameManager="*res://scripts/game_manager.gd"
 
 [display]
 
-window/vsync/vsync_mode=0
 mouse_cursor/custom_image="res://assets/sprites/cursor pointer.png"
 
 [input]

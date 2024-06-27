@@ -19,6 +19,7 @@ offsets = PackedFloat32Array(0.246637, 0.887892)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="explosion" type="Node2D"]
+z_index = 5
 script = ExtResource("1_pvsj3")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

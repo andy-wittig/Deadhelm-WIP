@@ -47,8 +47,13 @@ func hurt_enemy(damage: int, other_pos: float):
 @rpc("call_local", "any_peer")
 func destroy_self():
 	var soul = load("res://scenes/soul.tscn").instantiate()
-	soul.transform = transform
+	soul.position = position
 	owner.add_child(soul)
+	
+	var explosion = load("res://scenes/explosion.tscn").instantiate()
+	get_parent().add_child(explosion)
+	explosion.position.y = position.y - 8
+	explosion.position.x = position.x
 	
 	marked_for_death = true
 	queue_free()

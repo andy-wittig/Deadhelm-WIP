@@ -11,12 +11,18 @@ func get_sprite_path():
 func _process(delta):
 	meteor_sprite.rotation = direction.angle()
 	position += direction * SPEED * delta
-
-func _on_destroy_timer_timeout():
-	queue_free()
 	
 @rpc("any_peer", "call_local")
 func destroy_self():
+	var impact = load("res://scenes/impact.tscn").instantiate()
+	get_parent().add_child(impact)
+	impact.position = position
+	queue_free()
+	
+func _on_destroy_timer_timeout():
+	var impact = load("res://scenes/impact.tscn").instantiate()
+	get_parent().add_child(impact)
+	impact.position = position
 	queue_free()
 
 func _on_body_entered(body):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dlses24j38m5l"]
+[gd_scene load_steps=31 format=3 uid="uid://dlses24j38m5l"]
 
 [ext_resource type="Texture2D" uid="uid://bwldevarfdf0b" path="res://assets/sprites/bombshell run sheet.png" id="1_evslb"]
 [ext_resource type="Script" path="res://scripts/bombshell_enemy.gd" id="1_twrv8"]
@@ -12,7 +12,7 @@
 resource_local_to_scene = true
 shader = ExtResource("2_i0mqy")
 shader_parameter/enabled = false
-shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/tint = Color(0.92549, 0.152941, 0.247059, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gn55m"]
 atlas = ExtResource("3_stsli")
@@ -153,7 +153,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/tint")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_7ssvu"]
@@ -171,11 +183,52 @@ tracks/0/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/tint")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8rcyp"]
+resource_name = "hurt_blink"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/tint")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Color(0.92549, 0.152941, 0.247059, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_31xmi"]
 _data = {
 "RESET": SubResource("Animation_37y7c"),
-"blink": SubResource("Animation_7ssvu")
+"blink": SubResource("Animation_7ssvu"),
+"hurt_blink": SubResource("Animation_8rcyp")
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rxive"]
@@ -188,7 +241,8 @@ properties/1/replication_mode = 1
 
 [node name="bombshell enemy" type="CharacterBody2D"]
 z_index = 4
-collision_layer = 2
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_twrv8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

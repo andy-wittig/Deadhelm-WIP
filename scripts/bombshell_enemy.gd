@@ -5,11 +5,13 @@ const JUMP_VELOCITY = -140.0
 
 var direction = 1
 var rand_state_timer = RandomNumberGenerator.new()
-
+var player = null
 var chasing_player = false
 var attacking = false
 var attack_timer_started = false
 var bombshell_detonated = false
+var enemy_health = 30
+var marked_for_death = false
 
 enum state_type {
 	MOVING,
@@ -19,17 +21,37 @@ enum state_type {
 }
 var state := state_type.MOVING
 
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 @onready var ray_cast_right = $RayCastRight
 @onready var ray_cast_left = $RayCastLeft
-
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
-
 @onready var audio_player = $AudioStreamPlayer2D
 
-var player = null
-
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+func apply_knockback(other_pos):
+	var knock_back = 50
+	if (other_pos < global_position.x):
+		velocity += Vector2(knock_back * 2.5, -knock_back)
+	else:
+		velocity += Vector2(-knock_back * 2.5, -knock_back)
+	
+	move_and_slide()
+	
+@rpc("any_peer", "call_local")
+func hurt_enemy(damage: int, other_pos: float):
+	animation_player.play("hurt_blink")
+	apply_knockback(other_pos)
+	enemy_health -= damage
+	enemy_health = max(enemy_health, 0)
+	
+@rpc("call_local", "any_peer")
+func destroy_self():
+	var soul = load("res://scenes/soul.tscn").instantiate()
+	soul.position = position
+	owner.add_child(soul)
+	marked_for_death = true
+	queue_free()
 
 @rpc("call_local")
 func set_state_timer():
@@ -74,6 +96,12 @@ func _on_chase_player_body_exited(body):
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
+		
+	#deal with enemy death
+	if multiplayer.is_server():
+		if (enemy_health <= 0):
+			if (!marked_for_death):
+				rpc("destroy_self")
 
 	#flip sprite
 	if (direction > 0):
