@@ -181,6 +181,7 @@ autoplay = "flame"
 [node name="ShrineChimeAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_ojaql")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="SoulLabel" type="Label" parent="."]
 z_index = 10

@@ -11,7 +11,7 @@ func _on_join_button_pressed():
 	MultiplayerManager.join_game(server_ip, server_port, player_name)
 
 func _on_back_button_pressed():
-	queue_free()
+	get_parent().return_to_main_menu()
 
 func _on_port_entry_text_changed(new_text):
 	server_port = int(new_text)

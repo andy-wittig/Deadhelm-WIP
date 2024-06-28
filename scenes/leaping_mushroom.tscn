@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://u1heuwmpu3ud"]
+[gd_scene load_steps=6 format=3 uid="uid://u1heuwmpu3ud"]
 
 [ext_resource type="Texture2D" uid="uid://cw3mcdvw4p4xu" path="res://assets/sprites/leaping mushroom.png" id="1_50yhu"]
 [ext_resource type="Shader" path="res://shaders/grass_sway.gdshader" id="1_g7g82"]
+[ext_resource type="Script" path="res://scripts/leaping_mushroom.gd" id="1_ltmlx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_05dqu"]
 shader = ExtResource("1_g7g82")
@@ -11,6 +12,8 @@ radius = 4.0
 height = 18.0
 
 [node name="leaping mushroom" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_ltmlx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_05dqu")
@@ -21,3 +24,5 @@ texture = ExtResource("1_50yhu")
 position = Vector2(0, -16)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1u1ao")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

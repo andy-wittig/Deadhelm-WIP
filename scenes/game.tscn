@@ -469,6 +469,7 @@ position = Vector2(447, 56)
 stream = ExtResource("16_gfini")
 volume_db = -25.0
 autoplay = true
+bus = &"Music"
 
 [node name="enemies" type="Node" parent="."]
 

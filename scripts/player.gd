@@ -4,6 +4,7 @@ const SPEED = 70.0
 const CLIMB_SPEED = 35
 const JUMP_VELOCITY = -250.0
 
+var grounded: bool
 var player_health = 100
 var souls_collected = 0
 var coins_collected = 0
@@ -116,7 +117,10 @@ func _physics_process(delta):
 		state_type.MOVING:
 			#handle gravity
 			if not is_on_floor():
+				grounded = false
 				velocity.y += gravity * delta
+			else:
+				grounded = true
 			#jumping
 			if Input.is_action_just_pressed("jump") and is_on_floor():
 				velocity.y = JUMP_VELOCITY

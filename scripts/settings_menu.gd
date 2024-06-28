@@ -15,6 +15,10 @@ var controls_list = [
 @onready var check_windowed = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed
 @onready var check_vsync = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckVsync
 @onready var remap_container = $VBoxContainer/SettingsTabs/CONTROLS/RemapContainer
+@onready var music_slider = $VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MusicSlider
+@onready var sfx_slider = $VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/SFXSlider
+@onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
+@onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
 
 func _ready():
 	if (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED):
@@ -26,6 +30,9 @@ func _ready():
 		check_vsync.button_pressed = true
 	elif (DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_DISABLED):
 		check_vsync.button_pressed = false
+		
+	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(MUSIC_BUS_ID))
+	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(SFX_BUS_ID))
 
 	for action in controls_list:
 		var label = Label.new()
@@ -36,9 +43,17 @@ func _ready():
 		button.action = action
 		remap_container.add_child(label)
 		remap_container.add_child(button)
+		
+func _on_music_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value))
+	AudioServer.set_bus_mute(MUSIC_BUS_ID, value < 0.05)
+
+func _on_sfx_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(value))
+	AudioServer.set_bus_mute(SFX_BUS_ID, value < 0.05)
 
 func _on_back_button_pressed():
-	queue_free()
+	get_parent().return_to_main_menu()
 
 func _on_check_windowed_toggled(toggled):
 	if (toggled):

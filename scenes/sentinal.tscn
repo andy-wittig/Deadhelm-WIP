@@ -219,6 +219,7 @@ color_ramp = SubResource("Gradient_7s2sg")
 position = Vector2(0, -7)
 stream = ExtResource("5_gmvqt")
 volume_db = -15.0
+bus = &"SFX"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_cx5gq")
