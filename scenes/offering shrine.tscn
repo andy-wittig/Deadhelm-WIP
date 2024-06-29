@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_kwcm2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hcyye"]
+resource_local_to_scene = true
 shader = ExtResource("2_h7ffm")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = false

@@ -526,6 +526,11 @@ position = Vector2(520, 32)
 soul_cost = 1
 spell_type = "shield"
 
+[node name="offering shrine2" parent="game objects" instance=ExtResource("13_le3ki")]
+z_index = -1
+position = Vector2(256, 192)
+soul_cost = 1
+
 [node name="soul" parent="game objects" instance=ExtResource("15_4uqt5")]
 position = Vector2(435, 56)
 

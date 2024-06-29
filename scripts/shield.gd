@@ -1,5 +1,7 @@
 extends Area2D
 
+const DIAL_RADIUS = 22
+
 var direction : Vector2
 var player : CharacterBody2D
 
@@ -11,14 +13,11 @@ func get_sprite_path():
 func _ready():
 	shield_sprite.rotation = direction.angle()
 
-func _process(delta):
-	pass
-
 func _on_destroy_timer_timeout():
 	queue_free()
 
-func _on_body_entered(body):
+func _on_area_entered(area):
 	print ("shield collided!")
-	if (body.is_in_group("enemy_projectile")):
-		#if (multiplayer.is_server()):
-		body.rpc("destroy_self")
+	if (area.is_in_group("enemy_projectile")):
+		if (multiplayer.is_server()):
+			area.rpc("destroy_self")
