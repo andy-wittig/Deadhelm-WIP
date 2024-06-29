@@ -1,15 +1,14 @@
-extends CharacterBody2D
+extends Area2D
 
 var direction = Vector2(1.0,0.0)
-var speed = 100.0
+const SPEED = 100.0
 
 func on_ready():
 	$DestroyTimer.start(0.6)
 
-func _process(_delta):
-	self.rotation = velocity.angle()
-	velocity = speed * direction
-	move_and_slide()
+func _process(delta):
+	self.rotation = direction.angle()
+	position += direction * SPEED * delta
 
 func _on_destroy_timer_timeout():
 	queue_free()
@@ -17,8 +16,8 @@ func _on_destroy_timer_timeout():
 @rpc("any_peer", "call_local")
 func destroy_self():
 	queue_free()
-	
-func _on_area_2d_body_entered(body):
+
+func _on_body_entered(body):
 	if (body.get_parent().get_name() == "players"
 	&& multiplayer.is_server()):
 		if (body.get_name() == "player"):

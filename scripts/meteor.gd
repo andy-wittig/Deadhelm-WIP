@@ -1,6 +1,7 @@
 extends Area2D
 
 var direction : Vector2
+var player : CharacterBody2D
 const SPEED = 70.0
 
 @onready var meteor_sprite = $MeteorSprite

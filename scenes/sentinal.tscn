@@ -197,7 +197,7 @@ unique_name_in_owner = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 4.0
+wait_time = 3.0
 
 [node name="Rocket Marker" type="Marker2D" parent="."]
 unique_name_in_owner = true

@@ -95,11 +95,12 @@ func _process(delta):
 		#fire mystic dial
 		if (dial_created):
 			if Input.is_action_just_pressed("left_click"):
-				get_parent().add_child(spell_instance)
 				var mouse_pos = get_global_mouse_position()
 				var mouse_dir = (mouse_pos - dial_instance.global_position).normalized()
 				spell_instance.direction = mouse_dir
+				spell_instance.player = self
 				spell_instance.position = dial_instance.position + dial_instance.mouse_dir * dial_instance.DIAL_RADIUS
+				get_parent().add_child(spell_instance)
 				
 				dial_instance.destroy()
 				attack_cooldown_timer.start(2)
@@ -117,10 +118,8 @@ func _physics_process(delta):
 		state_type.MOVING:
 			#handle gravity
 			if not is_on_floor():
-				grounded = false
 				velocity.y += gravity * delta
-			else:
-				grounded = true
+				
 			#jumping
 			if Input.is_action_just_pressed("jump") and is_on_floor():
 				velocity.y = JUMP_VELOCITY
@@ -142,11 +141,13 @@ func _physics_process(delta):
 	
 	#play animation
 	if is_on_floor():
+		grounded = true
 		if (direction == 0):
 			animated_sprite.play("idle")
 		else:
 			animated_sprite.play("run")
 	else:
+		grounded = false
 		if (state == state_type.MOVING):
 			animated_sprite.play("jump")
 		elif (state == state_type.CLIMBING):

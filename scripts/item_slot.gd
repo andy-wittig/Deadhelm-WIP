@@ -15,7 +15,8 @@ var currently_selected = false
 }
 
 @onready var item_instance_dict = {
-	"meteor" : "res://scenes/meteor.tscn"
+	"meteor" : "res://scenes/meteor.tscn",
+	"shield" : "res://scenes/shield.tscn",
 }
 
 @onready var items = item_texture_dict.keys()

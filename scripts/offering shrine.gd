@@ -5,7 +5,6 @@ var can_interact = false
 var souls_input = 0
 @export var soul_cost = 10
 @export var spell_type = "meteor"
-
 @onready var soul_label = $SoulLabel
 @onready var shrine_chime_audio = $ShrineChimeAudio
 

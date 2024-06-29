@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8v8h4yeenklg"]
+
+[ext_resource type="Texture2D" uid="uid://xrx8dx5uq8wa" path="res://assets/sprites/shield.png" id="1_58ub7"]
+[ext_resource type="Script" path="res://scripts/shield.gd" id="1_dlmlp"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8e8ne"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("ShieldSprite:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnrc1"]
+size = Vector2(11, 24)
+
+[node name="shield" type="Area2D"]
+z_index = 10
+script = ExtResource("1_dlmlp")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_8e8ne")
+
+[node name="ShieldSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_58ub7")
+
+[node name="ShieldCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_gnrc1")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

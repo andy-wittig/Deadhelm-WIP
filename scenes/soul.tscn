@@ -63,7 +63,7 @@ texture = ExtResource("1_lenky")
 shape = SubResource("CircleShape2D_ow4j7")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.5
+shadow_color = Color(0.0987284, 0.0987284, 0.0987284, 0)
 texture = SubResource("GradientTexture2D_xnxnk")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

@@ -163,13 +163,11 @@ color_ramp = SubResource("Gradient_nymuo")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-10, -5)
 color = Color(0.92549, 0.152941, 0.247059, 1)
-energy = 0.6
 texture = SubResource("GradientTexture2D_lpaax")
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
 position = Vector2(10, -5)
 color = Color(0.937712, 0.3796, 0.380388, 1)
-energy = 0.6
 texture = SubResource("GradientTexture2D_lpaax")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

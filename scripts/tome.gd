@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var player = null
 var can_interact = false
-var spell_type = "meteor"
+var spell_type: String
 
 @onready var spell_label = $SpellLabel
 
