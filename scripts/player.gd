@@ -32,7 +32,10 @@ var state := state_type.MOVING
 @onready var healthbar_label = %hud/Control/HBoxContainer/Healthbar/HealthbarLabel
 @onready var soul_label = %hud/Control/HBoxContainer/SoulCounter/SoulCounterLabel
 @onready var money_label = %hud/Control/HBoxContainer/MoneyCounter/MoneyCounterLabel
-@onready var coin_pickup_audio_player = $CoinPickupAudioPlayer
+@onready var coin_pickup_audio_player = $CoinPickupAudio
+@onready var tome_pickup_audio = $TomePickupAudio
+@onready var soul_pickup_audio = $SoulPickupAudio
+@onready var player_hurt_audio = $PlayerHurtAudio
 @onready var attack_cooldown_timer = $AttackCooldownTimer
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -170,12 +173,14 @@ func apply_knockback(other_pos):
 
 func hurt_player(damage: int, other_pos: float):
 	animation_player.play("player_hurt")
+	player_hurt_audio.play()
 	apply_knockback(other_pos)
 	player_health -= damage
 	healthbar.value = player_health
 	player_health = max(player_health, 0)
 	
 func collect_soul():
+	soul_pickup_audio.play()
 	souls_collected += 1
 	
 func collect_coin():
@@ -186,6 +191,7 @@ func colllect_spell(spell_type):
 	for slot in inventory:
 		if inventory[slot].get_slot_item() == "empty":
 			inventory[slot].set_slot_item(spell_type)
+			tome_pickup_audio.play()
 			break
 	
 func is_inventory_full():
