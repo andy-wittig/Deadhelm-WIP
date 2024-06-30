@@ -16,10 +16,10 @@ shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ow4j7"]
-radius = 4.0
+radius = 5.00018
 
 [sub_resource type="Gradient" id="Gradient_c5y7r"]
-offsets = PackedFloat32Array(0.123348, 1)
+offsets = PackedFloat32Array(0, 0.660606)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xnxnk"]
@@ -41,7 +41,6 @@ colors = PackedColorArray(0.427451, 0.917647, 0.839216, 0, 1, 1, 1, 0.588235, 0.
 radius = 14.0001
 
 [node name="soul" type="RigidBody2D"]
-z_index = 6
 position = Vector2(0, -0.0421152)
 collision_layer = 4
 collision_mask = 5
@@ -60,6 +59,7 @@ material = SubResource("ShaderMaterial_28x2n")
 texture = ExtResource("1_lenky")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ow4j7")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -69,8 +69,8 @@ texture = SubResource("GradientTexture2D_xnxnk")
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 light_mask = 0
 z_index = -1
-position = Vector2(0, 4.04212)
-amount = 75
+position = Vector2(0, 2.04212)
+amount = 18
 lifetime = 2.0
 speed_scale = 0.8
 explosiveness = 0.1

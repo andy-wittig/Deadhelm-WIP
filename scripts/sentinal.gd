@@ -130,7 +130,7 @@ func _physics_process(delta):
 		state_type.CHASE:
 			if multiplayer.is_server():
 				player_direction = (player.global_position - global_position).normalized()
-				if player.global_position.distance_to(global_position) > 32:
+				if player.global_position.distance_to(global_position) > 64:
 					velocity = player_direction * SPEED
 				else:
 					velocity = Vector2.ZERO

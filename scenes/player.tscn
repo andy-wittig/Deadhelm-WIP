@@ -196,7 +196,7 @@ _data = {
 "player_hurt": SubResource("Animation_y5whd")
 }
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["players"]]
 collision_layer = 2
 script = ExtResource("1_6jjtq")
 

@@ -20,7 +20,7 @@ func set_placeholder_sprite(sprite_path):
 	
 func _ready():
 	placeholder_spell = Sprite2D.new()
-	placeholder_spell.modulate.a = 0.8
+	placeholder_spell.modulate.a = 0.75
 	add_child(placeholder_spell)
 	
 func _process(_delta):

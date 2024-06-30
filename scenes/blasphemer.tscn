@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy85nfl1yblvo"]
+[gd_scene load_steps=12 format=3 uid="uid://cy85nfl1yblvo"]
 
+[ext_resource type="Script" path="res://scripts/blasphemer.gd" id="1_ir5ew"]
 [ext_resource type="Texture2D" uid="uid://yahxduawgq3j" path="res://assets/sprites/blasphemer.png" id="1_qghqt"]
+[ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/hurt_player_area.tscn" id="2_gii73"]
 
 [sub_resource type="Curve" id="Curve_ls151"]
 min_value = -200.0
@@ -63,19 +65,24 @@ _data = {
 }
 
 [node name="blasphemer" type="Node2D"]
+script = ExtResource("1_ir5ew")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="HurtPlayerArea" parent="." instance=ExtResource("2_gii73")]
+position = Vector2(0, 48)
+scale = Vector2(1, 6)
+damage = 15
+
+[node name="BlasphemerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
 texture = ExtResource("1_qghqt")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="FireParticles" type="CPUParticles2D" parent="."]
 z_index = -1
 amount = 500
 lifetime = 0.5
 speed_scale = 0.3
 explosiveness = 0.02
 randomness = 0.1
-lifetime_randomness = 0.1
 emission_shape = 1
 emission_sphere_radius = 5.0
 orbit_velocity_min = -0.05
@@ -89,13 +96,19 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_lnyf8")
 color_ramp = SubResource("Gradient_yna4w")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="FlameLight" type="PointLight2D" parent="."]
 z_index = 1
 color = Color(0.92549, 0.152941, 0.247059, 1)
 texture = SubResource("GradientTexture2D_q3tdg")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FlameLight"]
 libraries = {
 "": SubResource("AnimationLibrary_mkj0e")
 }
 autoplay = "flame"
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

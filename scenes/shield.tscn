@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8v8h4yeenklg"]
+[gd_scene load_steps=10 format=3 uid="uid://b8v8h4yeenklg"]
 
 [ext_resource type="Texture2D" uid="uid://xrx8dx5uq8wa" path="res://assets/sprites/shield.png" id="1_58ub7"]
 [ext_resource type="Script" path="res://scripts/shield.gd" id="1_dlmlp"]
+[ext_resource type="Shader" path="res://shaders/distort.gdshader" id="2_12jkt"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8e8ne"]
 properties/0/path = NodePath(".:position")
@@ -11,10 +12,29 @@ properties/1/path = NodePath("ShieldSprite:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y8f53"]
+noise_type = 4
+frequency = 0.008
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5xy6c"]
+seamless = true
+noise = SubResource("FastNoiseLite_y8f53")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3gb2"]
+shader = ExtResource("2_12jkt")
+shader_parameter/speed = 0.08
+shader_parameter/strength = 0.09
+shader_parameter/noise = SubResource("NoiseTexture2D_5xy6c")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnrc1"]
 size = Vector2(11, 24)
 
+[sub_resource type="Gradient" id="Gradient_tvdib"]
+offsets = PackedFloat32Array(0, 0.142857, 0.534162, 1)
+colors = PackedColorArray(0.968627, 0.952941, 0.717647, 0, 0.968627, 0.952941, 0.717647, 1, 0.952941, 0.658824, 0.2, 1, 1, 1, 1, 0)
+
 [node name="shield" type="Area2D"]
+self_modulate = Color(1, 1, 1, 0)
 z_index = 10
 script = ExtResource("1_dlmlp")
 
@@ -22,6 +42,7 @@ script = ExtResource("1_dlmlp")
 replication_config = SubResource("SceneReplicationConfig_8e8ne")
 
 [node name="ShieldSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_c3gb2")
 texture = ExtResource("1_58ub7")
 
 [node name="ShieldCollision" type="CollisionShape2D" parent="."]
@@ -29,8 +50,28 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_gnrc1")
 
 [node name="DestroyTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 5.0
 autostart = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(1, 0)
+amount = 25
+lifetime = 1.5
+speed_scale = 0.5
+explosiveness = 0.1
+randomness = 0.5
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(2, 6)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 8.0
+initial_velocity_max = 10.0
+damping_min = 5.0
+damping_max = 10.0
+angle_max = 360.0
+color_ramp = SubResource("Gradient_tvdib")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

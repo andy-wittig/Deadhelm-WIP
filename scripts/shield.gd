@@ -13,11 +13,11 @@ func get_sprite_path():
 func _ready():
 	shield_sprite.rotation = direction.angle()
 
-func _on_destroy_timer_timeout():
-	queue_free()
-
 func _on_area_entered(area):
 	print ("shield collided!")
 	if (area.is_in_group("enemy_projectile")):
 		if (multiplayer.is_server()):
 			area.rpc("destroy_self")
+
+func _on_destroy_timer_timeout():
+	queue_free()

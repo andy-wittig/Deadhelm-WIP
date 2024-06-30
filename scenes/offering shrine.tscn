@@ -12,8 +12,8 @@ shader = ExtResource("2_h7ffm")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = false
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_naqoh"]
-radius = 12.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npxd1"]
+size = Vector2(24, 25)
 
 [sub_resource type="Curve" id="Curve_fbfds"]
 min_value = -200.0
@@ -113,9 +113,9 @@ texture = ExtResource("1_qyktf")
 [node name="DetectPlayer" type="Area2D" parent="."]
 collision_mask = 2
 
-[node name="PickupShape" type="CollisionShape2D" parent="DetectPlayer"]
-position = Vector2(0, -12)
-shape = SubResource("CircleShape2D_naqoh")
+[node name="DetectShape" type="CollisionShape2D" parent="DetectPlayer"]
+position = Vector2(0, -12.5)
+shape = SubResource("RectangleShape2D_npxd1")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_index = 1
