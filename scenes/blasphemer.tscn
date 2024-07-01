@@ -71,7 +71,8 @@ script = ExtResource("1_ir5ew")
 [node name="HurtPlayerArea" parent="." instance=ExtResource("2_gii73")]
 position = Vector2(0, 48)
 scale = Vector2(1, 6)
-damage = 15
+damage = 5
+attack_wait = 0.5
 
 [node name="BlasphemerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
@@ -81,7 +82,7 @@ texture = ExtResource("1_qghqt")
 z_index = -1
 amount = 500
 lifetime = 0.5
-speed_scale = 0.3
+speed_scale = 0.6
 explosiveness = 0.02
 randomness = 0.1
 emission_shape = 1

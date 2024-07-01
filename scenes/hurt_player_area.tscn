@@ -12,4 +12,8 @@ script = ExtResource("1_beraj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_snhai")
 
+[node name="HurtPlayerTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="HurtPlayerTimer" to="." method="_on_hurt_player_timer_timeout"]
