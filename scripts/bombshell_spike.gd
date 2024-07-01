@@ -10,12 +10,12 @@ func _process(delta):
 	self.rotation = direction.angle()
 	position += direction * SPEED * delta
 
-func _on_destroy_timer_timeout():
-	queue_free()
-	
-@rpc("any_peer", "call_local")
+@rpc("call_local")
 func destroy_self():
 	queue_free()
+
+func _on_destroy_timer_timeout():
+	destroy_self()
 
 func _on_body_entered(body):
 	if (body.get_parent().get_name() == "players"
@@ -25,4 +25,4 @@ func _on_body_entered(body):
 			destroy_self()
 		else:
 			body.hurt_player.rpc_id(body.player_id, 10, global_position.x)
-			rpc("destroy_self")	
+			destroy_self()

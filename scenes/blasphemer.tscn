@@ -1,8 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://cy85nfl1yblvo"]
+[gd_scene load_steps=13 format=3 uid="uid://cy85nfl1yblvo"]
 
 [ext_resource type="Script" path="res://scripts/blasphemer.gd" id="1_ir5ew"]
 [ext_resource type="Texture2D" uid="uid://yahxduawgq3j" path="res://assets/sprites/blasphemer.png" id="1_qghqt"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/hurt_player_area.tscn" id="2_gii73"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hipyl"]
+properties/0/path = NodePath("FireParticles:emitting")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimationPlayer:current_animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [sub_resource type="Curve" id="Curve_ls151"]
 min_value = -200.0
@@ -67,6 +75,9 @@ _data = {
 
 [node name="blasphemer" type="Node2D"]
 script = ExtResource("1_ir5ew")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hipyl")
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("2_gii73")]
 position = Vector2(0, 48)

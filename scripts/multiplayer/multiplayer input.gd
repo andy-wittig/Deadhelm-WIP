@@ -4,6 +4,7 @@ extends MultiplayerSynchronizer
 
 var input_direction
 var climb_direction
+var username := ""
 
 func _ready():
 	if get_multiplayer_authority() != multiplayer.get_unique_id():
@@ -12,6 +13,8 @@ func _ready():
 		
 	input_direction = Input.get_axis("move_left", "move_right")
 	climb_direction = Input.get_axis("move_up", "move_down")
+	
+	username = MultiplayerManager.username
 
 func _physics_process(delta):
 	input_direction = Input.get_axis("move_left", "move_right")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://b5rai463xckyn"]
+[gd_scene load_steps=35 format=3 uid="uid://b5rai463xckyn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_6jjtq"]
+[ext_resource type="PackedScene" uid="uid://cv3ipj46sh6tq" path="res://scenes/hud.tscn" id="2_5bfwm"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/bombshell_blink.tres" id="2_276j0"]
 [ext_resource type="Texture2D" uid="uid://ba4n0ad8v66jr" path="res://assets/sprites/player run sheet.png" id="2_juqqo"]
 [ext_resource type="Texture2D" uid="uid://jiomi8ggan8j" path="res://assets/sprites/player climb.png" id="2_rw1rv"]
@@ -174,7 +175,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_y5whd"]
@@ -209,6 +210,8 @@ zoom = Vector2(3, 3)
 limit_bottom = 320
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="hud" parent="." instance=ExtResource("2_5bfwm")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_0v5y2")

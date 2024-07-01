@@ -1,88 +1,169 @@
 extends CharacterBody2D
 
+#Physics Constants
 const SPEED = 75.0
 const CLIMB_SPEED = 35
 const JUMP_VELOCITY = -250.0
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+#Physics Variables
 var grounded: bool
 var hor_direction = 1
 var ver_direction = 1
 var jumped = false
 var _is_on_floor = true
-var player_name
+#Player Stats Variables
+var username := ""
 var player_health = 100
 var souls_collected = 0
 var coins_collected = 0
+#Player Mechanics Variables
 var dial_instance = null
 var dial_created = false
 var attack_cooldown = false
-
-@onready var animated_sprite = $AnimatedSprite2D
-@onready var animation_player = $AnimationPlayer
-@onready var attack_cooldown_timer = $AttackCooldownTimer
-@onready var healthbar = get_tree().get_current_scene().get_node("%hud/Control/HBoxContainer/Healthbar")
-@onready var healthbar_label = get_tree().get_current_scene().get_node("%hud/Control/HBoxContainer/Healthbar/HealthbarLabel")
-@onready var soul_label = get_tree().get_current_scene().get_node("%hud/Control/HBoxContainer/SoulCounter/SoulCounterLabel")
-@onready var money_label = get_tree().get_current_scene().get_node("%hud/Control/HBoxContainer/MoneyCounter/MoneyCounterLabel")
-
+enum state_type {MOVING, CLIMBING}
+var state := state_type.MOVING
+#Player Inventory Variables
+var selected_slot_pos = 0
+var currently_selected_slot = null
+var spell_instance = null
+#Multiplayer Variables
 @export var player_id := 1:
 	set(id):
 		player_id = id
-		#client only has acess to change inputs
-		%InputSynchronizer.set_multiplayer_authority(id)
-		
-enum state_type {
-	MOVING,
-	CLIMBING
+		%InputSynchronizer.set_multiplayer_authority(id) #only client has acess to change inputs
+
+#Sprite Paths
+@onready var animated_sprite = $AnimatedSprite2D
+@onready var animation_player = $AnimationPlayer
+@onready var username_label = $Username
+#UI Paths
+@onready var inventory = {
+	"slot_1" : $hud/Control/HBoxContainer/ItemSlot1.get_node("Item"),
+	"slot_2" : $hud/Control/HBoxContainer/ItemSlot2.get_node("Item")
 }
-var state := state_type.MOVING
+@onready var healthbar = $hud/Control/HBoxContainer/Healthbar
+@onready var healthbar_label = $hud/Control/HBoxContainer/Healthbar/HealthbarLabel
+@onready var soul_label = $hud/Control/HBoxContainer/SoulCounter/SoulCounterLabel
+@onready var money_label = $hud/Control/HBoxContainer/MoneyCounter/MoneyCounterLabel
+#Audio Paths
+@onready var coin_pickup_audio_player = $CoinPickupAudio
+@onready var tome_pickup_audio = $TomePickupAudio
+@onready var soul_pickup_audio = $SoulPickupAudio
+@onready var player_hurt_audio = $PlayerHurtAudio
+#Mechanics Paths
+@onready var attack_cooldown_timer = $AttackCooldownTimer
+
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 		
 func _ready():
-	$Label.text = str(player_name)
+	currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
+	currently_selected_slot.currently_selected = true
 	
 	if multiplayer.get_unique_id() == player_id: #player_id is client
 		$Camera2D.make_current()
 	else:
 		$Camera2D.enabled = false
-		
-func _on_attack_cooldown_timer_timeout():
-	attack_cooldown = false
+		$hud.queue_free()	
 	
-@rpc("any_peer", "call_local", "reliable")
-func fire_spell(peer_position, peer_dir, radius): 
-	var spell_instance = load("res://scenes/meteor.tscn").instantiate()
-	spell_instance.direction = peer_dir
-	spell_instance.position = peer_position + peer_dir * radius
-	get_parent().add_child(spell_instance)
+@rpc ("call_local", "any_peer")
+func drop_inventory_item(spell_type, pos):
+	var tome = load("res://scenes/tome.tscn").instantiate()
+	tome.spell_type = spell_type
+	tome.position.x = pos.x
+	tome.position.y = pos.y - 16
+	get_tree().get_root().add_child(tome)
 
-func _process(_delta):
-	if multiplayer.get_unique_id() == player_id:
+@rpc("any_peer", "call_local")
+func fire_spell(peer_spell_instance): 
+	get_tree().get_root().add_child(peer_spell_instance)
+	
+@rpc ("any_peer", "call_local")
+func apply_knockback(other_pos):
+	var knock_back = 100
+	if (other_pos < self.global_position.x):
+		self.velocity = Vector2(knock_back * 2.5, -knock_back)
+	else:
+		self.velocity = Vector2(-knock_back * 2.5, -knock_back)
+		
+@rpc("any_peer", "call_local")
+func hurt_player(damage: int, other_pos: float):
+	animation_player.play("player_hurt")
+	rpc("apply_knockback", other_pos)
+	player_health -= damage
+	healthbar.value = player_health
+	player_health = max(player_health, 0)
+
+func _process(_delta):	
+	if (multiplayer.get_unique_id() == player_id):
 		healthbar_label.text = str(player_health) + "/100"
 		soul_label.text = str(souls_collected)
 		money_label.text = "$" + str(coins_collected)
 		
-		#trigger mystic dial
-		if not attack_cooldown:
-			if Input.is_action_just_pressed("right_click"):
-				dial_instance = load("res://scenes/mystic_dial.tscn").instantiate()
-				get_parent().add_child(dial_instance)
-				dial_instance.player = self
-				dial_created = true
+		#handle inventory input
+		if (Input.is_action_just_pressed("scroll_up")):
+			selected_slot_pos += 1
+			selected_slot_pos = clamp(selected_slot_pos, 0 , inventory.size() - 1)
+			currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
+			for slot in inventory:
+				inventory[slot].currently_selected = false
+			currently_selected_slot.currently_selected = true
+			
+		if (Input.is_action_just_pressed("scroll_down")):
+			selected_slot_pos -= 1
+			selected_slot_pos = clamp(selected_slot_pos, 0 , inventory.size() - 1)
+			currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
+			for slot in inventory:
+				inventory[slot].currently_selected = false
+			currently_selected_slot.currently_selected = true
+			
+		if (Input.is_action_just_pressed("drop_item")):
+			if (currently_selected_slot.get_slot_item() != "empty" && !currently_selected_slot.dragging):
+				rpc("drop_inventory_item", currently_selected_slot.get_slot_item(), global_position)
+				currently_selected_slot.set_slot_item("empty")
 		
-		if Input.is_action_just_released("right_click"):
+		if (currently_selected_slot.get_slot_item() != "empty"):
+			#Trigger Mystic Dial
+			if not attack_cooldown:
+				if Input.is_action_just_pressed("right_click"):
+					spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
+					dial_instance = load("res://scenes/mystic_dial.tscn").instantiate()
+					get_parent().add_child(dial_instance)
+					dial_instance.position.x = position.x
+					dial_instance.position.y = position.y - 16
+					dial_instance.player = self
+					dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
+					dial_created = true
+			#Fire Mystic Dial
 			if (dial_created):
-				dial_instance.destroy()
-				dial_created = false
-		
-		#fire mystic dial
-		if (dial_created):
-			if Input.is_action_just_pressed("left_click"):
-				rpc("fire_spell", dial_instance.position, dial_instance.mouse_dir, dial_instance.DIAL_RADIUS)
-				dial_instance.destroy()
-				attack_cooldown_timer.start(2)
-				attack_cooldown = true
-				dial_created = false
+				if Input.is_action_just_pressed("left_click"):
+					var mouse_pos = get_global_mouse_position()
+					var mouse_dir = (mouse_pos - dial_instance.global_position).normalized()
+					spell_instance.direction = mouse_dir
+					spell_instance.position = dial_instance.global_position + mouse_dir * dial_instance.DIAL_RADIUS
+					rpc("fire_spell", spell_instance)
+					
+					dial_instance.destroy()
+					attack_cooldown_timer.start(2)
+					attack_cooldown = true
+					dial_created = false
+		#Release Dial		
+		if Input.is_action_just_released("right_click"):
+				if (dial_created):
+					dial_instance.destroy()
+					dial_created = false
+					
+func colllect_spell(spell_type):
+	for slot in inventory:
+		if inventory[slot].get_slot_item() == "empty":
+			inventory[slot].set_slot_item(spell_type)
+			tome_pickup_audio.play()
+			break
+	
+func is_inventory_full():
+	for slot in inventory:
+		if inventory[slot].get_slot_item() == "empty":
+			return false
+	return true
 
 func _apply_animations(_delta):
 	#flips sprite
@@ -141,28 +222,20 @@ func _physics_process(delta):
 	if multiplayer.is_server():
 		_is_on_floor = is_on_floor()
 		_apply_movement_from_input(delta)
+		username = %InputSynchronizer.username
 		
 	if not multiplayer.is_server() || MultiplayerManager.host_mode_enabled:
 		_apply_animations(delta)
-		
-@rpc ("any_peer", "call_local")
-func apply_knockback(other_pos):
-	var knock_back = 100
-	if (other_pos < self.global_position.x):
-		self.velocity = Vector2(knock_back * 2.5, -knock_back)
-	else:
-		self.velocity = Vector2(-knock_back * 2.5, -knock_back)
-		
-@rpc("any_peer", "call_local", "reliable")
-func hurt_player(damage: int, other_pos: float):
-	animation_player.play("player_hurt")
-	rpc("apply_knockback", other_pos)
-	player_health -= damage
-	healthbar.value = player_health
-	player_health = max(player_health, 0)
+		if (username_label && username != ""):
+			username_label.set_text(username)
 	
 func collect_soul():
+	soul_pickup_audio.play()
 	souls_collected += 1
 	
 func collect_coin():
+	coin_pickup_audio_player.play()
 	coins_collected += 1
+	
+func _on_attack_cooldown_timer_timeout():
+	attack_cooldown = false

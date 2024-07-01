@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=24 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player.tscn" id="1_cche3"]
 [ext_resource type="Texture2D" uid="uid://dny6loqyjar73" path="res://assets/sprites/tilesheet wip.png" id="2_u3onv"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dlses24j38m5l" path="res://scenes/bombshell_enemy.tscn" id="7_xf2gf"]
 [ext_resource type="PackedScene" uid="uid://bv5plpqydgmj0" path="res://scenes/killzone.tscn" id="8_6gpen"]
 [ext_resource type="PackedScene" uid="uid://cscumksn7qbxd" path="res://scenes/coin.tscn" id="8_p1okw"]
-[ext_resource type="PackedScene" uid="uid://cv3ipj46sh6tq" path="res://scenes/hud.tscn" id="9_nnb6n"]
 [ext_resource type="PackedScene" uid="uid://oq2a4voisjg1" path="res://scenes/spawner.tscn" id="10_oukdr"]
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/sentinal.tscn" id="11_3c5st"]
 [ext_resource type="PackedScene" uid="uid://cy85nfl1yblvo" path="res://scenes/blasphemer.tscn" id="12_7335n"]
@@ -471,9 +470,6 @@ position = Vector2(80, -144)
 
 [node name="player" parent="players" instance=ExtResource("1_cche3")]
 z_index = 5
-
-[node name="hud" parent="." instance=ExtResource("9_nnb6n")]
-unique_name_in_owner = true
 
 [node name="enemies" type="Node" parent="."]
 

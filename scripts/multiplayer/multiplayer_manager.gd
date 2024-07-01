@@ -1,11 +1,12 @@
 extends Node
 
 var multiplayer_scene = preload("res://scenes/multiplayer_player.tscn")
+var username := ""
 var _players_spawn_node
 var host_mode_enabled = false
 var multiplayer_mode_enabled = false
 
-func become_host(server_port, player_name):
+func become_host(server_port):
 	print ("Hosting the game!")
 	
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
@@ -19,14 +20,13 @@ func become_host(server_port, player_name):
 	server_peer.create_server(server_port)
 	
 	multiplayer.multiplayer_peer = server_peer
-	
 	multiplayer.peer_connected.connect(_add_player_to_game)
 	multiplayer.peer_disconnected.connect(_del_player)
 	
 	_remove_single_player()
 	_add_player_to_game(1) #host is id 1
 
-func join_game(server_ip, server_port, player_name):
+func join_game(server_ip, server_port):
 	print ("Joining the game!")
 	
 	multiplayer_mode_enabled = true
@@ -46,7 +46,6 @@ func _add_player_to_game(id: int):
 	
 	var player_to_add = multiplayer_scene.instantiate()
 	player_to_add.player_id = id
-	player_to_add.player_name = id
 	player_to_add.name = str(id)
 	
 	_players_spawn_node.add_child(player_to_add, true)

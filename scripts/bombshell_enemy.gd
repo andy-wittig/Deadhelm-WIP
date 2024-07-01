@@ -29,31 +29,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animation_player = $AnimationPlayer
 @onready var audio_player = $AudioStreamPlayer2D
 
-func apply_knockback(other_pos):
-	var knock_back = 50
-	if (other_pos < global_position.x):
-		velocity += Vector2(knock_back * 2.5, -knock_back)
-	else:
-		velocity += Vector2(-knock_back * 2.5, -knock_back)
-	
-	move_and_slide()
-	
-@rpc("any_peer", "call_local")
-func hurt_enemy(damage: int, other_pos: float):
-	animation_player.play("hurt_blink")
-	apply_knockback(other_pos)
-	enemy_health -= damage
-	enemy_health = max(enemy_health, 0)
-	
-@rpc("call_local", "any_peer")
-func destroy_self():
-	var soul = load("res://scenes/soul.tscn").instantiate()
-	soul.position = position
-	owner.add_child(soul)
-	marked_for_death = true
-	queue_free()
-
-@rpc("call_local")
 func set_state_timer():
 	var time = randf_range(0, 10.0)
 	%ChangeStateTimer.start(time)
@@ -62,35 +37,23 @@ func set_state_timer():
 func set_state(new_state):
 	state = new_state
 	
-@rpc("call_local")
-func set_chasing(chase_bool):
-	chasing_player = chase_bool
-	
 func _ready():
 	if multiplayer.is_server():
-		rpc("set_state_timer")
-		
-func _on_timer_timeout():
-	if not chasing_player && multiplayer.is_server():
-		var change_state = randi_range(0, 1)
-		rpc("set_state", change_state)
-
-	if multiplayer.is_server():
-		rpc("set_state_timer")
+		set_state_timer()
 
 func _on_chase_player_body_entered(body):
 	if (body.get_parent().get_name() == "players") && multiplayer.is_server():
 		if (body == player || player == null):
 			if not bombshell_detonated:
 				player = body
-				rpc("set_chasing", true)
+				chasing_player = true
 				rpc("set_state", state_type.CHASE)
 
 func _on_chase_player_body_exited(body):
 	if (body == player):
 		player = null
 		if not bombshell_detonated:
-			rpc("set_chasing", false)
+			chasing_player = false
 			rpc("set_state", state_type.MOVING)
 
 func _physics_process(delta):
@@ -157,25 +120,55 @@ func _physics_process(delta):
 				attack_timer_started = true
 				
 	move_and_slide()
+	
+func _on_change_state_timer_timeout():
+	if not chasing_player && multiplayer.is_server():
+		var change_state = randi_range(0, 1)
+		rpc("set_state", change_state)
+		set_state_timer()
 
 func _on_cooldown_timer_timeout():
 	bombshell_detonated = false
 
 func _on_attack_timer_timeout():
 	attack_timer_started = false
-	if chasing_player:
+	if (state == state_type.ATTACK):
 		bombshell_detonated = true
-		
-		#shoot spikes here
+		rpc("create_spikes")
+		audio_player.play()
+		%CooldownTimer.start(10)
+		state = state_type.MOVING
+
+@rpc("call_local")
+func create_spikes():
 		var spike_angle = Vector2(1.0,0.0)
 		for i in 7:
 			var spike = load("res://scenes/bombshell_spike.tscn").instantiate()
 			spike.direction = spike_angle
 			spike_angle = spike_angle.rotated(deg_to_rad(-30))
-			owner.add_child(spike)
 			spike.transform = %"Spike Marker".global_transform
-			
-		audio_player.play()
-		%CooldownTimer.start(10)
-		
-		state = state_type.MOVING
+			get_tree().get_root().add_child(spike)	
+
+func apply_knockback(other_pos):
+	var knock_back = 50
+	if (other_pos < global_position.x):
+		velocity += Vector2(knock_back * 2.5, -knock_back)
+	else:
+		velocity += Vector2(-knock_back * 2.5, -knock_back)
+	
+	move_and_slide()
+	
+@rpc("any_peer", "call_local")
+func hurt_enemy(damage: int, other_pos: float):
+	animation_player.play("hurt_blink")
+	apply_knockback(other_pos)
+	enemy_health -= damage
+	enemy_health = max(enemy_health, 0)
+	
+@rpc("call_local", "any_peer")
+func destroy_self():
+	var soul = load("res://scenes/soul.tscn").instantiate()
+	soul.position = position
+	get_tree().get_root().add_child(soul)
+	marked_for_death = true
+	queue_free()

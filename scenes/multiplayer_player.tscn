@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dy55bsh72et68"]
+[gd_scene load_steps=39 format=3 uid="uid://dy55bsh72et68"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_controller.gd" id="1_24qcy"]
 [ext_resource type="Texture2D" uid="uid://cqyji7ikfp63v" path="res://assets/sprites/player idle sheet.png" id="2_eteu1"]
@@ -6,8 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://g8qn0ulsilf0" path="res://assets/sprites/player fall.png" id="3_40l2y"]
 [ext_resource type="Texture2D" uid="uid://jiomi8ggan8j" path="res://assets/sprites/player climb.png" id="3_bnp5t"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/bombshell_blink.tres" id="3_cl34t"]
+[ext_resource type="PackedScene" uid="uid://cv3ipj46sh6tq" path="res://scenes/hud.tscn" id="3_ctuuw"]
 [ext_resource type="Texture2D" uid="uid://ba4n0ad8v66jr" path="res://assets/sprites/player run sheet.png" id="4_wuebc"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="6_gcx4u"]
+[ext_resource type="AudioStream" uid="uid://b35odhysclypl" path="res://assets/sound effects/player_hurt.mp3" id="9_ihtcf"]
+[ext_resource type="AudioStream" uid="uid://b5j6nu1ge7i78" path="res://assets/sound effects/coin_pickup.mp3" id="10_4cros"]
+[ext_resource type="AudioStream" uid="uid://b8rod0c5ue3me" path="res://assets/sound effects/tome_pickup.wav" id="11_dmkwd"]
+[ext_resource type="AudioStream" uid="uid://bog807tukihob" path="res://assets/sound effects/soul_pickup.wav" id="12_dhq23"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kdq82"]
 properties/0/path = NodePath(".:player_id")
@@ -28,7 +33,7 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath(".:ver_direction")
 properties/5/spawn = true
 properties/5/replication_mode = 1
-properties/6/path = NodePath("Label:text")
+properties/6/path = NodePath(".:username")
 properties/6/spawn = true
 properties/6/replication_mode = 1
 
@@ -39,6 +44,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("InputSynchronizer:climb_direction")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath("InputSynchronizer:username")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1tyvq"]
 resource_local_to_scene = true
@@ -241,6 +249,8 @@ unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_k2nre")
 script = ExtResource("2_fk3ux")
 
+[node name="hud" parent="." instance=ExtResource("3_ctuuw")]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_1tyvq")
 position = Vector2(0, -16)
@@ -257,7 +267,7 @@ position = Vector2(0, -9)
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
-[node name="Label" type="Label" parent="."]
+[node name="Username" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -281,5 +291,24 @@ libraries = {
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="PlayerHurtAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ihtcf")
+volume_db = -18.0
+bus = &"SFX"
+
+[node name="CoinPickupAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_4cros")
+bus = &"SFX"
+
+[node name="TomePickupAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_dmkwd")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="SoulPickupAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_dhq23")
+volume_db = 5.0
+bus = &"SFX"
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

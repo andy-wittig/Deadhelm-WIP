@@ -1,7 +1,6 @@
 extends Area2D
 
 var direction : Vector2
-var player : CharacterBody2D
 const SPEED = 70.0
 
 @onready var meteor_sprite = $MeteorSprite
@@ -16,13 +15,13 @@ func _process(delta):
 @rpc("any_peer", "call_local")
 func destroy_self():
 	var impact = load("res://scenes/impact.tscn").instantiate()
-	get_parent().add_child(impact)
+	get_tree().get_root().add_child(impact)
 	impact.position = position
 	queue_free()
 	
 func _on_destroy_timer_timeout():
 	var impact = load("res://scenes/impact.tscn").instantiate()
-	get_parent().add_child(impact)
+	get_tree().get_root().add_child(impact)
 	impact.position = position
 	queue_free()
 

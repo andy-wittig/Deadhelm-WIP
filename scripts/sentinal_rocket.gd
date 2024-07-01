@@ -7,18 +7,15 @@ func _process(delta):
 	self.rotation = direction.angle()
 	position += direction * SPEED * delta
 
-@rpc("any_peer", "call_local")
+@rpc("call_local")
 func destroy_self():
 	var explosion = load("res://scenes/explosion.tscn").instantiate()
-	get_parent().add_child(explosion)
+	get_tree().get_root().add_child(explosion)
 	explosion.position = position
 	queue_free()
 
 func _on_destroy_timer_timeout():
-	var explosion = load("res://scenes/explosion.tscn").instantiate()
-	get_parent().add_child(explosion)
-	explosion.position = self.position
-	queue_free()
+	destroy_self()
 
 func _on_body_entered(body):
 	if (body.get_parent().get_name() == "players"

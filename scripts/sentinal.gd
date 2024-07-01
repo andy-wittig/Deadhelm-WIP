@@ -48,17 +48,23 @@ func hurt_enemy(damage: int, other_pos: float):
 func destroy_self():
 	var soul = load("res://scenes/soul.tscn").instantiate()
 	soul.position = position
-	owner.add_child(soul)
+	get_tree().get_root().add_child(soul)
 	
 	var explosion = load("res://scenes/explosion.tscn").instantiate()
-	get_parent().add_child(explosion)
+	get_tree().get_root().add_child(explosion)
 	explosion.position.y = position.y - 8
 	explosion.position.x = position.x
 	
 	marked_for_death = true
 	queue_free()
-
+	
 @rpc("call_local")
+func attack(direction):
+	var rocket = load("res://scenes/sentinal_rocket.tscn").instantiate()
+	rocket.direction = direction
+	rocket.transform = %"Rocket Marker".global_transform
+	get_tree().get_root().add_child(rocket)
+
 func update_direction():
 	var rand_direction = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.LEFT, Vector2.RIGHT, Vector2.RIGHT]
 	rand_direction.shuffle()
@@ -66,7 +72,6 @@ func update_direction():
 	var time = randf_range(0, 5.0)
 	%RoamTimer.start(time)
 	
-@rpc("call_local")
 func player_entered(_body):
 	audio_stream.play()
 	player = _body
@@ -74,19 +79,11 @@ func player_entered(_body):
 	state = state_type.CHASE
 	%AttackTimer.start()
 	
-@rpc("call_local")
 func player_exited():
 	player = null
 	chasing_player = false
 	state = state_type.MOVING
 	%AttackTimer.stop()
-	
-@rpc("call_local")
-func attack(direction):
-	var rocket = load("res://scenes/sentinal_rocket.tscn").instantiate()
-	owner.add_child(rocket)
-	rocket.direction = direction
-	rocket.transform = %"Rocket Marker".global_transform
 			
 func _ready():
 	if multiplayer.is_server():
@@ -150,17 +147,17 @@ func _on_chase_player_body_entered(body):
 	if (body.get_parent().get_name() == "players") && multiplayer.is_server():
 		if (player == null): #only one player can be targeted
 			if (!marked_for_death):
-				rpc("player_entered", body)
+				player_entered(body)
 
 func _on_chase_player_body_exited(body):
 		if (body == player):
 			if (!marked_for_death):
-				rpc("player_exited")
+				player_exited()
 			
 func _on_roam_timer_timeout():
 	if not chasing_player:
 		if (!marked_for_death):
-			rpc("update_direction")
+			update_direction()
 
 func _on_attack_timer_timeout():
 	if multiplayer.is_server():

@@ -3,7 +3,6 @@ extends Area2D
 const DIAL_RADIUS = 22
 
 var direction : Vector2
-var player : CharacterBody2D
 
 @onready var shield_sprite = $ShieldSprite
 
