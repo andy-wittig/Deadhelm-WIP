@@ -25,4 +25,4 @@ func _on_body_entered(body):
 			destroy_self()
 		else:
 			body.hurt_player.rpc_id(body.player_id, 10, global_position.x)
-			destroy_self()
+			rpc("destroy_self")

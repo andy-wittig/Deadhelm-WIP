@@ -133,8 +133,8 @@ func _on_cooldown_timer_timeout():
 func _on_attack_timer_timeout():
 	attack_timer_started = false
 	if (state == state_type.ATTACK):
+		if (multiplayer.is_server()): rpc("create_spikes")
 		bombshell_detonated = true
-		rpc("create_spikes")
 		audio_player.play()
 		%CooldownTimer.start(10)
 		state = state_type.MOVING
