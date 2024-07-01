@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dmhxqps832npn"]
+[gd_scene load_steps=20 format=3 uid="uid://dmhxqps832npn"]
 
 [ext_resource type="Script" path="res://scripts/sentinal.gd" id="1_onipe"]
 [ext_resource type="Texture2D" uid="uid://bm4fxsyxftyp2" path="res://assets/sprites/sentinal.png" id="1_vs5s6"]
@@ -6,6 +6,20 @@
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/bombshell_blink.tres" id="2_yj1bm"]
 [ext_resource type="Texture2D" uid="uid://ckqalx0dmu00f" path="res://assets/sprites/energy ring.png" id="4_xlb1g"]
 [ext_resource type="AudioStream" uid="uid://cm0mb03v6df6" path="res://assets/sound effects/sentinal_player_entered.mp3" id="5_gmvqt"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cx5gq"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("BodySprite:flip_h")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("GunSprite:flip_v")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("GunSprite:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7xacb"]
 radius = 6.0
@@ -121,25 +135,27 @@ point_count = 3
 offsets = PackedFloat32Array(0.242152, 1)
 colors = PackedColorArray(1, 1, 1, 0.882353, 1, 1, 1, 0)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cx5gq"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("BodySprite:flip_h")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath("GunSprite:flip_v")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-properties/3/path = NodePath("GunSprite:rotation")
-properties/3/spawn = true
-properties/3/replication_mode = 1
+[sub_resource type="Gradient" id="Gradient_mh4j2"]
+resource_local_to_scene = true
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tvq32"]
+gradient = SubResource("Gradient_mh4j2")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
 
 [node name="sentinal" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 4
 collision_mask = 8
 script = ExtResource("1_onipe")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_cx5gq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -7)
@@ -193,16 +209,16 @@ position = Vector2(0, -7)
 target_position = Vector2(-7, 0)
 collision_mask = 4
 
+[node name="Rocket Marker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -7)
+
 [node name="RoamTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 3.0
-
-[node name="Rocket Marker" type="Marker2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, -7)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_index = -1
@@ -216,14 +232,15 @@ angular_velocity_max = 10.0
 scale_amount_curve = SubResource("Curve_86jod")
 color_ramp = SubResource("Gradient_7s2sg")
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.427451, 0.917647, 0.839216, 1)
+texture = SubResource("GradientTexture2D_tvq32")
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(0, -7)
 stream = ExtResource("5_gmvqt")
 volume_db = -20.0
 bus = &"SFX"
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_cx5gq")
 
 [connection signal="body_entered" from="chase player" to="." method="_on_chase_player_body_entered"]
 [connection signal="body_exited" from="chase player" to="." method="_on_chase_player_body_exited"]
