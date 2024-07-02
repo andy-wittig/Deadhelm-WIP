@@ -62,7 +62,7 @@ func _ready():
 		$Camera2D.make_current()
 	else:
 		$Camera2D.enabled = false
-		$hud.queue_free()	
+		$hud.visible = false
 	
 @rpc ("call_local", "any_peer")
 func drop_inventory_item(spell_type, pos):

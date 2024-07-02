@@ -10,6 +10,7 @@ var controls_list = [
 	"drop_item",
 	"scroll_up",
 	"scroll_down",
+	"show_chat",
 ]
 
 @onready var check_windowed = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed

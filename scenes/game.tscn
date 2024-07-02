@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=25 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player.tscn" id="1_cche3"]
 [ext_resource type="Texture2D" uid="uid://dny6loqyjar73" path="res://assets/sprites/tilesheet wip.png" id="2_u3onv"]
+[ext_resource type="PackedScene" uid="uid://n15lqsti4eaq" path="res://scenes/multiplayer_chat.tscn" id="3_bwk87"]
 [ext_resource type="PackedScene" uid="uid://cqbypq7pvrrg7" path="res://scenes/platform.tscn" id="3_df6r4"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/ladder.tscn" id="5_8fq6d"]
 [ext_resource type="PackedScene" uid="uid://dlses24j38m5l" path="res://scenes/bombshell_enemy.tscn" id="7_xf2gf"]
@@ -432,6 +433,11 @@ stream = ExtResource("16_gfini")
 volume_db = -25.0
 autoplay = true
 bus = &"Music"
+
+[node name="MultiplayerCanvas" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="multiplayer_chat" parent="MultiplayerCanvas" instance=ExtResource("3_bwk87")]
 
 [node name="SkyBackground" type="CanvasLayer" parent="."]
 layer = -100

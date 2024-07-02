@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cv3ipj46sh6tq"]
+[gd_scene load_steps=7 format=3 uid="uid://cv3ipj46sh6tq"]
 
 [ext_resource type="Texture2D" uid="uid://b3spor51sya6b" path="res://assets/sprites/money_ui.png" id="1_bcj4c"]
 [ext_resource type="Texture2D" uid="uid://b1w4puvir581d" path="res://assets/sprites/soul_ui.png" id="2_sxibc"]
 [ext_resource type="Texture2D" uid="uid://52met2jet5e1" path="res://assets/sprites/healthbar.png" id="3_2npvj"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_jvlyp"]
 [ext_resource type="Texture2D" uid="uid://cx5730avm00l5" path="res://assets/sprites/healthbar_progress.png" id="4_4ieq4"]
-[ext_resource type="PackedScene" uid="uid://n15lqsti4eaq" path="res://scenes/multiplayer_chat.tscn" id="7_3tpw3"]
 [ext_resource type="PackedScene" uid="uid://bqqi6e1x2xkt6" path="res://scenes/item_slot.tscn" id="7_eq0b1"]
 
 [node name="hud" type="CanvasLayer"]
@@ -98,5 +97,3 @@ size_flags_horizontal = 6
 [node name="ItemSlot2" parent="Control/HBoxContainer" instance=ExtResource("7_eq0b1")]
 layout_mode = 2
 size_flags_horizontal = 6
-
-[node name="multiplayer_chat" parent="." instance=ExtResource("7_3tpw3")]
