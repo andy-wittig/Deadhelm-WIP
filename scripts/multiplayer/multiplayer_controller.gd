@@ -25,7 +25,6 @@ var state := state_type.MOVING
 #Player Inventory Variables
 var selected_slot_pos = 0
 var currently_selected_slot = null
-var spell_instance = null
 #Multiplayer Variables
 @export var player_id := 1:
 	set(id):
@@ -74,8 +73,11 @@ func drop_inventory_item(spell_type, pos):
 	get_tree().get_root().add_child(tome)
 
 @rpc("any_peer", "call_local")
-func fire_spell(peer_spell_instance): 
-	get_tree().get_root().add_child(peer_spell_instance)
+func create_spell(path, dir, pos): 
+	var new_spell = load(path).instantiate()
+	new_spell.direction = dir
+	new_spell.position = pos
+	get_tree().get_root().add_child(new_spell)
 	
 @rpc ("any_peer", "call_local")
 func apply_knockback(other_pos):
@@ -125,22 +127,22 @@ func _process(_delta):
 			#Trigger Mystic Dial
 			if not attack_cooldown:
 				if Input.is_action_just_pressed("right_click"):
-					spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
+					var spell_placeholder_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
 					dial_instance = load("res://scenes/mystic_dial.tscn").instantiate()
 					get_parent().add_child(dial_instance)
 					dial_instance.position.x = position.x
 					dial_instance.position.y = position.y - 16
 					dial_instance.player = self
-					dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
+					dial_instance.set_placeholder_sprite(spell_placeholder_instance.get_sprite_path())
 					dial_created = true
 			#Fire Mystic Dial
 			if (dial_created):
 				if Input.is_action_just_pressed("left_click"):
 					var mouse_pos = get_global_mouse_position()
 					var mouse_dir = (mouse_pos - dial_instance.global_position).normalized()
-					spell_instance.direction = mouse_dir
-					spell_instance.position = dial_instance.global_position + mouse_dir * dial_instance.DIAL_RADIUS
-					rpc("fire_spell", spell_instance)
+					var spell_pos = dial_instance.global_position + mouse_dir * dial_instance.DIAL_RADIUS
+					var spell_path = currently_selected_slot.get_spell_instance()
+					rpc("create_spell", spell_path, mouse_dir, spell_pos)
 					
 					dial_instance.destroy()
 					attack_cooldown_timer.start(2)
