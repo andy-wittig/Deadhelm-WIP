@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @onready var message_edit = $VBoxContainer/MessageEdit
 @onready var chat_label = $VBoxContainer/ChatPanel/ChatScrollContainer/ChatLabel
@@ -10,11 +10,22 @@ func send_chat(username, message):
 func _ready():
 	visible = false
 	
-func _process(_delta):
-	if Input.is_action_just_pressed("show_chat"):
+func _input(event):
+	if (event.is_action_pressed("show_chat") 
+	&& MultiplayerManager.multiplayer_mode_enabled):
 		visible = not visible
+		get_viewport().set_input_as_handled()
 
-	if Input.is_action_just_pressed("send_chat"):
+	if event.is_action_pressed("send_chat"):
+		get_viewport().set_input_as_handled()
 		var text_to_send = message_edit.get_text()
 		rpc("send_chat", MultiplayerManager.username, text_to_send)
 		message_edit.clear()
+
+func _on_message_edit_focus_entered():
+	var player_client = get_tree().get_current_scene().get_node("players/" + str(multiplayer.get_unique_id()))
+	player_client.is_in_chat = true
+
+func _on_message_edit_focus_exited():
+	var player_client = get_tree().get_current_scene().get_node("players/" + str(multiplayer.get_unique_id()))
+	player_client.is_in_chat = false

@@ -1,7 +1,5 @@
 extends Node
 
-var ui_scale = 1
-
 var can_drop_cursor = load("res://assets/sprites/cursor can drop.png")
 var can_not_drop_cursor = load("res://assets/sprites/cursor cancel.png")
 

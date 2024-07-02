@@ -22,9 +22,10 @@ var dial_created = false
 var attack_cooldown = false
 enum state_type {MOVING, CLIMBING}
 var state := state_type.MOVING
-#Player Inventory Variables
+#Player UI Variables
 var selected_slot_pos = 0
 var currently_selected_slot = null
+var is_in_chat := false
 #Multiplayer Variables
 @export var player_id := 1:
 	set(id):
@@ -188,8 +189,9 @@ func _apply_animations(_delta):
 
 func _apply_movement_from_input(delta):
 	#direction is set server-side from client input
-	hor_direction = %InputSynchronizer.input_direction 
-	ver_direction = %InputSynchronizer.climb_direction
+	if (!is_in_chat):
+		hor_direction = %InputSynchronizer.input_direction 
+		ver_direction = %InputSynchronizer.climb_direction
 	
 	#simple state machine
 	match state:
@@ -201,7 +203,7 @@ func _apply_movement_from_input(delta):
 			else:
 				grounded = true
 			#jumping
-			if jumped and is_on_floor():
+			if jumped and is_on_floor() and not is_in_chat:
 				velocity.y = JUMP_VELOCITY
 				jumped = false
 		state_type.CLIMBING:

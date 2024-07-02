@@ -1,20 +1,52 @@
-[gd_scene load_steps=3 format=3 uid="uid://n15lqsti4eaq"]
+[gd_scene load_steps=4 format=3 uid="uid://n15lqsti4eaq"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_chat.gd" id="1_heqm1"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="1_uaj3j"]
+[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_y13ll"]
 
-[node name="multiplayer_chat" type="CanvasLayer"]
+[node name="multiplayer_chat" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
 script = ExtResource("1_heqm1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -128.0
-offset_right = 640.0
-offset_bottom = 128.0
-grow_vertical = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_right = 320.0
+offset_bottom = 512.0
+grow_horizontal = 2
 theme_override_constants/separation = 4
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="Label" type="Label" parent="VBoxContainer/Spacer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -184.5
+offset_top = -24.0
+offset_right = 184.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_y13ll")
+theme_override_font_sizes/font_size = 24
+text = "MULTIPLAYER CHAT"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="ChatPanel" type="Panel" parent="VBoxContainer"]
 layout_mode = 2
@@ -39,6 +71,10 @@ autowrap_mode = 3
 [node name="MessageEdit" type="TextEdit" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.25
+size_flags_stretch_ratio = 0.1
 theme_override_fonts/font = ExtResource("1_uaj3j")
-placeholder_text = "Enter message here."
+placeholder_text = "Enter message."
+caret_blink = true
+
+[connection signal="focus_entered" from="VBoxContainer/MessageEdit" to="." method="_on_message_edit_focus_entered"]
+[connection signal="focus_exited" from="VBoxContainer/MessageEdit" to="." method="_on_message_edit_focus_exited"]

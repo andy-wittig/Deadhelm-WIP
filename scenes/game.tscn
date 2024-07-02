@@ -434,10 +434,11 @@ volume_db = -25.0
 autoplay = true
 bus = &"Music"
 
-[node name="MultiplayerCanvas" type="CanvasLayer" parent="."]
+[node name="UICanvas" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="multiplayer_chat" parent="MultiplayerCanvas" instance=ExtResource("3_bwk87")]
+[node name="multiplayer_chat" parent="UICanvas" instance=ExtResource("3_bwk87")]
+visible = false
 
 [node name="SkyBackground" type="CanvasLayer" parent="."]
 layer = -100
