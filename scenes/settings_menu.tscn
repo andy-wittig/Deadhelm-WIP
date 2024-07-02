@@ -139,17 +139,25 @@ value = 1.0
 visible = false
 layout_mode = 2
 
-[node name="RemapContainer" type="GridContainer" parent="VBoxContainer/SettingsTabs/CONTROLS"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/SettingsTabs/CONTROLS"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -20.0
-offset_bottom = 20.0
+offset_left = -160.0
+offset_top = -96.0
+offset_right = 160.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="RemapContainer" type="GridContainer" parent="VBoxContainer/SettingsTabs/CONTROLS/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 columns = 2
 
 [node name="backButton" type="Button" parent="VBoxContainer"]

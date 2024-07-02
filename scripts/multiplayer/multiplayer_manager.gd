@@ -1,7 +1,7 @@
 extends Node
 
 var multiplayer_scene = preload("res://scenes/multiplayer_player.tscn")
-var username := ""
+var username := "unknown"
 var _players_spawn_node
 var host_mode_enabled = false
 var multiplayer_mode_enabled = false

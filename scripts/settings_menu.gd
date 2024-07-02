@@ -14,7 +14,7 @@ var controls_list = [
 
 @onready var check_windowed = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed
 @onready var check_vsync = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckVsync
-@onready var remap_container = $VBoxContainer/SettingsTabs/CONTROLS/RemapContainer
+@onready var remap_container = $VBoxContainer/SettingsTabs/CONTROLS/ScrollContainer/RemapContainer
 @onready var music_slider = $VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MusicSlider
 @onready var sfx_slider = $VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/SFXSlider
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
