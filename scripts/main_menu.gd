@@ -30,7 +30,7 @@ func _process(_delta):
 			multiplayer_menu.visible = false
 			main_menu.visible = false
 			
-func return_to_main_menu():
+func return_to_prev_menu():
 	current_menu = menu.MAIN
 
 func _on_start_button_pressed():

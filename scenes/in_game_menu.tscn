@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=3 uid="uid://38kceu3ebfnc"]
+
+[ext_resource type="Script" path="res://scripts/in_game_menu.gd" id="1_6tw1o"]
+[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_j41ku"]
+[ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/settings_menu.tscn" id="2_djsis"]
+
+[node name="in_game_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6tw1o")
+
+[node name="MenuOptions" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -70.0
+offset_right = 192.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="SettingsButton" type="Button" parent="MenuOptions"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_j41ku")
+theme_override_font_sizes/font_size = 24
+text = "settings"
+
+[node name="LeaveButton" type="Button" parent="MenuOptions"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_j41ku")
+theme_override_font_sizes/font_size = 24
+text = "leave to menu"
+
+[node name="QuitButton" type="Button" parent="MenuOptions"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_j41ku")
+theme_override_font_sizes/font_size = 24
+text = "quit game"
+
+[node name="BackButton" type="Button" parent="MenuOptions"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_j41ku")
+theme_override_font_sizes/font_size = 24
+text = "back"
+
+[node name="settings_menu" parent="." instance=ExtResource("2_djsis")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="MenuOptions/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuOptions/LeaveButton" to="." method="_on_leave_button_pressed"]
+[connection signal="pressed" from="MenuOptions/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuOptions/BackButton" to="." method="_on_back_button_pressed"]

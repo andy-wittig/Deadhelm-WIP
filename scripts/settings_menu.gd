@@ -54,7 +54,7 @@ func _on_sfx_slider_value_changed(value):
 	AudioServer.set_bus_mute(SFX_BUS_ID, value < 0.05)
 
 func _on_back_button_pressed():
-	get_parent().return_to_main_menu()
+	get_parent().return_to_prev_menu()
 
 func _on_check_windowed_toggled(toggled):
 	if (toggled):
