@@ -11,7 +11,7 @@ var multiplayer_mode_enabled = false
 func _ready():
 	if (OS.has_feature("dedicated_server")):
 		print ("Starting dedicated server...")
-		become_host(DEDICATED_SERVER_PORT).call_deferred()
+		become_host(DEDICATED_SERVER_PORT)
 
 func become_host(server_port):
 	print ("Hosting the game!")

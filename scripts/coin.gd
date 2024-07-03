@@ -31,15 +31,13 @@ func _on_input_event(viewport, event, shape_idx):
 			rpc("destroy_self")
 
 func _on_detect_player_body_entered(body):
-	if (body.get_parent().get_name() == "players"):
-		if (body.get_name() == "player"
-		|| body.player_id == multiplayer.get_unique_id()):
-			player = body
+	if (body.is_in_group("players")):
 			$AnimatedSprite2D.material.set_shader_parameter("enabled", true)
+			player = body
 			can_interact = true
 
 func _on_detect_player_body_exited(body):
 	if (body == player):
-		player = null
 		$AnimatedSprite2D.material.set_shader_parameter("enabled", false)
+		player = null
 		can_interact = false
