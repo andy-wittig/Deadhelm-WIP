@@ -100,6 +100,4 @@ wait_time = 15.0
 autostart = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="body_entered" from="DetectPlayer" to="." method="_on_detect_player_body_entered"]
-[connection signal="body_exited" from="DetectPlayer" to="." method="_on_detect_player_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
