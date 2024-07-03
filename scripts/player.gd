@@ -168,10 +168,10 @@ func _physics_process(delta):
 	
 func apply_knockback(other_pos):
 	var knock_back = 100
-	if (other_pos < self.global_position.x):
-		self.velocity = Vector2(knock_back * 2.5, -knock_back)
+	if (other_pos < global_position.x):
+		velocity = Vector2(knock_back * 2.5, -knock_back)
 	else:
-		self.velocity = Vector2(-knock_back * 2.5, -knock_back)
+		velocity = Vector2(-knock_back * 2.5, -knock_back)
 
 func hurt_player(damage: int, other_pos: float):
 	animation_player.play("player_hurt")

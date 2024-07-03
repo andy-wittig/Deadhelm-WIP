@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7n0d4png6rh5"]
+[gd_scene load_steps=17 format=3 uid="uid://b7n0d4png6rh5"]
 
 [ext_resource type="Script" path="res://scripts/desecrater_blackhole.gd" id="1_3ktav"]
 [ext_resource type="Texture2D" uid="uid://bjemmo2ns8q7n" path="res://assets/sprites/desecrater blackhole.png" id="1_w0i00"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ahte"]
 radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sqt54"]
+radius = 32.0
 
 [sub_resource type="Animation" id="Animation_shrvt"]
 length = 0.001
@@ -81,14 +84,20 @@ shader_parameter/curve = SubResource("CurveTexture_cidrv")
 
 [node name="desecrater_blackhole" type="Area2D" groups=["enemy_projectile"]]
 z_index = 10
+collision_mask = 3
 script = ExtResource("1_3ktav")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="ProjectileCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8ahte")
 
 [node name="BlackholeSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_w0i00")
+
+[node name="HurtArea" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="HurtCollider" type="CollisionShape2D" parent="HurtArea"]
+shape = SubResource("CircleShape2D_sqt54")
 
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 6.0
@@ -144,4 +153,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("PlaceholderTexture2D_ss3j0")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

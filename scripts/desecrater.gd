@@ -1,9 +1,24 @@
 extends Node2D
 
+@export_enum("left_facing", "right_facing") var facing_direction
+@export var detection_range := 128
+
 var attack_wait := false
+var attack_direction
 
 @onready var ray_cast = $RayCast2D
 @onready var attack_timer = $AttackTimer
+@onready var desecrater_sprite = $DesecraterSprite
+
+func _ready():
+	if (facing_direction == 0):
+		ray_cast.target_position.x = -detection_range
+		desecrater_sprite.flip_h = false
+		attack_direction = Vector2(-1.0, 0.0)
+	elif (facing_direction == 1):
+		ray_cast.target_position.x = detection_range
+		desecrater_sprite.flip_h = true
+		attack_direction = Vector2(1.0, 0.0)
 
 func _process(_delta):
 	if (not attack_wait):
@@ -19,6 +34,7 @@ func _process(_delta):
 func attack():
 	var blackhole = load("res://scenes/desecrater_blackhole.tscn").instantiate()
 	blackhole.position = position
+	blackhole.direction = attack_direction
 	get_tree().get_root().add_child(blackhole)
 
 func _on_attack_timer_timeout():
