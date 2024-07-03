@@ -8,18 +8,25 @@
 [ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/settings_menu.tscn" id="5_oyons"]
 [ext_resource type="PackedScene" uid="uid://dsmtbe5hbqsrc" path="res://scenes/multiplayer_menu.tscn" id="6_i3fw6"]
 
-[node name="main menu" type="Control"]
+[node name="main menu" type="Node"]
+
+[node name="Level" type="Node" parent="."]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/game.tscn")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[node name="MenuControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
 script = ExtResource("1_lami0")
 
-[node name="MenuContainer" type="VBoxContainer" parent="."]
+[node name="MenuContainer" type="VBoxContainer" parent="MenuControl"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,42 +41,42 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="TextureRect" type="TextureRect" parent="MenuContainer"]
+[node name="TextureRect" type="TextureRect" parent="MenuControl/MenuContainer"]
 layout_mode = 2
 texture = ExtResource("2_u7tpf")
 expand_mode = 5
 stretch_mode = 6
 
-[node name="Spacer" type="Control" parent="MenuContainer"]
+[node name="Spacer" type="Control" parent="MenuControl/MenuContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="startButton" type="Button" parent="MenuContainer"]
+[node name="startButton" type="Button" parent="MenuControl/MenuContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_w2m3k")
 theme_override_font_sizes/font_size = 24
 text = "single player"
 
-[node name="multiplayerButton" type="Button" parent="MenuContainer"]
+[node name="multiplayerButton" type="Button" parent="MenuControl/MenuContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_w2m3k")
 theme_override_font_sizes/font_size = 24
 text = "multiplayer"
 
-[node name="settingsButton" type="Button" parent="MenuContainer"]
+[node name="settingsButton" type="Button" parent="MenuControl/MenuContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_l1je8")
 theme_override_font_sizes/font_size = 24
 text = "settings"
 
-[node name="quitButton" type="Button" parent="MenuContainer"]
+[node name="quitButton" type="Button" parent="MenuControl/MenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_l1je8")
 theme_override_font_sizes/font_size = 24
 text = "quit game"
 
-[node name="settings_menu" parent="." instance=ExtResource("5_oyons")]
+[node name="settings_menu" parent="MenuControl" instance=ExtResource("5_oyons")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -78,7 +85,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 
-[node name="multiplayer_menu" parent="." instance=ExtResource("6_i3fw6")]
+[node name="multiplayer_menu" parent="MenuControl" instance=ExtResource("6_i3fw6")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -87,13 +94,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 
-[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="."]
+[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="MenuControl"]
 stream = ExtResource("4_4asvc")
 volume_db = -20.0
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="MenuContainer/startButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="MenuContainer/multiplayerButton" to="." method="_on_multiplayer_button_pressed"]
-[connection signal="pressed" from="MenuContainer/settingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="MenuContainer/quitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuControl/MenuContainer/startButton" to="MenuControl" method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuControl/MenuContainer/multiplayerButton" to="MenuControl" method="_on_multiplayer_button_pressed"]
+[connection signal="pressed" from="MenuControl/MenuContainer/settingsButton" to="MenuControl" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuControl/MenuContainer/quitButton" to="MenuControl" method="_on_quit_button_pressed"]

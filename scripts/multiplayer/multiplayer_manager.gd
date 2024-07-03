@@ -1,17 +1,20 @@
 extends Node
 
+const DEDICATED_SERVER_PORT = 8080
+
 var multiplayer_scene = preload("res://scenes/multiplayer_player.tscn")
 var username := "unknown"
 var _players_spawn_node
 var host_mode_enabled = false
 var multiplayer_mode_enabled = false
 
+func _ready():
+	if (OS.has_feature("dedicated_server")):
+		print ("Starting dedicated server...")
+		become_host(DEDICATED_SERVER_PORT).call_deferred()
+
 func become_host(server_port):
 	print ("Hosting the game!")
-	
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
-	await get_tree().tree_changed
-	_players_spawn_node = get_tree().get_current_scene().get_node("players")
 	
 	multiplayer_mode_enabled = true
 	host_mode_enabled = true
@@ -23,23 +26,34 @@ func become_host(server_port):
 	multiplayer.peer_connected.connect(_add_player_to_game)
 	multiplayer.peer_disconnected.connect(_del_player)
 	
-	_remove_single_player()
-	_add_player_to_game(1) #host is id 1
+	start_game()
 
 func join_game(server_ip, server_port):
 	print ("Joining the game!")
 	
 	multiplayer_mode_enabled = true
 	
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
-	await get_tree().tree_changed
-	
 	var client_peer = ENetMultiplayerPeer.new()
 	client_peer.create_client(server_ip, server_port)
-	
 	multiplayer.multiplayer_peer = client_peer
 	
+	start_game()
+	
+func start_game():
+	change_level(load("res://scenes/game.tscn"))
+	get_tree().get_current_scene().get_node("MenuControl").queue_free()
 	_remove_single_player()
+	if (multiplayer.is_server()):
+		_players_spawn_node = get_tree().get_current_scene().get_node("Level/Game/players")
+		_add_player_to_game(1)
+	
+func change_level(scene: PackedScene):
+	var level = get_tree().get_current_scene().get_node("Level")
+	for object in level.get_children(): #clear old level
+		level.remove_child(object)
+		object.queue_free()
+		
+	level.add_child(scene.instantiate())
 	
 func _add_player_to_game(id: int):
 	print ("Player %s joined the game!" % id)
@@ -58,5 +72,5 @@ func _del_player(id: int):
 	
 func _remove_single_player():
 	print ("Removing single player")
-	var player_to_remove = get_tree().get_current_scene().get_node("players/player")
+	var player_to_remove = get_tree().get_current_scene().get_node("Level/Game/players/player")
 	player_to_remove.queue_free()
