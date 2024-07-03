@@ -23,9 +23,9 @@ func _input(event):
 		message_edit.clear()
 
 func _on_message_edit_focus_entered():
-	var player_client = get_tree().get_current_scene().get_node("players/" + str(multiplayer.get_unique_id()))
+	var player_client = get_tree().get_current_scene().get_node("Level/Game/players/" + str(multiplayer.get_unique_id()))
 	player_client.is_in_chat = true
 
 func _on_message_edit_focus_exited():
-	var player_client = get_tree().get_current_scene().get_node("players/" + str(multiplayer.get_unique_id()))
+	var player_client = get_tree().get_current_scene().get_node("Level/Game/players/" + str(multiplayer.get_unique_id()))
 	player_client.is_in_chat = false

@@ -7,6 +7,7 @@ var player = null
 var can_interact = false
 
 @onready var detect_player = $DetectPlayer
+@onready var animated_sprite = $AnimatedSprite2D
 
 @rpc("any_peer", "call_local", "reliable")
 func destroy_self():
@@ -20,11 +21,11 @@ func _ready():
 		apply_central_impulse(Vector2(rand_x_force, y_force))
 
 func _process(delta):
-	$AnimatedSprite2D.material.set_shader_parameter("enabled", false)
+	animated_sprite.material.set_shader_parameter("enabled", false)
 	for body in detect_player.get_overlapping_bodies():
 		if (body.get_name() == "player"
 		|| body.player_id == multiplayer.get_unique_id()):
-			$AnimatedSprite2D.material.set_shader_parameter("enabled", true)
+			animated_sprite.material.set_shader_parameter("enabled", true)
 			if Input.is_action_just_pressed("pickup"):
 				body.collect_coin()
 				rpc("destroy_self")

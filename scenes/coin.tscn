@@ -16,7 +16,7 @@ properties/0/replication_mode = 1
 resource_local_to_scene = true
 shader = ExtResource("2_xebfj")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
-shader_parameter/enabled = false
+shader_parameter/enabled = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y5yib"]
 atlas = ExtResource("1_cyd1j")
