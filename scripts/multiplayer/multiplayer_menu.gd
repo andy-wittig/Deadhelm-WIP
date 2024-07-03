@@ -3,6 +3,11 @@ extends Control
 var server_port = 8080
 var server_ip = "127.0.0.1"
 
+func _ready():
+	if (OS.has_feature("dedicated_server")):
+		print ("Starting dedicated server...")
+		MultiplayerManager.become_host(server_port)
+
 func _on_host_button_pressed():
 	MultiplayerManager.become_host(server_port)
 
