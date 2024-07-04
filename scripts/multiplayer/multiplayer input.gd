@@ -14,14 +14,15 @@ func _ready():
 	input_direction = Input.get_axis("move_left", "move_right")
 	climb_direction = Input.get_axis("move_up", "move_down")
 	
-	username = MultiplayerManager.username
+	username = GameManager.username
 
 func _physics_process(delta):
-	input_direction = Input.get_axis("move_left", "move_right")
-	climb_direction = Input.get_axis("move_up", "move_down")
+	if (not get_parent().is_in_chat):
+		input_direction = Input.get_axis("move_left", "move_right")
+		climb_direction = Input.get_axis("move_up", "move_down")
 
 func _process(delta):
-	if Input.is_action_just_pressed("jump"):
+	if (Input.is_action_just_pressed("jump") && not get_parent().is_in_chat):
 		jump.rpc()
 
 @rpc("call_local")

@@ -1,21 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=9 format=3 uid="uid://cm4gh7qawwcbf"]
 
-[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="1_l1je8"]
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_lami0"]
-[ext_resource type="Texture2D" uid="uid://b213dlq1guphc" path="res://assets/sprites/title_ui.png" id="2_u7tpf"]
-[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_w2m3k"]
-[ext_resource type="AudioStream" uid="uid://b5ycopyaj1oif" path="res://assets/music/title_screen.mp3" id="4_4asvc"]
-[ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/settings_menu.tscn" id="5_oyons"]
-[ext_resource type="PackedScene" uid="uid://dsmtbe5hbqsrc" path="res://scenes/multiplayer_menu.tscn" id="6_i3fw6"]
+[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
+[ext_resource type="Texture2D" uid="uid://b213dlq1guphc" path="res://assets/sprites/title_ui.png" id="3_i7ejn"]
+[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_1urpk"]
+[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
+[ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/settings_menu.tscn" id="6_hxbga"]
+[ext_resource type="PackedScene" uid="uid://dsmtbe5hbqsrc" path="res://scenes/multiplayer_menu.tscn" id="7_hkw8y"]
+[ext_resource type="AudioStream" uid="uid://b5ycopyaj1oif" path="res://assets/music/title_screen.mp3" id="8_fyhhs"]
 
-[node name="main menu" type="Node"]
-
-[node name="Level" type="Node" parent="."]
+[node name="game" type="Node"]
+script = ExtResource("1_yvbvk")
 
 [node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/game.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/level_1.tscn")
 spawn_path = NodePath("../Level")
 spawn_limit = 1
+
+[node name="Level" type="Node" parent="."]
 
 [node name="MenuControl" type="Control" parent="."]
 layout_mode = 3
@@ -24,7 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lami0")
+script = ExtResource("2_th4ch")
 
 [node name="MenuContainer" type="VBoxContainer" parent="MenuControl"]
 layout_mode = 1
@@ -43,7 +45,7 @@ theme_override_constants/separation = 4
 
 [node name="TextureRect" type="TextureRect" parent="MenuControl/MenuContainer"]
 layout_mode = 2
-texture = ExtResource("2_u7tpf")
+texture = ExtResource("3_i7ejn")
 expand_mode = 5
 stretch_mode = 6
 
@@ -53,30 +55,30 @@ size_flags_vertical = 3
 
 [node name="startButton" type="Button" parent="MenuControl/MenuContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_w2m3k")
+theme_override_fonts/font = ExtResource("4_1urpk")
 theme_override_font_sizes/font_size = 24
 text = "single player"
 
 [node name="multiplayerButton" type="Button" parent="MenuControl/MenuContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_w2m3k")
+theme_override_fonts/font = ExtResource("4_1urpk")
 theme_override_font_sizes/font_size = 24
 text = "multiplayer"
 
 [node name="settingsButton" type="Button" parent="MenuControl/MenuContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_l1je8")
+theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 24
 text = "settings"
 
 [node name="quitButton" type="Button" parent="MenuControl/MenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("1_l1je8")
+theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 24
 text = "quit game"
 
-[node name="settings_menu" parent="MenuControl" instance=ExtResource("5_oyons")]
+[node name="settings_menu" parent="MenuControl" instance=ExtResource("6_hxbga")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -85,7 +87,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 
-[node name="multiplayer_menu" parent="MenuControl" instance=ExtResource("6_i3fw6")]
+[node name="multiplayer_menu" parent="MenuControl" instance=ExtResource("7_hkw8y")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -95,7 +97,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 
 [node name="TitleScreenMusic" type="AudioStreamPlayer" parent="MenuControl"]
-stream = ExtResource("4_4asvc")
+stream = ExtResource("8_fyhhs")
 volume_db = -20.0
 autoplay = true
 bus = &"Music"

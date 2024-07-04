@@ -6,9 +6,9 @@ enum state_type {
 }
 
 func _on_body_entered(body):
-	if (body.name == "player" || multiplayer.get_unique_id()):
+	if (body.is_in_group("players")):
 		body.state = state_type.CLIMBING
 
 func _on_body_exited(body):
-	if (body.name == "player" || multiplayer.get_unique_id()):
+	if (body.is_in_group("players")):
 		body.state = state_type.MOVING

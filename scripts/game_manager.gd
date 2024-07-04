@@ -1,5 +1,9 @@
 extends Node
 
+var username := "unknown"
+var host_mode_enabled = false
+var multiplayer_mode_enabled = false
+
 var can_drop_cursor = load("res://assets/sprites/cursor can drop.png")
 var can_not_drop_cursor = load("res://assets/sprites/cursor cancel.png")
 

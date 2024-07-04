@@ -34,7 +34,7 @@ func return_to_prev_menu():
 	current_menu = menu.MAIN
 
 func _on_start_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/game.tscn")
+	get_owner().start_game()
 
 func _on_multiplayer_button_pressed():
 	current_menu = menu.MULTIPLAYER

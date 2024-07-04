@@ -11,13 +11,12 @@ config_version=5
 [application]
 
 config/name="Deadhelm"
-run/main_scene="res://scenes/main_menu.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://assets/sprites/icon.png"
 
 [autoload]
 
-MultiplayerManager="*res://scripts/multiplayer/multiplayer_manager.gd"
 GameManager="*res://scripts/game_manager.gd"
 
 [display]

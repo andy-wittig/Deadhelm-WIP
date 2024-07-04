@@ -189,9 +189,8 @@ func _apply_animations(_delta):
 
 func _apply_movement_from_input(delta):
 	#direction is set server-side from client input
-	if (!is_in_chat):
-		hor_direction = %InputSynchronizer.input_direction 
-		ver_direction = %InputSynchronizer.climb_direction
+	hor_direction = %InputSynchronizer.input_direction 
+	ver_direction = %InputSynchronizer.climb_direction
 	
 	#simple state machine
 	match state:
@@ -228,7 +227,7 @@ func _physics_process(delta):
 		_apply_movement_from_input(delta)
 		username = %InputSynchronizer.username
 		
-	if not multiplayer.is_server() || MultiplayerManager.host_mode_enabled:
+	if not multiplayer.is_server() || GameManager.host_mode_enabled:
 		_apply_animations(delta)
 		if (username_label && username != ""):
 			username_label.set_text(username)
