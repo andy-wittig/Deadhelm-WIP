@@ -88,6 +88,7 @@ point_count = 2
 
 [node name="spawner" type="Node2D"]
 script = ExtResource("1_o47cc")
+spawn_range = null
 
 [node name="SpawnerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
