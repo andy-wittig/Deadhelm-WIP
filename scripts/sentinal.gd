@@ -144,7 +144,7 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _on_chase_player_body_entered(body):
-	if (body.get_parent().get_name() == "players") && multiplayer.is_server():
+	if (body.is_in_group("players") && multiplayer.is_server()):
 		if (player == null): #only one player can be targeted
 			if (!marked_for_death):
 				player_entered(body)

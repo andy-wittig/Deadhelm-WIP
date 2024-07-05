@@ -26,7 +26,7 @@ func _on_destroy_timer_timeout():
 	queue_free()
 
 func _on_body_entered(body):
-	if (body.get_parent().get_name() == "enemies"
+	if (body.is_in_group("enemies")
 	&& multiplayer.is_server()):
 		body.hurt_enemy.rpc(10, global_position.x)
 		rpc("destroy_self")

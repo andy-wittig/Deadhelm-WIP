@@ -42,7 +42,7 @@ func _ready():
 		set_state_timer()
 
 func _on_chase_player_body_entered(body):
-	if (body.get_parent().get_name() == "players") && multiplayer.is_server():
+	if (body.is_in_group("players") && multiplayer.is_server()):
 		if (body == player || player == null):
 			if not bombshell_detonated:
 				player = body

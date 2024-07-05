@@ -3,14 +3,17 @@ extends Control
 var server_port = 8080
 var server_ip = "127.0.0.1"
 
+@onready var menu_layer = $"../.."
+@onready var game = $"../../.."
+
 func _on_host_button_pressed():
-	get_node("/root/game").become_host(server_port)
+	game.become_host(server_port)
 
 func _on_join_button_pressed():
-	get_node("/root/game").join_game(server_ip, server_port)
+	game.join_game(server_ip, server_port)
 
 func _on_back_button_pressed():
-	get_parent().return_to_prev_menu()
+	menu_layer.return_to_prev_menu()
 
 func _on_port_entry_text_changed(entered_text):
 	server_port = int(entered_text)

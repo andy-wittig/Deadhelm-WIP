@@ -169,4 +169,5 @@ text = "summon"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="timeout" from="SpawnWaitTimer" to="." method="_on_spawn_wait_timer_timeout"]

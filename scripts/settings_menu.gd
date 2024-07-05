@@ -11,6 +11,7 @@ var controls_list = [
 	"scroll_up",
 	"scroll_down",
 	"show_chat",
+	"in-game_menu",
 ]
 
 @onready var check_windowed = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed
@@ -20,6 +21,7 @@ var controls_list = [
 @onready var sfx_slider = $VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/SFXSlider
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
 @onready var SFX_BUS_ID = AudioServer.get_bus_index("SFX")
+@onready var menu_layer = $"../.."
 
 func _ready():
 	if (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED):
@@ -54,7 +56,7 @@ func _on_sfx_slider_value_changed(value):
 	AudioServer.set_bus_mute(SFX_BUS_ID, value < 0.05)
 
 func _on_back_button_pressed():
-	get_parent().return_to_prev_menu()
+	menu_layer.return_to_prev_menu()
 
 func _on_check_windowed_toggled(toggled):
 	if (toggled):

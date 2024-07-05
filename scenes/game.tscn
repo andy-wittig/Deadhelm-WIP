@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=10 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
 [ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/settings_menu.tscn" id="6_hxbga"]
 [ext_resource type="PackedScene" uid="uid://dsmtbe5hbqsrc" path="res://scenes/multiplayer_menu.tscn" id="7_hkw8y"]
+[ext_resource type="PackedScene" uid="uid://c3tnfa07koleu" path="res://scenes/in_game_menu.tscn" id="8_ar250"]
 [ext_resource type="AudioStream" uid="uid://b5ycopyaj1oif" path="res://assets/music/title_screen.mp3" id="8_fyhhs"]
 
 [node name="game" type="Node"]
@@ -19,16 +20,18 @@ _spawnable_scenes = PackedStringArray("res://scenes/level_1.tscn")
 spawn_path = NodePath("../Level")
 spawn_limit = 1
 
-[node name="MenuControl" type="Control" parent="."]
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_th4ch")
+
+[node name="MenuControl" type="Control" parent="MenuLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_th4ch")
 
-[node name="MenuContainer" type="VBoxContainer" parent="MenuControl"]
+[node name="MenuContainer" type="VBoxContainer" parent="MenuLayer/MenuControl"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -43,42 +46,42 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
-[node name="TextureRect" type="TextureRect" parent="MenuControl/MenuContainer"]
+[node name="TextureRect" type="TextureRect" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 texture = ExtResource("3_i7ejn")
 expand_mode = 5
 stretch_mode = 6
 
-[node name="Spacer" type="Control" parent="MenuControl/MenuContainer"]
+[node name="Spacer" type="Control" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="startButton" type="Button" parent="MenuControl/MenuContainer"]
+[node name="startButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_1urpk")
 theme_override_font_sizes/font_size = 24
 text = "single player"
 
-[node name="multiplayerButton" type="Button" parent="MenuControl/MenuContainer"]
+[node name="multiplayerButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_1urpk")
 theme_override_font_sizes/font_size = 24
 text = "multiplayer"
 
-[node name="settingsButton" type="Button" parent="MenuControl/MenuContainer"]
+[node name="settingsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 24
 text = "settings"
 
-[node name="quitButton" type="Button" parent="MenuControl/MenuContainer"]
+[node name="quitButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 24
 text = "quit game"
 
-[node name="settings_menu" parent="MenuControl" instance=ExtResource("6_hxbga")]
+[node name="settings_menu" parent="MenuLayer/MenuControl" instance=ExtResource("6_hxbga")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -87,7 +90,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 
-[node name="multiplayer_menu" parent="MenuControl" instance=ExtResource("7_hkw8y")]
+[node name="multiplayer_menu" parent="MenuLayer/MenuControl" instance=ExtResource("7_hkw8y")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -96,13 +99,25 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 
-[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="MenuControl"]
+[node name="in_game_menu" parent="MenuLayer/MenuControl" instance=ExtResource("8_ar250")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="MenuLayer/MenuControl"]
 stream = ExtResource("8_fyhhs")
 volume_db = -20.0
 autoplay = true
 bus = &"Music"
 
-[connection signal="pressed" from="MenuControl/MenuContainer/startButton" to="MenuControl" method="_on_start_button_pressed"]
-[connection signal="pressed" from="MenuControl/MenuContainer/multiplayerButton" to="MenuControl" method="_on_multiplayer_button_pressed"]
-[connection signal="pressed" from="MenuControl/MenuContainer/settingsButton" to="MenuControl" method="_on_settings_button_pressed"]
-[connection signal="pressed" from="MenuControl/MenuContainer/quitButton" to="MenuControl" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer/MenuControl" method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/multiplayerButton" to="MenuLayer" method="_on_multiplayer_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/settingsButton" to="MenuLayer" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/settingsButton" to="MenuLayer/MenuControl" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/quitButton" to="MenuLayer" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/quitButton" to="MenuLayer/MenuControl" method="_on_quit_button_pressed"]
