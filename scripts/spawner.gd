@@ -1,31 +1,37 @@
 extends Area2D
 
 @export var spawn_enemy_type: PackedScene
-@export var tile_map: Node
 @export var spawn_range: int
 @export var spawn_wait: float
-@export var spawn_enemy_amount: int
+@export var spawn_enemy_limit: int
 
 var currently_spawning := false
+var spawned_count := 0
 var random = RandomNumberGenerator.new()
 
 @onready var spawner_sprite = $SpawnerSprite
 @onready var detect_player = $DetectPlayerCollider
-@onready var spawn_wait_timer = $SpawnWaitTimer
+@onready var spawn_timer = $SpawnWaitTimer
+@onready var summon_label = $SummonLabel
+@onready var tile_map = $"../../TileMap"
 
 func _process(delta):
 	spawner_sprite.material.set_shader_parameter("enabled", false)
+	summon_label.visible = false
 	for body in get_overlapping_bodies():
-		if (body.is_in_group("players")):
+		if (body.is_in_group("players") && not currently_spawning):
 			spawner_sprite.material.set_shader_parameter("enabled", true)
-			if Input.is_action_just_pressed("pickup"):
-				check_enemy_spawnable()
+			summon_label.visible = true
+			if (Input.is_action_just_pressed("pickup")):
+				spawn_timer.start(spawn_wait)
+				currently_spawning = true
 
 func _on_input_event(viewport, event, shape_idx):
 	for body in get_overlapping_bodies():
-		if (body.is_in_group("players")):
-			if (Input.is_action_just_pressed("left_click")):
-				check_enemy_spawnable()
+		if (body.is_in_group("players") && not currently_spawning):
+			if (Input.is_action_just_pressed("pickup")):
+				spawn_timer.start(spawn_wait)
+				currently_spawning = true
 	
 @rpc("call_local")
 func spawn_enemy(spawn_position):
@@ -34,15 +40,23 @@ func spawn_enemy(spawn_position):
 	get_tree().get_root().add_child(enemy)
 	
 func check_enemy_spawnable():
-	var rand_x_pos = position.x + random.randi_range(-spawn_range, spawn_range)
-	var rand_y_pos = position.y + random.randi_range(-spawn_range, spawn_range)
-
-	var test_tile = tile_map.get_cell_tile_data(0, Vector2(rand_x_pos, rand_y_pos))
+	var rand_x_pos = position.x + random.randi_range(-spawn_range, spawn_range) * 16
+	var rand_y_pos = position.y + random.randi_range(-spawn_range, spawn_range) * 16
+	var test_tile = tile_map.get_cell_tile_data(0, tile_map.local_to_map(Vector2(rand_x_pos, rand_y_pos)))
+	
 	if (test_tile == null):
 		rpc("spawn_enemy", Vector2(rand_x_pos, rand_y_pos))
-		return
-	elif (test_tile.get_custom_data("spawnable_tile")):
+	elif (test_tile.get_custom_data("spawnable_tile") == true):
 		rpc("spawn_enemy", Vector2(rand_x_pos, rand_y_pos))
-		return
 	else:
 		check_enemy_spawnable()
+
+func _on_spawn_wait_timer_timeout():
+	if (spawned_count >= spawn_enemy_limit):
+		spawned_count = 0
+		currently_spawning = false
+		spawn_timer.stop()
+	else:
+		spawned_count += 1
+		check_enemy_spawnable()
+		spawn_timer.start(spawn_wait)

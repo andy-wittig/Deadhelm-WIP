@@ -291,10 +291,12 @@ texture = ExtResource("4_pfe7p")
 12:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 12:6/0/physics_layer_0/angular_velocity = 0.0
 12:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:6/0/custom_data_0 = true
 13:6/0 = 0
 13:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 13:6/0/physics_layer_0/angular_velocity = 0.0
 13:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:6/0/custom_data_0 = true
 10:7/0 = 0
 10:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:7/0/physics_layer_0/angular_velocity = 0.0
@@ -378,7 +380,6 @@ texture = ExtResource("4_pfe7p")
 7:6/0 = 0
 7:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:6/0/physics_layer_0/angular_velocity = 0.0
-7:6/0/custom_data_0 = true
 8:6/0 = 0
 8:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:6/0/physics_layer_0/angular_velocity = 0.0
@@ -560,15 +561,9 @@ position = Vector2(80, -144)
 
 [node name="player" parent="players" instance=ExtResource("5_gsx3e")]
 z_index = 5
-position = Vector2(128, 272)
+position = Vector2(80, 272)
 
 [node name="enemies" type="Node" parent="."]
-
-[node name="sentinal" parent="enemies" instance=ExtResource("6_b6eee")]
-position = Vector2(648, 48)
-
-[node name="bombshell enemy" parent="enemies" instance=ExtResource("7_wu2l5")]
-position = Vector2(160, 0)
 
 [node name="blasphemer" parent="enemies" instance=ExtResource("8_dn50k")]
 z_index = 1
@@ -579,8 +574,30 @@ position = Vector2(352, 120)
 
 [node name="game objects" type="Node" parent="."]
 
-[node name="coin" parent="game objects" instance=ExtResource("10_mnf4j")]
-position = Vector2(128, -152)
+[node name="spawner1" parent="game objects" instance=ExtResource("14_mv4c4")]
+position = Vector2(424, 64)
+spawn_enemy_type = ExtResource("6_b6eee")
+spawn_range = 3
+spawn_wait = 2.0
+spawn_enemy_limit = 2
+
+[node name="spawner2" parent="game objects" instance=ExtResource("14_mv4c4")]
+position = Vector2(112, 0)
+spawn_enemy_type = ExtResource("7_wu2l5")
+spawn_range = 2
+spawn_wait = 2.0
+spawn_enemy_limit = 2
+
+[node name="offering shrine" parent="game objects" instance=ExtResource("15_by2nq")]
+z_index = -1
+position = Vector2(264, 192)
+soul_cost = 1
+
+[node name="offering shrine2" parent="game objects" instance=ExtResource("15_by2nq")]
+z_index = -1
+position = Vector2(656, -64)
+soul_cost = 1
+spell_type = "shield"
 
 [node name="leaping mushroom" parent="game objects" instance=ExtResource("11_lwg2q")]
 position = Vector2(368, -80)
@@ -588,6 +605,9 @@ position = Vector2(368, -80)
 [node name="leaping mushroom2" parent="game objects" instance=ExtResource("11_lwg2q")]
 position = Vector2(608, 128)
 bounce_force = -450.0
+
+[node name="coin" parent="game objects" instance=ExtResource("10_mnf4j")]
+position = Vector2(128, -152)
 
 [node name="platform" parent="game objects" node_paths=PackedStringArray("animation_player_optional") instance=ExtResource("12_fgsca")]
 position = Vector2(424, -139)
@@ -626,23 +646,6 @@ scale = Vector2(1, 6)
 [node name="ladder5" parent="game objects" instance=ExtResource("13_v01f1")]
 position = Vector2(744, 8)
 scale = Vector2(1, 7)
-
-[node name="spawner" parent="game objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("14_mv4c4")]
-position = Vector2(416, 64)
-spawn_enemy_type = ExtResource("6_b6eee")
-tile_map = NodePath("../../TileMap")
-spawn_range = 64
-
-[node name="offering shrine" parent="game objects" instance=ExtResource("15_by2nq")]
-z_index = -1
-position = Vector2(264, 192)
-soul_cost = 1
-
-[node name="offering shrine2" parent="game objects" instance=ExtResource("15_by2nq")]
-z_index = -1
-position = Vector2(656, -64)
-soul_cost = 1
-spell_type = "shield"
 
 [node name="soul" parent="game objects" instance=ExtResource("16_iu6nv")]
 position = Vector2(96, -56)
