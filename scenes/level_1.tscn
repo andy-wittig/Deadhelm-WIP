@@ -629,7 +629,7 @@ scale = Vector2(1, 7)
 
 [node name="spawner" parent="game objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("14_mv4c4")]
 position = Vector2(416, 64)
-spawn_enemy_path = ExtResource("6_b6eee")
+spawn_enemy_type = ExtResource("6_b6eee")
 tile_map = NodePath("../../TileMap")
 spawn_range = 64
 

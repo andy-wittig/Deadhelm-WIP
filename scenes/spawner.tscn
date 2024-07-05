@@ -1,8 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://oq2a4voisjg1"]
+[gd_scene load_steps=14 format=3 uid="uid://oq2a4voisjg1"]
 
 [ext_resource type="Texture2D" uid="uid://dv6vdn27h5kil" path="res://assets/sprites/spawner.png" id="1_24323"]
+[ext_resource type="Shader" path="res://shaders/soul.gdshader" id="1_fh3nh"]
 [ext_resource type="Script" path="res://scripts/spawner.gd" id="1_o47cc"]
 [ext_resource type="Texture2D" uid="uid://cfmpjnypd34os" path="res://assets/sprites/spawner orb.png" id="2_x51t5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4hknq"]
+size = Vector2(18, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7jpd"]
+shader = ExtResource("1_fh3nh")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/enabled = false
 
 [sub_resource type="Gradient" id="Gradient_i8mv2"]
 interpolation_mode = 2
@@ -86,10 +95,16 @@ _data = {
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.500835), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="spawner" type="Node2D"]
+[node name="spawner" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_o47cc")
 
+[node name="DetectPlayerCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_4hknq")
+
 [node name="SpawnerSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_e7jpd")
 position = Vector2(0, -8)
 texture = ExtResource("1_24323")
 
@@ -130,3 +145,5 @@ scale_amount_min = 2.0
 scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_iwwos")
 color_ramp = SubResource("Gradient_vfcl5")
+
+[node name="SpawnWaitTimer" type="Timer" parent="."]
