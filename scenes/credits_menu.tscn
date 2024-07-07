@@ -21,9 +21,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -203.0
-offset_top = -174.0
+offset_top = -134.0
 offset_right = 203.0
-offset_bottom = 174.0
+offset_bottom = 134.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -44,7 +44,6 @@ size_flags_vertical = 3
 
 [node name="CreditsText" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/line_separation = 10
@@ -60,8 +59,10 @@ ARTWORK
 [u][b]ADAM[/b][/u]
 MUSIC & SFX
 [u][b]ZACH[/b][/u]
-SFX[/center]"
-fit_content = true
+SFX
+[u][b]EMA[/b][/u]
+SFX
+GOOD LISTENER[/center]"
 
 [node name="backButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2

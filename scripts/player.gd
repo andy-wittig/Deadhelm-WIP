@@ -176,9 +176,15 @@ func hurt_player(damage: int, other_pos: float):
 	animation_player.play("player_hurt")
 	player_hurt_audio.play()
 	apply_knockback(other_pos, 100)
+	
 	player_health -= damage
 	healthbar.value = player_health
 	player_health = max(player_health, 0)
+	
+	var damage_indicator = load("res://scenes/damage_indicator.tscn").instantiate()
+	damage_indicator.damage_amount = damage
+	damage_indicator.position = global_position
+	get_tree().get_root().add_child(damage_indicator)
 	
 func collect_soul():
 	soul_pickup_audio.play()
