@@ -166,8 +166,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-func apply_knockback(other_pos):
-	var knock_back = 100
+func apply_knockback(other_pos, knock_back: int):
 	if (other_pos < global_position.x):
 		velocity = Vector2(knock_back * 2.5, -knock_back)
 	else:
@@ -176,7 +175,7 @@ func apply_knockback(other_pos):
 func hurt_player(damage: int, other_pos: float):
 	animation_player.play("player_hurt")
 	player_hurt_audio.play()
-	apply_knockback(other_pos)
+	apply_knockback(other_pos, 100)
 	player_health -= damage
 	healthbar.value = player_health
 	player_health = max(player_health, 0)

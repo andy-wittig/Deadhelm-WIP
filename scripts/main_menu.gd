@@ -4,6 +4,7 @@ enum menu {
 	MAIN,
 	MULTIPLAYER,
 	SETTINGS,
+	CREDITS,
 	INGAME,
 	HIDDEN
 }
@@ -13,6 +14,7 @@ var current_menu := menu.MAIN
 @onready var main_menu = $MenuControl/MenuContainer
 @onready var settings_menu = $MenuControl/settings_menu
 @onready var multiplayer_menu = $MenuControl/multiplayer_menu
+@onready var credits_menu = $MenuControl/credits_menu
 @onready var in_game_menu = $MenuControl/in_game_menu
 
 func _process(_delta):
@@ -29,30 +31,42 @@ func _process(_delta):
 			main_menu.visible = true
 			settings_menu.visible = false
 			multiplayer_menu.visible = false
+			credits_menu.visible = false
 			in_game_menu.visible = false
 		menu.MULTIPLAYER:
 			menu_control.visible = true
 			main_menu.visible = false
 			settings_menu.visible = false
 			multiplayer_menu.visible = true
+			credits_menu.visible = false
 			in_game_menu.visible = false
 		menu.SETTINGS:
 			menu_control.visible = true
 			main_menu.visible = false
 			settings_menu.visible = true
 			multiplayer_menu.visible = false
+			credits_menu.visible = false
+			in_game_menu.visible = false
+		menu.CREDITS:
+			menu_control.visible = true
+			main_menu.visible = false
+			settings_menu.visible = false
+			multiplayer_menu.visible = false
+			credits_menu.visible = true
 			in_game_menu.visible = false
 		menu.INGAME:
 			menu_control.visible = true
 			main_menu.visible = false
 			settings_menu.visible = false
 			multiplayer_menu.visible = false
+			credits_menu.visible = false
 			in_game_menu.visible = true
 		menu.HIDDEN:
 			menu_control.visible = false
 			main_menu.visible = false
 			settings_menu.visible = false
 			multiplayer_menu.visible = false
+			credits_menu.visible = false
 			in_game_menu.visible = false
 			
 func return_to_prev_menu():
@@ -72,6 +86,9 @@ func _on_multiplayer_button_pressed():
 	
 func _on_settings_button_pressed():
 	current_menu = menu.SETTINGS
+	
+func _on_credits_button_pressed():
+	current_menu = menu.CREDITS
 	
 func _on_quit_button_pressed():
 	get_tree().quit()

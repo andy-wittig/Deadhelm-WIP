@@ -1,14 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=14 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
 [ext_resource type="Texture2D" uid="uid://b213dlq1guphc" path="res://assets/sprites/title_ui.png" id="3_i7ejn"]
+[ext_resource type="PackedScene" uid="uid://n15lqsti4eaq" path="res://scenes/multiplayer_chat.tscn" id="3_urre7"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_1urpk"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
 [ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/settings_menu.tscn" id="6_hxbga"]
 [ext_resource type="PackedScene" uid="uid://dsmtbe5hbqsrc" path="res://scenes/multiplayer_menu.tscn" id="7_hkw8y"]
 [ext_resource type="PackedScene" uid="uid://c3tnfa07koleu" path="res://scenes/in_game_menu.tscn" id="8_ar250"]
 [ext_resource type="AudioStream" uid="uid://b5ycopyaj1oif" path="res://assets/music/title_screen.mp3" id="8_fyhhs"]
+[ext_resource type="PackedScene" uid="uid://bqgd6hcfgc75y" path="res://scenes/credits_menu.tscn" id="9_0w2qv"]
+[ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
+[ext_resource type="AudioStream" uid="uid://budqgb0s5wkcd" path="res://assets/music/level_1.mp3" id="11_5c2xu"]
 
 [node name="game" type="Node"]
 script = ExtResource("1_yvbvk")
@@ -22,6 +26,9 @@ spawn_limit = 1
 
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 script = ExtResource("2_th4ch")
+
+[node name="multiplayer_chat" parent="MenuLayer" instance=ExtResource("3_urre7")]
+visible = false
 
 [node name="MenuControl" type="Control" parent="MenuLayer"]
 layout_mode = 3
@@ -74,6 +81,13 @@ theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 24
 text = "settings"
 
+[node name="creditsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_3g5wa")
+theme_override_font_sizes/font_size = 24
+text = "credits
+"
+
 [node name="quitButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -108,16 +122,26 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 
-[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="MenuLayer/MenuControl"]
+[node name="credits_menu" parent="MenuLayer/MenuControl" instance=ExtResource("9_0w2qv")]
+visible = false
+layout_mode = 1
+
+[node name="Music" type="Node" parent="."]
+script = ExtResource("10_mudwi")
+
+[node name="TitleScreenMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("8_fyhhs")
 volume_db = -20.0
-autoplay = true
+bus = &"Music"
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("11_5c2xu")
+volume_db = -25.0
 bus = &"Music"
 
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer" method="_on_start_button_pressed"]
-[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer/MenuControl" method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/multiplayerButton" to="MenuLayer" method="_on_multiplayer_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/settingsButton" to="MenuLayer" method="_on_settings_button_pressed"]
-[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/settingsButton" to="MenuLayer/MenuControl" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/creditsButton" to="MenuLayer" method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/quitButton" to="MenuLayer" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/quitButton" to="MenuLayer/MenuControl" method="_on_quit_button_pressed"]

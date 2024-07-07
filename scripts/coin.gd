@@ -3,9 +3,6 @@ extends RigidBody2D
 const y_force = -250
 var rand_x_force = randf_range(-100, 100)
 
-var player = null
-var can_interact = false
-
 @onready var detect_player = $DetectPlayer
 @onready var animated_sprite = $AnimatedSprite2D
 

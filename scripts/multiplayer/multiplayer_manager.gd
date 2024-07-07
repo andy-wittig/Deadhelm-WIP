@@ -58,4 +58,3 @@ func change_level(scene: PackedScene):
 		object.queue_free()
 		
 	level.add_child(scene.instantiate())
-
