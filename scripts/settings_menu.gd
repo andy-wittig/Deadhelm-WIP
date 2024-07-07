@@ -10,6 +10,8 @@ var controls_list = [
 	"drop_item",
 	"scroll_up",
 	"scroll_down",
+	"left_click",
+	"right_click",
 	"show_chat",
 	"in-game_menu",
 ]
