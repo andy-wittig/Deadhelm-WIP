@@ -3,16 +3,19 @@
 [ext_resource type="Script" path="res://scripts/platform.gd" id="1_b5nxq"]
 [ext_resource type="Texture2D" uid="uid://dny6loqyjar73" path="res://assets/sprites/tilesheet wip.png" id="1_bl6bk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ki4nm"]
-size = Vector2(16, 10)
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6x6i1"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ki4nm"]
+size = Vector2(16, 10)
+
 [node name="platform" type="AnimatableBody2D"]
 script = ExtResource("1_b5nxq")
+
+[node name="PlatformSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_6x6i1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_bl6bk")
@@ -22,6 +25,3 @@ region_rect = Rect2(208, 0, 16, 11)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ki4nm")
 one_way_collision = true
-
-[node name="PlatformSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_6x6i1")

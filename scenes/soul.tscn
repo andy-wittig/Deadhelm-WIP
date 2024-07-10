@@ -18,12 +18,12 @@ shader_parameter/enabled = false
 [sub_resource type="CircleShape2D" id="CircleShape2D_ow4j7"]
 radius = 5.00018
 
-[sub_resource type="Gradient" id="Gradient_c5y7r"]
+[sub_resource type="Gradient" id="Gradient_td52r"]
 offsets = PackedFloat32Array(0, 0.660606)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xnxnk"]
-gradient = SubResource("Gradient_c5y7r")
+gradient = SubResource("Gradient_td52r")
 width = 16
 height = 16
 fill = 1

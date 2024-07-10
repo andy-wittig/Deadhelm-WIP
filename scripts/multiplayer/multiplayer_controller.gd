@@ -38,13 +38,14 @@ var is_in_chat := false
 @onready var username_label = $Username
 #UI Paths
 @onready var inventory = {
-	"slot_1" : $hud/Control/HBoxContainer/ItemSlot1.get_node("Item"),
-	"slot_2" : $hud/Control/HBoxContainer/ItemSlot2.get_node("Item")
+	"slot_1" : $hud/Control/GridContainer/Slots/ItemSlot1.get_node("Item"),
+	"slot_2" : $hud/Control/GridContainer/Slots/ItemSlot2.get_node("Item"),
+	"slot_3" : $hud/Control/GridContainer/Slots/ItemSlot3.get_node("Item"),
 }
-@onready var healthbar = $hud/Control/HBoxContainer/Healthbar
-@onready var healthbar_label = $hud/Control/HBoxContainer/Healthbar/HealthbarLabel
-@onready var soul_label = $hud/Control/HBoxContainer/SoulCounter/SoulCounterLabel
-@onready var money_label = $hud/Control/HBoxContainer/MoneyCounter/MoneyCounterLabel
+@onready var healthbar = $hud/Control/GridContainer/Healthbar
+@onready var healthbar_label = $hud/Control/GridContainer/Healthbar/HealthbarLabel
+@onready var soul_label = $hud/Control/GridContainer/VBoxContainer/SoulCounter/SoulCounterLabel
+@onready var money_label = $hud/Control/GridContainer/VBoxContainer/MoneyCounter/MoneyCounterLabel
 #Audio Paths
 @onready var coin_pickup_audio_player = $CoinPickupAudio
 @onready var tome_pickup_audio = $TomePickupAudio
@@ -92,9 +93,15 @@ func apply_knockback(other_pos):
 func hurt_player(damage: int, other_pos: float):
 	animation_player.play("player_hurt")
 	rpc("apply_knockback", other_pos)
+	
 	player_health -= damage
 	healthbar.value = player_health
 	player_health = max(player_health, 0)
+	
+	var damage_indicator = load("res://scenes/damage_indicator.tscn").instantiate()
+	damage_indicator.damage_amount = damage
+	damage_indicator.position = global_position
+	get_tree().get_root().add_child(damage_indicator)
 
 func _process(_delta):	
 	if (multiplayer.get_unique_id() == player_id):
@@ -197,10 +204,7 @@ func _apply_movement_from_input(delta):
 		state_type.MOVING:
 			#handle gravity
 			if not is_on_floor():
-				grounded = false
 				velocity.y += gravity * delta
-			else:
-				grounded = true
 			#jumping
 			if jumped and is_on_floor() and not is_in_chat:
 				velocity.y = JUMP_VELOCITY
@@ -224,6 +228,7 @@ func _apply_movement_from_input(delta):
 func _physics_process(delta):
 	if multiplayer.is_server():
 		_is_on_floor = is_on_floor()
+		grounded = is_on_floor()
 		_apply_movement_from_input(delta)
 		username = %InputSynchronizer.username
 		

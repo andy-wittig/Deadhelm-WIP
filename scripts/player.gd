@@ -27,13 +27,14 @@ var spell_instance = null
 @onready var animation_player = $AnimationPlayer
 #UI Paths
 @onready var inventory = {
-	"slot_1" : $hud/Control/HBoxContainer/ItemSlot1.get_node("Item"),
-	"slot_2" : $hud/Control/HBoxContainer/ItemSlot2.get_node("Item")
+	"slot_1" : $hud/Control/GridContainer/Slots/ItemSlot1.get_node("Item"),
+	"slot_2" : $hud/Control/GridContainer/Slots/ItemSlot2.get_node("Item"),
+	"slot_3" : $hud/Control/GridContainer/Slots/ItemSlot3.get_node("Item"),
 }
-@onready var healthbar = $hud/Control/HBoxContainer/Healthbar
-@onready var healthbar_label = $hud/Control/HBoxContainer/Healthbar/HealthbarLabel
-@onready var soul_label = $hud/Control/HBoxContainer/SoulCounter/SoulCounterLabel
-@onready var money_label = $hud/Control/HBoxContainer/MoneyCounter/MoneyCounterLabel
+@onready var healthbar = $hud/Control/GridContainer/Healthbar
+@onready var healthbar_label = $hud/Control/GridContainer/Healthbar/HealthbarLabel
+@onready var soul_label = $hud/Control/GridContainer/VBoxContainer/SoulCounter/SoulCounterLabel
+@onready var money_label = $hud/Control/GridContainer/VBoxContainer/MoneyCounter/MoneyCounterLabel
 #Audio Paths
 @onready var coin_pickup_audio_player = $CoinPickupAudio
 @onready var tome_pickup_audio = $TomePickupAudio
