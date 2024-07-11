@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://drk6c4fy4xida"]
+
+[ext_resource type="Texture2D" uid="uid://c4rd0cdnp1us0" path="res://assets/sprites/lighting.png" id="1_0mlfs"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_stln8"]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_ylg3h"]
+offsets = PackedFloat32Array(0, 0.378505, 0.490654, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_5l4kf"]
+offsets = PackedFloat32Array(0.266055, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vxjdv"]
+gradient = SubResource("Gradient_5l4kf")
+width = 32
+height = 16
+fill = 1
+fill_from = Vector2(0.4, 0.5)
+fill_to = Vector2(0.9, 0.5)
+
+[node name="lightning" type="Area2D"]
+
+[node name="Lightning Particle" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+material = SubResource("CanvasItemMaterial_stln8")
+position = Vector2(16, 0)
+amount = 1
+lifetime = 0.25
+explosiveness = 0.5
+randomness = 1.0
+lifetime_randomness = 0.25
+texture = ExtResource("1_0mlfs")
+spread = 0.0
+gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_ylg3h")
+anim_offset_max = 1.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(16, 0)
+texture = SubResource("GradientTexture2D_vxjdv")
