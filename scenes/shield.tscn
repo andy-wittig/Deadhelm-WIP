@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8v8h4yeenklg"]
+[gd_scene load_steps=11 format=3 uid="uid://b8v8h4yeenklg"]
 
 [ext_resource type="Texture2D" uid="uid://xrx8dx5uq8wa" path="res://assets/sprites/shield.png" id="1_58ub7"]
 [ext_resource type="Script" path="res://scripts/shield.gd" id="1_dlmlp"]
 [ext_resource type="Shader" path="res://shaders/distort.gdshader" id="2_12jkt"]
+[ext_resource type="AudioStream" uid="uid://dhfjh66frhodl" path="res://assets/sound effects/shield_sound.mp3" id="4_5j37i"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8e8ne"]
 properties/0/path = NodePath(".:position")
@@ -72,6 +73,13 @@ damping_min = 5.0
 damping_max = 10.0
 angle_max = 360.0
 color_ramp = SubResource("Gradient_tvdib")
+
+[node name="ShieldSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5j37i")
+volume_db = -5.0
+pitch_scale = 1.2
+autoplay = true
+bus = &"SFX"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

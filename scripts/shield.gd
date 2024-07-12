@@ -1,10 +1,10 @@
 extends Area2D
 
-const DIAL_RADIUS = 22
-
+var player: CharacterBody2D
 var direction : Vector2
 
 @onready var shield_sprite = $ShieldSprite
+@onready var shield_sound = $ShieldSound
 
 func get_sprite_path():
 	return $ShieldSprite.texture.resource_path

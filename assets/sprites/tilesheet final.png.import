@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4rd0cdnp1us0"
-path="res://.godot/imported/lighting.png-e0f49402d29862bf2fa5301e06877077.ctex"
+uid="uid://d30jjelyeh4xq"
+path="res://.godot/imported/tilesheet final.png-be4df12cc9fccb08175a23a39f9154eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/lighting.png"
-dest_files=["res://.godot/imported/lighting.png-e0f49402d29862bf2fa5301e06877077.ctex"]
+source_file="res://assets/sprites/tilesheet final.png"
+dest_files=["res://.godot/imported/tilesheet final.png-be4df12cc9fccb08175a23a39f9154eb.ctex"]
 
 [params]
 

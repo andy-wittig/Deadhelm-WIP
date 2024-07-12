@@ -1,6 +1,7 @@
 extends Node2D
 
 const DIAL_RADIUS = 22
+
 var player = null
 var mouse_dir : Vector2
 var placeholder_spell : Sprite2D
