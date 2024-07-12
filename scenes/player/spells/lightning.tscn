@@ -1,0 +1,171 @@
+[gd_scene load_steps=18 format=3 uid="uid://drk6c4fy4xida"]
+
+[ext_resource type="Script" path="res://scripts/lightning.gd" id="1_3o1lo"]
+[ext_resource type="Texture2D" uid="uid://bguhdhn0jqswj" path="res://assets/sprites/level_objects/spells/lightning orb.png" id="2_nnea1"]
+[ext_resource type="Texture2D" uid="uid://c4rd0cdnp1us0" path="res://assets/sprites/level_objects/spells/lightning.png" id="3_vgx2h"]
+[ext_resource type="PackedScene" uid="uid://c6hvdac7cbih0" path="res://scenes/player/hurt_enemy_area.tscn" id="4_ocpje"]
+[ext_resource type="AudioStream" uid="uid://c08nlxh066age" path="res://assets/sound effects/player/lightning_sound.mp3" id="5_u7j72"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vleht"]
+atlas = ExtResource("3_vgx2h")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4dfq"]
+atlas = ExtResource("3_vgx2h")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmvdd"]
+atlas = ExtResource("3_vgx2h")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5j7m"]
+atlas = ExtResource("3_vgx2h")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pqn1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vleht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4dfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmvdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5j7m")
+}],
+"loop": true,
+"name": &"lightning",
+"speed": 8.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_5l4kf"]
+offsets = PackedFloat32Array(0.266055, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vxjdv"]
+gradient = SubResource("Gradient_5l4kf")
+width = 48
+height = 16
+fill = 1
+fill_from = Vector2(0.4, 0.5)
+fill_to = Vector2(0.9, 0.5)
+
+[sub_resource type="Curve" id="Curve_x1vgv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.497533), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_x8n8r"]
+colors = PackedColorArray(0.427451, 0.917647, 0.839216, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_hjchv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightningAnimatedSprite/PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_s1sa0"]
+resource_name = "lightning_flash"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightningAnimatedSprite/PointLight2D:energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ejyiq"]
+_data = {
+"RESET": SubResource("Animation_hjchv"),
+"lightning_flash": SubResource("Animation_s1sa0")
+}
+
+[node name="lightning" type="Area2D"]
+modulate = Color(1, 1, 1, 0.862745)
+z_index = 10
+script = ExtResource("1_3o1lo")
+
+[node name="LightningOrbSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_nnea1")
+
+[node name="LightningAnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pqn1j")
+animation = &"lightning"
+autoplay = "lightning"
+frame_progress = 0.309775
+offset = Vector2(16, 0)
+
+[node name="hurt_enemy_area" parent="LightningAnimatedSprite" instance=ExtResource("4_ocpje")]
+position = Vector2(12, 0)
+scale = Vector2(2, 1)
+damage = 5
+attack_wait = 0.4
+
+[node name="PointLight2D" type="PointLight2D" parent="LightningAnimatedSprite"]
+position = Vector2(16, 0)
+energy = 0.5
+texture = SubResource("GradientTexture2D_vxjdv")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="LightningAnimatedSprite"]
+amount = 20
+lifetime = 0.8
+explosiveness = 0.1
+randomness = 0.5
+lifetime_randomness = 0.2
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 6.0
+spread = 90.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.0
+angular_velocity_max = 15.0
+radial_accel_min = 20.0
+radial_accel_max = 20.0
+damping_min = 8.0
+damping_max = 10.0
+angle_min = -360.0
+angle_max = 360.0
+scale_amount_min = 1.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_x1vgv")
+color_ramp = SubResource("Gradient_x8n8r")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="LightningSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_u7j72")
+volume_db = -8.0
+autoplay = true
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ejyiq")
+}
+autoplay = "lightning_flash"
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

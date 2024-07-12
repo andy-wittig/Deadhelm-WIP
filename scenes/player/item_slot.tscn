@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqqi6e1x2xkt6"]
+
+[ext_resource type="Texture2D" uid="uid://ecfmsjrpb7mf" path="res://assets/sprites/UI/player_information/select_ui.png" id="1_b4pxt"]
+[ext_resource type="Texture2D" uid="uid://bb8xxi4fo0u5" path="res://assets/sprites/UI/player_information/slot_ui.png" id="2_xtnh6"]
+[ext_resource type="Script" path="res://scripts/item_slot.gd" id="3_fhp0k"]
+
+[node name="ItemSlot" type="Control"]
+light_mask = 0
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SelectTexture" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = -15.0
+offset_right = 16.0
+offset_bottom = 1.0
+texture = ExtResource("1_b4pxt")
+
+[node name="SlotBase" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("2_xtnh6")
+
+[node name="Item" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 16.0
+script = ExtResource("3_fhp0k")
+
+[connection signal="gui_input" from="Item" to="Item" method="_on_slot_base_gui_input"]

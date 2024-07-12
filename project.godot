@@ -13,7 +13,14 @@ config_version=5
 config/name="Deadhelm"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://assets/sprites/icon.png"
+boot_splash/bg_color=Color(0.419608, 0.14902, 0.262745, 1)
+boot_splash/image="res://assets/sprites/UI/studio logo.png"
+boot_splash/fullsize=false
+config/icon="res://assets/sprites/UI/icon.png"
+
+[audio]
+
+buses/default_bus_layout="res://assets/default_bus_layout.tres"
 
 [autoload]
 
@@ -24,7 +31,7 @@ GameManager="*res://scripts/game_manager.gd"
 window/size/viewport_width=1600
 window/size/viewport_height=900
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="res://assets/sprites/cursor pointer.png"
+mouse_cursor/custom_image="res://assets/sprites/UI/cursor pointer.png"
 
 [input]
 

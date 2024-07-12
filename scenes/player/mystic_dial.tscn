@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://oh3fs6ugskct"]
+
+[ext_resource type="Texture2D" uid="uid://b86co1pvkl007" path="res://assets/sprites/player/mystic dial.png" id="1_tn40v"]
+[ext_resource type="Script" path="res://scripts/mystic_dial.gd" id="1_x6f12"]
+[ext_resource type="AudioStream" uid="uid://4dnc14h2aqd5" path="res://assets/sound effects/mystic_dial_sound.mp3" id="3_wsl73"]
+
+[sub_resource type="Animation" id="Animation_myx2l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.686275)]
+}
+
+[sub_resource type="Animation" id="Animation_sgfuw"]
+resource_name = "dial_rotate"
+length = 6.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_3qcdt"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.686275), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qm5rv"]
+_data = {
+"RESET": SubResource("Animation_myx2l"),
+"dial_rotate": SubResource("Animation_sgfuw"),
+"fade_out": SubResource("Animation_3qcdt")
+}
+
+[node name="mystic dial" type="Node2D"]
+z_index = 5
+script = ExtResource("1_x6f12")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.686275)
+texture = ExtResource("1_tn40v")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qm5rv")
+}
+autoplay = "dial_rotate"
+
+[node name="MysticDialAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wsl73")
+volume_db = -15.0
+pitch_scale = 0.75
+autoplay = true
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

@@ -8,16 +8,16 @@ var currently_selected = false
 
 @onready var item_texture_dict = {
 	"empty" : null,
-	"lock" : preload("res://assets/sprites/placeholder_lock.png"),
-	"meteor" : preload("res://assets/sprites/placeholder_meteor.png"),
-	"shield" : preload("res://assets/sprites/placeholder_shield.png"),
-	"lightning" : preload("res://assets/sprites/placeholder_lightning.png")
+	"lock" : preload("res://assets/sprites/UI/player_information/placeholder_lock.png"),
+	"meteor" : preload("res://assets/sprites/UI/player_information/placeholder_meteor.png"),
+	"shield" : preload("res://assets/sprites/UI/player_information/placeholder_shield.png"),
+	"lightning" : preload("res://assets/sprites/UI/player_information/placeholder_lightning.png")
 }
 
 @onready var item_instance_dict = {
-	"meteor" : "res://scenes/meteor.tscn",
-	"shield" : "res://scenes/shield.tscn",
-	"lightning" : "res://scenes/lightning.tscn",
+	"meteor" : "res://scenes/player/spells/meteor.tscn",
+	"shield" : "res://scenes/player/spells/shield.tscn",
+	"lightning" : "res://scenes/player/spells/lightning.tscn",
 }
 
 @onready var items = item_texture_dict.keys()

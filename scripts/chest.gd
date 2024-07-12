@@ -29,6 +29,6 @@ func open_chest():
 	chest_open_sprite.visible = true
 	chest_open = true
 	for i in range(coin_amount):
-		var coin = load("res://scenes/coin.tscn").instantiate()
+		var coin = load("res://scenes/level_objects/coin.tscn").instantiate()
 		coin.position = position
 		get_tree().get_root().add_child(coin)

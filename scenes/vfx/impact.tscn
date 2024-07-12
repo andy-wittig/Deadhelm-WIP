@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://23aywy6jutlg"]
+
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_3nkrh"]
+[ext_resource type="Texture2D" uid="uid://dknfs0prokvpk" path="res://assets/sprites/vfx/impact.png" id="2_q4byr"]
+[ext_resource type="AudioStream" uid="uid://y1pn7kv1jm7v" path="res://assets/sound effects/impact.wav" id="3_kce12"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ummjq"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_u5qoa"]
+_data = [Vector2(0, 0.758242), 0.0, 3.45425, 0, 0, Vector2(0.666667, 0.813187), 2.18077, 2.18077, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_axdkn"]
+offsets = PackedFloat32Array(0.745342, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="impact" type="Node2D"]
+z_index = 5
+script = ExtResource("1_3nkrh")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_ummjq")
+amount = 2
+lifetime = 0.4
+texture = ExtResource("2_q4byr")
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 12.0
+damping_min = 25.0
+damping_max = 25.0
+angle_min = -45.0
+angle_max = 45.0
+scale_amount_curve = SubResource("Curve_u5qoa")
+color_ramp = SubResource("Gradient_axdkn")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="DestoryAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kce12")
+volume_db = -15.0
+autoplay = true
+bus = &"SFX"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

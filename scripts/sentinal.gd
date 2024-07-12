@@ -46,11 +46,11 @@ func hurt_enemy(damage: int, other_pos: float):
 	
 @rpc("call_local", "any_peer")
 func destroy_self():
-	var soul = load("res://scenes/soul.tscn").instantiate()
+	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	soul.position = position
 	get_tree().get_root().add_child(soul)
 	
-	var explosion = load("res://scenes/explosion.tscn").instantiate()
+	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()
 	get_tree().get_root().add_child(explosion)
 	explosion.position.y = position.y - 8
 	explosion.position.x = position.x
@@ -60,7 +60,7 @@ func destroy_self():
 	
 @rpc("call_local")
 func attack(direction):
-	var rocket = load("res://scenes/sentinal_rocket.tscn").instantiate()
+	var rocket = load("res://scenes/enemies/sentinal_rocket.tscn").instantiate()
 	rocket.direction = direction
 	rocket.transform = %"Rocket Marker".global_transform
 	get_tree().get_root().add_child(rocket)

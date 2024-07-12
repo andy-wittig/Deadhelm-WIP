@@ -22,13 +22,13 @@ func _process(delta):
 	
 @rpc("any_peer", "call_local")
 func destroy_self():
-	var impact = load("res://scenes/impact.tscn").instantiate()
+	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
 	get_tree().get_root().add_child(impact)
 	impact.position = position
 	queue_free()
 	
 func _on_destroy_timer_timeout():
-	var impact = load("res://scenes/impact.tscn").instantiate()
+	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
 	get_tree().get_root().add_child(impact)
 	impact.position = position
 	queue_free()

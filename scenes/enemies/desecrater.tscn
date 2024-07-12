@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://y0thy4gylqg"]
+
+[ext_resource type="Script" path="res://scripts/desecrater.gd" id="1_bn7vt"]
+[ext_resource type="Texture2D" uid="uid://2itwy4ed42y4" path="res://assets/sprites/enemies/desecrater.png" id="1_f2gjn"]
+
+[sub_resource type="Gradient" id="Gradient_niu5n"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.230216, 1)
+colors = PackedColorArray(0.0647482, 0.0647482, 0.0647482, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jvcvn"]
+gradient = SubResource("Gradient_niu5n")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.75, 0.75)
+
+[node name="desecrater" type="Node2D"]
+z_index = 6
+script = ExtResource("1_bn7vt")
+facing_direction = 0
+
+[node name="DesecraterSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_f2gjn")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+blend_mode = 1
+texture = SubResource("GradientTexture2D_jvcvn")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(-128, 0)
+collision_mask = 3
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

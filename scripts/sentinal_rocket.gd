@@ -9,7 +9,7 @@ func _process(delta):
 
 @rpc("call_local")
 func destroy_self():
-	var explosion = load("res://scenes/explosion.tscn").instantiate()
+	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()
 	get_tree().get_root().add_child(explosion)
 	explosion.position = position
 	queue_free()

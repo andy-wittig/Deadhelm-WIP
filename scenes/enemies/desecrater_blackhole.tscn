@@ -1,0 +1,157 @@
+[gd_scene load_steps=17 format=3 uid="uid://b7n0d4png6rh5"]
+
+[ext_resource type="Script" path="res://scripts/desecrater_blackhole.gd" id="1_3ktav"]
+[ext_resource type="Texture2D" uid="uid://bjemmo2ns8q7n" path="res://assets/sprites/enemies/projectiles/desecrater blackhole.png" id="1_w0i00"]
+[ext_resource type="Shader" path="res://shaders/screen_distort.gdshader" id="4_7sdn5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ahte"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sqt54"]
+radius = 32.0
+
+[sub_resource type="Animation" id="Animation_shrvt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackholeSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1fwfe"]
+resource_name = "rotate"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackholeSprite:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.785398, 0.785398]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aw4kk"]
+_data = {
+"RESET": SubResource("Animation_shrvt"),
+"rotate": SubResource("Animation_1fwfe")
+}
+
+[sub_resource type="Curve" id="Curve_40vqe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_2bbjm"]
+offsets = PackedFloat32Array(0, 0.471963, 1)
+colors = PackedColorArray(0.0627451, 0.0705882, 0.109804, 0, 0, 0, 0, 1, 0.0627451, 0.0705882, 0.109804, 0)
+
+[sub_resource type="Gradient" id="Gradient_cvkb7"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaw5t"]
+gradient = SubResource("Gradient_cvkb7")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Curve" id="Curve_0mcbe"]
+_data = [Vector2(0.125, 0), 0.0, -0.11623, 0, 0, Vector2(0.23628, 0.00521123), 0.0, 0.0, 0, 0, Vector2(0.315, 0), -0.276465, 28.7806, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cidrv"]
+width = 512
+curve = SubResource("Curve_0mcbe")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_al01l"]
+shader = ExtResource("4_7sdn5")
+shader_parameter/curve = SubResource("CurveTexture_cidrv")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ss3j0"]
+
+[node name="desecrater_blackhole" type="Area2D" groups=["enemy_projectile"]]
+z_index = 10
+collision_mask = 3
+script = ExtResource("1_3ktav")
+
+[node name="ProjectileCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8ahte")
+
+[node name="BlackholeSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_w0i00")
+
+[node name="HurtArea" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="HurtCollider" type="CollisionShape2D" parent="HurtArea"]
+shape = SubResource("CircleShape2D_sqt54")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_aw4kk")
+}
+autoplay = "rotate"
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -1
+amount = 25
+lifetime = 4.0
+speed_scale = 0.8
+randomness = 0.5
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0
+damping_min = 15.0
+damping_max = 15.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 2.0
+scale_amount_max = 2.5
+scale_amount_curve = SubResource("Curve_40vqe")
+color_ramp = SubResource("Gradient_2bbjm")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.4
+blend_mode = 1
+texture = SubResource("GradientTexture2D_eaw5t")
+
+[node name="DistortRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_al01l")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("PlaceholderTexture2D_ss3j0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

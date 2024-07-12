@@ -98,7 +98,7 @@ func hurt_player(damage: int, other_pos: float):
 	healthbar.value = player_health
 	player_health = max(player_health, 0)
 	
-	var damage_indicator = load("res://scenes/damage_indicator.tscn").instantiate()
+	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
 	damage_indicator.damage_amount = damage
 	damage_indicator.position = global_position
 	get_tree().get_root().add_child(damage_indicator)
@@ -136,7 +136,7 @@ func _process(_delta):
 			if not attack_cooldown:
 				if Input.is_action_just_pressed("right_click"):
 					var spell_placeholder_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
-					dial_instance = load("res://scenes/mystic_dial.tscn").instantiate()
+					dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
 					get_parent().add_child(dial_instance)
 					dial_instance.position.x = position.x
 					dial_instance.position.y = position.y - 16

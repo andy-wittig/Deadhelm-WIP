@@ -143,7 +143,7 @@ func _on_attack_timer_timeout():
 func create_spikes():
 		var spike_angle = Vector2(1.0,0.0)
 		for i in 7:
-			var spike = load("res://scenes/bombshell_spike.tscn").instantiate()
+			var spike = load("res://scenes/enemies/bombshell_spike.tscn").instantiate()
 			spike.direction = spike_angle
 			spike_angle = spike_angle.rotated(deg_to_rad(-30))
 			spike.transform = %"Spike Marker".global_transform
@@ -167,8 +167,11 @@ func hurt_enemy(damage: int, other_pos: float):
 	
 @rpc("call_local", "any_peer")
 func destroy_self():
-	var soul = load("res://scenes/soul.tscn").instantiate()
+	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
+	var death_effect = load("res://scenes/vfx/bombshell_turtle_death.tscn").instantiate()
 	soul.position = position
+	death_effect.position = position
 	get_tree().get_root().add_child(soul)
+	get_tree().get_root().add_child(death_effect)
 	marked_for_death = true
 	queue_free()

@@ -14,7 +14,7 @@ func spawn_tome():
 	soul_label.visible = false
 	can_interact = false
 		
-	var tome = load("res://scenes/tome.tscn").instantiate()
+	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
 	tome.spell_type = spell_type
 	tome.transform = transform
 	get_parent().add_child(tome)

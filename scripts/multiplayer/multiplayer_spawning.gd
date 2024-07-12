@@ -1,6 +1,6 @@
 extends Node2D
 
-var multiplayer_scene = preload("res://scenes/multiplayer_player.tscn")
+var multiplayer_scene = preload("res://scenes/player/multiplayer_player.tscn")
 
 @onready var players_spawn_node = $players
 
