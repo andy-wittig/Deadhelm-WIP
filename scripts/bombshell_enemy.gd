@@ -113,7 +113,8 @@ func _physics_process(delta):
 			velocity.x = 0
 			
 			animated_sprite.play("idle")
-			animation_player.play("blink")
+			if (animation_player.current_animation != "hurt_blink"):
+				animation_player.play("blink")
 			
 			if not attack_timer_started:
 				%AttackTimer.start(2)
