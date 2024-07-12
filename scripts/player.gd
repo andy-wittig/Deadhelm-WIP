@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #Physics Constants
 const SPEED = 75.0
-const CLIMB_SPEED = 35
+const CLIMB_SPEED = 60.0
 const JUMP_VELOCITY = -250.0
 
 #Physics Variables
@@ -40,6 +40,8 @@ var spell_instance = null
 @onready var tome_pickup_audio = $TomePickupAudio
 @onready var soul_pickup_audio = $SoulPickupAudio
 @onready var player_hurt_audio = $PlayerHurtAudio
+@onready var footstep_audio = $FootstepAudio
+@onready var spell_cast_audio = $SpellCastAudio
 #Mechanics Paths
 @onready var attack_cooldown_timer = $AttackCooldownTimer
 
@@ -104,9 +106,11 @@ func _process(delta):
 			if Input.is_action_just_pressed("left_click"):
 				var mouse_pos = get_global_mouse_position()
 				var mouse_dir = (mouse_pos - dial_instance.global_position).normalized()
+				spell_instance.player = self
 				spell_instance.direction = mouse_dir
 				spell_instance.position = dial_instance.global_position + mouse_dir * dial_instance.DIAL_RADIUS
 				get_tree().get_root().add_child(spell_instance)
+				spell_cast_audio.play()
 				
 				dial_instance.destroy()
 				attack_cooldown_timer.start(2)
@@ -144,16 +148,20 @@ func _physics_process(delta):
 		animated_sprite.flip_h = false
 	elif (direction < 0):
 		animated_sprite.flip_h = true
-	
+
 	#play animation
 	if is_on_floor():
 		grounded = true
 		if (direction == 0):
 			animated_sprite.play("idle")
+			footstep_audio.stop()
 		else:
 			animated_sprite.play("run")
+			if (!footstep_audio.is_playing()):
+				footstep_audio.play()
 	else:
 		grounded = false
+		footstep_audio.stop()
 		if (state == state_type.MOVING):
 			animated_sprite.play("jump")
 		elif (state == state_type.CLIMBING):

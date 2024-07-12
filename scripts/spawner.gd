@@ -14,6 +14,7 @@ var random = RandomNumberGenerator.new()
 @onready var spawn_timer = $SpawnWaitTimer
 @onready var summon_label = $SummonLabel
 @onready var tile_map = $"../../TileMap"
+@onready var spawn_sound = $SpawnSound
 
 func _process(delta):
 	spawner_sprite.material.set_shader_parameter("enabled", false)
@@ -38,6 +39,7 @@ func spawn_enemy(spawn_position):
 	var enemy = spawn_enemy_type.instantiate()
 	enemy.position = spawn_position
 	get_tree().get_root().add_child(enemy)
+	spawn_sound.play()
 	
 func check_enemy_spawnable():
 	var rand_x_pos = global_position.x + random.randi_range(-spawn_range, spawn_range) * 16
