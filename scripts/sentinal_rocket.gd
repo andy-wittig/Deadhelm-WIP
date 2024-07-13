@@ -10,15 +10,15 @@ func _process(delta):
 @rpc("call_local")
 func destroy_self():
 	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()
-	get_tree().get_root().add_child(explosion)
 	explosion.position = position
+	get_tree().get_root().add_child(explosion)
 	queue_free()
 
 func _on_destroy_timer_timeout():
 	destroy_self()
 
 func _on_body_entered(body):
-	if (body.get_parent().get_name() == "players"
+	if (body.is_in_group("players")
 	&& multiplayer.is_server()):
 		if (body.get_name() == "player"):
 			body.hurt_player(15, global_position, 200)

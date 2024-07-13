@@ -206,7 +206,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_8rcyp"]
 resource_name = "hurt_blink"
-length = 0.2
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -214,7 +214,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -226,7 +226,7 @@ tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/tint")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Color(0.92549, 0.152941, 0.247059, 1), Color(1, 1, 1, 1)]
@@ -241,8 +241,8 @@ _data = {
 
 [node name="bombshell enemy" type="CharacterBody2D" groups=["enemies"]]
 z_index = 4
-collision_layer = 4
-collision_mask = 8
+collision_layer = 8
+collision_mask = 16
 script = ExtResource("1_twrv8")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -262,13 +262,16 @@ shape = SubResource("CircleShape2D_8sfko")
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, -6)
 target_position = Vector2(8, 0)
+collision_mask = 16
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, -6)
 target_position = Vector2(-8, 0)
+collision_mask = 16
 
 [node name="chase player" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
 collision_mask = 2
 
 [node name="detection_radius" type="CollisionShape2D" parent="chase player"]
@@ -281,9 +284,8 @@ libraries = {
 "": SubResource("AnimationLibrary_31xmi")
 }
 
-[node name="ChangeStateTimer" type="Timer" parent="."]
+[node name="RoamTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-autostart = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -303,6 +305,6 @@ bus = &"SFX"
 
 [connection signal="body_entered" from="chase player" to="." method="_on_chase_player_body_entered"]
 [connection signal="body_exited" from="chase player" to="." method="_on_chase_player_body_exited"]
-[connection signal="timeout" from="ChangeStateTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="RoamTimer" to="." method="_on_change_state_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

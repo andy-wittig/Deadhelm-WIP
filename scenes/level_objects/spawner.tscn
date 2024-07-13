@@ -99,6 +99,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.500835), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="spawner" type="Area2D"]
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_o47cc")
 
@@ -119,7 +120,7 @@ texture = ExtResource("2_x51t5")
 [node name="PointLight2D" type="PointLight2D" parent="OrbSprite"]
 z_index = 1
 color = Color(0.427451, 0.917647, 0.839216, 1)
-energy = 2.0
+energy = 1.6
 texture = SubResource("GradientTexture2D_ceu8f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

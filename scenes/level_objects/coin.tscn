@@ -69,8 +69,8 @@ radius = 13.0
 
 [node name="coin" type="RigidBody2D"]
 z_index = 6
-collision_layer = 8
-collision_mask = 8
+collision_layer = 0
+collision_mask = 16
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_wdjdm")
 lock_rotation = true
@@ -90,6 +90,7 @@ shape = SubResource("CircleShape2D_mvgg4")
 
 [node name="DetectPlayer" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
 collision_mask = 2
 
 [node name="PickupShape" type="CollisionShape2D" parent="DetectPlayer"]

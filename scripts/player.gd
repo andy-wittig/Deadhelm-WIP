@@ -4,7 +4,7 @@ extends CharacterBody2D
 const SPEED = 75.0
 const CLIMB_SPEED = 60.0
 const JUMP_VELOCITY = -250.0
-const KNOCK_BACK_SPEED := 75.0
+const KNOCK_BACK_FALLOFF := 60.0
 #Physics Variables
 var grounded: bool
 var knock_back: Vector2
@@ -175,8 +175,8 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 	velocity += knock_back
-	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_SPEED)
-	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_SPEED)
+	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
+	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 
 	move_and_slide()
 	

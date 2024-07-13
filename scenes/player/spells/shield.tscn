@@ -36,7 +36,10 @@ colors = PackedColorArray(0.968627, 0.952941, 0.717647, 0, 0.968627, 0.952941, 0
 
 [node name="shield" type="Area2D"]
 self_modulate = Color(1, 1, 1, 0)
+light_mask = 5
 z_index = 10
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_dlmlp")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

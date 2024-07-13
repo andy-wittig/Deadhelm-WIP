@@ -12,6 +12,8 @@ properties/0/replication_mode = 1
 size = Vector2(16, 10)
 
 [node name="platform" type="AnimatableBody2D"]
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("1_b5nxq")
 
 [node name="PlatformSynchronizer" type="MultiplayerSynchronizer" parent="."]

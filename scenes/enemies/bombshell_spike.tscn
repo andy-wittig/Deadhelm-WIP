@@ -4,11 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://bygo3ctxud1ol" path="res://assets/sprites/enemies/bombshell_turtle/bombshell spike.png" id="1_6vxcd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sfnp1"]
-radius = 4.0
+radius = 3.0
 
 [node name="bombshell spike" type="Area2D" groups=["enemy_projectile"]]
 z_index = 10
-collision_mask = 3
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_2lmx7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -20,6 +21,7 @@ rotation = 0.785398
 texture = ExtResource("1_6vxcd")
 
 [node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 0.6
 autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

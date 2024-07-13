@@ -15,6 +15,7 @@ shader_parameter/enabled = false
 size = Vector2(16, 16)
 
 [node name="chest" type="Area2D"]
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_bk8mp")
 

@@ -48,6 +48,7 @@ a = Vector2(8, 1)
 b = Vector2(-8, 1)
 
 [node name="leaping mushroom" type="Area2D"]
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_ltmlx")
 

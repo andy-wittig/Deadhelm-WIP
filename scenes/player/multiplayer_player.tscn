@@ -239,6 +239,7 @@ _data = {
 [node name="MultiplayerPlayer" type="CharacterBody2D" groups=["players"]]
 z_index = 5
 collision_layer = 2
+collision_mask = 16
 script = ExtResource("1_mntnr")
 
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
