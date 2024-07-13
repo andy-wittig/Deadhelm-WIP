@@ -2,8 +2,10 @@ extends CharacterBody2D
 
 const SPEED = 25.0
 const JUMP_VELOCITY = -140.0
+const KNOCK_BACK_SPEED := 75.0
 
 var direction = 1
+var knock_back: Vector2
 var rand_state_timer = RandomNumberGenerator.new()
 var player = null
 var chasing_player = false
@@ -119,7 +121,11 @@ func _physics_process(delta):
 			if not attack_timer_started:
 				%AttackTimer.start(2)
 				attack_timer_started = true
-				
+	
+	velocity += knock_back
+	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_SPEED)
+	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_SPEED)
+		
 	move_and_slide()
 	
 func _on_change_state_timer_timeout():
@@ -150,19 +156,19 @@ func create_spikes():
 			spike.transform = %"Spike Marker".global_transform
 			get_tree().get_root().add_child(spike)	
 
-func apply_knockback(other_pos):
-	var knock_back = 50
-	if (other_pos < global_position.x):
-		velocity += Vector2(knock_back * 2.5, -knock_back)
-	else:
-		velocity += Vector2(-knock_back * 2.5, -knock_back)
-	
-	move_and_slide()
+func apply_knockback(other_pos: Vector2, force: float):
+	var other_dir = (other_pos - global_position).normalized()
+	knock_back = -other_dir * force
 	
 @rpc("any_peer", "call_local")
-func hurt_enemy(damage: int, other_pos: float):
+func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 	animation_player.play("hurt_blink")
-	apply_knockback(other_pos)
+	apply_knockback(other_pos, force)
+	
+	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
+	get_tree().get_root().add_child(impact)
+	impact.position = Vector2(position.x, position.y - 6)
+	
 	enemy_health -= damage
 	enemy_health = max(enemy_health, 0)
 	

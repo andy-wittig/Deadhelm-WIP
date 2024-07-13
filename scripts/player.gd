@@ -4,9 +4,10 @@ extends CharacterBody2D
 const SPEED = 75.0
 const CLIMB_SPEED = 60.0
 const JUMP_VELOCITY = -250.0
-
+const KNOCK_BACK_SPEED := 75.0
 #Physics Variables
 var grounded: bool
+var knock_back: Vector2
 #Player Stats Variables
 var player_health = 100
 var souls_collected = 0
@@ -172,19 +173,21 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		
+	velocity += knock_back
+	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_SPEED)
+	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_SPEED)
 
 	move_and_slide()
 	
-func apply_knockback(other_pos, knock_back: int):
-	if (other_pos < global_position.x):
-		velocity = Vector2(knock_back * 2.5, -knock_back)
-	else:
-		velocity = Vector2(-knock_back * 2.5, -knock_back)
+func apply_knockback(other_pos: Vector2, force: float):
+		var other_dir = (other_pos - global_position).normalized()
+		knock_back = -other_dir * force
 
-func hurt_player(damage: int, other_pos: float):
+func hurt_player(damage: int, other_pos: Vector2, force: float):
 	animation_player.play("player_hurt")
 	player_hurt_audio.play()
-	apply_knockback(other_pos, 100)
+	apply_knockback(other_pos, force)
 	
 	player_health -= damage
 	healthbar.value = player_health

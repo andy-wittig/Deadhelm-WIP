@@ -119,6 +119,7 @@ position = Vector2(12, 0)
 scale = Vector2(2, 1)
 damage = 5
 attack_wait = 0.4
+knock_back = 100.0
 
 [node name="PointLight2D" type="PointLight2D" parent="LightningAnimatedSprite"]
 position = Vector2(16, 0)

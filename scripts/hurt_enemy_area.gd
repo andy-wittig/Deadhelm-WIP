@@ -3,6 +3,7 @@ extends Area2D
 @export var damage: int
 @export var attack_wait := 2.0
 @export var destroy_time := 2
+@export var knock_back := 0.0
 
 @onready var hurt_enemy_timer = $HurtEnemyTimer
 @onready var destroy_timer = $DestroyTimer
@@ -20,7 +21,7 @@ func _on_hurt_enemy_timer_timeout():
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("enemies")
 		&& multiplayer.is_server()):
-			body.hurt_enemy.rpc(damage, global_position.x)
+			body.hurt_enemy.rpc(damage, global_position, knock_back)
 
 func _on_destroy_timer_timeout():
 	rpc("destroy_self")

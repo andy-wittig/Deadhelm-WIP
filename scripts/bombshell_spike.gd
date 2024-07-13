@@ -21,8 +21,8 @@ func _on_body_entered(body):
 	if (body.get_parent().get_name() == "players"
 	&& multiplayer.is_server()):
 		if (body.get_name() == "player"):
-			body.hurt_player(10, global_position.x)
+			body.hurt_player(10, global_position, 200)
 			destroy_self()
 		else:
-			body.hurt_player.rpc_id(body.player_id, 10, global_position.x)
+			body.hurt_player.rpc_id(body.player_id, 10, global_position, 200)
 			rpc("destroy_self")

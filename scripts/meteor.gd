@@ -17,20 +17,12 @@ func _process(delta):
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("enemies")
 		&& multiplayer.is_server()):
-			body.hurt_enemy.rpc(15, global_position.x)
+			body.hurt_enemy.rpc(15, global_position, 200)
 			rpc("destroy_self")
 	
 @rpc("any_peer", "call_local")
 func destroy_self():
-	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
-	get_tree().get_root().add_child(impact)
-	impact.position = position
 	queue_free()
 	
 func _on_destroy_timer_timeout():
-	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
-	get_tree().get_root().add_child(impact)
-	impact.position = position
-	queue_free()
-	
-		
+	destroy_self()	

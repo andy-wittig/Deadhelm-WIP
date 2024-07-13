@@ -9,9 +9,9 @@ var active := true
 func apply_damage(body):
 	if (body.is_in_group("players") && multiplayer.is_server() && active):
 			if (body.get_name() == "player"): #single player
-				body.hurt_player(damage, global_position.x)
+				body.hurt_player(damage, global_position, 100)
 			else: #multiplayer
-				body.hurt_player.rpc_id(body.player_id, damage, global_position.x)
+				body.hurt_player.rpc_id(body.player_id, damage, global_position, 100)
 
 func _on_body_entered(body):
 		hurt_player_timer.wait_time = attack_wait
