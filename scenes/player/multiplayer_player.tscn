@@ -14,6 +14,17 @@
 [ext_resource type="AudioStream" uid="uid://b8rod0c5ue3me" path="res://assets/sound effects/player/tome_pickup.wav" id="12_o1xq7"]
 [ext_resource type="AudioStream" uid="uid://bog807tukihob" path="res://assets/sound effects/player/soul_pickup.wav" id="13_ak86l"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_201n0"]
+properties/0/path = NodePath("InputSynchronizer:input_direction")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("InputSynchronizer:climb_direction")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("InputSynchronizer:username")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kdq82"]
 properties/0/path = NodePath(".:player_id")
 properties/0/spawn = true
@@ -36,17 +47,6 @@ properties/5/replication_mode = 1
 properties/6/path = NodePath(".:username")
 properties/6/spawn = true
 properties/6/replication_mode = 1
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k2nre"]
-properties/0/path = NodePath("InputSynchronizer:input_direction")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("InputSynchronizer:climb_direction")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath("InputSynchronizer:username")
-properties/2/spawn = true
-properties/2/replication_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1tyvq"]
 resource_local_to_scene = true
@@ -242,31 +242,23 @@ collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_mntnr")
 
-[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_kdq82")
-
 [node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
-replication_config = SubResource("SceneReplicationConfig_k2nre")
+replication_config = SubResource("SceneReplicationConfig_201n0")
 script = ExtResource("2_t1m0d")
 
-[node name="hud" parent="." instance=ExtResource("3_gd847")]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_1tyvq")
-position = Vector2(0, -16)
-sprite_frames = SubResource("SpriteFrames_pnaq5")
-animation = &"climb"
-autoplay = "idle"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_t3qde")
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_kdq82")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -9)
 zoom = Vector2(3, 3)
+limit_left = 0
+limit_bottom = 0
+limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="hud" parent="." instance=ExtResource("3_gd847")]
 
 [node name="Username" type="Label" parent="."]
 anchors_preset = 5
@@ -283,6 +275,17 @@ theme_override_fonts/font = ExtResource("9_yfqiy")
 theme_override_font_sizes/font_size = 8
 text = "username"
 horizontal_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_1tyvq")
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_pnaq5")
+animation = &"climb"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_t3qde")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false

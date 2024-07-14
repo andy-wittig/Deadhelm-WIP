@@ -6,9 +6,9 @@ func _ready():
 	pass
 	multiplayer.server_relay = false
 	
-	if DisplayServer.get_name() == "headless":
-		print ("Automatically starting dedicated server.")
-		become_host(DEDICATED_SERVER_PORT).call_deferred()
+	#if DisplayServer.get_name() == "headless":
+		#print ("Automatically starting dedicated server.")
+		#become_host(DEDICATED_SERVER_PORT).call_deferred()
 	#if (OS.has_feature("dedicated_server")):
 		#print ("Starting dedicated server...")
 		#become_host(DEDICATED_SERVER_PORT)

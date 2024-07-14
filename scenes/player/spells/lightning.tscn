@@ -119,7 +119,7 @@ offset = Vector2(16, 0)
 [node name="hurt_enemy_area" parent="LightningAnimatedSprite" instance=ExtResource("4_ocpje")]
 position = Vector2(12, 0)
 scale = Vector2(2, 1)
-damage = 5
+damage = 3
 attack_wait = 0.4
 knock_back = 100.0
 

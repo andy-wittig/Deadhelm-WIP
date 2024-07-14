@@ -210,9 +210,11 @@ script = ExtResource("1_6jjtq")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -9)
 zoom = Vector2(3, 3)
-limit_bottom = 320
+limit_left = 0
+limit_bottom = 0
 limit_smoothed = true
 position_smoothing_enabled = true
+editor_draw_limits = true
 
 [node name="hud" parent="." instance=ExtResource("2_5bfwm")]
 
@@ -232,6 +234,9 @@ reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_1g6jv")
 }
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="PlayerHurtAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_agady")
@@ -254,14 +259,11 @@ bus = &"SFX"
 
 [node name="FootstepAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_u6xwe")
-volume_db = -6.0
+volume_db = -8.0
 
 [node name="SpellCastAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_ujh84")
 volume_db = -8.0
 pitch_scale = 0.5
-
-[node name="AttackCooldownTimer" type="Timer" parent="."]
-one_shot = true
 
 [connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

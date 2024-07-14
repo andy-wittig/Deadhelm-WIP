@@ -4,13 +4,14 @@ extends CharacterBody2D
 const SPEED = 75.0
 const CLIMB_SPEED = 60.0
 const JUMP_VELOCITY = -250.0
-
+const KNOCK_BACK_FALLOFF := 60.0
 #Physics Variables
 var grounded: bool
 var hor_direction = 1
 var ver_direction = 1
 var jumped = false
 var _is_on_floor = true
+var knock_back: Vector2
 #Player Stats Variables
 var username := ""
 var player_health = 100
@@ -62,37 +63,36 @@ func _ready():
 	
 	if multiplayer.get_unique_id() == player_id: #player_id is client
 		$Camera2D.make_current()
+		$Camera2D.reset_smoothing()
 	else:
 		$Camera2D.enabled = false
 		$hud.visible = false
 	
 @rpc ("call_local", "any_peer")
 func drop_inventory_item(spell_type, pos):
-	var tome = load("res://scenes/tome.tscn").instantiate()
+	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
 	tome.spell_type = spell_type
-	tome.position.x = pos.x
-	tome.position.y = pos.y - 16
+	tome.position.x = Vector2(pos.x, pos.y - 16)
 	get_tree().get_root().add_child(tome)
 
 @rpc("any_peer", "call_local")
-func create_spell(path, dir, pos): 
+func create_spell(path, dir, pos, body): 
 	var new_spell = load(path).instantiate()
+	new_spell.player = body
 	new_spell.direction = dir
 	new_spell.position = pos
 	get_tree().get_root().add_child(new_spell)
 	
 @rpc ("any_peer", "call_local")
-func apply_knockback(other_pos):
-	var knock_back = 100
-	if (other_pos < self.global_position.x):
-		self.velocity = Vector2(knock_back * 2.5, -knock_back)
-	else:
-		self.velocity = Vector2(-knock_back * 2.5, -knock_back)
+func apply_knockback(other_pos: Vector2, force: float):
+		var other_dir = (other_pos - global_position).normalized()
+		knock_back = -other_dir * force
 		
 @rpc("any_peer", "call_local")
-func hurt_player(damage: int, other_pos: float):
+func hurt_player(damage: int, other_pos: Vector2, force: float):
 	animation_player.play("player_hurt")
-	rpc("apply_knockback", other_pos)
+	player_hurt_audio.play()
+	rpc("apply_knockback", other_pos, force)
 	
 	player_health -= damage
 	healthbar.value = player_health
@@ -102,6 +102,13 @@ func hurt_player(damage: int, other_pos: float):
 	damage_indicator.damage_amount = damage
 	damage_indicator.position = global_position
 	get_tree().get_root().add_child(damage_indicator)
+	
+@rpc("any_peer", "call_local")		
+func mark_dead():
+	$RespawnTimer.start()
+	
+func _on_respawn_timer_timeout():
+	pass # Replace with function body.
 
 func _process(_delta):	
 	if (multiplayer.get_unique_id() == player_id):
@@ -109,7 +116,11 @@ func _process(_delta):
 		soul_label.text = str(souls_collected)
 		money_label.text = "$" + str(coins_collected)
 		
-		#handle inventory input
+		#Handle player death
+		if (player_health <= 0):
+			mark_dead.rpc_id(player_id)
+		
+		#Handle inventory input
 		if (Input.is_action_just_pressed("scroll_up")):
 			selected_slot_pos += 1
 			selected_slot_pos = clamp(selected_slot_pos, 0 , inventory.size() - 1)
@@ -132,7 +143,7 @@ func _process(_delta):
 				currently_selected_slot.set_slot_item("empty")
 		
 		if (currently_selected_slot.get_slot_item() != "empty"):
-			#Trigger Mystic Dial
+			#Trigger mystic dial
 			if not attack_cooldown:
 				if Input.is_action_just_pressed("right_click"):
 					var spell_placeholder_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
@@ -143,20 +154,20 @@ func _process(_delta):
 					dial_instance.player = self
 					dial_instance.set_placeholder_sprite(spell_placeholder_instance.get_sprite_path())
 					dial_created = true
-			#Fire Mystic Dial
+			#Fire mystic dial
 			if (dial_created):
 				if Input.is_action_just_pressed("left_click"):
 					var mouse_pos = get_global_mouse_position()
 					var mouse_dir = (mouse_pos - dial_instance.global_position).normalized()
 					var spell_pos = dial_instance.global_position + mouse_dir * dial_instance.DIAL_RADIUS
 					var spell_path = currently_selected_slot.get_spell_instance()
-					rpc("create_spell", spell_path, mouse_dir, spell_pos)
+					rpc("create_spell", spell_path, mouse_dir, spell_pos, self)
 					
 					dial_instance.destroy()
 					attack_cooldown_timer.start(2)
 					attack_cooldown = true
 					dial_created = false
-		#Release Dial		
+		#Release dial		
 		if Input.is_action_just_released("right_click"):
 				if (dial_created):
 					dial_instance.destroy()
@@ -176,13 +187,13 @@ func is_inventory_full():
 	return true
 
 func _apply_animations(_delta):
-	#flips sprite
+	#Flip sprite
 	if (hor_direction > 0):
 		animated_sprite.flip_h = false
 	elif (hor_direction < 0):
 		animated_sprite.flip_h = true
 	
-	#play animation
+	#Player animation
 	if _is_on_floor:
 		if (hor_direction == 0):
 			animated_sprite.play("idle")
@@ -199,7 +210,7 @@ func _apply_movement_from_input(delta):
 	hor_direction = %InputSynchronizer.input_direction 
 	ver_direction = %InputSynchronizer.climb_direction
 	
-	#simple state machine
+	#State machine
 	match state:
 		state_type.MOVING:
 			#handle gravity
@@ -217,11 +228,15 @@ func _apply_movement_from_input(delta):
 			elif (ver_direction < 0):
 				velocity.y = -CLIMB_SPEED
 		
-	#applys movement
+	#Apply movement
 	if hor_direction:
 		velocity.x = hor_direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	velocity += knock_back
+	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
+	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 
 	move_and_slide()
 	

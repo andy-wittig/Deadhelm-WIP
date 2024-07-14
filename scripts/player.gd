@@ -59,6 +59,7 @@ func drop_inventory_item(spell_type, pos):
 	get_tree().get_root().add_child(tome)
 	
 func _ready():
+	$Camera2D.reset_smoothing()
 	currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
 	currently_selected_slot.currently_selected = true
 	

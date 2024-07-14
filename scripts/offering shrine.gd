@@ -16,7 +16,7 @@ func spawn_tome():
 		
 	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
 	tome.spell_type = spell_type
-	tome.transform = transform
+	tome.position = Vector2(position.x, position.y - 16)
 	get_parent().add_child(tome)
 	
 func _ready():
@@ -26,8 +26,10 @@ func _process(delta):
 	soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls"
 	
 	if (souls_input >= soul_cost):
-		rpc("spawn_tome")
-		souls_input = 0
+		if (can_interact):
+			if Input.is_action_just_pressed("pickup"):
+				rpc("spawn_tome")
+				souls_input = 0
 	
 	if (can_interact):
 		if Input.is_action_just_pressed("pickup"):
