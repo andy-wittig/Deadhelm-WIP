@@ -1167,6 +1167,7 @@ position = Vector2(64, -272)
 script = ExtResource("1_g31m4")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player/multiplayer_player.tscn")
 spawn_path = NodePath("../players")
 spawn_limit = 2
 
