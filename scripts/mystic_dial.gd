@@ -27,6 +27,6 @@ func _process(_delta):
 	global_position.y = player.global_position.y - 16
 	
 	#update spells position
-	placeholder_spell.position = player.spell_spawn.position
+	placeholder_spell.global_position = player.spell_spawn.global_position
 	placeholder_spell.rotation = player.spell_direction.angle()
 

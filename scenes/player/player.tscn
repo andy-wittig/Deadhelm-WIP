@@ -229,6 +229,8 @@ autoplay = "idle"
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_bqlik")
 
+[node name="SpellSpawn" type="Node2D" parent="."]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 libraries = {

@@ -2,13 +2,17 @@ extends Area2D
 
 const SPEED = 70.0
 
-var authority: int
+var player: CharacterBody2D
 var direction: Vector2
 
 @onready var meteor_sprite = $MeteorSprite
 
 func get_sprite_path():
 	return $MeteorSprite.texture.resource_path
+	
+func _ready():
+	direction = player.spell_direction
+	position = player.spell_spawn.global_position
 
 func _process(delta):
 	meteor_sprite.rotation = direction.angle()

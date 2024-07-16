@@ -1319,6 +1319,12 @@ z_index = -1
 position = Vector2(208, -320)
 soul_cost = 0
 
+[node name="offering shrine5" parent="game objects" instance=ExtResource("15_by2nq")]
+z_index = -1
+position = Vector2(144, -320)
+soul_cost = 0
+spell_type = "shield"
+
 [node name="leaping mushroom" parent="game objects" instance=ExtResource("11_lwg2q")]
 position = Vector2(432, -352)
 

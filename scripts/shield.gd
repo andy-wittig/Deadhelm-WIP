@@ -1,7 +1,6 @@
 extends Area2D
 
 var player: CharacterBody2D
-var direction : Vector2
 
 @onready var shield_sprite = $ShieldSprite
 @onready var shield_sound = $ShieldSound
@@ -10,7 +9,8 @@ func get_sprite_path():
 	return $ShieldSprite.texture.resource_path
 	
 func _ready():
-	shield_sprite.rotation = direction.angle()
+	shield_sprite.rotation = player.spell_direction.angle()
+	global_position = player.spell_spawn.global_position
 
 func _on_area_entered(area):
 	print ("shield collided!")

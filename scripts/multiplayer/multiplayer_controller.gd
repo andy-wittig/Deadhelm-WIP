@@ -117,7 +117,7 @@ func _process(_delta):
 			
 		#Set Spell Marker Position
 		var mouse_pos = get_global_mouse_position()
-		var dial_center = Vector2(global_position.x, global_position.y)
+		var dial_center = Vector2(global_position.x, global_position.y - 16)
 		spell_direction = (mouse_pos - dial_center).normalized()
 		spell_spawn.global_position = dial_center + spell_direction * DIAL_RADIUS
 		
@@ -159,7 +159,8 @@ func _process(_delta):
 					var spell_path = currently_selected_slot.get_spell_instance()
 					var new_spell = load(spell_path).instantiate()
 					new_spell.player = self
-					spell_spawn.add_child(new_spell)
+					get_tree().get_root().add_child(new_spell)
+					#client side spawns spells but not shared on multiplayer
 					
 					dial_instance.destroy()
 					attack_cooldown_timer.start(2)

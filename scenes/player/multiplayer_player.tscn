@@ -250,10 +250,6 @@ unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_201n0")
 script = ExtResource("2_t1m0d")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/player/spells/lightning.tscn", "res://scenes/player/spells/meteor.tscn", "res://scenes/player/spells/shield.tscn")
-spawn_path = NodePath("../SpellSpawn")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -9)
 zoom = Vector2(3, 3)

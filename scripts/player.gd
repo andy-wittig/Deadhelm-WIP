@@ -5,6 +5,7 @@ const SPEED = 75.0
 const CLIMB_SPEED = 60.0
 const JUMP_VELOCITY = -250.0
 const KNOCK_BACK_FALLOFF := 60.0
+const DIAL_RADIUS = 22
 #Physics Variables
 var grounded: bool
 var knock_back: Vector2
@@ -18,6 +19,7 @@ var dial_created = false
 var attack_cooldown = false
 enum state_type {MOVING, CLIMBING}
 var state := state_type.MOVING
+var spell_direction: Vector2
 #Player Inventory Variables
 var selected_slot_pos = 0
 var currently_selected_slot = null
@@ -45,6 +47,7 @@ var spell_instance = null
 @onready var spell_cast_audio = $SpellCastAudio
 #Mechanics Paths
 @onready var attack_cooldown_timer = $AttackCooldownTimer
+@onready var spell_spawn = $SpellSpawn
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -67,6 +70,12 @@ func _process(delta):
 	healthbar_label.text = str(player_health) + "/100"
 	soul_label.text = str(souls_collected)
 	money_label.text = "$" + str(coins_collected)
+	
+	#Set Spell Marker Position
+	var mouse_pos = get_global_mouse_position()
+	var dial_center = Vector2(global_position.x, global_position.y - 16)
+	spell_direction = (mouse_pos - dial_center).normalized()
+	spell_spawn.global_position = dial_center + spell_direction * DIAL_RADIUS
 	
 	#Handle Inventory Input
 	if (Input.is_action_just_pressed("scroll_up")):
@@ -106,12 +115,10 @@ func _process(delta):
 		#Fire Mystic Dial
 		if (dial_created):
 			if Input.is_action_just_pressed("left_click"):
-				var mouse_pos = get_global_mouse_position()
-				var mouse_dir = (mouse_pos - dial_instance.global_position).normalized()
-				spell_instance.authority = 1
-				spell_instance.direction = mouse_dir
-				spell_instance.position = dial_instance.global_position + mouse_dir * dial_instance.DIAL_RADIUS
-				get_tree().get_root().add_child(spell_instance)
+				var spell_path = currently_selected_slot.get_spell_instance()
+				var new_spell = load(spell_path).instantiate()
+				new_spell.player = self
+				get_tree().get_root().add_child(new_spell)
 				
 				spell_cast_audio.play()
 				
