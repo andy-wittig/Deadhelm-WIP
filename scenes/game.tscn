@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=15 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bqgd6hcfgc75y" path="res://scenes/menus/credits_menu.tscn" id="9_0w2qv"]
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
 [ext_resource type="AudioStream" uid="uid://budqgb0s5wkcd" path="res://assets/music/level_1.mp3" id="11_5c2xu"]
+[ext_resource type="Texture2D" uid="uid://c3yxki7yyql4v" path="res://assets/sprites/UI/title_background.png" id="11_a6y1t"]
 
 [node name="game" type="Node"]
 script = ExtResource("1_yvbvk")
@@ -125,6 +126,13 @@ anchor_bottom = 0.5
 [node name="credits_menu" parent="MenuLayer/MenuControl" instance=ExtResource("9_0w2qv")]
 visible = false
 layout_mode = 1
+
+[node name="TitleBackground" type="TextureRect" parent="MenuLayer"]
+z_index = -100
+offset_right = 1600.0
+offset_bottom = 900.0
+mouse_filter = 2
+texture = ExtResource("11_a6y1t")
 
 [node name="Music" type="Node" parent="."]
 script = ExtResource("10_mudwi")
