@@ -16,9 +16,11 @@ var current_menu := menu.MAIN
 @onready var multiplayer_menu = $MenuControl/multiplayer_menu
 @onready var credits_menu = $MenuControl/credits_menu
 @onready var in_game_menu = $MenuControl/in_game_menu
+@onready var title_background = $TitleBackground
 
 func _process(_delta):
 	if (GameManager.started_game):
+		title_background.visible = false
 		if Input.is_action_just_pressed("in-game_menu"):
 			if (current_menu == menu.HIDDEN):
 				current_menu = menu.INGAME

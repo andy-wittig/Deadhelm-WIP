@@ -1,13 +1,23 @@
 extends Node
 
-@onready var title_screen_music = $TitleScreenMusic
-@onready var level_music = $LevelMusic
-
-func _ready():
-	title_screen_music.play()
+@onready var title_track = $TitleTrack
+@onready var level_track_1 = $LevelTrack1
+@onready var level_track_2 = $LevelTrack2
 
 func _process(delta):
 	if (GameManager.started_game):
-		if (not level_music.playing):
-			title_screen_music.stop()
-			level_music.play()
+		for current_level in get_tree().get_root().get_node("game/Level").get_children():
+			if (current_level.get_name() == "level_1"):
+				if (not level_track_1.playing):
+					stop_music()
+					level_track_1.play()
+			elif (current_level.get_name() == "level_2"):
+				if (not level_track_2.playing):
+					stop_music()
+					level_track_2.play()
+	elif (not title_track.playing):
+		title_track.play()
+		
+func stop_music():
+	for track in get_children():
+		track.stop()

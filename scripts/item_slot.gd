@@ -11,13 +11,15 @@ var currently_selected = false
 	"lock" : preload("res://assets/sprites/UI/player_information/placeholder_lock.png"),
 	"meteor" : preload("res://assets/sprites/UI/player_information/placeholder_meteor.png"),
 	"shield" : preload("res://assets/sprites/UI/player_information/placeholder_shield.png"),
-	"lightning" : preload("res://assets/sprites/UI/player_information/placeholder_lightning.png")
+	"lightning" : preload("res://assets/sprites/UI/player_information/placeholder_lightning.png"),
+	"flame" : preload("res://assets/sprites/UI/player_information/placeholder_flame.png"),
 }
 
 @onready var item_instance_dict = {
 	"meteor" : "res://scenes/player/spells/meteor.tscn",
 	"shield" : "res://scenes/player/spells/shield.tscn",
 	"lightning" : "res://scenes/player/spells/lightning.tscn",
+	"flame" : "res://scenes/player/spells/flame.tscn",
 }
 
 @onready var items = item_texture_dict.keys()

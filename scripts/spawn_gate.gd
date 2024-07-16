@@ -1,5 +1,6 @@
 extends Area2D
 
+@export var next_level: PackedScene
 @export var soul_cost: int
 
 var souls_input := 0
@@ -17,6 +18,7 @@ func _process(delta):
 	if (souls_input >= soul_cost):
 		portal_active.visible = true
 		soul_label.text = "delve deeper"
+		portal_activated = true
 	else:
 		soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls"
 	
@@ -30,6 +32,8 @@ func _process(delta):
 			if Input.is_action_just_pressed("pickup"):
 				if (not portal_activated && souls_input < soul_cost):
 					collect_soul(body)
+				elif (portal_activated):
+					get_tree().get_root().get_node("game").change_level(next_level)
 
 func _on_input_event(viewport, event, shape_idx):
 	for body in get_overlapping_bodies():
@@ -38,6 +42,8 @@ func _on_input_event(viewport, event, shape_idx):
 			if (Input.is_action_just_pressed("left_click")):
 				if (not portal_activated && souls_input < soul_cost):
 					collect_soul(body)
+				elif (portal_activated):
+					get_tree().get_root().get_node("game").change_level(next_level)
 	
 func collect_soul(player):
 	if (player.souls_collected > 0):

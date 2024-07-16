@@ -1,0 +1,195 @@
+[gd_scene load_steps=18 format=3 uid="uid://cdk16mvpa1vlp"]
+
+[ext_resource type="Script" path="res://scripts/flame.gd" id="1_10q3v"]
+[ext_resource type="Texture2D" uid="uid://cg4mbvaqta81t" path="res://assets/sprites/level_objects/spells/flame orb.png" id="2_bao0b"]
+[ext_resource type="Texture2D" uid="uid://bwt4ymhvl6rc7" path="res://assets/sprites/level_objects/spells/flame.png" id="3_dfk2l"]
+[ext_resource type="PackedScene" uid="uid://c6hvdac7cbih0" path="res://scenes/player/hurt_enemy_area.tscn" id="4_8rpvf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jrtm"]
+atlas = ExtResource("3_dfk2l")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5tbe0"]
+atlas = ExtResource("3_dfk2l")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbcwb"]
+atlas = ExtResource("3_dfk2l")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayst7"]
+atlas = ExtResource("3_dfk2l")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pqn1j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jrtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5tbe0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbcwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayst7")
+}],
+"loop": true,
+"name": &"lightning",
+"speed": 6.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_5l4kf"]
+offsets = PackedFloat32Array(0.266055, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vxjdv"]
+gradient = SubResource("Gradient_5l4kf")
+width = 48
+height = 16
+fill = 1
+fill_from = Vector2(0.4, 0.5)
+fill_to = Vector2(0.9, 0.5)
+
+[sub_resource type="Curve" id="Curve_aptqi"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.87251, 13.3556), -246.012, -246.012, 0, 0, Vector2(1, 52.4207), -462.205, -462.205, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_ah5fm"]
+_data = [Vector2(0.00398406, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.651968), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_sngqd"]
+offsets = PackedFloat32Array(0.0852018, 0.538117, 0.843049, 0.995516)
+colors = PackedColorArray(0.909804, 0.823529, 0.509804, 1, 0.913725, 0.521569, 0.215686, 1, 0.92549, 0.152941, 0.247059, 1, 0.92549, 0.152941, 0.247059, 0)
+
+[sub_resource type="Animation" id="Animation_hjchv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlameAnimatedSprite/PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlameAnimatedSprite/PointLight2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.968627, 0.952941, 0.717647, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_s1sa0"]
+resource_name = "lightning_flash"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlameAnimatedSprite/PointLight2D:energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 1.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlameAnimatedSprite/PointLight2D:color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.968627, 0.952941, 0.717647, 1), Color(0.870588, 0.364706, 0.227451, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ejyiq"]
+_data = {
+"RESET": SubResource("Animation_hjchv"),
+"lightning_flash": SubResource("Animation_s1sa0")
+}
+
+[node name="flame" type="Area2D"]
+modulate = Color(1, 1, 1, 0.862745)
+z_index = 10
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_10q3v")
+
+[node name="FlameOrbSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_bao0b")
+
+[node name="FlameAnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pqn1j")
+animation = &"lightning"
+autoplay = "lightning"
+frame_progress = 0.714249
+offset = Vector2(16, 0)
+
+[node name="hurt_enemy_area" parent="FlameAnimatedSprite" instance=ExtResource("4_8rpvf")]
+position = Vector2(12, 0)
+scale = Vector2(2, 1)
+damage = 2
+attack_wait = 0.4
+destroy_time = 3
+knock_back = 200.0
+
+[node name="PointLight2D" type="PointLight2D" parent="FlameAnimatedSprite"]
+position = Vector2(16, 0)
+color = Color(0.968627, 0.952941, 0.717647, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_vxjdv")
+
+[node name="FireParticles" type="CPUParticles2D" parent="FlameAnimatedSprite"]
+rotation = -1.5708
+amount = 35
+lifetime = 0.3
+speed_scale = 0.4
+explosiveness = 0.02
+randomness = 0.1
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 6.0
+orbit_velocity_min = -0.05
+orbit_velocity_max = 0.05
+radial_accel_min = -100.0
+radial_accel_curve = SubResource("Curve_aptqi")
+angle_min = -45.0
+angle_max = 45.0
+scale_amount_min = 1.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_ah5fm")
+color_ramp = SubResource("Gradient_sngqd")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ejyiq")
+}
+autoplay = "lightning_flash"
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
