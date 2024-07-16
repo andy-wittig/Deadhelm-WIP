@@ -1,8 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://tbg0y00wq7jh"]
+[gd_scene load_steps=11 format=3 uid="uid://tbg0y00wq7jh"]
 
 [ext_resource type="Script" path="res://scripts/meteor.gd" id="1_mj8tp"]
 [ext_resource type="Texture2D" uid="uid://blfjmxfbjmxa8" path="res://assets/sprites/level_objects/spells/meteor.png" id="2_nyg0a"]
 [ext_resource type="Texture2D" uid="uid://82ix4vile3rb" path="res://assets/sprites/vfx/meteor_pieces.png" id="3_qjni5"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_te3kg"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("MeteorSprite:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3r8ns"]
 radius = 7.0
@@ -35,6 +43,9 @@ z_index = 10
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_mj8tp")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_te3kg")
 
 [node name="MeteorSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_nyg0a")

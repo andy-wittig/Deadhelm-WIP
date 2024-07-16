@@ -108,10 +108,11 @@ func _process(delta):
 			if Input.is_action_just_pressed("left_click"):
 				var mouse_pos = get_global_mouse_position()
 				var mouse_dir = (mouse_pos - dial_instance.global_position).normalized()
-				spell_instance.player = self
+				spell_instance.authority = 1
 				spell_instance.direction = mouse_dir
 				spell_instance.position = dial_instance.global_position + mouse_dir * dial_instance.DIAL_RADIUS
 				get_tree().get_root().add_child(spell_instance)
+				
 				spell_cast_audio.play()
 				
 				dial_instance.destroy()

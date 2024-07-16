@@ -5,6 +5,7 @@ const SPEED = 75.0
 const CLIMB_SPEED = 60.0
 const JUMP_VELOCITY = -250.0
 const KNOCK_BACK_FALLOFF := 60.0
+const DIAL_RADIUS = 22
 #Physics Variables
 var grounded: bool
 var hor_direction = 1
@@ -23,6 +24,7 @@ var dial_created = false
 var attack_cooldown = false
 enum state_type {MOVING, CLIMBING}
 var state := state_type.MOVING
+var spell_direction: Vector2
 #Player UI Variables
 var selected_slot_pos = 0
 var currently_selected_slot = null
@@ -54,6 +56,7 @@ var is_in_chat := false
 @onready var player_hurt_audio = $PlayerHurtAudio
 #Mechanics Paths
 @onready var attack_cooldown_timer = $AttackCooldownTimer
+@onready var spell_spawn = $SpellSpawn
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 		
@@ -74,14 +77,6 @@ func drop_inventory_item(spell_type, pos):
 	tome.spell_type = spell_type
 	tome.position.x = Vector2(pos.x, pos.y - 16)
 	get_tree().get_root().add_child(tome)
-
-@rpc("any_peer", "call_local")
-func create_spell(path, dir, pos, body): 
-	var new_spell = load(path).instantiate()
-	new_spell.player = body
-	new_spell.direction = dir
-	new_spell.position = pos
-	get_tree().get_root().add_child(new_spell)
 	
 @rpc ("any_peer", "call_local")
 func apply_knockback(other_pos: Vector2, force: float):
@@ -119,6 +114,12 @@ func _process(_delta):
 		#Handle player death
 		if (player_health <= 0):
 			mark_dead.rpc_id(player_id)
+			
+		#Set Spell Marker Position
+		var mouse_pos = get_global_mouse_position()
+		var dial_center = Vector2(global_position.x, global_position.y)
+		spell_direction = (mouse_pos - dial_center).normalized()
+		spell_spawn.global_position = dial_center + spell_direction * DIAL_RADIUS
 		
 		#Handle inventory input
 		if (Input.is_action_just_pressed("scroll_up")):
@@ -148,30 +149,27 @@ func _process(_delta):
 				if Input.is_action_just_pressed("right_click"):
 					var spell_placeholder_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
 					dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
-					get_parent().add_child(dial_instance)
-					dial_instance.position.x = position.x
-					dial_instance.position.y = position.y - 16
 					dial_instance.player = self
+					get_parent().add_child(dial_instance)
 					dial_instance.set_placeholder_sprite(spell_placeholder_instance.get_sprite_path())
 					dial_created = true
 			#Fire mystic dial
 			if (dial_created):
 				if Input.is_action_just_pressed("left_click"):
-					var mouse_pos = get_global_mouse_position()
-					var mouse_dir = (mouse_pos - dial_instance.global_position).normalized()
-					var spell_pos = dial_instance.global_position + mouse_dir * dial_instance.DIAL_RADIUS
 					var spell_path = currently_selected_slot.get_spell_instance()
-					rpc("create_spell", spell_path, mouse_dir, spell_pos, self)
+					var new_spell = load(spell_path).instantiate()
+					new_spell.player = self
+					spell_spawn.add_child(new_spell)
 					
 					dial_instance.destroy()
 					attack_cooldown_timer.start(2)
 					attack_cooldown = true
 					dial_created = false
-		#Release dial		
-		if Input.is_action_just_released("right_click"):
-				if (dial_created):
-					dial_instance.destroy()
-					dial_created = false
+			#Release dial		
+			if Input.is_action_just_released("right_click"):
+					if (dial_created):
+						dial_instance.destroy()
+						dial_created = false
 					
 func colllect_spell(spell_type):
 	for slot in inventory:

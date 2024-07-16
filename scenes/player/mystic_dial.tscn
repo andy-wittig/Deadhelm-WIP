@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://oh3fs6ugskct"]
+[gd_scene load_steps=7 format=3 uid="uid://oh3fs6ugskct"]
 
 [ext_resource type="Texture2D" uid="uid://b86co1pvkl007" path="res://assets/sprites/player/mystic dial.png" id="1_tn40v"]
 [ext_resource type="Script" path="res://scripts/mystic_dial.gd" id="1_x6f12"]
-[ext_resource type="AudioStream" uid="uid://4dnc14h2aqd5" path="res://assets/sound effects/mystic_dial_sound.mp3" id="3_wsl73"]
 
 [sub_resource type="Animation" id="Animation_myx2l"]
 length = 0.001
@@ -88,7 +87,6 @@ libraries = {
 autoplay = "dial_rotate"
 
 [node name="MysticDialAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_wsl73")
 volume_db = -15.0
 pitch_scale = 0.75
 autoplay = true

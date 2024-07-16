@@ -37,10 +37,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var audio_player = $AudioStreamPlayer2D
 
 	
-@rpc("call_local")
-func set_state(new_state):
-	state = new_state
-	
 func _ready():
 	if multiplayer.is_server():
 		direction = [-1, 1].pick_random()
@@ -53,12 +49,12 @@ func _process(_delta):
 				if (!chasing_player):
 					player = body
 					chasing_player = true
-					rpc("set_state", state_type.CHASE)
+					state = state_type.CHASE
 				return
 		#player left detection radius
 		player = null
 		chasing_player = false
-		rpc("set_state", state_type.MOVING)	
+		state = state_type.MOVING
 
 func _physics_process(delta):
 	#deal with enemy death
@@ -110,7 +106,7 @@ func _physics_process(delta):
 						
 					velocity.x = direction * SPEED
 				else:
-					rpc("set_state", state_type.ATTACK)
+					state = state_type.ATTACK
 		state_type.ATTACK:
 			velocity.x = 0
 			
@@ -133,9 +129,8 @@ func _physics_process(delta):
 	
 func _on_change_state_timer_timeout():
 	if (not chasing_player && multiplayer.is_server()):
-		print ("state changed!")
 		direction = [-1, 1].pick_random()
-		rpc("set_state", randi_range(0, 1))
+		state = randi_range(0, 1)
 		%RoamTimer.start(randf_range(0, ROAM_CHANGE_WAIT))
 
 func _on_cooldown_timer_timeout():

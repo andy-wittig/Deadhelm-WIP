@@ -1,9 +1,6 @@
 extends Node2D
 
-const DIAL_RADIUS = 22
-
 var player = null
-var mouse_dir : Vector2
 var placeholder_spell : Sprite2D
 
 @onready var animation_player = $AnimationPlayer
@@ -30,8 +27,6 @@ func _process(_delta):
 	global_position.y = player.global_position.y - 16
 	
 	#update spells position
-	var mouse_pos = get_global_mouse_position()
-	mouse_dir = (mouse_pos - global_position).normalized()
-	placeholder_spell.position = mouse_dir * DIAL_RADIUS
-	placeholder_spell.rotation = mouse_dir.angle()
+	placeholder_spell.position = player.spell_spawn.position
+	placeholder_spell.rotation = player.spell_direction.angle()
 
