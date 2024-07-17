@@ -53,6 +53,7 @@ func start_game():
 	
 func change_level(scene: PackedScene):
 	var level = $Level
+	GameManager.current_level = scene.get_name()
 	for object in level.get_children(): #clear old level
 		level.remove_child(object)
 		object.queue_free() #objects are instantiated into root, this only clears objects in level node

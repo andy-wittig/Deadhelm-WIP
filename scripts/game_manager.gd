@@ -4,6 +4,7 @@ var username := "unknown"
 var host_mode_enabled = false
 var multiplayer_mode_enabled = false
 var started_game := false
+var current_level: String
 
 var can_drop_cursor = load("res://assets/sprites/UI/cursor can drop.png")
 var can_not_drop_cursor = load("res://assets/sprites/UI/cursor cancel.png")

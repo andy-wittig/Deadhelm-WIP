@@ -1,7 +1,9 @@
 extends Area2D
 
-var direction: Vector2
 const SPEED = 80.0
+const ROCKET_KNOCK_BACK := 150
+
+var direction: Vector2
 
 func _process(delta):
 	self.rotation = direction.angle()
@@ -11,7 +13,7 @@ func _process(delta):
 func destroy_self():
 	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()
 	explosion.position = position
-	get_tree().get_root().add_child(explosion)
+	get_tree().get_root().get_node("game/Level").add_child(explosion)
 	queue_free()
 
 func _on_destroy_timer_timeout():
@@ -21,8 +23,8 @@ func _on_body_entered(body):
 	if (body.is_in_group("players")
 	&& multiplayer.is_server()):
 		if (body.get_name() == "player"):
-			body.hurt_player(15, global_position, 200)
+			body.hurt_player(15, global_position, ROCKET_KNOCK_BACK)
 			destroy_self()
 		else:
-			body.hurt_player.rpc_id(body.player_id, 15, global_position, 200)
+			body.hurt_player.rpc_id(body.player_id, 15, global_position, ROCKET_KNOCK_BACK)
 			rpc("destroy_self")

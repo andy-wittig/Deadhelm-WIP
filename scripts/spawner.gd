@@ -38,7 +38,7 @@ func _on_input_event(viewport, event, shape_idx):
 func spawn_enemy(spawn_position):
 	var enemy = spawn_enemy_type.instantiate()
 	enemy.position = spawn_position
-	get_tree().get_root().add_child(enemy)
+	get_tree().get_root().get_node("game/Level").add_child(enemy)
 	spawn_sound.play()
 	
 func check_enemy_spawnable():

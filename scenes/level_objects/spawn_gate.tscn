@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://rrv0mvcmyxnk"]
 
 [ext_resource type="Script" path="res://scripts/spawn_gate.gd" id="1_g5hin"]
-[ext_resource type="Texture2D" uid="uid://u5ck764yvagn" path="res://assets/sprites/level_objects/spawn_gate.png" id="1_v8c2c"]
+[ext_resource type="Texture2D" uid="uid://c5chp2hbujymm" path="res://assets/sprites/level_objects/spawn_gate.png" id="1_v8c2c"]
 [ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="2_6usm4"]
 [ext_resource type="Shader" path="res://shaders/distort.gdshader" id="2_c1a68"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="4_vw883"]

@@ -35,7 +35,7 @@ func attack():
 	var blackhole = load("res://scenes/enemies/desecrater_blackhole.tscn").instantiate()
 	blackhole.position = position
 	blackhole.direction = attack_direction
-	get_tree().get_root().add_child(blackhole)
+	get_tree().get_root().get_node("game/Level").add_child(blackhole)
 
 func _on_attack_timer_timeout():
 	attack_wait = false

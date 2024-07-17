@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
 [ext_resource type="Texture2D" uid="uid://c3yxki7yyql4v" path="res://assets/sprites/UI/title_background.png" id="11_a6y1t"]
 [ext_resource type="AudioStream" uid="uid://b30b5kxyjyc4y" path="res://assets/music/level_track_1.mp3" id="14_ya6b7"]
-[ext_resource type="AudioStream" uid="uid://uei4jh6d0gav" path="res://assets/music/level_track_2.mp3" id="15_3d256"]
+[ext_resource type="AudioStream" uid="uid://7qnkk0o4yblj" path="res://assets/music/level_track_2.mp3" id="15_3d256"]
 
 [node name="game" type="Node"]
 script = ExtResource("1_yvbvk")

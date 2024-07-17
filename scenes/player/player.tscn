@@ -162,8 +162,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bqlik"]
-radius = 6.08276
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_74c68"]
+radius = 4.0
+height = 16.0
 
 [sub_resource type="Animation" id="Animation_xpmlu"]
 length = 0.001
@@ -208,7 +209,6 @@ collision_mask = 16
 script = ExtResource("1_6jjtq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -9)
 zoom = Vector2(4, 4)
 limit_left = 0
 limit_bottom = 0
@@ -220,14 +220,14 @@ editor_draw_limits = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_0v5y2")
-position = Vector2(0, -16)
+position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_2q11b")
 animation = &"climb"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_bqlik")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_74c68")
 
 [node name="SpellSpawn" type="Node2D" parent="."]
 

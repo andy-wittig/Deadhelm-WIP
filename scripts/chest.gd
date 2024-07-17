@@ -31,4 +31,4 @@ func open_chest():
 	for i in range(coin_amount):
 		var coin = load("res://scenes/level_objects/coin.tscn").instantiate()
 		coin.position = position
-		get_tree().get_root().add_child(coin)
+		get_tree().get_root().get_node("game/Level").add_child(coin)

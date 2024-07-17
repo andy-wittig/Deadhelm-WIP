@@ -76,7 +76,7 @@ func drop_inventory_item(spell_type, pos):
 	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
 	tome.spell_type = spell_type
 	tome.position.x = Vector2(pos.x, pos.y - 16)
-	get_tree().get_root().add_child(tome)
+	get_tree().get_root().get_node("game/Level").add_child(tome)
 	
 @rpc ("any_peer", "call_local")
 func apply_knockback(other_pos: Vector2, force: float):
@@ -96,7 +96,7 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
 	damage_indicator.damage_amount = damage
 	damage_indicator.position = global_position
-	get_tree().get_root().add_child(damage_indicator)
+	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 	
 @rpc("any_peer", "call_local")		
 func mark_dead():
@@ -159,7 +159,7 @@ func _process(_delta):
 					var spell_path = currently_selected_slot.get_spell_instance()
 					var new_spell = load(spell_path).instantiate()
 					new_spell.player = self
-					get_tree().get_root().add_child(new_spell)
+					get_tree().get_root().get_node("game/Level").add_child(new_spell)
 					#client side spawns spells but not shared on multiplayer
 					
 					dial_instance.destroy()

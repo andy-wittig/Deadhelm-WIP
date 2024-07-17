@@ -1,13 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cdk16mvpa1vlp"]
+[gd_scene load_steps=17 format=3 uid="uid://cdk16mvpa1vlp"]
 
 [ext_resource type="Script" path="res://scripts/flame.gd" id="1_10q3v"]
 [ext_resource type="Texture2D" uid="uid://cg4mbvaqta81t" path="res://assets/sprites/level_objects/spells/flame orb.png" id="2_bao0b"]
 [ext_resource type="Texture2D" uid="uid://bwt4ymhvl6rc7" path="res://assets/sprites/level_objects/spells/flame.png" id="3_dfk2l"]
 [ext_resource type="PackedScene" uid="uid://c6hvdac7cbih0" path="res://scenes/player/hurt_enemy_area.tscn" id="4_8rpvf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jrtm"]
-atlas = ExtResource("3_dfk2l")
-region = Rect2(96, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5tbe0"]
 atlas = ExtResource("3_dfk2l")
@@ -25,9 +21,6 @@ region = Rect2(64, 0, 32, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1jrtm")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_5tbe0")
 }, {
 "duration": 1.0,
@@ -38,7 +31,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"lightning",
-"speed": 6.0
+"speed": 8.0
 }]
 
 [sub_resource type="Gradient" id="Gradient_5l4kf"]
@@ -143,7 +136,7 @@ texture = ExtResource("2_bao0b")
 sprite_frames = SubResource("SpriteFrames_pqn1j")
 animation = &"lightning"
 autoplay = "lightning"
-frame_progress = 0.714249
+frame_progress = 0.939339
 offset = Vector2(16, 0)
 
 [node name="hurt_enemy_area" parent="FlameAnimatedSprite" instance=ExtResource("4_8rpvf")]
@@ -161,8 +154,9 @@ energy = 0.5
 texture = SubResource("GradientTexture2D_vxjdv")
 
 [node name="FireParticles" type="CPUParticles2D" parent="FlameAnimatedSprite"]
+z_index = -1
 rotation = -1.5708
-amount = 35
+amount = 50
 lifetime = 0.3
 speed_scale = 0.4
 explosiveness = 0.02

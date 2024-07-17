@@ -47,7 +47,7 @@ func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 	apply_knockback(other_pos, force)
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
-	get_tree().get_root().add_child(impact)
+	get_tree().get_root().get_node("game/Level").add_child(impact)
 	impact.position = Vector2(position.x, position.y)
 	
 	enemy_health -= damage
@@ -57,10 +57,10 @@ func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 func destroy_self():
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	soul.position = position
-	get_tree().get_root().add_child(soul)
+	get_tree().get_root().get_node("game/Level").add_child(soul)
 	
 	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()
-	get_tree().get_root().add_child(explosion)
+	get_tree().get_root().get_node("game/Level").add_child(explosion)
 	explosion.position = Vector2(position.x, position.y - 8)
 	
 	marked_for_death = true
@@ -71,7 +71,7 @@ func attack(direction):
 	var rocket = load("res://scenes/enemies/sentinal_rocket.tscn").instantiate()
 	rocket.direction = direction
 	rocket.transform = %"Rocket Marker".global_transform
-	get_tree().get_root().add_child(rocket)
+	get_tree().get_root().get_node("game/Level").add_child(rocket)
 	
 func update_rand_direction():
 	var rand_x = init_position.x + randi_range(-ROAM_RANGE, ROAM_RANGE)

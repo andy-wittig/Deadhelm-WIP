@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5chp2hbujymm"
-path="res://.godot/imported/spawn_gate.png-4ff3ded95963a01989a523e71a44938b.ctex"
+uid="uid://flm0ssvuccmi"
+path="res://.godot/imported/stalactite.png-aaeff21b8dfd1735372b00ff1d2a94e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/level_objects/spawn_gate.png"
-dest_files=["res://.godot/imported/spawn_gate.png-4ff3ded95963a01989a523e71a44938b.ctex"]
+source_file="res://assets/sprites/level_objects/stalactite.png"
+dest_files=["res://.godot/imported/stalactite.png-aaeff21b8dfd1735372b00ff1d2a94e4.ctex"]
 
 [params]
 

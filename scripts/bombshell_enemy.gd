@@ -93,7 +93,7 @@ func _physics_process(delta):
 			animated_sprite.play("run")
 			
 			if multiplayer.is_server():
-				if player.global_position.distance_to(global_position) > 8:
+				if player.global_position.distance_to(global_position) > 16:
 					if abs(player.global_position.x - global_position.x) > 8:
 						if (player.global_position.x > global_position.x):
 							direction = 1
@@ -154,7 +154,7 @@ func create_spikes():
 			var spike = load("res://scenes/enemies/bombshell_spike.tscn").instantiate()
 			spike.direction = spike_angle
 			spike.position = position + spike_angle * 8
-			get_tree().get_root().add_child(spike)
+			get_tree().get_root().get_node("game/Level").add_child(spike)
 			
 			spike_angle = spike_angle.rotated(deg_to_rad(-30))
 
@@ -168,7 +168,7 @@ func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 	apply_knockback(other_pos, force)
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
-	get_tree().get_root().add_child(impact)
+	get_tree().get_root().get_node("game/Level").add_child(impact)
 	impact.position = Vector2(position.x, position.y - 6)
 	
 	enemy_health -= damage
@@ -180,8 +180,8 @@ func destroy_self():
 	var death_effect = load("res://scenes/vfx/bombshell_turtle_death.tscn").instantiate()
 	soul.position = position
 	death_effect.position = position
-	get_tree().get_root().add_child(soul)
-	get_tree().get_root().add_child(death_effect)
+	get_tree().get_root().get_node("game/Level").add_child(soul)
+	get_tree().get_root().get_node("game/Level").add_child(death_effect)
 	
 	marked_for_death = true
 	queue_free()

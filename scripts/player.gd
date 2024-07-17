@@ -58,8 +58,8 @@ func drop_inventory_item(spell_type, pos):
 	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
 	tome.spell_type = spell_type
 	tome.position.x = pos.x
-	tome.position.y = pos.y - 16
-	get_tree().get_root().add_child(tome)
+	tome.position.y = pos.y
+	get_tree().get_root().get_node("game/Level").add_child(tome)
 	
 func _ready():
 	$Camera2D.reset_smoothing()
@@ -73,7 +73,7 @@ func _process(delta):
 	
 	#Set Spell Marker Position
 	var mouse_pos = get_global_mouse_position()
-	var dial_center = Vector2(global_position.x, global_position.y - 16)
+	var dial_center = Vector2(global_position.x, global_position.y)
 	spell_direction = (mouse_pos - dial_center).normalized()
 	spell_spawn.global_position = dial_center + spell_direction * DIAL_RADIUS
 	
@@ -108,7 +108,7 @@ func _process(delta):
 				dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
 				get_parent().add_child(dial_instance)
 				dial_instance.position.x = position.x
-				dial_instance.position.y = position.y - 16
+				dial_instance.position.y = position.y
 				dial_instance.player = self
 				dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
 				dial_created = true
@@ -118,7 +118,7 @@ func _process(delta):
 				var spell_path = currently_selected_slot.get_spell_instance()
 				var new_spell = load(spell_path).instantiate()
 				new_spell.player = self
-				get_tree().get_root().add_child(new_spell)
+				get_tree().get_root().get_node("game/Level").add_child(new_spell)
 				
 				spell_cast_audio.play()
 				
@@ -205,7 +205,7 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
 	damage_indicator.damage_amount = damage
 	damage_indicator.position = global_position
-	get_tree().get_root().add_child(damage_indicator)
+	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 	
 func collect_soul():
 	soul_pickup_audio.play()
