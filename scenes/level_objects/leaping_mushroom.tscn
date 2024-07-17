@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://u1heuwmpu3ud"]
+[gd_scene load_steps=12 format=3 uid="uid://u1heuwmpu3ud"]
 
 [ext_resource type="Shader" path="res://shaders/sway.gdshader" id="1_g7g82"]
 [ext_resource type="Script" path="res://scripts/leaping_mushroom.gd" id="1_ltmlx"]
@@ -7,40 +7,47 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_05dqu"]
 shader = ExtResource("1_g7g82")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jhnks"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_oo3ve"]
 atlas = ExtResource("3_xoxoq")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jjnxa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_76084"]
 atlas = ExtResource("3_xoxoq")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uo0l2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_nleik"]
 atlas = ExtResource("3_xoxoq")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_18dgm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwc1v"]
 atlas = ExtResource("3_xoxoq")
 region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dkc5"]
+atlas = ExtResource("3_xoxoq")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3sril"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jhnks")
+"texture": SubResource("AtlasTexture_oo3ve")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jjnxa")
+"texture": SubResource("AtlasTexture_76084")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uo0l2")
+"texture": SubResource("AtlasTexture_nleik")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_18dgm")
+"texture": SubResource("AtlasTexture_uwc1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dkc5")
 }],
 "loop": false,
 "name": &"bounce",
-"speed": 10.0
+"speed": 20.0
 }]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_us8gk"]
