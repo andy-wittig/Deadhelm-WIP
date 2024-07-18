@@ -75,7 +75,7 @@ func _ready():
 func drop_inventory_item(spell_type, pos):
 	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
 	tome.spell_type = spell_type
-	tome.position.x = Vector2(pos.x, pos.y - 16)
+	tome.position.x = Vector2(pos.x, pos.y)
 	get_tree().get_root().get_node("game/Level").add_child(tome)
 	
 @rpc ("any_peer", "call_local")
@@ -117,7 +117,7 @@ func _process(_delta):
 			
 		#Set Spell Marker Position
 		var mouse_pos = get_global_mouse_position()
-		var dial_center = Vector2(global_position.x, global_position.y - 16)
+		var dial_center = Vector2(global_position.x, global_position.y)
 		spell_direction = (mouse_pos - dial_center).normalized()
 		spell_spawn.global_position = dial_center + spell_direction * DIAL_RADIUS
 		

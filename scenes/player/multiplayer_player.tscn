@@ -196,8 +196,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_t3qde"]
-radius = 6.08276
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cljip"]
+radius = 4.0
+height = 16.0
 
 [sub_resource type="Animation" id="Animation_xpmlu"]
 length = 0.001
@@ -251,7 +252,6 @@ replication_config = SubResource("SceneReplicationConfig_201n0")
 script = ExtResource("2_t1m0d")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -9)
 zoom = Vector2(4, 4)
 limit_left = 0
 limit_bottom = 0
@@ -278,14 +278,14 @@ horizontal_alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_1tyvq")
-position = Vector2(0, -16)
+position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_pnaq5")
 animation = &"climb"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_t3qde")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_cljip")
 
 [node name="SpellSpawn" type="Node2D" parent="."]
 

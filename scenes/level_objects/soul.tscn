@@ -95,11 +95,10 @@ color_ramp = SubResource("Gradient_y0pg8")
 
 [node name="DetectPlayer" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
 collision_mask = 2
 
 [node name="PickupShape" type="CollisionShape2D" parent="DetectPlayer"]
 shape = SubResource("CircleShape2D_sf2hl")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
-[connection signal="body_entered" from="DetectPlayer" to="." method="_on_detect_player_body_entered"]
-[connection signal="body_exited" from="DetectPlayer" to="." method="_on_detect_player_body_exited"]

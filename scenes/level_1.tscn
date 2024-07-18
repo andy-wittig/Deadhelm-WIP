@@ -1080,6 +1080,10 @@ texture = ExtResource("3_6ctga")
 12:12/0 = 0
 12:12/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 12:12/0/physics_layer_0/angular_velocity = 0.0
+11:11/0 = 0
+11:11/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+11:11/0/physics_layer_0/angular_velocity = 0.0
+11:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -1, 8, -1, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_fj6g0"]
 physics_layer_0/collision_layer = 16
@@ -1213,7 +1217,7 @@ position = Vector2(0, -11)
 [node name="spawn_gate" parent="game objects" instance=ExtResource("8_4vhbi")]
 position = Vector2(200, -416)
 next_level = ExtResource("6_k5gy8")
-soul_cost = 1
+soul_cost = 2
 
 [node name="ladder objects" type="Node" parent="game objects"]
 
@@ -1359,3 +1363,6 @@ position = Vector2(136, 48)
 
 [node name="soul" parent="." instance=ExtResource("19_yxfj8")]
 position = Vector2(112, -152.042)
+
+[node name="soul2" parent="." instance=ExtResource("19_yxfj8")]
+position = Vector2(104, -152)

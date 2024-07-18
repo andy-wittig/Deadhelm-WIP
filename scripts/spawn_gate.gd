@@ -25,28 +25,34 @@ func _process(delta):
 	gate_sprite.material.set_shader_parameter("enabled", false)
 	soul_label.visible = false
 	for body in get_overlapping_bodies():
-		if (body.get_name() == "player"
-		|| body.player_id == multiplayer.get_unique_id()):
-			gate_sprite.material.set_shader_parameter("enabled", true)
-			soul_label.visible = true
-			if Input.is_action_just_pressed("pickup"):
-				if (not portal_activated && souls_input < soul_cost):
-					collect_soul(body)
-				elif (portal_activated):
-					get_tree().get_root().get_node("game").change_level(next_level)
+		if (body.is_in_group("players")):
+			if (!GameManager.multiplayer_mode_enabled ||
+			body.player_id == multiplayer.get_unique_id()):
+				gate_sprite.material.set_shader_parameter("enabled", true)
+				soul_label.visible = true
+				if Input.is_action_just_pressed("pickup"):
+					if (not portal_activated && souls_input < soul_cost):
+						use_soul(body)
+					elif (portal_activated):
+						get_tree().get_root().get_node("game").change_level(next_level)
 
 func _on_input_event(viewport, event, shape_idx):
 	for body in get_overlapping_bodies():
-		if (body.get_name() == "player"
-		|| body.player_id == multiplayer.get_unique_id()):
-			if (Input.is_action_just_pressed("left_click")):
-				if (not portal_activated && souls_input < soul_cost):
-					collect_soul(body)
-				elif (portal_activated):
-					get_tree().get_root().get_node("game").change_level(next_level)
-	
-func collect_soul(player):
+		if (body.is_in_group("players")):
+			if (!GameManager.multiplayer_mode_enabled ||
+			body.player_id == multiplayer.get_unique_id()):
+				if (Input.is_action_just_pressed("left_click")):
+					if (not portal_activated && souls_input < soul_cost):
+						use_soul(body)
+					elif (portal_activated):
+						get_tree().get_root().get_node("game").change_level(next_level)
+		
+func use_soul(player):
 	if (player.souls_collected > 0):
 		player.souls_collected -= 1
-		souls_input += 1
+		rpc("add_soul")
 		shrine_chime_audio.play()
+		
+@rpc("call_local", "any_peer")
+func add_soul():
+	souls_input += 1

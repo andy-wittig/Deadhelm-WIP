@@ -21,18 +21,22 @@ func _process(delta):
 	summon_label.visible = false
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("players") && not currently_spawning):
-			spawner_sprite.material.set_shader_parameter("enabled", true)
-			summon_label.visible = true
-			if (Input.is_action_just_pressed("pickup")):
-				spawn_timer.start(spawn_wait)
-				currently_spawning = true
+			if (!GameManager.multiplayer_mode_enabled ||
+			body.player_id == multiplayer.get_unique_id()):
+				spawner_sprite.material.set_shader_parameter("enabled", true)
+				summon_label.visible = true
+				if (Input.is_action_just_pressed("pickup")):
+					spawn_timer.start(spawn_wait)
+					currently_spawning = true
 
 func _on_input_event(viewport, event, shape_idx):
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("players") && not currently_spawning):
-			if (Input.is_action_just_pressed("left_click")):
-				spawn_timer.start(spawn_wait)
-				currently_spawning = true
+			if (!GameManager.multiplayer_mode_enabled ||
+			body.player_id == multiplayer.get_unique_id()):
+				if (Input.is_action_just_pressed("left_click")):
+					spawn_timer.start(spawn_wait)
+					currently_spawning = true
 	
 @rpc("any_peer", "call_local")
 func spawn_enemy(spawn_position):
