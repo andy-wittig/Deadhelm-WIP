@@ -104,12 +104,10 @@ collision_mask = 2
 script = ExtResource("1_o47cc")
 
 [node name="DetectPlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_4hknq")
 
 [node name="SpawnerSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_e7jpd")
-position = Vector2(0, -8)
 texture = ExtResource("1_24323")
 
 [node name="OrbSprite" type="Sprite2D" parent="."]
@@ -119,6 +117,7 @@ texture = ExtResource("2_x51t5")
 
 [node name="PointLight2D" type="PointLight2D" parent="OrbSprite"]
 z_index = 1
+position = Vector2(0, -1)
 color = Color(0.427451, 0.917647, 0.839216, 1)
 energy = 1.6
 texture = SubResource("GradientTexture2D_ceu8f")
@@ -131,7 +130,7 @@ autoplay = "orb bounce"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_index = -1
-position = Vector2(0, -14)
+position = Vector2(0, -6)
 amount = 10
 speed_scale = 0.3
 explosiveness = 0.15
@@ -160,9 +159,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -31.0
-offset_top = -32.0
+offset_top = -24.0
 offset_right = 31.0
-offset_bottom = -24.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("5_3mt5w")

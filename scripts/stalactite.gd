@@ -19,8 +19,7 @@ func _process(delta):
 		var body = ray_cast.get_collider()
 		if (body.is_in_group("players") && multiplayer.is_server()):
 			if (can_fall):
-				stalactite_fall = true
-				can_fall = false
+				rpc("start_fall")
 			
 	if (stalactite_fall):
 		if ($FallTimer.get_time_left() == 0):
@@ -28,6 +27,11 @@ func _process(delta):
 			animation_player.play("fall")
 			$FallTimer.start()
 		position += Vector2.DOWN * FALL_VELOCITY * delta
+		
+@rpc("call_local", "any_peer")
+func start_fall():
+	stalactite_fall = true
+	can_fall = false
 		
 func _on_fall_timer_timeout():
 	global_position = origin

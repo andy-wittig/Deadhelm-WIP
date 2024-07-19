@@ -43,9 +43,9 @@ func _ready():
 		%RoamTimer.start(randi_range(2, ROAM_CHANGE_WAIT))
 
 func _process(_delta):
-	if (not bombshell_detonated):
+	if (not bombshell_detonated && multiplayer.is_server()):
 		for body in chase_player.get_overlapping_bodies():
-			if (body.is_in_group("players") && multiplayer.is_server()):
+			if (body.is_in_group("players")):
 				if (!chasing_player):
 					player = body
 					chasing_player = true
@@ -54,6 +54,7 @@ func _process(_delta):
 		#player left detection radius
 		player = null
 		chasing_player = false
+		animation_player.play("RESET")
 		state = state_type.MOVING
 
 func _physics_process(delta):
@@ -140,6 +141,7 @@ func _on_cooldown_timer_timeout():
 
 func _on_attack_timer_timeout():
 	attack_timer_started = false
+	animation_player.play("RESET")
 	if (chasing_player):
 		if (multiplayer.is_server()): rpc("create_spikes")
 		audio_player.play()

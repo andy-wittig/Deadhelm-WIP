@@ -21,6 +21,12 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:bombshell_detonated")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("AnimatedSprite2D:animation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("AnimationPlayer:current_animation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ji213"]
 resource_local_to_scene = true
@@ -285,6 +291,7 @@ position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_5jea4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+deterministic = true
 reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_31xmi")
