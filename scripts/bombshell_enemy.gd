@@ -93,7 +93,7 @@ func _physics_process(delta):
 		state_type.CHASE:
 			animated_sprite.play("run")
 			
-			if multiplayer.is_server():
+			if (multiplayer.is_server() && player != null):
 				if player.global_position.distance_to(global_position) > 16:
 					if abs(player.global_position.x - global_position.x) > 8:
 						if (player.global_position.x > global_position.x):

@@ -41,21 +41,22 @@ func _on_input_event(viewport, event, shape_idx):
 @rpc("any_peer", "call_local")
 func spawn_enemy(spawn_position):
 	var enemy = spawn_enemy_type.instantiate()
-	enemy.position = spawn_position
+	enemy.global_position = spawn_position
 	get_tree().get_root().get_node("game/Level").add_child(enemy)
 	spawn_sound.play()
 	
 func check_enemy_spawnable():
-	var rand_x_pos = global_position.x + random.randi_range(-spawn_range, spawn_range) * 16
-	var rand_y_pos = global_position.y - random.randi_range(0, spawn_range) * 16
-	var test_tile = tile_map.get_cell_tile_data(0, tile_map.local_to_map(Vector2(rand_x_pos, rand_y_pos)))
-	
-	if (test_tile == null):
-		rpc("spawn_enemy", Vector2(rand_x_pos, rand_y_pos))
-	elif (test_tile.get_custom_data("spawnable_tile") == true):
-		rpc("spawn_enemy", Vector2(rand_x_pos, rand_y_pos))
-	else:
-		check_enemy_spawnable()
+	var rand_x_pos = global_position.x + random.randi_range(-spawn_range, spawn_range)
+	var rand_y_pos = global_position.y - random.randi_range(0, spawn_range)
+	var test_tile: TileData
+	for layer in range(tile_map.get_layers_count()):
+		test_tile = tile_map.get_cell_tile_data(layer, tile_map.local_to_map(Vector2(rand_x_pos, rand_y_pos)))
+		if (test_tile != null):
+			if (test_tile.get_custom_data("spawnable_tile") == false):
+				print ("hey")
+				check_enemy_spawnable()
+				return
+	rpc("spawn_enemy", Vector2(rand_x_pos, rand_y_pos))	
 
 func _on_spawn_wait_timer_timeout():
 	if (spawned_count >= spawn_enemy_limit):
