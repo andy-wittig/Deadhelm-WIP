@@ -1158,7 +1158,6 @@ _data = {
 }
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xu020"]
-distance = -272.0
 
 [sub_resource type="Animation" id="Animation_u8ryp"]
 length = 0.001
@@ -1237,7 +1236,7 @@ position = Vector2(136, -144)
 
 [node name="player" parent="players" instance=ExtResource("5_gsx3e")]
 z_index = 5
-position = Vector2(584, 216)
+position = Vector2(0, -8)
 
 [node name="game objects" type="Node" parent="."]
 
@@ -1324,7 +1323,6 @@ scale = Vector2(3, 1)
 damage = 15
 
 [node name="Killzone" parent="game objects/hurt zones" instance=ExtResource("17_da04b")]
-position = Vector2(64, -272)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="game objects/hurt zones/Killzone"]
 shape = SubResource("WorldBoundaryShape2D_xu020")

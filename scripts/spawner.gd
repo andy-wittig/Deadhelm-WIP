@@ -41,8 +41,8 @@ func _on_input_event(viewport, event, shape_idx):
 @rpc("any_peer", "call_local")
 func spawn_enemy(spawn_position):
 	var enemy = spawn_enemy_type.instantiate()
+	$EnemySpawn.add_child(enemy, true)
 	enemy.global_position = spawn_position
-	get_tree().get_root().get_node("game/Level").add_child(enemy)
 	spawn_sound.play()
 	
 func check_enemy_spawnable():
@@ -56,7 +56,7 @@ func check_enemy_spawnable():
 				print ("hey")
 				check_enemy_spawnable()
 				return
-	rpc("spawn_enemy", Vector2(rand_x_pos, rand_y_pos))	
+	rpc_id(1, "spawn_enemy", Vector2(rand_x_pos, rand_y_pos))	
 
 func _on_spawn_wait_timer_timeout():
 	if (spawned_count >= spawn_enemy_limit):

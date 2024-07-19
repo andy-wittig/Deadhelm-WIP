@@ -25,7 +25,7 @@ func _process(delta):
 			body.player_id == multiplayer.get_unique_id()):
 				animated_sprite.material.set_shader_parameter("enabled", true)
 				if Input.is_action_just_pressed("pickup"):
-					body.collect_soul()
+					body.collect_coin()
 					rpc("destroy_self")
 
 func _on_input_event(viewport, event, shape_idx):
@@ -34,5 +34,5 @@ func _on_input_event(viewport, event, shape_idx):
 			if (!GameManager.multiplayer_mode_enabled ||
 			body.player_id == multiplayer.get_unique_id()):
 				if (Input.is_action_just_pressed("left_click")):
-					body.collect_soul()
+					body.collect_coin()
 					rpc("destroy_self")

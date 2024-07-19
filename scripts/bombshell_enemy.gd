@@ -72,17 +72,19 @@ func _physics_process(delta):
 		
 	match state:
 		state_type.IDLE:
-			if bombshell_detonated:
-				animated_sprite.play("cooldown_idle")
-			else:
-				animated_sprite.play("idle")
+			if (multiplayer.is_server()):
+				if bombshell_detonated:
+					animated_sprite.play("cooldown_idle")
+				else:
+					animated_sprite.play("idle")
 				
 			velocity.x = 0
 		state_type.MOVING:
-			if bombshell_detonated:
-				animated_sprite.play("cooldown_run")
-			else:
-				animated_sprite.play("run")
+			if (multiplayer.is_server()):
+				if bombshell_detonated:
+					animated_sprite.play("cooldown_run")
+				else:
+					animated_sprite.play("run")
 				
 			if ray_cast_right.is_colliding():
 				direction = -1
@@ -156,7 +158,7 @@ func create_spikes():
 			var spike = load("res://scenes/enemies/bombshell_spike.tscn").instantiate()
 			spike.direction = spike_angle
 			spike.position = position + spike_angle * 8
-			get_tree().get_root().get_node("game/Level").add_child(spike)
+			get_parent().add_child(spike)
 			
 			spike_angle = spike_angle.rotated(deg_to_rad(-30))
 
