@@ -172,7 +172,7 @@ func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 	apply_knockback(other_pos, force)
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
-	get_tree().get_root().get_node("game/Level").add_child(impact)
+	get_parent().add_child(impact)
 	impact.position = Vector2(position.x, position.y - 6)
 	
 	enemy_health -= damage
@@ -184,8 +184,8 @@ func destroy_self():
 	var death_effect = load("res://scenes/vfx/bombshell_turtle_death.tscn").instantiate()
 	soul.position = position
 	death_effect.position = position
-	get_tree().get_root().get_node("game/Level").add_child(soul)
-	get_tree().get_root().get_node("game/Level").add_child(death_effect)
+	get_parent().add_child(soul)
+	get_parent().add_child(death_effect)
 	
 	marked_for_death = true
 	queue_free()

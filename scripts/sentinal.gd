@@ -31,6 +31,7 @@ var state := state_type.MOVING
 @onready var ray_cast_left = $RayCastLeft
 @onready var audio_stream = $AudioStreamPlayer2D
 @onready var animation_player = $AnimationPlayer
+@onready var chase_player = $"chase player"
 
 func _ready():
 	if multiplayer.is_server():
@@ -47,7 +48,7 @@ func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 	apply_knockback(other_pos, force)
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
-	get_tree().get_root().get_node("game/Level").add_child(impact)
+	get_parent().add_child(impact)
 	impact.position = Vector2(position.x, position.y)
 	
 	enemy_health -= damage
@@ -57,10 +58,10 @@ func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 func destroy_self():
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	soul.position = position
-	get_tree().get_root().get_node("game/Level").add_child(soul)
+	get_parent().add_child(soul)
 	
 	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()
-	get_tree().get_root().get_node("game/Level").add_child(explosion)
+	get_parent().add_child(explosion)
 	explosion.position = Vector2(position.x, position.y - 8)
 	
 	marked_for_death = true
@@ -68,16 +69,33 @@ func destroy_self():
 	
 @rpc("call_local")
 func attack(direction):
+	print ("fire!!")
 	var rocket = load("res://scenes/enemies/sentinal_rocket.tscn").instantiate()
 	rocket.direction = direction
-	rocket.transform = %"Rocket Marker".global_transform
-	get_tree().get_root().get_node("game/Level").add_child(rocket)
+	rocket.position = %"Rocket Marker".position
+	add_child(rocket)
 	
 func update_rand_direction():
 	var rand_x = init_position.x + randi_range(-ROAM_RANGE, ROAM_RANGE)
 	var rand_y = init_position.y + randi_range(-ROAM_RANGE, ROAM_RANGE)
 	roam_direction = (Vector2(rand_x, rand_y) - global_position).normalized()
 	%RoamTimer.start(randf_range(2, ROAM_CHANGE_WAIT))
+
+func _process(_delta):
+	if (multiplayer.is_server()):
+		for body in chase_player.get_overlapping_bodies():
+			if (body.is_in_group("players")):
+				if (!chasing_player):
+					player = body
+					chasing_player = true
+					%AttackTimer.start()
+					state = state_type.CHASE
+				return
+		#player left detection radius
+		player = null
+		chasing_player = false
+		%AttackTimer.stop()
+		state = state_type.MOVING
 
 func _physics_process(delta):
 	#deal with enemy death
@@ -86,31 +104,32 @@ func _physics_process(delta):
 			if (!marked_for_death):
 				rpc("destroy_self")
 			
-	#flip sprite
-	if (global_position.x + roam_direction.x > global_position.x):
-		body_sprite.flip_h = true
-		gun_sprite.rotation = deg_to_rad(-135)
-		gun_sprite.flip_v = true
-	elif (global_position.x + roam_direction.x < global_position.x):
-		body_sprite.flip_h = false
-		gun_sprite.rotation = deg_to_rad(-45)
-		gun_sprite.flip_v = false
+		#flip sprite
+		if (global_position.x + roam_direction.x > global_position.x):
+			body_sprite.flip_h = true
+			gun_sprite.rotation = deg_to_rad(-135)
+			gun_sprite.flip_v = true
+		elif (global_position.x + roam_direction.x < global_position.x):
+			body_sprite.flip_h = false
+			gun_sprite.rotation = deg_to_rad(-45)
+			gun_sprite.flip_v = false
 		
 	match state:
 		state_type.MOVING:	
-			if ray_cast_right.is_colliding():
-				roam_direction = Vector2.LEFT
-			elif ray_cast_left.is_colliding():
-				roam_direction = Vector2.RIGHT
-			elif ray_cast_up.is_colliding():
-				roam_direction = Vector2.DOWN
-			elif ray_cast_down.is_colliding():
-				roam_direction = Vector2.UP
-				
-			if (init_position.distance_to(global_position) >= ROAM_RANGE):
-				roam_direction = (init_position - global_position).normalized()
-				
-			velocity = roam_direction * SPEED
+			if multiplayer.is_server():
+				if ray_cast_right.is_colliding():
+					roam_direction = Vector2.LEFT
+				elif ray_cast_left.is_colliding():
+					roam_direction = Vector2.RIGHT
+				elif ray_cast_up.is_colliding():
+					roam_direction = Vector2.DOWN
+				elif ray_cast_down.is_colliding():
+					roam_direction = Vector2.UP
+					
+				if (init_position.distance_to(global_position) >= ROAM_RANGE):
+					roam_direction = (init_position - global_position).normalized()
+					
+				velocity = roam_direction * SPEED
 				
 		state_type.CHASE:
 			if multiplayer.is_server():
@@ -126,29 +145,10 @@ func _physics_process(delta):
 	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 	
 	move_and_slide()
-
-func _on_chase_player_body_entered(body):
-	if (body.is_in_group("players") && multiplayer.is_server()):
-		if (player == null): #only one player can be targeted
-			if (!marked_for_death):
-				audio_stream.play()
-				player = body
-				chasing_player = true
-				state = state_type.CHASE
-				%AttackTimer.start()
-
-func _on_chase_player_body_exited(body):
-		if (body == player):
-			if (!marked_for_death):
-				player = null
-				chasing_player = false
-				state = state_type.MOVING
-				%AttackTimer.stop()
 			
 func _on_roam_timer_timeout():
-	if not chasing_player:
-		if (!marked_for_death):
-			update_rand_direction()
+	if (!chasing_player && !marked_for_death && multiplayer.is_server()):
+		update_rand_direction()
 
 func _on_attack_timer_timeout():
 	if multiplayer.is_server():

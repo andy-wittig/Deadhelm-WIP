@@ -13,7 +13,7 @@ func _process(delta):
 func destroy_self():
 	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()
 	explosion.position = position
-	get_tree().get_root().get_node("game/Level").add_child(explosion)
+	get_parent().add_child(explosion)
 	queue_free()
 
 func _on_destroy_timer_timeout():
