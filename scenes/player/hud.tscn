@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cv3ipj46sh6tq"]
+[gd_scene load_steps=9 format=3 uid="uid://cv3ipj46sh6tq"]
 
 [ext_resource type="Texture2D" uid="uid://b3spor51sya6b" path="res://assets/sprites/UI/player_information/money_ui.png" id="1_auw1f"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_xifmn"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cx5730avm00l5" path="res://assets/sprites/UI/player_information/healthbar_progress.png" id="5_0tsfq"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="6_t4wkt"]
 [ext_resource type="PackedScene" uid="uid://bqqi6e1x2xkt6" path="res://scenes/player/item_slot.tscn" id="7_7auib"]
-[ext_resource type="Texture2D" uid="uid://3rmjxpql8iov" path="res://assets/sprites/UI/player_information/dead_heart_ui.png" id="8_jr2fh"]
 
 [node name="hud" type="CanvasLayer"]
 
@@ -103,22 +102,22 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="HeartTexture" type="TextureRect" parent="Control/GridContainer/HeartContainer"]
+[node name="Heart1" type="TextureRect" parent="Control/GridContainer/HeartContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 texture = ExtResource("4_8v4w6")
 stretch_mode = 2
 
-[node name="HeartTexture2" type="TextureRect" parent="Control/GridContainer/HeartContainer"]
+[node name="Heart2" type="TextureRect" parent="Control/GridContainer/HeartContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 texture = ExtResource("4_8v4w6")
 stretch_mode = 2
 
-[node name="HeartTexture3" type="TextureRect" parent="Control/GridContainer/HeartContainer"]
+[node name="Heart3" type="TextureRect" parent="Control/GridContainer/HeartContainer"]
 layout_mode = 2
 size_flags_vertical = 8
-texture = ExtResource("8_jr2fh")
+texture = ExtResource("4_8v4w6")
 stretch_mode = 2
 
 [node name="Slots" type="HBoxContainer" parent="Control/GridContainer"]

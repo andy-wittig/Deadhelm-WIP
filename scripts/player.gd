@@ -6,11 +6,13 @@ const CLIMB_SPEED = 60.0
 const JUMP_VELOCITY = -250.0
 const KNOCK_BACK_FALLOFF := 60.0
 const DIAL_RADIUS = 22
+const HEALTH := 100
 #Physics Variables
 var grounded: bool
 var knock_back: Vector2
 #Player Stats Variables
-var player_health = 100
+var player_health := 100
+var player_lives := 3
 var souls_collected = 0
 var coins_collected = 0
 #Player Mechanics Variables
@@ -34,6 +36,11 @@ var spell_instance = null
 	"slot_2" : $hud/Control/GridContainer/Slots/ItemSlot2.get_node("Item"),
 	"slot_3" : $hud/Control/GridContainer/Slots/ItemSlot3.get_node("Item"),
 }
+@onready var hearts = [
+	$hud/Control/GridContainer/HeartContainer.get_node("Heart1"),
+	$hud/Control/GridContainer/HeartContainer.get_node("Heart2"),
+	$hud/Control/GridContainer/HeartContainer.get_node("Heart3"),
+]
 @onready var healthbar = $hud/Control/GridContainer/Healthbar
 @onready var healthbar_label = $hud/Control/GridContainer/Healthbar/HealthbarLabel
 @onready var soul_label = $hud/Control/GridContainer/VBoxContainer/SoulCounter/SoulCounterLabel
@@ -68,8 +75,20 @@ func _ready():
 	
 func _process(delta):
 	healthbar_label.text = str(player_health) + "/100"
+	healthbar.value = player_health
 	soul_label.text = str(souls_collected)
 	money_label.text = "$" + str(coins_collected)
+	
+	#Handle player death
+	if (player_health <= 0 && player_lives > 0):
+		player_lives -= 1
+		hearts[player_lives].texture = load("res://assets/sprites/UI/player_information/dead_heart_ui.png")
+		souls_collected = 0
+		coins_collected = 0
+		player_health = HEALTH
+		global_position = get_parent().global_position
+	elif (player_health <= 0 && player_lives <= 0):
+		pass
 	
 	#Set Spell Marker Position
 	var mouse_pos = get_global_mouse_position()
@@ -199,7 +218,6 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	apply_knockback(other_pos, force)
 	
 	player_health -= damage
-	healthbar.value = player_health
 	player_health = max(player_health, 0)
 	
 	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
