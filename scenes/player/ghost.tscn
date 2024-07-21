@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://ym088clblnrc"]
+
+[ext_resource type="Script" path="res://scripts/ghost.gd" id="1_2sf63"]
+[ext_resource type="Texture2D" uid="uid://rvnhdugaf7io" path="res://assets/sprites/player/ghost_float_sheet.png" id="1_mpfxy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2oov"]
+atlas = ExtResource("1_mpfxy")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc66v"]
+atlas = ExtResource("1_mpfxy")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qu3u0"]
+atlas = ExtResource("1_mpfxy")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd4cc"]
+atlas = ExtResource("1_mpfxy")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31bws"]
+atlas = ExtResource("1_mpfxy")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxtb4"]
+atlas = ExtResource("1_mpfxy")
+region = Rect2(80, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd733"]
+atlas = ExtResource("1_mpfxy")
+region = Rect2(96, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gcjfy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2oov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fc66v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qu3u0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sd4cc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31bws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxtb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd733")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ghost" type="Node2D"]
+z_index = 10
+script = ExtResource("1_2sf63")
+
+[node name="GhostAnimatedSprite" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+sprite_frames = SubResource("SpriteFrames_gcjfy")
+autoplay = "default"
+frame_progress = 0.0207177
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+limit_left = 0
+limit_bottom = 0
+limit_smoothed = true
+position_smoothing_enabled = true
+editor_draw_limits = true

@@ -6,6 +6,7 @@ const CLIMB_SPEED = 60.0
 const JUMP_VELOCITY = -250.0
 const KNOCK_BACK_FALLOFF := 60.0
 const DIAL_RADIUS = 22
+const HEALTH := 100
 #Physics Variables
 var grounded: bool
 var hor_direction = 1
@@ -15,7 +16,9 @@ var _is_on_floor = true
 var knock_back: Vector2
 #Player Stats Variables
 var username := ""
-var player_health = 100
+var player_health := 100
+var player_lives := 3
+var marked_dead := false
 var souls_collected = 0
 var coins_collected = 0
 #Player Mechanics Variables
@@ -45,6 +48,11 @@ var is_in_chat := false
 	"slot_2" : $hud/Control/GridContainer/Slots/ItemSlot2.get_node("Item"),
 	"slot_3" : $hud/Control/GridContainer/Slots/ItemSlot3.get_node("Item"),
 }
+@onready var hearts = [
+	$hud/Control/GridContainer/HeartContainer.get_node("Heart1"),
+	$hud/Control/GridContainer/HeartContainer.get_node("Heart2"),
+	$hud/Control/GridContainer/HeartContainer.get_node("Heart3"),
+]
 @onready var healthbar = $hud/Control/GridContainer/Healthbar
 @onready var healthbar_label = $hud/Control/GridContainer/Healthbar/HealthbarLabel
 @onready var soul_label = $hud/Control/GridContainer/VBoxContainer/SoulCounter/SoulCounterLabel
@@ -57,6 +65,7 @@ var is_in_chat := false
 #Mechanics Paths
 @onready var attack_cooldown_timer = $AttackCooldownTimer
 @onready var spell_spawn = $SpellSpawn
+@onready var player_collider = $PlayerCollider
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 		
@@ -98,12 +107,15 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	damage_indicator.position = global_position
 	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 	
-@rpc("any_peer", "call_local")		
-func mark_dead():
-	$RespawnTimer.start()
-	
-func _on_respawn_timer_timeout():
-	pass # Replace with function body.
+@rpc("any_peer", "call_local")
+func disable_player():
+	set_process(false)
+	set_physics_process(false)
+	player_collider.disabled = true
+	$hud.visible = false
+	visible = false
+	$Camera2D.enabled = false
+	marked_dead = true
 
 func _process(_delta):	
 	if (multiplayer.get_unique_id() == player_id):
@@ -112,8 +124,18 @@ func _process(_delta):
 		money_label.text = "$" + str(coins_collected)
 		
 		#Handle player death
-		if (player_health <= 0):
-			mark_dead.rpc_id(player_id)
+		if (player_health <= 0 && player_lives >= 0):
+			if (!marked_dead):
+				player_lives -= 1
+				hearts[player_lives].texture = load("res://assets/sprites/UI/player_information/dead_heart_ui.png")
+				souls_collected = 0
+				player_health = HEALTH
+				global_position = get_parent().global_position
+				if (player_lives <= 0):
+					var ghost = load("res://scenes/player/ghost.tscn").instantiate()
+					ghost.global_position = get_parent().global_position
+					get_tree().get_root().get_node("game/Level").add_child(ghost)
+					rpc("disable_player")
 			
 		#Set Spell Marker Position
 		var mouse_pos = get_global_mouse_position()

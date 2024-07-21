@@ -84,7 +84,6 @@ func _process(delta):
 		player_lives -= 1
 		hearts[player_lives].texture = load("res://assets/sprites/UI/player_information/dead_heart_ui.png")
 		souls_collected = 0
-		coins_collected = 0
 		player_health = HEALTH
 		global_position = get_parent().global_position
 	elif (player_health <= 0 && player_lives <= 0):
