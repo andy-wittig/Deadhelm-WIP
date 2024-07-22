@@ -24,9 +24,11 @@ func _process(_delta):
 	if (not attack_wait):
 		if (ray_cast.is_colliding()):
 			var body = ray_cast.get_collider()
-			if (body.get_parent().get_name() == "players"
-			&& multiplayer.is_server()):
-				rpc("attack")
+			if (body.is_in_group("players")):
+				if (multiplayer.is_server()):
+					rpc("attack")
+				elif (!GameManager.multiplayer_mode_enabled):
+					attack()
 				attack_timer.start()
 				attack_wait = true
 

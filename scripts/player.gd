@@ -233,9 +233,9 @@ func disable_player():
 	set_process(false)
 	set_physics_process(false)
 	player_collider.set_deferred("disabled", true)
-	$hud.visible = false
+	#$hud.visible = false
 	visible = false
-	$Camera2D.enabled = false
+	#$Camera2D.enabled = false
 	marked_dead = true
 	
 func collect_soul():

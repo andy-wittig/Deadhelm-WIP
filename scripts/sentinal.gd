@@ -34,7 +34,7 @@ var state := state_type.MOVING
 @onready var chase_player = $"chase player"
 
 func _ready():
-	if multiplayer.is_server():
+	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 		init_position = global_position
 		%RoamTimer.start()
 
@@ -82,7 +82,7 @@ func update_rand_direction():
 	%RoamTimer.start(randf_range(2, ROAM_CHANGE_WAIT))
 
 func _process(_delta):
-	if (multiplayer.is_server()):
+	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 		for body in chase_player.get_overlapping_bodies():
 			if (body.is_in_group("players")):
 				if (!chasing_player):
@@ -98,11 +98,14 @@ func _process(_delta):
 		state = state_type.MOVING
 
 func _physics_process(delta):
-	#deal with enemy death
-	if multiplayer.is_server():
+	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
+		#Handle enemy death
 		if (enemy_health <= 0):
 			if (!marked_for_death):
-				rpc("destroy_self")
+				if (multiplayer.is_server()):
+					rpc("destroy_self")
+				elif (!GameManager.multiplayer_mode_enabled):
+					destroy_self()
 			
 		#flip sprite
 		if (global_position.x + roam_direction.x > global_position.x):
@@ -116,7 +119,7 @@ func _physics_process(delta):
 		
 	match state:
 		state_type.MOVING:	
-			if multiplayer.is_server():
+			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 				if ray_cast_right.is_colliding():
 					roam_direction = Vector2.LEFT
 				elif ray_cast_left.is_colliding():
@@ -132,7 +135,7 @@ func _physics_process(delta):
 				velocity = roam_direction * SPEED
 				
 		state_type.CHASE:
-			if multiplayer.is_server():
+			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 				roam_direction = (player.global_position - global_position).normalized()
 				if player.global_position.distance_to(global_position) > 64:
 					velocity = roam_direction * SPEED
@@ -147,10 +150,13 @@ func _physics_process(delta):
 	move_and_slide()
 			
 func _on_roam_timer_timeout():
-	if (!chasing_player && !marked_for_death && multiplayer.is_server()):
-		update_rand_direction()
+	if (!chasing_player && !marked_for_death):
+		if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
+			update_rand_direction()
 
 func _on_attack_timer_timeout():
-	if multiplayer.is_server():
-		if (!marked_for_death):
+	if (!marked_for_death):
+		if multiplayer.is_server():
 			rpc("attack", roam_direction)
+		elif (!GameManager.multiplayer_mode_enabled):
+			attack(roam_direction)

@@ -21,11 +21,10 @@ func _on_destroy_timer_timeout():
 	destroy_self()
 
 func _on_body_entered(body):
-	if (body.is_in_group("players")
-		&& multiplayer.is_server()):
-			if (body.get_name() == "player"):
-				body.hurt_player(20, global_position.x)
-				destroy_self()
-			else:
-				body.hurt_player.rpc_id(body.player_id, 20, global_position.x)
-				rpc("destroy_self")
+	if (body.is_in_group("players")):
+		if (multiplayer.is_server()):
+			body.hurt_player.rpc_id(body.player_id, 20, global_position.x)
+			rpc("destroy_self")
+		elif (!GameManager.multiplayer_mode_enabled):
+			body.hurt_player(20, global_position.x)
+			destroy_self()

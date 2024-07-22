@@ -56,7 +56,10 @@ func check_enemy_spawnable():
 				print ("hey")
 				check_enemy_spawnable()
 				return
-	rpc_id(1, "spawn_enemy", Vector2(rand_x_pos, rand_y_pos))	
+	if (!GameManager.multiplayer_mode_enabled):
+		spawn_enemy(Vector2(rand_x_pos, rand_y_pos))
+	elif (multiplayer.is_server()):
+		rpc_id(1, "spawn_enemy", Vector2(rand_x_pos, rand_y_pos))	
 
 func _on_spawn_wait_timer_timeout():
 	if (spawned_count >= spawn_enemy_limit):

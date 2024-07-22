@@ -48,7 +48,7 @@ func join_game(server_ip, server_port):
 func start_game():
 	$MenuLayer.current_menu = $MenuLayer.menu.HIDDEN
 	GameManager.started_game = true
-	if (multiplayer.is_server()):
+	if (!GameManager.multiplayer_mode_enabled || multiplayer.is_server()):
 		change_level.call_deferred(load("res://scenes/level_1.tscn"))
 	
 func change_level(scene: PackedScene):

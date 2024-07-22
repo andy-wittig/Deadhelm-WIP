@@ -7,11 +7,11 @@ var active := true
 @onready var hurt_player_timer = $HurtPlayerTimer
 
 func apply_damage(body):
-	if (body.is_in_group("players") && multiplayer.is_server() && active):
-			if (body.get_name() == "player"): #single player
+	if (body.is_in_group("players") && active):
+		if (!GameManager.multiplayer_mode_enabled): #single player
 				body.hurt_player(damage, global_position, 100)
-			else: #multiplayer
-				body.hurt_player.rpc_id(body.player_id, damage, global_position, 100)
+		elif (multiplayer.is_server()): #multiplayer
+			body.hurt_player.rpc_id(body.player_id, damage, global_position, 100)	
 
 func _on_body_entered(body):
 		hurt_player_timer.wait_time = attack_wait

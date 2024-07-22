@@ -8,10 +8,6 @@ extends Area2D
 @onready var hurt_enemy_timer = $HurtEnemyTimer
 @onready var destroy_timer = $DestroyTimer
 
-@rpc("any_peer", "call_local")
-func destroy_self():
-	queue_free()
-
 func _ready():
 	destroy_timer.start(destroy_time)
 	hurt_enemy_timer.wait_time = attack_wait
@@ -19,9 +15,11 @@ func _ready():
 	
 func _on_hurt_enemy_timer_timeout():
 	for body in get_overlapping_bodies():
-		if (body.is_in_group("enemies")
-		&& multiplayer.is_server()):
-			body.hurt_enemy.rpc(damage, global_position, knock_back)
+		if (body.is_in_group("enemies")):
+			if (multiplayer.is_server()):
+				body.hurt_enemy.rpc(damage, global_position, knock_back)
+			elif (!GameManager.multiplayer_mode_enabled):
+				body.hurt_enemy(damage, global_position, knock_back)
 
 func _on_destroy_timer_timeout():
-	rpc("destroy_self")
+	queue_free()

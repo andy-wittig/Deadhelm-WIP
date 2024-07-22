@@ -50,7 +50,10 @@ func _on_input_event(viewport, event, shape_idx):
 func use_soul(player):
 	if (player.souls_collected > 0):
 		player.souls_collected -= 1
-		rpc("add_soul")
+		if (!GameManager.multiplayer_mode_enabled):
+			add_soul()
+		elif (multiplayer.is_server()):
+			rpc("add_soul")
 		shrine_chime_audio.play()
 		
 func enter_portal():

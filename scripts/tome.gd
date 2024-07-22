@@ -19,14 +19,20 @@ func _process(delta):
 		if Input.is_action_just_pressed("pickup"):
 			player.colllect_spell(spell_type)
 			can_interact = false
-			rpc("destroy_self")
+			if (!GameManager.multiplayer_mode_enabled):
+				destroy_self()
+			elif (multiplayer.is_server()):
+				rpc("destroy_self")
 
 func _on_input_event(viewport, event, shape_idx):
 	if (Input.is_action_just_pressed("left_click")):
 		if (can_interact && not player.is_inventory_full()):
 			player.colllect_spell(spell_type)
 			can_interact = false
-			rpc("destroy_self")
+			if (!GameManager.multiplayer_mode_enabled):
+				destroy_self()
+			elif (multiplayer.is_server()):
+				rpc("destroy_self")
 
 func _on_detect_player_body_entered(body):
 	if (body.get_parent().get_name() == "players"):

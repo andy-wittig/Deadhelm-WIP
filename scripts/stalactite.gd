@@ -17,8 +17,10 @@ func _ready():
 func _process(delta):
 	if ray_cast.is_colliding():
 		var body = ray_cast.get_collider()
-		if (body.is_in_group("players") && multiplayer.is_server()):
-			if (can_fall):
+		if (body.is_in_group("players") && can_fall):
+			if (!GameManager.multiplayer_mode_enabled):
+				start_fall()
+			elif (multiplayer.is_server()):
 				rpc("start_fall")
 			
 	if (stalactite_fall):

@@ -28,8 +28,11 @@ func _process(delta):
 	if (souls_input >= soul_cost):
 		if (can_interact):
 			if Input.is_action_just_pressed("pickup"):
-				rpc("spawn_tome")
 				souls_input = 0
+				if (multiplayer.is_server()):
+					rpc("spawn_tome")
+				elif (!GameManager.multiplayer_mode_enabled):
+					spawn_tome()
 	
 	if (can_interact):
 		if Input.is_action_just_pressed("pickup"):

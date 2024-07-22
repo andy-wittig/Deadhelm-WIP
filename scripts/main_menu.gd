@@ -76,8 +76,6 @@ func return_to_prev_menu():
 			current_menu = menu.HIDDEN
 		elif (current_menu == menu.SETTINGS):
 			current_menu = menu.INGAME
-		elif (current_menu == menu.GAMEOVER):
-			current_menu = menu.MAIN
 	else:
 		current_menu = menu.MAIN
 

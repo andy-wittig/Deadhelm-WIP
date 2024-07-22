@@ -38,19 +38,20 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 	
 func _ready():
-	if multiplayer.is_server():
+	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 		direction = [-1, 1].pick_random()
 		%RoamTimer.start(randi_range(2, ROAM_CHANGE_WAIT))
 
 func _process(_delta):
-	if (not bombshell_detonated && multiplayer.is_server()):
-		for body in chase_player.get_overlapping_bodies():
-			if (body.is_in_group("players")):
-				if (!chasing_player):
-					player = body
-					chasing_player = true
-					state = state_type.CHASE
-				return
+	if (not bombshell_detonated):
+		if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
+			for body in chase_player.get_overlapping_bodies():
+				if (body.is_in_group("players")):
+					if (!chasing_player):
+						player = body
+						chasing_player = true
+						state = state_type.CHASE
+					return
 		#player left detection radius
 		player = null
 		chasing_player = false
@@ -59,10 +60,13 @@ func _process(_delta):
 
 func _physics_process(delta):
 	#deal with enemy death
-	if multiplayer.is_server():
+	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 		if (enemy_health <= 0):
 			if (!marked_for_death):
-				rpc("destroy_self")
+				if (multiplayer.is_server()):
+					rpc("destroy_self")
+				elif (!GameManager.multiplayer_mode_enabled):
+					destroy_self()
 
 	#flip sprite
 	if (direction > 0):
@@ -72,7 +76,7 @@ func _physics_process(delta):
 		
 	match state:
 		state_type.IDLE:
-			if (multiplayer.is_server()):
+			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 				if bombshell_detonated:
 					animated_sprite.play("cooldown_idle")
 				else:
@@ -80,7 +84,7 @@ func _physics_process(delta):
 				
 			velocity.x = 0
 		state_type.MOVING:
-			if (multiplayer.is_server()):
+			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 				if bombshell_detonated:
 					animated_sprite.play("cooldown_run")
 				else:
@@ -95,7 +99,7 @@ func _physics_process(delta):
 		state_type.CHASE:
 			animated_sprite.play("run")
 			
-			if (multiplayer.is_server() && player != null):
+			if ((multiplayer.is_server() || !GameManager.multiplayer_mode_enabled) && player != null):
 				if player.global_position.distance_to(global_position) > 16:
 					if abs(player.global_position.x - global_position.x) > 8:
 						if (player.global_position.x > global_position.x):
@@ -131,10 +135,11 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _on_change_state_timer_timeout():
-	if (not chasing_player && multiplayer.is_server()):
-		direction = [-1, 1].pick_random()
-		state = randi_range(0, 1)
-		%RoamTimer.start(randf_range(0, ROAM_CHANGE_WAIT))
+	if (not chasing_player):
+		if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
+			direction = [-1, 1].pick_random()
+			state = randi_range(0, 1)
+			%RoamTimer.start(randf_range(0, ROAM_CHANGE_WAIT))
 
 func _on_cooldown_timer_timeout():
 	player = null
@@ -145,7 +150,10 @@ func _on_attack_timer_timeout():
 	attack_timer_started = false
 	animation_player.play("RESET")
 	if (chasing_player):
-		if (multiplayer.is_server()): rpc("create_spikes")
+		if (multiplayer.is_server()):
+			rpc("create_spikes")
+		elif (!GameManager.multiplayer_mode_enabled):
+			create_spikes()
 		audio_player.play()
 		bombshell_detonated = true
 		%CooldownTimer.start(10)
