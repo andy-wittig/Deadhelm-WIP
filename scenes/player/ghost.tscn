@@ -1,7 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://ym088clblnrc"]
+[gd_scene load_steps=17 format=3 uid="uid://ym088clblnrc"]
 
 [ext_resource type="Script" path="res://scripts/ghost.gd" id="1_2sf63"]
 [ext_resource type="Texture2D" uid="uid://rvnhdugaf7io" path="res://assets/sprites/player/ghost_float_sheet.png" id="1_mpfxy"]
+[ext_resource type="Shader" path="res://shaders/distort.gdshader" id="2_0rhqb"]
+[ext_resource type="Shader" path="res://shaders/black_and_white.gdshader" id="3_lbad0"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tugqc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pga50"]
+noise = SubResource("FastNoiseLite_tugqc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x08v3"]
+shader = ExtResource("2_0rhqb")
+shader_parameter/speed = 0.08
+shader_parameter/strength = 0.01
+shader_parameter/noise = SubResource("NoiseTexture2D_pga50")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u2oov"]
 atlas = ExtResource("1_mpfxy")
@@ -60,15 +73,19 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e04v0"]
+shader = ExtResource("3_lbad0")
+shader_parameter/tint = null
+
 [node name="ghost" type="Node2D"]
 z_index = 10
 script = ExtResource("1_2sf63")
 
 [node name="GhostAnimatedSprite" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.784314)
+material = SubResource("ShaderMaterial_x08v3")
 sprite_frames = SubResource("SpriteFrames_gcjfy")
 autoplay = "default"
-frame_progress = 0.0207177
+frame_progress = 0.406778
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -77,3 +94,13 @@ limit_bottom = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_e04v0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
