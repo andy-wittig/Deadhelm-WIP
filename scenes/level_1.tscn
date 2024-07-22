@@ -1241,7 +1241,7 @@ z_index = 5
 [node name="spawn_gate" parent="game objects" instance=ExtResource("8_4vhbi")]
 position = Vector2(200, -416)
 next_level = ExtResource("6_k5gy8")
-soul_cost = 2
+soul_cost = 12
 
 [node name="ladder objects" type="Node" parent="game objects"]
 
@@ -1330,7 +1330,7 @@ position = Vector2(760, -792)
 spawn_enemy_type = ExtResource("6_b6eee")
 spawn_range = 128
 spawn_wait = 1.0
-spawn_enemy_limit = 3
+spawn_enemy_limit = 2
 
 [node name="spawner2" parent="game objects" instance=ExtResource("14_mv4c4")]
 position = Vector2(344, -152)
@@ -1342,6 +1342,7 @@ spawn_enemy_limit = 2
 [node name="offering shrine" parent="game objects" instance=ExtResource("15_by2nq")]
 z_index = -1
 position = Vector2(720, -336)
+soul_cost = 6
 
 [node name="offering shrine3" parent="game objects" instance=ExtResource("15_by2nq")]
 z_index = -1
