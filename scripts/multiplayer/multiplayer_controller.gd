@@ -107,7 +107,7 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	damage_indicator.position = global_position
 	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 	
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "reliable")
 func disable_player():
 	set_process(false)
 	set_physics_process(false)
@@ -116,6 +116,10 @@ func disable_player():
 	visible = false
 	$Camera2D.enabled = false
 	marked_dead = true
+	
+@rpc("call_local", "any_peer", "reliable")
+func reset_spawn_position():
+	global_position = get_parent().global_position
 
 func _process(_delta):	
 	if (multiplayer.get_unique_id() == player_id):
@@ -130,7 +134,7 @@ func _process(_delta):
 				hearts[player_lives].texture = load("res://assets/sprites/UI/player_information/dead_heart_ui.png")
 				souls_collected = 0
 				player_health = HEALTH
-				global_position = get_parent().global_position
+				rpc("reset_spawn_position")
 				if (player_lives <= 0):
 					var ghost = load("res://scenes/player/ghost.tscn").instantiate()
 					ghost.global_position = get_parent().global_position
