@@ -6,21 +6,23 @@ enum menu {
 	SETTINGS,
 	CREDITS,
 	INGAME,
-	HIDDEN
+	HIDDEN,
+	GAMEOVER,
 }
 var current_menu := menu.MAIN
 
-@onready var menu_control = $MenuControl
-@onready var main_menu = $MenuControl/MenuContainer
-@onready var settings_menu = $MenuControl/settings_menu
-@onready var multiplayer_menu = $MenuControl/multiplayer_menu
-@onready var credits_menu = $MenuControl/credits_menu
-@onready var in_game_menu = $MenuControl/in_game_menu
-@onready var title_background = $TitleBackground
+@onready var menu_scenes = {
+	"main_menu" : $MenuControl/MenuContainer,
+	"title_background" : $TitleBackground,
+	"settings_menu" : $MenuControl/settings_menu,
+	"multiplayer_menu" : $MenuControl/multiplayer_menu,
+	"credits_menu" : $MenuControl/credits_menu,
+	"in_game_menu" : $MenuControl/in_game_menu,
+	"gameover_menu" : $MenuControl/gameover_menu,
+}
 
 func _process(_delta):
 	if (GameManager.started_game):
-		title_background.visible = false
 		if Input.is_action_just_pressed("in-game_menu"):
 			if (current_menu == menu.HIDDEN):
 				current_menu = menu.INGAME
@@ -29,47 +31,44 @@ func _process(_delta):
 	
 	match current_menu:
 		menu.MAIN:
-			menu_control.visible = true
-			main_menu.visible = true
-			settings_menu.visible = false
-			multiplayer_menu.visible = false
-			credits_menu.visible = false
-			in_game_menu.visible = false
+			for scene in menu_scenes:
+				if (scene != "main_menu" && scene != "title_background"):
+					menu_scenes[scene].visible = false
+				else:
+					menu_scenes[scene].visible = true
 		menu.MULTIPLAYER:
-			menu_control.visible = true
-			main_menu.visible = false
-			settings_menu.visible = false
-			multiplayer_menu.visible = true
-			credits_menu.visible = false
-			in_game_menu.visible = false
+			for scene in menu_scenes:
+				if (scene != "multiplayer_menu"):
+					menu_scenes[scene].visible = false
+				else:
+					menu_scenes[scene].visible = true
 		menu.SETTINGS:
-			menu_control.visible = true
-			main_menu.visible = false
-			settings_menu.visible = true
-			multiplayer_menu.visible = false
-			credits_menu.visible = false
-			in_game_menu.visible = false
+			for scene in menu_scenes:
+				if (scene != "settings_menu"):
+					menu_scenes[scene].visible = false
+				else:
+					menu_scenes[scene].visible = true
 		menu.CREDITS:
-			menu_control.visible = true
-			main_menu.visible = false
-			settings_menu.visible = false
-			multiplayer_menu.visible = false
-			credits_menu.visible = true
-			in_game_menu.visible = false
+			for scene in menu_scenes:
+				if (scene != "credits_menu"):
+					menu_scenes[scene].visible = false
+				else:
+					menu_scenes[scene].visible = true
 		menu.INGAME:
-			menu_control.visible = true
-			main_menu.visible = false
-			settings_menu.visible = false
-			multiplayer_menu.visible = false
-			credits_menu.visible = false
-			in_game_menu.visible = true
+			for scene in menu_scenes:
+				if (scene != "in_game_menu"):
+					menu_scenes[scene].visible = false
+				else:
+					menu_scenes[scene].visible = true
 		menu.HIDDEN:
-			menu_control.visible = false
-			main_menu.visible = false
-			settings_menu.visible = false
-			multiplayer_menu.visible = false
-			credits_menu.visible = false
-			in_game_menu.visible = false
+			for scene in menu_scenes:
+					menu_scenes[scene].visible = false
+		menu.GAMEOVER:
+			for scene in menu_scenes:
+				if (scene != "gameover_menu"):
+					menu_scenes[scene].visible = false
+				else:
+					menu_scenes[scene].visible = true
 			
 func return_to_prev_menu():
 	if (GameManager.started_game):
@@ -77,6 +76,8 @@ func return_to_prev_menu():
 			current_menu = menu.HIDDEN
 		elif (current_menu == menu.SETTINGS):
 			current_menu = menu.INGAME
+		elif (current_menu == menu.GAMEOVER):
+			current_menu = menu.MAIN
 	else:
 		current_menu = menu.MAIN
 

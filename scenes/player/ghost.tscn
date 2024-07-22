@@ -95,9 +95,9 @@ limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GreyScaleCanvas" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="GreyScaleCanvas"]
 material = SubResource("ShaderMaterial_e04v0")
 anchors_preset = 15
 anchor_right = 1.0

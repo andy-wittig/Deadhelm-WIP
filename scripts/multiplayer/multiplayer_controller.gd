@@ -99,7 +99,6 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	rpc("apply_knockback", other_pos, force)
 	
 	player_health -= damage
-	healthbar.value = player_health
 	player_health = max(player_health, 0)
 	
 	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
@@ -123,6 +122,7 @@ func reset_spawn_position():
 
 func _process(_delta):	
 	if (multiplayer.get_unique_id() == player_id):
+		healthbar.value = player_health
 		healthbar_label.text = str(player_health) + "/100"
 		soul_label.text = str(souls_collected)
 		money_label.text = "$" + str(coins_collected)
