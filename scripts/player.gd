@@ -13,6 +13,7 @@ var knock_back: Vector2
 #Player Stats Variables
 var player_health := 100
 var player_lives := 3
+var marked_dead := false
 var souls_collected = 0
 var coins_collected = 0
 #Player Mechanics Variables
@@ -53,6 +54,7 @@ var spell_instance = null
 @onready var footstep_audio = $FootstepAudio
 @onready var spell_cast_audio = $SpellCastAudio
 #Mechanics Paths
+@onready var player_collider = $PlayerCollider
 @onready var attack_cooldown_timer = $AttackCooldownTimer
 @onready var spell_spawn = $SpellSpawn
 
@@ -81,13 +83,16 @@ func _process(delta):
 	
 	#Handle player death
 	if (player_health <= 0 && player_lives > 0):
-		player_lives -= 1
-		hearts[player_lives].texture = load("res://assets/sprites/UI/player_information/dead_heart_ui.png")
-		souls_collected = 0
-		player_health = HEALTH
-		global_position = get_parent().global_position
-	elif (player_health <= 0 && player_lives <= 0):
-		pass
+		if (!marked_dead):
+			player_lives -= 1
+			hearts[player_lives].texture = load("res://assets/sprites/UI/player_information/dead_heart_ui.png")
+			souls_collected = 0
+			player_health = HEALTH
+			global_position = get_parent().global_position
+			if (player_lives <= 0):
+				disable_player()
+				var menu_control = get_tree().get_root().get_node("game/MenuLayer")
+				menu_control.current_menu = menu_control.menu.GAMEOVER
 	
 	#Set Spell Marker Position
 	var mouse_pos = get_global_mouse_position()
@@ -223,6 +228,15 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	damage_indicator.damage_amount = damage
 	damage_indicator.position = global_position
 	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
+	
+func disable_player():
+	set_process(false)
+	set_physics_process(false)
+	player_collider.set_deferred("disabled", true)
+	$hud.visible = false
+	visible = false
+	$Camera2D.enabled = false
+	marked_dead = true
 	
 func collect_soul():
 	soul_pickup_audio.play()

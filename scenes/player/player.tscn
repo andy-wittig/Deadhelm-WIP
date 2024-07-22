@@ -225,7 +225,7 @@ sprite_frames = SubResource("SpriteFrames_2q11b")
 animation = &"climb"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_74c68")
 
