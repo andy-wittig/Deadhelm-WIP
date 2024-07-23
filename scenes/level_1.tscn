@@ -1320,11 +1320,6 @@ position = Vector2(712, -152)
 scale = Vector2(3, 1)
 damage = 15
 
-[node name="HurtPlayerArea2" parent="game objects/hurt zones" instance=ExtResource("18_t0yfv")]
-position = Vector2(248, -408)
-scale = Vector2(3, 1)
-damage = 100
-
 [node name="Killzone" parent="game objects/hurt zones" instance=ExtResource("17_da04b")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="game objects/hurt zones/Killzone"]

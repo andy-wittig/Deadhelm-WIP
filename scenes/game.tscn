@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=31 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
 [ext_resource type="PackedScene" uid="uid://b0378gpwb8g1x" path="res://scenes/menus/gameover_menu.tscn" id="11_bodm6"]
 [ext_resource type="Texture2D" uid="uid://dm11bfh1qcc23" path="res://assets/sprites/UI/title_background_sky.png" id="13_1o8hw"]
+[ext_resource type="Texture2D" uid="uid://baxrvat8rbb0w" path="res://assets/sprites/UI/title_background_foreground.png" id="13_e5jav"]
 [ext_resource type="AudioStream" uid="uid://b30b5kxyjyc4y" path="res://assets/music/level_track_1.mp3" id="14_ya6b7"]
 [ext_resource type="Texture2D" uid="uid://fgw4c7gfxo7e" path="res://assets/sprites/UI/title_background_mountains.png" id="14_yyt2w"]
 [ext_resource type="AudioStream" uid="uid://7qnkk0o4yblj" path="res://assets/music/level_track_2.mp3" id="15_3d256"]
@@ -49,6 +50,13 @@ shader_parameter/speed = 0.05
 shader_parameter/strength = 0.005
 shader_parameter/noise = SubResource("NoiseTexture2D_2rdnd")
 
+[sub_resource type="Gradient" id="Gradient_dqply"]
+colors = PackedColorArray(1, 0.819608, 0.835294, 0.784314, 0.2, 0.533333, 0.870588, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lr8m4"]
+gradient = SubResource("Gradient_dqply")
+fill_to = Vector2(0, 1)
+
 [node name="game" type="Node"]
 script = ExtResource("1_yvbvk")
 
@@ -81,19 +89,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -256.0
-offset_top = -144.0
+offset_top = -90.0
 offset_right = 256.0
-offset_bottom = 144.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
-
-[node name="TextureRect" type="TextureRect" parent="MenuLayer/MenuControl/MenuContainer"]
-material = SubResource("ShaderMaterial_mgunp")
-layout_mode = 2
-texture = ExtResource("3_i7ejn")
-expand_mode = 5
-stretch_mode = 6
 
 [node name="Spacer" type="Control" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
@@ -176,14 +177,37 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Sky" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
-offset_right = 1600.0
-offset_bottom = 900.0
+[node name="Title" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = 2
+material = SubResource("ShaderMaterial_mgunp")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -386.0
+offset_right = 375.0
+offset_bottom = -276.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_i7ejn")
+
+[node name="Foreground" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("13_1o8hw")
+texture = ExtResource("13_e5jav")
 
 [node name="Mountains" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 z_index = 1
+layout_mode = 0
 offset_right = 1600.0
 offset_bottom = 900.0
 mouse_filter = 2
@@ -191,14 +215,23 @@ texture = ExtResource("14_yyt2w")
 
 [node name="Shorline" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 material = SubResource("ShaderMaterial_jb632")
+layout_mode = 0
 offset_right = 1600.0
 offset_bottom = 900.0
 mouse_filter = 2
 texture = ExtResource("15_s3i31")
 
+[node name="Sky" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+layout_mode = 0
+offset_right = 1600.0
+offset_bottom = 900.0
+mouse_filter = 2
+texture = ExtResource("13_1o8hw")
+
 [node name="SkylineReflection" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 z_index = -2
 material = SubResource("ShaderMaterial_da0k7")
+layout_mode = 0
 offset_top = -280.0
 offset_right = 1600.0
 offset_bottom = 620.0
@@ -206,17 +239,16 @@ mouse_filter = 2
 texture = ExtResource("14_yyt2w")
 flip_v = true
 
-[node name="WaterRect" type="ColorRect" parent="MenuLayer/MenuControl/TitleBackground"]
-z_index = -1
+[node name="WaterRect" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 252.0
+offset_top = 290.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.2, 0.533333, 0.870588, 0.882353)
+texture = SubResource("GradientTexture2D_lr8m4")
 
 [node name="Music" type="Node" parent="."]
 script = ExtResource("10_mudwi")
