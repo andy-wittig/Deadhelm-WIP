@@ -13,7 +13,7 @@ var current_menu := menu.MAIN
 
 @onready var menu_scenes = {
 	"main_menu" : $MenuControl/MenuContainer,
-	"title_background" : $TitleBackground,
+	"title_background" : $MenuControl/TitleBackground,
 	"settings_menu" : $MenuControl/settings_menu,
 	"multiplayer_menu" : $MenuControl/multiplayer_menu,
 	"credits_menu" : $MenuControl/credits_menu,

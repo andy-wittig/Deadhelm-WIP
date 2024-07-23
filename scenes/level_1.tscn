@@ -19,11 +19,11 @@
 [ext_resource type="PackedScene" uid="uid://bevvq8dlvdjip" path="res://scenes/level_objects/stalactite.tscn" id="18_b6k5u"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="18_t0yfv"]
 
-[sub_resource type="Gradient" id="Gradient_so2so"]
+[sub_resource type="Gradient" id="Gradient_n6nku"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_a24ds"]
-gradient = SubResource("Gradient_so2so")
+gradient = SubResource("Gradient_n6nku")
 fill_to = Vector2(0, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m4elw"]

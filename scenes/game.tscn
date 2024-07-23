@@ -1,10 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=28 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
-[ext_resource type="Texture2D" uid="uid://b213dlq1guphc" path="res://assets/sprites/UI/title_ui.png" id="3_i7ejn"]
+[ext_resource type="Texture2D" uid="uid://370vg8cxmgmw" path="res://assets/sprites/UI/title_ui.png" id="3_i7ejn"]
 [ext_resource type="PackedScene" uid="uid://n15lqsti4eaq" path="res://scenes/menus/multiplayer_chat.tscn" id="3_urre7"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_1urpk"]
+[ext_resource type="Shader" path="res://shaders/sway.gdshader" id="4_7fi5r"]
+[ext_resource type="Shader" path="res://shaders/distort.gdshader" id="4_mlfnw"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
 [ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/menus/settings_menu.tscn" id="6_hxbga"]
 [ext_resource type="PackedScene" uid="uid://dsmtbe5hbqsrc" path="res://scenes/menus/multiplayer_menu.tscn" id="7_hkw8y"]
@@ -12,10 +14,40 @@
 [ext_resource type="AudioStream" uid="uid://b5ycopyaj1oif" path="res://assets/music/title_screen.mp3" id="8_fyhhs"]
 [ext_resource type="PackedScene" uid="uid://bqgd6hcfgc75y" path="res://scenes/menus/credits_menu.tscn" id="9_0w2qv"]
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
-[ext_resource type="Texture2D" uid="uid://c3yxki7yyql4v" path="res://assets/sprites/UI/title_background.png" id="11_a6y1t"]
 [ext_resource type="PackedScene" uid="uid://b0378gpwb8g1x" path="res://scenes/menus/gameover_menu.tscn" id="11_bodm6"]
+[ext_resource type="Texture2D" uid="uid://dm11bfh1qcc23" path="res://assets/sprites/UI/title_background_sky.png" id="13_1o8hw"]
 [ext_resource type="AudioStream" uid="uid://b30b5kxyjyc4y" path="res://assets/music/level_track_1.mp3" id="14_ya6b7"]
+[ext_resource type="Texture2D" uid="uid://fgw4c7gfxo7e" path="res://assets/sprites/UI/title_background_mountains.png" id="14_yyt2w"]
 [ext_resource type="AudioStream" uid="uid://7qnkk0o4yblj" path="res://assets/music/level_track_2.mp3" id="15_3d256"]
+[ext_resource type="Texture2D" uid="uid://bn661yg7bx1x8" path="res://assets/sprites/UI/title_background_shorline.png" id="15_s3i31"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgunp"]
+shader = ExtResource("4_7fi5r")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i7rq8"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_elora"]
+noise = SubResource("FastNoiseLite_i7rq8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jb632"]
+shader = ExtResource("4_mlfnw")
+shader_parameter/speed = 0.05
+shader_parameter/strength = 0.005
+shader_parameter/noise = SubResource("NoiseTexture2D_elora")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b3gn5"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2rdnd"]
+seamless = true
+noise = SubResource("FastNoiseLite_b3gn5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_da0k7"]
+shader = ExtResource("4_mlfnw")
+shader_parameter/speed = 0.05
+shader_parameter/strength = 0.005
+shader_parameter/noise = SubResource("NoiseTexture2D_2rdnd")
 
 [node name="game" type="Node"]
 script = ExtResource("1_yvbvk")
@@ -48,15 +80,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -192.0
-offset_top = -128.0
-offset_right = 192.0
-offset_bottom = 128.0
+offset_left = -256.0
+offset_top = -144.0
+offset_right = 256.0
+offset_bottom = 144.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
 
 [node name="TextureRect" type="TextureRect" parent="MenuLayer/MenuControl/MenuContainer"]
+material = SubResource("ShaderMaterial_mgunp")
 layout_mode = 2
 texture = ExtResource("3_i7ejn")
 expand_mode = 5
@@ -133,12 +166,57 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
-[node name="TitleBackground" type="TextureRect" parent="MenuLayer"]
+[node name="TitleBackground" type="Control" parent="MenuLayer/MenuControl"]
 z_index = -100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Sky" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 offset_right = 1600.0
 offset_bottom = 900.0
 mouse_filter = 2
-texture = ExtResource("11_a6y1t")
+texture = ExtResource("13_1o8hw")
+
+[node name="Mountains" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = 1
+offset_right = 1600.0
+offset_bottom = 900.0
+mouse_filter = 2
+texture = ExtResource("14_yyt2w")
+
+[node name="Shorline" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+material = SubResource("ShaderMaterial_jb632")
+offset_right = 1600.0
+offset_bottom = 900.0
+mouse_filter = 2
+texture = ExtResource("15_s3i31")
+
+[node name="SkylineReflection" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = -2
+material = SubResource("ShaderMaterial_da0k7")
+offset_top = -280.0
+offset_right = 1600.0
+offset_bottom = 620.0
+mouse_filter = 2
+texture = ExtResource("14_yyt2w")
+flip_v = true
+
+[node name="WaterRect" type="ColorRect" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.2, 0.533333, 0.870588, 0.882353)
 
 [node name="Music" type="Node" parent="."]
 script = ExtResource("10_mudwi")
