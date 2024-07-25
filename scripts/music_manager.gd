@@ -16,6 +16,7 @@ func _process(delta):
 					stop_music()
 					level_track_2.play()
 	elif (not title_track.playing):
+		stop_music()
 		title_track.play()
 		
 func stop_music():
