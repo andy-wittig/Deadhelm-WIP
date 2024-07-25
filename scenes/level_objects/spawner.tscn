@@ -99,7 +99,6 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.500835), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="spawner" type="Area2D"]
-collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_o47cc")
 

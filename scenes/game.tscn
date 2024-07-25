@@ -70,9 +70,6 @@ spawn_limit = 1
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 script = ExtResource("2_th4ch")
 
-[node name="multiplayer_chat" parent="MenuLayer" instance=ExtResource("3_urre7")]
-visible = false
-
 [node name="MenuControl" type="Control" parent="MenuLayer"]
 layout_mode = 3
 anchors_preset = 15
@@ -80,6 +77,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="MenuContainer" type="VBoxContainer" parent="MenuLayer/MenuControl"]
 layout_mode = 1
@@ -88,9 +86,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
+offset_left = -192.0
 offset_top = -90.0
-offset_right = 256.0
+offset_right = 192.0
 offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -131,6 +129,10 @@ size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 24
 text = "quit game"
+
+[node name="multiplayer_chat" parent="MenuLayer/MenuControl" instance=ExtResource("3_urre7")]
+visible = false
+layout_mode = 1
 
 [node name="settings_menu" parent="MenuLayer/MenuControl" instance=ExtResource("6_hxbga")]
 visible = false

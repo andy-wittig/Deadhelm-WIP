@@ -1,19 +1,19 @@
 extends Node2D
 
 var player = null
-var can_interact = false
 var souls_input = 0
+var can_interact := true
+
 @export var soul_cost = 10
-@export var spell_type = "meteor"
+@export var spell_type: String
+
 @onready var soul_label = $SoulLabel
 @onready var shrine_chime_audio = $ShrineChimeAudio
+@onready var detect_player = $DetectPlayer
+@onready var sprite = $ShrineSprite
 
 @rpc("any_peer", "call_local")
 func spawn_tome():
-	$ShrineSprite.material.set_shader_parameter("enabled", false)
-	soul_label.visible = false
-	can_interact = false
-		
 	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
 	tome.spell_type = spell_type
 	tome.position = Vector2(position.x, position.y - 16)
@@ -24,45 +24,49 @@ func _ready():
 	
 func _process(delta):
 	soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls"
+	sprite.material.set_shader_parameter("enabled", false)
+	soul_label.visible = false
 	
-	if (souls_input >= soul_cost):
-		if (can_interact):
-			if Input.is_action_just_pressed("pickup"):
-				souls_input = 0
-				if (multiplayer.is_server()):
-					rpc("spawn_tome")
-				elif (!GameManager.multiplayer_mode_enabled):
-					spawn_tome()
-	
-	if (can_interact):
-		if Input.is_action_just_pressed("pickup"):
-			can_interact = false
-			collect_soul()
+	for body in detect_player.get_overlapping_bodies():
+		if (body.is_in_group("players") && can_interact):
+			if (!GameManager.multiplayer_mode_enabled ||
+			body.player_id == multiplayer.get_unique_id()):
+				sprite.material.set_shader_parameter("enabled", true)
+				soul_label.visible = true
+				if (Input.is_action_just_pressed("pickup")):
+					if (souls_input >= soul_cost):
+						can_interact = false
+						$BuyTimer.start()
+						souls_input = 0
+						if (multiplayer.is_server()):
+							rpc("spawn_tome")
+						elif (!GameManager.multiplayer_mode_enabled):
+							spawn_tome()
+					else:
+						collect_soul(body)
 
-func _on_input_event(viewport, event, shape_idx):
-	if (Input.is_action_just_pressed("left_click")):
-		if (can_interact):
-			can_interact = false
-			collect_soul()
+func _on_input_event(viewport, event, shape_idx):	
+	for body in detect_player.get_overlapping_bodies():
+		if (body.is_in_group("players") && can_interact):
+			if (!GameManager.multiplayer_mode_enabled ||
+			body.player_id == multiplayer.get_unique_id()):
+				if (Input.is_action_just_pressed("left_click")):
+					if (souls_input >= soul_cost):
+						souls_input = 0
+						can_interact = false
+						$BuyTimer.start()
+						if (multiplayer.is_server()):
+							rpc("spawn_tome")
+						elif (!GameManager.multiplayer_mode_enabled):
+							spawn_tome()
+					else:
+						collect_soul(body)
 
-func _on_detect_player_body_entered(body):
-	if (body.get_parent().get_name() == "players"):
-		if (body.get_name() == "player"
-		|| body.player_id == multiplayer.get_unique_id()):
-			player = body
-			$ShrineSprite.material.set_shader_parameter("enabled", true)
-			soul_label.visible = true
-			can_interact = true
-
-func _on_detect_player_body_exited(body):
-	if (body == player):
-		player = null
-		$ShrineSprite.material.set_shader_parameter("enabled", false)
-		soul_label.visible = false
-		can_interact = false
-		
-func collect_soul():
-	if (player.souls_collected > 0):
-		player.souls_collected -= 1
+func collect_soul(body):
+	if (body.souls_collected > 0):
+		body.souls_collected -= 1
 		souls_input += 1
 		shrine_chime_audio.play()
+
+func _on_buy_timer_timeout():
+	can_interact = true
