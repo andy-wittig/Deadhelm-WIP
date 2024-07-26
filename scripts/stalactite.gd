@@ -45,3 +45,10 @@ func _on_fall_timer_timeout():
 func _on_wait_timer_timeout():
 	animation_player.play("RESET")
 	can_fall = true
+	
+@rpc("call_local")
+func destroy_self():
+	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()
+	explosion.position = position
+	get_parent().add_child(explosion)
+	queue_free()

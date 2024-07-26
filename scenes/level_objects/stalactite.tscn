@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bevvq8dlvdjip"]
+[gd_scene load_steps=12 format=3 uid="uid://bevvq8dlvdjip"]
 
 [ext_resource type="Texture2D" uid="uid://flm0ssvuccmi" path="res://assets/sprites/level_objects/stalactite.png" id="1_kttog"]
 [ext_resource type="Script" path="res://scripts/stalactite.gd" id="1_nmj2m"]
@@ -8,6 +8,9 @@
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ngn05"]
+radius = 4.0
 
 [sub_resource type="Animation" id="Animation_ovc7j"]
 length = 0.001
@@ -83,12 +86,17 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_sg3fj"]
 colors = PackedColorArray(0.301961, 0.207843, 0.2, 1, 0.54902, 0.470588, 0.647059, 0)
 
-[node name="stalactite" type="Node2D"]
+[node name="stalactite" type="Area2D" groups=["enemy_projectile"]]
 z_index = 6
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_nmj2m")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." groups=["enemy_projectile"]]
 replication_config = SubResource("SceneReplicationConfig_ucilh")
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ngn05")
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("2_nqyc6")]
 scale = Vector2(0.5, 0.5)

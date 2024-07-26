@@ -1348,7 +1348,7 @@ soul_cost = 6
 z_index = -1
 position = Vector2(176, -320)
 soul_cost = 0
-spell_type = "flame"
+spell_type = "shield"
 
 [node name="leaping mushroom" parent="game objects" instance=ExtResource("11_lwg2q")]
 position = Vector2(432, -352)
