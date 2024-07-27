@@ -3,6 +3,7 @@ extends Area2D
 var direction = Vector2(-1.0,0.0)
 const SPEED = 20.0
 const ATTRACTION_SPEED = 120.0
+const BLACKHOLE_KNOCK_BACK := 125
 
 @onready var hurt_area = $HurtArea
 
@@ -22,9 +23,9 @@ func _on_destroy_timer_timeout():
 
 func _on_body_entered(body):
 	if (body.is_in_group("players")):
-		if (multiplayer.is_server()):
-			body.hurt_player.rpc_id(body.player_id, 20, global_position.x)
-			rpc("destroy_self")
-		elif (!GameManager.multiplayer_mode_enabled):
-			body.hurt_player(20, global_position.x)
+		if (!GameManager.multiplayer_mode_enabled):
+			body.hurt_player(20, global_position, BLACKHOLE_KNOCK_BACK)
 			destroy_self()
+		elif (multiplayer.is_server()):
+			body.hurt_player.rpc_id(body.player_id, 20, global_position, BLACKHOLE_KNOCK_BACK)
+			rpc("destroy_self")

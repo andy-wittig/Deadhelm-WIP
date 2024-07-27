@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/desecrater_blackhole.gd" id="1_3ktav"]
 [ext_resource type="Texture2D" uid="uid://bjemmo2ns8q7n" path="res://assets/sprites/enemies/projectiles/desecrater blackhole.png" id="1_w0i00"]
-[ext_resource type="Shader" path="res://shaders/screen_distort.gdshader" id="4_7sdn5"]
+[ext_resource type="Shader" path="res://shaders/screen_distort.gdshader" id="3_0ww3p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ahte"]
 radius = 6.0
@@ -77,7 +77,7 @@ width = 512
 curve = SubResource("Curve_0mcbe")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_al01l"]
-shader = ExtResource("4_7sdn5")
+shader = ExtResource("3_0ww3p")
 shader_parameter/curve = SubResource("CurveTexture_cidrv")
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ss3j0"]

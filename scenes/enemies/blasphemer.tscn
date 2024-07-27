@@ -74,6 +74,7 @@ _data = {
 }
 
 [node name="blasphemer" type="Node2D"]
+z_index = 1
 script = ExtResource("1_ir5ew")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
