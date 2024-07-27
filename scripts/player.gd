@@ -31,6 +31,8 @@ var spell_instance = null
 #Sprite Paths
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
+const DEAD_HEART_UI = preload("res://assets/sprites/UI/player_information/dead_heart_ui.png")
+const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart_ui.png")
 #UI Paths
 @onready var inventory = {
 	"slot_1" : $hud/Control/GridContainer/Slots/ItemSlot1.get_node("Item"),
@@ -62,14 +64,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func get_player_info():
 	var save_dict = {
-		"filename" : get_scene_file_path(),
 		"player_health" : player_health,
 		"player_lives" : player_lives,
-		"souls" : souls_collected,
-		"coins" : coins_collected,
-		"slot_1" : inventory[0].get_slot_item(),
-		"slot_2" : inventory[1].get_slot_item(),
-		"slot_3" : inventory[2].get_slot_item(),
+		"souls_collected" : souls_collected,
+		"coins_collected" : coins_collected,
+		"slot_1" : inventory["slot_1"].get_slot_item(),
+		"slot_2" : inventory["slot_2"].get_slot_item(),
+		"slot_3" : inventory["slot_3"].get_slot_item(),
 	}
 	return save_dict
 	
@@ -78,6 +79,31 @@ func save_player_info():
 	var player_data = get_player_info()
 	var json_string = JSON.stringify(player_data)
 	player_info_file.store_line(json_string)
+	
+func load_player_info():
+	if not FileAccess.file_exists("user://player_info.save"):
+		return
+		
+	var player_info_file = FileAccess.open("user://player_info.save", FileAccess.READ)
+	while player_info_file.get_position() < player_info_file.get_length():
+		var json_string = player_info_file.get_line()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		var player_data = json.get_data()
+		
+		inventory["slot_1"].set_slot_item(player_data["slot_1"])
+		inventory["slot_2"].set_slot_item(player_data["slot_2"])
+		inventory["slot_3"].set_slot_item(player_data["slot_3"])
+		
+		for data in player_data.keys():
+			if(data == "slot_1" || data == "slot_2" || data == "slot_3"):
+				continue
+			set(data, player_data[data])
 
 func _on_attack_cooldown_timer_timeout():
 	attack_cooldown = false
@@ -91,27 +117,34 @@ func drop_inventory_item(spell_type, pos):
 	
 func _ready():
 	$Camera2D.reset_smoothing()
+	load_player_info()
 	currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
 	currently_selected_slot.currently_selected = true
 	
 func _process(delta):
+	for i in range(hearts.size()):
+		if (i + 1 > player_lives):
+			hearts[i].texture = DEAD_HEART_UI
+		else:
+			hearts[i].texture = ALIVE_HEART_UI
+			
 	healthbar_label.text = str(player_health) + "/100"
 	healthbar.value = player_health
 	soul_label.text = str(souls_collected)
 	money_label.text = "$" + str(coins_collected)
 	
 	#Handle player death
+	if (player_lives <= 0):
+		disable_player()
+		var menu_control = get_tree().get_root().get_node("game/MenuLayer")
+		menu_control.current_menu = menu_control.menu.GAMEOVER
+				
 	if (player_health <= 0 && player_lives > 0):
 		if (!marked_dead):
 			player_lives -= 1
-			hearts[player_lives].texture = load("res://assets/sprites/UI/player_information/dead_heart_ui.png")
 			souls_collected = 0
 			player_health = HEALTH
 			global_position = get_parent().global_position
-			if (player_lives <= 0):
-				disable_player()
-				var menu_control = get_tree().get_root().get_node("game/MenuLayer")
-				menu_control.current_menu = menu_control.menu.GAMEOVER
 	
 	#Set Spell Marker Position
 	var mouse_pos = get_global_mouse_position()

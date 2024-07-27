@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="16_krdr2"]
 
 [sub_resource type="Gradient" id="Gradient_so2so"]
-colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
+colors = PackedColorArray(0.913725, 0.521569, 0.215686, 1, 0.968627, 0.952941, 0.717647, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_a24ds"]
 gradient = SubResource("Gradient_so2so")

@@ -34,7 +34,7 @@ func _process(delta):
 					if (not portal_activated && souls_input < soul_cost):
 						use_soul(body)
 					elif (portal_activated):
-						enter_portal()
+						enter_portal(body)
 
 func _on_input_event(viewport, event, shape_idx):
 	for body in get_overlapping_bodies():
@@ -45,7 +45,7 @@ func _on_input_event(viewport, event, shape_idx):
 					if (not portal_activated && souls_input < soul_cost):
 						use_soul(body)
 					elif (portal_activated):
-						enter_portal()
+						enter_portal(body)
 		
 func use_soul(player):
 	if (player.souls_collected > 0):
@@ -56,7 +56,8 @@ func use_soul(player):
 			rpc("add_soul")
 		shrine_chime_audio.play()
 		
-func enter_portal():
+func enter_portal(body):
+	body.save_player_info()
 	get_tree().get_root().get_node("game").change_level(next_level)
 		
 @rpc("call_local", "any_peer")

@@ -49,6 +49,7 @@ func start_game():
 	$MenuLayer.current_menu = $MenuLayer.menu.HIDDEN
 	GameManager.started_game = true
 	if (!GameManager.multiplayer_mode_enabled || multiplayer.is_server()):
+		FileAccess.open("user://player_info.save", FileAccess.WRITE)
 		change_level.call_deferred(load("res://scenes/level_1.tscn"))
 	
 func change_level(scene: PackedScene):
