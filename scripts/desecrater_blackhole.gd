@@ -1,7 +1,7 @@
 extends Area2D
 
 var direction = Vector2(-1.0,0.0)
-const SPEED = 20.0
+const SPEED = 28.0
 const ATTRACTION_SPEED = 120.0
 const BLACKHOLE_KNOCK_BACK := 125
 

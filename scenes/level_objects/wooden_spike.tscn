@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct1vd1qwksnqo"]
+
+[ext_resource type="Texture2D" uid="uid://cnmwscx5wsamy" path="res://assets/sprites/level_objects/wooden_spike.png" id="1_mt1sa"]
+[ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="2_dpyq2"]
+
+[node name="wooden_spike" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_mt1sa")
+
+[node name="HurtPlayerArea" parent="." instance=ExtResource("2_dpyq2")]
+position = Vector2(0, -3)
+scale = Vector2(0.6, 0.4)
+damage = 10

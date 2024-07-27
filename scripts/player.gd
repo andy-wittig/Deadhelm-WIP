@@ -60,6 +60,25 @@ var spell_instance = null
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func get_player_info():
+	var save_dict = {
+		"filename" : get_scene_file_path(),
+		"player_health" : player_health,
+		"player_lives" : player_lives,
+		"souls" : souls_collected,
+		"coins" : coins_collected,
+		"slot_1" : inventory[0].get_slot_item(),
+		"slot_2" : inventory[1].get_slot_item(),
+		"slot_3" : inventory[2].get_slot_item(),
+	}
+	return save_dict
+	
+func save_player_info():
+	var player_info_file = FileAccess.open("user://player_info.save", FileAccess.WRITE)
+	var player_data = get_player_info()
+	var json_string = JSON.stringify(player_data)
+	player_info_file.store_line(json_string)
+
 func _on_attack_cooldown_timer_timeout():
 	attack_cooldown = false
 	

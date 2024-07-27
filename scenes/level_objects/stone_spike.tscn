@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvgm67ftgfnlp"]
+
+[ext_resource type="Texture2D" uid="uid://dqsj7awmok7sf" path="res://assets/sprites/level_objects/stone_spike.png" id="1_haanx"]
+[ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="2_faeep"]
+
+[node name="stone_spike" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_haanx")
+
+[node name="HurtPlayerArea" parent="." instance=ExtResource("2_faeep")]
+position = Vector2(0, -3)
+scale = Vector2(0.6, 0.4)
+damage = 15
