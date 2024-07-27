@@ -1,9 +1,9 @@
 extends CharacterBody2D
 #Constants
-const SPEED = 25.0
+const SPEED = 28.0
 const JUMP_VELOCITY = -180.0
 const KNOCK_BACK_SPEED := 75.0
-const DETONATE_TIME := 2
+const DETONATE_TIME := 1.0
 const ROAM_CHANGE_WAIT := 6
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
@@ -100,7 +100,7 @@ func _physics_process(delta):
 			animated_sprite.play("run")
 			
 			if ((multiplayer.is_server() || !GameManager.multiplayer_mode_enabled) && player != null):
-				if player.global_position.distance_to(global_position) > 16:
+				if player.global_position.distance_to(global_position) > 24:
 					if abs(player.global_position.x - global_position.x) > 8:
 						if (player.global_position.x > global_position.x):
 							direction = 1
@@ -156,7 +156,7 @@ func _on_attack_timer_timeout():
 			create_spikes()
 		audio_player.play()
 		bombshell_detonated = true
-		%CooldownTimer.start(10)
+		%CooldownTimer.start(4)
 		state = state_type.MOVING
 
 @rpc("call_local")
