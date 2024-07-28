@@ -22,7 +22,7 @@ offset_bottom = -675.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="GridContainer" type="GridContainer" parent="Control"]
 layout_mode = 1
