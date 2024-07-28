@@ -1328,16 +1328,18 @@ position = Vector2(712, -144)
 [node name="wooden_spike3" parent="game objects/hurt zones" instance=ExtResource("10_fqrk3")]
 position = Vector2(728, -144)
 
-[node name="spawner1" parent="game objects" instance=ExtResource("14_mv4c4")]
+[node name="spawner1" parent="game objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("14_mv4c4")]
 position = Vector2(760, -792)
 spawn_enemy_type = ExtResource("6_b6eee")
+tile_map = NodePath("../../TileMap")
 spawn_range = 128
 spawn_wait = 1.0
 spawn_enemy_limit = 2
 
-[node name="spawner2" parent="game objects" instance=ExtResource("14_mv4c4")]
+[node name="spawner2" parent="game objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("14_mv4c4")]
 position = Vector2(344, -152)
 spawn_enemy_type = ExtResource("7_wu2l5")
+tile_map = NodePath("../../TileMap")
 spawn_range = 64
 spawn_wait = 1.0
 spawn_enemy_limit = 2

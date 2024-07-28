@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var spawn_enemy_type: PackedScene
+@export var tile_map: TileMap
 @export var spawn_range: int
 @export var spawn_wait: float
 @export var spawn_enemy_limit: int
@@ -13,7 +14,6 @@ var random = RandomNumberGenerator.new()
 @onready var detect_player = $DetectPlayerCollider
 @onready var spawn_timer = $SpawnWaitTimer
 @onready var summon_label = $SummonLabel
-@onready var tile_map = $"../../TileMap"
 @onready var spawn_sound = $SpawnSound
 
 func _process(delta):

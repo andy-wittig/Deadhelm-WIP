@@ -1,11 +1,13 @@
 extends CharacterBody2D
 
 #Physics Constants
-const SPEED = 75.0
-const CLIMB_SPEED = 60.0
-const JUMP_VELOCITY = -250.0
+const SPEED := 75.0
+const CLIMB_SPEED := 60.0
+const JUMP_VELOCITY := -250.0
+const COYOTE_TIME := 0.15
+const JUMP_BUFFER := 0.1
 const KNOCK_BACK_FALLOFF := 60.0
-const DIAL_RADIUS = 22
+const DIAL_RADIUS := 22
 const HEALTH := 100
 #Physics Variables
 var grounded: bool
@@ -14,19 +16,21 @@ var knock_back: Vector2
 var player_health := 100
 var player_lives := 3
 var marked_dead := false
-var souls_collected = 0
-var coins_collected = 0
+var souls_collected := 0
+var coins_collected := 0
 #Player Mechanics Variables
 var dial_instance = null
-var dial_created = false
-var attack_cooldown = false
+var dial_created := false
+var attack_cooldown := false
 enum state_type {MOVING, CLIMBING}
 var state := state_type.MOVING
 var spell_direction: Vector2
 #Player Inventory Variables
-var selected_slot_pos = 0
+var selected_slot_pos := 0
 var currently_selected_slot = null
 var spell_instance = null
+var coyote_time_counter: float
+var jump_buffer_time: float
 
 #Sprite Paths
 @onready var animated_sprite = $AnimatedSprite2D
@@ -211,13 +215,25 @@ func _physics_process(delta):
 	#simple state machine
 	match state:
 		state_type.MOVING:
-			#handle gravity
-			if not is_on_floor():
+			#handle gravity and jumping
+			if is_on_floor():
+				coyote_time_counter = COYOTE_TIME
+			else:
 				velocity.y += gravity * delta
+				coyote_time_counter -= delta
 				
-			#jumping
-			if Input.is_action_just_pressed("jump") and is_on_floor():
+			if (Input.is_action_just_pressed("jump")):
+				jump_buffer_time = JUMP_BUFFER
+			else:
+				jump_buffer_time -= delta
+				
+			if (jump_buffer_time > 0 && coyote_time_counter > 0):
 				velocity.y = JUMP_VELOCITY
+				jump_buffer_time = 0
+			
+			if (Input.is_action_just_released("jump") && velocity.y < 0): #jump height control
+				velocity.y *= 0.5
+				coyote_time_counter = 0
 		state_type.CLIMBING:
 			velocity.y = 0
 			if (Input.is_action_pressed("move_up")):
