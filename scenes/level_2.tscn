@@ -1194,6 +1194,21 @@ _data = {
 "move": SubResource("Animation_4kbtw")
 }
 
+[sub_resource type="Animation" id="Animation_siihv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1080, -360)]
+}
+
 [sub_resource type="Animation" id="Animation_f3rak"]
 resource_name = "move"
 length = 2.0
@@ -1209,21 +1224,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1080, -360), Vector2(1112, -360)]
-}
-
-[sub_resource type="Animation" id="Animation_siihv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1080, -360)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t8n3j"]
@@ -1486,7 +1486,7 @@ coin_amount = 12
 
 [node name="chest4" parent="." instance=ExtResource("7_2morc")]
 position = Vector2(864, -416)
-coin_amount = 2
+coin_amount = 6
 
 [node name="offering shrine" parent="." instance=ExtResource("14_awo10")]
 position = Vector2(568, -48)

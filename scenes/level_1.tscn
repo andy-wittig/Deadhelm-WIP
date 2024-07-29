@@ -1342,11 +1342,12 @@ spawn_enemy_type = ExtResource("7_wu2l5")
 tile_map = NodePath("../../TileMap")
 spawn_range = 5
 spawn_wait = 1.0
-spawn_enemy_limit = 2
+spawn_enemy_limit = 3
 
 [node name="offering shrine" parent="game objects" instance=ExtResource("15_by2nq")]
 z_index = -1
 position = Vector2(720, -336)
+soul_cost = 6
 spell_type = "shield"
 
 [node name="offering shrine3" parent="game objects" instance=ExtResource("15_by2nq")]

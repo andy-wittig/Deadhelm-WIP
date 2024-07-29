@@ -1,14 +1,15 @@
 extends Area2D
 
-enum state_type {
-	MOVING,
-	CLIMBING
-}
-
-func _on_body_entered(body):
-	if (body.is_in_group("players")):
-		body.state = state_type.CLIMBING
+func _process(delta):
+	for body in get_overlapping_bodies():
+		if (body.is_in_group("players")):
+			if (!GameManager.multiplayer_mode_enabled ||
+			body.player_id == multiplayer.get_unique_id()):
+				if (Input.is_action_just_pressed("move_up") || Input.is_action_just_pressed("move_down")):
+					body.state = body.state_type.CLIMBING
 
 func _on_body_exited(body):
 	if (body.is_in_group("players")):
-		body.state = state_type.MOVING
+		if (!GameManager.multiplayer_mode_enabled ||
+		body.player_id == multiplayer.get_unique_id()):
+			body.state = body.state_type.MOVING
