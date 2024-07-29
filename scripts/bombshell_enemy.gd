@@ -55,7 +55,7 @@ func _process(_delta):
 		#player left detection radius
 		player = null
 		chasing_player = false
-		animation_player.play("RESET")
+		#animation_player.play("RESET")
 		state = state_type.MOVING
 
 func _physics_process(delta):

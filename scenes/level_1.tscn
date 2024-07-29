@@ -1332,7 +1332,7 @@ position = Vector2(728, -144)
 position = Vector2(760, -792)
 spawn_enemy_type = ExtResource("6_b6eee")
 tile_map = NodePath("../../TileMap")
-spawn_range = 128
+spawn_range = 6
 spawn_wait = 1.0
 spawn_enemy_limit = 2
 
@@ -1340,7 +1340,7 @@ spawn_enemy_limit = 2
 position = Vector2(344, -152)
 spawn_enemy_type = ExtResource("7_wu2l5")
 tile_map = NodePath("../../TileMap")
-spawn_range = 64
+spawn_range = 5
 spawn_wait = 1.0
 spawn_enemy_limit = 2
 

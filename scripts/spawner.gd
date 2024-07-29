@@ -46,14 +46,13 @@ func spawn_enemy(spawn_position):
 	spawn_sound.play()
 	
 func check_enemy_spawnable():
-	var rand_x_pos = global_position.x + random.randi_range(-spawn_range, spawn_range)
-	var rand_y_pos = global_position.y - random.randi_range(0, spawn_range)
+	var rand_x_pos = global_position.x + random.randi_range(-spawn_range, spawn_range) * 16
+	var rand_y_pos = global_position.y - random.randi_range(0, spawn_range) * 16
 	var test_tile: TileData
 	for layer in range(tile_map.get_layers_count()):
 		test_tile = tile_map.get_cell_tile_data(layer, tile_map.local_to_map(Vector2(rand_x_pos, rand_y_pos)))
 		if (test_tile != null):
 			if (test_tile.get_custom_data("spawnable_tile") == false):
-				print ("hey")
 				check_enemy_spawnable()
 				return
 	if (!GameManager.multiplayer_mode_enabled):
