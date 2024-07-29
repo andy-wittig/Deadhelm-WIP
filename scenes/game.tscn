@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=32 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://fgw4c7gfxo7e" path="res://assets/sprites/UI/title_background_mountains.png" id="14_yyt2w"]
 [ext_resource type="AudioStream" uid="uid://7qnkk0o4yblj" path="res://assets/music/level_track_2.mp3" id="15_3d256"]
 [ext_resource type="Texture2D" uid="uid://bn661yg7bx1x8" path="res://assets/sprites/UI/title_background_shorline.png" id="15_s3i31"]
+[ext_resource type="AudioStream" uid="uid://b4g28fossdvo1" path="res://assets/music/level_track_3.mp3" id="22_xbve0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgunp"]
 shader = ExtResource("4_7fi5r")
@@ -269,6 +270,10 @@ bus = &"Music"
 stream = ExtResource("15_3d256")
 volume_db = -25.0
 bus = &"Music"
+
+[node name="LevelTrack3" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("22_xbve0")
+volume_db = -25.0
 
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer" method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/multiplayerButton" to="MenuLayer" method="_on_multiplayer_button_pressed"]

@@ -222,8 +222,9 @@ editor_draw_limits = true
 material = SubResource("ShaderMaterial_0v5y2")
 position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_2q11b")
-animation = &"climb"
+animation = &"jump"
 autoplay = "idle"
+frame_progress = 0.950153
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
