@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://c0pspuwwhnp34"]
 
-[ext_resource type="Script" path="res://scripts/soul.gd" id="1_3kxyh"]
-[ext_resource type="Texture2D" uid="uid://bb4qlq8vn0ue2" path="res://assets/sprites/level_objects/soul.png" id="1_lenky"]
+[ext_resource type="Script" path="res://scripts/soul.gd" id="1_3oxgu"]
+[ext_resource type="Texture2D" uid="uid://bb4qlq8vn0ue2" path="res://assets/sprites/level_objects/diamond_soul.png" id="1_lenky"]
 [ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="2_0gobi"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_17l2i"]
@@ -9,14 +9,17 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ow4j7"]
+radius = 5.00018
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28x2n"]
 resource_local_to_scene = true
 shader = ExtResource("2_0gobi")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = false
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ow4j7"]
-radius = 5.00018
+[sub_resource type="CircleShape2D" id="CircleShape2D_sf2hl"]
+radius = 14.0001
 
 [sub_resource type="Gradient" id="Gradient_td52r"]
 offsets = PackedFloat32Array(0, 0.660606)
@@ -34,11 +37,8 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.500835), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_y0pg8"]
-offsets = PackedFloat32Array(0, 0.372197, 0.609865, 1)
-colors = PackedColorArray(0.427451, 0.917647, 0.839216, 0, 1, 1, 1, 0.588235, 0.427451, 0.917647, 0.839216, 0.686275, 1, 1, 1, 0)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_sf2hl"]
-radius = 14.0001
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="soul" type="RigidBody2D"]
 z_index = 1
@@ -49,19 +49,26 @@ input_pickable = true
 mass = 0.2
 gravity_scale = 0.25
 lock_rotation = true
-script = ExtResource("1_3kxyh")
+script = ExtResource("1_3oxgu")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_17l2i")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0.588235)
-material = SubResource("ShaderMaterial_28x2n")
-texture = ExtResource("1_lenky")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ow4j7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_28x2n")
+texture = ExtResource("1_lenky")
+
+[node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="PickupShape" type="CollisionShape2D" parent="DetectPlayer"]
+shape = SubResource("CircleShape2D_sf2hl")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 shadow_color = Color(0.0987284, 0.0987284, 0.0987284, 0)
@@ -76,6 +83,7 @@ lifetime = 2.0
 speed_scale = 0.8
 explosiveness = 0.1
 lifetime_randomness = 0.2
+local_coords = true
 emission_shape = 1
 emission_sphere_radius = 4.0
 direction = Vector2(0, -1)
@@ -91,15 +99,6 @@ damping_max = 10.0
 scale_amount_min = 2.0
 scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_nc6iy")
-color = Color(0.427451, 0.917647, 0.839216, 1)
 color_ramp = SubResource("Gradient_y0pg8")
-
-[node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 2
-
-[node name="PickupShape" type="CollisionShape2D" parent="DetectPlayer"]
-shape = SubResource("CircleShape2D_sf2hl")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

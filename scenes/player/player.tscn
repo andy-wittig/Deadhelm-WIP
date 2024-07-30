@@ -220,7 +220,6 @@ limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
 script = ExtResource("2_m6nil")
-target = NodePath("..")
 noise = SubResource("FastNoiseLite_nnqmg")
 
 [node name="hud" parent="." instance=ExtResource("2_5bfwm")]

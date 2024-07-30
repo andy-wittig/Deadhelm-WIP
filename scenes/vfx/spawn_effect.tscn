@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpd1jst2iukvt"]
+
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_foi5p"]
+[ext_resource type="Texture2D" uid="uid://dljh1hru2q5md" path="res://assets/sprites/vfx/spawn_effect.png" id="2_nylw7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0qxuh"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_gc0f7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.505494), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_k36g8"]
+colors = PackedColorArray(1, 1, 1, 0.882353, 1, 1, 1, 0)
+
+[node name="spawn_effect" type="Node2D"]
+z_index = 5
+script = ExtResource("1_foi5p")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_0qxuh")
+amount = 1
+speed_scale = 0.6
+local_coords = true
+texture = ExtResource("2_nylw7")
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+damping_min = 12.0
+damping_max = 12.0
+scale_amount_curve = SubResource("Curve_gc0f7")
+color_ramp = SubResource("Gradient_k36g8")
+anim_speed_min = 2.0
+anim_speed_max = 2.0
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -58,6 +58,9 @@ func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 func destroy_self():
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	soul.position = position
+	soul.rarities["diamond"] = 60
+	soul.rarities["emerald"] = 30
+	soul.rarities["gold"] = 10
 	get_parent().add_child(soul)
 	
 	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()

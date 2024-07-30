@@ -191,6 +191,9 @@ func destroy_self():
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	var death_effect = load("res://scenes/vfx/bombshell_turtle_death.tscn").instantiate()
 	soul.position = position
+	soul.rarities["diamond"] = 70
+	soul.rarities["emerald"] = 25
+	soul.rarities["gold"] = 5
 	death_effect.position = position
 	get_parent().add_child(soul)
 	get_parent().add_child(death_effect)

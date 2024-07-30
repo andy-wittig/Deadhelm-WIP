@@ -1,6 +1,5 @@
 extends Camera2D
 
-@export var target: NodePath
 @export var noise : FastNoiseLite
 
 var decay := 0.9
@@ -21,8 +20,6 @@ func shake():
 	offset.y = max_offset.y * amount * noise.get_noise_2d(2000, noise_y)
 	
 func _process(delta):
-	if target:
-		global_position = get_node(target).global_position
 	if trauma:
 		trauma = max(trauma - decay * delta, 0)
 		shake()
