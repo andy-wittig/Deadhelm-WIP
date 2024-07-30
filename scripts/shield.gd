@@ -13,7 +13,6 @@ func _ready():
 	global_position = player.spell_spawn.global_position
 
 func _on_area_entered(area):
-	print ("shield collided!")
 	if (area.is_in_group("enemy_projectile")):
 		if (!GameManager.multiplayer_mode_enabled):
 			area.destroy_self()
