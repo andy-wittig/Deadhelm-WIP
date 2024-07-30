@@ -63,6 +63,7 @@ const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart
 @onready var player_collider = $PlayerCollider
 @onready var attack_cooldown_timer = $AttackCooldownTimer
 @onready var spell_spawn = $SpellSpawn
+@onready var camera = $Camera2D
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -287,6 +288,7 @@ func apply_knockback(other_pos: Vector2, force: float):
 func hurt_player(damage: int, other_pos: Vector2, force: float):
 	animation_player.play("player_hurt")
 	player_hurt_audio.play()
+	camera.add_trauma(0.8)
 	apply_knockback(other_pos, force)
 	
 	player_health -= damage
