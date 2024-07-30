@@ -288,7 +288,7 @@ func apply_knockback(other_pos: Vector2, force: float):
 func hurt_player(damage: int, other_pos: Vector2, force: float):
 	animation_player.play("player_hurt")
 	player_hurt_audio.play()
-	camera.add_trauma(0.8)
+	camera.add_trauma(0.6)
 	apply_knockback(other_pos, force)
 	
 	player_health -= damage
