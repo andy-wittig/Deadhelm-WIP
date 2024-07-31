@@ -71,7 +71,6 @@ func get_player_info():
 	var save_dict = {
 		"player_health" : player_health,
 		"player_lives" : player_lives,
-		"souls_collected" : souls_collected,
 		"coins_collected" : coins_collected,
 		"slot_1" : inventory["slot_1"].get_slot_item(),
 		"slot_2" : inventory["slot_2"].get_slot_item(),
@@ -147,7 +146,6 @@ func _process(delta):
 	if (player_health <= 0 && player_lives > 0):
 		if (!marked_dead):
 			player_lives -= 1
-			souls_collected = 0
 			player_health = HEALTH
 			global_position = get_parent().global_position
 	
@@ -160,7 +158,8 @@ func _process(delta):
 	#Handle Inventory Input
 	if (Input.is_action_just_pressed("scroll_up")):
 		selected_slot_pos += 1
-		selected_slot_pos = clamp(selected_slot_pos, 0 , inventory.size() - 1)
+		if (selected_slot_pos > inventory.size() - 1):
+			selected_slot_pos = 0
 		currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
 		for slot in inventory:
 			inventory[slot].currently_selected = false
@@ -168,7 +167,8 @@ func _process(delta):
 		
 	if (Input.is_action_just_pressed("scroll_down")):
 		selected_slot_pos -= 1
-		selected_slot_pos = clamp(selected_slot_pos, 0 , inventory.size() - 1)
+		if (selected_slot_pos < 0):
+			selected_slot_pos = inventory.size() - 1
 		currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
 		for slot in inventory:
 			inventory[slot].currently_selected = false
@@ -285,6 +285,18 @@ func apply_knockback(other_pos: Vector2, force: float):
 		var other_dir = (other_pos - global_position).normalized()
 		knock_back = -other_dir * force
 
+func heal_player(health: int):
+	animation_player.play("player_heal")
+	
+	player_health += health
+	if (player_health > 100): player_health = 100
+	
+	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
+	damage_indicator.damage_amount = health
+	damage_indicator.damage_indicator_color = "5ab552"
+	damage_indicator.position = global_position
+	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
+
 func hurt_player(damage: int, other_pos: Vector2, force: float):
 	animation_player.play("player_hurt")
 	player_hurt_audio.play()
@@ -296,6 +308,7 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	
 	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
 	damage_indicator.damage_amount = damage
+	damage_indicator.damage_indicator_color = "ec273f"
 	damage_indicator.position = global_position
 	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 	
