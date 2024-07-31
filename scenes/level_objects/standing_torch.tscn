@@ -1,0 +1,129 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2a7lhqqs0c0b"]
+
+[ext_resource type="Texture2D" uid="uid://j35vgeo1ssr4" path="res://assets/sprites/level_objects/standing_torch.png" id="1_3toh5"]
+
+[sub_resource type="Curve" id="Curve_01e4c"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.87251, 13.3556), -246.012, -246.012, 0, 0, Vector2(1, 52.4207), -462.205, -462.205, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_v5wen"]
+_data = [Vector2(0.00398406, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.651968), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ceqp5"]
+offsets = PackedFloat32Array(0.0852018, 0.538117, 0.843049, 0.995516)
+colors = PackedColorArray(0.909804, 0.823529, 0.509804, 1, 0.913725, 0.521569, 0.215686, 1, 0.92549, 0.152941, 0.247059, 1, 0.92549, 0.152941, 0.247059, 0)
+
+[sub_resource type="Gradient" id="Gradient_fa88u"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yndi0"]
+gradient = SubResource("Gradient_fa88u")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Animation" id="Animation_u31aj"]
+resource_name = "torch_flame"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.92549, 0.152941, 0.247059, 1), Color(0.913725, 0.521569, 0.215686, 1), Color(0.968627, 0.952941, 0.717647, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.8, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_x8o4i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.92549, 0.152941, 0.247059, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_502dh"]
+_data = {
+"RESET": SubResource("Animation_x8o4i"),
+"torch_flame": SubResource("Animation_u31aj")
+}
+
+[node name="standing_torch" type="Node2D"]
+
+[node name="TorchSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_3toh5")
+
+[node name="FireParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, -32)
+amount = 50
+lifetime = 0.3
+speed_scale = 0.4
+explosiveness = 0.02
+randomness = 0.1
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+gravity = Vector2(0, -980)
+orbit_velocity_min = -0.05
+orbit_velocity_max = 0.05
+radial_accel_min = -100.0
+radial_accel_curve = SubResource("Curve_01e4c")
+angle_min = -45.0
+angle_max = 45.0
+scale_amount_min = 1.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_v5wen")
+color_ramp = SubResource("Gradient_ceqp5")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -32)
+color = Color(0.92549, 0.152941, 0.247059, 1)
+texture = SubResource("GradientTexture2D_yndi0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_502dh")
+}
+autoplay = "torch_flame"

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://gc250e5gngb4"]
+
+[ext_resource type="Shader" path="res://shaders/sway.gdshader" id="1_cyquc"]
+[ext_resource type="Script" path="res://scripts/bulb_blossom.gd" id="1_jcmxc"]
+[ext_resource type="Texture2D" uid="uid://by8ar31h4eb5u" path="res://assets/sprites/level_objects/bulb_blossom.png" id="2_s48e0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q4ywm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yg4tq"]
+shader = ExtResource("1_cyquc")
+
+[sub_resource type="Gradient" id="Gradient_nv8wf"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_btfmg"]
+gradient = SubResource("Gradient_nv8wf")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[node name="bulb_blossom" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_jcmxc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_q4ywm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yg4tq")
+position = Vector2(0, -8)
+texture = ExtResource("2_s48e0")
+
+[node name="BulbLight" type="PointLight2D" parent="."]
+position = Vector2(0, -8)
+enabled = false
+color = Color(0.427451, 0.917647, 0.839216, 1)
+texture = SubResource("GradientTexture2D_btfmg")
+
+[node name="BulbTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="BulbTimer" to="." method="_on_bulb_timer_timeout"]

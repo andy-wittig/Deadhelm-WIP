@@ -274,6 +274,7 @@ bus = &"Music"
 [node name="LevelTrack3" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("22_xbve0")
 volume_db = -25.0
+bus = &"Music"
 
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer" method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/multiplayerButton" to="MenuLayer" method="_on_multiplayer_button_pressed"]
