@@ -4,8 +4,8 @@ const SPEED = 28.0
 const JUMP_VELOCITY = -180.0
 const KNOCK_BACK_FORCE := 75.0
 const ROAM_CHANGE_WAIT := 6
-const ATTACK_RADIUS := 16
-const ATTACK_WAIT := 4
+const ATTACK_RADIUS := 24
+const ATTACK_WAIT := 1
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
 var direction: int
@@ -13,8 +13,6 @@ var knock_back: Vector2
 #Attacking Variables
 var player = null
 var chasing_player = false
-var attack_timer_started = false
-var attacking = false
 #Enemy Mechanics Variables
 var enemy_health = 50
 var marked_for_death = false
@@ -57,7 +55,6 @@ func _process(_delta):
 	#player left detection radius
 	player = null
 	chasing_player = false
-	state = state_type.MOVING
 
 func _physics_process(delta):
 	#deal with enemy death
@@ -79,7 +76,6 @@ func _physics_process(delta):
 		state_type.IDLE:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 				animated_sprite.play("idle")
-				
 				velocity.x = 0
 		state_type.MOVING:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
@@ -92,17 +88,15 @@ func _physics_process(delta):
 					
 				velocity.x = direction * SPEED
 		state_type.CHASE:
-			animated_sprite.play("run")
-			
 			if ((multiplayer.is_server() || !GameManager.multiplayer_mode_enabled) && player != null):
-				if player.global_position.distance_to(global_position) > ATTACK_RADIUS:
+				if (player.global_position.x - global_position.x > 8):
+						direction = 1
+				elif (player.global_position.x - global_position.x < -8):
+					direction = -1
+				
+				if (player.global_position.distance_to(global_position) > ATTACK_RADIUS):
 					hurt_player_area.active = false
-					
-					if abs(player.global_position.x - global_position.x) > 8:
-						if (player.global_position.x > global_position.x):
-							direction = 1
-						else:
-							direction = -1
+					animated_sprite.play("run")
 					
 					if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
 					&& is_on_floor()):
@@ -110,14 +104,17 @@ func _physics_process(delta):
 						
 					velocity.x = direction * SPEED
 				else:
-					hurt_player_area.active = true
-					if (%CooldownTimer.is_stopped()):
-						print ("ATTACKING!")
-						#animated_sprite.play("attack")
-						audio_player.play()
-						%CooldownTimer.start(ATTACK_WAIT)
+					%CooldownTimer.start(ATTACK_WAIT)
+					animated_sprite.stop()
+					state = state_type.ATTACK
+		state_type.ATTACK:
+			audio_player.play()
+			
+			if (!animated_sprite.is_playing()):
+				animated_sprite.play("attack")
+				hurt_player_area.active = true
 				
-					velocity.x = 0
+			velocity.x = 0
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -128,11 +125,23 @@ func _physics_process(delta):
 		
 	move_and_slide()
 	
+func _on_animated_fester_sprite_animation_finished():
+	if (state == state_type.ATTACK):
+		animated_sprite.play("idle")
+		hurt_player_area.active = false
+	
+func _on_cooldown_timer_timeout():
+	if (chasing_player):
+		state = state_type.CHASE
+	else:
+		state = state_type.MOVING
+	
 func _on_change_state_timer_timeout():
 	if (not chasing_player):
 		if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 			direction = [-1, 1].pick_random()
 			state = randi_range(0, 1)
+			print(state)
 			%RoamTimer.start(randf_range(0, ROAM_CHANGE_WAIT))
 
 func apply_knockback(other_pos: Vector2, force: float):
