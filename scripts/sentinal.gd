@@ -106,10 +106,10 @@ func _physics_process(delta):
 		#Handle enemy death
 		if (enemy_health <= 0):
 			if (!marked_for_death):
-				if (multiplayer.is_server()):
-					rpc("destroy_self")
-				elif (!GameManager.multiplayer_mode_enabled):
+				if (!GameManager.multiplayer_mode_enabled):
 					destroy_self()
+				elif (multiplayer.is_server()):
+					rpc("destroy_self")
 			
 		#flip sprite
 		if (global_position.x + roam_direction.x > global_position.x):
