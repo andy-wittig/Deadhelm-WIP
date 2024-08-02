@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dyutn277xh3h5"]
+[gd_scene load_steps=33 format=3 uid="uid://dyutn277xh3h5"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_ihr1e"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_ih6ig"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="16_krdr2"]
 [ext_resource type="PackedScene" uid="uid://u1heuwmpu3ud" path="res://scenes/level_objects/leaping_mushroom.tscn" id="18_dt0wg"]
 [ext_resource type="PackedScene" uid="uid://dlses24j38m5l" path="res://scenes/enemies/bombshell_enemy.tscn" id="18_yk3jw"]
+[ext_resource type="PackedScene" uid="uid://dkt3s7wbnw3ek" path="res://scenes/enemies/fester.tscn" id="20_q21uk"]
 
 [sub_resource type="Gradient" id="Gradient_so2so"]
 colors = PackedColorArray(0.913725, 0.521569, 0.215686, 1, 0.968627, 0.952941, 0.717647, 1)
@@ -450,3 +451,10 @@ facing_direction = 1
 
 [node name="wooden_spike" parent="." instance=ExtResource("9_8fdu4")]
 position = Vector2(600, -576)
+
+[node name="spawner3" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("15_dn43k")]
+position = Vector2(872, -72)
+spawn_enemy_type = ExtResource("20_q21uk")
+tile_map = NodePath("../TileMap")
+spawn_range = 4
+spawn_enemy_limit = 1

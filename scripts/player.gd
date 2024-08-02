@@ -2,16 +2,24 @@ extends CharacterBody2D
 
 #Physics Constants
 const SPEED := 75.0
+const GRAVITY := 960.0
+const EXTRA_GRAVITY := 200.0
 const CLIMB_SPEED := 60.0
 const JUMP_VELOCITY := -250.0
 const COYOTE_TIME := 0.15
 const JUMP_BUFFER := 0.1
+const MAX_AIR_TIME := 0.5
+const HANG_TIME_THRESHHOLD := 60.0
+const HANG_TIME_MULTIPLIER := 0.8
 const KNOCK_BACK_FALLOFF := 60.0
 const DIAL_RADIUS := 22
 const HEALTH := 100
 #Physics Variables
 var grounded: bool
 var knock_back: Vector2
+var coyote_time_counter: float
+var jump_buffer_time: float
+var air_time: float
 #Player Stats Variables
 var player_health := 100
 var player_lives := 3
@@ -29,8 +37,6 @@ var spell_direction: Vector2
 var selected_slot_pos := 0
 var currently_selected_slot = null
 var spell_instance = null
-var coyote_time_counter: float
-var jump_buffer_time: float
 
 #Sprite Paths
 @onready var animated_sprite = $AnimatedSprite2D
@@ -64,8 +70,6 @@ const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart
 @onready var attack_cooldown_timer = $AttackCooldownTimer
 @onready var spell_spawn = $SpellSpawn
 @onready var camera = $Camera2D
-
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func get_player_info():
 	var save_dict = {
@@ -218,9 +222,18 @@ func _physics_process(delta):
 		state_type.MOVING:
 			#handle gravity and jumping
 			if is_on_floor():
+				air_time = 0
 				coyote_time_counter = COYOTE_TIME
 			else:
-				velocity.y += gravity * delta
+				air_time += delta
+				air_time = clamp(air_time, 0, MAX_AIR_TIME)
+				
+				print(velocity.y)
+				if (abs(velocity.y) < HANG_TIME_THRESHHOLD):
+					velocity.y += (GRAVITY + (EXTRA_GRAVITY * air_time)) * HANG_TIME_MULTIPLIER * delta
+				else:
+					velocity.y += (GRAVITY + (EXTRA_GRAVITY * air_time)) * delta
+				
 				coyote_time_counter -= delta
 				
 			if (Input.is_action_just_pressed("jump")):
