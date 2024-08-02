@@ -4,7 +4,7 @@ const SPEED = 28.0
 const JUMP_VELOCITY = -180.0
 const KNOCK_BACK_FORCE := 75.0
 const ROAM_CHANGE_WAIT := 6
-const ATTACK_RADIUS := 24
+const ATTACK_RADIUS := 20
 const ATTACK_WAIT := 1
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
@@ -165,9 +165,9 @@ func destroy_self():
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	var death_effect = load("res://scenes/vfx/bombshell_turtle_death.tscn").instantiate()
 	soul.position = position
-	soul.rarities["diamond"] = 70
-	soul.rarities["emerald"] = 18
-	soul.rarities["gold"] = 2
+	soul.rarities["diamond"] = 60
+	soul.rarities["emerald"] = 25
+	soul.rarities["gold"] = 5
 	soul.rarities["ruby"] = 10
 	death_effect.position = position
 	get_parent().add_child(soul)

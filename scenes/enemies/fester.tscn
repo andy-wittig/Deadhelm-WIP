@@ -267,8 +267,8 @@ libraries = {
 }
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("5_hyjv3")]
-position = Vector2(0, -8)
-scale = Vector2(2.5, 0.5)
+position = Vector2(0, -4)
+scale = Vector2(2, 0.5)
 damage = 6
 
 [node name="RoamTimer" type="Timer" parent="."]
