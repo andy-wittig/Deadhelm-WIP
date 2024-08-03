@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://mk8x6lo0ft6t" path="res://scenes/level_objects/chest.tscn" id="6_8vvf1"]
 [ext_resource type="PackedScene" uid="uid://b6pi4r17v0xlq" path="res://scenes/level_objects/bulb_rose.tscn" id="7_0nsjt"]
 [ext_resource type="PackedScene" uid="uid://cqbypq7pvrrg7" path="res://scenes/level_objects/platform.tscn" id="8_7syaq"]
+[ext_resource type="PackedScene" uid="uid://bxe376frrevrf" path="res://scenes/enemies/irritus.tscn" id="10_01chv"]
 [ext_resource type="PackedScene" uid="uid://bvgm67ftgfnlp" path="res://scenes/level_objects/stone_spike.tscn" id="10_bicai"]
-[ext_resource type="PackedScene" uid="uid://dkt3s7wbnw3ek" path="res://scenes/enemies/fester.tscn" id="10_jjwxm"]
 [ext_resource type="PackedScene" uid="uid://oq2a4voisjg1" path="res://scenes/level_objects/spawner.tscn" id="12_rrn3e"]
 
 [sub_resource type="Gradient" id="Gradient_so2so"]
@@ -90,10 +90,10 @@ position = Vector2(264, -176)
 
 [node name="spawner" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("12_rrn3e")]
 position = Vector2(616, -72)
-spawn_enemy_type = ExtResource("10_jjwxm")
+spawn_enemy_type = ExtResource("10_01chv")
 tile_map = NodePath("../TileMap")
 spawn_range = 5
-spawn_enemy_limit = 1
+spawn_enemy_limit = 2
 
 [node name="bulb_blossom3" parent="." instance=ExtResource("4_fhd5v")]
 position = Vector2(560, -80)

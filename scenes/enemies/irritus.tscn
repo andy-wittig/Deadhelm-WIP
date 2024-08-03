@@ -1,12 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://bxe376frrevrf"]
+[gd_scene load_steps=25 format=3 uid="uid://bxe376frrevrf"]
 
-[ext_resource type="Script" path="res://scripts/fester.gd" id="1_gd3x6"]
+[ext_resource type="Script" path="res://scripts/irritus.gd" id="1_3o7hq"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_l4048"]
-[ext_resource type="Texture2D" uid="uid://coo0yufsxmf4l" path="res://assets/sprites/enemies/fester_attack_sheet.png" id="3_fwjxf"]
-[ext_resource type="Texture2D" uid="uid://dy6ylb8up0wjc" path="res://assets/sprites/enemies/fester_idle_sheet.png" id="4_fw4ox"]
-[ext_resource type="Texture2D" uid="uid://c6d7qb3ig76k7" path="res://assets/sprites/enemies/fester_run_sheet.png" id="5_21p7n"]
+[ext_resource type="Texture2D" uid="uid://4583yrsgdw6r" path="res://assets/sprites/enemies/irritus_jump_sprite.png" id="4_6tpdr"]
+[ext_resource type="Texture2D" uid="uid://clrwy5nyhdex6" path="res://assets/sprites/enemies/irritus_idle_sheet.png" id="4_spc1d"]
+[ext_resource type="Texture2D" uid="uid://dck0ni3ptvnh5" path="res://assets/sprites/enemies/irritus_run_sheet.png" id="5_fjyq5"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="6_sfiq4"]
-[ext_resource type="AudioStream" uid="uid://w7oda2afdl4w" path="res://assets/sound effects/enemies/fester scream.mp3" id="7_p1eo5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ji213"]
 resource_local_to_scene = true
@@ -14,118 +13,96 @@ shader = ExtResource("2_l4048")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_goibt"]
-atlas = ExtResource("3_fwjxf")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysxay"]
+atlas = ExtResource("4_spc1d")
+region = Rect2(0, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_44kls"]
-atlas = ExtResource("3_fwjxf")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_csnd8"]
+atlas = ExtResource("4_spc1d")
+region = Rect2(16, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkb3q"]
-atlas = ExtResource("3_fwjxf")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1jmt"]
+atlas = ExtResource("4_spc1d")
+region = Rect2(32, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4bshm"]
-atlas = ExtResource("3_fwjxf")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ato1h"]
+atlas = ExtResource("4_spc1d")
+region = Rect2(48, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xtiby"]
-atlas = ExtResource("4_fw4ox")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_f68ci"]
+atlas = ExtResource("4_spc1d")
+region = Rect2(64, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_652cx"]
-atlas = ExtResource("4_fw4ox")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wj7g"]
+atlas = ExtResource("4_6tpdr")
+region = Rect2(0, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ek45m"]
-atlas = ExtResource("4_fw4ox")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyj2n"]
+atlas = ExtResource("5_fjyq5")
+region = Rect2(0, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jv8j5"]
-atlas = ExtResource("4_fw4ox")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_273t3"]
+atlas = ExtResource("5_fjyq5")
+region = Rect2(16, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rr4e3"]
-atlas = ExtResource("5_21p7n")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_i08f6"]
+atlas = ExtResource("5_fjyq5")
+region = Rect2(32, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iaj2f"]
-atlas = ExtResource("5_21p7n")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d8j5t"]
-atlas = ExtResource("5_21p7n")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k3yxa"]
-atlas = ExtResource("5_21p7n")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rantg"]
-atlas = ExtResource("5_21p7n")
-region = Rect2(128, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwr1x"]
+atlas = ExtResource("5_fjyq5")
+region = Rect2(48, 0, 16, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_47d34"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_goibt")
+"texture": SubResource("AtlasTexture_ysxay")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_44kls")
+"texture": SubResource("AtlasTexture_csnd8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qkb3q")
+"texture": SubResource("AtlasTexture_j1jmt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4bshm")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xtiby")
+"texture": SubResource("AtlasTexture_ato1h")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_652cx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ek45m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jv8j5")
+"texture": SubResource("AtlasTexture_f68ci")
 }],
 "loop": true,
 "name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wj7g")
+}],
+"loop": true,
+"name": &"jump",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rr4e3")
+"texture": SubResource("AtlasTexture_xyj2n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iaj2f")
+"texture": SubResource("AtlasTexture_273t3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d8j5t")
+"texture": SubResource("AtlasTexture_i08f6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k3yxa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rantg")
+"texture": SubResource("AtlasTexture_jwr1x")
 }],
 "loop": true,
 "name": &"run",
 "speed": 8.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ps2ld"]
-radius = 4.0
-height = 14.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_gfx5x"]
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jea4"]
 radius = 79.0
@@ -224,30 +201,28 @@ _data = {
 z_index = 4
 collision_layer = 8
 collision_mask = 16
-script = ExtResource("1_gd3x6")
+script = ExtResource("1_3o7hq")
 
 [node name="AnimatedIrritusSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ji213")
-position = Vector2(0, -16)
+position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_47d34")
-animation = &"attack"
+animation = &"jump"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
-[node name="FesterCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+[node name="IrritusCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_ps2ld")
+shape = SubResource("CircleShape2D_gfx5x")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
-position = Vector2(0, -4)
-target_position = Vector2(8, 0)
+position = Vector2(0, -5)
+target_position = Vector2(6, 0)
 collision_mask = 16
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
-position = Vector2(0, -4)
-target_position = Vector2(-8, 0)
+position = Vector2(0, -5)
+target_position = Vector2(-6, 0)
 collision_mask = 16
 
 [node name="ChasePlayer" type="Area2D" parent="."]
@@ -256,7 +231,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="DetectionCollider" type="CollisionShape2D" parent="ChasePlayer"]
-position = Vector2(0, -6)
+position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_5jea4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -267,9 +242,12 @@ libraries = {
 }
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("6_sfiq4")]
-position = Vector2(0, -4)
-scale = Vector2(2, 0.5)
-damage = 10
+position = Vector2(0, -5)
+scale = Vector2(0.5, 0.5)
+damage = 20
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="RoamTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -278,13 +256,13 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 one_shot = true
 
-[node name="FesterScreamAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_p1eo5")
-volume_db = -5.0
-bus = &"SFX"
+[node name="GhostTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.05
 
-[connection signal="animation_finished" from="AnimatedIrritusSprite" to="." method="_on_animated_fester_sprite_animation_finished"]
 [connection signal="body_entered" from="ChasePlayer" to="." method="_on_chase_player_body_entered"]
 [connection signal="body_exited" from="ChasePlayer" to="." method="_on_chase_player_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="RoamTimer" to="." method="_on_change_state_timer_timeout"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

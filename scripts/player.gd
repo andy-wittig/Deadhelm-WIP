@@ -228,7 +228,6 @@ func _physics_process(delta):
 				air_time += delta
 				air_time = clamp(air_time, 0, MAX_AIR_TIME)
 				
-				print(velocity.y)
 				if (abs(velocity.y) < HANG_TIME_THRESHHOLD):
 					velocity.y += (GRAVITY + (EXTRA_GRAVITY * air_time)) * HANG_TIME_MULTIPLIER * delta
 				else:
