@@ -10,6 +10,7 @@ const KNOCK_BACK_FORCE := 150.0
 const ROAM_CHANGE_WAIT := 5
 const ATTACK_RADIUS := 48
 const ATTACK_WAIT := 3
+const ATTACK_TIME := 0.5
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
 var direction: int
@@ -120,7 +121,7 @@ func _physics_process(delta):
 				#handle jump dash attack
 				if (!jumped):
 					velocity = Vector2(0, JUMP_ATTACK_VELOCITY)
-					$AttackTimer.start(0.5)
+					$AttackTimer.start(ATTACK_TIME)
 					jumped = true
 				elif (is_on_floor()):
 					%GhostTimer.stop()

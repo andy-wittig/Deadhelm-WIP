@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqqi6e1x2xkt6"]
+[gd_scene load_steps=6 format=3 uid="uid://bqqi6e1x2xkt6"]
 
 [ext_resource type="Texture2D" uid="uid://ecfmsjrpb7mf" path="res://assets/sprites/UI/player_information/select_ui.png" id="1_b4pxt"]
 [ext_resource type="Texture2D" uid="uid://bb8xxi4fo0u5" path="res://assets/sprites/UI/player_information/slot_ui.png" id="2_xtnh6"]
 [ext_resource type="Script" path="res://scripts/item_slot.gd" id="3_fhp0k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vm41k"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqm0n"]
+bg_color = Color(0.172549, 0.117647, 0.192157, 0.588235)
 
 [node name="ItemSlot" type="Control"]
 light_mask = 0
@@ -29,4 +35,22 @@ offset_right = 16.0
 offset_bottom = 16.0
 script = ExtResource("3_fhp0k")
 
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CooldownProgress" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 14.0
+offset_right = 14.0
+offset_bottom = 26.0
+rotation = -1.5708
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_vm41k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xqm0n")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
 [connection signal="gui_input" from="Item" to="Item" method="_on_slot_base_gui_input"]
+[connection signal="timeout" from="CooldownTimer" to="Item" method="_on_cooldown_timer_timeout"]

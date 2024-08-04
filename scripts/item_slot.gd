@@ -1,19 +1,22 @@
 extends TextureRect
 
-var dragging = false
+var dragging := false
 var current_item = null
-var currently_selected = false
+var currently_selected := false
+var attack_cooldown := false
 
 @onready var select_texture = %SelectTexture
+@onready var cooldown_timer = $"../CooldownTimer"
+@onready var cooldown_progress = $"../CooldownProgress"
 
 @onready var item_texture_dict = {
 	"empty" : null,
-	"lock" : preload("res://assets/sprites/UI/player_information/placeholder_lock.png"),
 	"meteor" : preload("res://assets/sprites/UI/player_information/placeholder_meteor.png"),
 	"shield" : preload("res://assets/sprites/UI/player_information/placeholder_shield.png"),
 	"lightning" : preload("res://assets/sprites/UI/player_information/placeholder_lightning.png"),
 	"flame" : preload("res://assets/sprites/UI/player_information/placeholder_flame.png"),
 }
+@onready var items = item_texture_dict.keys()
 
 @onready var item_instance_dict = {
 	"meteor" : "res://scenes/player/spells/meteor.tscn",
@@ -22,7 +25,12 @@ var currently_selected = false
 	"flame" : "res://scenes/player/spells/flame.tscn",
 }
 
-@onready var items = item_texture_dict.keys()
+@onready var item_cooldown = {
+	"meteor" : 3,
+	"shield" : 4,
+	"lightning" : 2,
+	"flame" : 1,
+}
 
 func _ready():
 	current_item = items.find("empty")
@@ -37,6 +45,16 @@ func _process(delta):
 	if (dragging):
 		if (Input.is_action_just_released("left_click")):
 			dragging = false
+			
+	cooldown_progress.value = cooldown_timer.time_left
+			
+func start_cooldown():
+	attack_cooldown = true
+	cooldown_progress.max_value = item_cooldown[items[current_item]]
+	cooldown_timer.start(item_cooldown[items[current_item]])
+
+func _on_cooldown_timer_timeout():
+	attack_cooldown = false
 
 func get_slot_item():
 	return items[current_item]
@@ -48,6 +66,7 @@ func set_slot_item(item_name):
 	current_item = items.find(item_name)
 	texture = item_texture_dict[items[current_item]]
 
+#DRAGGING FUNCTIONS
 func _get_drag_data(_pos):
 	if (items[current_item] != "empty" && items[current_item] != "lock"): #there is item to drag
 		var data = {}
@@ -61,7 +80,7 @@ func _get_drag_data(_pos):
 		set_drag_preview(drag_texture)
 	
 		return data
-	
+
 func _can_drop_data(_pos, data):
 	if (data["item_type"] == "lock"):
 		return false

@@ -15,3 +15,5 @@ shape = SubResource("RectangleShape2D_snhai")
 
 [node name="HurtPlayerTimer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="timeout" from="HurtPlayerTimer" to="." method="_on_hurt_player_timer_timeout"]

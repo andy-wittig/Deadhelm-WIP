@@ -112,16 +112,6 @@ func load_player_info():
 			if(data == "slot_1" || data == "slot_2" || data == "slot_3"):
 				continue
 			set(data, player_data[data])
-
-func _on_attack_cooldown_timer_timeout():
-	attack_cooldown = false
-	
-func drop_inventory_item(spell_type, pos):
-	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
-	tome.spell_type = spell_type
-	tome.position.x = pos.x
-	tome.position.y = pos.y
-	get_tree().get_root().get_node("game/Level").add_child(tome)
 	
 func _ready():
 	$Camera2D.reset_smoothing()
@@ -130,6 +120,7 @@ func _ready():
 	currently_selected_slot.currently_selected = true
 	
 func _process(delta):
+	#handle UI elements
 	for i in range(hearts.size()):
 		if (i + 1 > player_lives):
 			hearts[i].texture = DEAD_HEART_UI
@@ -141,7 +132,7 @@ func _process(delta):
 	soul_label.text = str(souls_collected)
 	money_label.text = "$" + str(coins_collected)
 	
-	#Handle player death
+	#handle player death
 	if (player_lives <= 0):
 		disable_player()
 		var menu_control = get_tree().get_root().get_node("game/MenuLayer")
@@ -153,64 +144,53 @@ func _process(delta):
 			player_health = HEALTH
 			global_position = get_parent().global_position
 	
-	#Set Spell Marker Position
+	#set spell spawn marker position
 	var mouse_pos = get_global_mouse_position()
 	var dial_center = Vector2(global_position.x, global_position.y)
 	spell_direction = (mouse_pos - dial_center).normalized()
 	spell_spawn.global_position = dial_center + spell_direction * DIAL_RADIUS
 	
-	#Handle Inventory Input
+	#HANDLE INVENTORY INPUT
+	#scrolling
 	if (Input.is_action_just_pressed("scroll_up")):
-		selected_slot_pos += 1
-		if (selected_slot_pos > inventory.size() - 1):
-			selected_slot_pos = 0
-		currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
-		for slot in inventory:
-			inventory[slot].currently_selected = false
-		currently_selected_slot.currently_selected = true
+		inventory_scrolling(1)
 		
 	if (Input.is_action_just_pressed("scroll_down")):
-		selected_slot_pos -= 1
-		if (selected_slot_pos < 0):
-			selected_slot_pos = inventory.size() - 1
-		currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
-		for slot in inventory:
-			inventory[slot].currently_selected = false
-		currently_selected_slot.currently_selected = true
-		
+		inventory_scrolling(-1)
+	
+	#droping items
 	if (Input.is_action_just_pressed("drop_item")):
 		if (currently_selected_slot.get_slot_item() != "empty" && !currently_selected_slot.dragging):
 			drop_inventory_item(currently_selected_slot.get_slot_item(), global_position)
-			currently_selected_slot.set_slot_item("empty")
-			
+			currently_selected_slot.set_slot_item("empty")	
 	
+	#mystic dial and spell spawning
 	if (currently_selected_slot.get_slot_item() != "empty"):
-		#Trigger Mystic Dial
-		if not attack_cooldown:
-			if Input.is_action_just_pressed("right_click"):
-				spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
-				dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
-				get_parent().add_child(dial_instance)
-				dial_instance.position.x = position.x
-				dial_instance.position.y = position.y
-				dial_instance.player = self
-				dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
-				dial_created = true
-		#Fire Mystic Dial
-		if (dial_created):
-			if Input.is_action_just_pressed("left_click"):
-				var spell_path = currently_selected_slot.get_spell_instance()
-				var new_spell = load(spell_path).instantiate()
-				new_spell.player = self
-				get_tree().get_root().get_node("game/Level").add_child(new_spell)
-				
-				spell_cast_audio.play()
-				
-				dial_instance.destroy()
-				attack_cooldown_timer.start(2)
-				attack_cooldown = true
-				dial_created = false
-	#Release Dial		
+		#open mystic dial
+		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("right_click")):
+			spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
+			dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
+			get_parent().add_child(dial_instance)
+			dial_instance.position.x = position.x
+			dial_instance.position.y = position.y
+			dial_instance.player = self
+			dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
+			dial_created = true
+		
+		#trigger mystic dial
+		if (dial_created && Input.is_action_just_pressed("left_click")):
+			var spell_path = currently_selected_slot.get_spell_instance()
+			var new_spell = load(spell_path).instantiate()
+			new_spell.player = self
+			get_tree().get_root().get_node("game/Level").add_child(new_spell)
+			
+			spell_cast_audio.play()
+			
+			currently_selected_slot.start_cooldown()
+			dial_instance.destroy()
+			dial_created = false
+	
+	#release mystic dial		
 	if Input.is_action_just_released("right_click"):
 			if (dial_created):
 				dial_instance.destroy()
@@ -292,7 +272,8 @@ func _physics_process(delta):
 	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 
 	move_and_slide()
-	
+
+#PLAYER LOGIC FUNCTIONS
 func apply_knockback(other_pos: Vector2, force: float):
 		var other_dir = (other_pos - global_position).normalized()
 		knock_back = -other_dir * force
@@ -333,6 +314,35 @@ func disable_player():
 	#$Camera2D.enabled = false
 	marked_dead = true
 	
+#INVENTORY FUNCTIONS
+func inventory_scrolling(scroll_amount: int):
+		selected_slot_pos += scroll_amount
+		
+		#wrap scrolling
+		if (selected_slot_pos > inventory.size() - 1): 
+			selected_slot_pos = 0
+		elif (selected_slot_pos < 0):
+			selected_slot_pos = inventory.size() - 1
+		
+		currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
+		for slot in inventory:
+			inventory[slot].currently_selected = false
+		currently_selected_slot.currently_selected = true
+		
+func drop_inventory_item(spell_type, pos):
+	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
+	tome.spell_type = spell_type
+	tome.position.x = pos.x
+	tome.position.y = pos.y
+	get_tree().get_root().get_node("game/Level").add_child(tome)
+	
+func is_inventory_full():
+	for slot in inventory:
+		if inventory[slot].get_slot_item() == "empty":
+			return false
+	return true
+	
+#COLLECT ITEM FUNCTIONS
 func collect_soul():
 	soul_pickup_audio.play()
 	souls_collected += 1
@@ -347,9 +357,3 @@ func colllect_spell(spell_type):
 			inventory[slot].set_slot_item(spell_type)
 			tome_pickup_audio.play()
 			break
-	
-func is_inventory_full():
-	for slot in inventory:
-		if inventory[slot].get_slot_item() == "empty":
-			return false
-	return true

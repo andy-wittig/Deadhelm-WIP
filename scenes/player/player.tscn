@@ -285,9 +285,6 @@ libraries = {
 "": SubResource("AnimationLibrary_1g6jv")
 }
 
-[node name="AttackCooldownTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="PlayerHurtAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_agady")
 volume_db = -15.0
@@ -315,5 +312,3 @@ volume_db = -8.0
 stream = ExtResource("13_ujh84")
 volume_db = -8.0
 pitch_scale = 0.5
-
-[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_attack_cooldown_timer_timeout"]

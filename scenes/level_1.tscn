@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=32 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_g31m4"]
 [ext_resource type="Texture2D" uid="uid://d30jjelyeh4xq" path="res://assets/sprites/level_objects/tilesheet final.png" id="3_6ctga"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://mk8x6lo0ft6t" path="res://scenes/level_objects/chest.tscn" id="16_2frns"]
 [ext_resource type="PackedScene" uid="uid://bv5plpqydgmj0" path="res://scenes/level_objects/killzone.tscn" id="17_da04b"]
 [ext_resource type="PackedScene" uid="uid://bevvq8dlvdjip" path="res://scenes/level_objects/stalactite.tscn" id="18_b6k5u"]
+[ext_resource type="PackedScene" uid="uid://c0pspuwwhnp34" path="res://scenes/level_objects/soul.tscn" id="20_qqnq0"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
@@ -1353,7 +1354,7 @@ spell_type = "shield"
 [node name="offering shrine3" parent="game objects" instance=ExtResource("15_by2nq")]
 z_index = -1
 position = Vector2(176, -320)
-soul_cost = 0
+soul_cost = 1
 spell_type = "lightning"
 
 [node name="leaping mushroom" parent="game objects" instance=ExtResource("11_lwg2q")]
@@ -1389,3 +1390,6 @@ libraries = {
 "": SubResource("AnimationLibrary_chnkq")
 }
 autoplay = "blasphemer_move"
+
+[node name="soul" parent="." instance=ExtResource("20_qqnq0")]
+position = Vector2(88, -160)
