@@ -113,7 +113,8 @@ color_ramp = SubResource("Gradient_yna4w")
 
 [node name="FlameLight" type="PointLight2D" parent="."]
 z_index = 1
-position = Vector2(0, 8)
+position = Vector2(0, 36)
+scale = Vector2(1, 1.875)
 color = Color(0.92549, 0.152941, 0.247059, 1)
 energy = 1.5
 texture = SubResource("GradientTexture2D_q3tdg")
