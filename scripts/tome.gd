@@ -1,8 +1,9 @@
 extends RigidBody2D
 
+@export var spell_type: String
+
 var can_collect := true
 var player = null
-var spell_type: String
 
 @onready var spell_label = $SpellLabel
 @onready var detect_player = $DetectPlayer

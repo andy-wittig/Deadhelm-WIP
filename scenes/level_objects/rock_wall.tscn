@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv7ii30ng3m2"]
+
+[ext_resource type="Texture2D" uid="uid://o4yq6k6ved13" path="res://assets/sprites/level_objects/rock_wall.png" id="1_rv0wa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7qihh"]
+size = Vector2(12, 48)
+
+[node name="rock_wall" type="StaticBody2D"]
+z_index = -1
+collision_layer = 16
+collision_mask = 0
+
+[node name="WallSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("1_rv0wa")
+
+[node name="WallCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_7qihh")
