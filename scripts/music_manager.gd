@@ -21,6 +21,10 @@ func _process(delta):
 				if (not level_track_3.playing):
 					stop_music()
 					level_track_3.play()
+			elif (current_level.get_name() == "level_3"):
+				if (not level_track_2.playing):
+					stop_music()
+					level_track_2.play()
 	elif (not title_track.playing):
 		stop_music()
 		title_track.play()

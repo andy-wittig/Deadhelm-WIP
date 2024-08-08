@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://xekuabglq1uh"]
+
+[ext_resource type="Texture2D" uid="uid://bymofdd64mr0u" path="res://assets/sprites/level_objects/lantern.png" id="1_ly5gm"]
+
+[sub_resource type="Gradient" id="Gradient_e7lyn"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8or83"]
+gradient = SubResource("Gradient_e7lyn")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.9)
+
+[sub_resource type="Animation" id="Animation_ddxhb"]
+resource_name = "light"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_w0fkv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fo8ol"]
+_data = {
+"RESET": SubResource("Animation_w0fkv"),
+"light": SubResource("Animation_ddxhb")
+}
+
+[node name="lantern" type="Node2D"]
+
+[node name="LanternSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_ly5gm")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -6)
+color = Color(0.968627, 0.952941, 0.717647, 1)
+energy = 0.6
+texture = SubResource("GradientTexture2D_8or83")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
+libraries = {
+"": SubResource("AnimationLibrary_fo8ol")
+}
+autoplay = "light"

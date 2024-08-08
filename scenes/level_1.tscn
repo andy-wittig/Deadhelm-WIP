@@ -1242,6 +1242,7 @@ z_index = 5
 [node name="spawn_gate" parent="game objects" instance=ExtResource("8_4vhbi")]
 position = Vector2(200, -416)
 next_level = ExtResource("6_k5gy8")
+soul_cost = 10
 
 [node name="ladder objects" type="Node" parent="game objects"]
 
@@ -1392,4 +1393,4 @@ libraries = {
 autoplay = "blasphemer_move"
 
 [node name="soul" parent="." instance=ExtResource("20_qqnq0")]
-position = Vector2(88, -160)
+position = Vector2(88, -56)

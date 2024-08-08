@@ -3,7 +3,7 @@ extends Area2D
 @export var required_item: String
 @export var totem_list: Array[Node]
 @export var totem_control := false
-@export var animation_player: AnimationPlayer
+@export var scene: Node
 @onready var spell_sprite = $SpellSprite
 
 var active := false
@@ -31,10 +31,10 @@ func _process(delta):
 			if (totem.active == false):
 				all_totems_unlocked = false
 		if (all_totems_unlocked):
-			animation_player.play("move")
+			scene.get_node("AnimationPlayer").play("move")
 			
+	$SpellSprite.visible = false
 	if (!active):
-		$SpellSprite.visible = false
 		for body in self.get_overlapping_bodies():
 			if (body.is_in_group("players")):
 				$SpellSprite.visible = true
