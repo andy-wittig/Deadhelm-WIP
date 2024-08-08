@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=33 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_g31m4"]
 [ext_resource type="Texture2D" uid="uid://d30jjelyeh4xq" path="res://assets/sprites/level_objects/tilesheet final.png" id="3_6ctga"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bv5plpqydgmj0" path="res://scenes/level_objects/killzone.tscn" id="17_da04b"]
 [ext_resource type="PackedScene" uid="uid://bevvq8dlvdjip" path="res://scenes/level_objects/stalactite.tscn" id="18_b6k5u"]
 [ext_resource type="PackedScene" uid="uid://c0pspuwwhnp34" path="res://scenes/level_objects/soul.tscn" id="20_qqnq0"]
+[ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="20_sjyxs"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
@@ -1242,7 +1243,6 @@ z_index = 5
 [node name="spawn_gate" parent="game objects" instance=ExtResource("8_4vhbi")]
 position = Vector2(200, -416)
 next_level = ExtResource("6_k5gy8")
-soul_cost = 10
 
 [node name="ladder objects" type="Node" parent="game objects"]
 
@@ -1394,3 +1394,15 @@ autoplay = "blasphemer_move"
 
 [node name="soul" parent="." instance=ExtResource("20_qqnq0")]
 position = Vector2(88, -56)
+
+[node name="tome" parent="." instance=ExtResource("20_sjyxs")]
+position = Vector2(56, -152)
+spell_type = "flame"
+
+[node name="tome2" parent="." instance=ExtResource("20_sjyxs")]
+position = Vector2(72, -152)
+spell_type = "lightning"
+
+[node name="tome3" parent="." instance=ExtResource("20_sjyxs")]
+position = Vector2(88, -152)
+spell_type = "meteor"
