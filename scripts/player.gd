@@ -160,7 +160,7 @@ func _process(delta):
 	
 	#droping items
 	if (Input.is_action_just_pressed("drop_item")):
-		if (currently_selected_slot.get_slot_item() != "empty" && !currently_selected_slot.dragging):
+		if (currently_selected_slot.get_can_drop()):
 			drop_inventory_item(currently_selected_slot.get_slot_item(), global_position)
 			currently_selected_slot.set_slot_item("empty")	
 	

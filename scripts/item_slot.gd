@@ -15,6 +15,8 @@ var attack_cooldown := false
 	"shield" : preload("res://assets/sprites/UI/player_information/placeholder_shield.png"),
 	"lightning" : preload("res://assets/sprites/UI/player_information/placeholder_lightning.png"),
 	"flame" : preload("res://assets/sprites/UI/player_information/placeholder_flame.png"),
+	"poison bottle" : preload("res://assets/sprites/UI/player_information/placeholder_poison_bottle.png"),
+	"bow" : preload("res://assets/sprites/UI/player_information/placeholder_bow.png"),
 }
 @onready var items = item_texture_dict.keys()
 
@@ -23,13 +25,17 @@ var attack_cooldown := false
 	"shield" : "res://scenes/player/spells/shield.tscn",
 	"lightning" : "res://scenes/player/spells/lightning.tscn",
 	"flame" : "res://scenes/player/spells/flame.tscn",
+	"poison bottle" : "res://scenes/player/spells/poison_bottle.tscn",
+	"bow" : "res://scenes/player/spells/arrow.tscn",
 }
 
 @onready var item_cooldown = {
-	"meteor" : 3,
-	"shield" : 4,
-	"lightning" : 2,
-	"flame" : 1,
+	"meteor" : 4,
+	"shield" : 5,
+	"lightning" : 3,
+	"flame" : 3,
+	"poison bottle" : 15,
+	"bow" : 6
 }
 
 func _ready():
@@ -55,6 +61,12 @@ func start_cooldown():
 
 func _on_cooldown_timer_timeout():
 	attack_cooldown = false
+	
+func get_can_drop():
+	if (items[current_item] != "empty" && items[current_item] != "lock" && cooldown_timer.time_left <= 0 && !dragging):
+		return true
+	else:
+		return false
 
 func get_slot_item():
 	return items[current_item]
@@ -68,7 +80,7 @@ func set_slot_item(item_name):
 
 #DRAGGING FUNCTIONS
 func _get_drag_data(_pos):
-	if (items[current_item] != "empty" && items[current_item] != "lock"): #there is item to drag
+	if (items[current_item] != "empty" && items[current_item] != "lock" && cooldown_timer.time_left <= 0): #there is item to drag
 		var data = {}
 		data["original_slot"] = self
 		data["original_texture"] = texture

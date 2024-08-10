@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://tl3xgwaoaqfw"]
+
+[ext_resource type="Script" path="res://scripts/poison_bottle.gd" id="1_vc4qk"]
+[ext_resource type="Texture2D" uid="uid://dejrqlk2c2cha" path="res://assets/sprites/level_objects/spells/poison_bottle.png" id="3_txtwd"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bamxr"]
+friction = 0.8
+bounce = 0.6
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8e8ne"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ynlu7"]
+radius = 5.0
+
+[node name="poison_bottle" type="RigidBody2D"]
+self_modulate = Color(1, 1, 1, 0)
+light_mask = 5
+z_index = 10
+collision_layer = 0
+collision_mask = 20
+physics_material_override = SubResource("PhysicsMaterial_bamxr")
+gravity_scale = 0.8
+script = ExtResource("1_vc4qk")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_8e8ne")
+
+[node name="PoisonBottleSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_txtwd")
+
+[node name="BottleCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ynlu7")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 1.4
+autostart = true
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

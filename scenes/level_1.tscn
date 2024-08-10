@@ -1397,12 +1397,16 @@ position = Vector2(88, -56)
 
 [node name="tome" parent="." instance=ExtResource("20_sjyxs")]
 position = Vector2(56, -152)
-spell_type = "flame"
+spell_type = "poison bottle"
 
 [node name="tome2" parent="." instance=ExtResource("20_sjyxs")]
 position = Vector2(72, -152)
-spell_type = "lightning"
+spell_type = "flame"
 
 [node name="tome3" parent="." instance=ExtResource("20_sjyxs")]
 position = Vector2(88, -152)
 spell_type = "meteor"
+
+[node name="tome4" parent="." instance=ExtResource("20_sjyxs")]
+position = Vector2(152, -56)
+spell_type = "bow"

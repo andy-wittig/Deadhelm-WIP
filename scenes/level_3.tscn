@@ -606,7 +606,7 @@ spawn_enemy_limit = 3
 [node name="offering shrine" parent="Level Objects" instance=ExtResource("13_3vntk")]
 position = Vector2(1128, -624)
 soul_cost = 8
-spell_type = "flame"
+spell_type = "poison bottle"
 
 [node name="offering shrine2" parent="Level Objects" instance=ExtResource("13_3vntk")]
 position = Vector2(1096, -208)
@@ -616,7 +616,7 @@ spell_type = "meteor"
 [node name="offering shrine3" parent="Level Objects" instance=ExtResource("13_3vntk")]
 position = Vector2(144, -800)
 soul_cost = 8
-spell_type = "lightning"
+spell_type = "flame"
 
 [node name="spawner2" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("12_rrn3e")]
 position = Vector2(432, -936)
@@ -647,11 +647,11 @@ scene = NodePath("../rock_wall")
 
 [node name="totem2" parent="Level Objects" instance=ExtResource("19_uunp8")]
 position = Vector2(160, -928)
-required_item = "lightning"
+required_item = "meteor"
 
 [node name="totem3" parent="Level Objects" instance=ExtResource("19_uunp8")]
 position = Vector2(208, -928)
-required_item = "meteor"
+required_item = "poison bottle"
 
 [node name="rock_wall" parent="Level Objects" instance=ExtResource("21_c1qg4")]
 position = Vector2(72, -912)

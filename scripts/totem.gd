@@ -15,6 +15,7 @@ var all_totems_unlocked := false
 	"shield" : preload("res://assets/sprites/UI/player_information/placeholder_shield.png"),
 	"lightning" : preload("res://assets/sprites/UI/player_information/placeholder_lightning.png"),
 	"flame" : preload("res://assets/sprites/UI/player_information/placeholder_flame.png"),
+	"poison bottle" : preload("res://assets/sprites/UI/player_information/placeholder_poison_bottle.png"),
 }
 
 @onready var totem_sprite = $TotemSprite

@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy1n5yixndy0a"]
+[gd_scene load_steps=7 format=3 uid="uid://cy1n5yixndy0a"]
 
+[ext_resource type="Script" path="res://scripts/poison_cloud.gd" id="1_g5h1e"]
 [ext_resource type="Texture2D" uid="uid://c83b25mk3t04m" path="res://assets/sprites/vfx/poison_cloud.png" id="1_tcirb"]
 [ext_resource type="PackedScene" uid="uid://c6hvdac7cbih0" path="res://scenes/player/hurt_enemy_area.tscn" id="2_fyjig"]
 
@@ -18,6 +19,8 @@ offsets = PackedFloat32Array(0, 0.28, 1)
 colors = PackedColorArray(0.976471, 0.976471, 0.976471, 0, 0.976471, 0.976471, 0.976471, 0.784314, 1, 1, 1, 0)
 
 [node name="poison_cloud" type="Area2D"]
+z_index = 6
+script = ExtResource("1_g5h1e")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_82jgj")
@@ -48,5 +51,6 @@ anim_offset_max = 1.0
 
 [node name="hurt_enemy_area" parent="." instance=ExtResource("2_fyjig")]
 scale = Vector2(2, 2)
-damage = 5
+damage = 3
 attack_wait = 0.5
+destroy_time = 8
