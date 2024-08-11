@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-const SPEED = 90.0
+const SPEED = 100.0
 
 var player: CharacterBody2D
 var direction: Vector2

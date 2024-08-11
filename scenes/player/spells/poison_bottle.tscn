@@ -32,7 +32,6 @@ texture = ExtResource("3_txtwd")
 shape = SubResource("CircleShape2D_ynlu7")
 
 [node name="DestroyTimer" type="Timer" parent="."]
-wait_time = 1.4
 autostart = true
 
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

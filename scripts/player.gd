@@ -157,6 +157,12 @@ func _process(delta):
 		
 	if (Input.is_action_just_pressed("scroll_down")):
 		inventory_scrolling(-1)
+	#hotkeys
+	inventory_hotkey()
+	
+	for slot in inventory:
+		inventory[slot].currently_selected = false
+	currently_selected_slot.currently_selected = true
 	
 	#droping items
 	if (Input.is_action_just_pressed("drop_item")):
@@ -325,9 +331,14 @@ func inventory_scrolling(scroll_amount: int):
 			selected_slot_pos = inventory.size() - 1
 		
 		currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
-		for slot in inventory:
-			inventory[slot].currently_selected = false
-		currently_selected_slot.currently_selected = true
+		
+func inventory_hotkey():
+	if (Input.is_action_just_pressed("slot_1")):
+		currently_selected_slot = inventory[inventory.keys()[0]]
+	if (Input.is_action_just_pressed("slot_2")):
+		currently_selected_slot = inventory[inventory.keys()[1]]
+	if (Input.is_action_just_pressed("slot_3")):
+		currently_selected_slot = inventory[inventory.keys()[2]]
 		
 func drop_inventory_item(spell_type, pos):
 	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
