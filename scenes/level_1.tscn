@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=34 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_g31m4"]
 [ext_resource type="Texture2D" uid="uid://d30jjelyeh4xq" path="res://assets/sprites/level_objects/tilesheet final.png" id="3_6ctga"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cqbypq7pvrrg7" path="res://scenes/level_objects/platform.tscn" id="12_fgsca"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="13_v01f1"]
 [ext_resource type="PackedScene" uid="uid://oq2a4voisjg1" path="res://scenes/level_objects/spawner.tscn" id="14_mv4c4"]
+[ext_resource type="PackedScene" uid="uid://b28dfhxb5sp1c" path="res://scenes/enemies/bomb_frog.tscn" id="14_sp1r2"]
 [ext_resource type="PackedScene" uid="uid://6fmdfddl6dkc" path="res://scenes/level_objects/offering shrine.tscn" id="15_by2nq"]
 [ext_resource type="PackedScene" uid="uid://mk8x6lo0ft6t" path="res://scenes/level_objects/chest.tscn" id="16_2frns"]
 [ext_resource type="PackedScene" uid="uid://bv5plpqydgmj0" path="res://scenes/level_objects/killzone.tscn" id="17_da04b"]
@@ -1345,6 +1346,14 @@ tile_map = NodePath("../../TileMap")
 spawn_range = 5
 spawn_wait = 1.0
 spawn_enemy_limit = 3
+
+[node name="spawner3" parent="game objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("14_mv4c4")]
+position = Vector2(368, -360)
+spawn_enemy_type = ExtResource("14_sp1r2")
+tile_map = NodePath("../../TileMap")
+spawn_range = 3
+spawn_wait = 1.0
+spawn_enemy_limit = 1
 
 [node name="offering shrine" parent="game objects" instance=ExtResource("15_by2nq")]
 z_index = -1
