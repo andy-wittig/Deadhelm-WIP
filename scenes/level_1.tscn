@@ -1112,6 +1112,12 @@ texture = ExtResource("3_6ctga")
 15:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 15:6/0/physics_layer_0/angular_velocity = 0.0
 15:6/0/custom_data_0 = true
+14:10/size_in_atlas = Vector2i(1, 2)
+14:10/0 = 0
+14:10/0/texture_origin = Vector2i(0, 8)
+14:10/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+14:10/0/physics_layer_0/angular_velocity = 0.0
+14:10/0/custom_data_0 = true
 
 [sub_resource type="TileSet" id="TileSet_fj6g0"]
 physics_layer_0/collision_layer = 16

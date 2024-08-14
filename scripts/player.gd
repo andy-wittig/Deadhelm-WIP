@@ -4,7 +4,8 @@ extends CharacterBody2D
 const SPEED := 75.0
 const GRAVITY := 960.0
 const EXTRA_GRAVITY := 200.0
-const CLIMB_SPEED := 60.0
+const CLIMB_SPEED := 65.0
+const ZIPLINE_SPEED := 80
 const JUMP_VELOCITY := -250.0
 const COYOTE_TIME := 0.15
 const JUMP_BUFFER := 0.1
@@ -30,7 +31,7 @@ var coins_collected := 0
 var dial_instance = null
 var dial_created := false
 var attack_cooldown := false
-enum state_type {MOVING, CLIMBING}
+enum state_type {MOVING, CLIMBING, ZIPLINE}
 var state := state_type.MOVING
 var spell_direction: Vector2
 #Player Inventory Variables
@@ -239,6 +240,8 @@ func _physics_process(delta):
 				velocity.y = -CLIMB_SPEED
 			elif (Input.is_action_pressed("move_down")):
 				velocity.y = CLIMB_SPEED
+		state_type.ZIPLINE:
+			velocity = Vector2.ZERO
 
 	#get input direction
 	var direction = Input.get_axis("move_left", "move_right")
@@ -264,11 +267,11 @@ func _physics_process(delta):
 		footstep_audio.stop()
 		if (state == state_type.MOVING):
 			animated_sprite.play("jump")
-		elif (state == state_type.CLIMBING):
+		elif (state == state_type.CLIMBING || state_type.ZIPLINE):
 			animated_sprite.play("climb")	
 		
 	#applys movement
-	if direction:
+	if (direction && state != state_type.ZIPLINE):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg0s11w7gjjxq"]
+
+[ext_resource type="Script" path="res://scripts/zip_line.gd" id="1_mqn24"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctwt0"]
+size = Vector2(16, 16)
+
+[node name="zip_line" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_mqn24")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ctwt0")

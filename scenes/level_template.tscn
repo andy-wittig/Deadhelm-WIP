@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://b00u5431eiqqh"]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_1cbdb"]
+[ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_h72fo"]
+[ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="4_qpukk"]
+
+[sub_resource type="Gradient" id="Gradient_n6nku"]
+colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a24ds"]
+gradient = SubResource("Gradient_n6nku")
+fill_to = Vector2(0, 1)
+
+[node name="level_name" type="Node2D"]
+script = ExtResource("1_1cbdb")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player/multiplayer_player.tscn")
+spawn_path = NodePath("../players")
+spawn_limit = 2
+
+[node name="SkyBackground" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="SkyGradient" type="TextureRect" parent="SkyBackground"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_a24ds")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_h72fo")
+format = 2
+layer_0/name = "foreground"
+layer_1/name = "midground"
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "background"
+layer_2/modulate = Color(0.54902, 0.470588, 0.647059, 1)
+layer_2/z_index = -2
+layer_2/tile_data = PackedInt32Array()
+
+[node name="players" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="player" parent="players" instance=ExtResource("4_qpukk")]
+z_index = 5
