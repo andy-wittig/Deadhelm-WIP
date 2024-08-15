@@ -1,0 +1,125 @@
+[gd_scene load_steps=13 format=3 uid="uid://clj453y1ct468"]
+
+[ext_resource type="Script" path="res://scripts/gremlin_shop.gd" id="1_3bcr4"]
+[ext_resource type="Texture2D" uid="uid://cotkyff0ssvqr" path="res://assets/sprites/level_objects/gremlin_shop_sheet.png" id="1_u7smj"]
+[ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="1_wls4n"]
+[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_b2nui"]
+[ext_resource type="Texture2D" uid="uid://brcfqdgnchh52" path="res://assets/sprites/UI/shop/shop_background_ui.png" id="4_gampp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qr2j"]
+shader = ExtResource("1_wls4n")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/enabled = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xp6vq"]
+atlas = ExtResource("1_u7smj")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u5pd"]
+atlas = ExtResource("1_u7smj")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yskd"]
+atlas = ExtResource("1_u7smj")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gktq"]
+atlas = ExtResource("1_u7smj")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_okklg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xp6vq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u5pd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yskd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gktq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxjwb"]
+size = Vector2(40, 16)
+
+[node name="gremlin_shop" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_3bcr4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_7qr2j")
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_okklg")
+autoplay = "default"
+frame_progress = 0.263539
+
+[node name="ShopMenuSprite" type="Sprite2D" parent="."]
+light_mask = 0
+z_index = 100
+position = Vector2(0, -56)
+texture = ExtResource("4_gampp")
+
+[node name="PriceLabel1" type="Label" parent="ShopMenuSprite"]
+offset_left = -30.0
+offset_top = 6.0
+offset_right = -9.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource("4_b2nui")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+
+[node name="PriceLabel2" type="Label" parent="ShopMenuSprite"]
+offset_left = -10.0
+offset_top = 6.0
+offset_right = 11.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource("4_b2nui")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+
+[node name="PriceLabel3" type="Label" parent="ShopMenuSprite"]
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 31.0
+offset_bottom = 14.0
+theme_override_fonts/font = ExtResource("4_b2nui")
+theme_override_font_sizes/font_size = 8
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="ItemTexture1" type="TextureRect" parent="ShopMenuSprite"]
+light_mask = 0
+offset_left = -28.0
+offset_top = -12.0
+offset_right = -12.0
+offset_bottom = 4.0
+
+[node name="ItemTexture2" type="TextureRect" parent="ShopMenuSprite"]
+light_mask = 0
+offset_left = -8.0
+offset_top = -12.0
+offset_right = 8.0
+offset_bottom = 4.0
+
+[node name="ItemTexture3" type="TextureRect" parent="ShopMenuSprite"]
+light_mask = 0
+offset_left = 12.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_oxjwb")

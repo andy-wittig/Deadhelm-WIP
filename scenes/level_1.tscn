@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dny6loqyjar73" path="res://assets/sprites/level_objects/tilesheet wip.png" id="4_pfe7p"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="5_gsx3e"]
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="6_b6eee"]
-[ext_resource type="PackedScene" uid="uid://dyutn277xh3h5" path="res://scenes/level_2.tscn" id="6_k5gy8"]
+[ext_resource type="PackedScene" uid="uid://dis3wy3nmnpfo" path="res://scenes/level_grasslands_1.tscn" id="6_ovjnc"]
 [ext_resource type="PackedScene" uid="uid://dlses24j38m5l" path="res://scenes/enemies/bombshell_enemy.tscn" id="7_wu2l5"]
 [ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/spawn_gate.tscn" id="8_4vhbi"]
 [ext_resource type="PackedScene" uid="uid://cy85nfl1yblvo" path="res://scenes/enemies/blasphemer.tscn" id="8_dn50k"]
@@ -1249,7 +1249,7 @@ z_index = 5
 
 [node name="spawn_gate" parent="game objects" instance=ExtResource("8_4vhbi")]
 position = Vector2(200, -416)
-next_level = ExtResource("6_k5gy8")
+next_level = ExtResource("6_ovjnc")
 
 [node name="ladder objects" type="Node" parent="game objects"]
 
