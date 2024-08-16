@@ -5,7 +5,7 @@ const SPEED := 75.0
 const GRAVITY := 960.0
 const EXTRA_GRAVITY := 200.0
 const CLIMB_SPEED := 65.0
-const ZIPLINE_SPEED := 80
+const ZIPLINE_SPEED := 100
 const JUMP_VELOCITY := -250.0
 const COYOTE_TIME := 0.15
 const JUMP_BUFFER := 0.1
@@ -14,7 +14,8 @@ const HANG_TIME_THRESHHOLD := 60.0
 const HANG_TIME_MULTIPLIER := 0.8
 const KNOCK_BACK_FALLOFF := 60.0
 const DIAL_RADIUS := 22
-const HEALTH := 100
+const MAX_HEALTH := 100
+const MAX_LIVES := 3
 #Physics Variables
 var grounded: bool
 var knock_back: Vector2
@@ -142,7 +143,7 @@ func _process(delta):
 	if (player_health <= 0 && player_lives > 0):
 		if (!marked_dead):
 			player_lives -= 1
-			player_health = HEALTH
+			player_health = MAX_HEALTH
 			global_position = get_parent().global_position
 	
 	#set spell spawn marker position
@@ -358,7 +359,10 @@ func is_inventory_full():
 	
 #COLLECT ITEM FUNCTIONS
 func collect_buff(buff: String):
-	print(buff)
+	match buff:
+		"heart_crystal":
+			if (player_lives < MAX_LIVES):
+				player_lives += 1
 
 func collect_soul():
 	soul_pickup_audio.play()

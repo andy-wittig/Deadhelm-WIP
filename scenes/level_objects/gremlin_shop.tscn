@@ -178,6 +178,7 @@ texture = ExtResource("4_gampp")
 
 [node name="PriceLabel1" type="Label" parent="ShopControl"]
 z_index = 1
+layout_mode = 0
 offset_left = 10.0
 offset_top = 22.0
 offset_right = 31.0
@@ -189,6 +190,7 @@ horizontal_alignment = 1
 
 [node name="PriceLabel2" type="Label" parent="ShopControl"]
 z_index = 1
+layout_mode = 0
 offset_left = 30.0
 offset_top = 22.0
 offset_right = 51.0
@@ -200,6 +202,7 @@ horizontal_alignment = 1
 
 [node name="PriceLabel3" type="Label" parent="ShopControl"]
 z_index = 1
+layout_mode = 0
 offset_left = 50.0
 offset_top = 22.0
 offset_right = 71.0
@@ -213,6 +216,7 @@ horizontal_alignment = 1
 [node name="ItemTexture1" type="TextureRect" parent="ShopControl"]
 light_mask = 0
 z_index = 1
+layout_mode = 0
 offset_left = 12.0
 offset_top = 4.0
 offset_right = 28.0
@@ -221,6 +225,7 @@ offset_bottom = 20.0
 [node name="ItemTexture2" type="TextureRect" parent="ShopControl"]
 light_mask = 0
 z_index = 1
+layout_mode = 0
 offset_left = 32.0
 offset_top = 4.0
 offset_right = 48.0
@@ -229,6 +234,7 @@ offset_bottom = 20.0
 [node name="ItemTexture3" type="TextureRect" parent="ShopControl"]
 light_mask = 0
 z_index = 1
+layout_mode = 0
 offset_left = 52.0
 offset_top = 4.0
 offset_right = 68.0

@@ -6,8 +6,8 @@ var menu_opened := false
 var player: CharacterBody2D
 
 @onready var shop_items = {
-	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 10],
-	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 8],
+	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 1],
+	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 1],
 }
 @onready var price_labels := [
 	$ShopControl/PriceLabel1,
