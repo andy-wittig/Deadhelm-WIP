@@ -357,6 +357,9 @@ func is_inventory_full():
 	return true
 	
 #COLLECT ITEM FUNCTIONS
+func collect_buff(buff: String):
+	print(buff)
+
 func collect_soul():
 	soul_pickup_audio.play()
 	souls_collected += 1

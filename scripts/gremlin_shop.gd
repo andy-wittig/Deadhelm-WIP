@@ -3,19 +3,21 @@ extends Area2D
 @export var shop_listings: Array[String]
 
 var menu_opened := false
+var player: CharacterBody2D
+
 @onready var shop_items = {
 	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 10],
 	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 8],
 }
 @onready var price_labels := [
-	$ShopControl/ShopMenuSprite/PriceLabel1,
-	$ShopControl/ShopMenuSprite/PriceLabel2,
-	$ShopControl/ShopMenuSprite/PriceLabel3,
+	$ShopControl/PriceLabel1,
+	$ShopControl/PriceLabel2,
+	$ShopControl/PriceLabel3,
 ]
 @onready var item_textures = [
-	$ShopControl/ShopMenuSprite/ItemTexture1,
-	$ShopControl/ShopMenuSprite/ItemTexture2,
-	$ShopControl/ShopMenuSprite/ItemTexture3,
+	$ShopControl/ItemTexture1,
+	$ShopControl/ItemTexture2,
+	$ShopControl/ItemTexture3,
 ]
 
 @onready var shop_sprite = $AnimatedSprite2D
@@ -37,6 +39,7 @@ func _process(delta):
 		if (body.is_in_group("players")):
 			if (!GameManager.multiplayer_mode_enabled ||
 			body.player_id == multiplayer.get_unique_id()):
+				player = body
 				if (!menu_opened): shop_sprite.material.set_shader_parameter("enabled", true)
 				if Input.is_action_just_pressed("pickup"):
 					menu_opened = !menu_opened
@@ -52,6 +55,7 @@ func _on_input_event(viewport, event, shape_idx):
 		if (body.is_in_group("players")):
 			if (!GameManager.multiplayer_mode_enabled ||
 			body.player_id == multiplayer.get_unique_id()):
+				player = body
 				if (Input.is_action_just_pressed("left_click")):
 					menu_opened = !menu_opened
 					if (menu_opened): animation_player.play("open_menu")
@@ -60,3 +64,21 @@ func _on_input_event(viewport, event, shape_idx):
 func _on_animation_player_animation_finished(anim_name):
 	if (!menu_opened):
 		shop_control.visible = false
+
+func _on_purchase_button_1_pressed():
+	var cost = shop_items[shop_listings[0]][1]
+	if (player.coins_collected >= cost):
+		player.collect_buff(shop_listings[0])
+		player.coins_collected -= cost
+
+func _on_purchase_button_2_pressed():
+	var cost = shop_items[shop_listings[1]][1]
+	if (player.coins_collected >= cost):
+		player.collect_buff(shop_listings[1])
+		player.coins_collected -= cost
+
+func _on_purchase_button_3_pressed():
+	var cost = shop_items[shop_listings[2]][1]
+	if (player.coins_collected >= cost):
+		player.collect_buff(shop_listings[2])
+		player.coins_collected -= cost

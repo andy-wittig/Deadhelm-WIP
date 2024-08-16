@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://clj453y1ct468"]
+[gd_scene load_steps=20 format=3 uid="uid://clj453y1ct468"]
 
 [ext_resource type="Script" path="res://scripts/gremlin_shop.gd" id="1_3bcr4"]
 [ext_resource type="Texture2D" uid="uid://cotkyff0ssvqr" path="res://assets/sprites/level_objects/gremlin_shop_sheet.png" id="1_u7smj"]
@@ -47,45 +47,19 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="Animation" id="Animation_mglit"]
-resource_name = "open_menu"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ShopControl:size")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(80, 0), Vector2(80, 32)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ShopControl:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-40, -48), Vector2(-40, -80)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ShopControl:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8tdva"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7vrk"]
+bg_color = Color(0.690196, 0.654902, 0.721569, 0.686275)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbb2u"]
+bg_color = Color(0.368627, 0.356863, 0.54902, 0.686275)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e8yue"]
 
 [sub_resource type="Animation" id="Animation_hkmag"]
 length = 0.001
@@ -126,6 +100,46 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_mglit"]
+resource_name = "open_menu"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShopControl:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(80, 0), Vector2(80, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShopControl:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-40, -48), Vector2(-40, -80)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShopControl:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3mmh"]
 _data = {
 "RESET": SubResource("Animation_hkmag"),
@@ -136,7 +150,6 @@ _data = {
 size = Vector2(40, 16)
 
 [node name="gremlin_shop" type="Area2D"]
-collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_3bcr4")
 
@@ -148,8 +161,10 @@ autoplay = "default"
 frame_progress = 0.263539
 
 [node name="ShopControl" type="Control" parent="."]
+z_index = 100
 clip_contents = true
 layout_mode = 3
+anchors_preset = 0
 offset_left = -40.0
 offset_top = -80.0
 offset_right = 40.0
@@ -158,61 +173,99 @@ offset_bottom = -48.0
 [node name="ShopMenuSprite" type="Sprite2D" parent="ShopControl"]
 clip_children = 2
 light_mask = 0
-z_index = 100
 position = Vector2(40, 16)
 texture = ExtResource("4_gampp")
 
-[node name="PriceLabel1" type="Label" parent="ShopControl/ShopMenuSprite"]
-offset_left = -30.0
-offset_top = 6.0
-offset_right = -9.0
-offset_bottom = 14.0
-theme_override_fonts/font = ExtResource("4_b2nui")
-theme_override_font_sizes/font_size = 8
-text = "0"
-horizontal_alignment = 1
-
-[node name="PriceLabel2" type="Label" parent="ShopControl/ShopMenuSprite"]
-offset_left = -10.0
-offset_top = 6.0
-offset_right = 11.0
-offset_bottom = 14.0
-theme_override_fonts/font = ExtResource("4_b2nui")
-theme_override_font_sizes/font_size = 8
-text = "0"
-horizontal_alignment = 1
-
-[node name="PriceLabel3" type="Label" parent="ShopControl/ShopMenuSprite"]
+[node name="PriceLabel1" type="Label" parent="ShopControl"]
+z_index = 1
 offset_left = 10.0
-offset_top = 6.0
+offset_top = 22.0
 offset_right = 31.0
-offset_bottom = 14.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("4_b2nui")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+
+[node name="PriceLabel2" type="Label" parent="ShopControl"]
+z_index = 1
+offset_left = 30.0
+offset_top = 22.0
+offset_right = 51.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("4_b2nui")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+
+[node name="PriceLabel3" type="Label" parent="ShopControl"]
+z_index = 1
+offset_left = 50.0
+offset_top = 22.0
+offset_right = 71.0
+offset_bottom = 30.0
 theme_override_fonts/font = ExtResource("4_b2nui")
 theme_override_font_sizes/font_size = 8
 text = "0
 "
 horizontal_alignment = 1
 
-[node name="ItemTexture1" type="TextureRect" parent="ShopControl/ShopMenuSprite"]
+[node name="ItemTexture1" type="TextureRect" parent="ShopControl"]
 light_mask = 0
-offset_left = -28.0
-offset_top = -12.0
-offset_right = -12.0
-offset_bottom = 4.0
-
-[node name="ItemTexture2" type="TextureRect" parent="ShopControl/ShopMenuSprite"]
-light_mask = 0
-offset_left = -8.0
-offset_top = -12.0
-offset_right = 8.0
-offset_bottom = 4.0
-
-[node name="ItemTexture3" type="TextureRect" parent="ShopControl/ShopMenuSprite"]
-light_mask = 0
+z_index = 1
 offset_left = 12.0
-offset_top = -12.0
+offset_top = 4.0
 offset_right = 28.0
-offset_bottom = 4.0
+offset_bottom = 20.0
+
+[node name="ItemTexture2" type="TextureRect" parent="ShopControl"]
+light_mask = 0
+z_index = 1
+offset_left = 32.0
+offset_top = 4.0
+offset_right = 48.0
+offset_bottom = 20.0
+
+[node name="ItemTexture3" type="TextureRect" parent="ShopControl"]
+light_mask = 0
+z_index = 1
+offset_left = 52.0
+offset_top = 4.0
+offset_right = 68.0
+offset_bottom = 20.0
+
+[node name="PurchaseButton1" type="Button" parent="ShopControl"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 3.0
+offset_right = 29.0
+offset_bottom = 21.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e8yue")
+
+[node name="PurchaseButton2" type="Button" parent="ShopControl"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 3.0
+offset_right = 49.0
+offset_bottom = 21.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e8yue")
+
+[node name="PurchaseButton3" type="Button" parent="ShopControl"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 3.0
+offset_right = 69.0
+offset_bottom = 21.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e8yue")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -223,4 +276,8 @@ libraries = {
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_oxjwb")
 
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="pressed" from="ShopControl/PurchaseButton1" to="." method="_on_purchase_button_1_pressed"]
+[connection signal="pressed" from="ShopControl/PurchaseButton2" to="." method="_on_purchase_button_2_pressed"]
+[connection signal="pressed" from="ShopControl/PurchaseButton3" to="." method="_on_purchase_button_3_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

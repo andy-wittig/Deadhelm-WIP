@@ -166,3 +166,7 @@ position = Vector2(536, -928)
 
 [node name="platform8" parent="." instance=ExtResource("8_1mk3m")]
 position = Vector2(568, -952)
+
+[node name="chest2" parent="." instance=ExtResource("11_7vyvg")]
+position = Vector2(384, -784)
+coin_amount = 25
