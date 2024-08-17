@@ -292,6 +292,7 @@ bus = &"SFX"
 
 [node name="CoinPickupAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_2kihc")
+max_polyphony = 5
 bus = &"SFX"
 
 [node name="TomePickupAudio" type="AudioStreamPlayer2D" parent="."]

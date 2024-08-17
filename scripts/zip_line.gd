@@ -19,9 +19,13 @@ func _ready():
 	zipline_path.add_child(zipline_follow)
 	
 	#Line Setup
-	zipline_line.default_color = Color("4d3533")  
-	zipline_line.width = 1
-	zipline_line.joint_mode = Line2D.LINE_JOINT_ROUND
+	zipline_line.default_color = Color("ce9248") 
+	zipline_line.texture = load("res://assets/sprites/vfx/zipline_rope_texture.png")
+	zipline_line.texture_mode = Line2D.LINE_TEXTURE_TILE
+	zipline_line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	zipline_line.width = 3
+	zipline_line.begin_cap_mode = Line2D.LINE_CAP_ROUND
+	zipline_line.end_cap_mode = Line2D.LINE_CAP_ROUND
 	var points = zipline_path.curve.get_baked_points()
 	zipline_line.points = points
 	

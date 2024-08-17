@@ -165,17 +165,20 @@ func _on_cooldown_timer_timeout():
 func _on_attack_timer_timeout():
 	attack_timer_started = false
 	if (chasing_player):
-		if (multiplayer.is_server()):
-			rpc("detonate")
-		elif (!GameManager.multiplayer_mode_enabled):
+		if (!GameManager.multiplayer_mode_enabled):
 			detonate()
+		elif (multiplayer.is_server()):
+			rpc("detonate")
+			
 		frog_detonated = true
 		%CooldownTimer.start(4)
 		state = state_type.MOVING
 
 @rpc("call_local")
 func detonate():
-	print("boom!")
+		var explosion = load("res://scenes/enemies/large_explosion.tscn").instantiate()
+		explosion.position = position
+		get_parent().add_child(explosion)
 
 func apply_knockback(other_pos: Vector2, force: float):
 	var other_dir = (other_pos - global_position).normalized()

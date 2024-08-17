@@ -9,38 +9,38 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7qr2j"]
 shader = ExtResource("1_wls4n")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
-shader_parameter/enabled = false
+shader_parameter/enabled = true
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xp6vq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2ivc"]
 atlas = ExtResource("1_u7smj")
-region = Rect2(0, 0, 48, 48)
+region = Rect2(0, 0, 50, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5u5pd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxmp4"]
 atlas = ExtResource("1_u7smj")
-region = Rect2(48, 0, 48, 48)
+region = Rect2(50, 0, 50, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2yskd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8lco"]
 atlas = ExtResource("1_u7smj")
-region = Rect2(96, 0, 48, 48)
+region = Rect2(100, 0, 50, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5gktq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_66he2"]
 atlas = ExtResource("1_u7smj")
-region = Rect2(144, 0, 48, 48)
+region = Rect2(150, 0, 50, 40)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_okklg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xp6vq")
+"texture": SubResource("AtlasTexture_v2ivc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5u5pd")
+"texture": SubResource("AtlasTexture_wxmp4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2yskd")
+"texture": SubResource("AtlasTexture_l8lco")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5gktq")
+"texture": SubResource("AtlasTexture_66he2")
 }],
 "loop": true,
 "name": &"default",
@@ -155,10 +155,10 @@ script = ExtResource("1_3bcr4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_7qr2j")
-position = Vector2(0, -24)
+position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_okklg")
 autoplay = "default"
-frame_progress = 0.263539
+frame_progress = 0.523898
 
 [node name="ShopControl" type="Control" parent="."]
 visible = false
@@ -283,8 +283,17 @@ libraries = {
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_oxjwb")
 
+[node name="SquabbleTimer" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+
+[node name="SquabbleAudio" type="AudioStreamPlayer2D" parent="."]
+attenuation = 6.49802
+bus = &"SFX"
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="pressed" from="ShopControl/PurchaseButton1" to="." method="_on_purchase_button_1_pressed"]
 [connection signal="pressed" from="ShopControl/PurchaseButton2" to="." method="_on_purchase_button_2_pressed"]
 [connection signal="pressed" from="ShopControl/PurchaseButton3" to="." method="_on_purchase_button_3_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="SquabbleTimer" to="." method="_on_squabble_timer_timeout"]

@@ -4,10 +4,18 @@ extends Area2D
 
 var menu_opened := false
 var player: CharacterBody2D
+var random = RandomNumberGenerator.new()
 
+@onready var gremlin_squabbles = [
+	load("res://assets/sound effects/shop_gremlin/gremlin_1.mp3"),
+	load("res://assets/sound effects/shop_gremlin/gremlin_2.mp3"),
+	load("res://assets/sound effects/shop_gremlin/gremlin_3.mp3"),
+	load("res://assets/sound effects/shop_gremlin/gremlin_4.mp3"),
+	load("res://assets/sound effects/shop_gremlin/gremlin_5.mp3"),
+]
 @onready var shop_items = {
-	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 1],
-	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 1],
+	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 10],
+	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 8],
 }
 @onready var price_labels := [
 	$ShopControl/PriceLabel1,
@@ -23,6 +31,7 @@ var player: CharacterBody2D
 @onready var shop_sprite = $AnimatedSprite2D
 @onready var shop_control = $ShopControl
 @onready var animation_player = $AnimationPlayer
+@onready var squabble_audio = $SquabbleAudio
 
 func _ready():
 	shop_control.visible = false
@@ -82,3 +91,9 @@ func _on_purchase_button_3_pressed():
 	if (player.coins_collected >= cost):
 		player.collect_buff(shop_listings[2])
 		player.coins_collected -= cost
+
+
+func _on_squabble_timer_timeout():
+	var choice = random.randi_range(0, 3)
+	squabble_audio.set_stream(gremlin_squabbles[choice])
+	squabble_audio.play()

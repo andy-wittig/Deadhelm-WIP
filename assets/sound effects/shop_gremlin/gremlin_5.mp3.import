@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://mv588xlpewvr"
+path="res://.godot/imported/gremlin_5.mp3-aa9c3745689531adc86bf06585474eee.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/shop_gremlin/gremlin_5.mp3"
+dest_files=["res://.godot/imported/gremlin_5.mp3-aa9c3745689531adc86bf06585474eee.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -252,6 +252,7 @@ texture = SubResource("GradientTexture2D_lr8m4")
 script = ExtResource("10_mudwi")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="Music"]
+volume_db = -20.0
 bus = &"Music"
 
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer" method="_on_start_button_pressed"]

@@ -13,10 +13,11 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_f2r4j"]
-_data = [Vector2(0, 0.505494), 0.0, -0.36223, 0, 0, Vector2(1, 0.527472), -0.8598, 0.0, 0, 0]
+_data = [Vector2(0, 0.802198), 0.0, -0.925156, 0, 0, Vector2(1, 0.527472), -0.8598, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_duqit"]
+offsets = PackedFloat32Array(0.62, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="zip_line" type="Area2D"]
@@ -28,12 +29,11 @@ script = ExtResource("1_mqn24")
 shape = SubResource("RectangleShape2D_ctwt0")
 
 [node name="SparksParticle" type="CPUParticles2D" parent="."]
+z_index = 1
 material = SubResource("CanvasItemMaterial_4ge55")
-emitting = false
-amount = 4
-speed_scale = 1.2
+amount = 6
+lifetime = 0.4
 randomness = 1.0
-local_coords = true
 texture = ExtResource("2_1pnq7")
 emission_shape = 1
 emission_sphere_radius = 2.0
