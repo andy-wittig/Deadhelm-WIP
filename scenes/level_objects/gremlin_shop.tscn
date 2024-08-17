@@ -161,6 +161,7 @@ autoplay = "default"
 frame_progress = 0.263539
 
 [node name="ShopControl" type="Control" parent="."]
+visible = false
 z_index = 100
 clip_contents = true
 layout_mode = 3

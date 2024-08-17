@@ -181,7 +181,7 @@ _data = {
 "move": SubResource("Animation_psepn")
 }
 
-[node name="level_3" type="Node2D"]
+[node name="level_cave_1" type="Node2D"]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/multiplayer_player.tscn")
