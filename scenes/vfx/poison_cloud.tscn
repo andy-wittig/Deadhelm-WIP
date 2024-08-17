@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy1n5yixndy0a"]
+[gd_scene load_steps=8 format=3 uid="uid://cy1n5yixndy0a"]
 
 [ext_resource type="Script" path="res://scripts/poison_cloud.gd" id="1_g5h1e"]
 [ext_resource type="Texture2D" uid="uid://c83b25mk3t04m" path="res://assets/sprites/vfx/poison_cloud.png" id="1_tcirb"]
@@ -17,6 +17,9 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_1k6pf"]
 offsets = PackedFloat32Array(0, 0.28, 1)
 colors = PackedColorArray(0.976471, 0.976471, 0.976471, 0, 0.976471, 0.976471, 0.976471, 0.784314, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cvh4u"]
+radius = 32.0
 
 [node name="poison_cloud" type="Area2D"]
 z_index = 6
@@ -49,8 +52,12 @@ scale_amount_curve = SubResource("Curve_fci72")
 color_ramp = SubResource("Gradient_1k6pf")
 anim_offset_max = 1.0
 
-[node name="hurt_enemy_area" parent="." instance=ExtResource("2_fyjig")]
+[node name="hurt_enemy_area" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("2_fyjig")]
 scale = Vector2(2, 2)
-damage = 3
+damage = 5
 attack_wait = 0.5
 destroy_time = 8
+shape = NodePath("../CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cvh4u")

@@ -7,7 +7,7 @@ var can_interact := true
 @export var soul_cost = 10
 @export var spell_type: String
 
-@onready var soul_label = $SoulLabel
+@onready var soul_label = $PanelContainer/SoulLabel
 @onready var shrine_chime_audio = $ShrineChimeAudio
 @onready var detect_player = $DetectPlayer
 @onready var sprite = $ShrineSprite
@@ -20,19 +20,19 @@ func spawn_tome():
 	get_parent().add_child(tome)
 	
 func _ready():
-	soul_label.visible = false
+	$PanelContainer.visible = false
 	
 func _process(delta):
-	soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls"
+	soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls\n" + spell_type + " spell"
 	sprite.material.set_shader_parameter("enabled", false)
-	soul_label.visible = false
+	$PanelContainer.visible = false
 	
 	for body in detect_player.get_overlapping_bodies():
 		if (body.is_in_group("players") && can_interact):
 			if (!GameManager.multiplayer_mode_enabled ||
 			body.player_id == multiplayer.get_unique_id()):
 				sprite.material.set_shader_parameter("enabled", true)
-				soul_label.visible = true
+				$PanelContainer.visible = true
 				if (Input.is_action_just_pressed("pickup")):
 					if (souls_input >= soul_cost):
 						can_interact = false

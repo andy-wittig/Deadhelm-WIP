@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://drk6c4fy4xida"]
+[gd_scene load_steps=20 format=3 uid="uid://drk6c4fy4xida"]
 
 [ext_resource type="Script" path="res://scripts/lightning.gd" id="1_3o1lo"]
 [ext_resource type="Texture2D" uid="uid://bguhdhn0jqswj" path="res://assets/sprites/level_objects/spells/lightning orb.png" id="2_nnea1"]
@@ -53,17 +53,17 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcp61"]
+
 [sub_resource type="Gradient" id="Gradient_5l4kf"]
-offsets = PackedFloat32Array(0.266055, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vxjdv"]
 gradient = SubResource("Gradient_5l4kf")
-width = 48
-height = 16
+height = 32
 fill = 1
-fill_from = Vector2(0.4, 0.5)
-fill_to = Vector2(0.9, 0.5)
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.8)
 
 [sub_resource type="Curve" id="Curve_x1vgv"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.497533), 0.0, 0.0, 0, 0]
@@ -130,15 +130,20 @@ autoplay = "lightning"
 frame_progress = 0.309775
 offset = Vector2(16, 0)
 
-[node name="hurt_enemy_area" parent="LightningAnimatedSprite" instance=ExtResource("4_ocpje")]
+[node name="hurt_enemy_area" parent="LightningAnimatedSprite" node_paths=PackedStringArray("shape") instance=ExtResource("4_ocpje")]
 position = Vector2(12, 0)
 scale = Vector2(2, 1)
 damage = 4
 attack_wait = 0.4
 knock_back = 100.0
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LightningAnimatedSprite/hurt_enemy_area"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_hcp61")
 
 [node name="PointLight2D" type="PointLight2D" parent="LightningAnimatedSprite"]
-position = Vector2(16, 0)
+position = Vector2(24, 0)
 energy = 0.5
 texture = SubResource("GradientTexture2D_vxjdv")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdk16mvpa1vlp"]
+[gd_scene load_steps=18 format=3 uid="uid://cdk16mvpa1vlp"]
 
 [ext_resource type="Script" path="res://scripts/flame.gd" id="1_10q3v"]
 [ext_resource type="Texture2D" uid="uid://cg4mbvaqta81t" path="res://assets/sprites/level_objects/spells/flame orb.png" id="2_bao0b"]
@@ -34,16 +34,16 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eq6he"]
+
 [sub_resource type="Gradient" id="Gradient_5l4kf"]
-offsets = PackedFloat32Array(0.266055, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vxjdv"]
 gradient = SubResource("Gradient_5l4kf")
-width = 48
-height = 16
+height = 32
 fill = 1
-fill_from = Vector2(0.4, 0.5)
+fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.5)
 
 [sub_resource type="Curve" id="Curve_aptqi"]
@@ -139,16 +139,21 @@ autoplay = "lightning"
 frame_progress = 0.939339
 offset = Vector2(16, 0)
 
-[node name="hurt_enemy_area" parent="FlameAnimatedSprite" instance=ExtResource("4_8rpvf")]
+[node name="hurt_enemy_area" parent="FlameAnimatedSprite" node_paths=PackedStringArray("shape") instance=ExtResource("4_8rpvf")]
 position = Vector2(12, 0)
 scale = Vector2(2, 1)
 damage = 2
 attack_wait = 0.4
 destroy_time = 3
 knock_back = 200.0
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="FlameAnimatedSprite/hurt_enemy_area"]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_eq6he")
 
 [node name="PointLight2D" type="PointLight2D" parent="FlameAnimatedSprite"]
-position = Vector2(16, 0)
+position = Vector2(24, 0)
 color = Color(0.968627, 0.952941, 0.717647, 1)
 energy = 0.5
 texture = SubResource("GradientTexture2D_vxjdv")

@@ -7,7 +7,7 @@ var souls_input := 0
 var portal_activated := false
 
 @onready var portal_active = $PortalActive
-@onready var soul_label = $SoulLabel
+@onready var soul_label = $PanelContainer/SoulLabel
 @onready var shrine_chime_audio = $ShrineChimeAudio
 @onready var gate_sprite = $GateSprite
 
@@ -17,19 +17,19 @@ func _ready():
 func _process(delta):
 	if (souls_input >= soul_cost):
 		portal_active.visible = true
-		soul_label.text = ""
+		soul_label.text = "enter portal"
 		portal_activated = true
 	else:
 		soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls"
 	
 	gate_sprite.material.set_shader_parameter("enabled", false)
-	soul_label.visible = false
+	$PanelContainer.visible = false
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("players")):
 			if (!GameManager.multiplayer_mode_enabled ||
 			body.player_id == multiplayer.get_unique_id()):
 				gate_sprite.material.set_shader_parameter("enabled", true)
-				soul_label.visible = true
+				$PanelContainer.visible = true
 				if Input.is_action_just_pressed("pickup"):
 					if (not portal_activated && souls_input < soul_cost):
 						use_soul(body)

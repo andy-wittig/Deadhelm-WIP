@@ -1,13 +1,13 @@
 extends CharacterBody2D
 #Constants
-const SPEED = 65.0
-const JUMP_VELOCITY = -200.0
+const SPEED = 70.0
+const JUMP_VELOCITY = -280.0
 const HANG_TIME_THRESHHOLD := 40.0
-const HANG_TIME_MULTIPLIER := 0.5
-const KNOCK_BACK_SPEED := 75.0
-const DETONATE_TIME := 3.0
+const HANG_TIME_MULTIPLIER := 0.6
+const KNOCK_BACK_SPEED := 250.0
+const DETONATE_TIME := 0.6
 const ROAM_CHANGE_WAIT := 6
-const JUMP_WAIT := 2
+const JUMP_WAIT := 1.4
 const ATTACK_RADIUS := 16
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
@@ -179,6 +179,8 @@ func detonate():
 		var explosion = load("res://scenes/enemies/large_explosion.tscn").instantiate()
 		explosion.position = position
 		get_parent().add_child(explosion)
+		
+		player.set_screen_shake(0.8)
 
 func apply_knockback(other_pos: Vector2, force: float):
 	var other_dir = (other_pos - global_position).normalized()

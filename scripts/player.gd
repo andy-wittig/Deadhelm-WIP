@@ -303,7 +303,7 @@ func heal_player(health: int):
 func hurt_player(damage: int, other_pos: Vector2, force: float):
 	animation_player.play("player_hurt")
 	player_hurt_audio.play()
-	camera.add_trauma(0.5)
+	set_screen_shake(0.5)
 	apply_knockback(other_pos, force)
 	
 	player_health -= damage
@@ -378,3 +378,6 @@ func colllect_spell(spell_type):
 			inventory[slot].set_slot_item(spell_type)
 			tome_pickup_audio.play()
 			break
+			
+func set_screen_shake(amount: float):
+	camera.add_trauma(amount)

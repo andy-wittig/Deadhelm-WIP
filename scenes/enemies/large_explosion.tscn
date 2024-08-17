@@ -39,8 +39,8 @@ z_index = 6
 script = ExtResource("1_h2vsb")
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("1_6v63i")]
-scale = Vector2(2, 2)
-damage = 25
+scale = Vector2(2.5, 2.5)
+damage = 20
 
 [node name="ExplosionParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_81gea")
@@ -90,6 +90,7 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 
 [node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 0.8
 one_shot = true
 autostart = true
 

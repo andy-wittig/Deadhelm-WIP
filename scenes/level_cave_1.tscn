@@ -221,6 +221,7 @@ position = Vector2(448, -608)
 
 [node name="player" parent="players" instance=ExtResource("3_15plg")]
 z_index = 5
+position = Vector2(528, 368)
 
 [node name="Spikes" type="Node" parent="."]
 
@@ -598,11 +599,10 @@ coin_amount = 6
 
 [node name="spawner" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("12_rrn3e")]
 position = Vector2(312, -200)
-spawn_enemy_type = ExtResource("10_01chv")
+spawn_enemy_type = Array[PackedScene]([ExtResource("10_01chv"), ExtResource("10_01chv")])
 tile_map = NodePath("../../TileMap")
 spawn_range = 4
 spawn_wait = 2.0
-spawn_enemy_limit = 3
 
 [node name="offering shrine" parent="Level Objects" instance=ExtResource("13_3vntk")]
 position = Vector2(1128, -624)
@@ -621,11 +621,10 @@ spell_type = "flame"
 
 [node name="spawner2" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("12_rrn3e")]
 position = Vector2(432, -936)
-spawn_enemy_type = ExtResource("14_132gn")
+spawn_enemy_type = Array[PackedScene]([ExtResource("14_132gn"), ExtResource("14_132gn"), ExtResource("10_01chv")])
 tile_map = NodePath("../../TileMap")
 spawn_range = 7
 spawn_wait = 4.0
-spawn_enemy_limit = 3
 
 [node name="spawn_gate" parent="Level Objects" instance=ExtResource("15_pvjjp")]
 position = Vector2(48, -896)

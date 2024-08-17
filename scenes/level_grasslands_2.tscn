@@ -138,6 +138,7 @@ position = Vector2(480, -448)
 
 [node name="player" parent="players" instance=ExtResource("3_lefxa")]
 z_index = 5
+position = Vector2(432, -912)
 
 [node name="Ziplines" type="Node" parent="."]
 
@@ -374,16 +375,14 @@ position = Vector2(1376, -736)
 
 [node name="spawner" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8lntp")]
 position = Vector2(1232, -328)
-spawn_enemy_type = ExtResource("16_1v2ms")
+spawn_enemy_type = Array[PackedScene]([ExtResource("16_1v2ms"), ExtResource("16_1v2ms")])
 tile_map = NodePath("../../TileMap")
 spawn_range = 5
 spawn_wait = 3.0
-spawn_enemy_limit = 3
 
 [node name="spawn_gate" parent="Level Objects" instance=ExtResource("17_dkwbp")]
 position = Vector2(880, -1344)
 next_level = ExtResource("18_sfou0")
-soul_cost = 16
 
 [node name="leaping mushroom4" parent="Level Objects" instance=ExtResource("4_kgpay")]
 position = Vector2(1016, -1168)
@@ -400,11 +399,10 @@ position = Vector2(704, -1624)
 
 [node name="spawner" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8lntp")]
 position = Vector2(744, -1544)
-spawn_enemy_type = ExtResource("19_mfv7b")
+spawn_enemy_type = Array[PackedScene]([ExtResource("19_mfv7b"), ExtResource("19_mfv7b"), ExtResource("19_mfv7b"), ExtResource("19_mfv7b")])
 tile_map = NodePath("../TileMap")
 spawn_range = 6
 spawn_wait = 2.0
-spawn_enemy_limit = 4
 
 [node name="chest" parent="." instance=ExtResource("11_7vyvg")]
 position = Vector2(784, -1728)
