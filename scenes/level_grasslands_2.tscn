@@ -29,39 +29,54 @@ fill_to = Vector2(0, 1)
 
 [sub_resource type="Curve2D" id="Curve2D_i8cux"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -3, 5, 0, 0, 0, 0, -91, -94)
+"points": PackedVector2Array(43.0763, 16.1068, -43.0763, -16.1068, -3, 5, 49.4441, 22.1, -49.4441, -22.1, -91, -94)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_uykt8"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 4, -4, 0, 0, 0, 0, 59, -98)
+"points": PackedVector2Array(-45.1792, 49.4714, 45.1792, -49.4714, 4, -4, 0, 0, 0, 0, 56, -96)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_nm7k4"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -3, -4, 0, 0, 0, 0, -123, -114)
+"points": PackedVector2Array(56.4801, 11.5101, -56.4801, -11.5101, -3, -4, 36.1134, 32.1449, -36.1134, -32.1449, -123, -114)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_5kl1l"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -3, -4, 0, 0, 0, 0, -138, -66)
+"points": PackedVector2Array(31.748, 8.73071, -31.748, -8.73071, -3, -4, 19.0488, 23.0173, -19.0488, -23.0173, -138, -66)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_m8ffg"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -4, -5, 0, 0, 0, 0, -123, -131)
+"points": PackedVector2Array(39.685, 4.36535, -39.685, -4.36535, -4, -5, 29.7638, 27.3827, -29.7638, -27.3827, -123, -131)
 }
 point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_vv04n"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -4, -4, 0, 0, 0, 0, -235, -18)
+"points": PackedVector2Array(54.061, -12.3473, -54.061, 12.3473, -4, -4, 38.8309, 8.05605, -38.8309, -8.05605, -235, -18)
 }
 point_count = 2
+
+[sub_resource type="Animation" id="Animation_0cmln"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1040, -1056)]
+}
 
 [sub_resource type="Animation" id="Animation_gn4fj"]
 resource_name = "move"
@@ -78,21 +93,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1040, -1056), Vector2(1040, -1104)]
-}
-
-[sub_resource type="Animation" id="Animation_0cmln"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1040, -1056)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ut2nq"]

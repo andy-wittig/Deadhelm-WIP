@@ -7,6 +7,8 @@ var zipline_follow: PathFollow2D
 var player: CharacterBody2D
 var zipline_active := false
 
+@onready var sparks_particle = $SparksParticle
+
 func _ready():
 	zipline_follow = PathFollow2D.new()
 	zipline_line = Line2D.new()
@@ -29,6 +31,8 @@ func _ready():
 
 func _process(delta):
 	if (!zipline_active):
+		sparks_particle.emitting = false
+		
 		for body in get_overlapping_bodies():
 			if (body.is_in_group("players")):
 				if (!GameManager.multiplayer_mode_enabled ||
@@ -40,6 +44,8 @@ func _process(delta):
 						player = body
 	else:
 		zipline_follow.progress += player.ZIPLINE_SPEED * delta
+		sparks_particle.emitting = true
+		sparks_particle.position = zipline_follow.position
 		player.global_position = zipline_follow.global_position
 		
 		if (zipline_follow.progress_ratio == 1.0 ||

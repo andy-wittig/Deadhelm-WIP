@@ -1,9 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://cg0s11w7gjjxq"]
+[gd_scene load_steps=7 format=3 uid="uid://cg0s11w7gjjxq"]
 
 [ext_resource type="Script" path="res://scripts/zip_line.gd" id="1_mqn24"]
+[ext_resource type="Texture2D" uid="uid://bckpftyf2flwy" path="res://assets/sprites/vfx/sparks_effect.png" id="2_1pnq7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctwt0"]
 size = Vector2(16, 16)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ge55"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_f2r4j"]
+_data = [Vector2(0, 0.505494), 0.0, -0.36223, 0, 0, Vector2(1, 0.527472), -0.8598, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_duqit"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="zip_line" type="Area2D"]
 collision_layer = 0
@@ -12,3 +26,25 @@ script = ExtResource("1_mqn24")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ctwt0")
+
+[node name="SparksParticle" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_4ge55")
+emitting = false
+amount = 4
+speed_scale = 1.2
+randomness = 1.0
+local_coords = true
+texture = ExtResource("2_1pnq7")
+emission_shape = 1
+emission_sphere_radius = 2.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+damping_min = 6.0
+damping_max = 6.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_f2r4j")
+color_ramp = SubResource("Gradient_duqit")
+anim_speed_min = 1.0
+anim_speed_max = 1.0

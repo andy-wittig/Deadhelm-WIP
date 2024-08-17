@@ -17,7 +17,7 @@ func _ready():
 func _process(delta):
 	if (souls_input >= soul_cost):
 		portal_active.visible = true
-		soul_label.text = "delve deeper"
+		soul_label.text = ""
 		portal_activated = true
 	else:
 		soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls"
