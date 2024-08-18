@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=33 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="Texture2D" uid="uid://dny6loqyjar73" path="res://assets/sprites/level_objects/tilesheet wip.png" id="2_8faey"]
@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://cy85nfl1yblvo" path="res://scenes/enemies/blasphemer.tscn" id="19_vfsee"]
 [ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="20_cbi00"]
 [ext_resource type="PackedScene" uid="uid://c0pspuwwhnp34" path="res://scenes/level_objects/soul.tscn" id="20_rqmcm"]
-[ext_resource type="PackedScene" uid="uid://b28dfhxb5sp1c" path="res://scenes/enemies/bomb_frog.tscn" id="21_pebmi"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
@@ -1403,10 +1402,3 @@ position = Vector2(88, -56)
 [node name="tome" parent="." instance=ExtResource("20_cbi00")]
 position = Vector2(152, -56)
 spell_type = "flame"
-
-[node name="spawner" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("11_eugnb")]
-position = Vector2(288, -88)
-spawn_enemy_type = Array[PackedScene]([ExtResource("13_8j7cl"), ExtResource("21_pebmi"), ExtResource("13_8j7cl")])
-tile_map = NodePath("../TileMap")
-spawn_range = 1
-spawn_wait = 1.0

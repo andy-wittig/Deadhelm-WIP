@@ -14,6 +14,7 @@ var spawn_pos: Vector2
 @onready var detect_player = $DetectPlayerCollider
 @onready var spawn_timer = $SpawnWaitTimer
 @onready var spawn_sound = $SpawnSound
+@onready var vortex_sprite = $VortexSprite
 
 func _process(delta):
 	spawner_sprite.material.set_shader_parameter("enabled", false)
@@ -55,14 +56,21 @@ func check_enemy_spawnable():
 			if (test_tile.get_custom_data("spawnable_tile") == false):
 				check_enemy_spawnable()
 				return
-	spawn_timer.start(spawn_wait)
-
-func _on_spawn_wait_timer_timeout():
+	
 	if (spawned_count >= spawn_enemy_type.size()):
+		vortex_sprite.visible = false
 		spawned_count = 0
 		currently_spawning = false
 		spawn_timer.stop()
-	else:
+		return
+	
+	vortex_sprite.visible = true
+	$VortexSprite/AnimationPlayer.stop()
+	$VortexSprite/AnimationPlayer.play("rotate")
+	vortex_sprite.global_position = spawn_pos
+	spawn_timer.start(spawn_wait)
+
+func _on_spawn_wait_timer_timeout():
 		spawned_count += 1
 		if (!GameManager.multiplayer_mode_enabled):
 			spawn_enemy(spawn_pos)
