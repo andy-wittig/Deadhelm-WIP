@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cy85nfl1yblvo"]
+[gd_scene load_steps=18 format=3 uid="uid://cy85nfl1yblvo"]
 
 [ext_resource type="Script" path="res://scripts/blasphemer.gd" id="1_ir5ew"]
 [ext_resource type="Texture2D" uid="uid://yahxduawgq3j" path="res://assets/sprites/enemies/blasphemer.png" id="1_qghqt"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="2_gii73"]
 [ext_resource type="Texture2D" uid="uid://cj6nlav1h7hk3" path="res://assets/sprites/vfx/flame_effect.png" id="4_41w33"]
+[ext_resource type="Texture2D" uid="uid://smaw6s5mex0t" path="res://assets/sprites/vfx/smoke_effect.png" id="4_uoav3"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hipyl"]
 properties/0/path = NodePath("FireParticles:emitting")
@@ -12,6 +13,20 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("AnimationPlayer:current_animation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dcj0j"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_vpnpm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.509294), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_avant"]
+offsets = PackedFloat32Array(0, 0.277778, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_il55w"]
 particles_animation = true
@@ -91,6 +106,29 @@ attack_wait = 0.5
 [node name="BlasphemerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -2)
 texture = ExtResource("1_qghqt")
+
+[node name="SmokeParticles" type="CPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_dcj0j")
+amount = 15
+lifetime = 2.0
+speed_scale = 0.8
+explosiveness = 0.2
+local_coords = true
+texture = ExtResource("4_uoav3")
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+radial_accel_min = -10.0
+damping_min = 5.0
+damping_max = 5.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_vpnpm")
+color_ramp = SubResource("Gradient_avant")
+anim_offset_max = 1.0
 
 [node name="FireParticles" type="CPUParticles2D" parent="."]
 z_index = -1

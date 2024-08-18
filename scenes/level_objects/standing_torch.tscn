@@ -1,6 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2a7lhqqs0c0b"]
+[gd_scene load_steps=12 format=3 uid="uid://d2a7lhqqs0c0b"]
 
 [ext_resource type="Texture2D" uid="uid://j35vgeo1ssr4" path="res://assets/sprites/level_objects/standing_torch.png" id="1_3toh5"]
+[ext_resource type="Texture2D" uid="uid://cj6nlav1h7hk3" path="res://assets/sprites/vfx/flame_effect.png" id="2_rkte8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5w2xn"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_01e4c"]
 min_value = -200.0
@@ -9,12 +16,12 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.87251, 13.3556), -246.012, -24
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_v5wen"]
-_data = [Vector2(0.00398406, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.651968), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.00398406, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.249071), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_ceqp5"]
-offsets = PackedFloat32Array(0.0852018, 0.538117, 0.843049, 0.995516)
-colors = PackedColorArray(0.909804, 0.823529, 0.509804, 1, 0.913725, 0.521569, 0.215686, 1, 0.92549, 0.152941, 0.247059, 1, 0.92549, 0.152941, 0.247059, 0)
+offsets = PackedFloat32Array(0, 0.756944, 0.995516)
+colors = PackedColorArray(1, 1, 1, 1, 0.909804, 0.823529, 0.509804, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_fa88u"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -96,15 +103,16 @@ position = Vector2(0, -16)
 texture = ExtResource("1_3toh5")
 
 [node name="FireParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_5w2xn")
 position = Vector2(0, -32)
-amount = 50
+amount = 10
 lifetime = 0.3
 speed_scale = 0.4
 explosiveness = 0.02
-randomness = 0.1
 local_coords = true
+texture = ExtResource("2_rkte8")
 emission_shape = 1
-emission_sphere_radius = 4.0
+emission_sphere_radius = 2.0
 gravity = Vector2(0, -980)
 orbit_velocity_min = -0.05
 orbit_velocity_max = 0.05
@@ -112,8 +120,6 @@ radial_accel_min = -100.0
 radial_accel_curve = SubResource("Curve_01e4c")
 angle_min = -45.0
 angle_max = 45.0
-scale_amount_min = 1.5
-scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_v5wen")
 color_ramp = SubResource("Gradient_ceqp5")
 

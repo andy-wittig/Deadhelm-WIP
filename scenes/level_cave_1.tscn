@@ -305,11 +305,11 @@ position = Vector2(480, -400)
 [node name="standing_torch10" parent="Torches" instance=ExtResource("4_w44fd")]
 position = Vector2(824, -272)
 
-[node name="standing_torch11" parent="Torches" instance=ExtResource("4_w44fd")]
-position = Vector2(936, -208)
-
 [node name="standing_torch12" parent="Torches" instance=ExtResource("4_w44fd")]
-position = Vector2(1048, -208)
+position = Vector2(952, -208)
+
+[node name="standing_torch14" parent="Torches" instance=ExtResource("4_w44fd")]
+position = Vector2(1072, -208)
 
 [node name="standing_torch13" parent="Torches" instance=ExtResource("4_w44fd")]
 position = Vector2(248, -176)
@@ -569,6 +569,7 @@ position = Vector2(600, -800)
 
 [node name="blasphemer" parent="Level Enemies" instance=ExtResource("8_sx22w")]
 position = Vector2(672, -304)
+attack_rate = 6
 
 [node name="blasphemer2" parent="Level Enemies" instance=ExtResource("8_sx22w")]
 position = Vector2(784, -320)
