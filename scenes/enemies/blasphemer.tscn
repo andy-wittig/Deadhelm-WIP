@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cy85nfl1yblvo"]
+[gd_scene load_steps=14 format=3 uid="uid://cy85nfl1yblvo"]
 
 [ext_resource type="Script" path="res://scripts/blasphemer.gd" id="1_ir5ew"]
 [ext_resource type="Texture2D" uid="uid://yahxduawgq3j" path="res://assets/sprites/enemies/blasphemer.png" id="1_qghqt"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="2_gii73"]
+[ext_resource type="Texture2D" uid="uid://cj6nlav1h7hk3" path="res://assets/sprites/vfx/flame_effect.png" id="4_41w33"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hipyl"]
 properties/0/path = NodePath("FireParticles:emitting")
@@ -12,19 +13,19 @@ properties/1/path = NodePath("AnimationPlayer:current_animation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[sub_resource type="Curve" id="Curve_ls151"]
-min_value = -200.0
-max_value = 200.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.87251, 13.3556), -246.012, -246.012, 0, 0, Vector2(1, 52.4207), -462.205, -462.205, 0, 0]
-point_count = 3
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_il55w"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_lnyf8"]
-_data = [Vector2(0.00398406, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.651968), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.747191, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_yna4w"]
-offsets = PackedFloat32Array(0.0852018, 0.538117, 0.843049, 0.995516)
-colors = PackedColorArray(0.909804, 0.823529, 0.509804, 1, 0.913725, 0.521569, 0.215686, 1, 0.92549, 0.152941, 0.247059, 1, 0.92549, 0.152941, 0.247059, 0)
+offsets = PackedFloat32Array(0.00666667, 0.806667, 0.995516)
+colors = PackedColorArray(1, 1, 1, 1, 0.952941, 0.658824, 0.2, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_q1wph"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
@@ -81,6 +82,7 @@ script = ExtResource("1_ir5ew")
 replication_config = SubResource("SceneReplicationConfig_hipyl")
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("2_gii73")]
+visible = false
 position = Vector2(0, 48)
 scale = Vector2(1, 6)
 damage = 5
@@ -92,24 +94,24 @@ texture = ExtResource("1_qghqt")
 
 [node name="FireParticles" type="CPUParticles2D" parent="."]
 z_index = -1
-amount = 500
-lifetime = 0.5
-speed_scale = 0.6
-explosiveness = 0.02
-randomness = 0.1
+material = SubResource("CanvasItemMaterial_il55w")
+amount = 40
+lifetime = 0.7
+preprocess = 0.4
+randomness = 0.5
 local_coords = true
+texture = ExtResource("4_41w33")
 emission_shape = 1
 emission_sphere_radius = 5.0
-orbit_velocity_min = -0.05
-orbit_velocity_max = 0.05
-radial_accel_min = -100.0
-radial_accel_curve = SubResource("Curve_ls151")
-angle_min = -45.0
-angle_max = 45.0
-scale_amount_min = 1.5
-scale_amount_max = 2.0
+gravity = Vector2(0, 490)
+radial_accel_min = -80.0
+angle_min = 150.0
+angle_max = 210.0
 scale_amount_curve = SubResource("Curve_lnyf8")
 color_ramp = SubResource("Gradient_yna4w")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_offset_max = 1.0
 
 [node name="FlameLight" type="PointLight2D" parent="."]
 z_index = 1
