@@ -72,13 +72,13 @@ fill_to = Vector2(0.8, 0.8)
 _data = [Vector2(0.125, 0), 0.0, -0.11623, 0, 0, Vector2(0.23628, 0.00521123), 0.0, 0.0, 0, 0, Vector2(0.315, 0), -0.276465, 28.7806, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_cidrv"]
+[sub_resource type="CurveTexture" id="CurveTexture_3p002"]
 width = 512
 curve = SubResource("Curve_0mcbe")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_al01l"]
 shader = ExtResource("3_0ww3p")
-shader_parameter/curve = SubResource("CurveTexture_cidrv")
+shader_parameter/curve = SubResource("CurveTexture_3p002")
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ss3j0"]
 

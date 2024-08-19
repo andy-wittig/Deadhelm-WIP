@@ -1,0 +1,135 @@
+[gd_scene load_steps=18 format=3 uid="uid://byxhh826s58u0"]
+
+[ext_resource type="Texture2D" uid="uid://byoptr1x3tx8e" path="res://assets/sprites/level_objects/radio.png" id="1_m3sl1"]
+[ext_resource type="Script" path="res://scripts/radio.gd" id="1_w17rl"]
+[ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="1_wdyif"]
+[ext_resource type="Texture2D" uid="uid://c5nhuyio2u7e2" path="res://assets/sprites/vfx/music_effect.png" id="2_2pw6t"]
+[ext_resource type="Shader" path="res://shaders/screen_distort.gdshader" id="3_ljgki"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cosr1"]
+size = Vector2(16, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4twdn"]
+shader = ExtResource("1_wdyif")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/enabled = false
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yo3c1"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_222d4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.754647), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_p0g3t"]
+offsets = PackedFloat32Array(0, 0.166667, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_b00ri"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m3xuh"]
+curve = SubResource("Curve_b00ri")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6xfy"]
+shader = ExtResource("3_ljgki")
+shader_parameter/curve = SubResource("CurveTexture_m3xuh")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n1vy4"]
+
+[sub_resource type="Animation" id="Animation_aaeir"]
+resource_name = "speakers"
+length = 0.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/curve:curve:point_0/right_tangent")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.01]
+}
+
+[sub_resource type="Animation" id="Animation_ih53b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/curve:curve:point_0/right_tangent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3w4qn"]
+_data = {
+"RESET": SubResource("Animation_ih53b"),
+"speakers": SubResource("Animation_aaeir")
+}
+
+[node name="radio" type="Area2D"]
+z_index = 1
+collision_mask = 2
+script = ExtResource("1_w17rl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_cosr1")
+
+[node name="RadioSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_4twdn")
+position = Vector2(0, -8)
+texture = ExtResource("1_m3sl1")
+
+[node name="MusicParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_yo3c1")
+position = Vector2(-4, -8)
+emitting = false
+amount = 4
+lifetime = 3.0
+speed_scale = 0.8
+explosiveness = 0.5
+randomness = 0.2
+lifetime_randomness = 0.5
+local_coords = true
+texture = ExtResource("2_2pw6t")
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+damping_min = 2.0
+damping_max = 7.0
+scale_amount_curve = SubResource("Curve_222d4")
+color_ramp = SubResource("Gradient_p0g3t")
+anim_offset_max = 1.0
+
+[node name="BoomShader" type="TextureRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_y6xfy")
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 4.0
+texture = SubResource("PlaceholderTexture2D_n1vy4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BoomShader"]
+libraries = {
+"": SubResource("AnimationLibrary_3w4qn")
+}
+autoplay = "speakers"
+
+[node name="RadioStationAudio" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
