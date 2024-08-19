@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://uswapymi1wdl" path="res://assets/sound effects/level_object_sounds/offering_shrine_chime.mp3" id="3_ojaql"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_kwcm2"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3afq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nr3l3"]
 bg_color = Color(0.368627, 0.356863, 0.54902, 0.588235)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hcyye"]
@@ -108,7 +108,7 @@ _data = {
 [node name="offering shrine" type="Node2D"]
 script = ExtResource("1_ueftv")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="SoulLabel" type="Label" parent="."]
 z_index = 10
 anchors_preset = 5
 anchor_left = 0.5
@@ -117,12 +117,9 @@ offset_left = -28.0
 offset_right = 28.0
 offset_bottom = 8.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_u3afq")
-
-[node name="SoulLabel" type="Label" parent="PanelContainer"]
-layout_mode = 2
 theme_override_fonts/font = ExtResource("5_kwcm2")
 theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_nr3l3")
 text = "0/0 souls"
 horizontal_alignment = 1
 

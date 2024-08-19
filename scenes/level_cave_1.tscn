@@ -221,7 +221,7 @@ position = Vector2(448, -608)
 
 [node name="player" parent="players" instance=ExtResource("3_15plg")]
 z_index = 5
-position = Vector2(528, 368)
+position = Vector2(576, 384)
 
 [node name="Spikes" type="Node" parent="."]
 
@@ -657,6 +657,6 @@ required_item = "poison bottle"
 [node name="rock_wall" parent="Level Objects" instance=ExtResource("21_c1qg4")]
 position = Vector2(72, -912)
 
-[node name="gremlin_shop" parent="." instance=ExtResource("22_dn0ti")]
+[node name="gremlin_shop" parent="Level Objects" instance=ExtResource("22_dn0ti")]
 position = Vector2(992, -208)
 shop_listings = Array[String](["heart_crystal", "defense_upgrade"])

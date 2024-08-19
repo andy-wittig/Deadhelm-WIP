@@ -61,7 +61,7 @@ height = 16
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_20xwp"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j6fq"]
 bg_color = Color(0.368627, 0.356863, 0.54902, 0.588235)
 
 [node name="spawn_gate" type="Area2D"]
@@ -148,7 +148,7 @@ color = Color(0.427451, 0.917647, 0.839216, 1)
 shadow_color = Color(0.0987284, 0.0987284, 0.0987284, 0)
 texture = SubResource("GradientTexture2D_oqri4")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="SoulLabel" type="Label" parent="."]
 z_index = 10
 anchors_preset = 5
 anchor_left = 0.5
@@ -157,12 +157,9 @@ offset_left = -28.0
 offset_right = 28.0
 offset_bottom = 8.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_20xwp")
-
-[node name="SoulLabel" type="Label" parent="PanelContainer"]
-layout_mode = 2
 theme_override_fonts/font = ExtResource("4_vw883")
 theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_1j6fq")
 text = "0/0 souls"
 horizontal_alignment = 1
 

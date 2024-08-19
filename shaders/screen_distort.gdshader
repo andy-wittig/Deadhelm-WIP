@@ -2,6 +2,7 @@ shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
 uniform sampler2D curve;
+render_mode unshaded;
 
 void fragment() {
 	vec2 vecToCenter = vec2(0.5, 0.5) - UV;
