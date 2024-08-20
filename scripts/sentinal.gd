@@ -4,6 +4,7 @@ const SPEED := 28.0
 const KNOCK_BACK_FALLOFF := 60.0
 const ROAM_RANGE := 48
 const ROAM_CHANGE_WAIT := 6
+const MAX_HEALTH := 40
 #Chase Player Variables
 var chasing_player = false
 var player = null
@@ -15,7 +16,7 @@ var roam_direction = Vector2.UP
 var knock_back: Vector2
 #Enemy Mechanic Variables
 var marked_for_death = false
-var enemy_health = 40
+var enemy_health = MAX_HEALTH
 
 enum state_type {
 	MOVING,

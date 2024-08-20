@@ -11,6 +11,7 @@ const ROAM_CHANGE_WAIT := 5
 const ATTACK_RADIUS := 48
 const ATTACK_WAIT := 3
 const ATTACK_TIME := 0.5
+const MAX_HEALTH := 30
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
 var direction: int
@@ -20,7 +21,7 @@ var player = null
 var chasing_player := false
 var jumped := false
 #Enemy Mechanics Variables
-var enemy_health := 30
+var enemy_health := MAX_HEALTH
 var marked_for_death := false
 
 enum state_type {

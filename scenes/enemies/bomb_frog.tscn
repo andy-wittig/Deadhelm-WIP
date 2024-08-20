@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://b28dfhxb5sp1c"]
+[gd_scene load_steps=22 format=3 uid="uid://b28dfhxb5sp1c"]
 
 [ext_resource type="Script" path="res://scripts/bomb_frog.gd" id="1_upav5"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_3s1ca"]
 [ext_resource type="Texture2D" uid="uid://b725fckr3j6ac" path="res://assets/sprites/enemies/bomb_frog/bomb_frog_idle.png" id="3_wqc7v"]
 [ext_resource type="Texture2D" uid="uid://b4g0284ctaovp" path="res://assets/sprites/enemies/bomb_frog/bomb_frog_fall.png" id="4_ymjor"]
 [ext_resource type="Texture2D" uid="uid://bt00qdjr8olu2" path="res://assets/sprites/enemies/bomb_frog/bomb_frog_primed.png" id="5_fads5"]
+[ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="6_t3o5m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ji213"]
 resource_local_to_scene = true
@@ -230,6 +231,9 @@ one_shot = true
 [node name="CooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="enemy_healthbar" parent="." instance=ExtResource("6_t3o5m")]
+position = Vector2(0, -16)
 
 [connection signal="body_entered" from="chase player" to="." method="_on_chase_player_body_entered"]
 [connection signal="body_exited" from="chase player" to="." method="_on_chase_player_body_exited"]

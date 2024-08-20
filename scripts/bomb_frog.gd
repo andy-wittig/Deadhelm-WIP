@@ -9,6 +9,7 @@ const DETONATE_TIME := 0.6
 const ROAM_CHANGE_WAIT := 6
 const JUMP_WAIT := 1.4
 const ATTACK_RADIUS := 16
+const MAX_HEALTH := 40
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
 var direction: int
@@ -21,7 +22,7 @@ var attack_timer_started = false
 var attacking = false
 var frog_detonated = false
 #Enemy Mechanics Variables
-var enemy_health = 40
+var enemy_health = MAX_HEALTH
 var marked_for_death = false
 
 enum state_type {

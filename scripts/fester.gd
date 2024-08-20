@@ -6,6 +6,7 @@ const KNOCK_BACK_FORCE := 75.0
 const ROAM_CHANGE_WAIT := 6
 const ATTACK_RADIUS := 20
 const ATTACK_WAIT := 1
+const MAX_HEALTH := 50
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
 var direction: int
@@ -14,7 +15,7 @@ var knock_back: Vector2
 var player = null
 var chasing_player = false
 #Enemy Mechanics Variables
-var enemy_health = 50
+var enemy_health = MAX_HEALTH
 var marked_for_death = false
 
 enum state_type {

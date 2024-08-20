@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bxe376frrevrf"]
+[gd_scene load_steps=26 format=3 uid="uid://bxe376frrevrf"]
 
 [ext_resource type="Script" path="res://scripts/irritus.gd" id="1_3o7hq"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_l4048"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://clrwy5nyhdex6" path="res://assets/sprites/enemies/irritus_idle_sheet.png" id="4_spc1d"]
 [ext_resource type="Texture2D" uid="uid://dck0ni3ptvnh5" path="res://assets/sprites/enemies/irritus_run_sheet.png" id="5_fjyq5"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="6_sfiq4"]
+[ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="7_kkao4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ji213"]
 resource_local_to_scene = true
@@ -259,6 +260,9 @@ one_shot = true
 [node name="GhostTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.05
+
+[node name="enemy_healthbar" parent="." instance=ExtResource("7_kkao4")]
+position = Vector2(0, -16)
 
 [connection signal="body_entered" from="ChasePlayer" to="." method="_on_chase_player_body_entered"]
 [connection signal="body_exited" from="ChasePlayer" to="." method="_on_chase_player_body_exited"]

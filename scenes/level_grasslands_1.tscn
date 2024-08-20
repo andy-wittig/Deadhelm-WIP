@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=36 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="Texture2D" uid="uid://dny6loqyjar73" path="res://assets/sprites/level_objects/tilesheet wip.png" id="2_8faey"]
@@ -15,7 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://oq2a4voisjg1" path="res://scenes/level_objects/spawner.tscn" id="11_eugnb"]
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="12_gp0ds"]
 [ext_resource type="PackedScene" uid="uid://dlses24j38m5l" path="res://scenes/enemies/bombshell_enemy.tscn" id="13_8j7cl"]
+[ext_resource type="PackedScene" uid="uid://b28dfhxb5sp1c" path="res://scenes/enemies/bomb_frog.tscn" id="14_frip0"]
 [ext_resource type="PackedScene" uid="uid://6fmdfddl6dkc" path="res://scenes/level_objects/offering shrine.tscn" id="15_k88ra"]
+[ext_resource type="PackedScene" uid="uid://dkt3s7wbnw3ek" path="res://scenes/enemies/fester.tscn" id="15_tlsac"]
+[ext_resource type="PackedScene" uid="uid://bxe376frrevrf" path="res://scenes/enemies/irritus.tscn" id="16_mop8c"]
 [ext_resource type="PackedScene" uid="uid://bevvq8dlvdjip" path="res://scenes/level_objects/stalactite.tscn" id="18_ny01i"]
 [ext_resource type="PackedScene" uid="uid://cy85nfl1yblvo" path="res://scenes/enemies/blasphemer.tscn" id="19_vfsee"]
 [ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="20_cbi00"]
@@ -1346,6 +1349,13 @@ spawn_wait = 1.0
 [node name="spawner2" parent="game objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("11_eugnb")]
 position = Vector2(344, -152)
 spawn_enemy_type = Array[PackedScene]([ExtResource("13_8j7cl"), ExtResource("13_8j7cl"), ExtResource("13_8j7cl")])
+tile_map = NodePath("../../TileMap")
+spawn_range = 5
+spawn_wait = 1.0
+
+[node name="spawner3" parent="game objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("11_eugnb")]
+position = Vector2(352, -360)
+spawn_enemy_type = Array[PackedScene]([ExtResource("13_8j7cl"), ExtResource("14_frip0"), ExtResource("15_tlsac"), ExtResource("16_mop8c"), ExtResource("12_gp0ds")])
 tile_map = NodePath("../../TileMap")
 spawn_range = 5
 spawn_wait = 1.0

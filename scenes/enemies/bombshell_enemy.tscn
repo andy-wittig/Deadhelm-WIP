@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dlses24j38m5l"]
+[gd_scene load_steps=32 format=3 uid="uid://dlses24j38m5l"]
 
 [ext_resource type="Texture2D" uid="uid://bwldevarfdf0b" path="res://assets/sprites/enemies/bombshell_turtle/bombshell run sheet.png" id="1_evslb"]
 [ext_resource type="Script" path="res://scripts/bombshell_enemy.gd" id="1_twrv8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://pnf7fiylbvbt" path="res://assets/sprites/enemies/bombshell_turtle/bombshell cooldown idle sheet.png" id="3_stsli"]
 [ext_resource type="Texture2D" uid="uid://dvbbxxxwdsjq0" path="res://assets/sprites/enemies/bombshell_turtle/bombshell cooldown run sheet.png" id="4_0aeq6"]
 [ext_resource type="AudioStream" uid="uid://dc57a1jodpr7n" path="res://assets/sound effects/enemies/bombshell_fire.mp3" id="7_vip0i"]
+[ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="8_hu8lj"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rxive"]
 properties/0/path = NodePath(".:position")
@@ -310,6 +311,10 @@ position = Vector2(0, -6)
 stream = ExtResource("7_vip0i")
 volume_db = -5.0
 bus = &"SFX"
+
+[node name="enemy_healthbar" parent="." node_paths=PackedStringArray("enemy_body") instance=ExtResource("8_hu8lj")]
+position = Vector2(0, -16)
+enemy_body = NodePath("..")
 
 [connection signal="body_entered" from="chase player" to="." method="_on_chase_player_body_entered"]
 [connection signal="body_exited" from="chase player" to="." method="_on_chase_player_body_exited"]

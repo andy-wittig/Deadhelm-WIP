@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dkt3s7wbnw3ek"]
+[gd_scene load_steps=30 format=3 uid="uid://dkt3s7wbnw3ek"]
 
 [ext_resource type="Script" path="res://scripts/fester.gd" id="1_0ytq8"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_myen5"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c6d7qb3ig76k7" path="res://assets/sprites/enemies/fester_run_sheet.png" id="4_3xcke"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="5_hyjv3"]
 [ext_resource type="AudioStream" uid="uid://w7oda2afdl4w" path="res://assets/sound effects/enemies/fester scream.mp3" id="5_s3ruv"]
+[ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="8_eh8l7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ji213"]
 resource_local_to_scene = true
@@ -282,6 +283,9 @@ one_shot = true
 stream = ExtResource("5_s3ruv")
 volume_db = -5.0
 bus = &"SFX"
+
+[node name="enemy_healthbar" parent="." instance=ExtResource("8_eh8l7")]
+position = Vector2(0, -16)
 
 [connection signal="animation_finished" from="AnimatedFesterSprite" to="." method="_on_animated_fester_sprite_animation_finished"]
 [connection signal="body_entered" from="ChasePlayer" to="." method="_on_chase_player_body_entered"]
