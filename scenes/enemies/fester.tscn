@@ -284,8 +284,9 @@ stream = ExtResource("5_s3ruv")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="enemy_healthbar" parent="." instance=ExtResource("8_eh8l7")]
+[node name="enemy_healthbar" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("8_eh8l7")]
 position = Vector2(0, -16)
+collision_shape = NodePath("../FesterCollider")
 
 [connection signal="animation_finished" from="AnimatedFesterSprite" to="." method="_on_animated_fester_sprite_animation_finished"]
 [connection signal="body_entered" from="ChasePlayer" to="." method="_on_chase_player_body_entered"]

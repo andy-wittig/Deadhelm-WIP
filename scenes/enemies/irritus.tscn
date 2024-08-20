@@ -261,8 +261,9 @@ one_shot = true
 unique_name_in_owner = true
 wait_time = 0.05
 
-[node name="enemy_healthbar" parent="." instance=ExtResource("7_kkao4")]
+[node name="enemy_healthbar" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("7_kkao4")]
 position = Vector2(0, -16)
+collision_shape = NodePath("../IrritusCollider")
 
 [connection signal="body_entered" from="ChasePlayer" to="." method="_on_chase_player_body_entered"]
 [connection signal="body_exited" from="ChasePlayer" to="." method="_on_chase_player_body_exited"]

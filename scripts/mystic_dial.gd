@@ -4,6 +4,7 @@ var player = null
 var placeholder_spell : Sprite2D
 
 @onready var animation_player = $AnimationPlayer
+@onready var mystic_particles = $MysticParticles
 
 func destroy():
 	placeholder_spell.visible = not placeholder_spell.visible
@@ -28,5 +29,6 @@ func _process(_delta):
 	
 	#update spells position
 	placeholder_spell.global_position = player.spell_spawn.global_position
+	mystic_particles.global_position = player.spell_spawn.global_position
 	placeholder_spell.rotation = player.spell_direction.angle()
 

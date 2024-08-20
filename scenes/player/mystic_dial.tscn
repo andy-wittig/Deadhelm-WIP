@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://oh3fs6ugskct"]
+[gd_scene load_steps=11 format=3 uid="uid://oh3fs6ugskct"]
 
 [ext_resource type="Texture2D" uid="uid://b86co1pvkl007" path="res://assets/sprites/player/mystic dial.png" id="1_tn40v"]
 [ext_resource type="Script" path="res://scripts/mystic_dial.gd" id="1_x6f12"]
+[ext_resource type="Texture2D" uid="uid://bsbd0mgvk5p7o" path="res://assets/sprites/vfx/mystic effect.png" id="3_hhvmr"]
 
 [sub_resource type="Animation" id="Animation_myx2l"]
 length = 0.001
@@ -69,6 +70,20 @@ _data = {
 "fade_out": SubResource("Animation_3qcdt")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bohdq"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_4clv3"]
+_data = [Vector2(0, 0.494424), 0.0, 0.0, 0, 0, Vector2(0.494565, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.501859), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_cw4dc"]
+offsets = PackedFloat32Array(0, 0.194444, 0.638889, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1, 1, 0)
+
 [node name="mystic dial" type="Node2D"]
 z_index = 5
 script = ExtResource("1_x6f12")
@@ -90,5 +105,31 @@ autoplay = "dial_rotate"
 volume_db = -15.0
 pitch_scale = 0.75
 autoplay = true
+
+[node name="MysticParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_bohdq")
+amount = 6
+lifetime = 0.5
+speed_scale = 0.5
+randomness = 1.0
+lifetime_randomness = 0.2
+texture = ExtResource("3_hhvmr")
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+radial_accel_min = -5.0
+radial_accel_max = 5.0
+damping_min = 10.0
+damping_max = 10.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_4clv3")
+color_ramp = SubResource("Gradient_cw4dc")
+anim_offset_max = 1.0
 
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
