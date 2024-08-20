@@ -9,7 +9,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/path = NodePath("DialSprite:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -21,7 +21,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/path = NodePath("DialSprite:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -38,7 +38,7 @@ loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/path = NodePath("DialSprite:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -53,7 +53,7 @@ resource_name = "fade_out"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/path = NodePath("DialSprite:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -88,7 +88,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1
 z_index = 5
 script = ExtResource("1_x6f12")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="DialSprite" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.686275)
 texture = ExtResource("1_tn40v")
 
@@ -108,7 +108,7 @@ autoplay = true
 
 [node name="MysticParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_bohdq")
-amount = 6
+amount = 4
 lifetime = 0.5
 speed_scale = 0.5
 randomness = 1.0

@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cdk16mvpa1vlp"]
+[gd_scene load_steps=20 format=3 uid="uid://cdk16mvpa1vlp"]
 
 [ext_resource type="Script" path="res://scripts/flame.gd" id="1_10q3v"]
 [ext_resource type="Texture2D" uid="uid://cg4mbvaqta81t" path="res://assets/sprites/level_objects/spells/flame orb.png" id="2_bao0b"]
 [ext_resource type="Texture2D" uid="uid://bwt4ymhvl6rc7" path="res://assets/sprites/level_objects/spells/flame.png" id="3_dfk2l"]
 [ext_resource type="PackedScene" uid="uid://c6hvdac7cbih0" path="res://scenes/player/hurt_enemy_area.tscn" id="4_8rpvf"]
+[ext_resource type="Texture2D" uid="uid://cj6nlav1h7hk3" path="res://assets/sprites/vfx/flame_effect.png" id="5_djqd4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5tbe0"]
 atlas = ExtResource("3_dfk2l")
@@ -46,6 +47,12 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.5)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r7i3m"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
 [sub_resource type="Curve" id="Curve_aptqi"]
 min_value = -200.0
 max_value = 200.0
@@ -53,12 +60,12 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.87251, 13.3556), -246.012, -24
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_ah5fm"]
-_data = [Vector2(0.00398406, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.651968), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0.747253), 0.0, 0.0, 0, 0, Vector2(0.494382, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.651968), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_sngqd"]
-offsets = PackedFloat32Array(0.0852018, 0.538117, 0.843049, 0.995516)
-colors = PackedColorArray(0.909804, 0.823529, 0.509804, 1, 0.913725, 0.521569, 0.215686, 1, 0.92549, 0.152941, 0.247059, 1, 0.92549, 0.152941, 0.247059, 0)
+offsets = PackedFloat32Array(0, 0.133333, 0.538117, 0.843049, 0.995516)
+colors = PackedColorArray(1, 1, 1, 0, 0.909804, 0.823529, 0.509804, 1, 0.913725, 0.521569, 0.215686, 1, 0.92549, 0.152941, 0.247059, 1, 0.92549, 0.152941, 0.247059, 0)
 
 [sub_resource type="Animation" id="Animation_hjchv"]
 length = 0.001
@@ -130,6 +137,7 @@ collision_mask = 8
 script = ExtResource("1_10q3v")
 
 [node name="FlameOrbSprite" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_bao0b")
 
 [node name="FlameAnimatedSprite" type="AnimatedSprite2D" parent="."]
@@ -160,25 +168,22 @@ texture = SubResource("GradientTexture2D_vxjdv")
 
 [node name="FireParticles" type="CPUParticles2D" parent="FlameAnimatedSprite"]
 z_index = -1
+material = SubResource("CanvasItemMaterial_r7i3m")
 rotation = -1.5708
-amount = 50
+amount = 15
 lifetime = 0.3
 speed_scale = 0.4
-explosiveness = 0.02
-randomness = 0.1
 local_coords = true
+texture = ExtResource("5_djqd4")
 emission_shape = 1
 emission_sphere_radius = 6.0
-orbit_velocity_min = -0.05
-orbit_velocity_max = 0.05
-radial_accel_min = -100.0
+radial_accel_min = -20.0
 radial_accel_curve = SubResource("Curve_aptqi")
-angle_min = -45.0
-angle_max = 45.0
-scale_amount_min = 1.5
-scale_amount_max = 2.0
+angle_min = 150.0
+angle_max = 210.0
 scale_amount_curve = SubResource("Curve_ah5fm")
 color_ramp = SubResource("Gradient_sngqd")
+anim_offset_max = 1.0
 
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 3.0

@@ -19,16 +19,16 @@ func set_placeholder_sprite(sprite_path):
 	
 func _ready():
 	placeholder_spell = Sprite2D.new()
-	placeholder_spell.modulate.a = 0.8
+	placeholder_spell.modulate.a = 0.6
 	add_child(placeholder_spell)
 	
 func _process(_delta):
 	#update dials position
 	global_position.x = player.global_position.x
 	global_position.y = player.global_position.y
-	
 	#update spells position
 	placeholder_spell.global_position = player.spell_spawn.global_position
 	mystic_particles.global_position = player.spell_spawn.global_position
+	#update rotation
 	placeholder_spell.rotation = player.spell_direction.angle()
 
