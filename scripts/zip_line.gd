@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 @export var zipline_path : Path2D
 
@@ -13,8 +13,6 @@ func _ready():
 	zipline_follow = PathFollow2D.new()
 	zipline_line = Line2D.new()
 	
-	self.add_child(zipline_path)
-	zipline_path = get_node("Path2D")
 	zipline_path.add_child(zipline_line)
 	zipline_path.add_child(zipline_follow)
 	
@@ -28,6 +26,15 @@ func _ready():
 	var points = zipline_path.curve.get_baked_points()
 	zipline_line.points = points
 	
+	#zipline collision
+	for i in points.size() - 1:
+		var new_shape = CollisionShape2D.new()
+		var segment = SegmentShape2D.new()
+		segment.a = points[i]
+		segment.b = points[i + 1]
+		new_shape.shape = segment
+		$LineCollisionShapes.add_child(new_shape)
+	
 	#Path Follow Setup
 	zipline_follow.loop = false
 	zipline_follow.rotates = false
@@ -36,7 +43,7 @@ func _process(delta):
 	if (!zipline_active):
 		sparks_particle.emitting = false
 		
-		for body in get_overlapping_bodies():
+		for body in $LineCollisionShapes.get_overlapping_bodies():
 			if (body.is_in_group("players")):
 				if (!GameManager.multiplayer_mode_enabled ||
 				body.player_id == multiplayer.get_unique_id()):
@@ -45,11 +52,14 @@ func _process(delta):
 						body.state = body.state_type.ZIPLINE
 						zipline_active = true
 						player = body
+						
+						var offset = zipline_path.curve.get_closest_offset(zipline_path.to_local(player.global_position))
+						zipline_follow.progress = offset
 	else:
 		zipline_follow.progress += player.ZIPLINE_SPEED * delta
-		sparks_particle.emitting = true
-		sparks_particle.position = zipline_follow.position
 		player.global_position = zipline_follow.global_position
+		sparks_particle.emitting = true
+		sparks_particle.global_position = zipline_follow.global_position
 		
 		if (zipline_follow.progress_ratio == 1.0 ||
 		Input.is_action_just_pressed("move_up") || 

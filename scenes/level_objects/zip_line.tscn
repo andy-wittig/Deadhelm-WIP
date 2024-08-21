@@ -1,10 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cg0s11w7gjjxq"]
+[gd_scene load_steps=6 format=3 uid="uid://cg0s11w7gjjxq"]
 
 [ext_resource type="Script" path="res://scripts/zip_line.gd" id="1_mqn24"]
 [ext_resource type="Texture2D" uid="uid://bckpftyf2flwy" path="res://assets/sprites/vfx/sparks_effect.png" id="2_1pnq7"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctwt0"]
-size = Vector2(16, 16)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ge55"]
 particles_animation = true
@@ -20,13 +17,8 @@ point_count = 2
 offsets = PackedFloat32Array(0.62, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="zip_line" type="Area2D"]
-collision_layer = 0
-collision_mask = 2
+[node name="zip_line" type="Node2D"]
 script = ExtResource("1_mqn24")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ctwt0")
 
 [node name="SparksParticle" type="CPUParticles2D" parent="."]
 z_index = 1
@@ -48,3 +40,7 @@ scale_amount_curve = SubResource("Curve_f2r4j")
 color_ramp = SubResource("Gradient_duqit")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
+
+[node name="LineCollisionShapes" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2

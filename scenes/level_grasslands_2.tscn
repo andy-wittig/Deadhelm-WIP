@@ -146,43 +146,44 @@ position = Vector2(424, -912)
 
 [node name="zip_line3" parent="Ziplines" node_paths=PackedStringArray("zipline_path") instance=ExtResource("10_8i1af")]
 position = Vector2(152, -1032)
-zipline_path = NodePath("Path2D")
+zipline_path = NodePath("Path2D2")
 
-[node name="Path2D" type="Path2D" parent="Ziplines/zip_line3"]
+[node name="Path2D2" type="Path2D" parent="Ziplines/zip_line3"]
 curve = SubResource("Curve2D_i8cux")
 
-[node name="zip_line2" parent="Ziplines" instance=ExtResource("10_8i1af")]
+[node name="zip_line2" parent="Ziplines" node_paths=PackedStringArray("zipline_path") instance=ExtResource("10_8i1af")]
 position = Vector2(600, -568)
+zipline_path = NodePath("Path2D2")
 
-[node name="Path2D" type="Path2D" parent="Ziplines/zip_line2"]
+[node name="Path2D2" type="Path2D" parent="Ziplines/zip_line2"]
 curve = SubResource("Curve2D_uykt8")
 
 [node name="zip_line" parent="Ziplines" node_paths=PackedStringArray("zipline_path") instance=ExtResource("10_8i1af")]
 position = Vector2(856, -712)
-zipline_path = NodePath("Path2D")
+zipline_path = NodePath("Path2D2")
 
-[node name="Path2D" type="Path2D" parent="Ziplines/zip_line"]
-position = Vector2(0, -1)
+[node name="Path2D2" type="Path2D" parent="Ziplines/zip_line"]
 curve = SubResource("Curve2D_nm7k4")
 
-[node name="zip_line4" parent="Ziplines" instance=ExtResource("10_8i1af")]
+[node name="zip_line4" parent="Ziplines" node_paths=PackedStringArray("zipline_path") instance=ExtResource("10_8i1af")]
 position = Vector2(1304, -360)
+zipline_path = NodePath("Path2D2")
 
-[node name="Path2D" type="Path2D" parent="Ziplines/zip_line4"]
+[node name="Path2D2" type="Path2D" parent="Ziplines/zip_line4"]
 curve = SubResource("Curve2D_5kl1l")
 
 [node name="zip_line5" parent="Ziplines" node_paths=PackedStringArray("zipline_path") instance=ExtResource("10_8i1af")]
 position = Vector2(1096, -1128)
-zipline_path = NodePath("Path2D")
+zipline_path = NodePath("Path2D2")
 
-[node name="Path2D" type="Path2D" parent="Ziplines/zip_line5"]
+[node name="Path2D2" type="Path2D" parent="Ziplines/zip_line5"]
 curve = SubResource("Curve2D_m8ffg")
 
 [node name="zip_line6" parent="Ziplines" node_paths=PackedStringArray("zipline_path") instance=ExtResource("10_8i1af")]
 position = Vector2(1240, -1368)
-zipline_path = NodePath("Path2D")
+zipline_path = NodePath("Path2D2")
 
-[node name="Path2D" type="Path2D" parent="Ziplines/zip_line6"]
+[node name="Path2D2" type="Path2D" parent="Ziplines/zip_line6"]
 curve = SubResource("Curve2D_vv04n")
 
 [node name="Ladders" type="Node" parent="."]
@@ -294,6 +295,15 @@ libraries = {
 }
 autoplay = "move"
 
+[node name="platform15" parent="Platforms" instance=ExtResource("8_1mk3m")]
+position = Vector2(1160, -1408)
+
+[node name="platform16" parent="Platforms" instance=ExtResource("8_1mk3m")]
+position = Vector2(720, -1600)
+
+[node name="platform17" parent="Platforms" instance=ExtResource("8_1mk3m")]
+position = Vector2(704, -1624)
+
 [node name="Spikes" type="Node" parent="."]
 
 [node name="wooden_spike" parent="Spikes" instance=ExtResource("9_3n6k1")]
@@ -390,28 +400,19 @@ next_level = ExtResource("18_sfou0")
 position = Vector2(1016, -1168)
 bounce_force = -400.0
 
-[node name="platform" parent="." instance=ExtResource("8_1mk3m")]
-position = Vector2(1160, -1408)
-
-[node name="platform2" parent="." instance=ExtResource("8_1mk3m")]
-position = Vector2(720, -1600)
-
-[node name="platform3" parent="." instance=ExtResource("8_1mk3m")]
-position = Vector2(704, -1624)
-
-[node name="spawner" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8lntp")]
+[node name="spawner2" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8lntp")]
 position = Vector2(744, -1544)
 spawn_enemy_type = Array[PackedScene]([ExtResource("19_mfv7b"), ExtResource("19_mfv7b"), ExtResource("19_mfv7b"), ExtResource("19_mfv7b")])
-tile_map = NodePath("../TileMap")
+tile_map = NodePath("../../TileMap")
 spawn_range = 6
 spawn_wait = 2.0
 
-[node name="chest" parent="." instance=ExtResource("11_7vyvg")]
+[node name="chest4" parent="Level Objects" instance=ExtResource("11_7vyvg")]
 position = Vector2(784, -1728)
 coin_amount = 4
 
-[node name="radio" parent="." instance=ExtResource("20_8edf3")]
+[node name="radio" parent="Level Objects" instance=ExtResource("20_8edf3")]
 position = Vector2(528, -752)
 
-[node name="falling_leaves" parent="." instance=ExtResource("21_rfe82")]
+[node name="falling_leaves" parent="Level Objects" instance=ExtResource("21_rfe82")]
 position = Vector2(624, -872)
