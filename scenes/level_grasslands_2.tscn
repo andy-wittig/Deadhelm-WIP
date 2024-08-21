@@ -346,7 +346,7 @@ position = Vector2(624, -976)
 
 [node name="gremlin_shop" parent="Level Objects" instance=ExtResource("5_6sy76")]
 position = Vector2(496, -752)
-shop_listings = Array[String](["heart_crystal", "defense_upgrade"])
+shop_listings = Array[String](["heart_crystal", "defense_upgrade", "health_potion"])
 
 [node name="chest" parent="Level Objects" instance=ExtResource("11_7vyvg")]
 position = Vector2(600, -336)

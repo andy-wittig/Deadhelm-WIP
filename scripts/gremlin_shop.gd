@@ -14,8 +14,10 @@ var random = RandomNumberGenerator.new()
 	load("res://assets/sound effects/shop_gremlin/gremlin_5.mp3"),
 ]
 @onready var shop_items = {
-	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 10, "returns one lost life"],
-	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 8, "buffs current health by +25"],
+	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 1, "returns one lost life"],
+	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 1, "buffs total health by +10"],
+	"double_jump" : ["res://assets/sprites/UI/shop/double_jump.png", 1, "provides a second jump ability"],
+	"health_potion" : ["res://assets/sprites/UI/shop/health_potion.png", 1, "heals the player by +25"],
 }
 @onready var price_labels := [
 	$ShopControl/PriceLabel1,

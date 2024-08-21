@@ -14,8 +14,8 @@ const HANG_TIME_THRESHHOLD := 60.0
 const HANG_TIME_MULTIPLIER := 0.8
 const KNOCK_BACK_FALLOFF := 60.0
 const DIAL_RADIUS := 22
-const MAX_HEALTH := 100
 const MAX_LIVES := 3
+const MAX_UPGRADED_HEALTH := 200
 #Physics Variables
 var grounded: bool
 var knock_back: Vector2
@@ -23,7 +23,8 @@ var coyote_time_counter: float
 var jump_buffer_time: float
 var air_time: float
 #Player Stats Variables
-var player_health := 100
+var max_health := 100
+var player_health := max_health
 var player_lives := 3
 var marked_dead := false
 var souls_collected := 0
@@ -76,6 +77,7 @@ const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart
 func get_player_info():
 	var save_dict = {
 		"player_health" : player_health,
+		"max_health" : max_health,
 		"player_lives" : player_lives,
 		"coins_collected" : coins_collected,
 		"slot_1" : inventory["slot_1"].get_slot_item(),
@@ -129,7 +131,9 @@ func _process(delta):
 		else:
 			hearts[i].texture = ALIVE_HEART_UI
 			
-	healthbar_label.text = str(player_health) + "/100"
+	healthbar_label.text = str(player_health) + "/" + str(max_health)
+	healthbar.max_value = max_health
+	print (max_health)
 	healthbar.value = player_health
 	soul_label.text = str(souls_collected)
 	money_label.text = "$" + str(coins_collected)
@@ -143,7 +147,7 @@ func _process(delta):
 	if (player_health <= 0 && player_lives > 0):
 		if (!marked_dead):
 			player_lives -= 1
-			player_health = MAX_HEALTH
+			player_health = max_health
 			global_position = get_parent().global_position
 	
 	#set spell spawn marker position
@@ -363,6 +367,14 @@ func collect_buff(buff: String):
 		"heart_crystal":
 			if (player_lives < MAX_LIVES):
 				player_lives += 1
+		"defense_upgrade":
+			if (max_health <= MAX_UPGRADED_HEALTH - 10):
+				max_health += 10
+		"health_potion":
+			if (player_health < max_health):
+				player_health += 25
+				player_health = min(player_health, max_health)
+				
 
 func collect_soul():
 	soul_pickup_audio.play()
