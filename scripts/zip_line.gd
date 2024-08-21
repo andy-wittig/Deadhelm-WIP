@@ -19,7 +19,6 @@ func _ready():
 	zipline_path.add_child(zipline_follow)
 	
 	#Line Setup
-	zipline_line.default_color = Color("ce9248") 
 	zipline_line.texture = load("res://assets/sprites/vfx/zipline_rope_texture.png")
 	zipline_line.texture_mode = Line2D.LINE_TEXTURE_TILE
 	zipline_line.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
