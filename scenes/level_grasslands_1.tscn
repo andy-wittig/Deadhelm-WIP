@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=35 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="Texture2D" uid="uid://dny6loqyjar73" path="res://assets/sprites/level_objects/tilesheet wip.png" id="2_8faey"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://bxe376frrevrf" path="res://scenes/enemies/irritus.tscn" id="16_mop8c"]
 [ext_resource type="PackedScene" uid="uid://bevvq8dlvdjip" path="res://scenes/level_objects/stalactite.tscn" id="18_ny01i"]
 [ext_resource type="PackedScene" uid="uid://cy85nfl1yblvo" path="res://scenes/enemies/blasphemer.tscn" id="19_vfsee"]
-[ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="20_cbi00"]
 [ext_resource type="PackedScene" uid="uid://c0pspuwwhnp34" path="res://scenes/level_objects/soul.tscn" id="20_rqmcm"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
@@ -1408,7 +1407,3 @@ autoplay = "blasphemer_move"
 
 [node name="soul" parent="." instance=ExtResource("20_rqmcm")]
 position = Vector2(88, -56)
-
-[node name="tome" parent="." instance=ExtResource("20_cbi00")]
-position = Vector2(152, -56)
-spell_type = "flame"

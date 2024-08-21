@@ -22,6 +22,7 @@ var knock_back: Vector2
 var coyote_time_counter: float
 var jump_buffer_time: float
 var air_time: float
+var direction: float
 #Player Stats Variables
 var max_health := 100
 var player_health := max_health
@@ -134,7 +135,6 @@ func _process(delta):
 			
 	healthbar_label.text = str(player_health) + "/" + str(max_health)
 	healthbar.max_value = max_health
-	print (max_health)
 	healthbar.value = player_health
 	soul_label.text = str(souls_collected)
 	money_label.text = "$" + str(coins_collected)
@@ -152,9 +152,19 @@ func _process(delta):
 			global_position = get_parent().global_position
 	
 	#set spell spawn marker position
-	var mouse_pos = get_global_mouse_position()
 	var dial_center = Vector2(global_position.x, global_position.y)
-	spell_direction = (mouse_pos - dial_center).normalized()
+	
+	if (Input.get_connected_joypads().is_empty()):
+		var aim_pos = get_global_mouse_position()
+		spell_direction = (aim_pos - dial_center).normalized()
+	elif (!Input.get_connected_joypads().is_empty()):
+		var aim_vec = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
+		
+		if (aim_vec.length() > 0):
+			spell_direction = aim_vec.normalized()
+		elif (direction != 0):
+			spell_direction = Vector2(direction, 0).normalized()
+	
 	spell_spawn.global_position = dial_center + spell_direction * DIAL_RADIUS
 	
 	#HANDLE INVENTORY INPUT
@@ -251,7 +261,7 @@ func _physics_process(delta):
 			velocity = Vector2.ZERO
 
 	#get input direction
-	var direction = Input.get_axis("move_left", "move_right")
+	direction = Input.get_axis("move_left", "move_right")
 	
 	#flips sprite
 	if (direction > 0):
