@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dis3wy3nmnpfo"]
+[gd_scene load_steps=33 format=3 uid="uid://dis3wy3nmnpfo"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_p2deu"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dyutn277xh3h5" path="res://scenes/level_desert_1.tscn" id="18_sfou0"]
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="19_mfv7b"]
 [ext_resource type="PackedScene" uid="uid://byxhh826s58u0" path="res://scenes/level_objects/radio.tscn" id="20_8edf3"]
+[ext_resource type="PackedScene" uid="uid://denacnmk41nwy" path="res://scenes/vfx/falling_leaves.tscn" id="21_rfe82"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
@@ -411,3 +412,6 @@ coin_amount = 4
 
 [node name="radio" parent="." instance=ExtResource("20_8edf3")]
 position = Vector2(528, -752)
+
+[node name="falling_leaves" parent="." instance=ExtResource("21_rfe82")]
+position = Vector2(624, -872)

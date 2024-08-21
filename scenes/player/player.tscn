@@ -284,31 +284,33 @@ libraries = {
 "": SubResource("AnimationLibrary_1g6jv")
 }
 
-[node name="PlayerHurtAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="Sound Effects" type="Node" parent="."]
+
+[node name="PlayerHurtAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
 stream = ExtResource("7_agady")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="CoinPickupAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="CoinPickupAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
 stream = ExtResource("7_2kihc")
 max_polyphony = 5
 bus = &"SFX"
 
-[node name="TomePickupAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="TomePickupAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
 stream = ExtResource("8_3og7p")
 volume_db = 5.0
 bus = &"SFX"
 
-[node name="SoulPickupAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="SoulPickupAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
 stream = ExtResource("9_134ax")
 volume_db = 5.0
 bus = &"SFX"
 
-[node name="FootstepAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="FootstepAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
 stream = ExtResource("12_u6xwe")
 volume_db = -8.0
 
-[node name="SpellCastAudio" type="AudioStreamPlayer" parent="."]
+[node name="SpellCastAudio" type="AudioStreamPlayer" parent="Sound Effects"]
 stream = ExtResource("13_ujh84")
 volume_db = -8.0
 pitch_scale = 0.5

@@ -62,17 +62,18 @@ const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart
 @onready var soul_label = $hud/Control/GridContainer/VBoxContainer/SoulCounter/SoulCounterLabel
 @onready var money_label = $hud/Control/GridContainer/VBoxContainer/MoneyCounter/MoneyCounterLabel
 #Audio Paths
-@onready var coin_pickup_audio_player = $CoinPickupAudio
-@onready var tome_pickup_audio = $TomePickupAudio
-@onready var soul_pickup_audio = $SoulPickupAudio
-@onready var player_hurt_audio = $PlayerHurtAudio
-@onready var footstep_audio = $FootstepAudio
-@onready var spell_cast_audio = $SpellCastAudio
+@onready var coin_pickup_audio_player = $"Sound Effects/CoinPickupAudio"
+@onready var tome_pickup_audio = $"Sound Effects/TomePickupAudio"
+@onready var soul_pickup_audio = $"Sound Effects/SoulPickupAudio"
+@onready var player_hurt_audio = $"Sound Effects/PlayerHurtAudio"
+@onready var footstep_audio = $"Sound Effects/FootstepAudio"
+@onready var spell_cast_audio = $"Sound Effects/SpellCastAudio"
 #Mechanics Paths
 @onready var player_collider = $PlayerCollider
 @onready var attack_cooldown_timer = $AttackCooldownTimer
 @onready var spell_spawn = $SpellSpawn
 @onready var camera = $Camera2D
+@onready var dust_particles = $DustParticles
 
 func get_player_info():
 	var save_dict = {
@@ -233,6 +234,7 @@ func _physics_process(delta):
 				jump_buffer_time -= delta
 				
 			if (jump_buffer_time > 0 && coyote_time_counter > 0):
+				dust_particles.emitting = true
 				velocity.y = JUMP_VELOCITY
 				jump_buffer_time = 0
 			

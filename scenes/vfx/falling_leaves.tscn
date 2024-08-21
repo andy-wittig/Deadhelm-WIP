@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://denacnmk41nwy"]
+
+[ext_resource type="Texture2D" uid="uid://bmv65uu4bsju8" path="res://assets/sprites/vfx/leaf_effect.png" id="1_kw4ho"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ovq8q"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_wt1ps"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 5.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_b57uw"]
+offsets = PackedFloat32Array(0.673611, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="falling_leaves" type="Node2D"]
+
+[node name="LeafParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_ovq8q")
+amount = 2
+speed_scale = 0.3
+explosiveness = 0.5
+lifetime_randomness = 0.1
+texture = ExtResource("1_kw4ho")
+emission_shape = 1
+emission_sphere_radius = 16.0
+gravity = Vector2(0, 245)
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+angle_max = 360.0
+angle_curve = SubResource("Curve_wt1ps")
+color_ramp = SubResource("Gradient_b57uw")
+anim_offset_max = 1.0
