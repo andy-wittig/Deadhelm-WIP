@@ -169,7 +169,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_74c68"]
 radius = 4.0
-height = 16.0
+height = 24.0
 
 [sub_resource type="Animation" id="Animation_xpmlu"]
 length = 0.001
@@ -288,7 +288,7 @@ autoplay = "idle"
 frame_progress = 0.975332
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_74c68")
 
 [node name="SpellSpawn" type="Node2D" parent="."]

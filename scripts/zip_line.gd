@@ -47,8 +47,7 @@ func _process(delta):
 			if (body.is_in_group("players")):
 				if (!GameManager.multiplayer_mode_enabled ||
 				body.player_id == multiplayer.get_unique_id()):
-					if (Input.is_action_just_pressed("move_up") || 
-					Input.is_action_just_pressed("move_down")):
+					if (Input.is_action_just_pressed("pickup")):
 						body.state = body.state_type.ZIPLINE
 						zipline_active = true
 						player = body

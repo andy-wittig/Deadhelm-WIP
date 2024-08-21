@@ -221,7 +221,6 @@ position = Vector2(448, -608)
 
 [node name="player" parent="players" instance=ExtResource("3_15plg")]
 z_index = 5
-position = Vector2(576, 384)
 
 [node name="Spikes" type="Node" parent="."]
 
@@ -596,7 +595,7 @@ coin_amount = 6
 
 [node name="chest2" parent="Level Objects" instance=ExtResource("6_8vvf1")]
 position = Vector2(1152, -64)
-coin_amount = 6
+coin_amount = 4
 
 [node name="spawner" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("12_rrn3e")]
 position = Vector2(312, -200)
@@ -633,11 +632,11 @@ soul_cost = 1000
 
 [node name="chest3" parent="Level Objects" instance=ExtResource("6_8vvf1")]
 position = Vector2(848, -720)
-coin_amount = 6
+coin_amount = 3
 
 [node name="chest4" parent="Level Objects" instance=ExtResource("6_8vvf1")]
 position = Vector2(816, -992)
-coin_amount = 8
+coin_amount = 6
 
 [node name="totem" parent="Level Objects" node_paths=PackedStringArray("totem_list", "scene") instance=ExtResource("19_uunp8")]
 position = Vector2(112, -928)

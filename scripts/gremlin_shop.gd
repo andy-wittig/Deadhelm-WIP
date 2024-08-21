@@ -14,10 +14,10 @@ var random = RandomNumberGenerator.new()
 	load("res://assets/sound effects/shop_gremlin/gremlin_5.mp3"),
 ]
 @onready var shop_items = {
-	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 1, "returns one lost life"],
-	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 1, "buffs total health by +10"],
-	"double_jump" : ["res://assets/sprites/UI/shop/double_jump.png", 1, "provides a second jump ability"],
-	"health_potion" : ["res://assets/sprites/UI/shop/health_potion.png", 1, "heals the player by +25"],
+	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 12, "returns one lost life"],
+	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 10, "buffs total health by +10"],
+	"double_jump" : ["res://assets/sprites/UI/shop/double_jump.png", 20, "provides a second jump ability"],
+	"health_potion" : ["res://assets/sprites/UI/shop/health_potion.png", 5, "heals the player by +25"],
 }
 @onready var price_labels := [
 	$ShopControl/PriceLabel1,
@@ -28,6 +28,11 @@ var random = RandomNumberGenerator.new()
 	$ShopControl/ItemTexture1,
 	$ShopControl/ItemTexture2,
 	$ShopControl/ItemTexture3,
+]
+@onready var soldout_textures = [
+	$ShopControl/SoldOutTexture1,
+	$ShopControl/SoldOutTexture2,
+	$ShopControl/SoldOutTexture3,
 ]
 
 @onready var shop_sprite = $AnimatedSprite2D
@@ -45,6 +50,13 @@ func _process(delta):
 	if (menu_opened):
 		shop_control.visible = true
 		shop_sprite.material.set_shader_parameter("enabled", false)
+		
+		for i in range(shop_listings.size()):
+			var cost = shop_items[shop_listings[i]][1]
+			if (player.coins_collected >= cost):
+				soldout_textures[i].visible = false
+			else:
+				soldout_textures[i].visible = true
 		
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("players")):
