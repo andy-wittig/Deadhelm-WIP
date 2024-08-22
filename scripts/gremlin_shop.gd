@@ -29,10 +29,10 @@ var random = RandomNumberGenerator.new()
 	$ShopControl/ItemTexture2,
 	$ShopControl/ItemTexture3,
 ]
-@onready var soldout_textures = [
-	$ShopControl/SoldOutTexture1,
-	$ShopControl/SoldOutTexture2,
-	$ShopControl/SoldOutTexture3,
+@onready var soldout_rects = [
+	$ShopControl/SoldOutShader1,
+	$ShopControl/SoldOutShader2,
+	$ShopControl/SoldOutShader3,
 ]
 
 @onready var shop_sprite = $AnimatedSprite2D
@@ -53,11 +53,12 @@ func _process(delta):
 		
 		for i in range(shop_listings.size()):
 			var cost = shop_items[shop_listings[i]][1]
+			
 			if (player.coins_collected >= cost):
-				soldout_textures[i].visible = false
+				soldout_rects[i].material.set_shader_parameter("enabled", false)
 			else:
-				soldout_textures[i].visible = true
-		
+				soldout_rects[i].material.set_shader_parameter("enabled", true)
+				
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("players")):
 			if (!GameManager.multiplayer_mode_enabled ||

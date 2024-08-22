@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://byxhh826s58u0"]
+[gd_scene load_steps=18 format=3 uid="uid://byxhh826s58u0"]
 
 [ext_resource type="Texture2D" uid="uid://byoptr1x3tx8e" path="res://assets/sprites/level_objects/radio.png" id="1_m3sl1"]
 [ext_resource type="Script" path="res://scripts/radio.gd" id="1_w17rl"]
@@ -10,7 +10,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cosr1"]
 size = Vector2(16, 8)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4twdn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_boxbe"]
+resource_local_to_scene = true
 shader = ExtResource("1_wdyif")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = false
@@ -36,11 +37,9 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_m3xuh"]
 curve = SubResource("Curve_b00ri")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6xfy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bk2q"]
 shader = ExtResource("3_ljgki")
 shader_parameter/curve = SubResource("CurveTexture_m3xuh")
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n1vy4"]
 
 [sub_resource type="Animation" id="Animation_ih53b"]
 length = 0.001
@@ -90,7 +89,7 @@ position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_cosr1")
 
 [node name="RadioSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_4twdn")
+material = SubResource("ShaderMaterial_boxbe")
 position = Vector2(0, -8)
 texture = ExtResource("1_m3sl1")
 
@@ -118,13 +117,12 @@ scale_amount_curve = SubResource("Curve_222d4")
 color_ramp = SubResource("Gradient_p0g3t")
 anim_offset_max = 1.0
 
-[node name="BoomShader" type="TextureRect" parent="."]
+[node name="BoomShader" type="ColorRect" parent="."]
 visible = false
-material = SubResource("ShaderMaterial_y6xfy")
+material = SubResource("ShaderMaterial_1bk2q")
 offset_left = -12.0
 offset_top = -8.0
 offset_right = 4.0
-texture = SubResource("PlaceholderTexture2D_n1vy4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BoomShader"]
 libraries = {

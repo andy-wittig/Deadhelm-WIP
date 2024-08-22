@@ -76,6 +76,7 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e04v0"]
 shader = ExtResource("3_lbad0")
 shader_parameter/tint = null
+shader_parameter/enabled = false
 
 [node name="ghost" type="Node2D"]
 z_index = 10

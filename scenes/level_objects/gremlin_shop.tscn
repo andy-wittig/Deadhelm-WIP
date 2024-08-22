@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://clj453y1ct468"]
+[gd_scene load_steps=25 format=3 uid="uid://clj453y1ct468"]
 
 [ext_resource type="Script" path="res://scripts/gremlin_shop.gd" id="1_3bcr4"]
 [ext_resource type="Texture2D" uid="uid://cotkyff0ssvqr" path="res://assets/sprites/level_objects/gremlin_shop_sheet.png" id="1_u7smj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" path="res://shaders/black_and_white.gdshader" id="6_fbnqo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7qr2j"]
+resource_local_to_scene = true
 shader = ExtResource("1_wls4n")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = true
@@ -65,11 +66,20 @@ bg_color = Color(0.368627, 0.356863, 0.54902, 0.686275)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e8yue"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rhaog"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ofr8"]
 shader = ExtResource("6_fbnqo")
 shader_parameter/tint = null
+shader_parameter/enabled = false
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3t6bi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds2ir"]
+shader = ExtResource("6_fbnqo")
+shader_parameter/tint = null
+shader_parameter/enabled = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1kp0"]
+shader = ExtResource("6_fbnqo")
+shader_parameter/tint = null
+shader_parameter/enabled = false
 
 [sub_resource type="Animation" id="Animation_hkmag"]
 length = 0.001
@@ -183,7 +193,6 @@ offset_bottom = -48.0
 
 [node name="ShopMenuSprite" type="Sprite2D" parent="ShopControl"]
 clip_children = 2
-light_mask = 0
 use_parent_material = true
 position = Vector2(40, 16)
 texture = ExtResource("4_gampp")
@@ -226,7 +235,6 @@ text = "0
 horizontal_alignment = 1
 
 [node name="ItemTexture1" type="TextureRect" parent="ShopControl"]
-light_mask = 0
 use_parent_material = true
 layout_mode = 0
 offset_left = 12.0
@@ -235,7 +243,6 @@ offset_right = 28.0
 offset_bottom = 20.0
 
 [node name="ItemTexture2" type="TextureRect" parent="ShopControl"]
-light_mask = 0
 use_parent_material = true
 layout_mode = 0
 offset_left = 32.0
@@ -244,7 +251,6 @@ offset_right = 48.0
 offset_bottom = 20.0
 
 [node name="ItemTexture3" type="TextureRect" parent="ShopControl"]
-light_mask = 0
 use_parent_material = true
 layout_mode = 0
 offset_left = 52.0
@@ -288,32 +294,35 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_e8yue")
 
-[node name="SoldOutTexture1" type="TextureRect" parent="ShopControl"]
-material = SubResource("ShaderMaterial_rhaog")
+[node name="SoldOutShader1" type="ColorRect" parent="ShopControl"]
+material = SubResource("ShaderMaterial_7ofr8")
 layout_mode = 0
 offset_left = 11.0
 offset_top = 3.0
 offset_right = 29.0
 offset_bottom = 22.0
-texture = SubResource("PlaceholderTexture2D_3t6bi")
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
-[node name="SoldOutTexture2" type="TextureRect" parent="ShopControl"]
-material = SubResource("ShaderMaterial_rhaog")
+[node name="SoldOutShader2" type="ColorRect" parent="ShopControl"]
+material = SubResource("ShaderMaterial_ds2ir")
 layout_mode = 0
 offset_left = 31.0
 offset_top = 3.0
 offset_right = 49.0
 offset_bottom = 22.0
-texture = SubResource("PlaceholderTexture2D_3t6bi")
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
-[node name="SoldOutTexture3" type="TextureRect" parent="ShopControl"]
-material = SubResource("ShaderMaterial_rhaog")
+[node name="SoldOutShader3" type="ColorRect" parent="ShopControl"]
+material = SubResource("ShaderMaterial_a1kp0")
 layout_mode = 0
 offset_left = 51.0
 offset_top = 3.0
 offset_right = 69.0
 offset_bottom = 22.0
-texture = SubResource("PlaceholderTexture2D_3t6bi")
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -386,7 +386,6 @@ func collect_buff(buff: String):
 			if (player_health < max_health):
 				player_health += 25
 				player_health = min(player_health, max_health)
-				
 
 func collect_soul():
 	soul_pickup_audio.play()
