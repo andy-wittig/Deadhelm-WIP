@@ -10,6 +10,7 @@ enum menu {
 	GAMEOVER,
 }
 var current_menu := menu.MAIN
+var menu_started := false
 
 @onready var menu_scenes = {
 	"main_menu" : $MenuControl/MenuContainer,
@@ -36,30 +37,36 @@ func _process(_delta):
 					menu_scenes[scene].visible = false
 				else:
 					menu_scenes[scene].visible = true
+					if (scene == "main_menu"):
+						menu_opened()
 		menu.MULTIPLAYER:
 			for scene in menu_scenes:
 				if (scene != "multiplayer_menu"):
 					menu_scenes[scene].visible = false
 				else:
 					menu_scenes[scene].visible = true
+					menu_scenes[scene].menu_opened()
 		menu.SETTINGS:
 			for scene in menu_scenes:
 				if (scene != "settings_menu"):
 					menu_scenes[scene].visible = false
 				else:
 					menu_scenes[scene].visible = true
+					menu_scenes[scene].menu_opened()
 		menu.CREDITS:
 			for scene in menu_scenes:
 				if (scene != "credits_menu"):
 					menu_scenes[scene].visible = false
 				else:
 					menu_scenes[scene].visible = true
+					menu_scenes[scene].menu_opened()
 		menu.INGAME:
 			for scene in menu_scenes:
 				if (scene != "in_game_menu"):
 					menu_scenes[scene].visible = false
 				else:
 					menu_scenes[scene].visible = true
+					menu_scenes[scene].menu_opened()
 		menu.HIDDEN:
 			for scene in menu_scenes:
 					menu_scenes[scene].visible = false
@@ -69,7 +76,13 @@ func _process(_delta):
 					menu_scenes[scene].visible = false
 				else:
 					menu_scenes[scene].visible = true
-			
+					menu_scenes[scene].visible = false
+
+func menu_opened():
+	if (!menu_started):
+		$MenuControl/MenuContainer/startButton.grab_focus()
+		menu_started = true
+	
 func return_to_prev_menu():
 	if (GameManager.started_game):
 		if (current_menu == menu.INGAME):
@@ -81,15 +94,19 @@ func return_to_prev_menu():
 
 func _on_start_button_pressed():
 	get_owner().start_game()
+	menu_started = false
 
 func _on_multiplayer_button_pressed():
 	current_menu = menu.MULTIPLAYER
+	menu_started = false
 	
 func _on_settings_button_pressed():
 	current_menu = menu.SETTINGS
+	menu_started = false
 	
 func _on_credits_button_pressed():
 	current_menu = menu.CREDITS
+	menu_started = false
 	
 func _on_quit_button_pressed():
 	get_tree().quit()

@@ -8,7 +8,7 @@
 radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqt54"]
-radius = 32.0
+radius = 40.0
 
 [sub_resource type="Animation" id="Animation_shrvt"]
 length = 0.001
@@ -95,6 +95,7 @@ shape = SubResource("CircleShape2D_8ahte")
 texture = ExtResource("1_w0i00")
 
 [node name="HurtArea" type="Area2D" parent="."]
+visible = false
 collision_mask = 3
 
 [node name="HurtCollider" type="CollisionShape2D" parent="HurtArea"]
@@ -111,14 +112,14 @@ libraries = {
 autoplay = "rotate"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-z_index = -1
 amount = 25
 lifetime = 4.0
 speed_scale = 0.8
 randomness = 0.5
 lifetime_randomness = 0.5
+local_coords = true
 emission_shape = 1
-emission_sphere_radius = 3.0
+emission_sphere_radius = 10.0
 direction = Vector2(0, 0)
 gravity = Vector2(0, 0)
 orbit_velocity_min = 1.0

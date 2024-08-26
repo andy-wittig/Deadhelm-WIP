@@ -16,6 +16,8 @@ var controls_list = [
 	"in-game_menu",
 ]
 
+var menu_started := false
+
 @onready var check_windowed = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed
 @onready var check_vsync = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckVsync
 @onready var remap_container = $VBoxContainer/SettingsTabs/CONTROLS/ScrollContainer/RemapContainer
@@ -49,6 +51,11 @@ func _ready():
 		remap_container.add_child(label)
 		remap_container.add_child(button)
 		
+func menu_opened():
+	if (!menu_started):
+		$VBoxContainer/SettingsTabs.get_tab_bar().grab_focus()
+		menu_started = true
+
 func _on_music_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value))
 	AudioServer.set_bus_mute(MUSIC_BUS_ID, value < 0.05)
@@ -58,6 +65,7 @@ func _on_sfx_slider_value_changed(value):
 	AudioServer.set_bus_mute(SFX_BUS_ID, value < 0.05)
 
 func _on_back_button_pressed():
+	menu_started = false
 	menu_layer.return_to_prev_menu()
 
 func _on_check_windowed_toggled(toggled):

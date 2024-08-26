@@ -96,24 +96,32 @@ size_flags_vertical = 3
 
 [node name="startButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../quitButton")
+focus_next = NodePath("../multiplayerButton")
 theme_override_fonts/font = ExtResource("4_1urpk")
 theme_override_font_sizes/font_size = 24
 text = "single player"
 
 [node name="multiplayerButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../startButton")
+focus_neighbor_bottom = NodePath("../settingsButton")
 theme_override_fonts/font = ExtResource("4_1urpk")
 theme_override_font_sizes/font_size = 24
 text = "multiplayer"
 
 [node name="settingsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../multiplayerButton")
+focus_neighbor_bottom = NodePath("../creditsButton")
 theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 24
 text = "settings"
 
 [node name="creditsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../settingsButton")
+focus_neighbor_bottom = NodePath("../quitButton")
 theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 24
 text = "credits
@@ -122,6 +130,8 @@ text = "credits
 [node name="quitButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../creditsButton")
+focus_neighbor_bottom = NodePath("../startButton")
 theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 24
 text = "quit game"

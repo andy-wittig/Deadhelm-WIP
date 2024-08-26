@@ -25,7 +25,6 @@ facing_direction = 0
 texture = ExtResource("1_f2gjn")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 blend_mode = 1
 texture = SubResource("GradientTexture2D_jvcvn")
 
@@ -34,7 +33,7 @@ target_position = Vector2(-128, 0)
 collision_mask = 3
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 6.0
 one_shot = true
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
