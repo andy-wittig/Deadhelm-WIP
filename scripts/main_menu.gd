@@ -29,6 +29,7 @@ func _process(_delta):
 				current_menu = menu.INGAME
 			elif (current_menu == menu.INGAME || current_menu == menu.SETTINGS):
 				current_menu = menu.HIDDEN
+				$MenuControl/in_game_menu.menu_started = false
 	
 	match current_menu:
 		menu.MAIN:
