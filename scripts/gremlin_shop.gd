@@ -42,9 +42,15 @@ var random = RandomNumberGenerator.new()
 
 func _ready():
 	shop_control.visible = false
+	
 	for i in range(shop_listings.size()):
 		item_textures[i].texture = load(shop_items[shop_listings[i]][0])
 		price_labels[i].text = str(shop_items[shop_listings[i]][1])
+		
+	$ItemDescriptionLabel.text = (
+		shop_listings[0] + ": " + shop_items[shop_listings[0]][2] + "\n" +
+		shop_listings[1] + ": " + shop_items[shop_listings[1]][2] + "\n" +
+		shop_listings[2] + ": " + shop_items[shop_listings[2]][2])
 
 func _process(delta):
 	if (menu_opened):
@@ -106,8 +112,13 @@ func _on_purchase_button_3_pressed():
 	if (player.coins_collected >= cost):
 		player.collect_buff(shop_listings[2])
 		player.coins_collected -= cost
-
-
+		
+func mouse_entered():
+	$ItemDescriptionLabel.visible = true
+		
+func mouse_exited():
+	$ItemDescriptionLabel.visible = false
+		
 func _on_squabble_timer_timeout():
 	var choice = random.randi_range(0, 3)
 	squabble_audio.set_stream(gremlin_squabbles[choice])
