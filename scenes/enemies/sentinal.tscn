@@ -243,9 +243,8 @@ stream = ExtResource("5_gmvqt")
 volume_db = -20.0
 bus = &"SFX"
 
-[node name="enemy_healthbar" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("7_3s50h")]
+[node name="enemy_healthbar" parent="." instance=ExtResource("7_3s50h")]
 position = Vector2(0, -9)
-collision_shape = NodePath("../CollisionShape2D")
 
 [connection signal="timeout" from="RoamTimer" to="." method="_on_roam_timer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

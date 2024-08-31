@@ -12,4 +12,4 @@ texture = ExtResource("1_haanx")
 [node name="HurtPlayerArea" parent="." instance=ExtResource("2_faeep")]
 position = Vector2(0, -3)
 scale = Vector2(0.6, 0.4)
-damage = 15
+damage = 8

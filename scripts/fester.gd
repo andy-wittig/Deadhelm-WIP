@@ -35,6 +35,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animation_player = $AnimationPlayer
 @onready var audio_player = $FesterScreamAudio
 @onready var hurt_player_area = $HurtPlayerArea
+
+signal enemy_was_hurt
 	
 func _ready():
 	hurt_player_area.active = false
@@ -150,6 +152,7 @@ func apply_knockback(other_pos: Vector2, force: float):
 	
 @rpc("any_peer", "call_local")
 func hurt_enemy(damage: int, other_pos: Vector2, force: float):
+	emit_signal("enemy_was_hurt")
 	animation_player.play("hurt_blink")
 	apply_knockback(other_pos, force)
 	

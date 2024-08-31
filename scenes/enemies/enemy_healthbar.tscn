@@ -8,7 +8,7 @@ bg_color = Color(0.0627451, 0.0705882, 0.109804, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjamh"]
 bg_color = Color(0.92549, 0.152941, 0.247059, 1)
 
-[node name="enemy_healthbar" type="Area2D"]
+[node name="enemy_healthbar" type="Node2D"]
 script = ExtResource("1_ckikh")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -28,9 +28,8 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_kjamh")
 step = 1.0
 show_percentage = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 8)
+[node name="VisibleTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="VisibleTimer" to="." method="_on_visible_timer_timeout"]

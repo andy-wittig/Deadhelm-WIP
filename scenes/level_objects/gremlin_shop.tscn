@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://clj453y1ct468"]
+[gd_scene load_steps=27 format=3 uid="uid://clj453y1ct468"]
 
 [ext_resource type="Script" path="res://scripts/gremlin_shop.gd" id="1_3bcr4"]
 [ext_resource type="Texture2D" uid="uid://cotkyff0ssvqr" path="res://assets/sprites/level_objects/gremlin_shop_sheet.png" id="1_u7smj"]
@@ -64,7 +64,29 @@ border_width_bottom = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbb2u"]
 bg_color = Color(0.368627, 0.356863, 0.54902, 0.686275)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e8yue"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jx00o"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrmgq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_312kc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7ofr8"]
 shader = ExtResource("6_fbnqo")
@@ -268,7 +290,7 @@ offset_bottom = 21.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_e8yue")
+theme_override_styles/focus = SubResource("StyleBoxFlat_jx00o")
 
 [node name="PurchaseButton2" type="Button" parent="ShopControl"]
 use_parent_material = true
@@ -280,7 +302,7 @@ offset_bottom = 21.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_e8yue")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qrmgq")
 
 [node name="PurchaseButton3" type="Button" parent="ShopControl"]
 use_parent_material = true
@@ -292,7 +314,7 @@ offset_bottom = 21.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_e8yue")
+theme_override_styles/focus = SubResource("StyleBoxFlat_312kc")
 
 [node name="SoldOutShader1" type="ColorRect" parent="ShopControl"]
 material = SubResource("ShaderMaterial_7ofr8")

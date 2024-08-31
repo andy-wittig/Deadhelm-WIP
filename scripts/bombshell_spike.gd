@@ -2,6 +2,7 @@ extends Area2D
 
 const SPEED = 100.0
 const SPIKE_KNOCK_BACK := 100
+const PLAYER_DAMAGE := 6
 
 var direction = Vector2(1.0,0.0)
 
@@ -19,9 +20,9 @@ func _on_destroy_timer_timeout():
 func _on_body_entered(body):
 	if (body.is_in_group("players")):
 		if (!GameManager.multiplayer_mode_enabled):
-			body.hurt_player(10, global_position, SPIKE_KNOCK_BACK)
+			body.hurt_player(PLAYER_DAMAGE, global_position, SPIKE_KNOCK_BACK)
 			destroy_self()
 		elif (multiplayer.is_server()):
-			body.hurt_player.rpc_id(body.player_id, 10, global_position, SPIKE_KNOCK_BACK)
+			body.hurt_player.rpc_id(body.player_id, PLAYER_DAMAGE, global_position, SPIKE_KNOCK_BACK)
 			rpc("destroy_self")
 			

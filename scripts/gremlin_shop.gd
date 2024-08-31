@@ -88,6 +88,8 @@ func _on_input_event(viewport, event, shape_idx):
 func _on_animation_player_animation_finished(anim_name):
 	if (!menu_opened):
 		shop_control.visible = false
+	else:
+		$ShopControl/PurchaseButton1.grab_focus()
 
 func _on_purchase_button_1_pressed():
 	var cost = shop_items[shop_listings[0]][1]

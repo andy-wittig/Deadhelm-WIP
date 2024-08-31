@@ -40,6 +40,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var ray_cast_left = $RayCastLeft
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
+
+signal enemy_was_hurt
 	
 func _ready():
 	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
@@ -189,6 +191,7 @@ func apply_knockback(other_pos: Vector2, force: float):
 	
 @rpc("any_peer", "call_local")
 func hurt_enemy(damage: int, other_pos: Vector2, force: float):
+	emit_signal("enemy_was_hurt")
 	animation_player.play("hurt_blink")
 	apply_knockback(other_pos, force)
 	

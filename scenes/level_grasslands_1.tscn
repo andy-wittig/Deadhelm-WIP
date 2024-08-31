@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d30jjelyeh4xq" path="res://assets/sprites/level_objects/tilesheet final.png" id="3_ymrd8"]
 [ext_resource type="PackedScene" uid="uid://u1heuwmpu3ud" path="res://scenes/level_objects/leaping_mushroom.tscn" id="4_kgpay"]
 [ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/spawn_gate.tscn" id="5_lsitk"]
-[ext_resource type="PackedScene" uid="uid://c2ovuhtbii1pb" path="res://scenes/level_test.tscn" id="6_8ya1h"]
+[ext_resource type="PackedScene" uid="uid://dis3wy3nmnpfo" path="res://scenes/level_grasslands_2.tscn" id="6_y6dws"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="7_bjmkc"]
 [ext_resource type="PackedScene" uid="uid://cqbypq7pvrrg7" path="res://scenes/level_objects/platform.tscn" id="8_1mk3m"]
 [ext_resource type="PackedScene" uid="uid://ct1vd1qwksnqo" path="res://scenes/level_objects/wooden_spike.tscn" id="9_3n6k1"]
@@ -1250,13 +1250,13 @@ z_index = 5
 
 [node name="spawn_gate" parent="game objects" instance=ExtResource("5_lsitk")]
 position = Vector2(200, -416)
-next_level = ExtResource("6_8ya1h")
+next_level = ExtResource("6_y6dws")
 
 [node name="ladder objects" type="Node" parent="game objects"]
 
 [node name="ladder" parent="game objects/ladder objects" instance=ExtResource("7_bjmkc")]
-position = Vector2(104, -368)
-scale = Vector2(1, 6)
+position = Vector2(104, -376)
+scale = Vector2(1, 5)
 
 [node name="ladder4" parent="game objects/ladder objects" instance=ExtResource("7_bjmkc")]
 position = Vector2(424, -184)

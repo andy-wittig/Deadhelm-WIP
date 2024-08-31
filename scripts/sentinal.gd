@@ -34,6 +34,8 @@ var state := state_type.MOVING
 @onready var animation_player = $AnimationPlayer
 @onready var chase_player = $"chase player"
 
+signal enemy_was_hurt
+
 func _ready():
 	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 		init_position = global_position
@@ -45,6 +47,7 @@ func apply_knockback(other_pos: Vector2, force: float):
 	
 @rpc("any_peer", "call_local")
 func hurt_enemy(damage: int, other_pos: Vector2, force: float):
+	emit_signal("enemy_was_hurt")
 	animation_player.play("enemy_blink")
 	apply_knockback(other_pos, force)
 	
@@ -74,7 +77,6 @@ func destroy_self():
 	
 @rpc("call_local")
 func attack(direction):
-	print ("fire!!")
 	var rocket = load("res://scenes/enemies/sentinal_rocket.tscn").instantiate()
 	rocket.direction = direction
 	rocket.position = %"Rocket Marker".position

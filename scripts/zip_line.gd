@@ -43,8 +43,9 @@ func _process(delta):
 	if (!zipline_active):
 		sparks_particle.emitting = false
 		
-		for body in $LineCollisionShapes.get_overlapping_bodies():
-			if (body.is_in_group("players")):
+		for area in $LineCollisionShapes.get_overlapping_areas():
+			if (area.is_in_group("players")):
+				var body = area.get_parent()
 				if (!GameManager.multiplayer_mode_enabled ||
 				body.player_id == multiplayer.get_unique_id()):
 					if (Input.is_action_just_pressed("pickup")):
@@ -62,7 +63,8 @@ func _process(delta):
 		
 		if (zipline_follow.progress_ratio == 1.0 ||
 		Input.is_action_just_pressed("move_up") || 
-		Input.is_action_just_pressed("move_down")):
+		Input.is_action_just_pressed("move_down") ||
+		Input.is_action_just_pressed("pickup")):
 			player.state = player.state_type.MOVING
 			zipline_follow.progress = 0
 			zipline_active = false

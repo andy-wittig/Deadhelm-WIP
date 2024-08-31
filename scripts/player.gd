@@ -190,7 +190,7 @@ func _process(delta):
 	#mystic dial and spell spawning
 	if (currently_selected_slot.get_slot_item() != "empty"):
 		#open mystic dial
-		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("right_click")):
+		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("left_click")):
 			spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
 			dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
 			get_parent().add_child(dial_instance)
@@ -201,7 +201,7 @@ func _process(delta):
 			dial_created = true
 		
 		#trigger mystic dial
-		if (dial_created && Input.is_action_just_pressed("left_click")):
+		if (dial_created && Input.is_action_just_released("left_click")):
 			var spell_path = currently_selected_slot.get_spell_instance()
 			var new_spell = load(spell_path).instantiate()
 			new_spell.player = self
