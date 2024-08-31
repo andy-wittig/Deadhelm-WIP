@@ -93,9 +93,11 @@ func _on_input_event(viewport, event, shape_idx):
 
 func _on_animation_player_animation_finished(anim_name):
 	if (!menu_opened):
+		$ItemDescriptionLabel.visible = false
 		shop_control.visible = false
 	else:
 		$ShopControl/PurchaseButton1.grab_focus()
+		$ItemDescriptionLabel.visible = true
 
 func _on_purchase_button_1_pressed():
 	var cost = shop_items[shop_listings[0]][1]
@@ -114,12 +116,6 @@ func _on_purchase_button_3_pressed():
 	if (player.coins_collected >= cost):
 		player.collect_buff(shop_listings[2])
 		player.coins_collected -= cost
-		
-func mouse_entered():
-	$ItemDescriptionLabel.visible = true
-		
-func mouse_exited():
-	$ItemDescriptionLabel.visible = false
 		
 func _on_squabble_timer_timeout():
 	var choice = random.randi_range(0, 3)
