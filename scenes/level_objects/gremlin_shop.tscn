@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_b2nui"]
 [ext_resource type="Texture2D" uid="uid://brcfqdgnchh52" path="res://assets/sprites/UI/shop/shop_background_ui.png" id="4_gampp"]
 [ext_resource type="Shader" path="res://shaders/black_and_white.gdshader" id="6_fbnqo"]
+[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="7_fblmp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7qr2j"]
 resource_local_to_scene = true
@@ -48,6 +49,9 @@ animations = [{
 "name": &"default",
 "speed": 4.0
 }]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mepao"]
+bg_color = Color(0.368627, 0.356863, 0.54902, 0.588235)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3rxjk"]
 light_mode = 1
@@ -141,6 +145,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ItemDescriptionLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_mglit"]
 resource_name = "open_menu"
@@ -181,6 +197,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ItemDescriptionLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3mmh"]
 _data = {
@@ -201,6 +229,23 @@ position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_okklg")
 autoplay = "default"
 frame_progress = 0.523898
+
+[node name="ItemDescriptionLabel" type="Label" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 100
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.0
+offset_right = 21.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("7_fblmp")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_mepao")
+text = "item descriptions"
+horizontal_alignment = 1
 
 [node name="ShopControl" type="Control" parent="."]
 z_index = 100
@@ -287,6 +332,7 @@ offset_left = 11.0
 offset_top = 3.0
 offset_right = 29.0
 offset_bottom = 21.0
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
@@ -299,6 +345,7 @@ offset_left = 31.0
 offset_top = 3.0
 offset_right = 49.0
 offset_bottom = 21.0
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
@@ -311,6 +358,7 @@ offset_left = 51.0
 offset_top = 3.0
 offset_right = 69.0
 offset_bottom = 21.0
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
@@ -364,6 +412,8 @@ attenuation = 6.49802
 bus = &"SFX"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="ShopControl" to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="ShopControl" to="." method="mouse_exited"]
 [connection signal="pressed" from="ShopControl/PurchaseButton1" to="." method="_on_purchase_button_1_pressed"]
 [connection signal="pressed" from="ShopControl/PurchaseButton2" to="." method="_on_purchase_button_2_pressed"]
 [connection signal="pressed" from="ShopControl/PurchaseButton3" to="." method="_on_purchase_button_3_pressed"]
