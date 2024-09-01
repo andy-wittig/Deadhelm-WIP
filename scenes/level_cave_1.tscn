@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dyruqot1bthjn"]
+[gd_scene load_steps=36 format=3 uid="uid://dyruqot1bthjn"]
 
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="1_61iyt"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_15plg"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://dunbwsblhvliw" path="res://scenes/level_objects/totem.tscn" id="19_uunp8"]
 [ext_resource type="PackedScene" uid="uid://dv7ii30ng3m2" path="res://scenes/level_objects/rock_wall.tscn" id="21_c1qg4"]
 [ext_resource type="PackedScene" uid="uid://xekuabglq1uh" path="res://scenes/level_objects/lantern.tscn" id="21_pc1p8"]
-[ext_resource type="PackedScene" uid="uid://clj453y1ct468" path="res://scenes/level_objects/gremlin_shop.tscn" id="22_dn0ti"]
 
 [sub_resource type="Gradient" id="Gradient_so2so"]
 colors = PackedColorArray(0.243137, 0.231373, 0.396078, 1, 0.54902, 0.470588, 0.647059, 1)
@@ -657,7 +656,3 @@ required_item = "poison bottle"
 
 [node name="rock_wall" parent="Level Objects" instance=ExtResource("21_c1qg4")]
 position = Vector2(72, -912)
-
-[node name="gremlin_shop" parent="Level Objects" instance=ExtResource("22_dn0ti")]
-position = Vector2(992, -208)
-shop_listings = Array[String](["heart_crystal", "defense_upgrade"])
