@@ -204,7 +204,7 @@ material = SubResource("ShaderMaterial_7qr2j")
 position = Vector2(0, -20)
 sprite_frames = SubResource("SpriteFrames_okklg")
 autoplay = "default"
-frame_progress = 0.523898
+frame_progress = 0.715607
 
 [node name="ItemDescriptionLabel" type="Label" parent="."]
 visible = false

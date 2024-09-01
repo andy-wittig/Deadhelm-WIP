@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://j46c37k23ijy"]
+
+[ext_resource type="Texture2D" uid="uid://c3thu02tav6qw" path="res://assets/sprites/level_objects/blacksmith_sheet.png" id="1_ecw4u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a8su"]
+atlas = ExtResource("1_ecw4u")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iccuu"]
+atlas = ExtResource("1_ecw4u")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v808o"]
+atlas = ExtResource("1_ecw4u")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pgkb"]
+atlas = ExtResource("1_ecw4u")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xmlnv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a8su")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iccuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v808o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pgkb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sglf1"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_14asj"]
+load_path = "res://.godot/imported/smoke_effect.png-8625973dad6b12b525498378ab3f9f72.ctex"
+
+[sub_resource type="Curve" id="Curve_u4ymv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.509294), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_8ch5r"]
+offsets = PackedFloat32Array(0, 0.277778, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0)
+
+[node name="blacksmith" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_xmlnv")
+autoplay = "default"
+frame_progress = 0.504981
+
+[node name="SmokeParticles" type="CPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_sglf1")
+position = Vector2(11, -32)
+amount = 10
+lifetime = 2.0
+speed_scale = 0.8
+explosiveness = 0.1
+local_coords = true
+texture = SubResource("CompressedTexture2D_14asj")
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+radial_accel_min = -15.0
+damping_min = 2.0
+damping_max = 5.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_u4ymv")
+color_ramp = SubResource("Gradient_8ch5r")
+anim_offset_max = 1.0

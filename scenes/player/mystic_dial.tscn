@@ -90,10 +90,10 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("ParticlePath1/PathFollow2D:progress_ratio")
-tracks/1/interp = 2
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -102,10 +102,10 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("ParticlePath2/PathFollow2D:progress_ratio")
-tracks/2/interp = 2
+tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
@@ -137,7 +137,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1
 
 [sub_resource type="Curve2D" id="Curve2D_x5rtt"]
 _data = {
-"points": PackedVector2Array(-5.52501, 29.7789, 0, -28, -22, 0, 0, -28, 0, 30, 22, 0)
+"points": PackedVector2Array(-5.52501, 29.7789, 0, -30, -24, 0, 0, -30, 0, 30, 24, 0)
 }
 point_count = 2
 
@@ -157,7 +157,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1
 
 [sub_resource type="Curve2D" id="Curve2D_rnrog"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 28, -22, 0, 0, 28, 0, 0, 22, 0)
+"points": PackedVector2Array(0, 0, 0, 30, -24, 0, 0, 30, 0, 0, 24, 0)
 }
 point_count = 2
 
@@ -216,15 +216,15 @@ anim_offset_max = 1.0
 curve = SubResource("Curve2D_x5rtt")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ParticlePath1"]
-position = Vector2(-22, 0)
+position = Vector2(-24, 0)
 rotation = -1.5708
 
 [node name="MysticPathParticles" type="CPUParticles2D" parent="ParticlePath1/PathFollow2D"]
 material = SubResource("CanvasItemMaterial_bohdq")
 rotation = 3.14159
 emitting = false
-amount = 10
-lifetime = 0.5
+amount = 12
+lifetime = 0.4
 one_shot = true
 texture = ExtResource("3_hhvmr")
 emission_shape = 1
@@ -245,15 +245,15 @@ anim_offset_max = 1.0
 curve = SubResource("Curve2D_rnrog")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ParticlePath2"]
-position = Vector2(-22, 0)
+position = Vector2(-24, 0)
 rotation = 1.5708
 
 [node name="MysticPathParticles" type="CPUParticles2D" parent="ParticlePath2/PathFollow2D"]
 material = SubResource("CanvasItemMaterial_bohdq")
 rotation = 3.14159
 emitting = false
-amount = 10
-lifetime = 0.5
+amount = 12
+lifetime = 0.4
 one_shot = true
 texture = ExtResource("3_hhvmr")
 emission_shape = 1
