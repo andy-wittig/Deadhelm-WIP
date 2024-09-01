@@ -34,7 +34,7 @@ var attack_cooldown := false
 	"shield" : 5,
 	"lightning" : 3,
 	"flame" : 3,
-	"poison bottle" : 15,
+	"poison bottle" : 10,
 	"bow" : 6
 }
 

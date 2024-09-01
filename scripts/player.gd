@@ -206,7 +206,6 @@ func _process(delta):
 			var new_spell = load(spell_path).instantiate()
 			new_spell.player = self
 			get_tree().get_root().get_node("game/Level").add_child(new_spell)
-			
 			spell_cast_audio.play()
 			
 			currently_selected_slot.start_cooldown()

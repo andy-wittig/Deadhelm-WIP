@@ -53,6 +53,10 @@ func _ready():
 		shop_listings[2] + ": " + shop_items[shop_listings[2]][2])
 
 func _process(delta):
+	if (!GameManager.access_ingame_menu): #close shop if ingame menu is overlapping
+		menu_opened = false
+		animation_player.play_backwards("open_menu")
+		
 	if (menu_opened):
 		shop_control.visible = true
 		shop_sprite.material.set_shader_parameter("enabled", false)
@@ -71,7 +75,7 @@ func _process(delta):
 			body.player_id == multiplayer.get_unique_id()):
 				player = body
 				if (!menu_opened): shop_sprite.material.set_shader_parameter("enabled", true)
-				if Input.is_action_just_pressed("pickup"):
+				if (Input.is_action_just_pressed("pickup")):
 					menu_opened = !menu_opened
 					if (menu_opened): animation_player.play("open_menu")
 					else: animation_player.play_backwards("open_menu")

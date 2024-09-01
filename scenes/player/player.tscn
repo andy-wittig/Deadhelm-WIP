@@ -169,7 +169,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_74c68"]
 radius = 4.0
-height = 16.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_xpmlu"]
 length = 0.001
@@ -294,7 +294,7 @@ autoplay = "idle"
 frame_progress = 0.975332
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_74c68")
 
 [node name="InteractArea" type="Area2D" parent="."]
@@ -311,34 +311,37 @@ libraries = {
 
 [node name="Sound Effects" type="Node" parent="."]
 
-[node name="PlayerHurtAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
+[node name="PlayerHurtAudio" type="AudioStreamPlayer" parent="Sound Effects"]
 stream = ExtResource("7_agady")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="CoinPickupAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
+[node name="CoinPickupAudio" type="AudioStreamPlayer" parent="Sound Effects"]
 stream = ExtResource("7_2kihc")
-max_polyphony = 5
+volume_db = -10.0
+max_polyphony = 4
 bus = &"SFX"
 
-[node name="TomePickupAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
+[node name="TomePickupAudio" type="AudioStreamPlayer" parent="Sound Effects"]
 stream = ExtResource("8_3og7p")
 volume_db = 5.0
 bus = &"SFX"
 
-[node name="SoulPickupAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
+[node name="SoulPickupAudio" type="AudioStreamPlayer" parent="Sound Effects"]
 stream = ExtResource("9_134ax")
 volume_db = 5.0
 bus = &"SFX"
 
-[node name="FootstepAudio" type="AudioStreamPlayer2D" parent="Sound Effects"]
+[node name="FootstepAudio" type="AudioStreamPlayer" parent="Sound Effects"]
 stream = ExtResource("12_u6xwe")
 volume_db = -8.0
+bus = &"SFX"
 
 [node name="SpellCastAudio" type="AudioStreamPlayer" parent="Sound Effects"]
 stream = ExtResource("13_ujh84")
 volume_db = -8.0
 pitch_scale = 0.5
+bus = &"SFX"
 
 [node name="DustParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_rncr1")

@@ -54,6 +54,7 @@ func _process(_delta):
 				else:
 					menu_scenes[scene].visible = true
 					menu_scenes[scene].menu_opened()
+					GameManager.access_ingame_menu = false
 		menu.CREDITS:
 			for scene in menu_scenes:
 				if (scene != "credits_menu"):
@@ -68,16 +69,18 @@ func _process(_delta):
 				else:
 					menu_scenes[scene].visible = true
 					menu_scenes[scene].menu_opened()
+					GameManager.access_ingame_menu = false
 		menu.HIDDEN:
 			for scene in menu_scenes:
 					menu_scenes[scene].visible = false
+					GameManager.access_ingame_menu = true
 		menu.GAMEOVER:
 			for scene in menu_scenes:
 				if (scene != "gameover_menu"):
 					menu_scenes[scene].visible = false
 				else:
 					menu_scenes[scene].visible = true
-					menu_scenes[scene].visible = false
+					menu_scenes[scene].menu_opened()
 
 func menu_opened():
 	if (!menu_started):

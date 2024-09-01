@@ -5,9 +5,13 @@ var placeholder_spell : Sprite2D
 
 @onready var animation_player = $AnimationPlayer
 @onready var mystic_particles = $MysticParticles
+@onready var mystic_path_particles1 = $ParticlePath1/PathFollow2D/MysticPathParticles
+@onready var mystic_path_particles2 = $ParticlePath2/PathFollow2D/MysticPathParticles
 
 func destroy():
 	placeholder_spell.visible = not placeholder_spell.visible
+	mystic_path_particles1.emitting = true
+	mystic_path_particles2.emitting = true
 	animation_player.play("fade_out")
 	$DestroyTimer.start()
 	
@@ -31,4 +35,5 @@ func _process(_delta):
 	mystic_particles.global_position = player.spell_spawn.global_position
 	#update rotation
 	placeholder_spell.rotation = player.spell_direction.angle()
-
+	$ParticlePath1.rotation = player.spell_direction.angle()
+	$ParticlePath2.rotation = player.spell_direction.angle()
