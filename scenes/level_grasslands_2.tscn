@@ -142,7 +142,6 @@ position = Vector2(480, -448)
 
 [node name="player" parent="players" instance=ExtResource("3_lefxa")]
 z_index = 5
-position = Vector2(432, -912)
 
 [node name="Ziplines" type="Node" parent="."]
 
@@ -399,6 +398,7 @@ spawn_wait = 3.0
 [node name="spawn_gate" parent="Level Objects" instance=ExtResource("17_dkwbp")]
 position = Vector2(880, -1344)
 next_level = ExtResource("18_sfou0")
+soul_cost = 12
 
 [node name="leaping mushroom4" parent="Level Objects" instance=ExtResource("4_kgpay")]
 position = Vector2(1016, -1168)

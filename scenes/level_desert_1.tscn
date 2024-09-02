@@ -153,6 +153,21 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Animation" id="Animation_4ybbm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(792, -656)]
+}
+
 [sub_resource type="Animation" id="Animation_q1yfm"]
 resource_name = "move"
 length = 3.0
@@ -170,7 +185,13 @@ tracks/0/keys = {
 "values": [Vector2(792, -656), Vector2(792, -592)]
 }
 
-[sub_resource type="Animation" id="Animation_4ybbm"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8e5x"]
+_data = {
+"RESET": SubResource("Animation_4ybbm"),
+"move": SubResource("Animation_q1yfm")
+}
+
+[sub_resource type="Animation" id="Animation_y7bhv"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -182,13 +203,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(792, -656)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8e5x"]
-_data = {
-"RESET": SubResource("Animation_4ybbm"),
-"move": SubResource("Animation_q1yfm")
+"values": [Vector2(856, -656)]
 }
 
 [sub_resource type="Animation" id="Animation_ka317"]
@@ -206,21 +221,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(856, -592), Vector2(856, -656)]
-}
-
-[sub_resource type="Animation" id="Animation_y7bhv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(856, -656)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yy67r"]
@@ -266,7 +266,6 @@ position = Vector2(40, -496)
 
 [node name="player" parent="players" instance=ExtResource("3_2adtw")]
 z_index = 5
-position = Vector2(728, 208)
 
 [node name="game objects" type="Node" parent="."]
 
@@ -461,6 +460,7 @@ position = Vector2(616, -568)
 [node name="spawn_gate" parent="." instance=ExtResource("12_56v53")]
 position = Vector2(808, -272)
 next_level = ExtResource("13_rnvsw")
+soul_cost = 14
 
 [node name="chest" parent="." instance=ExtResource("14_6446v")]
 position = Vector2(40, -368)
@@ -475,7 +475,7 @@ position = Vector2(864, -416)
 coin_amount = 4
 
 [node name="offering shrine" parent="." instance=ExtResource("15_fpcoq")]
-position = Vector2(568, -48)
+position = Vector2(464, -592)
 soul_cost = 8
 spell_type = "meteor"
 
