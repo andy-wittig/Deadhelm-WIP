@@ -35,7 +35,17 @@ var attack_cooldown := false
 	"lightning" : 3,
 	"flame" : 3,
 	"poison bottle" : 10,
-	"bow" : 6
+	"bow" : 6,
+}
+
+enum class_type {SHORT_RANGE, LONG_RANGE, DEFENSE, THROWING}
+@onready var item_class = {
+	"meteor" : class_type.LONG_RANGE,
+	"shield" : class_type.DEFENSE,
+	"lightning" : class_type.SHORT_RANGE,
+	"flame" : class_type.SHORT_RANGE,
+	"poison bottle" : class_type.THROWING,
+	"bow" : class_type.LONG_RANGE,
 }
 
 func _ready():
@@ -54,10 +64,10 @@ func _process(delta):
 			
 	cooldown_progress.value = cooldown_timer.time_left
 			
-func start_cooldown():
+func start_cooldown(item: String):
 	attack_cooldown = true
-	cooldown_progress.max_value = item_cooldown[items[current_item]]
-	cooldown_timer.start(item_cooldown[items[current_item]])
+	cooldown_progress.max_value = item_cooldown[item]
+	cooldown_timer.start(item_cooldown[item])
 
 func _on_cooldown_timer_timeout():
 	attack_cooldown = false
@@ -67,6 +77,9 @@ func get_can_drop():
 		return true
 	else:
 		return false
+
+func get_slot_item_class():
+	return item_class[get_slot_item()]
 
 func get_slot_item():
 	return items[current_item]

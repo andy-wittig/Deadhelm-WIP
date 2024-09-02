@@ -4,7 +4,7 @@ extends CharacterBody2D
 const SPEED := 75.0
 const GRAVITY := 960.0
 const EXTRA_GRAVITY := 200.0
-const CLIMB_SPEED := 65.0
+const CLIMB_SPEED := 75.0
 const ZIPLINE_SPEED := 100
 const JUMP_VELOCITY := -250.0
 const COYOTE_TIME := 0.15
@@ -188,8 +188,17 @@ func _process(delta):
 			currently_selected_slot.set_slot_item("empty")	
 	
 	#mystic dial and spell spawning
-	if (currently_selected_slot.get_slot_item() != "empty"):
-		#open mystic dial
+	var can_fire := true
+	
+	if (currently_selected_slot.get_slot_item() == "empty"): can_fire = false
+	else: #ensure spells of same class can't be used at the same time
+		var currently_selected_class = currently_selected_slot.get_slot_item_class()
+		for slot in inventory:
+			if (inventory[slot].get_slot_item() != "empty" && inventory[slot].attack_cooldown):
+					if (inventory[slot].get_slot_item_class() == currently_selected_class):
+						can_fire = false
+	
+	if (can_fire):
 		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("left_click")):
 			spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
 			dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
@@ -208,15 +217,9 @@ func _process(delta):
 			get_tree().get_root().get_node("game/Level").add_child(new_spell)
 			spell_cast_audio.play()
 			
-			currently_selected_slot.start_cooldown()
+			currently_selected_slot.start_cooldown(currently_selected_slot.get_slot_item())
 			dial_instance.destroy()
 			dial_created = false
-	
-	#release mystic dial		
-	if Input.is_action_just_released("right_click"):
-			if (dial_created):
-				dial_instance.destroy()
-				dial_created = false
 
 func _physics_process(delta):
 	#simple state machine
