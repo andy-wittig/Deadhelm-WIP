@@ -142,6 +142,7 @@ position = Vector2(480, -448)
 
 [node name="player" parent="players" instance=ExtResource("3_lefxa")]
 z_index = 5
+position = Vector2(-16, -320)
 
 [node name="Ziplines" type="Node" parent="."]
 
@@ -437,3 +438,11 @@ position = Vector2(864, -1600)
 bounce_force = -400.0
 
 [node name="Killzone" parent="." instance=ExtResource("23_c1lgd")]
+
+[node name="chest" parent="." instance=ExtResource("11_7vyvg")]
+position = Vector2(528, -752)
+coin_amount = 20
+
+[node name="chest2" parent="." instance=ExtResource("11_7vyvg")]
+position = Vector2(552, -784)
+coin_amount = 20

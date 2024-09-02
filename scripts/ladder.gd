@@ -6,7 +6,7 @@ func _process(delta):
 			var body = area.get_parent()
 			if (!GameManager.multiplayer_mode_enabled ||
 			body.player_id == multiplayer.get_unique_id()):
-				if (Input.is_action_just_pressed("move_up") || Input.is_action_just_pressed("move_down")):
+				if (Input.is_action_just_pressed("pickup")):
 					body.state = body.state_type.CLIMBING
 
 func _on_area_exited(area):

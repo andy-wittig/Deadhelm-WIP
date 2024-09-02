@@ -14,10 +14,10 @@ var random = RandomNumberGenerator.new()
 	load("res://assets/sound effects/shop_gremlin/gremlin_5.mp3"),
 ]
 @onready var shop_items = {
-	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 12, "returns one lost life"],
-	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 10, "buffs total health by +10"],
-	"double_jump" : ["res://assets/sprites/UI/shop/double_jump.png", 20, "provides a second jump ability"],
-	"health_potion" : ["res://assets/sprites/UI/shop/health_potion.png", 5, "heals the player by +25"],
+	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 12, "returns one lost life", false],
+	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 10, "buffs total health by +10", false],
+	"double_jump" : ["res://assets/sprites/UI/shop/double_jump.png", 20, "provides a second jump ability", false],
+	"health_potion" : ["res://assets/sprites/UI/shop/health_potion.png", 5, "heals the player by +25", false],
 }
 @onready var price_labels := [
 	$ShopControl/PriceLabel1,
@@ -62,13 +62,28 @@ func _process(delta):
 		shop_sprite.material.set_shader_parameter("enabled", false)
 		
 		for i in range(shop_listings.size()):
+			shop_items[shop_listings[i]][3] = true
 			var cost = shop_items[shop_listings[i]][1]
 			
-			if (player.coins_collected >= cost):
+			match shop_listings[i]:
+				"heart_crystal":
+					if (player.player_lives >= player.MAX_LIVES):
+						shop_items[shop_listings[i]][3] = false
+				"defense_upgrade":
+					if (player.max_health >= player.MAX_UPGRADED_HEALTH):
+						shop_items[shop_listings[i]][3] = false
+				"health_potion":
+					if (player.player_health >= player.max_health):
+						shop_items[shop_listings[i]][3] = false
+			
+			if (player.coins_collected <= cost):
+				shop_items[shop_listings[i]][3] = false		
+				
+			if (shop_items[shop_listings[i]][3]):
 				soldout_rects[i].material.set_shader_parameter("enabled", false)
 			else:
 				soldout_rects[i].material.set_shader_parameter("enabled", true)
-				
+		
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("players")):
 			if (!GameManager.multiplayer_mode_enabled ||
@@ -105,19 +120,19 @@ func _on_animation_player_animation_finished(anim_name):
 
 func _on_purchase_button_1_pressed():
 	var cost = shop_items[shop_listings[0]][1]
-	if (player.coins_collected >= cost):
+	if (shop_items[shop_listings[0]][3]):
 		player.collect_buff(shop_listings[0])
 		player.coins_collected -= cost
 
 func _on_purchase_button_2_pressed():
 	var cost = shop_items[shop_listings[1]][1]
-	if (player.coins_collected >= cost):
+	if (shop_items[shop_listings[1]][3]):
 		player.collect_buff(shop_listings[1])
 		player.coins_collected -= cost
 
 func _on_purchase_button_3_pressed():
 	var cost = shop_items[shop_listings[2]][1]
-	if (player.coins_collected >= cost):
+	if (shop_items[shop_listings[2]][3]):
 		player.collect_buff(shop_listings[2])
 		player.coins_collected -= cost
 		

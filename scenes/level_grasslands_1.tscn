@@ -104,13 +104,13 @@ position = Vector2(112, -176)
 
 [node name="player" parent="players" instance=ExtResource("3_lefxa")]
 z_index = 5
+position = Vector2(224, 0)
 
 [node name="game objects" type="Node" parent="."]
 
 [node name="spawn_gate" parent="game objects" instance=ExtResource("5_lsitk")]
 position = Vector2(352, -448)
 next_level = ExtResource("6_y6dws")
-soul_cost = 6
 
 [node name="ladder objects" type="Node" parent="game objects"]
 
