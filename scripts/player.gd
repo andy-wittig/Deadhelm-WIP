@@ -49,19 +49,19 @@ const DEAD_HEART_UI = preload("res://assets/sprites/UI/player_information/dead_h
 const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart_ui.png")
 #UI Paths
 @onready var inventory = {
-	"slot_1" : $hud/Control/GridContainer/Slots/ItemSlot1.get_node("Item"),
-	"slot_2" : $hud/Control/GridContainer/Slots/ItemSlot2.get_node("Item"),
-	"slot_3" : $hud/Control/GridContainer/Slots/ItemSlot3.get_node("Item"),
+	"slot_1" : $hud/Control/Slots/ItemSlot1.get_node("Item"),
+	"slot_2" : $hud/Control/Slots/ItemSlot2.get_node("Item"),
+	"slot_3" : $hud/Control/Slots/ItemSlot3.get_node("Item"),
 }
 @onready var hearts = [
-	$hud/Control/GridContainer/HeartContainer.get_node("Heart1"),
-	$hud/Control/GridContainer/HeartContainer.get_node("Heart2"),
-	$hud/Control/GridContainer/HeartContainer.get_node("Heart3"),
+	$hud/Control/HealthContainer/LivesContainer.get_node("Heart1"),
+	$hud/Control/HealthContainer/LivesContainer.get_node("Heart2"),
+	$hud/Control/HealthContainer/LivesContainer.get_node("Heart3"),
 ]
-@onready var healthbar = $hud/Control/GridContainer/Healthbar
-@onready var healthbar_label = $hud/Control/GridContainer/Healthbar/HealthbarLabel
-@onready var soul_label = $hud/Control/GridContainer/VBoxContainer/SoulCounter/SoulCounterLabel
-@onready var money_label = $hud/Control/GridContainer/VBoxContainer/MoneyCounter/MoneyCounterLabel
+@onready var healthbar = $hud/Control/HealthContainer/Healthbar
+@onready var healthbar_label = $hud/Control/HealthContainer/Healthbar/HealthbarLabel
+@onready var soul_label = $hud/Control/StatsContainer/SoulCounter/SoulCounterLabel
+@onready var money_label = $hud/Control/StatsContainer/MoneyCounter/MoneyCounterLabel
 #Audio Paths
 @onready var coin_pickup_audio_player = $"Sound Effects/CoinPickupAudio"
 @onready var tome_pickup_audio = $"Sound Effects/TomePickupAudio"

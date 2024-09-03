@@ -54,8 +54,8 @@ anim_offset_max = 1.0
 
 [node name="hurt_enemy_area" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("2_fyjig")]
 scale = Vector2(2, 2)
-damage = 5
-attack_wait = 0.5
+damage = 4
+attack_wait = 0.6
 destroy_time = 8
 shape = NodePath("../CollisionShape2D")
 

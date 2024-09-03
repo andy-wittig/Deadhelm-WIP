@@ -215,34 +215,47 @@ texture = ExtResource("13_e5jav")
 
 [node name="Mountains" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 z_index = 1
-layout_mode = 0
-offset_right = 1600.0
-offset_bottom = 900.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("14_yyt2w")
 
 [node name="Shorline" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 material = SubResource("ShaderMaterial_jb632")
-layout_mode = 0
-offset_right = 1600.0
-offset_bottom = 900.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("15_s3i31")
 
 [node name="Sky" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
-layout_mode = 0
-offset_right = 1600.0
-offset_bottom = 900.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("13_1o8hw")
 
 [node name="SkylineReflection" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
-z_index = -2
+z_index = -1
 material = SubResource("ShaderMaterial_da0k7")
-layout_mode = 0
-offset_top = -280.0
-offset_right = 1600.0
-offset_bottom = 620.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -360.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("14_yyt2w")
 flip_v = true

@@ -8,6 +8,8 @@ var soul_rarity = null
 @onready var cpu_particles = $CPUParticles2D
 @onready var detect_player = $DetectPlayer
 
+@export var randomly_choose_soul := true
+
 var rarities = {
 	"diamond" : 60,
 	"emerald" : 20,
@@ -38,7 +40,11 @@ func _ready():
 	spawn_effect.position = position
 	get_parent().add_child(spawn_effect)
 	
-	soul_rarity = choose_rarity()
+	if (randomly_choose_soul):
+		soul_rarity = choose_rarity()
+	else:
+		soul_rarity = "diamond"
+
 	match soul_rarity:
 		"diamond":
 			sprite.texture = load("res://assets/sprites/level_objects/diamond_soul.png")

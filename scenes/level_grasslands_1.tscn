@@ -193,6 +193,7 @@ autoplay = "blasphemer_move"
 
 [node name="soul" parent="." instance=ExtResource("20_rqmcm")]
 position = Vector2(136, -56)
+randomly_choose_soul = false
 
 [node name="platform" parent="." instance=ExtResource("8_1mk3m")]
 position = Vector2(680, 80)
