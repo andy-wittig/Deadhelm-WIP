@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cv3ipj46sh6tq"]
+[gd_scene load_steps=13 format=3 uid="uid://cv3ipj46sh6tq"]
 
 [ext_resource type="Texture2D" uid="uid://b3spor51sya6b" path="res://assets/sprites/UI/player_information/money_ui.png" id="1_auw1f"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_xifmn"]
@@ -6,17 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://c2jcbimnvtrnf" path="res://assets/sprites/UI/player_information/heart_ui.png" id="4_8v4w6"]
 [ext_resource type="Texture2D" uid="uid://52met2jet5e1" path="res://assets/sprites/UI/player_information/healthbar.png" id="4_nr7sj"]
 [ext_resource type="Texture2D" uid="uid://cx5730avm00l5" path="res://assets/sprites/UI/player_information/healthbar_progress.png" id="5_0tsfq"]
+[ext_resource type="Texture2D" uid="uid://c4yphcspufqus" path="res://assets/sprites/UI/player_information/portal_progress_under_ui.png" id="6_fciug"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="6_t4wkt"]
 [ext_resource type="PackedScene" uid="uid://bqqi6e1x2xkt6" path="res://scenes/player/item_slot.tscn" id="7_7auib"]
+[ext_resource type="Texture2D" uid="uid://cfpgrvnnbrl87" path="res://assets/sprites/UI/player_information/portal_progress_over_ui.png" id="7_xji1y"]
+[ext_resource type="Texture2D" uid="uid://cospqj5bfrf2l" path="res://assets/sprites/UI/player_information/portal_progress_ui.png" id="8_v8e1b"]
 [ext_resource type="Texture2D" uid="uid://b4bjmtyq2bomj" path="res://assets/sprites/UI/player_information/portal_ui.png" id="9_3ys8q"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnllt"]
-bg_color = Color(0.0627451, 0.0705882, 0.109804, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.431373, 0.298039, 0.188235, 1)
 
 [node name="hud" type="CanvasLayer"]
 
@@ -121,23 +116,18 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -140.0
+offset_left = -64.0
 offset_bottom = 16.0
 grow_horizontal = 0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_constants/separation = 0
 
-[node name="ProgressBar" type="ProgressBar" parent="Control/PortalProgess"]
-modulate = Color(1, 1, 1, 0.784314)
+[node name="ProgressBar" type="TextureProgressBar" parent="Control/PortalProgess"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("2_xifmn")
-theme_override_font_sizes/font_size = 8
-theme_override_styles/background = SubResource("StyleBoxFlat_fnllt")
-step = 1.0
-show_percentage = false
+texture_under = ExtResource("6_fciug")
+texture_over = ExtResource("7_xji1y")
+texture_progress = ExtResource("8_v8e1b")
 
 [node name="PortalTexture" type="TextureRect" parent="Control/PortalProgess"]
 layout_mode = 2

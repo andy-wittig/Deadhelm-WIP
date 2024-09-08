@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://oq2a4voisjg1" path="res://scenes/level_objects/spawner.tscn" id="12_rrn3e"]
 [ext_resource type="PackedScene" uid="uid://6fmdfddl6dkc" path="res://scenes/level_objects/offering shrine.tscn" id="13_3vntk"]
 [ext_resource type="PackedScene" uid="uid://dkt3s7wbnw3ek" path="res://scenes/enemies/fester.tscn" id="14_132gn"]
-[ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/spawn_gate.tscn" id="15_pvjjp"]
+[ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="15_pvjjp"]
 [ext_resource type="PackedScene" uid="uid://dunbwsblhvliw" path="res://scenes/level_objects/totem.tscn" id="19_uunp8"]
 [ext_resource type="PackedScene" uid="uid://dv7ii30ng3m2" path="res://scenes/level_objects/rock_wall.tscn" id="21_c1qg4"]
 [ext_resource type="PackedScene" uid="uid://xekuabglq1uh" path="res://scenes/level_objects/lantern.tscn" id="21_pc1p8"]

@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bevvq8dlvdjip" path="res://scenes/level_objects/stalactite.tscn" id="9_hie6q"]
 [ext_resource type="PackedScene" uid="uid://y0thy4gylqg" path="res://scenes/enemies/desecrater.tscn" id="10_xac7m"]
 [ext_resource type="PackedScene" uid="uid://cy85nfl1yblvo" path="res://scenes/enemies/blasphemer.tscn" id="11_8mvy1"]
-[ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/spawn_gate.tscn" id="12_56v53"]
+[ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="12_56v53"]
 [ext_resource type="PackedScene" uid="uid://dyruqot1bthjn" path="res://scenes/level_cave_1.tscn" id="13_rnvsw"]
 [ext_resource type="PackedScene" uid="uid://mk8x6lo0ft6t" path="res://scenes/level_objects/chest.tscn" id="14_6446v"]
 [ext_resource type="PackedScene" uid="uid://6fmdfddl6dkc" path="res://scenes/level_objects/offering shrine.tscn" id="15_fpcoq"]

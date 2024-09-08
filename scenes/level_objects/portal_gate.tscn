@@ -64,7 +64,7 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j6fq"]
 bg_color = Color(0.368627, 0.356863, 0.54902, 0.588235)
 
-[node name="spawn_gate" type="Area2D"]
+[node name="portal_gate" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_g5hin")
 

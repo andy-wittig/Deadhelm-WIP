@@ -77,6 +77,9 @@ func get_can_drop():
 		return true
 	else:
 		return false
+		
+func is_dragging():
+	return dragging
 
 func get_slot_item_class():
 	return item_class[get_slot_item()]

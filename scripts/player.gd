@@ -62,6 +62,7 @@ const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart
 @onready var healthbar_label = $hud/Control/HealthContainer/Healthbar/HealthbarLabel
 @onready var soul_label = $hud/Control/StatsContainer/SoulCounter/SoulCounterLabel
 @onready var money_label = $hud/Control/StatsContainer/MoneyCounter/MoneyCounterLabel
+@onready var portal_progress = $hud/Control/PortalProgess/ProgressBar
 #Audio Paths
 @onready var coin_pickup_audio_player = $"Sound Effects/CoinPickupAudio"
 @onready var tome_pickup_audio = $"Sound Effects/TomePickupAudio"
@@ -127,12 +128,16 @@ func _ready():
 	
 func _process(delta):
 	#handle UI elements
+	var portal_gate = get_tree().get_root().get_node("game/Level/%s/portal_gate" % GameManager.current_level)
+	
 	for i in range(hearts.size()):
 		if (i + 1 > player_lives):
 			hearts[i].texture = DEAD_HEART_UI
 		else:
 			hearts[i].texture = ALIVE_HEART_UI
-			
+	
+	portal_progress.max_value = portal_gate.soul_cost
+	portal_progress.value = souls_collected
 	healthbar_label.text = str(player_health) + "/" + str(max_health)
 	healthbar.max_value = max_health
 	healthbar.value = player_health
@@ -190,7 +195,10 @@ func _process(delta):
 	#mystic dial and spell spawning
 	var can_fire := true
 	
-	if (currently_selected_slot.get_slot_item() == "empty"): can_fire = false
+	if (currently_selected_slot.get_slot_item() == "empty" || currently_selected_slot.is_dragging()): 
+		can_fire = false
+		if (dial_created):
+			dial_instance.destroy()
 	else: #ensure spells of same class can't be used at the same time
 		var currently_selected_class = currently_selected_slot.get_slot_item_class()
 		for slot in inventory:
