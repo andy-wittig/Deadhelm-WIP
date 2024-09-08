@@ -45,7 +45,7 @@ func _ready():
 		%RoamTimer.start(randi_range(2, ROAM_CHANGE_WAIT))
 
 func _process(_delta):
-	if (not bombshell_detonated):
+	if (!bombshell_detonated):
 		if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 			for body in chase_player.get_overlapping_bodies():
 				if (body.is_in_group("players")):
@@ -57,8 +57,6 @@ func _process(_delta):
 		#player left detection radius
 		player = null
 		chasing_player = false
-		#animation_player.play("RESET")
-		state = state_type.MOVING
 
 func _physics_process(delta):
 	#deal with enemy death
@@ -102,19 +100,25 @@ func _physics_process(delta):
 			animated_sprite.play("run")
 			
 			if ((multiplayer.is_server() || !GameManager.multiplayer_mode_enabled) && player != null):
-				if player.global_position.distance_to(global_position) > 24:
-					if abs(player.global_position.x - global_position.x) > 8:
-						if (player.global_position.x > global_position.x):
-							direction = 1
-						else:
-							direction = -1
+				#follow player
+				if abs(player.global_position.x - global_position.x) > 8:
+					if (player.global_position.x > global_position.x):
+						direction = 1
+					else:
+						direction = -1
+				
+				if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
+				&& is_on_floor()):
+					velocity.y = JUMP_VELOCITY
 					
-					if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
-					&& is_on_floor()):
-						velocity.y = JUMP_VELOCITY
-						
-					velocity.x = direction * SPEED
-				else:
+				velocity.x = direction * SPEED
+				
+				var angle_to_player = rad_to_deg((player.global_position - global_position).normalized().angle())
+				if (player.global_position.y < global_position.y + 16): #player is above enemy
+					if (angle_to_player >= -105 && angle_to_player <= -75):
+						state = state_type.ATTACK
+				
+				if (player.global_position.distance_to(global_position) <= 24):
 					state = state_type.ATTACK
 		state_type.ATTACK:
 			velocity.x = 0
