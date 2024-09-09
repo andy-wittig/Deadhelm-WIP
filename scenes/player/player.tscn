@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://d1dhhytd1eu3w" path="res://assets/sprites/vfx/dust_effect.png" id="15_835mp"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nnqmg"]
-frequency = 0.02
+frequency = 0.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0v5y2"]
 resource_local_to_scene = true
