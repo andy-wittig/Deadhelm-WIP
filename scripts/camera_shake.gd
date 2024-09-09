@@ -29,6 +29,7 @@ func _process(delta):
 		trauma = max(trauma - decay * delta, 0)
 		shake()
 	
-	offset = offset.lerp(get_parent().velocity * OFFSET_DAMP, delta * LERP_SPEED)
+	if (abs(get_parent().velocity) > Vector2.ZERO):
+		offset = offset.lerp(get_parent().velocity * OFFSET_DAMP, delta * LERP_SPEED)
 
 
