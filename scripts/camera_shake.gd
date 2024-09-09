@@ -2,6 +2,9 @@ extends Camera2D
 
 @export var noise : FastNoiseLite
 
+const LERP_SPEED := 0.8
+const OFFSET_DAMP := 0.5
+
 var decay := 0.9
 var max_offset := Vector2(16, 12)
 var max_roll := 0.1
@@ -20,8 +23,10 @@ func shake():
 	offset.y = max_offset.y * amount * noise.get_noise_2d(2000, noise_y)
 	
 func _process(delta):
-	if trauma:
+	if (trauma):
 		trauma = max(trauma - decay * delta, 0)
 		shake()
+	
+	offset = offset.lerp(get_parent().velocity * OFFSET_DAMP, delta * LERP_SPEED)
 
 
