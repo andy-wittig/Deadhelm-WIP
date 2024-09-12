@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=25 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_lefxa"]
 [ext_resource type="PackedScene" uid="uid://u1heuwmpu3ud" path="res://scenes/level_objects/leaping_mushroom.tscn" id="4_kgpay"]
+[ext_resource type="Texture2D" uid="uid://b20sos4yfhkov" path="res://assets/sprites/UI/level_background_test.png" id="4_kqxwq"]
 [ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="5_lsitk"]
 [ext_resource type="PackedScene" uid="uid://dis3wy3nmnpfo" path="res://scenes/level_grasslands_2.tscn" id="6_y6dws"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="7_bjmkc"]
@@ -79,16 +80,32 @@ position = Vector2(288, -176)
 next_level = ExtResource("6_y6dws")
 soul_cost = 1
 
-[node name="SkyBackground" type="CanvasLayer" parent="."]
+[node name="Background" type="CanvasLayer" parent="."]
 layer = -100
 
-[node name="SkyGradient" type="TextureRect" parent="SkyBackground"]
+[node name="SkyGradient" type="TextureRect" parent="Background"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 64.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_a24ds")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="CloudTexture" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer"]
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("4_kqxwq")
+stretch_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-64, 272)
@@ -205,3 +222,7 @@ scale = Vector2(1, 5)
 
 [node name="falling_leaves" parent="." instance=ExtResource("18_t7lxe")]
 position = Vector2(80, -200)
+
+[node name="ladder2" parent="." instance=ExtResource("7_bjmkc")]
+position = Vector2(163, -962)
+scale = Vector2(1, 100)
