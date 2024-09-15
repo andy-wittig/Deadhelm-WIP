@@ -84,7 +84,6 @@ soul_cost = 1
 layer = -100
 
 [node name="SkyGradient" type="TextureRect" parent="Background"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -95,12 +94,15 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_a24ds")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+layer = -99
 scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.6, 0.6)
 motion_mirroring = Vector2(1920, 1080)
 
 [node name="CloudTexture" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.588235)
 offset_right = 384.0
 offset_bottom = 216.0
 scale = Vector2(5, 5)

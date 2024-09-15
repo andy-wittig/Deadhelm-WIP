@@ -189,17 +189,14 @@ mouse_filter = 2
 z_index = 2
 material = SubResource("ShaderMaterial_mgunp")
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -375.0
-offset_top = -386.0
-offset_right = 375.0
-offset_bottom = -276.0
+offset_left = -450.0
+offset_top = 32.0
+offset_right = 450.0
+offset_bottom = 164.0
 grow_horizontal = 2
-grow_vertical = 2
 texture = ExtResource("3_i7ejn")
 
 [node name="Foreground" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
