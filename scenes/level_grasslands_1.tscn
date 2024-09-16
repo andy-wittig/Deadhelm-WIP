@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=26 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dlses24j38m5l" path="res://scenes/enemies/bombshell_enemy.tscn" id="13_8j7cl"]
 [ext_resource type="PackedScene" uid="uid://6fmdfddl6dkc" path="res://scenes/level_objects/offering shrine.tscn" id="15_k88ra"]
 [ext_resource type="PackedScene" uid="uid://denacnmk41nwy" path="res://scenes/vfx/falling_leaves.tscn" id="18_t7lxe"]
+[ext_resource type="PackedScene" uid="uid://bkmgf0sqr7pk3" path="res://scenes/enemies/golem.tscn" id="19_u8alu"]
 [ext_resource type="PackedScene" uid="uid://cy85nfl1yblvo" path="res://scenes/enemies/blasphemer.tscn" id="19_vfsee"]
 [ext_resource type="PackedScene" uid="uid://c0pspuwwhnp34" path="res://scenes/level_objects/soul.tscn" id="20_rqmcm"]
 
@@ -228,3 +229,10 @@ position = Vector2(80, -200)
 [node name="ladder2" parent="." instance=ExtResource("7_bjmkc")]
 position = Vector2(163, -962)
 scale = Vector2(1, 100)
+
+[node name="spawner" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("11_eugnb")]
+position = Vector2(224, -8)
+spawn_enemy_type = Array[PackedScene]([ExtResource("19_u8alu")])
+tile_map = NodePath("../TileMap")
+spawn_range = 5
+spawn_wait = 2.0

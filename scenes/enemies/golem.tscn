@@ -1,0 +1,136 @@
+[gd_scene load_steps=12 format=3 uid="uid://bkmgf0sqr7pk3"]
+
+[ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="1_a41dw"]
+[ext_resource type="Script" path="res://scripts/golem.gd" id="1_v0or6"]
+[ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="2_gx71o"]
+[ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="4_d7ck2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bg4no"]
+shader = ExtResource("1_a41dw")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(0.92549, 0.152941, 0.247059, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_t7id7"]
+size = Vector2(32, 32)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o0ern"]
+radius = 12.0
+height = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_clcye"]
+radius = 128.0
+
+[sub_resource type="Animation" id="Animation_f1a1l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GolemSprite:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GolemSprite:material:shader_parameter/tint")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.92549, 0.152941, 0.247059, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qrb02"]
+resource_name = "hurt_blink"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GolemSprite:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GolemSprite:material:shader_parameter/tint")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.92549, 0.152941, 0.247059, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c00k1"]
+_data = {
+"RESET": SubResource("Animation_f1a1l"),
+"hurt_blink": SubResource("Animation_qrb02")
+}
+
+[node name="golem" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("1_v0or6")
+
+[node name="GolemSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_bg4no")
+position = Vector2(0, -16)
+texture = SubResource("PlaceholderTexture2D_t7id7")
+
+[node name="GolemCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_o0ern")
+
+[node name="LeftRayCast" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+target_position = Vector2(-17, 0)
+collision_mask = 16
+
+[node name="RightRayCast" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+target_position = Vector2(17, 0)
+collision_mask = 16
+
+[node name="ChasePlayerArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="DetectionCollider" type="CollisionShape2D" parent="ChasePlayerArea"]
+position = Vector2(0, -16)
+shape = SubResource("CircleShape2D_clcye")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c00k1")
+}
+
+[node name="enemy_healthbar" parent="." instance=ExtResource("2_gx71o")]
+position = Vector2(0, -36)
+
+[node name="HurtPlayerArea" parent="." instance=ExtResource("4_d7ck2")]
+position = Vector2(0, -2)
+scale = Vector2(2, 0.25)
+damage = 18
+attack_wait = 4.0
+
+[node name="RoamTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true

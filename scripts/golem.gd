@@ -1,22 +1,22 @@
 extends CharacterBody2D
 #Constants
-const SPEED = 24.0
-const JUMP_VELOCITY = -180.0
-const KNOCK_BACK_FORCE := 75.0
+const SPEED := 16.0
+const JUMP_VELOCITY := -165.0
+const KNOCK_BACK_FORCE := 40.0
 const ROAM_CHANGE_WAIT := 6
 const ATTACK_RADIUS := 20
-const ATTACK_WAIT := 1
-const MAX_HEALTH := 50
+const ATTACK_WAIT := 4
+const MAX_HEALTH := 100
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
 var direction: int
 var knock_back: Vector2
 #Attacking Variables
 var player = null
-var chasing_player = false
+var chasing_player := false
 #Enemy Mechanics Variables
-var enemy_health = MAX_HEALTH
-var marked_for_death = false
+var enemy_health := MAX_HEALTH
+var marked_for_death := false
 
 enum state_type {
 	MOVING,
@@ -28,12 +28,11 @@ var state := state_type.MOVING
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@onready var chase_player = $ChasePlayer
-@onready var ray_cast_right = $RayCastRight
-@onready var ray_cast_left = $RayCastLeft
-@onready var animated_sprite = $AnimatedFesterSprite
+@onready var chase_player_area = $ChasePlayerArea
+@onready var ray_cast_right = $RightRayCast
+@onready var ray_cast_left = $LeftRayCast
+@onready var golem_sprite = $GolemSprite
 @onready var animation_player = $AnimationPlayer
-@onready var audio_player = $FesterScreamAudio
 @onready var hurt_player_area = $HurtPlayerArea
 
 signal enemy_was_hurt
@@ -48,7 +47,7 @@ func _ready():
 
 func _process(_delta):
 	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-		for body in chase_player.get_overlapping_bodies():
+		for body in chase_player_area.get_overlapping_bodies():
 			if (body.is_in_group("players")):
 				if (!chasing_player):
 					player = body
@@ -71,18 +70,18 @@ func _physics_process(delta):
 
 	#flip sprite
 	if (direction > 0):
-		animated_sprite.flip_h = true
+		golem_sprite.flip_h = true
 	elif (direction < 0):
-		animated_sprite.flip_h = false
+		golem_sprite.flip_h = false
 		
 	match state:
 		state_type.IDLE:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				animated_sprite.play("idle")
+				#golem_sprite.play("idle")
 				velocity.x = 0
 		state_type.MOVING:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				animated_sprite.play("run")
+				#golem_sprite.play("run")
 				
 				if ray_cast_right.is_colliding():
 					direction = -1
@@ -99,7 +98,7 @@ func _physics_process(delta):
 				
 				if (player.global_position.distance_to(global_position) > ATTACK_RADIUS):
 					hurt_player_area.active = false
-					animated_sprite.play("run")
+					#golem_sprite.play("run")
 					
 					if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
 					&& is_on_floor()):
@@ -108,14 +107,14 @@ func _physics_process(delta):
 					velocity.x = direction * SPEED
 				else:
 					%CooldownTimer.start(ATTACK_WAIT)
-					animated_sprite.stop()
+					#golem_sprite.stop()
 					state = state_type.ATTACK
 		state_type.ATTACK:
-			audio_player.play()
-			
-			if (!animated_sprite.is_playing()):
-				animated_sprite.play("attack")
-				hurt_player_area.active = true
+			#if (!golem_sprite.is_playing()):
+				#golem_sprite.play("attack")
+				#hurt_player_area.active = true
+				
+			hurt_player_area.active = true	
 				
 			velocity.x = 0
 
@@ -128,9 +127,9 @@ func _physics_process(delta):
 		
 	move_and_slide()
 	
-func _on_animated_fester_sprite_animation_finished():
+func _on_golem_sprite_animation_finished():
 	if (state == state_type.ATTACK):
-		animated_sprite.play("idle")
+		golem_sprite.play("idle")
 		hurt_player_area.active = false
 	
 func _on_cooldown_timer_timeout():
@@ -153,12 +152,12 @@ func apply_knockback(other_pos: Vector2, force: float):
 @rpc("any_peer", "call_local")
 func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 	emit_signal("enemy_was_hurt")
-	animation_player.play("hurt_blink")
 	apply_knockback(other_pos, force)
+	animation_player.play("hurt_blink")
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
 	get_parent().add_child(impact)
-	impact.position = Vector2(position.x, position.y - 6)
+	impact.position = Vector2(position.x, position.y - 16)
 	
 	enemy_health -= damage
 	enemy_health = max(enemy_health, 0)
