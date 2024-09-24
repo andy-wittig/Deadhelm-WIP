@@ -107,8 +107,7 @@ func _physics_process(delta):
 					else:
 						direction = -1
 				
-				if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
-				&& is_on_floor()):
+				if ((ray_cast_right.is_colliding() || ray_cast_left.is_colliding()) && is_on_floor()):
 					velocity.y = JUMP_VELOCITY
 					
 				velocity.x = direction * SPEED

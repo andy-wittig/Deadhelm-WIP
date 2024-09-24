@@ -1,11 +1,11 @@
 extends CharacterBody2D
 #Constants
-const SPEED := 16.0
-const JUMP_VELOCITY := -165.0
-const KNOCK_BACK_FORCE := 40.0
-const ROAM_CHANGE_WAIT := 6
+const SPEED := 14.0
+const JUMP_VELOCITY := -175.0
+const KNOCK_BACK_FORCE := 100.0
+const ROAM_CHANGE_WAIT := 4
 const ATTACK_RADIUS := 20
-const ATTACK_WAIT := 4
+const ATTACK_WAIT := 2
 const MAX_HEALTH := 100
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
@@ -77,11 +77,11 @@ func _physics_process(delta):
 	match state:
 		state_type.IDLE:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				#golem_sprite.play("idle")
+				golem_sprite.play("idle")
 				velocity.x = 0
 		state_type.MOVING:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				#golem_sprite.play("run")
+				golem_sprite.play("run")
 				
 				if ray_cast_right.is_colliding():
 					direction = -1
@@ -91,24 +91,26 @@ func _physics_process(delta):
 				velocity.x = direction * SPEED
 		state_type.CHASE:
 			if ((multiplayer.is_server() || !GameManager.multiplayer_mode_enabled) && player != null):
-				if (player.global_position.x - global_position.x > 8):
+				#follow player
+				if abs(player.global_position.x - global_position.x) > 8:
+					if (player.global_position.x > global_position.x):
 						direction = 1
-				elif (player.global_position.x - global_position.x < -8):
-					direction = -1
-				
-				if (player.global_position.distance_to(global_position) > ATTACK_RADIUS):
-					hurt_player_area.active = false
-					#golem_sprite.play("run")
-					
-					if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
-					&& is_on_floor()):
+					else:
+						direction = -1
+						
+				if ((ray_cast_right.is_colliding() || ray_cast_left.is_colliding()) && is_on_floor()):
 						velocity.y = JUMP_VELOCITY
 						
-					velocity.x = direction * SPEED
-				else:
+				velocity.x = direction * SPEED
+						
+				if (player.global_position.distance_to(global_position) <= ATTACK_RADIUS):
 					%CooldownTimer.start(ATTACK_WAIT)
 					#golem_sprite.stop()
 					state = state_type.ATTACK
+				else:
+					golem_sprite.play("run")
+					hurt_player_area.active = false
+						
 		state_type.ATTACK:
 			#if (!golem_sprite.is_playing()):
 				#golem_sprite.play("attack")
@@ -136,6 +138,8 @@ func _on_cooldown_timer_timeout():
 	if (chasing_player):
 		state = state_type.CHASE
 	else:
+		player = null
+		chasing_player = false
 		state = state_type.MOVING
 	
 func _on_change_state_timer_timeout():

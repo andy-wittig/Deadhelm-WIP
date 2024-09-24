@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkmgf0sqr7pk3"]
+[gd_scene load_steps=25 format=3 uid="uid://bkmgf0sqr7pk3"]
 
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="1_a41dw"]
 [ext_resource type="Script" path="res://scripts/golem.gd" id="1_v0or6"]
 [ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="2_gx71o"]
+[ext_resource type="Texture2D" uid="uid://bplegj60fn7m8" path="res://assets/sprites/enemies/golem_run_sheet.png" id="3_op12x"]
+[ext_resource type="Texture2D" uid="uid://cn4en6pclngws" path="res://assets/sprites/enemies/golem idle sheet.png" id="3_xu4mc"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="4_d7ck2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg4no"]
@@ -10,12 +12,99 @@ shader = ExtResource("1_a41dw")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(0.92549, 0.152941, 0.247059, 1)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_t7id7"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebwu7"]
+atlas = ExtResource("3_xu4mc")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81n4h"]
+atlas = ExtResource("3_xu4mc")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdfoa"]
+atlas = ExtResource("3_xu4mc")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80p1y"]
+atlas = ExtResource("3_xu4mc")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lv10"]
+atlas = ExtResource("3_xu4mc")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irggm"]
+atlas = ExtResource("3_op12x")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppyrn"]
+atlas = ExtResource("3_op12x")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nig5o"]
+atlas = ExtResource("3_op12x")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch6v2"]
+atlas = ExtResource("3_op12x")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c648"]
+atlas = ExtResource("3_op12x")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inofy"]
+atlas = ExtResource("3_op12x")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m63n4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebwu7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81n4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdfoa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80p1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lv10")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irggm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppyrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nig5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch6v2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5c648")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inofy")
+}],
+"loop": true,
+"name": &"run",
+"speed": 6.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o0ern"]
-radius = 12.0
-height = 28.0
+radius = 6.0
+height = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_clcye"]
 radius = 128.0
@@ -82,27 +171,31 @@ _data = {
 }
 
 [node name="golem" type="CharacterBody2D" groups=["enemies"]]
+z_index = 4
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_v0or6")
 
-[node name="GolemSprite" type="Sprite2D" parent="."]
+[node name="GolemSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_bg4no")
-position = Vector2(0, -16)
-texture = SubResource("PlaceholderTexture2D_t7id7")
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_m63n4")
+animation = &"run"
+autoplay = "idle"
+frame_progress = 0.891702
 
 [node name="GolemCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -14)
+position = Vector2(0, -20)
 shape = SubResource("CapsuleShape2D_o0ern")
 
 [node name="LeftRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, -8)
-target_position = Vector2(-17, 0)
+target_position = Vector2(-7, 0)
 collision_mask = 16
 
 [node name="RightRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, -8)
-target_position = Vector2(17, 0)
+target_position = Vector2(7, 0)
 collision_mask = 16
 
 [node name="ChasePlayerArea" type="Area2D" parent="."]
@@ -120,11 +213,11 @@ libraries = {
 }
 
 [node name="enemy_healthbar" parent="." instance=ExtResource("2_gx71o")]
-position = Vector2(0, -36)
+position = Vector2(0, -50)
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("4_d7ck2")]
-position = Vector2(0, -2)
-scale = Vector2(2, 0.25)
+position = Vector2(0, -4)
+scale = Vector2(2.5, 0.5)
 damage = 18
 attack_wait = 4.0
 
@@ -134,3 +227,6 @@ unique_name_in_owner = true
 [node name="CooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[connection signal="timeout" from="RoamTimer" to="." method="_on_change_state_timer_timeout"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
