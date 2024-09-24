@@ -1,11 +1,11 @@
 extends CharacterBody2D
 #Constants
-const SPEED := 14.0
+const SPEED := 16.0
 const JUMP_VELOCITY := -175.0
 const KNOCK_BACK_FORCE := 100.0
 const ROAM_CHANGE_WAIT := 4
-const ATTACK_RADIUS := 20
-const ATTACK_WAIT := 2
+const ATTACK_RADIUS := 32
+const ATTACK_WAIT := 3
 const MAX_HEALTH := 100
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
@@ -14,6 +14,7 @@ var knock_back: Vector2
 #Attacking Variables
 var player = null
 var chasing_player := false
+var attack_started := false
 #Enemy Mechanics Variables
 var enemy_health := MAX_HEALTH
 var marked_for_death := false
@@ -39,7 +40,6 @@ signal enemy_was_hurt
 	
 func _ready():
 	hurt_player_area.active = false
-	hurt_player_area.attack_wait = ATTACK_WAIT
 	
 	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 		direction = [-1, 1].pick_random()
@@ -105,18 +105,18 @@ func _physics_process(delta):
 						
 				if (player.global_position.distance_to(global_position) <= ATTACK_RADIUS):
 					%CooldownTimer.start(ATTACK_WAIT)
-					#golem_sprite.stop()
+					golem_sprite.stop()
 					state = state_type.ATTACK
 				else:
 					golem_sprite.play("run")
-					hurt_player_area.active = false
 						
 		state_type.ATTACK:
-			#if (!golem_sprite.is_playing()):
-				#golem_sprite.play("attack")
-				#hurt_player_area.active = true
+			if (!attack_started):
+				golem_sprite.play("attack")
+				attack_started = true
 				
-			hurt_player_area.active = true	
+			if (golem_sprite.frame == 5):
+				hurt_player_area.active = true
 				
 			velocity.x = 0
 
@@ -130,11 +130,12 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func _on_golem_sprite_animation_finished():
-	if (state == state_type.ATTACK):
+	if (attack_started):
 		golem_sprite.play("idle")
 		hurt_player_area.active = false
 	
 func _on_cooldown_timer_timeout():
+	attack_started = false
 	if (chasing_player):
 		state = state_type.CHASE
 	else:
