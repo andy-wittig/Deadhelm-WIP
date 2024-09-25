@@ -4,7 +4,7 @@ const SPEED := 16.0
 const JUMP_VELOCITY := -175.0
 const KNOCK_BACK_FORCE := 100.0
 const ROAM_CHANGE_WAIT := 4
-const ATTACK_RADIUS := 32
+const ATTACK_RADIUS := 24
 const ATTACK_WAIT := 3
 const MAX_HEALTH := 100
 #Movement Variables
@@ -105,7 +105,9 @@ func _physics_process(delta):
 						
 				velocity.x = direction * SPEED
 						
-				if (player.global_position.distance_to(global_position) <= ATTACK_RADIUS):
+				var angle_to_player = rad_to_deg((player.global_position - global_position).normalized().angle())
+				if ((player.global_position.distance_to(global_position) <= ATTACK_RADIUS)
+				&& (angle_to_player <= -105 && angle_to_player >= -75)):
 					%CooldownTimer.start(ATTACK_WAIT)
 					golem_sprite.stop()
 					state = state_type.ATTACK
