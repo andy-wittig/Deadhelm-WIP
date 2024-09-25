@@ -270,6 +270,7 @@ size = Vector2(8, 19)
 radius = 4.12311
 
 [node name="player" type="CharacterBody2D" groups=["players"]]
+z_index = 2
 collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_6jjtq")

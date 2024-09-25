@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bkmgf0sqr7pk3"]
+[gd_scene load_steps=42 format=3 uid="uid://bkmgf0sqr7pk3"]
 
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="1_a41dw"]
 [ext_resource type="Script" path="res://scripts/golem.gd" id="1_v0or6"]
@@ -235,8 +235,44 @@ _data = {
 "hurt_blink": SubResource("Animation_qrb02")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l1t6g"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_m6uq1"]
+load_path = "res://.godot/imported/dust_effect.png-ac029ad2c90791e578bef0c159b7f46c.ctex"
+
+[sub_resource type="Curve" id="Curve_3mfh1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.494505), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_w4rnq"]
+offsets = PackedFloat32Array(0, 0.286667, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.490196, 1, 1, 1, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w70fo"]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q6caf"]
+load_path = "res://.godot/imported/meteor_pieces.png-af91351f1ff4a075d85136af3eaf8df2.ctex"
+
+[sub_resource type="Curve" id="Curve_vu4p5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_gc6m1"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.180124, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
 [node name="golem" type="CharacterBody2D" groups=["enemies"]]
-z_index = 4
+z_index = 1
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_v0or6")
@@ -245,10 +281,9 @@ script = ExtResource("1_v0or6")
 material = SubResource("ShaderMaterial_bg4no")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_m63n4")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
-frame = 7
-frame_progress = 1.0
+frame_progress = 0.953392
 
 [node name="GolemCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
@@ -282,9 +317,9 @@ libraries = {
 position = Vector2(0, -50)
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("4_d7ck2")]
-position = Vector2(0, -4)
-scale = Vector2(2.5, 0.5)
-damage = 2
+position = Vector2(0, -12)
+scale = Vector2(3, 1.5)
+damage = 10
 attack_wait = 1.0
 
 [node name="RoamTimer" type="Timer" parent="."]
@@ -293,6 +328,49 @@ unique_name_in_owner = true
 [node name="CooldownTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="DustParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_l1t6g")
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+texture = SubResource("CompressedTexture2D_m6uq1")
+emission_shape = 3
+emission_rect_extents = Vector2(20, 1)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+damping_min = 4.0
+damping_max = 4.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_3mfh1")
+color_ramp = SubResource("Gradient_w4rnq")
+
+[node name="ChunkParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_w70fo")
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.2
+randomness = 0.2
+texture = SubResource("CompressedTexture2D_q6caf")
+emission_shape = 3
+emission_rect_extents = Vector2(20, 1)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_vu4p5")
+color_ramp = SubResource("Gradient_gc6m1")
+anim_offset_max = 1.0
 
 [connection signal="animation_finished" from="GolemSprite" to="." method="_on_golem_sprite_animation_finished"]
 [connection signal="timeout" from="RoamTimer" to="." method="_on_change_state_timer_timeout"]

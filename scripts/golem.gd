@@ -98,8 +98,10 @@ func _physics_process(delta):
 					else:
 						direction = -1
 						
-				if ((ray_cast_right.is_colliding() || ray_cast_left.is_colliding()) && is_on_floor()):
-						velocity.y = JUMP_VELOCITY
+				if (ray_cast_right.is_colliding() && direction == 1 && is_on_floor()):
+					velocity.y = JUMP_VELOCITY
+				elif (ray_cast_left.is_colliding() && direction == -1 && is_on_floor()):
+					velocity.y = JUMP_VELOCITY
 						
 				velocity.x = direction * SPEED
 						
@@ -115,7 +117,10 @@ func _physics_process(delta):
 				golem_sprite.play("attack")
 				attack_started = true
 				
-			if (golem_sprite.frame == 5):
+			if (golem_sprite.frame == 5 && player != null):
+				player.set_screen_shake(1.0)
+				$DustParticles.emitting = true
+				$ChunkParticles.emitting = true
 				hurt_player_area.active = true
 				
 			velocity.x = 0
