@@ -53,11 +53,11 @@ func _process(delta):
 						zipline_active = true
 						player = body
 						
-						var offset = zipline_path.curve.get_closest_offset(zipline_path.to_local(player.global_position))
+						var offset = zipline_path.curve.get_closest_offset(zipline_path.to_local(player.player_center.global_position))
 						zipline_follow.progress = offset
 	else:
 		zipline_follow.progress += player.ZIPLINE_SPEED * delta
-		player.global_position = zipline_follow.global_position
+		player.global_position = zipline_follow.global_position - player.player_center.position
 		sparks_particle.emitting = true
 		sparks_particle.global_position = zipline_follow.global_position
 		
