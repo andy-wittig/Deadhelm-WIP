@@ -30,7 +30,7 @@ func _process(delta):
 		shake()
 	
 	if (abs(get_parent().velocity) > Vector2.ZERO):
-		offset = offset.lerp(Vector2(
+		position = position.lerp(Vector2(
 			clamp(get_parent().velocity.x * OFFSET_DAMP, -32, 32), 
 			clamp(get_parent().velocity.y * OFFSET_DAMP, -32, 32)),
 			delta * LERP_SPEED)
