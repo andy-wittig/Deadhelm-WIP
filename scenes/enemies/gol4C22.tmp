@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bkmgf0sqr7pk3"]
+[gd_scene load_steps=42 format=3 uid="uid://bkmgf0sqr7pk3"]
 
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="1_a41dw"]
 [ext_resource type="Script" path="res://scripts/golem.gd" id="1_v0or6"]
@@ -170,10 +170,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o0ern"]
 radius = 6.0
-height = 32.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mfk1h"]
-radius = 6.0
+height = 48.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_clcye"]
 radius = 128.0
@@ -289,13 +286,9 @@ animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.953392
 
-[node name="BodyCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16)
+[node name="GolemCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
 shape = SubResource("CapsuleShape2D_o0ern")
-
-[node name="HeadCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -38)
-shape = SubResource("CircleShape2D_mfk1h")
 
 [node name="LeftRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, -8)
@@ -329,7 +322,6 @@ position = Vector2(0, -4)
 scale = Vector2(2.5, 0.5)
 damage = 10
 attack_wait = 1.0
-knock_back_force = 200
 
 [node name="RoamTimer" type="Timer" parent="."]
 unique_name_in_owner = true

@@ -2,10 +2,11 @@ extends Area2D
 
 @export var damage: int
 @export var attack_wait := 2.0
+@export var knock_back_force := 100
 
 var active := true
 var can_hurt := true
-var knock_back_force := 100
+
 
 @onready var hurt_player_timer = $HurtPlayerTimer
 

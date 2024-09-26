@@ -276,6 +276,7 @@ collision_mask = 16
 script = ExtResource("1_6jjtq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -16)
 zoom = Vector2(5, 5)
 limit_left = 0
 limit_bottom = 0
@@ -291,19 +292,22 @@ noise = SubResource("FastNoiseLite_nnqmg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_0v5y2")
+position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_2q11b")
 animation = &"run"
 autoplay = "idle"
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, 7)
+position = Vector2(0, -9)
 shape = SubResource("CapsuleShape2D_74c68")
 
 [node name="InteractArea" type="Area2D" parent="."]
+position = Vector2(0, -16)
 collision_layer = 256
 collision_mask = 0
 
 [node name="SpellSpawn" type="Node2D" parent="."]
+position = Vector2(0, -16)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -347,7 +351,6 @@ bus = &"SFX"
 
 [node name="DustParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_rncr1")
-position = Vector2(0, 16)
 emitting = false
 amount = 4
 lifetime = 0.5
@@ -369,6 +372,7 @@ scale_amount_curve = SubResource("Curve_6iav2")
 color_ramp = SubResource("Gradient_5mad8")
 
 [node name="InteractableArea" type="Area2D" parent="." groups=["players"]]
+position = Vector2(0, -16)
 collision_layer = 256
 collision_mask = 0
 
@@ -379,3 +383,6 @@ shape = SubResource("RectangleShape2D_kge2t")
 [node name="HeadCollider" type="CollisionShape2D" parent="InteractableArea"]
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_bkxj2")
+
+[node name="PlayerCenter" type="Marker2D" parent="."]
+position = Vector2(0, -16)

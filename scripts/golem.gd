@@ -1,7 +1,7 @@
 extends CharacterBody2D
 #Constants
 const SPEED := 16.0
-const JUMP_VELOCITY := -175.0
+const JUMP_VELOCITY := -180.0
 const KNOCK_BACK_FORCE := 100.0
 const ROAM_CHANGE_WAIT := 4
 const ATTACK_RADIUS := 24
@@ -105,9 +105,9 @@ func _physics_process(delta):
 						
 				velocity.x = direction * SPEED
 						
-				var angle_to_player = rad_to_deg((player.global_position - global_position).normalized().angle())
 				if ((player.global_position.distance_to(global_position) <= ATTACK_RADIUS)
-				&& (angle_to_player <= -105 && angle_to_player >= -75)):
+				&& (player.global_position.y + 2 >= global_position.y)
+				&& is_on_floor()):
 					%CooldownTimer.start(ATTACK_WAIT)
 					golem_sprite.stop()
 					state = state_type.ATTACK

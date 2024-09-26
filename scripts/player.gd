@@ -12,7 +12,7 @@ const JUMP_BUFFER := 0.1
 const MAX_AIR_TIME := 0.5
 const HANG_TIME_THRESHHOLD := 60.0
 const HANG_TIME_MULTIPLIER := 0.8
-const KNOCK_BACK_FALLOFF := 60.0
+const KNOCK_BACK_FALLOFF := 100.0
 const DIAL_RADIUS := 22
 const MAX_LIVES := 3
 const MAX_UPGRADED_HEALTH := 200
@@ -71,6 +71,7 @@ const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart
 @onready var footstep_audio = $"Sound Effects/FootstepAudio"
 @onready var spell_cast_audio = $"Sound Effects/SpellCastAudio"
 #Mechanics Paths
+@onready var player_center = $PlayerCenter
 @onready var player_collider = $PlayerCollider
 @onready var attack_cooldown_timer = $AttackCooldownTimer
 @onready var spell_spawn = $SpellSpawn
@@ -157,7 +158,7 @@ func _process(delta):
 			global_position = get_parent().global_position
 	
 	#set spell spawn marker position
-	var dial_center = Vector2(global_position.x, global_position.y)
+	var dial_center = player_center.global_position
 	
 	if (Input.get_connected_joypads().is_empty()):
 		var aim_pos = get_global_mouse_position()
@@ -189,7 +190,7 @@ func _process(delta):
 	#droping items
 	if (Input.is_action_just_pressed("drop_item")):
 		if (currently_selected_slot.get_can_drop()):
-			drop_inventory_item(currently_selected_slot.get_slot_item(), global_position)
+			drop_inventory_item(currently_selected_slot.get_slot_item(), player_center.global_position)
 			currently_selected_slot.set_slot_item("empty")	
 	
 	#mystic dial and spell spawning
@@ -211,8 +212,8 @@ func _process(delta):
 			spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
 			dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
 			get_parent().add_child(dial_instance)
-			dial_instance.position.x = position.x
-			dial_instance.position.y = position.y
+			dial_instance.position.x = player_center.global_position.x
+			dial_instance.position.y = player_center.global_position.y
 			dial_instance.player = self
 			dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
 			dial_created = true
@@ -311,7 +312,7 @@ func _physics_process(delta):
 
 #PLAYER LOGIC FUNCTIONS
 func apply_knockback(other_pos: Vector2, force: float):
-		var other_dir = (other_pos - global_position).normalized()
+		var other_dir = (other_pos - player_center.global_position).normalized()
 		knock_back = -other_dir * force
 
 func heal_player(health: int):
@@ -323,7 +324,7 @@ func heal_player(health: int):
 	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
 	damage_indicator.damage_amount = health
 	damage_indicator.damage_indicator_color = "5ab552"
-	damage_indicator.position = global_position
+	damage_indicator.position = player_center.global_position
 	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 
 func hurt_player(damage: int, other_pos: Vector2, force: float):
@@ -338,7 +339,7 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
 	damage_indicator.damage_amount = damage
 	damage_indicator.damage_indicator_color = "ec273f"
-	damage_indicator.position = global_position
+	damage_indicator.position = player_center.global_position
 	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 	
 func disable_player():

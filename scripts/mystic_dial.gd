@@ -31,8 +31,8 @@ func _ready():
 	
 func _process(_delta):
 	#update dials position
-	global_position.x = player.global_position.x
-	global_position.y = player.global_position.y
+	global_position.x = player.player_center.global_position.x
+	global_position.y = player.player_center.global_position.y
 	#update spells position
 	placeholder_spell.global_position = player.spell_spawn.global_position
 	mystic_particles.global_position = player.spell_spawn.global_position
