@@ -5,7 +5,7 @@ const JUMP_VELOCITY := -180.0
 const KNOCK_BACK_FORCE := 100.0
 const ROAM_CHANGE_WAIT := 4
 const ATTACK_RADIUS := 24
-const ATTACK_WAIT := 3
+const ATTACK_WAIT := 2
 const MAX_HEALTH := 100
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
@@ -35,11 +35,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var golem_sprite = $GolemSprite
 @onready var animation_player = $AnimationPlayer
 @onready var hurt_player_area = $HurtPlayerArea
+@onready var attack_indicator = $AttackIndicator
 
 signal enemy_was_hurt
 	
 func _ready():
 	hurt_player_area.active = false
+	attack_indicator.visible = false
 	
 	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 		direction = [-1, 1].pick_random()
@@ -117,12 +119,15 @@ func _physics_process(delta):
 		state_type.ATTACK:
 			if (!attack_started):
 				golem_sprite.play("attack")
+				animation_player.play("attack_indicator")
+				attack_indicator.visible = true
 				attack_started = true
 				
 			if (golem_sprite.frame == 5 && player != null):
 				player.set_screen_shake(1.0)
 				$DustParticles.emitting = true
 				$ChunkParticles.emitting = true
+				attack_indicator.visible = false
 				hurt_player_area.active = true
 				
 			velocity.x = 0

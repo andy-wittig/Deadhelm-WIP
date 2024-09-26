@@ -35,7 +35,7 @@ var attack_cooldown := false
 	"lightning" : 2.8,
 	"flame" : 3,
 	"poison bottle" : 10,
-	"bow" : 6,
+	"bow" : 2,
 }
 
 enum class_type {SHORT_RANGE, LONG_RANGE, DEFENSE, THROWING}

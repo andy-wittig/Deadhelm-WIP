@@ -4,9 +4,11 @@ extends Area2D
 @export var tile_map: TileMap
 @export var spawn_range: int
 @export var spawn_wait: float
+@export var max_spawn_uses := 2
 
 var currently_spawning := false
 var spawned_count := 0
+var current_spawn_uses := 0
 var random = RandomNumberGenerator.new()
 var spawn_pos: Vector2
 
@@ -17,26 +19,32 @@ var spawn_pos: Vector2
 @onready var vortex_sprite = $VortexSprite
 
 func _process(delta):
+	if (current_spawn_uses >= max_spawn_uses):
+		$OrbAnimationPlayer.play("deactivate_spawner")
+		$OrbSprite.texture = load("res://assets/sprites/level_objects/spawner orb deactivated.png")
+	
 	spawner_sprite.material.set_shader_parameter("enabled", false)
 	
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("collectable")): break
-		if (body.is_in_group("players") && !currently_spawning):
+		if (body.is_in_group("players") && !currently_spawning && current_spawn_uses < max_spawn_uses):
 			if (!GameManager.multiplayer_mode_enabled ||
 			body.player_id == multiplayer.get_unique_id()):
 				spawner_sprite.material.set_shader_parameter("enabled", true)
 				if (Input.is_action_just_pressed("pickup")):
 					check_enemy_spawnable()
+					current_spawn_uses += 1
 					currently_spawning = true
 
 func _on_input_event(viewport, event, shape_idx):
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("collectable")): break
-		if (body.is_in_group("players") && !currently_spawning):
+		if (body.is_in_group("players") && !currently_spawning && current_spawn_uses < max_spawn_uses):
 			if (!GameManager.multiplayer_mode_enabled ||
 			body.player_id == multiplayer.get_unique_id()):
 				if (Input.is_action_just_pressed("left_click")):
 					check_enemy_spawnable()
+					current_spawn_uses += 1
 					currently_spawning = true
 	
 @rpc("any_peer", "call_local")

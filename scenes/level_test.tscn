@@ -93,7 +93,7 @@ position = Vector2(392, -288)
 position = Vector2(408, -288)
 
 [node name="spawner" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("7_juqc7")]
-position = Vector2(632, -104)
+position = Vector2(632, -96)
 spawn_enemy_type = Array[PackedScene]([ExtResource("8_7c1tq"), ExtResource("9_mjpt2"), ExtResource("8_7c1tq"), ExtResource("9_mjpt2")])
 tile_map = NodePath("../TileMap")
 spawn_range = 8

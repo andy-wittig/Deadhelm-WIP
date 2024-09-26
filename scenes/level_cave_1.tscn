@@ -595,7 +595,7 @@ position = Vector2(1152, -64)
 coin_amount = 6
 
 [node name="spawner" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("12_rrn3e")]
-position = Vector2(312, -200)
+position = Vector2(312, -192)
 spawn_enemy_type = Array[PackedScene]([ExtResource("10_01chv"), ExtResource("10_01chv")])
 tile_map = NodePath("../../TileMap")
 spawn_range = 4
@@ -614,10 +614,10 @@ spell_type = "meteor"
 [node name="offering shrine3" parent="Level Objects" instance=ExtResource("13_3vntk")]
 position = Vector2(144, -800)
 soul_cost = 4
-spell_type = "flame"
+spell_type = "poison bottle"
 
 [node name="spawner2" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("12_rrn3e")]
-position = Vector2(432, -984)
+position = Vector2(432, -976)
 spawn_enemy_type = Array[PackedScene]([ExtResource("14_132gn"), ExtResource("14_132gn"), ExtResource("10_01chv"), ExtResource("14_132gn")])
 tile_map = NodePath("../../TileMap")
 spawn_range = 7
@@ -637,7 +637,7 @@ coin_amount = 6
 
 [node name="totem" parent="Level Objects" node_paths=PackedStringArray("totem_list", "scene") instance=ExtResource("19_uunp8")]
 position = Vector2(112, -928)
-required_item = "flame"
+required_item = "poison bottle"
 totem_list = [NodePath("."), NodePath("../totem2"), NodePath("../totem3")]
 totem_control = true
 scene = NodePath("../rock_wall")

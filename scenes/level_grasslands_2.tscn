@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dis3wy3nmnpfo"]
+[gd_scene load_steps=36 format=3 uid="uid://dis3wy3nmnpfo"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_p2deu"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dyutn277xh3h5" path="res://scenes/level_desert_1.tscn" id="18_sfou0"]
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="19_mfv7b"]
 [ext_resource type="PackedScene" uid="uid://byxhh826s58u0" path="res://scenes/level_objects/radio.tscn" id="20_8edf3"]
+[ext_resource type="PackedScene" uid="uid://dlses24j38m5l" path="res://scenes/enemies/bombshell_enemy.tscn" id="20_iruvl"]
 [ext_resource type="PackedScene" uid="uid://denacnmk41nwy" path="res://scenes/vfx/falling_leaves.tscn" id="21_rfe82"]
 [ext_resource type="PackedScene" uid="uid://y0thy4gylqg" path="res://scenes/enemies/desecrater.tscn" id="22_qr4rf"]
 [ext_resource type="PackedScene" uid="uid://bv5plpqydgmj0" path="res://scenes/level_objects/killzone.tscn" id="23_c1lgd"]
@@ -140,14 +141,14 @@ layer_2/tile_data = PackedInt32Array(-3538918, 262145, 2, -3473381, 262145, 1, -
 [node name="portal_gate" parent="." instance=ExtResource("17_dkwbp")]
 position = Vector2(880, -1344)
 next_level = ExtResource("18_sfou0")
-soul_cost = 12
+soul_cost = 16
 
 [node name="players" type="Node2D" parent="."]
 position = Vector2(480, -448)
 
 [node name="player" parent="players" instance=ExtResource("3_lefxa")]
 z_index = 5
-position = Vector2(-16, -320)
+position = Vector2(424, -896)
 
 [node name="Ziplines" type="Node" parent="."]
 
@@ -395,8 +396,8 @@ spell_type = "flame"
 position = Vector2(1376, -736)
 
 [node name="spawner" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8lntp")]
-position = Vector2(1240, -360)
-spawn_enemy_type = Array[PackedScene]([ExtResource("16_1v2ms"), ExtResource("19_mfv7b"), ExtResource("16_1v2ms")])
+position = Vector2(1240, -352)
+spawn_enemy_type = Array[PackedScene]([ExtResource("16_1v2ms"), ExtResource("16_1v2ms"), ExtResource("19_mfv7b"), ExtResource("19_mfv7b"), ExtResource("16_1v2ms"), ExtResource("16_1v2ms")])
 tile_map = NodePath("../../TileMap")
 spawn_range = 5
 spawn_wait = 3.0
@@ -406,8 +407,8 @@ position = Vector2(1016, -1168)
 bounce_force = -400.0
 
 [node name="spawner2" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8lntp")]
-position = Vector2(744, -1544)
-spawn_enemy_type = Array[PackedScene]([ExtResource("19_mfv7b"), ExtResource("19_mfv7b"), ExtResource("19_mfv7b"), ExtResource("19_mfv7b")])
+position = Vector2(744, -1536)
+spawn_enemy_type = Array[PackedScene]([ExtResource("19_mfv7b"), ExtResource("19_mfv7b"), ExtResource("20_iruvl"), ExtResource("20_iruvl"), ExtResource("19_mfv7b"), ExtResource("19_mfv7b")])
 tile_map = NodePath("../../TileMap")
 spawn_range = 6
 spawn_wait = 2.0

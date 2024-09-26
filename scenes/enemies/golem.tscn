@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bkmgf0sqr7pk3"]
+[gd_scene load_steps=46 format=3 uid="uid://bkmgf0sqr7pk3"]
 
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="1_a41dw"]
 [ext_resource type="Script" path="res://scripts/golem.gd" id="1_v0or6"]
@@ -204,6 +204,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(0.92549, 0.152941, 0.247059, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackIndicator:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_qrb02"]
 resource_name = "hurt_blink"
@@ -233,9 +245,26 @@ tracks/1/keys = {
 "values": [Color(0.92549, 0.152941, 0.247059, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_4gfco"]
+resource_name = "attack_indicator"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AttackIndicator:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c00k1"]
 _data = {
 "RESET": SubResource("Animation_f1a1l"),
+"attack_indicator": SubResource("Animation_4gfco"),
 "hurt_blink": SubResource("Animation_qrb02")
 }
 
@@ -275,8 +304,17 @@ interpolation_mode = 2
 offsets = PackedFloat32Array(0.180124, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
+[sub_resource type="Gradient" id="Gradient_nehd4"]
+offsets = PackedFloat32Array(0.603896, 0.74026, 0.87013, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1o3xv"]
+gradient = SubResource("Gradient_nehd4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.8)
+
 [node name="golem" type="CharacterBody2D" groups=["enemies"]]
-z_index = 1
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_v0or6")
@@ -325,11 +363,11 @@ libraries = {
 position = Vector2(0, -50)
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("4_d7ck2")]
-position = Vector2(0, -4)
-scale = Vector2(2.5, 0.5)
-damage = 10
+visible = false
+scale = Vector2(4, 0.5)
+damage = 20
 attack_wait = 1.0
-knock_back_force = 200
+knock_back_force = 250
 
 [node name="RoamTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -347,7 +385,7 @@ one_shot = true
 explosiveness = 0.8
 texture = SubResource("CompressedTexture2D_m6uq1")
 emission_shape = 3
-emission_rect_extents = Vector2(20, 1)
+emission_rect_extents = Vector2(32, 1)
 direction = Vector2(0, -1)
 gravity = Vector2(0, 0)
 initial_velocity_min = 10.0
@@ -369,7 +407,7 @@ explosiveness = 0.2
 randomness = 0.2
 texture = SubResource("CompressedTexture2D_q6caf")
 emission_shape = 3
-emission_rect_extents = Vector2(20, 1)
+emission_rect_extents = Vector2(32, 1)
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 100)
@@ -380,6 +418,11 @@ angle_max = 720.0
 scale_amount_curve = SubResource("Curve_vu4p5")
 color_ramp = SubResource("Gradient_gc6m1")
 anim_offset_max = 1.0
+
+[node name="AttackIndicator" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(1, 0.125)
+texture = SubResource("GradientTexture2D_1o3xv")
 
 [connection signal="animation_finished" from="GolemSprite" to="." method="_on_golem_sprite_animation_finished"]
 [connection signal="timeout" from="RoamTimer" to="." method="_on_change_state_timer_timeout"]

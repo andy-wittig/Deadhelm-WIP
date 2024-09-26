@@ -1,9 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=28 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
-[ext_resource type="PackedScene" uid="uid://c2ovuhtbii1pb" path="res://scenes/level_test.tscn" id="3_hvnwq"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_lefxa"]
+[ext_resource type="PackedScene" uid="uid://dis3wy3nmnpfo" path="res://scenes/level_grasslands_2.tscn" id="3_qxg5j"]
 [ext_resource type="PackedScene" uid="uid://u1heuwmpu3ud" path="res://scenes/level_objects/leaping_mushroom.tscn" id="4_kgpay"]
 [ext_resource type="Texture2D" uid="uid://b20sos4yfhkov" path="res://assets/sprites/UI/level_background_test.png" id="4_kqxwq"]
 [ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="5_lsitk"]
@@ -66,6 +66,43 @@ _data = {
 "blasphemer_move": SubResource("Animation_kgu0h")
 }
 
+[sub_resource type="Animation" id="Animation_v6swx"]
+resource_name = "move"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(400, -136), Vector2(400, -104)]
+}
+
+[sub_resource type="Animation" id="Animation_xug28"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(400, -136)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtsba"]
+_data = {
+"RESET": SubResource("Animation_xug28"),
+"move": SubResource("Animation_v6swx")
+}
+
 [node name="level_grasslands_1" type="Node2D"]
 position = Vector2(64, -272)
 script = ExtResource("1_xitry")
@@ -77,7 +114,8 @@ spawn_limit = 2
 
 [node name="portal_gate" parent="." instance=ExtResource("5_lsitk")]
 position = Vector2(288, -176)
-next_level = ExtResource("3_hvnwq")
+next_level = ExtResource("3_qxg5j")
+soul_cost = 3
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -100
@@ -127,7 +165,7 @@ position = Vector2(112, -176)
 
 [node name="player" parent="players" instance=ExtResource("3_lefxa")]
 z_index = 5
-position = Vector2(176, 0)
+position = Vector2(0, 16)
 
 [node name="game objects" type="Node" parent="."]
 
@@ -169,7 +207,7 @@ position = Vector2(728, -144)
 position = Vector2(744, -144)
 
 [node name="spawner2" parent="game objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("11_eugnb")]
-position = Vector2(248, -152)
+position = Vector2(248, -144)
 spawn_enemy_type = Array[PackedScene]([ExtResource("13_8j7cl"), ExtResource("13_8j7cl"), ExtResource("13_8j7cl")])
 tile_map = NodePath("../../TileMap")
 spawn_range = 5
@@ -223,3 +261,12 @@ scale = Vector2(1, 5)
 
 [node name="falling_leaves" parent="." instance=ExtResource("18_t7lxe")]
 position = Vector2(80, -200)
+
+[node name="platform2" parent="." instance=ExtResource("8_1mk3m")]
+position = Vector2(400, -136)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="platform2"]
+libraries = {
+"": SubResource("AnimationLibrary_vtsba")
+}
+autoplay = "move"
