@@ -1,12 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=27 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_lefxa"]
 [ext_resource type="PackedScene" uid="uid://dis3wy3nmnpfo" path="res://scenes/level_grasslands_2.tscn" id="3_qxg5j"]
+[ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="4_6001q"]
 [ext_resource type="PackedScene" uid="uid://u1heuwmpu3ud" path="res://scenes/level_objects/leaping_mushroom.tscn" id="4_kgpay"]
-[ext_resource type="Texture2D" uid="uid://b20sos4yfhkov" path="res://assets/sprites/UI/level_background_test.png" id="4_kqxwq"]
 [ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="5_lsitk"]
+[ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="5_qsvc4"]
+[ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="6_kjnu3"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="7_bjmkc"]
 [ext_resource type="PackedScene" uid="uid://cqbypq7pvrrg7" path="res://scenes/level_objects/platform.tscn" id="8_1mk3m"]
 [ext_resource type="PackedScene" uid="uid://ct1vd1qwksnqo" path="res://scenes/level_objects/wooden_spike.tscn" id="9_3n6k1"]
@@ -87,8 +89,6 @@ layer = -100
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 64.0
-offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_a24ds")
@@ -97,16 +97,40 @@ texture = SubResource("GradientTexture2D_a24ds")
 layer = -99
 scroll_ignore_camera_zoom = true
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="Background/ParallaxBackground"]
-motion_scale = Vector2(0.6, 0.6)
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Mountains" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer1"]
+modulate = Color(1, 1, 1, 0.588235)
+offset_right = 384.0
+offset_bottom = 108.0
+scale = Vector2(5, 5)
+texture = ExtResource("6_kjnu3")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.4, 0.4)
 motion_mirroring = Vector2(1920, 1080)
 
-[node name="CloudTexture" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer"]
+[node name="SmallClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer2"]
 modulate = Color(1, 1, 1, 0.588235)
 offset_right = 384.0
 offset_bottom = 216.0
 scale = Vector2(5, 5)
-texture = ExtResource("4_kqxwq")
+texture = ExtResource("4_6001q")
+stretch_mode = 1
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="LargeClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer3"]
+modulate = Color(1, 1, 1, 0.588235)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("5_qsvc4")
 stretch_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
