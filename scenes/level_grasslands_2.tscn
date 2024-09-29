@@ -141,7 +141,6 @@ layer_2/tile_data = PackedInt32Array(-3538918, 262145, 2, -3473381, 262145, 1, -
 [node name="portal_gate" parent="." instance=ExtResource("17_dkwbp")]
 position = Vector2(880, -1344)
 next_level = ExtResource("18_sfou0")
-soul_cost = 16
 
 [node name="players" type="Node2D" parent="."]
 position = Vector2(480, -432)

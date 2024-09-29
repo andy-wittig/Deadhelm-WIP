@@ -6,12 +6,12 @@ var controls_list = [
 	"move_up",
 	"move_down",
 	"jump",
+	"climb",
 	"pickup",
 	"drop_item",
 	"scroll_up",
 	"scroll_down",
 	"left_click",
-	"right_click",
 	"show_chat",
 	"in-game_menu",
 ]

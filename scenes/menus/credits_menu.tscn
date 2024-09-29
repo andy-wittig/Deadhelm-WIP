@@ -64,8 +64,12 @@ SFX DESIGNER
 [u][b]ZACH[/b][/u]
 SFX
 [u][b]EMA[/b][/u]
-SFX
-GOOD LISTENER[/center]"
+PLAY TESTER
+[u][b]SARAH[/b][/u]
+PLAY TESTER
+[u][b]EDEN[/b][/u]
+PLAY TESTER
+[/center]"
 
 [node name="backButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
