@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=27 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://denacnmk41nwy" path="res://scenes/vfx/falling_leaves.tscn" id="18_t7lxe"]
 [ext_resource type="PackedScene" uid="uid://cy85nfl1yblvo" path="res://scenes/enemies/blasphemer.tscn" id="19_vfsee"]
 [ext_resource type="PackedScene" uid="uid://c0pspuwwhnp34" path="res://scenes/level_objects/soul.tscn" id="20_rqmcm"]
-[ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="21_ebgin"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
@@ -97,24 +96,25 @@ texture = SubResource("GradientTexture2D_a24ds")
 layer = -99
 scroll_ignore_camera_zoom = true
 
-[node name="ParallaxLayer1" type="ParallaxLayer" parent="Background/ParallaxBackground"]
-motion_scale = Vector2(0.4, 0.4)
+[node name="ParallaxMountain" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_offset = Vector2(0, -108)
 motion_mirroring = Vector2(1920, 0)
 
-[node name="Mountains" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer1"]
-modulate = Color(1, 1, 1, 0.588235)
+[node name="Mountains" type="TextureRect" parent="Background/ParallaxBackground/ParallaxMountain"]
+modulate = Color(1, 1, 1, 0.784314)
 offset_right = 384.0
-offset_bottom = 108.0
+offset_bottom = 208.0
 scale = Vector2(5, 5)
 texture = ExtResource("6_kjnu3")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="Background/ParallaxBackground"]
-motion_scale = Vector2(0.4, 0.4)
+[node name="ParallaxSmallClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_offset = Vector2(0, -216)
 motion_mirroring = Vector2(1920, 1080)
 
-[node name="SmallClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer2"]
+[node name="SmallClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxSmallClouds"]
 modulate = Color(1, 1, 1, 0.588235)
 offset_right = 384.0
 offset_bottom = 216.0
@@ -122,10 +122,11 @@ scale = Vector2(5, 5)
 texture = ExtResource("4_6001q")
 stretch_mode = 1
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+[node name="ParallaxLargeClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(1.2, 1.2)
 motion_mirroring = Vector2(1920, 1080)
 
-[node name="LargeClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLayer3"]
+[node name="LargeClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLargeClouds"]
 modulate = Color(1, 1, 1, 0.588235)
 offset_right = 384.0
 offset_bottom = 216.0
@@ -247,23 +248,3 @@ scale = Vector2(1, 5)
 
 [node name="falling_leaves" parent="." instance=ExtResource("18_t7lxe")]
 position = Vector2(80, -200)
-
-[node name="tome" parent="." instance=ExtResource("21_ebgin")]
-position = Vector2(192, -72)
-spell_type = "poison bottle"
-
-[node name="tome2" parent="." instance=ExtResource("21_ebgin")]
-position = Vector2(208, -48)
-spell_type = "bow"
-
-[node name="tome3" parent="." instance=ExtResource("21_ebgin")]
-position = Vector2(208, -72)
-spell_type = "flame"
-
-[node name="tome4" parent="." instance=ExtResource("21_ebgin")]
-position = Vector2(240, -48)
-spell_type = "meteor"
-
-[node name="tome5" parent="." instance=ExtResource("21_ebgin")]
-position = Vector2(232, -72)
-spell_type = "lightning"
