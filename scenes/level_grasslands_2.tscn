@@ -1,11 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://dis3wy3nmnpfo"]
+[gd_scene load_steps=36 format=3 uid="uid://dis3wy3nmnpfo"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_p2deu"]
-[ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_vfanr"]
-[ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="3_cuiiq"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_lefxa"]
-[ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="4_ec7k1"]
 [ext_resource type="PackedScene" uid="uid://u1heuwmpu3ud" path="res://scenes/level_objects/leaping_mushroom.tscn" id="4_kgpay"]
 [ext_resource type="PackedScene" uid="uid://clj453y1ct468" path="res://scenes/level_objects/gremlin_shop.tscn" id="5_6sy76"]
 [ext_resource type="PackedScene" uid="uid://xekuabglq1uh" path="res://scenes/level_objects/lantern.tscn" id="6_3tehp"]
@@ -127,48 +124,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_a24ds")
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-layer = -99
-scroll_ignore_camera_zoom = true
-
-[node name="ParallaxMountain" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.8, 0.8)
-motion_offset = Vector2(0, -108)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="Mountains" type="TextureRect" parent="ParallaxBackground/ParallaxMountain"]
-modulate = Color(1, 1, 1, 0.784314)
-offset_right = 384.0
-offset_bottom = 216.0
-scale = Vector2(5, 5)
-texture = ExtResource("2_vfanr")
-expand_mode = 1
-stretch_mode = 1
-
-[node name="ParallaxSmallClouds" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_offset = Vector2(0, -216)
-motion_mirroring = Vector2(1920, 1080)
-
-[node name="SmallClouds" type="TextureRect" parent="ParallaxBackground/ParallaxSmallClouds"]
-modulate = Color(1, 1, 1, 0.588235)
-offset_right = 384.0
-offset_bottom = 216.0
-scale = Vector2(5, 5)
-texture = ExtResource("3_cuiiq")
-stretch_mode = 1
-
-[node name="ParallaxLargeClouds" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(1.2, 1.2)
-motion_mirroring = Vector2(1920, 1080)
-
-[node name="LargeClouds" type="TextureRect" parent="ParallaxBackground/ParallaxLargeClouds"]
-modulate = Color(1, 1, 1, 0.588235)
-offset_right = 384.0
-offset_bottom = 216.0
-scale = Vector2(5, 5)
-texture = ExtResource("4_ec7k1")
-stretch_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_p2deu")

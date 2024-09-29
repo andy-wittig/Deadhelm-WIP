@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=28 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="5_lsitk"]
 [ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="5_qsvc4"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="6_kjnu3"]
+[ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="6_uvdg6"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="7_bjmkc"]
 [ext_resource type="PackedScene" uid="uid://cqbypq7pvrrg7" path="res://scenes/level_objects/platform.tscn" id="8_1mk3m"]
 [ext_resource type="PackedScene" uid="uid://ct1vd1qwksnqo" path="res://scenes/level_objects/wooden_spike.tscn" id="9_3n6k1"]
@@ -22,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://c0pspuwwhnp34" path="res://scenes/level_objects/soul.tscn" id="20_rqmcm"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
-colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
+colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_a24ds"]
 gradient = SubResource("Gradient_n6nku")
@@ -104,7 +105,7 @@ motion_mirroring = Vector2(1920, 0)
 [node name="Mountains" type="TextureRect" parent="Background/ParallaxBackground/ParallaxMountain"]
 modulate = Color(1, 1, 1, 0.784314)
 offset_right = 384.0
-offset_bottom = 208.0
+offset_bottom = 216.0
 scale = Vector2(5, 5)
 texture = ExtResource("6_kjnu3")
 expand_mode = 1
@@ -113,9 +114,11 @@ stretch_mode = 1
 [node name="ParallaxSmallClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 motion_offset = Vector2(0, -216)
 motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("6_uvdg6")
+scroll_speed = 8.0
 
 [node name="SmallClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxSmallClouds"]
-modulate = Color(1, 1, 1, 0.588235)
+modulate = Color(1, 1, 1, 0.490196)
 offset_right = 384.0
 offset_bottom = 216.0
 scale = Vector2(5, 5)
@@ -125,9 +128,11 @@ stretch_mode = 1
 [node name="ParallaxLargeClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
 motion_scale = Vector2(1.2, 1.2)
 motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("6_uvdg6")
+scroll_speed = 4.0
 
 [node name="LargeClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLargeClouds"]
-modulate = Color(1, 1, 1, 0.588235)
+modulate = Color(1, 1, 1, 0.490196)
 offset_right = 384.0
 offset_bottom = 216.0
 scale = Vector2(5, 5)
