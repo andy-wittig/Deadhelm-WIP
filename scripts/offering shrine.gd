@@ -1,10 +1,10 @@
 extends Node2D
 
 var player = null
-var souls_input = 0
+var souls_input := 0
 var can_interact := true
 
-@export var soul_cost = 10
+@export var soul_cost := 10
 @export var spell_type: String
 
 @onready var soul_label = $SoulLabel

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 #Constants
-const SPEED = 70.0
-const JUMP_VELOCITY = -280.0
+const SPEED := 70.0
+const JUMP_VELOCITY := -280.0
 const HANG_TIME_THRESHHOLD := 40.0
 const HANG_TIME_MULTIPLIER := 0.6
 const KNOCK_BACK_SPEED := 250.0
@@ -17,13 +17,13 @@ var jump_timer: float
 var knock_back: Vector2
 #Attacking Variables
 var player = null
-var chasing_player = false
-var attack_timer_started = false
-var attacking = false
-var frog_detonated = false
+var chasing_player := false
+var attack_timer_started := false
+var attacking := false
+var frog_detonated := false
 #Enemy Mechanics Variables
-var enemy_health = MAX_HEALTH
-var marked_for_death = false
+var enemy_health := MAX_HEALTH
+var marked_for_death := false
 
 enum state_type {
 	MOVING,

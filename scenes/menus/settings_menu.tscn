@@ -20,17 +20,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -231.0
-offset_top = -223.5
-offset_right = 231.0
-offset_bottom = 223.5
+offset_left = -288.0
+offset_top = -288.0
+offset_right = 288.0
+offset_bottom = 288.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SettingsLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_k5orc")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "SETTINGS"
 horizontal_alignment = 1
 
@@ -42,11 +42,13 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("1_k5orc")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 tab_alignment = 1
+current_tab = 2
 clip_tabs = false
 
 [node name="DISPLAY" type="TabBar" parent="VBoxContainer/SettingsTabs"]
+visible = false
 layout_mode = 2
 focus_neighbor_bottom = NodePath("VBoxContainer/CheckWindowed")
 tab_alignment = 1
@@ -58,10 +60,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = -12.0
-offset_right = 84.0
-offset_bottom = 12.0
+offset_left = -120.0
+offset_top = -26.0
+offset_right = 120.0
+offset_bottom = 26.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -71,7 +73,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_k5orc")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "WINDOWED:"
 
 [node name="CheckVsync" type="CheckBox" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
@@ -80,7 +82,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_k5orc")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "VSYNC ENABLED:"
 
 [node name="SOUND" type="TabBar" parent="VBoxContainer/SettingsTabs"]
@@ -95,22 +97,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.5
-offset_top = -8.0
-offset_right = 125.5
-offset_bottom = 8.0
+offset_left = -192.0
+offset_top = -56.0
+offset_right = 192.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
+theme_override_constants/v_separation = 32
 columns = 2
 
 [node name="MusicLabel" type="Label" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_k5orc")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "MUSIC:"
 horizontal_alignment = 1
 
@@ -125,7 +128,7 @@ value = 1.0
 [node name="SFXLabel" type="Label" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_k5orc")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "SFX:"
 horizontal_alignment = 1
 
@@ -137,8 +140,10 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
+[node name="Control" type="Control" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
+layout_mode = 2
+
 [node name="CONTROLS" type="TabBar" parent="VBoxContainer/SettingsTabs"]
-visible = false
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/SettingsTabs/CONTROLS"]
@@ -148,10 +153,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -96.0
-offset_right = 160.0
-offset_bottom = 96.0
+offset_left = -192.0
+offset_top = -192.0
+offset_right = 192.0
+offset_bottom = 192.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
@@ -166,7 +171,7 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5htnj")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "back"
 
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed" to="." method="_on_check_windowed_toggled"]

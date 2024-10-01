@@ -315,6 +315,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.8)
 
 [node name="golem" type="CharacterBody2D" groups=["enemies"]]
+z_index = 4
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_v0or6")
@@ -323,9 +324,8 @@ script = ExtResource("1_v0or6")
 material = SubResource("ShaderMaterial_bg4no")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_m63n4")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.953392
 
 [node name="BodyCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)

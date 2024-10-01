@@ -1,8 +1,8 @@
 extends Area2D
 
-var direction = Vector2(-1.0,0.0)
-const SPEED = 35.0
-const ATTRACTION_SPEED = 135.0
+var direction := Vector2(-1.0,0.0)
+const SPEED := 35.0
+const ATTRACTION_SPEED := 135.0
 const BLACKHOLE_KNOCK_BACK := 125
 const PLAYER_DAMAGE := 10
 

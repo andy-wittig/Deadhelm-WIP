@@ -1,8 +1,8 @@
 extends RigidBody2D
 
 var can_collect := true
-const y_force = -250
-var rand_x_force = randf_range(-100, 100)
+const y_force := -250
+var rand_x_force := randf_range(-100, 100)
 
 @onready var detect_player = $DetectPlayer
 @onready var animated_sprite = $AnimatedSprite2D

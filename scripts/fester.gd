@@ -1,7 +1,7 @@
 extends CharacterBody2D
 #Constants
-const SPEED = 24.0
-const JUMP_VELOCITY = -180.0
+const SPEED := 24.0
+const JUMP_VELOCITY := -180.0
 const KNOCK_BACK_FORCE := 75.0
 const ROAM_CHANGE_WAIT := 6
 const ATTACK_RADIUS := 20
@@ -13,10 +13,10 @@ var direction: int
 var knock_back: Vector2
 #Attacking Variables
 var player = null
-var chasing_player = false
+var chasing_player := false
 #Enemy Mechanics Variables
-var enemy_health = MAX_HEALTH
-var marked_for_death = false
+var enemy_health := MAX_HEALTH
+var marked_for_death := false
 
 enum state_type {
 	MOVING,

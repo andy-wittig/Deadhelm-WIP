@@ -7,17 +7,12 @@ extends Area2D
 var active := true
 var can_hurt := true
 
-
-@onready var hurt_player_timer = $HurtPlayerTimer
-
 func _process(_delta):
-	if (active):
-		if (get_overlapping_bodies().size() < 1):
-			can_hurt = true
+	if (active && can_hurt):
 		for body in get_overlapping_bodies():
-			if (body.is_in_group("players") && can_hurt):
+			if (body.is_in_group("players")):
 				apply_damage(body)
-				hurt_player_timer.start(attack_wait)
+				$HurtPlayerTimer.start(attack_wait)
 				can_hurt = false
 
 func apply_damage(body):

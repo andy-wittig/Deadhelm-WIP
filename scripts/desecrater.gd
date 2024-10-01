@@ -4,7 +4,7 @@ extends Node2D
 @export var detection_range := 128
 
 var attack_wait := false
-var attack_direction
+var attack_direction : Vector2
 
 @onready var ray_cast = $RayCast2D
 @onready var attack_timer = $AttackTimer

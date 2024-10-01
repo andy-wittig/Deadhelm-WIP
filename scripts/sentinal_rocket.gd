@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED = 80.0
+const SPEED := 80.0
 const ROCKET_KNOCK_BACK := 150
 const PLAYER_DAMAGE := 10
 

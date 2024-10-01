@@ -1,6 +1,6 @@
 extends Node
 
-var random = RandomNumberGenerator.new()
+var random := RandomNumberGenerator.new()
 
 @onready var music_selection = {
 	"grasslands_track_1" : load("res://assets/music/grasslands_track_1.mp3"),

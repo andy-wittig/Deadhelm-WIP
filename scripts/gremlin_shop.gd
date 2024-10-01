@@ -4,7 +4,7 @@ extends Area2D
 
 var menu_opened := false
 var player: CharacterBody2D
-var random = RandomNumberGenerator.new()
+var random := RandomNumberGenerator.new()
 
 @onready var gremlin_squabbles = [
 	load("res://assets/sound effects/shop_gremlin/gremlin_1.mp3"),

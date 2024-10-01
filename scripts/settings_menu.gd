@@ -46,6 +46,8 @@ func _ready():
 		var button = custom_action.new()
 		label.add_theme_font_override("font", load("res://assets/fonts/PixelOperator8.ttf"))
 		button.add_theme_font_override("font", load("res://assets/fonts/PixelOperator8.ttf"))
+		label.set("theme_override_font_sizes/font_size", 16)
+		button.set("theme_override_font_sizes/font_size", 16)
 		label.text = action
 		button.action = action
 		remap_container.add_child(label)

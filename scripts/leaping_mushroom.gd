@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var bounce_force = -350.0
+@export var bounce_force := -350.0
 @onready var animated_sprite_2d = $AnimatedSprite2D
 
 func _process(delta):

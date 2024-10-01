@@ -1,24 +1,24 @@
 extends CharacterBody2D
 #Constants
-const SPEED = 28.0
+const SPEED := 28.0
 const JUMP_VELOCITY = -180.0
 const KNOCK_BACK_SPEED := 75.0
 const DETONATE_TIME := 1.0
 const ROAM_CHANGE_WAIT := 6
 const MAX_HEALTH := 30
 #Movement Variables
-var rand_state_timer = RandomNumberGenerator.new()
+var rand_state_timer := RandomNumberGenerator.new()
 var direction: int
 var knock_back: Vector2
 #Attacking Variables
 var player = null
-var chasing_player = false
-var attack_timer_started = false
-var attacking = false
-var bombshell_detonated = false
+var chasing_player := false
+var attack_timer_started := false
+var attacking := false
+var bombshell_detonated := false
 #Enemy Mechanics Variables
-var enemy_health = MAX_HEALTH
-var marked_for_death = false
+var enemy_health := MAX_HEALTH
+var marked_for_death := false
 
 enum state_type {
 	MOVING,

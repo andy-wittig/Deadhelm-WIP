@@ -73,7 +73,6 @@ const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart
 #Mechanics Paths
 @onready var player_center = $PlayerCenter
 @onready var player_collider = $PlayerCollider
-@onready var attack_cooldown_timer = $AttackCooldownTimer
 @onready var spell_spawn = $SpellSpawn
 @onready var camera = $Camera2D
 @onready var dust_particles = $DustParticles
@@ -229,6 +228,8 @@ func _process(delta):
 			currently_selected_slot.start_cooldown(currently_selected_slot.get_slot_item())
 			dial_instance.destroy()
 			dial_created = false
+			
+	move_and_slide()
 
 func _physics_process(delta):
 	#simple state machine
@@ -307,8 +308,6 @@ func _physics_process(delta):
 	velocity += knock_back
 	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
 	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
-
-	move_and_slide()
 
 #PLAYER LOGIC FUNCTIONS
 func apply_knockback(other_pos: Vector2, force: float):

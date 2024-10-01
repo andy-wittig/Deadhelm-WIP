@@ -252,10 +252,7 @@ script = ExtResource("1_o47cc")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/enemies/bombshell_enemy.tscn", "res://scenes/enemies/sentinal.tscn")
-spawn_path = NodePath("../EnemySpawn")
 spawn_limit = 100
-
-[node name="EnemySpawn" type="Node2D" parent="."]
 
 [node name="DetectPlayerCollider" type="CollisionShape2D" parent="."]
 z_index = 1

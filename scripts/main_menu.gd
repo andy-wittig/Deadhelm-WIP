@@ -42,26 +42,28 @@ func _process(_delta):
 						menu_opened()
 		menu.MULTIPLAYER:
 			for scene in menu_scenes:
-				if (scene != "multiplayer_menu"):
+				if (scene != "multiplayer_menu" && scene != "title_background"):
 					menu_scenes[scene].visible = false
 				else:
 					menu_scenes[scene].visible = true
-					menu_scenes[scene].menu_opened()
+					menu_scenes["multiplayer_menu"].menu_opened()
 		menu.SETTINGS:
 			for scene in menu_scenes:
 				if (scene != "settings_menu"):
 					menu_scenes[scene].visible = false
 				else:
+					if (!GameManager.started_game):
+						menu_scenes["title_background"].visible = true
 					menu_scenes[scene].visible = true
-					menu_scenes[scene].menu_opened()
+					menu_scenes["settings_menu"].menu_opened()
 					GameManager.access_ingame_menu = false
 		menu.CREDITS:
 			for scene in menu_scenes:
-				if (scene != "credits_menu"):
+				if (scene != "credits_menu" && scene != "title_background"):
 					menu_scenes[scene].visible = false
 				else:
 					menu_scenes[scene].visible = true
-					menu_scenes[scene].menu_opened()
+					menu_scenes["credits_menu"].menu_opened()
 		menu.INGAME:
 			for scene in menu_scenes:
 				if (scene != "in_game_menu"):

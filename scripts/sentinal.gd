@@ -6,17 +6,17 @@ const ROAM_RANGE := 48
 const ROAM_CHANGE_WAIT := 6
 const MAX_HEALTH := 40
 #Chase Player Variables
-var chasing_player = false
+var chasing_player := false
 var player = null
 #Roaming Variables
-var rand_state_timer = RandomNumberGenerator.new()
+var rand_state_timer := RandomNumberGenerator.new()
 var init_position: Vector2
-var roam_direction = Vector2.UP
+var roam_direction := Vector2.UP
 #Physics Variables
 var knock_back: Vector2
 #Enemy Mechanic Variables
-var marked_for_death = false
-var enemy_health = MAX_HEALTH
+var marked_for_death := false
+var enemy_health := MAX_HEALTH
 
 enum state_type {
 	MOVING,

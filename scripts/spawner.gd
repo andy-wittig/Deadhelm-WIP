@@ -9,7 +9,7 @@ extends Area2D
 var currently_spawning := false
 var spawned_count := 0
 var current_spawn_uses := 0
-var random = RandomNumberGenerator.new()
+var random := RandomNumberGenerator.new()
 var spawn_pos: Vector2
 
 @onready var spawner_sprite = $SpawnerSprite
@@ -50,7 +50,7 @@ func _on_input_event(viewport, event, shape_idx):
 @rpc("any_peer", "call_local")
 func spawn_enemy(spawn_position):
 	var enemy = spawn_enemy_type[spawned_count-1].instantiate()
-	$EnemySpawn.add_child(enemy, true)
+	get_tree().get_root().get_node("game/Level").add_child(enemy)
 	enemy.global_position = spawn_position
 	spawn_sound.play()
 	

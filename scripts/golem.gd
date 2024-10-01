@@ -8,7 +8,7 @@ const ATTACK_RADIUS := 24
 const ATTACK_WAIT := 2
 const MAX_HEALTH := 100
 #Movement Variables
-var rand_state_timer = RandomNumberGenerator.new()
+var rand_state_timer := RandomNumberGenerator.new()
 var direction: int
 var knock_back: Vector2
 #Attacking Variables

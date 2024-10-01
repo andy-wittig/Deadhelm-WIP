@@ -38,7 +38,7 @@ func choose_rarity():
 func _ready():
 	var spawn_effect = load("res://scenes/vfx/spawn_effect.tscn").instantiate()
 	spawn_effect.position = position
-	get_parent().add_child(spawn_effect)
+	get_parent().add_child.call_deferred(spawn_effect)
 	
 	if (randomly_choose_soul):
 		soul_rarity = choose_rarity()

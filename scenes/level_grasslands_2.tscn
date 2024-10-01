@@ -1,9 +1,13 @@
-[gd_scene load_steps=36 format=3 uid="uid://dis3wy3nmnpfo"]
+[gd_scene load_steps=40 format=3 uid="uid://dis3wy3nmnpfo"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
+[ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_hxqtm"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_p2deu"]
+[ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_cfmyk"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_lefxa"]
+[ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="4_jotyv"]
 [ext_resource type="PackedScene" uid="uid://u1heuwmpu3ud" path="res://scenes/level_objects/leaping_mushroom.tscn" id="4_kgpay"]
+[ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="5_4qbo2"]
 [ext_resource type="PackedScene" uid="uid://clj453y1ct468" path="res://scenes/level_objects/gremlin_shop.tscn" id="5_6sy76"]
 [ext_resource type="PackedScene" uid="uid://xekuabglq1uh" path="res://scenes/level_objects/lantern.tscn" id="6_3tehp"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="7_bjmkc"]
@@ -26,9 +30,9 @@
 [ext_resource type="PackedScene" uid="uid://bv5plpqydgmj0" path="res://scenes/level_objects/killzone.tscn" id="23_c1lgd"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
-colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
+colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_a24ds"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_64d4n"]
 gradient = SubResource("Gradient_n6nku")
 fill_to = Vector2(0, 1)
 
@@ -114,16 +118,62 @@ _spawnable_scenes = PackedStringArray("res://scenes/player/multiplayer_player.ts
 spawn_path = NodePath("../players")
 spawn_limit = 2
 
-[node name="SkyBackground" type="CanvasLayer" parent="."]
+[node name="Background" type="CanvasLayer" parent="."]
 layer = -100
 
-[node name="SkyGradient" type="TextureRect" parent="SkyBackground"]
+[node name="SkyGradient" type="TextureRect" parent="Background"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_a24ds")
+texture = SubResource("GradientTexture2D_64d4n")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+layer = -99
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxMountain" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_offset = Vector2(0, -108)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Mountains" type="TextureRect" parent="Background/ParallaxBackground/ParallaxMountain"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("2_hxqtm")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ParallaxSmallClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_offset = Vector2(0, -216)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_cfmyk")
+scroll_speed = 8.0
+
+[node name="SmallClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxSmallClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("4_jotyv")
+stretch_mode = 1
+
+[node name="ParallaxLargeClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(1.2, 1.2)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_cfmyk")
+scroll_speed = 4.0
+
+[node name="LargeClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLargeClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("5_4qbo2")
+stretch_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_p2deu")

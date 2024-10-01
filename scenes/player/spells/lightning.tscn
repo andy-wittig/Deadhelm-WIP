@@ -50,7 +50,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"lightning",
-"speed": 8.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hcp61"]
@@ -127,7 +127,7 @@ texture = ExtResource("2_nnea1")
 sprite_frames = SubResource("SpriteFrames_pqn1j")
 animation = &"lightning"
 autoplay = "lightning"
-frame_progress = 0.309775
+frame_progress = 0.73225
 offset = Vector2(16, 0)
 
 [node name="hurt_enemy_area" parent="LightningAnimatedSprite" node_paths=PackedStringArray("shape") instance=ExtResource("4_ocpje")]
