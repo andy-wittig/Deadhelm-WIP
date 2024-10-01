@@ -31,25 +31,25 @@ theme_override_constants/separation = 4
 [node name="BackButton" type="Button" parent="MenuOptions"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_j41ku")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "back"
 
 [node name="SettingsButton" type="Button" parent="MenuOptions"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_j41ku")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "settings"
 
 [node name="LeaveButton" type="Button" parent="MenuOptions"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_j41ku")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "leave to menu"
 
 [node name="QuitButton" type="Button" parent="MenuOptions"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_j41ku")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "quit game"
 
 [node name="settings_menu" parent="." instance=ExtResource("2_djsis")]
