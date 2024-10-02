@@ -51,7 +51,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u61f6"]
-size = Vector2(20, 8)
+size = Vector2(20, 11)
 
 [node name="leaping mushroom" type="Area2D"]
 collision_layer = 0
@@ -65,9 +65,8 @@ sprite_frames = SubResource("SpriteFrames_3sril")
 animation = &"bounce"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -17)
+position = Vector2(0, -16.5)
 shape = SubResource("RectangleShape2D_u61f6")
-one_way_collision = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

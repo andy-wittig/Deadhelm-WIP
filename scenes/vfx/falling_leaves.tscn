@@ -23,7 +23,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 [node name="LeafParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_ovq8q")
 amount = 2
-speed_scale = 0.3
+speed_scale = 0.2
 explosiveness = 0.5
 lifetime_randomness = 0.1
 texture = ExtResource("1_kw4ho")

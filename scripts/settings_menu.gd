@@ -30,7 +30,7 @@ var menu_started := false
 func _ready():
 	if (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED):
 		check_windowed.button_pressed = true
-	elif (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN):
+	elif (DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN):
 		check_windowed.button_pressed = false
 		
 	if (DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_ENABLED):

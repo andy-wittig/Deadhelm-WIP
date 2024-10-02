@@ -2,18 +2,18 @@ extends Area2D
 
 var direction := Vector2(-1.0,0.0)
 const SPEED := 35.0
-const ATTRACTION_SPEED := 135.0
+const ATTRACTION_SPEED := 65.0
 const BLACKHOLE_KNOCK_BACK := 125
 const PLAYER_DAMAGE := 10
 
 @onready var hurt_area = $HurtArea
 
 func _physics_process(delta):
-	position += direction * SPEED * delta
+	global_position += direction * SPEED * delta
 	
 	for body in hurt_area.get_overlapping_bodies():
 		if body.is_in_group("players"):
-			body.velocity.x = ((global_position - body.global_position).normalized() * ATTRACTION_SPEED).x
+			body.velocity.x = ((global_position - body.player_center.global_position).normalized() * ATTRACTION_SPEED).x
 
 @rpc("call_local")
 func destroy_self():

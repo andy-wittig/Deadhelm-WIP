@@ -35,7 +35,7 @@ func _process(_delta):
 @rpc("call_local")
 func attack():
 	var blackhole = load("res://scenes/enemies/desecrater_blackhole.tscn").instantiate()
-	blackhole.position = position
+	blackhole.global_position = global_position
 	blackhole.direction = attack_direction
 	get_tree().get_root().get_node("game/Level").add_child(blackhole)
 

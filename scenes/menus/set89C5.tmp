@@ -1,0 +1,180 @@
+[gd_scene load_steps=4 format=3 uid="uid://8f6vlpb4dim"]
+
+[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_k5orc"]
+[ext_resource type="Script" path="res://scripts/settings_menu.gd" id="1_w6ast"]
+[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_5htnj"]
+
+[node name="settings_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w6ast")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -288.0
+offset_right = 288.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 32
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SettingsTabs" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 24
+tab_alignment = 1
+clip_tabs = false
+
+[node name="DISPLAY" type="TabBar" parent="VBoxContainer/SettingsTabs"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("VBoxContainer/CheckWindowed")
+tab_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SettingsTabs/DISPLAY"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -26.0
+offset_right = 120.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CheckWindowed" type="CheckBox" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 24
+text = "WINDOWED:"
+
+[node name="CheckVsync" type="CheckBox" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 24
+text = "VSYNC ENABLED:"
+
+[node name="SOUND" type="TabBar" parent="VBoxContainer/SettingsTabs"]
+visible = false
+layout_mode = 2
+focus_neighbor_bottom = NodePath("VBoxContainer/GridContainer/MusicSlider")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SettingsTabs/SOUND"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -56.0
+offset_right = 192.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 24
+text = "MUSIC:"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 24
+text = "SFX:"
+horizontal_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Control" type="Control" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="CONTROLS" type="TabBar" parent="VBoxContainer/SettingsTabs"]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/SettingsTabs/CONTROLS"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -192.0
+offset_right = 192.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="RemapContainer" type="GridContainer" parent="VBoxContainer/SettingsTabs/CONTROLS/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 2
+
+[node name="backButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_5htnj")
+theme_override_font_sizes/font_size = 32
+text = "back"
+
+[connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed" to="." method="_on_check_windowed_toggled"]
+[connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckVsync" to="." method="_on_check_vsync_toggled"]
+[connection signal="value_changed" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/backButton" to="." method="_on_back_button_pressed"]

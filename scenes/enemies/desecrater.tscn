@@ -30,7 +30,7 @@ texture = SubResource("GradientTexture2D_jvcvn")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(-128, 0)
-collision_mask = 3
+collision_mask = 2
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 6.0

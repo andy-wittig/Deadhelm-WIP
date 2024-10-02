@@ -229,6 +229,10 @@ func _process(delta):
 			dial_instance.destroy()
 			dial_created = false
 			
+	#Developer Cheats
+	if (Input.is_action_just_pressed("cheat_button")):
+		souls_collected += 1
+			
 	move_and_slide()
 
 func _physics_process(delta):
