@@ -197,6 +197,7 @@ position = Vector2(480, -432)
 
 [node name="player" parent="players" instance=ExtResource("3_lefxa")]
 z_index = 5
+position = Vector2(400, -912)
 
 [node name="Ziplines" type="Node" parent="."]
 

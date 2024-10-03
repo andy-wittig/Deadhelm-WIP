@@ -137,7 +137,7 @@ func _process(delta):
 			hearts[i].texture = ALIVE_HEART_UI
 	
 	portal_progress.max_value = portal_gate.soul_cost
-	portal_progress.value = souls_collected
+	portal_progress.value = clamp(souls_collected + portal_gate.souls_input, 0, portal_progress.max_value)
 	healthbar_label.text = str(player_health) + "/" + str(max_health)
 	healthbar.max_value = max_health
 	healthbar.value = player_health
@@ -231,7 +231,7 @@ func _process(delta):
 			
 	#Developer Cheats
 	if (Input.is_action_just_pressed("cheat_button")):
-		souls_collected += 1
+		souls_collected += 10
 			
 	move_and_slide()
 

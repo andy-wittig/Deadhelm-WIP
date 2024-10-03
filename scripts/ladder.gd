@@ -14,4 +14,5 @@ func _on_area_exited(area):
 		var body = area.get_parent()
 		if (!GameManager.multiplayer_mode_enabled ||
 		body.player_id == multiplayer.get_unique_id()):
-			body.state = body.state_type.MOVING
+			if (body.state != body.state_type.ZIPLINE):
+				body.state = body.state_type.MOVING
