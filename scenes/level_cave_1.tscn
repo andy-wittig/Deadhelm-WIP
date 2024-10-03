@@ -233,7 +233,7 @@ position = Vector2(448, -608)
 
 [node name="player" parent="players" instance=ExtResource("3_15plg")]
 z_index = 5
-position = Vector2(-16, 0)
+position = Vector2(-16, 16)
 
 [node name="Spikes" type="Node" parent="."]
 
