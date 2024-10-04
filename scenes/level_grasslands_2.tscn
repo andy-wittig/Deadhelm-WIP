@@ -49,7 +49,7 @@ point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_uykt8"]
 _data = {
-"points": PackedVector2Array(-34.7386, 12.7649, 34.7386, -12.7649, 0, 0, -24.7758, 37.2526, 24.7758, -37.2526, 59, -98)
+"points": PackedVector2Array(-34.7386, 12.7649, 34.7386, -12.7649, 0, 0, -24.7758, 37.2526, 24.7758, -37.2526, 56, -94)
 }
 point_count = 2
 
@@ -67,7 +67,7 @@ point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_vv04n"]
 _data = {
-"points": PackedVector2Array(50.716, -17.5831, -50.716, 17.5831, -4, -4, 44.5896, 13.7618, -44.5896, -13.7618, -137.338, 0.914063)
+"points": PackedVector2Array(50.716, -17.5831, -50.716, 17.5831, 0, 0, 44.5896, 13.7618, -44.5896, -13.7618, -135, 2)
 }
 point_count = 2
 
@@ -197,7 +197,6 @@ position = Vector2(480, -432)
 
 [node name="player" parent="players" instance=ExtResource("3_lefxa")]
 z_index = 5
-position = Vector2(400, -912)
 
 [node name="Ziplines" type="Node" parent="."]
 
@@ -220,7 +219,6 @@ position = Vector2(603, -572)
 zipline_path = NodePath("Path2D2")
 
 [node name="Path2D2" type="Path2D" parent="Ziplines/zip_line2"]
-scale = Vector2(0.949153, 0.959184)
 curve = SubResource("Curve2D_uykt8")
 
 [node name="zip_line" parent="Ziplines" node_paths=PackedStringArray("zipline_path") instance=ExtResource("10_8i1af")]
@@ -242,7 +240,6 @@ position = Vector2(1140, -1388)
 zipline_path = NodePath("Path2D2")
 
 [node name="Path2D2" type="Path2D" parent="Ziplines/zip_line6"]
-position = Vector2(2.33765, 1.08599)
 curve = SubResource("Curve2D_vv04n")
 
 [node name="Ladders" type="Node" parent="."]
