@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://balh0s1khqr2c"]
+
+[ext_resource type="Texture2D" uid="uid://c7ikervgmadhy" path="res://assets/sprites/level_objects/respawn_point.png" id="1_njymx"]
+
+[node name="respawn_point" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="RespawnSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_njymx")
