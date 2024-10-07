@@ -153,9 +153,9 @@ func _process(delta):
 	if (player_health <= 0 && player_lives > 0):
 		if (!marked_dead):
 			player_lives -= 1
+			global_position = get_tree().get_root().get_node("game/Level/%s/spawn_point" % GameManager.current_level).global_position
 			player_health = max_health
-			global_position = get_parent().global_position
-	
+			
 	#set spell spawn marker position
 	var dial_center = player_center.global_position
 	

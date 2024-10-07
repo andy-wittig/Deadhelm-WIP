@@ -45,23 +45,6 @@ func _process(delta):
 					else:
 						collect_soul(body)
 
-func _on_input_event(viewport, event, shape_idx):	
-	for body in detect_player.get_overlapping_bodies():
-		if (body.is_in_group("players") && can_interact):
-			if (!GameManager.multiplayer_mode_enabled ||
-			body.player_id == multiplayer.get_unique_id()):
-				if (Input.is_action_just_pressed("left_click")):
-					if (souls_input >= soul_cost):
-						souls_input = 0
-						can_interact = false
-						$BuyTimer.start()
-						if (multiplayer.is_server()):
-							rpc("spawn_tome")
-						elif (!GameManager.multiplayer_mode_enabled):
-							spawn_tome()
-					else:
-						collect_soul(body)
-
 func collect_soul(body):
 	if (body.souls_collected > 0):
 		body.souls_collected -= 1

@@ -99,17 +99,6 @@ func _process(delta):
 	animation_player.play_backwards("open_menu")
 	menu_opened = false
 
-func _on_input_event(viewport, event, shape_idx):
-	for body in get_overlapping_bodies():
-		if (body.is_in_group("players")):
-			if (!GameManager.multiplayer_mode_enabled ||
-			body.player_id == multiplayer.get_unique_id()):
-				player = body
-				if (Input.is_action_just_pressed("left_click")):
-					menu_opened = !menu_opened
-					if (menu_opened): animation_player.play("open_menu")
-					else: animation_player.play_backwards("open_menu")
-
 func _on_animation_player_animation_finished(anim_name):
 	if (!menu_opened):
 		$ItemDescriptionLabel.visible = false

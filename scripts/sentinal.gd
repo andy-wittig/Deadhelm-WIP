@@ -143,7 +143,7 @@ func _physics_process(delta):
 				
 		state_type.CHASE:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				roam_direction = (player.global_position - global_position).normalized()
+				roam_direction = (player.player_center.global_position - global_position).normalized()
 				if player.global_position.distance_to(global_position) > 64:
 					velocity = roam_direction * SPEED
 				else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dis3wy3nmnpfo"]
+[gd_scene load_steps=41 format=3 uid="uid://dis3wy3nmnpfo"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_hxqtm"]
@@ -109,6 +109,8 @@ _data = {
 "RESET": SubResource("Animation_0cmln"),
 "move": SubResource("Animation_gn4fj")
 }
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h60yr"]
 
 [node name="level_grasslands_2" type="Node2D"]
 script = ExtResource("1_xitry")
@@ -494,8 +496,17 @@ position = Vector2(1192, -1360)
 position = Vector2(784, -960)
 coin_amount = 2
 
-[node name="respawn_point" parent="." instance=ExtResource("28_h0t7c")]
+[node name="respawn_point" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("28_h0t7c")]
 position = Vector2(1232, -1520)
+spawn_point = NodePath("../spawn_point")
 
 [node name="respawn_point2" parent="." instance=ExtResource("28_h0t7c")]
 position = Vector2(1528, -432)
+
+[node name="spawn_point" type="Marker2D" parent="."]
+position = Vector2(480, -432)
+
+[node name="Killzone2" parent="." instance=ExtResource("23_c1lgd")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone2"]
+shape = SubResource("WorldBoundaryShape2D_h60yr")

@@ -257,3 +257,6 @@ position = Vector2(104, -48)
 
 [node name="platform2" parent="." instance=ExtResource("8_1mk3m")]
 position = Vector2(328, 112)
+
+[node name="spawn_point" type="Marker2D" parent="."]
+position = Vector2(112, -160)

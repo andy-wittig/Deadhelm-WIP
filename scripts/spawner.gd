@@ -35,17 +35,6 @@ func _process(delta):
 					check_enemy_spawnable()
 					current_spawn_uses += 1
 					currently_spawning = true
-
-func _on_input_event(viewport, event, shape_idx):
-	for body in get_overlapping_bodies():
-		if (body.is_in_group("collectable")): break
-		if (body.is_in_group("players") && !currently_spawning && current_spawn_uses < max_spawn_uses):
-			if (!GameManager.multiplayer_mode_enabled ||
-			body.player_id == multiplayer.get_unique_id()):
-				if (Input.is_action_just_pressed("left_click")):
-					check_enemy_spawnable()
-					current_spawn_uses += 1
-					currently_spawning = true
 	
 @rpc("any_peer", "call_local")
 func spawn_enemy(spawn_position):

@@ -35,17 +35,6 @@ func _process(delta):
 						use_soul(body)
 					elif (portal_activated):
 						enter_portal(body)
-
-func _on_input_event(viewport, event, shape_idx):
-	for body in get_overlapping_bodies():
-		if (body.is_in_group("players")):
-			if (!GameManager.multiplayer_mode_enabled ||
-			body.player_id == multiplayer.get_unique_id()):
-				if (Input.is_action_just_pressed("left_click")):
-					if (not portal_activated && souls_input < soul_cost):
-						use_soul(body)
-					elif (portal_activated):
-						enter_portal(body)
 		
 func use_soul(player):
 	if (player.souls_collected > 0):
