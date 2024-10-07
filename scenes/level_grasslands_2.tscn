@@ -500,9 +500,6 @@ coin_amount = 2
 position = Vector2(1232, -1520)
 spawn_point = NodePath("../spawn_point")
 
-[node name="respawn_point2" parent="." instance=ExtResource("28_h0t7c")]
-position = Vector2(1528, -432)
-
 [node name="spawn_point" type="Marker2D" parent="."]
 position = Vector2(480, -432)
 

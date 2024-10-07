@@ -684,3 +684,6 @@ coin_amount = 3
 
 [node name="spawn_point" type="Marker2D" parent="."]
 position = Vector2(432, -592)
+
+[node name="standing_torch" parent="." instance=ExtResource("4_w44fd")]
+position = Vector2(136, -176)
