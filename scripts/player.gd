@@ -17,7 +17,6 @@ const DIAL_RADIUS := 22
 const MAX_LIVES := 3
 const MAX_UPGRADED_HEALTH := 200
 #Physics Variables
-var grounded: bool
 var knock_back: Vector2
 var coyote_time_counter: float
 var jump_buffer_time: float
@@ -34,8 +33,8 @@ var coins_collected := 0
 var dial_instance = null
 var dial_created := false
 var attack_cooldown := false
-enum state_type {MOVING, CLIMBING, ZIPLINE}
-var state := state_type.MOVING
+enum state_type {SITTING, MOVING, CLIMBING, ZIPLINE}
+var state := state_type.SITTING
 var spell_direction: Vector2
 #Player Inventory Variables
 var selected_slot_pos := 0
@@ -238,6 +237,16 @@ func _process(delta):
 func _physics_process(delta):
 	#simple state machine
 	match state:
+		state_type.SITTING:
+			if (GameManager.current_level != "level_grasslands_1"):
+				state = state_type.MOVING
+			else:
+				$Camera2D.zoom = Vector2(5, 5)
+				animated_sprite.play("sit")
+				
+				if (Input.is_anything_pressed()):
+					animation_player.play("zoom_out")
+					state = state_type.MOVING
 		state_type.MOVING:
 			#handle gravity and jumping
 			if is_on_floor():
@@ -267,13 +276,29 @@ func _physics_process(delta):
 			if (Input.is_action_just_released("jump") && velocity.y < 0): #jump height control
 				velocity.y *= 0.5
 				coyote_time_counter = 0
+				
+			#play animation
+			if is_on_floor():
+				if (direction == 0):
+					animated_sprite.play("idle")
+					footstep_audio.stop()
+				else:
+					animated_sprite.play("run")
+					if (!footstep_audio.is_playing()):
+						footstep_audio.play()
+			else:
+				footstep_audio.stop()
+				animated_sprite.play("jump")
 		state_type.CLIMBING:
+			animated_sprite.play("climb")
 			velocity.y = 0
+			
 			if (Input.is_action_pressed("move_up")):
 				velocity.y = -CLIMB_SPEED
 			elif (Input.is_action_pressed("move_down")):
 				velocity.y = CLIMB_SPEED
 		state_type.ZIPLINE:
+			animated_sprite.play("climb")
 			velocity = Vector2.ZERO
 
 	#get input direction
@@ -284,24 +309,6 @@ func _physics_process(delta):
 		animated_sprite.flip_h = false
 	elif (direction < 0):
 		animated_sprite.flip_h = true
-
-	#play animation
-	if is_on_floor():
-		grounded = true
-		if (direction == 0):
-			animated_sprite.play("idle")
-			footstep_audio.stop()
-		else:
-			animated_sprite.play("run")
-			if (!footstep_audio.is_playing()):
-				footstep_audio.play()
-	else:
-		grounded = false
-		footstep_audio.stop()
-		if (state == state_type.MOVING):
-			animated_sprite.play("jump")
-		elif (state == state_type.CLIMBING || state_type.ZIPLINE):
-			animated_sprite.play("climb")	
 		
 	#applys movement
 	if (direction && state != state_type.ZIPLINE):

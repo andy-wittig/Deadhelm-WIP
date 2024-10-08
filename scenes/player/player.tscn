@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b5rai463xckyn"]
+[gd_scene load_steps=49 format=3 uid="uid://b5rai463xckyn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_6jjtq"]
 [ext_resource type="PackedScene" uid="uid://cv3ipj46sh6tq" path="res://scenes/player/hud.tscn" id="2_5bfwm"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://b35odhysclypl" path="res://assets/sound effects/player/player_hurt.mp3" id="7_agady"]
 [ext_resource type="AudioStream" uid="uid://b8rod0c5ue3me" path="res://assets/sound effects/player/tome_pickup.wav" id="8_3og7p"]
 [ext_resource type="AudioStream" uid="uid://bog807tukihob" path="res://assets/sound effects/player/soul_pickup.wav" id="9_134ax"]
+[ext_resource type="Texture2D" uid="uid://l2x4q1igvs1q" path="res://assets/sprites/player/player sit.png" id="9_r0o4k"]
 [ext_resource type="AudioStream" uid="uid://6sp2eef7ldlu" path="res://assets/sound effects/player/footstep_sound.mp3" id="12_u6xwe"]
 [ext_resource type="AudioStream" uid="uid://051rx8f3n6vq" path="res://assets/sound effects/player/spell_cast_sound.mp3" id="13_ujh84"]
 [ext_resource type="Texture2D" uid="uid://d1dhhytd1eu3w" path="res://assets/sprites/vfx/dust_effect.png" id="15_835mp"]
@@ -93,6 +94,10 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("2_juqqo")
 region = Rect2(32, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykif0"]
+atlas = ExtResource("9_r0o4k")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_2q11b"]
 animations = [{
 "frames": [{
@@ -165,6 +170,14 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykif0")
+}],
+"loop": true,
+"name": &"sit",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_74c68"]
@@ -184,6 +197,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2D:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(4, 4)]
 }
 
 [sub_resource type="Animation" id="Animation_45srk"]
@@ -242,11 +267,28 @@ tracks/1/keys = {
 "values": [Color(0.92549, 0.152941, 0.247059, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_pftyc"]
+resource_name = "zoom_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5, 5), Vector2(4, 4)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1g6jv"]
 _data = {
 "RESET": SubResource("Animation_xpmlu"),
 "player_heal": SubResource("Animation_45srk"),
-"player_hurt": SubResource("Animation_y5whd")
+"player_hurt": SubResource("Animation_y5whd"),
+"zoom_out": SubResource("Animation_pftyc")
 }
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rncr1"]
@@ -295,7 +337,7 @@ noise = SubResource("FastNoiseLite_nnqmg")
 material = SubResource("ShaderMaterial_0v5y2")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_2q11b")
-animation = &"run"
+animation = &"sit"
 autoplay = "idle"
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
