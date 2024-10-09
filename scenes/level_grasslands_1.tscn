@@ -173,7 +173,7 @@ scale = Vector2(1, 7)
 [node name="platform objects" type="Node" parent="game objects"]
 
 [node name="platform2" parent="game objects/platform objects" instance=ExtResource("8_1mk3m")]
-position = Vector2(512, -288)
+position = Vector2(520, -288)
 
 [node name="platform3" parent="game objects/platform objects" instance=ExtResource("8_1mk3m")]
 position = Vector2(536, -264)
@@ -237,7 +237,7 @@ position = Vector2(232, -392)
 scale = Vector2(1, 5)
 
 [node name="falling_leaves" parent="." instance=ExtResource("18_t7lxe")]
-position = Vector2(80, -200)
+position = Vector2(128, -480)
 
 [node name="standing_torch" parent="." instance=ExtResource("22_7jai0")]
 position = Vector2(176, -256)
