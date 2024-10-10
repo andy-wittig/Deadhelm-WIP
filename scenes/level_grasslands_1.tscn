@@ -232,7 +232,7 @@ libraries = {
 autoplay = "blasphemer_move"
 
 [node name="platform" parent="." instance=ExtResource("8_1mk3m")]
-position = Vector2(664, 80)
+position = Vector2(728, -192)
 
 [node name="ladder" parent="." instance=ExtResource("7_bjmkc")]
 position = Vector2(232, -392)
@@ -259,8 +259,9 @@ position = Vector2(184, -448)
 message = "You've been resting for quite some time."
 
 [node name="dialog_area2" parent="." instance=ExtResource("22_jqhln")]
-position = Vector2(408, -352)
+position = Vector2(312, -304)
 message = "In your absence the portal gates soul power has diminished, collect more to reignite the gate."
+message_wait = 6
 
 [node name="tome" parent="." instance=ExtResource("23_cni07")]
 position = Vector2(208, -328)
