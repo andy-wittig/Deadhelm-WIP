@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://rrv0mvcmyxnk"]
+[gd_scene load_steps=24 format=3 uid="uid://rrv0mvcmyxnk"]
 
 [ext_resource type="Script" path="res://scripts/spawn_gate.gd" id="1_g5hin"]
 [ext_resource type="Texture2D" uid="uid://c5chp2hbujymm" path="res://assets/sprites/level_objects/spawn_gate.png" id="1_v8c2c"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/distort.gdshader" id="2_c1a68"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="4_vw883"]
 [ext_resource type="AudioStream" uid="uid://uswapymi1wdl" path="res://assets/sound effects/level_object_sounds/offering_shrine_chime.mp3" id="5_50dmn"]
+[ext_resource type="Texture2D" uid="uid://ocum3bufhqt6" path="res://assets/sprites/vfx/blue_flame_effect.png" id="7_seb8m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_debcj"]
 resource_local_to_scene = true
@@ -42,13 +43,19 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.9)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bcwwk"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
 [sub_resource type="Curve" id="Curve_qoxt0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.500835), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_i2q8v"]
-offsets = PackedFloat32Array(0, 0.372197, 0.609865, 1)
-colors = PackedColorArray(0.427451, 0.917647, 0.839216, 0, 1, 1, 1, 0.588235, 0.427451, 0.917647, 0.839216, 0.686275, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.305556, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_c5y7r"]
 offsets = PackedFloat32Array(0, 0.660606)
@@ -63,6 +70,20 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j6fq"]
 bg_color = Color(0.368627, 0.356863, 0.54902, 0.588235)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o5hyv"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_g2bfr"]
+_data = [Vector2(0, 0.98513), 0.0, 0.0, 0, 0, Vector2(1, 0.754647), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_d4gwv"]
+offsets = PackedFloat32Array(0, 0.229167, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="portal_gate" type="Area2D"]
 collision_mask = 2
@@ -79,7 +100,8 @@ shape = SubResource("RectangleShape2D_aprwg")
 
 [node name="PortalActive" type="Node2D" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="PortalActive"]
+[node name="PortalWarpTexture" type="TextureRect" parent="PortalActive"]
+visible = false
 material = SubResource("ShaderMaterial_ci0bh")
 offset_left = -8.0
 offset_top = -32.0
@@ -87,15 +109,17 @@ offset_right = 6.0
 texture = SubResource("GradientTexture2D_eil4a")
 expand_mode = 1
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="PortalActive"]
+[node name="PortalActiveParticle" type="CPUParticles2D" parent="PortalActive"]
 light_mask = 0
 z_index = -1
+material = SubResource("CanvasItemMaterial_bcwwk")
 position = Vector2(10, -36)
-amount = 10
-lifetime = 2.0
+emitting = false
+lifetime = 1.2
 speed_scale = 0.8
-explosiveness = 0.1
+explosiveness = 0.2
 lifetime_randomness = 0.2
+texture = ExtResource("7_seb8m")
 emission_shape = 1
 emission_sphere_radius = 4.0
 direction = Vector2(0, -1)
@@ -108,21 +132,23 @@ linear_accel_max = 10.0
 radial_accel_min = -15.0
 damping_min = 10.0
 damping_max = 10.0
-scale_amount_min = 2.0
-scale_amount_max = 2.5
+angle_min = -15.0
+angle_max = 15.0
 scale_amount_curve = SubResource("Curve_qoxt0")
-color = Color(0.427451, 0.917647, 0.839216, 1)
 color_ramp = SubResource("Gradient_i2q8v")
+anim_offset_max = 1.0
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="PortalActive"]
+[node name="PortalActiveParticle2" type="CPUParticles2D" parent="PortalActive"]
 light_mask = 0
 z_index = -1
+material = SubResource("CanvasItemMaterial_bcwwk")
 position = Vector2(-10, -36)
-amount = 10
-lifetime = 2.0
+emitting = false
+lifetime = 1.2
 speed_scale = 0.8
-explosiveness = 0.1
+explosiveness = 0.2
 lifetime_randomness = 0.2
+texture = ExtResource("7_seb8m")
 emission_shape = 1
 emission_sphere_radius = 4.0
 direction = Vector2(0, -1)
@@ -135,13 +161,14 @@ linear_accel_max = 10.0
 radial_accel_min = -15.0
 damping_min = 10.0
 damping_max = 10.0
-scale_amount_min = 2.0
-scale_amount_max = 2.5
+angle_min = -15.0
+angle_max = 15.0
 scale_amount_curve = SubResource("Curve_qoxt0")
-color = Color(0.427451, 0.917647, 0.839216, 1)
 color_ramp = SubResource("Gradient_i2q8v")
+anim_offset_max = 1.0
 
-[node name="PointLight2D" type="PointLight2D" parent="PortalActive"]
+[node name="PortalGlowLight" type="PointLight2D" parent="PortalActive"]
+visible = false
 position = Vector2(-2.38419e-07, -18)
 scale = Vector2(1.75, 2.25)
 color = Color(0.427451, 0.917647, 0.839216, 1)
@@ -167,5 +194,26 @@ horizontal_alignment = 1
 stream = ExtResource("5_50dmn")
 volume_db = -10.0
 bus = &"SFX"
+
+[node name="BlueFlameParticle" type="CPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_o5hyv")
+position = Vector2(0, -37)
+emitting = false
+amount = 14
+lifetime = 0.6
+one_shot = true
+texture = ExtResource("7_seb8m")
+emission_shape = 3
+emission_rect_extents = Vector2(12, 1)
+gravity = Vector2(0, -120)
+initial_velocity_max = 12.0
+radial_accel_min = -22.0
+radial_accel_max = -22.0
+angle_min = -15.0
+angle_max = 15.0
+scale_amount_curve = SubResource("Curve_g2bfr")
+color_ramp = SubResource("Gradient_d4gwv")
+anim_offset_max = 1.0
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

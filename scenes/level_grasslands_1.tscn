@@ -242,7 +242,7 @@ scale = Vector2(1, 5)
 position = Vector2(128, -480)
 
 [node name="standing_torch" parent="." instance=ExtResource("22_7jai0")]
-position = Vector2(176, -256)
+position = Vector2(168, -144)
 
 [node name="platform2" parent="." instance=ExtResource("8_1mk3m")]
 position = Vector2(328, 112)
@@ -260,7 +260,7 @@ message = "You've been resting for quite some time."
 
 [node name="dialog_area2" parent="." instance=ExtResource("22_jqhln")]
 position = Vector2(312, -304)
-message = "In your absence the portal gates soul power has diminished, collect more to reignite the gate."
+message = "In your absence the portal gates soul power has diminished, collect souls to reignite the gate."
 message_wait = 6
 
 [node name="tome" parent="." instance=ExtResource("23_cni07")]

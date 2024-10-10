@@ -10,13 +10,13 @@ var portal_activated := false
 @onready var soul_label = $SoulLabel
 @onready var shrine_chime_audio = $ShrineChimeAudio
 @onready var gate_sprite = $GateSprite
-
-func _ready():
-	portal_active.visible = false
 	
 func _process(delta):
 	if (souls_input >= soul_cost):
-		portal_active.visible = true
+		$PortalActive/PortalWarpTexture.visible = true
+		$PortalActive/PortalGlowLight.visible = true
+		$PortalActive/PortalActiveParticle.emitting = true
+		$PortalActive/PortalActiveParticle2.emitting = true
 		soul_label.text = "enter portal"
 		portal_activated = true
 	else:
@@ -38,12 +38,15 @@ func _process(delta):
 		
 func use_soul(player):
 	if (player.souls_collected > 0):
+		$BlueFlameParticle.emitting = true
+		shrine_chime_audio.play()
+		
 		player.souls_collected -= 1
+		
 		if (!GameManager.multiplayer_mode_enabled):
 			add_soul()
 		elif (multiplayer.is_server()):
 			rpc("add_soul")
-		shrine_chime_audio.play()
 		
 func enter_portal(body):
 	body.save_player_info()
