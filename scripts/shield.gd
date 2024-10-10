@@ -20,4 +20,9 @@ func _on_area_entered(area):
 			area.rpc("destroy_self")
 
 func _on_destroy_timer_timeout():
+	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
+	disolve_effect.spell_texture = $ShieldSprite.texture
+	disolve_effect.global_position = global_position
+	disolve_effect.spell_rotation = $ShieldSprite.rotation
+	get_parent().add_child(disolve_effect)
 	queue_free()

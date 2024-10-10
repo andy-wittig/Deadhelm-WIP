@@ -46,11 +46,6 @@ func _ready():
 	for i in range(shop_listings.size()):
 		item_textures[i].texture = load(shop_items[shop_listings[i]][0])
 		price_labels[i].text = str(shop_items[shop_listings[i]][1])
-		
-	$ItemDescriptionLabel.text = (
-		shop_listings[0] + ": " + shop_items[shop_listings[0]][2] + "\n" +
-		shop_listings[1] + ": " + shop_items[shop_listings[1]][2] + "\n" +
-		shop_listings[2] + ": " + shop_items[shop_listings[2]][2])
 
 func _process(delta):
 	if (!GameManager.access_ingame_menu): #close shop if ingame menu is overlapping
@@ -61,6 +56,15 @@ func _process(delta):
 		shop_control.visible = true
 		shop_sprite.material.set_shader_parameter("enabled", false)
 		
+		#Shop Description
+		if ($ShopControl/PurchaseButton1.has_focus()):
+			$ItemDescriptionLabel.text = (shop_listings[0] + ": " + shop_items[shop_listings[0]][2])
+		elif ($ShopControl/PurchaseButton2.has_focus()):
+			$ItemDescriptionLabel.text = (shop_listings[1] + ": " + shop_items[shop_listings[1]][2])
+		elif ($ShopControl/PurchaseButton3.has_focus()):
+			$ItemDescriptionLabel.text = (shop_listings[2] + ": " + shop_items[shop_listings[2]][2])
+				
+		#Shop Prices
 		for i in range(shop_listings.size()):
 			shop_items[shop_listings[i]][3] = true
 			var cost = shop_items[shop_listings[i]][1]
@@ -129,3 +133,12 @@ func _on_squabble_timer_timeout():
 	var choice = random.randi_range(0, 3)
 	squabble_audio.set_stream(gremlin_squabbles[choice])
 	squabble_audio.play()
+
+func _on_purchase_button_1_mouse_entered():
+	$ShopControl/PurchaseButton1.grab_focus()
+
+func _on_purchase_button_2_mouse_entered():
+	$ShopControl/PurchaseButton2.grab_focus()
+
+func _on_purchase_button_3_mouse_entered():
+	$ShopControl/PurchaseButton3.grab_focus()

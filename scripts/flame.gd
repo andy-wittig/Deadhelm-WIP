@@ -33,4 +33,9 @@ func set_spell_position():
 		player.apply_knockback(global_position, PLAYER_KNOCK_BACK)
 
 func _on_destroy_timer_timeout():
+	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
+	disolve_effect.player = player
+	disolve_effect.spell_texture = $FlameAnimatedSprite.get_sprite_frames().get_frame_texture("flame", 0)
+	disolve_effect.spell_offset = $FlameAnimatedSprite.offset
+	get_parent().add_child(disolve_effect)
 	queue_free()

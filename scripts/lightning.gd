@@ -28,4 +28,9 @@ func set_spell_position():
 	lightning_orb_sprite.rotation = player.spell_direction.angle()
 
 func _on_destroy_timer_timeout():
+	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
+	disolve_effect.player = player
+	disolve_effect.spell_texture = $LightningAnimatedSprite.get_sprite_frames().get_frame_texture("lightning", 0)
+	disolve_effect.spell_offset = $LightningAnimatedSprite.offset
+	get_parent().add_child(disolve_effect)
 	queue_free()

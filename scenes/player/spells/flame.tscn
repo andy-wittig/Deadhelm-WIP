@@ -31,7 +31,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ayst7")
 }],
 "loop": true,
-"name": &"lightning",
+"name": &"flame",
 "speed": 8.0
 }]
 
@@ -95,7 +95,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_s1sa0"]
-resource_name = "lightning_flash"
+resource_name = "flame_flash"
 length = 0.6
 loop_mode = 2
 tracks/0/type = "value"
@@ -126,7 +126,7 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ejyiq"]
 _data = {
 "RESET": SubResource("Animation_hjchv"),
-"lightning_flash": SubResource("Animation_s1sa0")
+"flame_flash": SubResource("Animation_s1sa0")
 }
 
 [node name="flame" type="Area2D"]
@@ -142,16 +142,15 @@ texture = ExtResource("2_bao0b")
 
 [node name="FlameAnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pqn1j")
-animation = &"lightning"
-autoplay = "lightning"
-frame_progress = 0.939339
+animation = &"flame"
+autoplay = "flame"
 offset = Vector2(16, 0)
 
 [node name="hurt_enemy_area" parent="FlameAnimatedSprite" node_paths=PackedStringArray("shape") instance=ExtResource("4_8rpvf")]
 position = Vector2(12, 0)
 scale = Vector2(2, 1)
 damage = 2
-attack_wait = 0.4
+attack_wait = 0.2
 destroy_time = 3
 knock_back = 200.0
 shape = NodePath("CollisionShape2D2")
@@ -194,6 +193,6 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_ejyiq")
 }
-autoplay = "lightning_flash"
+autoplay = "flame_flash"
 
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
