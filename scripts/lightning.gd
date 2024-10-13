@@ -32,5 +32,12 @@ func _on_destroy_timer_timeout():
 	disolve_effect.player = player
 	disolve_effect.spell_texture = $LightningAnimatedSprite.get_sprite_frames().get_frame_texture("lightning", 0)
 	disolve_effect.spell_offset = $LightningAnimatedSprite.offset
+	
+	var disolve_effect2 = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
+	disolve_effect2.player = player
+	disolve_effect2.spell_texture = $LightningOrbSprite.get_texture()
+	disolve_effect2.spell_rotation = $LightningOrbSprite.rotation
+	
 	get_parent().add_child(disolve_effect)
+	get_parent().add_child(disolve_effect2)
 	queue_free()
