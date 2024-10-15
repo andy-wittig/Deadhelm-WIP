@@ -159,7 +159,6 @@ position = Vector2(144, -432)
 
 [node name="player" parent="players" instance=ExtResource("3_lefxa")]
 z_index = 5
-position = Vector2(64, 112)
 
 [node name="game objects" type="Node" parent="."]
 
@@ -265,3 +264,7 @@ spell_type = "lightning"
 
 [node name="platform3" parent="." instance=ExtResource("8_1mk3m")]
 position = Vector2(424, -432)
+
+[node name="tome2" parent="." instance=ExtResource("23_cni07")]
+position = Vector2(272, -472)
+spell_type = "flame"

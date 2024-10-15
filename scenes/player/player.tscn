@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://b5rai463xckyn"]
+[gd_scene load_steps=54 format=3 uid="uid://b5rai463xckyn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_6jjtq"]
 [ext_resource type="PackedScene" uid="uid://cv3ipj46sh6tq" path="res://scenes/player/hud.tscn" id="2_5bfwm"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b5j6nu1ge7i78" path="res://assets/sound effects/player/coin_pickup.mp3" id="7_2kihc"]
 [ext_resource type="AudioStream" uid="uid://b35odhysclypl" path="res://assets/sound effects/player/player_hurt.mp3" id="7_agady"]
 [ext_resource type="AudioStream" uid="uid://b8rod0c5ue3me" path="res://assets/sound effects/player/tome_pickup.wav" id="8_3og7p"]
+[ext_resource type="Texture2D" uid="uid://b11a8psakrvq5" path="res://assets/sprites/player/player_jump.png" id="8_r8s8m"]
 [ext_resource type="Texture2D" uid="uid://l2x4q1igvs1q" path="res://assets/sprites/player/player sit sheet.png" id="9_3fr2u"]
 [ext_resource type="AudioStream" uid="uid://bog807tukihob" path="res://assets/sound effects/player/soul_pickup.wav" id="9_134ax"]
 [ext_resource type="AudioStream" uid="uid://6sp2eef7ldlu" path="res://assets/sound effects/player/footstep_sound.mp3" id="12_u6xwe"]
@@ -28,6 +29,10 @@ shader_parameter/tint = Color(0.92549, 0.152941, 0.247059, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n3tdl"]
 atlas = ExtResource("2_rw1rv")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ryeq"]
+atlas = ExtResource("3_x2gie")
 region = Rect2(0, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrchn"]
@@ -62,8 +67,8 @@ region = Rect2(192, 0, 32, 32)
 atlas = ExtResource("2_yemgb")
 region = Rect2(224, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7ryeq"]
-atlas = ExtResource("3_x2gie")
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1ge0"]
+atlas = ExtResource("8_r8s8m")
 region = Rect2(0, 0, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1so7"]
@@ -122,6 +127,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_7ryeq")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nrchn")
 }, {
 "duration": 1.0,
@@ -151,7 +164,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7ryeq")
+"texture": SubResource("AtlasTexture_w1ge0")
 }],
 "loop": true,
 "name": &"jump",
@@ -201,9 +214,8 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_74c68"]
-radius = 4.0
-height = 18.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_refxm"]
+size = Vector2(8, 16)
 
 [sub_resource type="Animation" id="Animation_xpmlu"]
 length = 0.001
@@ -358,13 +370,12 @@ noise = SubResource("FastNoiseLite_nnqmg")
 material = SubResource("ShaderMaterial_0v5y2")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_2q11b")
-animation = &"sit"
+animation = &"jump"
 autoplay = "idle"
-frame_progress = 0.779414
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -9)
-shape = SubResource("CapsuleShape2D_74c68")
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_refxm")
 
 [node name="InteractArea" type="Area2D" parent="."]
 position = Vector2(0, -16)

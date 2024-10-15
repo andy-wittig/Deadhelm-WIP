@@ -229,8 +229,11 @@ func _process(delta):
 			dial_created = false
 			
 	#Developer Cheats
-	if (Input.is_action_just_pressed("cheat_button")):
+	if (Input.is_action_just_pressed("cheat_button_1")):
 		souls_collected += 10
+		
+	if Input.is_action_just_pressed("cheat_button_2"):
+		global_position = portal_gate.global_position
 			
 	move_and_slide()
 
@@ -288,7 +291,10 @@ func _physics_process(delta):
 						footstep_audio.play()
 			else:
 				footstep_audio.stop()
-				animated_sprite.play("jump")
+				if (velocity.y < 0):
+					animated_sprite.play("jump")
+				else:
+					animated_sprite.play("fall")
 		state_type.CLIMBING:
 			animated_sprite.play("climb")
 			velocity.y = 0
@@ -315,7 +321,7 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
+	
 	velocity += knock_back
 	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
 	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)

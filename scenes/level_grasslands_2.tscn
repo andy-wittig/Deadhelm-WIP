@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dis3wy3nmnpfo"]
+[gd_scene load_steps=41 format=3 uid="uid://dis3wy3nmnpfo"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_hxqtm"]
@@ -25,7 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="19_mfv7b"]
 [ext_resource type="PackedScene" uid="uid://dlses24j38m5l" path="res://scenes/enemies/bombshell_enemy.tscn" id="20_iruvl"]
 [ext_resource type="PackedScene" uid="uid://denacnmk41nwy" path="res://scenes/vfx/falling_leaves.tscn" id="21_rfe82"]
-[ext_resource type="PackedScene" uid="uid://y0thy4gylqg" path="res://scenes/enemies/desecrater.tscn" id="22_qr4rf"]
 [ext_resource type="PackedScene" uid="uid://bv5plpqydgmj0" path="res://scenes/level_objects/killzone.tscn" id="23_c1lgd"]
 [ext_resource type="PackedScene" uid="uid://balh0s1khqr2c" path="res://scenes/level_objects/respawn_point.tscn" id="28_h0t7c"]
 [ext_resource type="PackedScene" uid="uid://d2a7lhqqs0c0b" path="res://scenes/level_objects/standing_torch.tscn" id="29_e5b02"]
@@ -466,10 +465,6 @@ position = Vector2(624, -872)
 [node name="chest2" parent="Level Objects" instance=ExtResource("11_7vyvg")]
 position = Vector2(1480, -608)
 coin_amount = 4
-
-[node name="desecrater" parent="." instance=ExtResource("22_qr4rf")]
-position = Vector2(640, -1656)
-facing_direction = 1
 
 [node name="leaping mushroom" parent="." instance=ExtResource("4_kgpay")]
 position = Vector2(864, -1600)
