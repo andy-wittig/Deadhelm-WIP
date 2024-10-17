@@ -1,0 +1,8 @@
+[gd_resource type="CanvasTexture" load_steps=3 format=3 uid="uid://bt6xj13wyb4sk"]
+
+[ext_resource type="Texture2D" uid="uid://jiomi8ggan8j" path="res://assets/sprites/player/player climb.png" id="1_ijjkf"]
+[ext_resource type="Texture2D" uid="uid://ci0yd8dybul06" path="res://assets/sprites/player/normal_maps/player climb_n.png" id="2_nebba"]
+
+[resource]
+diffuse_texture = ExtResource("1_ijjkf")
+normal_texture = ExtResource("2_nebba")

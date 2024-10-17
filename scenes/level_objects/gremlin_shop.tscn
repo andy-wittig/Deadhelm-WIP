@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://clj453y1ct468"]
+[gd_scene load_steps=30 format=3 uid="uid://clj453y1ct468"]
 
 [ext_resource type="Script" path="res://scripts/gremlin_shop.gd" id="1_3bcr4"]
 [ext_resource type="Texture2D" uid="uid://cotkyff0ssvqr" path="res://assets/sprites/level_objects/gremlin_shop_sheet.png" id="1_u7smj"]
@@ -49,6 +49,9 @@ animations = [{
 "name": &"default",
 "speed": 4.0
 }]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gra4j"]
+light_mode = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mepao"]
 bg_color = Color(0.368627, 0.356863, 0.54902, 0.588235)
@@ -209,6 +212,7 @@ frame_progress = 0.715607
 [node name="ItemDescriptionLabel" type="Label" parent="."]
 visible = false
 z_index = 100
+material = SubResource("CanvasItemMaterial_gra4j")
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

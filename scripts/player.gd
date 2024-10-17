@@ -135,7 +135,6 @@ func _process(delta):
 		else:
 			hearts[i].texture = ALIVE_HEART_UI
 	
-	portal_progress.max_value = portal_gate.soul_cost
 	portal_progress.value = clamp(souls_collected + portal_gate.souls_input, 0, portal_progress.max_value)
 	healthbar_label.text = str(player_health) + "/" + str(max_health)
 	healthbar.max_value = max_health

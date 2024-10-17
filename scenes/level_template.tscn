@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://b00u5431eiqqh"]
+[gd_scene load_steps=11 format=3 uid="uid://b00u5431eiqqh"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_1cbdb"]
+[ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_bo8sg"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_h72fo"]
+[ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_s6k1g"]
+[ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="4_iwrh5"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="4_qpukk"]
+[ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="5_5u38w"]
+[ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="7_lwigu"]
 
-[sub_resource type="Gradient" id="Gradient_n6nku"]
-colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.819608, 0.835294, 1)
+[sub_resource type="Gradient" id="Gradient_s5sk3"]
+colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_a24ds"]
-gradient = SubResource("Gradient_n6nku")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xkrum"]
+gradient = SubResource("Gradient_s5sk3")
 fill_to = Vector2(0, 1)
 
 [node name="level_name" type="Node2D"]
@@ -19,18 +24,65 @@ _spawnable_scenes = PackedStringArray("res://scenes/player/multiplayer_player.ts
 spawn_path = NodePath("../players")
 spawn_limit = 2
 
-[node name="SkyBackground" type="CanvasLayer" parent="."]
+[node name="Background" type="CanvasLayer" parent="."]
 layer = -100
 
-[node name="SkyGradient" type="TextureRect" parent="SkyBackground"]
+[node name="SkyGradient" type="TextureRect" parent="Background"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_a24ds")
+texture = SubResource("GradientTexture2D_xkrum")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+layer = -99
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxMountain" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_offset = Vector2(0, -108)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Mountains" type="TextureRect" parent="Background/ParallaxBackground/ParallaxMountain"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("2_bo8sg")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ParallaxSmallClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_offset = Vector2(0, -216)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_s6k1g")
+scroll_speed = 8.0
+
+[node name="SmallClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxSmallClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("4_iwrh5")
+stretch_mode = 1
+
+[node name="ParallaxLargeClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(1.2, 1.2)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_s6k1g")
+scroll_speed = 4.0
+
+[node name="LargeClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLargeClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("5_5u38w")
+stretch_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, 8)
 tile_set = ExtResource("2_h72fo")
 format = 2
 layer_0/name = "foreground"
@@ -42,8 +94,11 @@ layer_2/modulate = Color(0.54902, 0.470588, 0.647059, 1)
 layer_2/z_index = -2
 layer_2/tile_data = PackedInt32Array()
 
+[node name="portal_gate" parent="." instance=ExtResource("7_lwigu")]
+
 [node name="players" type="Node2D" parent="."]
-position = Vector2(0, -16)
 
 [node name="player" parent="players" instance=ExtResource("4_qpukk")]
 z_index = 5
+
+[node name="spawn_point" type="Marker2D" parent="."]
