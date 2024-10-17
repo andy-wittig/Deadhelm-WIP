@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dg6fah6kis3e"]
+[gd_scene load_steps=22 format=3 uid="uid://dg6fah6kis3e"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_rb1rw"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_3vpgq"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cg0s11w7gjjxq" path="res://scenes/level_objects/zip_line.tscn" id="14_b03pk"]
 [ext_resource type="PackedScene" uid="uid://mk8x6lo0ft6t" path="res://scenes/level_objects/chest.tscn" id="16_n7w4v"]
 [ext_resource type="PackedScene" uid="uid://df81gmo7ppw8s" path="res://scenes/level_objects/dialogue_area.tscn" id="17_ctpbg"]
+[ext_resource type="PackedScene" uid="uid://clj453y1ct468" path="res://scenes/level_objects/gremlin_shop.tscn" id="18_w4tnm"]
 
 [sub_resource type="Gradient" id="Gradient_s5sk3"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
@@ -172,7 +173,7 @@ bounce_force = -400.0
 
 [node name="chest" parent="." instance=ExtResource("16_n7w4v")]
 position = Vector2(208, -392)
-coin_amount = 4
+coin_amount = 5
 
 [node name="dialog_area" parent="." instance=ExtResource("17_ctpbg")]
 position = Vector2(560, -408)
@@ -182,3 +183,7 @@ message_wait = 6
 [node name="desecrater3" parent="." instance=ExtResource("9_xn14i")]
 position = Vector2(496, -592)
 facing_direction = 1
+
+[node name="gremlin_shop" parent="." instance=ExtResource("18_w4tnm")]
+position = Vector2(416, -488)
+shop_listings = Array[String](["health_potion", "health_potion", "health_potion"])
