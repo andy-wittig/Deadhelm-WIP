@@ -4,6 +4,7 @@ extends Area2D
 @export var message_wait := 4
 
 var started_message := false
+const MESSAGE_SPEED_MULTIPLIER := 0.8
 
 func _ready():
 	$Control/MessageLabel.visible = false
@@ -16,7 +17,7 @@ func start_message():
 	print ($Control/MessageLabel.visible)
 	var tween: Tween = create_tween()
 	var text_length = $Control/MessageLabel.get_total_character_count()
-	tween.tween_property($Control/MessageLabel, "visible_ratio", 1.0, sqrt(text_length)).from(0.0)
+	tween.tween_property($Control/MessageLabel, "visible_ratio", 1.0, sqrt(text_length) * MESSAGE_SPEED_MULTIPLIER).from(0.0)
 	await tween.finished
 	
 	$Timer.start(message_wait)

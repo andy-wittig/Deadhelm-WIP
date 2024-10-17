@@ -266,7 +266,7 @@ texture = ExtResource("1_qyktf")
 position = Vector2(1, -33)
 sprite_frames = SubResource("SpriteFrames_gov2w")
 autoplay = "default"
-frame_progress = 0.52956
+frame_progress = 0.849375
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DiceSprite"]
 libraries = {

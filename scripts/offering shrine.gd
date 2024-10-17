@@ -6,7 +6,8 @@ var can_interact := true
 
 @export var soul_cost := 10
 @export var spell_type: String
-@export var random := false
+@export var random_drop_enabled := false
+@export var drop_list: Array[String]
 
 @onready var soul_label = $SoulLabel
 @onready var shrine_chime_audio = $ShrineChimeAudio
@@ -15,6 +16,9 @@ var can_interact := true
 
 @rpc("any_peer", "call_local")
 func spawn_tome():
+	if (random_drop_enabled):
+		spell_type = drop_list[randi_range(0, drop_list.size() - 1)]
+	
 	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
 	tome.spell_type = spell_type
 	tome.position = Vector2(position.x, position.y - 16)
@@ -22,9 +26,16 @@ func spawn_tome():
 	
 func _ready():
 	soul_label.visible = false
+	if (random_drop_enabled) :
+		$DiceSprite.visible = true
+	else:
+		$DiceSprite.visible = false
 	
 func _process(delta):
-	soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls\n" + spell_type + " spell"
+	if (random_drop_enabled):
+		soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls\n" + "unkown"
+	else:
+		soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls\n" + spell_type + " spell"
 	sprite.material.set_shader_parameter("enabled", false)
 	soul_label.visible = false
 	
