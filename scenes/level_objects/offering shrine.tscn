@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://6fmdfddl6dkc"]
+[gd_scene load_steps=31 format=3 uid="uid://6fmdfddl6dkc"]
 
 [ext_resource type="Texture2D" uid="uid://dnmihy1luvbmi" path="res://assets/sprites/level_objects/offering shrine.png" id="1_qyktf"]
 [ext_resource type="Script" path="res://scripts/offering shrine.gd" id="1_ueftv"]
 [ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="2_h7ffm"]
 [ext_resource type="AudioStream" uid="uid://uswapymi1wdl" path="res://assets/sound effects/level_object_sounds/offering_shrine_chime.mp3" id="3_ojaql"]
+[ext_resource type="Texture2D" uid="uid://tg8eqkfw1ek4" path="res://assets/sprites/vfx/dice.png" id="5_dci2k"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_kwcm2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nr3l3"]
@@ -14,6 +15,139 @@ resource_local_to_scene = true
 shader = ExtResource("2_h7ffm")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_571b6"]
+atlas = ExtResource("5_dci2k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhma0"]
+atlas = ExtResource("5_dci2k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xt06i"]
+atlas = ExtResource("5_dci2k")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoftq"]
+atlas = ExtResource("5_dci2k")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge2vm"]
+atlas = ExtResource("5_dci2k")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8i3s"]
+atlas = ExtResource("5_dci2k")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6etn1"]
+atlas = ExtResource("5_dci2k")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2typ8"]
+atlas = ExtResource("5_dci2k")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_714ht"]
+atlas = ExtResource("5_dci2k")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gov2w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_571b6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhma0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xt06i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoftq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge2vm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8i3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6etn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2typ8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_714ht")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="Animation" id="Animation_e2v1w"]
+resource_name = "bounce"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -33), Vector2(1.71363e-07, -27)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 4
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.5708, 1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_ng6g2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, -33)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_et5t4"]
+_data = {
+"RESET": SubResource("Animation_ng6g2"),
+"bounce": SubResource("Animation_e2v1w")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_npxd1"]
 size = Vector2(24, 25)
@@ -128,6 +262,18 @@ material = SubResource("ShaderMaterial_hcyye")
 position = Vector2(0, -16)
 texture = ExtResource("1_qyktf")
 
+[node name="DiceSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -33)
+sprite_frames = SubResource("SpriteFrames_gov2w")
+autoplay = "default"
+frame_progress = 0.52956
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DiceSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_et5t4")
+}
+autoplay = "bounce"
+
 [node name="BuyTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
@@ -138,6 +284,11 @@ collision_mask = 2
 [node name="DetectShape" type="CollisionShape2D" parent="DetectPlayer"]
 position = Vector2(0, -12.5)
 shape = SubResource("RectangleShape2D_npxd1")
+
+[node name="ShrineChimeAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ojaql")
+volume_db = -10.0
+bus = &"SFX"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 z_index = 1
@@ -198,11 +349,6 @@ libraries = {
 "": SubResource("AnimationLibrary_tnn82")
 }
 autoplay = "flame"
-
-[node name="ShrineChimeAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_ojaql")
-volume_db = -10.0
-bus = &"SFX"
 
 [connection signal="timeout" from="BuyTimer" to="." method="_on_buy_timer_timeout"]
 [connection signal="body_entered" from="DetectPlayer" to="." method="_on_detect_player_body_entered"]

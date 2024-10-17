@@ -6,6 +6,7 @@ var can_interact := true
 
 @export var soul_cost := 10
 @export var spell_type: String
+@export var random := false
 
 @onready var soul_label = $SoulLabel
 @onready var shrine_chime_audio = $ShrineChimeAudio
