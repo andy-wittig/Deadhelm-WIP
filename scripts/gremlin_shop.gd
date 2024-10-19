@@ -15,8 +15,8 @@ var random := RandomNumberGenerator.new()
 ]
 @onready var shop_items = {
 	"heart_crystal" : ["res://assets/sprites/UI/shop/heart_crystal.png", 12, "returns one lost life", false],
-	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 10, "buffs total health by +10", false],
-	"double_jump" : ["res://assets/sprites/UI/shop/double_jump.png", 20, "provides a second jump ability", false],
+	"defense_upgrade" : ["res://assets/sprites/UI/shop/defense_upgrade.png", 8, "buffs total health by +10", false],
+	"double_jump" : ["res://assets/sprites/UI/shop/double_jump.png", 15, "provides a second jump ability", false],
 	"health_potion" : ["res://assets/sprites/UI/shop/health_potion.png", 5, "heals the player by +25", false],
 }
 @onready var price_labels := [
@@ -56,7 +56,7 @@ func _process(delta):
 		shop_control.visible = true
 		shop_sprite.material.set_shader_parameter("enabled", false)
 		
-		#Shop Description
+		#Shop descriptions
 		if ($ShopControl/PurchaseButton1.has_focus()):
 			$ItemDescriptionLabel.text = (shop_listings[0] + ": " + shop_items[shop_listings[0]][2])
 		elif ($ShopControl/PurchaseButton2.has_focus()):
@@ -64,12 +64,12 @@ func _process(delta):
 		elif ($ShopControl/PurchaseButton3.has_focus()):
 			$ItemDescriptionLabel.text = (shop_listings[2] + ": " + shop_items[shop_listings[2]][2])
 				
-		#Shop Prices
+		#Setiing shop prices
 		for i in range(shop_listings.size()):
 			shop_items[shop_listings[i]][3] = true
 			var cost = shop_items[shop_listings[i]][1]
 			
-			match shop_listings[i]:
+			match shop_listings[i]: #ensure player can't buy something they don't need
 				"heart_crystal":
 					if (player.player_lives >= player.MAX_LIVES):
 						shop_items[shop_listings[i]][3] = false
@@ -78,6 +78,9 @@ func _process(delta):
 						shop_items[shop_listings[i]][3] = false
 				"health_potion":
 					if (player.player_health >= player.max_health):
+						shop_items[shop_listings[i]][3] = false
+				"double_jump":
+					if (player.double_jump_active):
 						shop_items[shop_listings[i]][3] = false
 			
 			if (player.coins_collected <= cost):

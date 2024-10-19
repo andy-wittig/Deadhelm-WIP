@@ -36,6 +36,7 @@ var attack_cooldown := false
 enum state_type {SITTING, MOVING, CLIMBING, ZIPLINE}
 var state := state_type.SITTING
 var spell_direction: Vector2
+var double_jump_active := false
 #Player Inventory Variables
 var selected_slot_pos := 0
 var currently_selected_slot = null
@@ -153,6 +154,7 @@ func _process(delta):
 		if (!marked_dead):
 			player_lives -= 1
 			global_position = get_tree().get_root().get_node("game/Level/%s/spawn_point" % GameManager.current_level).global_position
+			$level_transition.get_node("AnimationPlayer").play("fade_in")
 			player_health = max_health
 			
 	#set spell spawn marker position
@@ -413,6 +415,8 @@ func collect_buff(buff: String):
 			if (player_health < max_health):
 				player_health += 25
 				player_health = min(player_health, max_health)
+		"double_jump":
+			double_jump_active = true
 
 func collect_soul():
 	soul_pickup_audio.play()

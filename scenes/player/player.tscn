@@ -1,9 +1,10 @@
-[gd_scene load_steps=54 format=3 uid="uid://b5rai463xckyn"]
+[gd_scene load_steps=55 format=3 uid="uid://b5rai463xckyn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_6jjtq"]
 [ext_resource type="PackedScene" uid="uid://cv3ipj46sh6tq" path="res://scenes/player/hud.tscn" id="2_5bfwm"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_276j0"]
 [ext_resource type="Script" path="res://scripts/camera_shake.gd" id="2_m6nil"]
+[ext_resource type="PackedScene" uid="uid://bg50g5d6it3nk" path="res://scenes/level_transition.tscn" id="3_tjjnx"]
 [ext_resource type="Texture2D" uid="uid://bt6xj13wyb4sk" path="res://assets/sprites/player/canvas/player_climb_canvas.tres" id="5_srhy4"]
 [ext_resource type="Texture2D" uid="uid://jxd8il8kkrrv" path="res://assets/sprites/player/canvas/player_fall_canvas.tres" id="6_cuikg"]
 [ext_resource type="AudioStream" uid="uid://b5j6nu1ge7i78" path="res://assets/sound effects/player/coin_pickup.mp3" id="7_2kihc"]
@@ -365,6 +366,8 @@ script = ExtResource("2_m6nil")
 noise = SubResource("FastNoiseLite_nnqmg")
 
 [node name="hud" parent="." instance=ExtResource("2_5bfwm")]
+
+[node name="level_transition" parent="." instance=ExtResource("3_tjjnx")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_0v5y2")

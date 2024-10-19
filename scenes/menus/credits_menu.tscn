@@ -53,22 +53,26 @@ theme_override_font_sizes/normal_font_size = 16
 theme_override_font_sizes/bold_font_size = 24
 bbcode_enabled = true
 text = "[center][img]res://assets/sprites/UI/studio logo.png[/img]
-[u][b]ANDY[/b][/u]
-LEAD DESIGNER
-CODING
-ARTWORK
-[u][b]ADAM[/b][/u]
-SOUNDTRACK
-SFX DESIGNER
-PLAY TESTER
-[u][b]ZACH[/b][/u]
-PLAY TESTER
-[u][b]EMA[/b][/u]
-PLAY TESTER
-[u][b]SARAH[/b][/u]
-PLAY TESTER
-[u][b]EDEN[/b][/u]
-PLAY TESTER
+
+[u][b]GAME DESIGN - CODING - ARTWORK[/b][/u]
+
+ANDREW WITTIG
+
+[u][b]SFX DESIGN[/b][/u]
+
+ADAM MCKOWN
+
+[u][b]MUSIC[/b][/u]
+
+ADAM MCKOWN
+JUDE LOPEZ
+
+[u][b]PLAY TESTERS[/b][/u]
+
+ZACHARY DAVIS
+EMA WORTHEN
+SARAH NGUYEN
+EDEN
 [/center]"
 
 [node name="backButton" type="Button" parent="VBoxContainer"]
