@@ -9,6 +9,9 @@ var rand_x_force := randf_range(-100, 100)
 
 @rpc("any_peer", "call_local", "reliable")
 func destroy_self():
+	var pickup_effect = load("res://scenes/vfx/item_pickup.tscn").instantiate()
+	pickup_effect.global_position = global_position
+	get_parent().add_child(pickup_effect)
 	queue_free()
 	
 func _on_timer_timeout():

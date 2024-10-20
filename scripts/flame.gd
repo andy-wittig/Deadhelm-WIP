@@ -1,6 +1,6 @@
 extends Area2D
 
-const PLAYER_KNOCK_BACK := 8
+const PLAYER_KNOCK_BACK := 6
 
 var player: CharacterBody2D
 

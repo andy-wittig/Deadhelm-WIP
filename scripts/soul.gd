@@ -20,6 +20,9 @@ var rarities = {
 
 @rpc("any_peer", "call_local")
 func destroy_self():
+	var pickup_effect = load("res://scenes/vfx/item_pickup.tscn").instantiate()
+	pickup_effect.global_position = global_position
+	get_parent().add_child(pickup_effect)
 	queue_free()
 	
 func choose_rarity():
