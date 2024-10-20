@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #Physics Constants
 const SPEED := 75.0
-const GRAVITY := 960.0
+const GRAVITY := 950.0
 const EXTRA_GRAVITY := 200.0
 const CLIMB_SPEED := 75.0
 const ZIPLINE_SPEED := 100
@@ -12,7 +12,8 @@ const JUMP_BUFFER := 0.1
 const MAX_AIR_TIME := 0.5
 const HANG_TIME_THRESHHOLD := 60.0
 const HANG_TIME_MULTIPLIER := 0.8
-const KNOCK_BACK_FALLOFF := 100.0
+const KNOCK_BACK_FALLOFF := 10.0
+const FRICTION_FORCE := 10
 const DIAL_RADIUS := 22
 const MAX_LIVES := 3
 const MAX_UPGRADED_HEALTH := 200
@@ -322,8 +323,8 @@ func _physics_process(delta):
 	if (direction && state != state_type.ZIPLINE):
 		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
+		velocity.x = move_toward(velocity.x, 0, FRICTION_FORCE)
+
 	velocity += knock_back
 	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
 	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)

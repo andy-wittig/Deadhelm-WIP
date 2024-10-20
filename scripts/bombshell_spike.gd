@@ -1,7 +1,7 @@
 extends Area2D
 
 const SPEED := 100.0
-const SPIKE_KNOCK_BACK := 100
+const SPIKE_KNOCK_BACK := 45
 const PLAYER_DAMAGE := 6
 
 var direction := Vector2(1.0,0.0)

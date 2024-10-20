@@ -280,3 +280,7 @@ scene = NodePath("../rock_wall")
 [node name="dialog_area3" parent="." instance=ExtResource("22_jqhln")]
 position = Vector2(248, -336)
 message = "Drop spells onto totems to activate them."
+
+[node name="tome2" parent="." instance=ExtResource("23_cni07")]
+position = Vector2(264, -472)
+spell_type = "flame"
