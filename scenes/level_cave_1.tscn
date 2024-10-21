@@ -209,6 +209,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_j3maj")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -622,7 +623,7 @@ spell_type = "poison bottle"
 position = Vector2(432, -976)
 spawn_enemy_type = Array[PackedScene]([ExtResource("14_132gn"), ExtResource("14_132gn"), ExtResource("20_i1og4")])
 tile_map = NodePath("../../TileMap")
-spawn_range = 7
+spawn_range = 3
 spawn_wait = 4.0
 max_spawn_uses = 3
 

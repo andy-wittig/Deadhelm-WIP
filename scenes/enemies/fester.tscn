@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dkt3s7wbnw3ek"]
+[gd_scene load_steps=31 format=3 uid="uid://dkt3s7wbnw3ek"]
 
 [ext_resource type="Script" path="res://scripts/fester.gd" id="1_0ytq8"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_myen5"]
@@ -15,21 +15,25 @@ shader = ExtResource("2_myen5")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_goibt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7fxb"]
 atlas = ExtResource("3_y3w4a")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 0, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_44kls"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2y54"]
 atlas = ExtResource("3_y3w4a")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(48, 0, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qkb3q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxkkv"]
 atlas = ExtResource("3_y3w4a")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(96, 0, 48, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4bshm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0hkn"]
 atlas = ExtResource("3_y3w4a")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5f5ko"]
+atlas = ExtResource("3_y3w4a")
+region = Rect2(192, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xtiby"]
 atlas = ExtResource("3_qokpl")
@@ -71,20 +75,23 @@ region = Rect2(128, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_goibt")
+"texture": SubResource("AtlasTexture_i7fxb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_44kls")
+"texture": SubResource("AtlasTexture_t2y54")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qkb3q")
+"texture": SubResource("AtlasTexture_dxkkv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4bshm")
+"texture": SubResource("AtlasTexture_e0hkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5f5ko")
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -125,8 +132,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ps2ld"]
-radius = 4.0
-height = 14.0
+radius = 8.0
+height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jea4"]
 radius = 79.0
@@ -231,24 +238,22 @@ script = ExtResource("1_0ytq8")
 material = SubResource("ShaderMaterial_ji213")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_47d34")
-animation = &"attack"
+animation = &"run"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 
 [node name="FesterCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ps2ld")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, -4)
-target_position = Vector2(8, 0)
+target_position = Vector2(13, 0)
 collision_mask = 16
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, -4)
-target_position = Vector2(-8, 0)
+target_position = Vector2(-13, 0)
 collision_mask = 16
 
 [node name="ChasePlayer" type="Area2D" parent="."]
@@ -270,7 +275,8 @@ libraries = {
 [node name="HurtPlayerArea" parent="." instance=ExtResource("5_hyjv3")]
 position = Vector2(0, -4)
 scale = Vector2(2, 0.5)
-damage = 10
+damage = 8
+knock_back_force = 45
 
 [node name="RoamTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -281,7 +287,6 @@ one_shot = true
 
 [node name="FesterScreamAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_s3ruv")
-volume_db = -5.0
 bus = &"SFX"
 
 [node name="enemy_healthbar" parent="." instance=ExtResource("8_eh8l7")]

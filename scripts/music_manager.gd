@@ -17,11 +17,11 @@ func _process(delta):
 	if (GameManager.started_game):
 		match GameManager.current_level:
 			"level_grasslands_1":
-				if (music_player.get_stream() != music_selection["grasslands_track_1"]):
-					music_player.set_stream(music_selection["grasslands_track_1"])
-			"level_grasslands_2":
 				if (music_player.get_stream() != music_selection["grasslands_track_2"]):
 					music_player.set_stream(music_selection["grasslands_track_2"])
+			"level_grasslands_2":
+				if (music_player.get_stream() != music_selection["grasslands_track_1"]):
+					music_player.set_stream(music_selection["grasslands_track_1"])
 			"level_grasslands_3":
 				if (music_player.get_stream() != music_selection["desert_track_1"]):
 					music_player.set_stream(music_selection["desert_track_1"])		

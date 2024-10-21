@@ -152,7 +152,7 @@ scale = Vector2(2, 1)
 damage = 2
 attack_wait = 0.2
 destroy_time = 3
-knock_back = 200.0
+knock_back = 45.0
 shape = NodePath("CollisionShape2D2")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="FlameAnimatedSprite/hurt_enemy_area"]

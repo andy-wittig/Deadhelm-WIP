@@ -2,10 +2,10 @@ extends CharacterBody2D
 #Constants
 const SPEED := 24.0
 const JUMP_VELOCITY := -180.0
-const KNOCK_BACK_FORCE := 75.0
+const KNOCK_BACK_FALLOFF := 10.0
 const ROAM_CHANGE_WAIT := 6
 const ATTACK_RADIUS := 20
-const ATTACK_WAIT := 1
+const ATTACK_WAIT := 2
 const MAX_HEALTH := 50
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
@@ -14,6 +14,7 @@ var knock_back: Vector2
 #Attacking Variables
 var player = null
 var chasing_player := false
+var attack_started := false
 #Enemy Mechanics Variables
 var enemy_health := MAX_HEALTH
 var marked_for_death := false
@@ -111,10 +112,12 @@ func _physics_process(delta):
 					animated_sprite.stop()
 					state = state_type.ATTACK
 		state_type.ATTACK:
-			audio_player.play()
-			
-			if (!animated_sprite.is_playing()):
+			if (!attack_started):
 				animated_sprite.play("attack")
+				audio_player.play()
+				attack_started = true
+			
+			if (animated_sprite.frame == 3 && player != null):
 				hurt_player_area.active = true
 				
 			velocity.x = 0
@@ -123,20 +126,23 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	
 	velocity += knock_back
-	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FORCE)
-	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FORCE)
+	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
+	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 		
 	move_and_slide()
 	
 func _on_animated_fester_sprite_animation_finished():
-	if (state == state_type.ATTACK):
+	if (attack_started):
 		animated_sprite.play("idle")
 		hurt_player_area.active = false
 	
 func _on_cooldown_timer_timeout():
+	attack_started = false
 	if (chasing_player):
 		state = state_type.CHASE
 	else:
+		player = null
+		chasing_player = false
 		state = state_type.MOVING
 	
 func _on_change_state_timer_timeout():
