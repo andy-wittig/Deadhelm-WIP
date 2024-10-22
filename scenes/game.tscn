@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=29 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dsmtbe5hbqsrc" path="res://scenes/menus/multiplayer_menu.tscn" id="7_hkw8y"]
 [ext_resource type="PackedScene" uid="uid://c3tnfa07koleu" path="res://scenes/menus/in_game_menu.tscn" id="8_ar250"]
 [ext_resource type="PackedScene" uid="uid://bqgd6hcfgc75y" path="res://scenes/menus/credits_menu.tscn" id="9_0w2qv"]
+[ext_resource type="PackedScene" uid="uid://btplmre76e21a" path="res://scenes/menus/journal_menu.tscn" id="9_7yf88"]
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
 [ext_resource type="PackedScene" uid="uid://b0378gpwb8g1x" path="res://scenes/menus/gameover_menu.tscn" id="11_bodm6"]
 [ext_resource type="Texture2D" uid="uid://dm11bfh1qcc23" path="res://assets/sprites/UI/title_background_sky.png" id="13_1o8hw"]
@@ -166,6 +167,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+
+[node name="JournalMenu" parent="MenuLayer/MenuControl" instance=ExtResource("9_7yf88")]
+visible = false
+layout_mode = 1
 
 [node name="credits_menu" parent="MenuLayer/MenuControl" instance=ExtResource("9_0w2qv")]
 visible = false

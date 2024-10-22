@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://btplmre76e21a"]
+
+[ext_resource type="Script" path="res://scripts/journal_menu.gd" id="1_du11q"]
+[ext_resource type="Texture2D" uid="uid://dlgm2y2w4sr2k" path="res://assets/sprites/UI/player_information/journal.png" id="1_rafl2"]
+[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_hbqgm"]
+[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_5nlnu"]
+
+[node name="JournalMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_du11q")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -288.0
+offset_right = 384.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rafl2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -192.0
+offset_right = 288.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pages" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="JournalEntry" type="RichTextLabel" parent="VBoxContainer/Pages"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.0627451, 0.0705882, 0.109804, 1)
+theme_override_fonts/normal_font = ExtResource("2_hbqgm")
+theme_override_fonts/bold_font = ExtResource("3_5nlnu")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[center]
+[b][u]JOURNAL[/u][/b]
+
+Lore goes here.
+[/center]"
+scroll_active = false
+
+[node name="DescriptionEntry" type="RichTextLabel" parent="VBoxContainer/Pages"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.0627451, 0.0705882, 0.109804, 1)
+theme_override_fonts/normal_font = ExtResource("2_hbqgm")
+theme_override_fonts/bold_font = ExtResource("3_5nlnu")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[center]
+[b][u]DESCRIPTION[/u][/b]
+
+[img={width%}128{height%}]res://assets/sprites/enemies/bombshell_turtle/bombshell.png[/img]
+
+Enemy description goes here.
+[/center]"
+scroll_active = false
+
+[node name="PageNumber" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="LeftPageNumber" type="Label" parent="VBoxContainer/PageNumber"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.0627451, 0.0705882, 0.109804, 1)
+theme_override_fonts/font = ExtResource("3_5nlnu")
+theme_override_font_sizes/font_size = 16
+text = "1"
+
+[node name="RightPageNumber" type="Label" parent="VBoxContainer/PageNumber"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.0627451, 0.0705882, 0.109804, 1)
+theme_override_fonts/font = ExtResource("3_5nlnu")
+theme_override_font_sizes/font_size = 16
+text = "2
+"

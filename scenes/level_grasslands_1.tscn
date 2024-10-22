@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=32 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
@@ -25,7 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="23_cni07"]
 [ext_resource type="PackedScene" uid="uid://dv7ii30ng3m2" path="res://scenes/level_objects/rock_wall.tscn" id="24_dqexj"]
 [ext_resource type="PackedScene" uid="uid://dunbwsblhvliw" path="res://scenes/level_objects/totem.tscn" id="25_pbkwx"]
-[ext_resource type="PackedScene" uid="uid://dkt3s7wbnw3ek" path="res://scenes/enemies/fester.tscn" id="26_s1b31"]
 
 [sub_resource type="Gradient" id="Gradient_hcj03"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
@@ -285,6 +284,3 @@ message = "Drop spells onto totems to activate them."
 [node name="tome2" parent="." instance=ExtResource("23_cni07")]
 position = Vector2(232, -472)
 spell_type = "morning_star"
-
-[node name="fester" parent="." instance=ExtResource("26_s1b31")]
-position = Vector2(320, -464)

@@ -6,6 +6,7 @@ enum menu {
 	SETTINGS,
 	CREDITS,
 	INGAME,
+	JOURNAL,
 	HIDDEN,
 	GAMEOVER,
 }
@@ -19,6 +20,7 @@ var menu_started := false
 	"multiplayer_menu" : $MenuControl/multiplayer_menu,
 	"credits_menu" : $MenuControl/credits_menu,
 	"in_game_menu" : $MenuControl/in_game_menu,
+	"journal" : $MenuControl/JournalMenu,
 	"gameover_menu" : $MenuControl/gameover_menu,
 }
 
@@ -27,9 +29,16 @@ func _process(_delta):
 		if Input.is_action_just_pressed("in-game_menu"):
 			if (current_menu == menu.HIDDEN):
 				current_menu = menu.INGAME
-			elif (current_menu == menu.INGAME || current_menu == menu.SETTINGS):
+			elif (current_menu == menu.INGAME || current_menu == menu.SETTINGS || current_menu == menu.JOURNAL):
 				current_menu = menu.HIDDEN
 				$MenuControl/in_game_menu.menu_started = false
+				
+		if Input.is_action_just_pressed("open_journal"):
+			if (current_menu == menu.HIDDEN):
+				current_menu = menu.JOURNAL
+			elif (current_menu == menu.JOURNAL):
+				current_menu = menu.HIDDEN
+				$MenuControl/JournalMenu.menu_started = false
 	
 	match current_menu:
 		menu.MAIN:
@@ -72,6 +81,14 @@ func _process(_delta):
 					menu_scenes[scene].visible = true
 					menu_scenes[scene].menu_opened()
 					GameManager.access_ingame_menu = false
+		menu.JOURNAL:
+			for scene in menu_scenes:
+				if (scene != "journal"):
+					menu_scenes[scene].visible = false
+				else:
+					menu_scenes[scene].visible = true
+					menu_scenes[scene].menu_opened()
+					GameManager.access_ingame_menu = false
 		menu.HIDDEN:
 			for scene in menu_scenes:
 					menu_scenes[scene].visible = false
@@ -95,6 +112,8 @@ func return_to_prev_menu():
 			current_menu = menu.HIDDEN
 		elif (current_menu == menu.SETTINGS):
 			current_menu = menu.INGAME
+		elif (current_menu == menu.JOURNAL):
+			current_menu = menu.HIDDEN
 	else:
 		current_menu = menu.MAIN
 
