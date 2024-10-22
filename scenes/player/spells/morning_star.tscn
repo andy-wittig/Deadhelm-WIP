@@ -29,8 +29,8 @@ texture = ExtResource("2_00xyu")
 shape = SubResource("CircleShape2D_n0imb")
 
 [node name="hurt_enemy_area" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("3_m3mlw")]
-damage = 5
-attack_wait = 1.0
+damage = 4
+attack_wait = 0.2
 destroy_time = 5
 knock_back = 100.0
 shape = NodePath("../CollisionShape2D")
