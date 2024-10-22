@@ -1,0 +1,7 @@
+[center]
+[b][u]DESCRIPTION[/u][/b]
+
+[img={width%}128{height%}]res://assets/sprites/enemies/bombshell_turtle/bombshell.png[/img]
+
+Enemy description goes here.
+[/center]

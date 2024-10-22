@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://btplmre76e21a"]
+[gd_scene load_steps=7 format=3 uid="uid://btplmre76e21a"]
 
 [ext_resource type="Script" path="res://scripts/journal_menu.gd" id="1_du11q"]
 [ext_resource type="Texture2D" uid="uid://dlgm2y2w4sr2k" path="res://assets/sprites/UI/player_information/journal.png" id="1_rafl2"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_hbqgm"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_5nlnu"]
+[ext_resource type="Texture2D" uid="uid://bus5i2amk0km5" path="res://assets/sprites/UI/player_information/next_arrow.png" id="5_cc30i"]
+[ext_resource type="Texture2D" uid="uid://qtlmyb4phdrd" path="res://assets/sprites/UI/player_information/next_arrow_pressed.png" id="6_t05xq"]
 
 [node name="JournalMenu" type="Control"]
 layout_mode = 3
@@ -58,11 +60,6 @@ theme_override_fonts/bold_font = ExtResource("3_5nlnu")
 theme_override_font_sizes/normal_font_size = 16
 theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
-text = "[center]
-[b][u]JOURNAL[/u][/b]
-
-Lore goes here.
-[/center]"
 scroll_active = false
 
 [node name="DescriptionEntry" type="RichTextLabel" parent="VBoxContainer/Pages"]
@@ -75,13 +72,6 @@ theme_override_fonts/bold_font = ExtResource("3_5nlnu")
 theme_override_font_sizes/normal_font_size = 16
 theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
-text = "[center]
-[b][u]DESCRIPTION[/u][/b]
-
-[img={width%}128{height%}]res://assets/sprites/enemies/bombshell_turtle/bombshell.png[/img]
-
-Enemy description goes here.
-[/center]"
 scroll_active = false
 
 [node name="PageNumber" type="GridContainer" parent="VBoxContainer"]
@@ -104,3 +94,26 @@ theme_override_fonts/font = ExtResource("3_5nlnu")
 theme_override_font_sizes/font_size = 16
 text = "2
 "
+
+[node name="PrevPageButton" type="TextureButton" parent="."]
+offset_left = 672.0
+offset_top = 648.0
+offset_right = 688.0
+offset_bottom = 664.0
+scale = Vector2(6, 6)
+texture_normal = ExtResource("5_cc30i")
+texture_pressed = ExtResource("6_t05xq")
+flip_h = true
+
+[node name="NextPageButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1152.0
+offset_top = 648.0
+offset_right = 1168.0
+offset_bottom = 664.0
+scale = Vector2(6, 6)
+texture_normal = ExtResource("5_cc30i")
+texture_pressed = ExtResource("6_t05xq")
+
+[connection signal="pressed" from="PrevPageButton" to="." method="_on_prev_page_button_pressed"]
+[connection signal="pressed" from="NextPageButton" to="." method="_on_next_page_button_pressed"]

@@ -1,0 +1,7 @@
+[center]
+[b][u]DESCRIPTION[/u][/b]
+
+[img={width%}128{height%}]res://assets/sprites/enemies/bomb_frog/bomb_frog_primed.png[/img]
+
+Bomb frog!
+[/center]

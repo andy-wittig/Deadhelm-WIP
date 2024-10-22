@@ -1,0 +1,5 @@
+[center]
+[b][u]JOURNAL[/u][/b]
+
+Lore goes here.
+[/center]
