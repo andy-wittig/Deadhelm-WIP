@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4583yrsgdw6r"
-path="res://.godot/imported/irritus_jump_sprite.png-1607323e651304905f82b1fc2eb4bb22.ctex"
+uid="uid://dy6ylb8up0wjc"
+path="res://.godot/imported/fester_idle_sheet.png-93cd40f7420f06ae1f1cfbd42ba445db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/irritus_jump_sprite.png"
-dest_files=["res://.godot/imported/irritus_jump_sprite.png-1607323e651304905f82b1fc2eb4bb22.ctex"]
+source_file="res://assets/sprites/enemies/fester/fester_idle_sheet.png"
+dest_files=["res://.godot/imported/fester_idle_sheet.png-93cd40f7420f06ae1f1cfbd42ba445db.ctex"]
 
 [params]
 

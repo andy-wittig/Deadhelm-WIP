@@ -31,7 +31,7 @@ enum state_type {
 	CHASE,
 	ATTACK
 }
-var state := state_type.MOVING
+var state := state_type.IDLE
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -204,6 +204,8 @@ func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 	
 @rpc("call_local", "any_peer")
 func destroy_self():
+	get_tree().call_group("unlock_enemy", "unlock_page", 3)
+	
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	var death_effect = load("res://scenes/vfx/bombshell_turtle_death.tscn").instantiate()
 	soul.position = position

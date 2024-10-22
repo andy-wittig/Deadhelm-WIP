@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc7grb23laahh"
-path="res://.godot/imported/golem_attack_sheet.png-203529b927682c9a01f05954b0d6d12a.ctex"
+uid="uid://dbu5m4ihynm4m"
+path="res://.godot/imported/bomb_frog.png-4cefe76a4cdf80c26ab63dacd6a85026.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/golem_attack_sheet.png"
-dest_files=["res://.godot/imported/golem_attack_sheet.png-203529b927682c9a01f05954b0d6d12a.ctex"]
+source_file="res://assets/sprites/enemies/bomb_frog/bomb_frog.png"
+dest_files=["res://.godot/imported/bomb_frog.png-4cefe76a4cdf80c26ab63dacd6a85026.ctex"]
 
 [params]
 

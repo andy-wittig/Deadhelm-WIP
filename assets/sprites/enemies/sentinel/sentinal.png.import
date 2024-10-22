@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clrwy5nyhdex6"
-path="res://.godot/imported/irritus_idle_sheet.png-538af1191e59f8619f88f9bf8061dbed.ctex"
+uid="uid://bm4fxsyxftyp2"
+path="res://.godot/imported/sentinal.png-d789d19e915367c79077a497811aff23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/irritus_idle_sheet.png"
-dest_files=["res://.godot/imported/irritus_idle_sheet.png-538af1191e59f8619f88f9bf8061dbed.ctex"]
+source_file="res://assets/sprites/enemies/sentinel/sentinal.png"
+dest_files=["res://.godot/imported/sentinal.png-d789d19e915367c79077a497811aff23.ctex"]
 
 [params]
 

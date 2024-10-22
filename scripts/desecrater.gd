@@ -11,6 +11,8 @@ var attack_direction : Vector2
 @onready var desecrater_sprite = $DesecraterSprite
 
 func _ready():
+	get_tree().call_group("unlock_enemy", "unlock_page", 1)
+	
 	if (facing_direction == 0):
 		ray_cast.target_position.x = -detection_range
 		desecrater_sprite.flip_h = false

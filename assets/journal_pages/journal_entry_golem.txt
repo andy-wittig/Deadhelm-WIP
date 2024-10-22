@@ -1,5 +1,5 @@
 [center]
 [b][u]JOURNAL[/u][/b]
 
-More lore here!
+Golem lore goes here.
 [/center]

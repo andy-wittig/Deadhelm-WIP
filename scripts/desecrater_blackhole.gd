@@ -2,8 +2,8 @@ extends Area2D
 
 var direction := Vector2(-1.0,0.0)
 const SPEED := 35.0
-const ATTRACTION_SPEED := 50.0
-const BLACKHOLE_KNOCK_BACK := 125
+const ATTRACTION_SPEED := 15.0
+const BLACKHOLE_KNOCK_BACK := 55
 const PLAYER_DAMAGE := 10
 
 @onready var hurt_area = $HurtArea

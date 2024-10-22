@@ -1,0 +1,8 @@
+[center]
+[b][u]DESCRIPTION[/u][/b]
+
+Desecrator
+[img={width%}128{height%}]res://assets/sprites/enemies/desecrater.png[/img]
+
+Enemy description goes here.
+[/center]

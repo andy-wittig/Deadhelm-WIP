@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bplegj60fn7m8"
-path="res://.godot/imported/golem_run_sheet.png-84e033ea9526aa02a0c4b2e9971426d4.ctex"
+uid="uid://c6d7qb3ig76k7"
+path="res://.godot/imported/fester_run_sheet.png-1b6b3155b8f127dce593cff9454bd2ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/golem_run_sheet.png"
-dest_files=["res://.godot/imported/golem_run_sheet.png-84e033ea9526aa02a0c4b2e9971426d4.ctex"]
+source_file="res://assets/sprites/enemies/fester/fester_run_sheet.png"
+dest_files=["res://.godot/imported/fester_run_sheet.png-1b6b3155b8f127dce593cff9454bd2ae.ctex"]
 
 [params]
 

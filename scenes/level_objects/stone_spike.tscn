@@ -13,3 +13,4 @@ texture = ExtResource("1_haanx")
 position = Vector2(0, -3)
 scale = Vector2(0.6, 0.4)
 damage = 8
+knock_back_force = 40

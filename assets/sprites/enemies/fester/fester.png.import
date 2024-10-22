@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy6ylb8up0wjc"
-path="res://.godot/imported/fester_idle_sheet.png-cbb3196f8156e63906f51961b5121142.ctex"
+uid="uid://cou1o54mj0hig"
+path="res://.godot/imported/fester.png-22c788132f68c7408693a53b2d497e34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/fester_idle_sheet.png"
-dest_files=["res://.godot/imported/fester_idle_sheet.png-cbb3196f8156e63906f51961b5121142.ctex"]
+source_file="res://assets/sprites/enemies/fester/fester.png"
+dest_files=["res://.godot/imported/fester.png-22c788132f68c7408693a53b2d497e34.ctex"]
 
 [params]
 

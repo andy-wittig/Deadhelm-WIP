@@ -1,0 +1,8 @@
+[center]
+[b][u]DESCRIPTION[/u][/b]
+
+Blasphemer
+[img={width%}128{height%}]res://assets/sprites/enemies/blasphemer.png[/img]
+
+Enemy description goes here.
+[/center]

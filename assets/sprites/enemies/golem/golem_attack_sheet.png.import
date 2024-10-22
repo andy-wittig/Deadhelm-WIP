@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn4en6pclngws"
-path="res://.godot/imported/golem idle sheet.png-2c5d408854f4aa67f2101cc785f870f0.ctex"
+uid="uid://cc7grb23laahh"
+path="res://.godot/imported/golem_attack_sheet.png-637da3b1d14513876cf60f708c452bcf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/golem idle sheet.png"
-dest_files=["res://.godot/imported/golem idle sheet.png-2c5d408854f4aa67f2101cc785f870f0.ctex"]
+source_file="res://assets/sprites/enemies/golem/golem_attack_sheet.png"
+dest_files=["res://.godot/imported/golem_attack_sheet.png-637da3b1d14513876cf60f708c452bcf.ctex"]
 
 [params]
 

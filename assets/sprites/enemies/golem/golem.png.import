@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm4fxsyxftyp2"
-path="res://.godot/imported/sentinal.png-adc82723f1f4087ad3c89016a2799422.ctex"
+uid="uid://fgl05y7r6v6d"
+path="res://.godot/imported/golem.png-10761245d2d927ec03113a92dcdc02c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/sentinal.png"
-dest_files=["res://.godot/imported/sentinal.png-adc82723f1f4087ad3c89016a2799422.ctex"]
+source_file="res://assets/sprites/enemies/golem/golem.png"
+dest_files=["res://.godot/imported/golem.png-10761245d2d927ec03113a92dcdc02c8.ctex"]
 
 [params]
 

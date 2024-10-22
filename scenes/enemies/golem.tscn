@@ -3,10 +3,10 @@
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="1_a41dw"]
 [ext_resource type="Script" path="res://scripts/golem.gd" id="1_v0or6"]
 [ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="2_gx71o"]
-[ext_resource type="Texture2D" uid="uid://cc7grb23laahh" path="res://assets/sprites/enemies/golem_attack_sheet.png" id="3_gq6uq"]
-[ext_resource type="Texture2D" uid="uid://bplegj60fn7m8" path="res://assets/sprites/enemies/golem_run_sheet.png" id="3_op12x"]
-[ext_resource type="Texture2D" uid="uid://cn4en6pclngws" path="res://assets/sprites/enemies/golem idle sheet.png" id="3_xu4mc"]
+[ext_resource type="Texture2D" uid="uid://cc7grb23laahh" path="res://assets/sprites/enemies/golem/golem_attack_sheet.png" id="3_eahcw"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="4_d7ck2"]
+[ext_resource type="Texture2D" uid="uid://cn4en6pclngws" path="res://assets/sprites/enemies/golem/golem idle sheet.png" id="4_mco43"]
+[ext_resource type="Texture2D" uid="uid://bplegj60fn7m8" path="res://assets/sprites/enemies/golem/golem_run_sheet.png" id="5_qtfgs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg4no"]
 resource_local_to_scene = true
@@ -15,79 +15,79 @@ shader_parameter/enabled = false
 shader_parameter/tint = Color(0.92549, 0.152941, 0.247059, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yb3va"]
-atlas = ExtResource("3_gq6uq")
+atlas = ExtResource("3_eahcw")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_org3a"]
-atlas = ExtResource("3_gq6uq")
+atlas = ExtResource("3_eahcw")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j0ota"]
-atlas = ExtResource("3_gq6uq")
+atlas = ExtResource("3_eahcw")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8x6dn"]
-atlas = ExtResource("3_gq6uq")
+atlas = ExtResource("3_eahcw")
 region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tcohe"]
-atlas = ExtResource("3_gq6uq")
+atlas = ExtResource("3_eahcw")
 region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n0qbp"]
-atlas = ExtResource("3_gq6uq")
+atlas = ExtResource("3_eahcw")
 region = Rect2(288, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_38kou"]
-atlas = ExtResource("3_gq6uq")
+atlas = ExtResource("3_eahcw")
 region = Rect2(336, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n3nmc"]
-atlas = ExtResource("3_gq6uq")
+atlas = ExtResource("3_eahcw")
 region = Rect2(384, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ebwu7"]
-atlas = ExtResource("3_xu4mc")
+atlas = ExtResource("4_mco43")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_81n4h"]
-atlas = ExtResource("3_xu4mc")
+atlas = ExtResource("4_mco43")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bdfoa"]
-atlas = ExtResource("3_xu4mc")
+atlas = ExtResource("4_mco43")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_80p1y"]
-atlas = ExtResource("3_xu4mc")
+atlas = ExtResource("4_mco43")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8lv10"]
-atlas = ExtResource("3_xu4mc")
+atlas = ExtResource("4_mco43")
 region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_irggm"]
-atlas = ExtResource("3_op12x")
+atlas = ExtResource("5_qtfgs")
 region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ppyrn"]
-atlas = ExtResource("3_op12x")
+atlas = ExtResource("5_qtfgs")
 region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nig5o"]
-atlas = ExtResource("3_op12x")
+atlas = ExtResource("5_qtfgs")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ch6v2"]
-atlas = ExtResource("3_op12x")
+atlas = ExtResource("5_qtfgs")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5c648"]
-atlas = ExtResource("3_op12x")
+atlas = ExtResource("5_qtfgs")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_inofy"]
-atlas = ExtResource("3_op12x")
+atlas = ExtResource("5_qtfgs")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m63n4"]
@@ -367,7 +367,7 @@ visible = false
 scale = Vector2(4, 0.5)
 damage = 20
 attack_wait = 1.0
-knock_back_force = 250
+knock_back_force = 60
 
 [node name="RoamTimer" type="Timer" parent="."]
 unique_name_in_owner = true

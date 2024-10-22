@@ -102,6 +102,7 @@ position = Vector2(0, 48)
 scale = Vector2(1, 6)
 damage = 5
 attack_wait = 0.5
+knock_back_force = 45
 
 [node name="BlasphemerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -2)

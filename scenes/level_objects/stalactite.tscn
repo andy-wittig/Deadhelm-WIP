@@ -101,6 +101,7 @@ shape = SubResource("CircleShape2D_ngn05")
 [node name="HurtPlayerArea" parent="." instance=ExtResource("2_nqyc6")]
 scale = Vector2(0.5, 0.5)
 damage = 10
+knock_back_force = 45
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_kttog")

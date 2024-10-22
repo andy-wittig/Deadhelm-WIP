@@ -1,0 +1,5 @@
+[center]
+[b][u]JOURNAL[/u][/b]
+
+Bomb Frog lore goes here.
+[/center]

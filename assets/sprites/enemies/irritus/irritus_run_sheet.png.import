@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coo0yufsxmf4l"
-path="res://.godot/imported/fester_attack_sheet.png-54339464051a044b8ddb5917dbb9224b.ctex"
+uid="uid://dck0ni3ptvnh5"
+path="res://.godot/imported/irritus_run_sheet.png-23e56b81462dccee7bfb0569476559c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/fester_attack_sheet.png"
-dest_files=["res://.godot/imported/fester_attack_sheet.png-54339464051a044b8ddb5917dbb9224b.ctex"]
+source_file="res://assets/sprites/enemies/irritus/irritus_run_sheet.png"
+dest_files=["res://.godot/imported/irritus_run_sheet.png-23e56b81462dccee7bfb0569476559c6.ctex"]
 
 [params]
 

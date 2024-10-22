@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bus5i2amk0km5" path="res://assets/sprites/UI/player_information/next_arrow.png" id="5_cc30i"]
 [ext_resource type="Texture2D" uid="uid://qtlmyb4phdrd" path="res://assets/sprites/UI/player_information/next_arrow_pressed.png" id="6_t05xq"]
 
-[node name="JournalMenu" type="Control"]
+[node name="JournalMenu" type="Control" groups=["unlock_enemy"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,6 +96,7 @@ text = "2
 "
 
 [node name="PrevPageButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 672.0
 offset_top = 648.0
 offset_right = 688.0

@@ -206,4 +206,5 @@ func destroy_self():
 	get_parent().add_child(death_effect)
 	
 	marked_for_death = true
+	get_tree().call_group("unlock_enemy", "unlock_page", 2)
 	queue_free()

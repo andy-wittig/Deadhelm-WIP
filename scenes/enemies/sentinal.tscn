@@ -1,9 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://dmhxqps832npn"]
 
 [ext_resource type="Script" path="res://scripts/sentinal.gd" id="1_onipe"]
-[ext_resource type="Texture2D" uid="uid://bm4fxsyxftyp2" path="res://assets/sprites/enemies/sentinal.png" id="1_vs5s6"]
-[ext_resource type="Texture2D" uid="uid://dcquwtc8vbwww" path="res://assets/sprites/enemies/sentinal arm.png" id="2_ohr3g"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_yj1bm"]
+[ext_resource type="Texture2D" uid="uid://bm4fxsyxftyp2" path="res://assets/sprites/enemies/sentinel/sentinal.png" id="3_d6pv7"]
+[ext_resource type="Texture2D" uid="uid://dcquwtc8vbwww" path="res://assets/sprites/enemies/sentinel/sentinal arm.png" id="4_dchrd"]
 [ext_resource type="Texture2D" uid="uid://ckqalx0dmu00f" path="res://assets/sprites/vfx/energy ring.png" id="4_xlb1g"]
 [ext_resource type="AudioStream" uid="uid://cm0mb03v6df6" path="res://assets/sound effects/enemies/sentinal_player_entered.mp3" id="5_gmvqt"]
 [ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="7_3s50h"]
@@ -168,13 +168,13 @@ shape = SubResource("CircleShape2D_7xacb")
 material = SubResource("ShaderMaterial_lopnc")
 position = Vector2(5.21541e-08, -0.999999)
 rotation = 0.10472
-texture = ExtResource("1_vs5s6")
+texture = ExtResource("3_d6pv7")
 
 [node name="GunSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ftgnw")
 position = Vector2(-2.38419e-07, 0)
 rotation = -0.785398
-texture = ExtResource("2_ohr3g")
+texture = ExtResource("4_dchrd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../BodySprite")

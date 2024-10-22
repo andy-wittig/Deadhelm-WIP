@@ -41,6 +41,7 @@ script = ExtResource("1_h2vsb")
 [node name="HurtPlayerArea" parent="." instance=ExtResource("1_6v63i")]
 scale = Vector2(2.5, 2.5)
 damage = 12
+knock_back_force = 55
 
 [node name="ExplosionParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_81gea")

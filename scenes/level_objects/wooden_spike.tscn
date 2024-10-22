@@ -13,3 +13,4 @@ texture = ExtResource("1_mt1sa")
 position = Vector2(0, -3)
 scale = Vector2(0.6, 0.4)
 damage = 5
+knock_back_force = 40

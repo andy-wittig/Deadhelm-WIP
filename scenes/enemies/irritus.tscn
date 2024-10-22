@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/irritus.gd" id="1_3o7hq"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_l4048"]
-[ext_resource type="Texture2D" uid="uid://4583yrsgdw6r" path="res://assets/sprites/enemies/irritus_jump_sprite.png" id="4_6tpdr"]
-[ext_resource type="Texture2D" uid="uid://clrwy5nyhdex6" path="res://assets/sprites/enemies/irritus_idle_sheet.png" id="4_spc1d"]
-[ext_resource type="Texture2D" uid="uid://dck0ni3ptvnh5" path="res://assets/sprites/enemies/irritus_run_sheet.png" id="5_fjyq5"]
+[ext_resource type="Texture2D" uid="uid://clrwy5nyhdex6" path="res://assets/sprites/enemies/irritus/irritus_idle_sheet.png" id="3_8etjg"]
+[ext_resource type="Texture2D" uid="uid://4583yrsgdw6r" path="res://assets/sprites/enemies/irritus/irritus_jump_sprite.png" id="4_860k1"]
+[ext_resource type="Texture2D" uid="uid://dck0ni3ptvnh5" path="res://assets/sprites/enemies/irritus/irritus_run_sheet.png" id="5_y0wf8"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="6_sfiq4"]
 [ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="7_kkao4"]
 
@@ -15,43 +15,43 @@ shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ysxay"]
-atlas = ExtResource("4_spc1d")
+atlas = ExtResource("3_8etjg")
 region = Rect2(0, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_csnd8"]
-atlas = ExtResource("4_spc1d")
+atlas = ExtResource("3_8etjg")
 region = Rect2(16, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j1jmt"]
-atlas = ExtResource("4_spc1d")
+atlas = ExtResource("3_8etjg")
 region = Rect2(32, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ato1h"]
-atlas = ExtResource("4_spc1d")
+atlas = ExtResource("3_8etjg")
 region = Rect2(48, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f68ci"]
-atlas = ExtResource("4_spc1d")
+atlas = ExtResource("3_8etjg")
 region = Rect2(64, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6wj7g"]
-atlas = ExtResource("4_6tpdr")
+atlas = ExtResource("4_860k1")
 region = Rect2(0, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xyj2n"]
-atlas = ExtResource("5_fjyq5")
+atlas = ExtResource("5_y0wf8")
 region = Rect2(0, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_273t3"]
-atlas = ExtResource("5_fjyq5")
+atlas = ExtResource("5_y0wf8")
 region = Rect2(16, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i08f6"]
-atlas = ExtResource("5_fjyq5")
+atlas = ExtResource("5_y0wf8")
 region = Rect2(32, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jwr1x"]
-atlas = ExtResource("5_fjyq5")
+atlas = ExtResource("5_y0wf8")
 region = Rect2(48, 0, 16, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_47d34"]
@@ -246,6 +246,7 @@ libraries = {
 position = Vector2(0, -5)
 scale = Vector2(0.5, 0.5)
 damage = 20
+knock_back_force = 55
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
@@ -261,9 +262,8 @@ one_shot = true
 unique_name_in_owner = true
 wait_time = 0.05
 
-[node name="enemy_healthbar" parent="." node_paths=PackedStringArray("collision_shape") instance=ExtResource("7_kkao4")]
+[node name="enemy_healthbar" parent="." instance=ExtResource("7_kkao4")]
 position = Vector2(0, -16)
-collision_shape = NodePath("../IrritusCollider")
 
 [connection signal="body_entered" from="ChasePlayer" to="." method="_on_chase_player_body_entered"]
 [connection signal="body_exited" from="ChasePlayer" to="." method="_on_chase_player_body_exited"]

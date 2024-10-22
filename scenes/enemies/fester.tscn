@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/fester.gd" id="1_0ytq8"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_myen5"]
-[ext_resource type="Texture2D" uid="uid://dy6ylb8up0wjc" path="res://assets/sprites/enemies/fester_idle_sheet.png" id="3_qokpl"]
-[ext_resource type="Texture2D" uid="uid://coo0yufsxmf4l" path="res://assets/sprites/enemies/fester_attack_sheet.png" id="3_y3w4a"]
-[ext_resource type="Texture2D" uid="uid://c6d7qb3ig76k7" path="res://assets/sprites/enemies/fester_run_sheet.png" id="4_3xcke"]
+[ext_resource type="Texture2D" uid="uid://coo0yufsxmf4l" path="res://assets/sprites/enemies/fester/fester_attack_sheet.png" id="3_l4ax2"]
+[ext_resource type="Texture2D" uid="uid://dy6ylb8up0wjc" path="res://assets/sprites/enemies/fester/fester_idle_sheet.png" id="4_a53yi"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="5_hyjv3"]
 [ext_resource type="AudioStream" uid="uid://w7oda2afdl4w" path="res://assets/sound effects/enemies/fester scream.mp3" id="5_s3ruv"]
+[ext_resource type="Texture2D" uid="uid://c6d7qb3ig76k7" path="res://assets/sprites/enemies/fester/fester_run_sheet.png" id="5_u76m3"]
 [ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="8_eh8l7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ji213"]
@@ -16,59 +16,59 @@ shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i7fxb"]
-atlas = ExtResource("3_y3w4a")
+atlas = ExtResource("3_l4ax2")
 region = Rect2(0, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t2y54"]
-atlas = ExtResource("3_y3w4a")
+atlas = ExtResource("3_l4ax2")
 region = Rect2(48, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dxkkv"]
-atlas = ExtResource("3_y3w4a")
+atlas = ExtResource("3_l4ax2")
 region = Rect2(96, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e0hkn"]
-atlas = ExtResource("3_y3w4a")
+atlas = ExtResource("3_l4ax2")
 region = Rect2(144, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5f5ko"]
-atlas = ExtResource("3_y3w4a")
+atlas = ExtResource("3_l4ax2")
 region = Rect2(192, 0, 48, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xtiby"]
-atlas = ExtResource("3_qokpl")
+atlas = ExtResource("4_a53yi")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_652cx"]
-atlas = ExtResource("3_qokpl")
+atlas = ExtResource("4_a53yi")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ek45m"]
-atlas = ExtResource("3_qokpl")
+atlas = ExtResource("4_a53yi")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jv8j5"]
-atlas = ExtResource("3_qokpl")
+atlas = ExtResource("4_a53yi")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rr4e3"]
-atlas = ExtResource("4_3xcke")
+atlas = ExtResource("5_u76m3")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iaj2f"]
-atlas = ExtResource("4_3xcke")
+atlas = ExtResource("5_u76m3")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d8j5t"]
-atlas = ExtResource("4_3xcke")
+atlas = ExtResource("5_u76m3")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k3yxa"]
-atlas = ExtResource("4_3xcke")
+atlas = ExtResource("5_u76m3")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rantg"]
-atlas = ExtResource("4_3xcke")
+atlas = ExtResource("5_u76m3")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_47d34"]

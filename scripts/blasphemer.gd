@@ -9,6 +9,7 @@ extends Node2D
 @onready var attack_timer = $AttackTimer
 
 func _ready():
+	get_tree().call_group("unlock_enemy", "unlock_page", 0)
 	attack_timer.start(attack_rate)
 
 func _on_attack_timer_timeout():
