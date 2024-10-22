@@ -115,10 +115,9 @@ func _physics_process(delta):
 			if (!attack_started):
 				animated_sprite.play("attack")
 				audio_player.play()
-				attack_started = true
-			
-			if (animated_sprite.frame == 3 && player != null):
-				hurt_player_area.active = true
+				if (animated_sprite.frame == 3 && player != null):
+					attack_started = true
+					hurt_player_area.active = true
 				
 			velocity.x = 0
 

@@ -273,7 +273,7 @@ libraries = {
 }
 
 [node name="HurtPlayerArea" parent="." instance=ExtResource("5_hyjv3")]
-position = Vector2(0, -4)
+position = Vector2(0, -11)
 scale = Vector2(2, 0.5)
 damage = 8
 knock_back_force = 45

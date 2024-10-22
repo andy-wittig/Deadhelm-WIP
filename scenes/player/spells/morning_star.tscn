@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyxwy2wukqds1"]
+
+[ext_resource type="Script" path="res://scripts/morning_star.gd" id="1_5ua8k"]
+[ext_resource type="Texture2D" uid="uid://bxnnk3jso1cjy" path="res://assets/sprites/level_objects/spells/morning_star.png" id="2_00xyu"]
+[ext_resource type="PackedScene" uid="uid://c6hvdac7cbih0" path="res://scenes/player/hurt_enemy_area.tscn" id="3_m3mlw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_go2kk"]
+bounce = 0.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n0imb"]
+radius = 6.0
+
+[node name="morning star" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 20
+mass = 4.0
+physics_material_override = SubResource("PhysicsMaterial_go2kk")
+angular_damp = 8.0
+script = ExtResource("1_5ua8k")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="SpellSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_00xyu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_n0imb")
+
+[node name="hurt_enemy_area" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("3_m3mlw")]
+damage = 5
+attack_wait = 1.0
+destroy_time = 5
+knock_back = 100.0
+shape = NodePath("../CollisionShape2D")
+
+[connection signal="timeout" from="DestroyTimer" to="." method="on_destroy_timer_timeout"]

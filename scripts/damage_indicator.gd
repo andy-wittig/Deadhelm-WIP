@@ -9,7 +9,7 @@ var damage_indicator_color: String
 
 func _ready():
 	damage_label.text = str(damage_amount)
-	damage_label.position -= Vector2(0, 32)
+	damage_label.position -= Vector2(0, 16)
 	damage_label.add_theme_font_size_override("font_size", 8)
 	damage_label.add_theme_color_override("font_color", Color(damage_indicator_color, 1.0))
 	create_position_tween()

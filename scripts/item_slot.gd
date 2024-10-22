@@ -17,6 +17,7 @@ var attack_cooldown := false
 	"flame" : preload("res://assets/sprites/UI/player_information/placeholder_flame.png"),
 	"poison bottle" : preload("res://assets/sprites/UI/player_information/placeholder_poison_bottle.png"),
 	"bow" : preload("res://assets/sprites/UI/player_information/placeholder_bow.png"),
+	"morning_star" : preload("res://assets/sprites/UI/player_information/placeholder_morning_star.png"),
 }
 @onready var items = item_texture_dict.keys()
 
@@ -27,6 +28,7 @@ var attack_cooldown := false
 	"flame" : "res://scenes/player/spells/flame.tscn",
 	"poison bottle" : "res://scenes/player/spells/poison_bottle.tscn",
 	"bow" : "res://scenes/player/spells/arrow.tscn",
+	"morning_star" : "res://scenes/player/spells/morning_star.tscn",
 }
 
 @onready var item_cooldown = {
@@ -36,6 +38,7 @@ var attack_cooldown := false
 	"flame" : 3,
 	"poison bottle" : 10,
 	"bow" : 2,
+	"morning_star" : 5,
 }
 
 enum class_type {SHORT_RANGE, LONG_RANGE, DEFENSE, THROWING}
@@ -46,6 +49,7 @@ enum class_type {SHORT_RANGE, LONG_RANGE, DEFENSE, THROWING}
 	"flame" : class_type.SHORT_RANGE,
 	"poison bottle" : class_type.THROWING,
 	"bow" : class_type.LONG_RANGE,
+	"morning_star" : class_type.THROWING,
 }
 
 func _ready():

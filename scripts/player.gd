@@ -358,7 +358,7 @@ func hurt_player(damage: int, other_pos: Vector2, force: float):
 	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
 	damage_indicator.damage_amount = damage
 	damage_indicator.damage_indicator_color = "ec273f"
-	damage_indicator.position = player_center.global_position
+	damage_indicator.global_position = player_center.global_position
 	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 	
 func disable_player():

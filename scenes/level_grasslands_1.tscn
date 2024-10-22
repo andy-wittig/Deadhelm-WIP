@@ -283,8 +283,8 @@ position = Vector2(248, -336)
 message = "Drop spells onto totems to activate them."
 
 [node name="tome2" parent="." instance=ExtResource("23_cni07")]
-position = Vector2(264, -472)
-spell_type = "flame"
+position = Vector2(232, -472)
+spell_type = "morning_star"
 
 [node name="fester" parent="." instance=ExtResource("26_s1b31")]
-position = Vector2(280, -464)
+position = Vector2(320, -464)
