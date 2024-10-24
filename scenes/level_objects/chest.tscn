@@ -33,4 +33,7 @@ visible = false
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_k7l5o")
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -8)
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -26,5 +26,5 @@ func open_chest():
 	chest_open = true
 	for i in range(coin_amount):
 		var coin = load("res://scenes/level_objects/coin.tscn").instantiate()
-		coin.position = position
+		coin.global_position = $Marker2D.global_position
 		get_tree().get_root().get_node("game/Level").add_child(coin)
