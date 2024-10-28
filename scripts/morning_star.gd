@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const FLICK_FORCE := .8
+const FLICK_FORCE := 22
 
 var player: CharacterBody2D
 
@@ -12,7 +12,7 @@ func _ready():
 	global_position = player.spell_spawn.global_position
 	apply_central_impulse(player.spell_direction * FLICK_FORCE)
 
-func _process(delta):
+func _physics_process(delta):
 	apply_central_impulse(-(global_position - get_global_mouse_position()).normalized() * FLICK_FORCE)
 
 func on_destroy_timer_timeout():
