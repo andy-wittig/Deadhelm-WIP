@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cqbypq7pvrrg7"]
 
 [ext_resource type="Script" path="res://scripts/platform.gd" id="1_b5nxq"]
-[ext_resource type="Texture2D" uid="uid://dny6loqyjar73" path="res://assets/sprites/level_objects/tilesheet wip.png" id="1_bl6bk"]
+[ext_resource type="Texture2D" uid="uid://d30jjelyeh4xq" path="res://assets/sprites/level_objects/tilesheet final.png" id="2_cq4ls"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6x6i1"]
 properties/0/path = NodePath(".:position")
@@ -21,9 +21,9 @@ replication_config = SubResource("SceneReplicationConfig_6x6i1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 5.5)
-texture = ExtResource("1_bl6bk")
+texture = ExtResource("2_cq4ls")
 region_enabled = true
-region_rect = Rect2(208, 0, 16, 11)
+region_rect = Rect2(224, 112, 16, 11)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.5)

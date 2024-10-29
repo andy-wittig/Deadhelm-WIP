@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=3 uid="uid://bloa288c3j57k"]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_5v3yq"]
+[ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_p1631"]
+[ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_8vnxp"]
+[ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="4_glimk"]
+[ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="5_l5gcv"]
+[ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="6_jgjud"]
+[ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="7_gf4ap"]
+[ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="8_f6w8m"]
+
+[sub_resource type="Gradient" id="Gradient_s5sk3"]
+colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xkrum"]
+gradient = SubResource("Gradient_s5sk3")
+fill_to = Vector2(0, 1)
+
+[node name="level_crystal_1" type="Node2D"]
+script = ExtResource("1_5v3yq")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player/multiplayer_player.tscn")
+spawn_path = NodePath("../players")
+spawn_limit = 2
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="SkyGradient" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_xkrum")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+layer = -99
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxMountain" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_offset = Vector2(0, -108)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Mountains" type="TextureRect" parent="Background/ParallaxBackground/ParallaxMountain"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("2_p1631")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ParallaxSmallClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_offset = Vector2(0, -216)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_8vnxp")
+scroll_speed = 8.0
+
+[node name="SmallClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxSmallClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("4_glimk")
+stretch_mode = 1
+
+[node name="ParallaxLargeClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(1.2, 1.2)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_8vnxp")
+scroll_speed = 4.0
+
+[node name="LargeClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLargeClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("5_l5gcv")
+stretch_mode = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, 8)
+tile_set = ExtResource("6_jgjud")
+format = 2
+layer_0/name = "foreground"
+layer_0/tile_data = PackedInt32Array(-917489, 1376257, 1, -917488, 1376257, 3, -917487, 1376257, 0, -917486, 1376257, 0, -917485, 1376257, 0, -917484, 1376257, 0, -917483, 1376257, 0, -917482, 1441793, 0, -851953, 1376257, 1, -786417, 1310721, 4, -720881, 1310721, 2, -720879, 1376257, 1, -786415, 1376257, 1, -851951, 1376257, 1, -851952, 1376257, 1, -786416, 1376257, 1, -720880, 1310721, 4, -786414, 1376257, 1, -786413, 1376257, 1, -851948, 1376257, 1, -851949, 1376257, 1, -720878, 1376257, 1, -786412, 1376257, 1, -851950, 1376257, 1, -720877, 1376257, 1, -655342, 1376257, 1, -655341, 1376257, 1, -720876, 1376257, 1, -720875, 1376257, 1, -786410, 1441793, 1, -851946, 1441793, 1, -851947, 1376257, 1, -786418, 1310721, 2, -851955, 1310721, 2, -917491, 1310721, 1, -917490, 1376257, 1, -983026, 1310721, 3, -851954, 1310721, 4, -983025, 1376257, 1, -983024, 1441793, 1, -983027, 1310721, 0, -1048561, 1310721, 3, -1048560, 1441793, 1, -1114096, 1376257, 4, -1114095, 1441793, 2, -1179631, 1376257, 4, -1179632, 1310721, 3, -1114097, 1310721, 1, -1179633, 1310721, 0, -1245168, 1310721, 1, -1310704, 1310721, 4, -1245167, 1376257, 1, -1310703, 1376257, 3, -1310705, 1310721, 2, -1376241, 1310721, 1, -1376240, 1376257, 1, -1441776, 1310721, 3, -1441777, 1310721, 0, -1441775, 1441793, 1, -1507311, 1441793, 0, -1507312, 1310721, 0, -1310702, 1441793, 0, -1376239, 1441793, 1, -1245166, 1441793, 1, -1179630, 1441793, 2, -1048562, 1310721, 0, -655343, 1310721, 4, -786411, 1376257, 1, -655340, 1376257, 1, -720874, 1441793, 1, -655344, 1310721, 2, -589807, 1310721, 1, -524271, 1310721, 1, -458735, 1310721, 2, -524270, 1376257, 1, -589806, 1376257, 1, -589805, 1376257, 1, -458734, 1376257, 2, -524269, 1376257, 1, -589804, 1376257, 1, -655339, 1376257, 1, -524268, 1376257, 4, -458733, 1376257, 2, -524267, 1441793, 2, -589803, 1376257, 4, -589802, 1376257, 2, -655338, 1376257, 3, -655337, 1376257, 0, -720873, 1048577, 11, -458732, 1441793, 2, -983021, 1048577, 9, -655330, 1048577, 11, -786401, 917505, 12, -589800, 1310721, 4, -655336, 1376257, 0, -589799, 1441793, 1, -524263, 1376257, 3, -655335, 1441793, 0, -458727, 1310721, 4, -458726, 1376257, 3, -524262, 1441793, 0, -393191, 1310721, 2, -393190, 1376257, 2, -458725, 1376257, 0, -393189, 1376257, 2, -393188, 1376257, 2, -458724, 1376257, 0, -458723, 1310721, 3, -524259, 1310721, 0, -524258, 1310721, 3, -589794, 1310721, 0, -458722, 1376257, 4, -393187, 1376257, 2, -393186, 1441793, 2, -524257, 1376257, 1, -589793, 1376257, 0, -524256, 1441793, 1, -589792, 1441793, 0, -851940, 786433, 12, -589801, 1376257, 2, -524264, 1310721, 1, -458728, 1310721, 2, -458720, 1441793, 2, -458721, 1376257, 2, -983019, 327681, 7, -589795, 327681, 268435463)
+layer_1/name = "midground"
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "background"
+layer_2/modulate = Color(0.54902, 0.470588, 0.647059, 1)
+layer_2/z_index = -2
+layer_2/tile_data = PackedInt32Array()
+
+[node name="portal_gate" parent="." instance=ExtResource("7_gf4ap")]
+position = Vector2(448, -104)
+
+[node name="players" type="Node2D" parent="."]
+position = Vector2(320, -216)
+
+[node name="player" parent="players" instance=ExtResource("8_f6w8m")]
+z_index = 5
+
+[node name="spawn_point" type="Marker2D" parent="."]
+position = Vector2(320, -216)
