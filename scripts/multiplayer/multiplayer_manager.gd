@@ -58,7 +58,7 @@ func change_level(scene: PackedScene):
 		level.remove_child(object)
 		object.queue_free()
 	
-	var new_scene = scene.instantiate()
+	var new_scene = scene.ienstantiate()
 	level.add_child(new_scene)
 	GameManager.current_level = new_scene.get_name()
 	

@@ -19,6 +19,7 @@ const MAX_LIVES := 3
 const MAX_UPGRADED_HEALTH := 200
 #Physics Variables
 var knock_back: Vector2
+var friction_multiplier := 1.0
 var coyote_time_counter: float
 var jump_buffer_time: float
 var air_time: float
@@ -319,12 +320,23 @@ func _physics_process(delta):
 	elif (direction < 0):
 		animated_sprite.flip_h = true
 		
-	#applys movement
+	#Slippery Surfaces
+	var test_tile: TileData
+	var tile_map := get_tree().get_root().get_node("game/Level/%s/TileMap" % GameManager.current_level)
+	friction_multiplier = 1.0
+	for layer in range(tile_map.get_layers_count()):
+		test_tile = tile_map.get_cell_tile_data(layer, tile_map.local_to_map(Vector2(global_position.x, global_position.y + 1)))
+		if (test_tile != null):
+			if (test_tile.get_custom_data("slippery")):
+				friction_multiplier = 0.1
+		
+	#Apply movement
 	if (direction && state != state_type.ZIPLINE):
 		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, FRICTION_FORCE)
+		velocity.x = move_toward(velocity.x, 0, FRICTION_FORCE * friction_multiplier)
 
+	#knock-back
 	velocity += knock_back
 	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
 	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
