@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bloa288c3j57k"]
+[gd_scene load_steps=12 format=3 uid="uid://bloa288c3j57k"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_5v3yq"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_p1631"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="5_l5gcv"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="6_jgjud"]
 [ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="7_gf4ap"]
+[ext_resource type="PackedScene" uid="uid://dyutn277xh3h5" path="res://scenes/level_desert_1.tscn" id="8_2u8dc"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="8_f6w8m"]
 
 [sub_resource type="Gradient" id="Gradient_s5sk3"]
@@ -97,6 +98,7 @@ layer_2/tile_data = PackedInt32Array()
 
 [node name="portal_gate" parent="." instance=ExtResource("7_gf4ap")]
 position = Vector2(448, -104)
+next_level = ExtResource("8_2u8dc")
 
 [node name="players" type="Node2D" parent="."]
 position = Vector2(320, -216)

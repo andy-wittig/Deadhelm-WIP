@@ -9,8 +9,5 @@ script = ExtResource("1_hq8b7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-[node name="ID" type="Node" parent="."]
-unique_name_in_owner = true
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -365,7 +365,7 @@ position = Vector2(0, -50)
 [node name="HurtPlayerArea" parent="." instance=ExtResource("4_d7ck2")]
 visible = false
 scale = Vector2(4, 0.5)
-damage = 20
+damage = 12
 attack_wait = 1.0
 knock_back_force = 60
 

@@ -2,7 +2,6 @@ extends Area2D
 
 @export var damage: int
 @export var attack_wait := 2.0
-@export var destroy_time := 2
 @export var knock_back := 0.0
 @export var shape: CollisionShape2D
 
@@ -25,9 +24,13 @@ func _on_body_entered(body):
 			add_child(enemy_damage_timer)
 			enemy_damage_timer.add_to_group(timer_id)
 			enemy_damage_timer.wait_time = attack_wait
+			enemy_damage_timer.one_shot = false
 			enemy_damage_timer.timeout.connect(_hurt_enemy_timer.bind(body))
 			enemy_damage_timer.start()
 			body.hurt_enemy(damage, global_position, knock_back)
+		else:
+			for timer in get_tree().get_nodes_in_group(timer_id):
+				timer.remove_from_group("destroy_timer")
 
 func _on_body_exited(body):
 	for timer in get_tree().get_nodes_in_group(body.name + str(get_instance_id())):
