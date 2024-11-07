@@ -39,6 +39,7 @@ enum state_type {SITTING, MOVING, CLIMBING, ZIPLINE}
 var state := state_type.SITTING
 var spell_direction: Vector2
 var double_jump_active := false
+#var facing_direction := 1
 #Player Inventory Variables
 var selected_slot_pos := 0
 var currently_selected_slot = null
@@ -317,8 +318,10 @@ func _physics_process(delta):
 	#flips sprite
 	if (direction > 0):
 		animated_sprite.flip_h = false
+		#facing_direction = 1
 	elif (direction < 0):
 		animated_sprite.flip_h = true
+		#facing_direction = -1
 		
 	#Slippery Surfaces
 	var test_tile: TileData

@@ -91,7 +91,7 @@ script = ExtResource("1_g5hin")
 
 [node name="GateSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_debcj")
-position = Vector2(0, -21)
+position = Vector2(0, -24)
 texture = ExtResource("1_v8c2c")
 
 [node name="PlayerDetectCollider" type="CollisionShape2D" parent="."]

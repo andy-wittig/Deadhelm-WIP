@@ -1,10 +1,86 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy1xd2emwoirc"]
+[gd_scene load_steps=11 format=3 uid="uid://cy1xd2emwoirc"]
 
 [ext_resource type="Script" path="res://scripts/bombshell_spike.gd" id="1_2lmx7"]
 [ext_resource type="Texture2D" uid="uid://bygo3ctxud1ol" path="res://assets/sprites/enemies/bombshell_turtle/bombshell spike.png" id="1_6vxcd"]
+[ext_resource type="Texture2D" uid="uid://cbdvfr13mqgwe" path="res://assets/sprites/vfx/rock_pieces.png" id="3_d04d4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sfnp1"]
-radius = 3.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ig1ur"]
+radius = 2.0
+height = 10.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qyvyu"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_gs65g"]
+_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 0.241758), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_jhnga"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_prc6r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gsl7l"]
+resource_name = "fade_out"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yc3w8"]
+_data = {
+"RESET": SubResource("Animation_prc6r"),
+"fade_out": SubResource("Animation_gsl7l")
+}
 
 [node name="bombshell spike" type="Area2D" groups=["enemy_projectile"]]
 z_index = 10
@@ -13,15 +89,43 @@ collision_mask = 2
 script = ExtResource("1_2lmx7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_sfnp1")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ig1ur")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
 rotation = 0.785398
 texture = ExtResource("1_6vxcd")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite2D"]
+z_index = -1
+material = SubResource("CanvasItemMaterial_qyvyu")
+position = Vector2(0.707107, 0.707107)
+rotation = -0.785398
+amount = 4
+lifetime = 0.5
+explosiveness = 0.1
+randomness = 0.4
+lifetime_randomness = 0.5
+texture = ExtResource("3_d04d4")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_gs65g")
+color_ramp = SubResource("Gradient_jhnga")
+anim_speed_max = 1.0
+anim_offset_max = 1.0
+
 [node name="DestroyTimer" type="Timer" parent="."]
 autostart = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yc3w8")
+}
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

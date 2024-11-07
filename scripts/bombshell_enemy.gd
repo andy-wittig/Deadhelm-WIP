@@ -170,7 +170,7 @@ func create_spikes():
 		for i in 7:
 			var spike = load("res://scenes/enemies/bombshell_spike.tscn").instantiate()
 			spike.direction = spike_angle
-			spike.position = position + spike_angle * 8
+			spike.position = position + Vector2(0, -4) + spike_angle * 8
 			get_parent().add_child(spike)
 			
 			spike_angle = spike_angle.rotated(deg_to_rad(-30))

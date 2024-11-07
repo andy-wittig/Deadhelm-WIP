@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dyutn277xh3h5"]
+[gd_scene load_steps=48 format=3 uid="uid://dyutn277xh3h5"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_pel5v"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_52uxu"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://dv7ii30ng3m2" path="res://scenes/level_objects/rock_wall.tscn" id="28_pc64f"]
 [ext_resource type="PackedScene" uid="uid://scoqgj7soj6f" path="res://scenes/level_objects/scene_player_area.tscn" id="29_ggu8g"]
 [ext_resource type="PackedScene" uid="uid://balh0s1khqr2c" path="res://scenes/level_objects/respawn_point.tscn" id="30_727gl"]
+[ext_resource type="PackedScene" uid="uid://bpw1cvbvhtqe4" path="res://scenes/level_objects/falling_platform.tscn" id="31_t706t"]
 
 [sub_resource type="Gradient" id="Gradient_so2so"]
 colors = PackedColorArray(0.913725, 0.521569, 0.215686, 1, 0.968627, 0.952941, 0.717647, 1)
@@ -112,44 +113,6 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_nd2pp"),
 "move": SubResource("Animation_4kbtw")
-}
-
-[sub_resource type="Animation" id="Animation_siihv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1080, -360)]
-}
-
-[sub_resource type="Animation" id="Animation_f3rak"]
-resource_name = "move"
-length = 2.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1080, -360), Vector2(1112, -360)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t8n3j"]
-_data = {
-"RESET": SubResource("Animation_siihv"),
-"move": SubResource("Animation_f3rak")
 }
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xu020"]
@@ -413,24 +376,6 @@ position = Vector2(632, -696)
 [node name="platform10" parent="game objects/platform objects" instance=ExtResource("5_x1jms")]
 position = Vector2(632, -696)
 
-[node name="platform11" parent="game objects/platform objects" instance=ExtResource("5_x1jms")]
-position = Vector2(1080, -360)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="game objects/platform objects/platform11"]
-libraries = {
-"": SubResource("AnimationLibrary_t8n3j")
-}
-autoplay = "move"
-
-[node name="platform12" parent="game objects/platform objects" instance=ExtResource("5_x1jms")]
-position = Vector2(1112, -392)
-
-[node name="platform13" parent="game objects/platform objects" instance=ExtResource("5_x1jms")]
-position = Vector2(1088, -424)
-
-[node name="platform14" parent="game objects/platform objects" instance=ExtResource("5_x1jms")]
-position = Vector2(1048, -336)
-
 [node name="platform16" parent="game objects/platform objects" instance=ExtResource("5_x1jms")]
 position = Vector2(968, -384)
 
@@ -488,9 +433,6 @@ position = Vector2(512, -320)
 
 [node name="stalactite3" parent="game objects/hurt zones" instance=ExtResource("9_hie6q")]
 position = Vector2(584, -480)
-
-[node name="stalactite4" parent="game objects/hurt zones" instance=ExtResource("9_hie6q")]
-position = Vector2(1048, -400)
 
 [node name="enemies" type="Node" parent="."]
 
@@ -658,3 +600,18 @@ position = Vector2(32, -480)
 [node name="respawn_point" parent="." node_paths=PackedStringArray("spawn_point") instance=ExtResource("30_727gl")]
 position = Vector2(520, -832)
 spawn_point = NodePath("../spawn_point")
+
+[node name="falling_platform" parent="." instance=ExtResource("31_t706t")]
+position = Vector2(1048, -336)
+
+[node name="falling_platform2" parent="." instance=ExtResource("31_t706t")]
+position = Vector2(1080, -360)
+
+[node name="falling_platform3" parent="." instance=ExtResource("31_t706t")]
+position = Vector2(1112, -392)
+
+[node name="falling_platform4" parent="." instance=ExtResource("31_t706t")]
+position = Vector2(1088, -424)
+
+[node name="falling_platform5" parent="." instance=ExtResource("31_t706t")]
+position = Vector2(96, -352)

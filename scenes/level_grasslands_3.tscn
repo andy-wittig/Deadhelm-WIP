@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dis3wy3nmnpfo"]
+[gd_scene load_steps=45 format=3 uid="uid://dis3wy3nmnpfo"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_005jl"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_ybw4u"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://dv7ii30ng3m2" path="res://scenes/level_objects/rock_wall.tscn" id="29_x7gii"]
 [ext_resource type="PackedScene" uid="uid://scoqgj7soj6f" path="res://scenes/level_objects/scene_player_area.tscn" id="30_vuqe1"]
 [ext_resource type="PackedScene" uid="uid://df81gmo7ppw8s" path="res://scenes/level_objects/dialogue_area.tscn" id="31_h23ux"]
+[ext_resource type="PackedScene" uid="uid://bpw1cvbvhtqe4" path="res://scenes/level_objects/falling_platform.tscn" id="32_sr2c5"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
@@ -320,12 +321,6 @@ position = Vector2(520, -224)
 [node name="platform5" parent="Platforms" instance=ExtResource("12_o4gke")]
 position = Vector2(216, -320)
 
-[node name="platform7" parent="Platforms" instance=ExtResource("12_o4gke")]
-position = Vector2(536, -928)
-
-[node name="platform8" parent="Platforms" instance=ExtResource("12_o4gke")]
-position = Vector2(568, -952)
-
 [node name="platform9" parent="Platforms" instance=ExtResource("12_o4gke")]
 position = Vector2(376, -1312)
 
@@ -520,3 +515,9 @@ scale = Vector2(1, 4)
 [node name="dialog_area" parent="." instance=ExtResource("31_h23ux")]
 position = Vector2(1200, -1536)
 message = "In death the shrine beckons your soul back to this world."
+
+[node name="falling_platform" parent="." instance=ExtResource("32_sr2c5")]
+position = Vector2(536, -928)
+
+[node name="falling_platform2" parent="." instance=ExtResource("32_sr2c5")]
+position = Vector2(568, -952)

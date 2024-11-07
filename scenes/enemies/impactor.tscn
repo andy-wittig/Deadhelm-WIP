@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpr3s11nxajtn"]
+
+[ext_resource type="Texture2D" uid="uid://bjov6lui3py4i" path="res://assets/sprites/enemies/impactor.png" id="1_04ual"]
+
+[node name="impactor" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_04ual")
