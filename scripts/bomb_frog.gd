@@ -118,9 +118,9 @@ func _physics_process(delta):
 					else:
 						jump_timer -= delta
 					
-					if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
-					&& is_on_floor()):
-						velocity.y = JUMP_VELOCITY
+					#if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
+					#&& is_on_floor()):
+						#velocity.y = JUMP_VELOCITY
 						
 					if (!is_on_floor()):
 						animated_sprite.play("leap")

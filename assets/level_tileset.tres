@@ -743,6 +743,18 @@ texture = ExtResource("1_syuli")
 13:13/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 13:13/0/physics_layer_0/angular_velocity = 0.0
 13:13/0/custom_data_0 = true
+2:5/0 = 0
+2:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:5/0/physics_layer_0/angular_velocity = 0.0
+3:5/0 = 0
+3:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:5/0/physics_layer_0/angular_velocity = 0.0
+6:7/size_in_atlas = Vector2i(1, 2)
+6:7/0 = 0
+6:7/0/texture_origin = Vector2i(0, 8)
+6:7/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:7/0/physics_layer_0/angular_velocity = 0.0
+6:7/0/custom_data_0 = true
 
 [resource]
 physics_layer_0/collision_layer = 16

@@ -209,8 +209,8 @@ position = Vector2(728, -144)
 position = Vector2(264, -144)
 spawn_enemy_type = Array[PackedScene]([ExtResource("13_8j7cl"), ExtResource("13_8j7cl"), ExtResource("13_8j7cl")])
 tile_map = NodePath("../../TileMap")
-spawn_range = 5
-spawn_wait = 1.0
+spawn_range = 4
+spawn_wait = 3.0
 
 [node name="offering shrine" parent="game objects" instance=ExtResource("15_k88ra")]
 z_index = -1
