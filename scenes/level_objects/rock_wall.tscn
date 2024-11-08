@@ -82,7 +82,7 @@ _data = {
 }
 
 [node name="rock_wall" type="Node2D"]
-z_index = -1
+z_index = -2
 
 [node name="Wall" type="StaticBody2D" parent="."]
 collision_layer = 16

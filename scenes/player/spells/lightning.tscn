@@ -65,6 +65,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hcp61"]
+size = Vector2(16, 12)
 
 [sub_resource type="Gradient" id="Gradient_5l4kf"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -205,7 +206,7 @@ knock_back = 100.0
 shape = NodePath("CollisionShape2D2")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="LightningAnimatedSprite/hurt_enemy_area"]
-position = Vector2(4, 0)
+position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_hcp61")
 
 [node name="PointLight2D" type="PointLight2D" parent="LightningAnimatedSprite"]
@@ -239,7 +240,7 @@ scale_amount_curve = SubResource("Curve_x1vgv")
 color_ramp = SubResource("Gradient_x8n8r")
 
 [node name="DestroyTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 2.5
 one_shot = true
 autostart = true
 

@@ -34,7 +34,7 @@ var attack_cooldown := false
 @onready var item_cooldown = {
 	"meteor" : 4,
 	"shield" : 7,
-	"lightning" : 2.8,
+	"lightning" : 3,
 	"flame" : 3,
 	"poison bottle" : 10,
 	"bow" : 2,

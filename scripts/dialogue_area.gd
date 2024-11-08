@@ -1,14 +1,19 @@
 extends Area2D
 
 @export var message : String
+@export var button_hint : String
 @export var message_wait := 4
 
 var started_message := false
-const MESSAGE_SPEED_MULTIPLIER := 0.8
+const MESSAGE_SPEED_MULTIPLIER := 0.6
 
 func _ready():
 	$Control/MessageLabel.visible = false
-	$Control/MessageLabel.text = message
+	if (button_hint != ""):
+		$Control/MessageLabel.text = message.format({"button": 
+			InputMap.action_get_events(button_hint)[0].as_text().replace(" (Physical)", "")})
+	else:
+		$Control/MessageLabel.text = message
 
 func start_message():
 	$AnimationPlayer.play("RESET")
