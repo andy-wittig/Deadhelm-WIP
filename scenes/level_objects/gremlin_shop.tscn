@@ -344,33 +344,35 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
 theme_override_styles/focus = SubResource("StyleBoxFlat_312kc")
 
-[node name="SoldOutShader1" type="ColorRect" parent="ShopControl"]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="ShopControl"]
+position = Vector2(40, 12.5)
+scale = Vector2(0.29, 0.095)
+copy_mode = 2
+
+[node name="SoldOutShader1" type="ColorRect" parent="ShopControl/BackBufferCopy"]
 material = SubResource("ShaderMaterial_7ofr8")
-layout_mode = 0
-offset_left = 11.0
-offset_top = 3.0
-offset_right = 29.0
-offset_bottom = 22.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = -38.0
+offset_bottom = 100.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="SoldOutShader2" type="ColorRect" parent="ShopControl"]
+[node name="SoldOutShader2" type="ColorRect" parent="ShopControl/BackBufferCopy"]
 material = SubResource("ShaderMaterial_ds2ir")
-layout_mode = 0
-offset_left = 31.0
-offset_top = 3.0
-offset_right = 49.0
-offset_bottom = 22.0
+offset_left = -31.0
+offset_top = -100.0
+offset_right = 31.0
+offset_bottom = 100.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="SoldOutShader3" type="ColorRect" parent="ShopControl"]
+[node name="SoldOutShader3" type="ColorRect" parent="ShopControl/BackBufferCopy"]
 material = SubResource("ShaderMaterial_a1kp0")
-layout_mode = 0
-offset_left = 51.0
-offset_top = 3.0
-offset_right = 69.0
-offset_bottom = 22.0
+offset_left = 38.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 

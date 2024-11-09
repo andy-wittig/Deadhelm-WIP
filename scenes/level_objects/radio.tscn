@@ -117,14 +117,17 @@ scale_amount_curve = SubResource("Curve_222d4")
 color_ramp = SubResource("Gradient_p0g3t")
 anim_offset_max = 1.0
 
-[node name="BoomShader" type="ColorRect" parent="."]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="BoomShader" type="ColorRect" parent="BackBufferCopy"]
 visible = false
 material = SubResource("ShaderMaterial_1bk2q")
 offset_left = -12.0
 offset_top = -8.0
 offset_right = 4.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BoomShader"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BackBufferCopy/BoomShader"]
 libraries = {
 "": SubResource("AnimationLibrary_3w4qn")
 }

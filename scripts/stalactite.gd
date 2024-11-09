@@ -48,7 +48,4 @@ func _on_wait_timer_timeout():
 	
 @rpc("call_local")
 func destroy_self():
-	var explosion = load("res://scenes/vfx/explosion.tscn").instantiate()
-	explosion.position = position
-	get_parent().add_child(explosion)
 	queue_free()

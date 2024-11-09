@@ -138,17 +138,21 @@ energy = 0.4
 blend_mode = 1
 texture = SubResource("GradientTexture2D_eaw5t")
 
-[node name="DistortRect" type="TextureRect" parent="."]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+position = Vector2(-32, -32)
+copy_mode = 2
+
+[node name="DistortRect" type="TextureRect" parent="BackBufferCopy"]
 material = SubResource("ShaderMaterial_al01l")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = -36.0
+offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4

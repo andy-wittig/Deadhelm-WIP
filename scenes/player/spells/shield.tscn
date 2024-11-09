@@ -28,7 +28,7 @@ shader_parameter/strength = 0.09
 shader_parameter/noise = SubResource("NoiseTexture2D_5xy6c")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnrc1"]
-size = Vector2(11, 24)
+size = Vector2(11, 16)
 
 [sub_resource type="Gradient" id="Gradient_tvdib"]
 offsets = PackedFloat32Array(0, 0.142857, 0.534162, 1)
@@ -59,7 +59,7 @@ autostart = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(1, 0)
-amount = 25
+amount = 20
 lifetime = 1.5
 speed_scale = 0.5
 explosiveness = 0.1

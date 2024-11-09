@@ -14,10 +14,10 @@ func _ready():
 
 func _on_area_entered(area):
 	if (area.is_in_group("enemy_projectile")):
-		if (!GameManager.multiplayer_mode_enabled):
-			area.destroy_self()
-		elif (multiplayer.is_server()):
-			area.rpc("destroy_self")
+		var absorb_effect = load("res://scenes/vfx/absorb.tscn").instantiate()
+		absorb_effect.global_position = area.global_position
+		get_parent().add_child(absorb_effect)
+		area.destroy_self()
 
 func _on_destroy_timer_timeout():
 	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()

@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var radio_sprite = $RadioSprite
 @onready var music_particles = $MusicParticles
-@onready var boom_shader = $BoomShader
+@onready var boom_shader = $BackBufferCopy/BoomShader
 @onready var radio_station_audio = $RadioStationAudio
 
 func _process(delta):

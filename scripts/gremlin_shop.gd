@@ -30,9 +30,9 @@ var random := RandomNumberGenerator.new()
 	$ShopControl/ItemTexture3,
 ]
 @onready var soldout_rects = [
-	$ShopControl/SoldOutShader1,
-	$ShopControl/SoldOutShader2,
-	$ShopControl/SoldOutShader3,
+	$ShopControl/BackBufferCopy/SoldOutShader1,
+	$ShopControl/BackBufferCopy/SoldOutShader2,
+	$ShopControl/BackBufferCopy/SoldOutShader3,
 ]
 
 @onready var shop_sprite = $AnimatedSprite2D
