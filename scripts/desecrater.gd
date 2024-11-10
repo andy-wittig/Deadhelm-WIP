@@ -1,6 +1,5 @@
 extends Node2D
 
-@export_enum("left_facing", "right_facing") var facing_direction
 @export var detection_range := 128
 
 var attack_wait := false
@@ -12,15 +11,6 @@ var attack_direction : Vector2
 
 func _ready():
 	get_tree().call_group("unlock_enemy", "unlock_page", 1)
-	
-	if (facing_direction == 0):
-		ray_cast.target_position.x = -detection_range
-		desecrater_sprite.flip_h = false
-		attack_direction = Vector2(-1.0, 0.0)
-	elif (facing_direction == 1):
-		ray_cast.target_position.x = detection_range
-		desecrater_sprite.flip_h = true
-		attack_direction = Vector2(1.0, 0.0)
 
 func _process(_delta):
 	if (not attack_wait):
@@ -36,9 +26,10 @@ func _process(_delta):
 
 @rpc("call_local")
 func attack():
+	$CPUParticles2D.emitting = true
 	var blackhole = load("res://scenes/enemies/desecrater_blackhole.tscn").instantiate()
 	blackhole.global_position = global_position
-	blackhole.direction = attack_direction
+	blackhole.direction = Vector2(-scale.x, 0)
 	get_tree().get_root().get_node("game/Level").add_child(blackhole)
 
 func _on_attack_timer_timeout():

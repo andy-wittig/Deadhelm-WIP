@@ -1,7 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://y0thy4gylqg"]
+[gd_scene load_steps=14 format=3 uid="uid://y0thy4gylqg"]
 
 [ext_resource type="Script" path="res://scripts/desecrater.gd" id="1_bn7vt"]
 [ext_resource type="Texture2D" uid="uid://2itwy4ed42y4" path="res://assets/sprites/enemies/desecrater.png" id="1_f2gjn"]
+[ext_resource type="Texture2D" uid="uid://diy5hwvkm4jy" path="res://assets/sprites/vfx/dissipate.png" id="3_4wrys"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8fgl"]
+atlas = ExtResource("1_f2gjn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6mbe"]
+atlas = ExtResource("1_f2gjn")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgthx"]
+atlas = ExtResource("1_f2gjn")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mq1aw"]
+atlas = ExtResource("1_f2gjn")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4lldi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8fgl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6mbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgthx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mq1aw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
 
 [sub_resource type="Gradient" id="Gradient_niu5n"]
 interpolation_mode = 2
@@ -16,15 +53,31 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.75, 0.75)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7tp0m"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_qn0t6"]
+_data = [Vector2(0, 0.747253), 0.0, 0.0, 0, 0, Vector2(1, 0.494505), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_kfsgd"]
+offsets = PackedFloat32Array(0, 0.14, 0.566667, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.784314, 0, 0, 0, 0.784314, 1, 1, 1, 0)
+
 [node name="desecrater" type="Node2D"]
 z_index = 6
 script = ExtResource("1_bn7vt")
-facing_direction = 0
 
-[node name="DesecraterSprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_f2gjn")
+[node name="DesecraterSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4lldi")
+autoplay = "default"
+frame_progress = 0.213379
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 blend_mode = 1
 texture = SubResource("GradientTexture2D_jvcvn")
 
@@ -35,5 +88,27 @@ collision_mask = 2
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_7tp0m")
+position = Vector2(-4, 1)
+emitting = false
+lifetime = 1.5
+one_shot = true
+preprocess = 0.4
+texture = ExtResource("3_4wrys")
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 25.0
+orbit_velocity_min = -0.35
+orbit_velocity_max = 0.5
+damping_min = 10.0
+damping_max = 15.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_qn0t6")
+color_ramp = SubResource("Gradient_kfsgd")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

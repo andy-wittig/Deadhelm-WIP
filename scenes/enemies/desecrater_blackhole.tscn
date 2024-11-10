@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://b7n0d4png6rh5"]
+[gd_scene load_steps=19 format=3 uid="uid://b7n0d4png6rh5"]
 
 [ext_resource type="Script" path="res://scripts/desecrater_blackhole.gd" id="1_3ktav"]
 [ext_resource type="Texture2D" uid="uid://bjemmo2ns8q7n" path="res://assets/sprites/enemies/projectiles/desecrater blackhole.png" id="1_w0i00"]
 [ext_resource type="Shader" path="res://shaders/screen_distort.gdshader" id="3_0ww3p"]
+[ext_resource type="Texture2D" uid="uid://diy5hwvkm4jy" path="res://assets/sprites/vfx/dissipate.png" id="3_8jb33"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ahte"]
 radius = 6.0
@@ -48,13 +49,19 @@ _data = {
 "rotate": SubResource("Animation_1fwfe")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4pt7a"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="Curve" id="Curve_40vqe"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_2bbjm"]
-offsets = PackedFloat32Array(0, 0.471963, 1)
-colors = PackedColorArray(0.0627451, 0.0705882, 0.109804, 0, 0, 0, 0, 1, 0.0627451, 0.0705882, 0.109804, 0)
+offsets = PackedFloat32Array(0, 0.28, 0.726667, 1)
+colors = PackedColorArray(0.0627451, 0.0705882, 0.109804, 0, 0, 0, 0, 0.784314, 0, 0, 0, 0.784314, 0.0627451, 0.0705882, 0.109804, 0)
 
 [sub_resource type="Gradient" id="Gradient_cvkb7"]
 interpolation_mode = 2
@@ -112,26 +119,25 @@ libraries = {
 autoplay = "rotate"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-amount = 25
+z_index = -1
+material = SubResource("CanvasItemMaterial_4pt7a")
+amount = 20
 lifetime = 4.0
 speed_scale = 0.8
 randomness = 0.5
-lifetime_randomness = 0.5
 local_coords = true
+texture = ExtResource("3_8jb33")
 emission_shape = 1
-emission_sphere_radius = 10.0
+emission_sphere_radius = 12.0
 direction = Vector2(0, 0)
 gravity = Vector2(0, 0)
-orbit_velocity_min = 1.0
 orbit_velocity_max = 1.0
-damping_min = 15.0
-damping_max = 15.0
 angle_min = -720.0
 angle_max = 720.0
-scale_amount_min = 2.0
-scale_amount_max = 2.5
 scale_amount_curve = SubResource("Curve_40vqe")
 color_ramp = SubResource("Gradient_2bbjm")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.4
