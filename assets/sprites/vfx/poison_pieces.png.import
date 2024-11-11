@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjiqfes1xil3h"
-path="res://.godot/imported/desecrater.png-d86df0c29c92e9a3184e51aa665fc6c8.ctex"
+uid="uid://njeyukupnf3k"
+path="res://.godot/imported/poison_pieces.png-57366cbac8eab996d6dfac2c1471d444.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/desecrater.png"
-dest_files=["res://.godot/imported/desecrater.png-d86df0c29c92e9a3184e51aa665fc6c8.ctex"]
+source_file="res://assets/sprites/vfx/poison_pieces.png"
+dest_files=["res://.godot/imported/poison_pieces.png-57366cbac8eab996d6dfac2c1471d444.ctex"]
 
 [params]
 

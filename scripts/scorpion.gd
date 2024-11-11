@@ -1,14 +1,14 @@
 extends CharacterBody2D
 #Constants
-const SPEED := 16.0
+const SPEED := 42.0
 const JUMP_VELOCITY := -180.0
-const KNOCK_BACK_FORCE := 100.0
-const ROAM_CHANGE_WAIT := 4
-const ATTACK_RADIUS := 24
-const ATTACK_WAIT := 2
-const MAX_HEALTH := 100
+const KNOCK_BACK_FALLOFF := 40.0
+const ROAM_CHANGE_WAIT := 6
+const ATTACK_RADIUS := 64
+const ATTACK_WAIT := 1
+const MAX_HEALTH := 50
 #Movement Variables
-var rand_state_timer := RandomNumberGenerator.new()
+var rand_state_timer = RandomNumberGenerator.new()
 var direction: int
 var knock_back: Vector2
 #Attacking Variables
@@ -29,27 +29,22 @@ var state := state_type.MOVING
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@onready var chase_player_area = $ChasePlayerArea
-@onready var ray_cast_right = $RightRayCast
-@onready var ray_cast_left = $LeftRayCast
-@onready var golem_sprite = $GolemSprite
+@onready var chase_player = $ChasePlayer
+@onready var ray_cast_right = $RayCastRight
+@onready var ray_cast_left = $RayCastLeft
+@onready var animated_sprite = $AnimatedScorpionSprite
 @onready var animation_player = $AnimationPlayer
-@onready var hurt_player_area = $HurtPlayerArea
-@onready var attack_indicator = $AttackIndicator
 
 signal enemy_was_hurt
 	
 func _ready():
-	hurt_player_area.active = false
-	attack_indicator.visible = false
-	
 	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 		direction = [-1, 1].pick_random()
 		%RoamTimer.start(randi_range(2, ROAM_CHANGE_WAIT))
 
 func _process(_delta):
 	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-		for body in chase_player_area.get_overlapping_bodies():
+		for body in chase_player.get_overlapping_bodies():
 			if (body.is_in_group("players")):
 				if (!chasing_player):
 					player = body
@@ -72,18 +67,18 @@ func _physics_process(delta):
 
 	#flip sprite
 	if (direction > 0):
-		golem_sprite.flip_h = true
+		animated_sprite.flip_h = true
 	elif (direction < 0):
-		golem_sprite.flip_h = false
+		animated_sprite.flip_h = false
 		
 	match state:
 		state_type.IDLE:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				golem_sprite.play("idle")
+				animated_sprite.play("idle")
 				velocity.x = 0
 		state_type.MOVING:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				golem_sprite.play("run")
+				animated_sprite.play("run")
 				
 				if ray_cast_right.is_colliding():
 					direction = -1
@@ -93,60 +88,42 @@ func _physics_process(delta):
 				velocity.x = direction * SPEED
 		state_type.CHASE:
 			if ((multiplayer.is_server() || !GameManager.multiplayer_mode_enabled) && player != null):
-				#follow player
-				if abs(player.global_position.x - global_position.x) > 8:
-					if (player.global_position.x > global_position.x):
-						direction = 1
-					else:
-						direction = -1
-						
-				if ((ray_cast_right.is_colliding() || ray_cast_left.is_colliding())
+				if (player.global_position.x - global_position.x > 8):
+					direction = 1
+				elif (player.global_position.x - global_position.x < -8):
+					direction = -1
+					
+				if (player.global_position.distance_to(global_position) > ATTACK_RADIUS):
+					animated_sprite.play("run")
+					
+					if ((ray_cast_right.is_colliding() || ray_cast_left.is_colliding())
 					&& is_on_floor()):
 						velocity.y = JUMP_VELOCITY
 						
-				velocity.x = direction * SPEED
-						
-				if ((player.global_position.distance_to(global_position) <= ATTACK_RADIUS)
-				&& (player.global_position.y + 2 >= global_position.y)
-				&& is_on_floor()):
-					%CooldownTimer.start(ATTACK_WAIT)
-					golem_sprite.stop()
-					state = state_type.ATTACK
+					velocity.x = direction * SPEED
 				else:
-					golem_sprite.play("run")
-						
+					%CooldownTimer.start(ATTACK_WAIT)
+					
+					var poison_ball = load("res://scenes/enemies/poison_ball.tscn").instantiate()
+					poison_ball.direction = (player.player_center.global_position - $PoisonBallMarker.global_position).normalized()
+					poison_ball.global_position = $PoisonBallMarker.global_position
+					get_parent().add_child(poison_ball)
+					
+					state = state_type.ATTACK
 		state_type.ATTACK:
-			if (!attack_started):
-				golem_sprite.play("attack")
-				animation_player.play("attack_indicator")
-				attack_indicator.visible = true
-				attack_started = true
-				
-			if (golem_sprite.frame == 5 && player != null):
-				player.set_screen_shake(1.0)
-				$DustParticles.emitting = true
-				$ChunkParticles.emitting = true
-				attack_indicator.visible = false
-				hurt_player_area.active = true
-				
+			animated_sprite.play("attack")
 			velocity.x = 0
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
 	velocity += knock_back
-	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FORCE)
-	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FORCE)
+	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
+	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 		
 	move_and_slide()
 	
-func _on_golem_sprite_animation_finished():
-	if (attack_started):
-		golem_sprite.play("idle")
-		hurt_player_area.active = false
-	
 func _on_cooldown_timer_timeout():
-	attack_started = false
 	if (chasing_player):
 		state = state_type.CHASE
 	else:
@@ -168,19 +145,19 @@ func apply_knockback(other_pos: Vector2, force: float):
 @rpc("any_peer", "call_local")
 func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 	emit_signal("enemy_was_hurt")
-	apply_knockback(other_pos, force)
 	animation_player.play("hurt_blink")
+	apply_knockback(other_pos, force)
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
 	get_parent().add_child(impact)
-	impact.position = Vector2(position.x, position.y - 16)
+	impact.position = Vector2(position.x, position.y - 6)
 	
 	enemy_health -= damage
 	enemy_health = max(enemy_health, 0)
 	
 @rpc("call_local", "any_peer")
 func destroy_self():
-	get_tree().call_group("unlock_enemy", "unlock_page", 7)
+	get_tree().call_group("unlock_enemy", "unlock_page", 5)
 	
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	soul.position = position

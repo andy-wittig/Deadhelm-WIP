@@ -104,7 +104,7 @@ func _physics_process(delta):
 					direction = -1
 				
 				if (player.global_position.distance_to(global_position) > ATTACK_RADIUS):
-					if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
+					if ((ray_cast_right.is_colliding() || ray_cast_left.is_colliding())
 					&& is_on_floor()):
 						velocity.y = JUMP_VELOCITY
 						

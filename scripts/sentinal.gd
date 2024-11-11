@@ -81,8 +81,8 @@ func destroy_self():
 func attack(direction):
 	var rocket = load("res://scenes/enemies/sentinal_rocket.tscn").instantiate()
 	rocket.direction = direction
-	rocket.position = %"Rocket Marker".position
-	add_child(rocket)
+	rocket.global_position = %"Rocket Marker".global_position
+	get_parent().add_child(rocket)
 	
 func update_rand_direction():
 	var rand_x = init_position.x + randi_range(-ROAM_RANGE, ROAM_RANGE)

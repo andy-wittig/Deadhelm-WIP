@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjiqfes1xil3h"
-path="res://.godot/imported/desecrater.png-d86df0c29c92e9a3184e51aa665fc6c8.ctex"
+uid="uid://2itwy4ed42y4"
+path="res://.godot/imported/desecrater_idle.png-b78f38ed017ed27d8d47aa9625a64d87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemies/desecrater.png"
-dest_files=["res://.godot/imported/desecrater.png-d86df0c29c92e9a3184e51aa665fc6c8.ctex"]
+source_file="res://assets/sprites/enemies/desecrater_idle.png"
+dest_files=["res://.godot/imported/desecrater_idle.png-b78f38ed017ed27d8d47aa9625a64d87.ctex"]
 
 [params]
 

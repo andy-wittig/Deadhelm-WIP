@@ -6,7 +6,7 @@ const KNOCK_BACK_FALLOFF := 10.0
 const ROAM_CHANGE_WAIT := 6
 const ATTACK_RADIUS := 20
 const ATTACK_WAIT := 2
-const MAX_HEALTH := 50
+const MAX_HEALTH := 65
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
 var direction: int
@@ -102,7 +102,7 @@ func _physics_process(delta):
 					hurt_player_area.active = false
 					animated_sprite.play("run")
 					
-					if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
+					if ((ray_cast_right.is_colliding() || ray_cast_left.is_colliding())
 					&& is_on_floor()):
 						velocity.y = JUMP_VELOCITY
 						

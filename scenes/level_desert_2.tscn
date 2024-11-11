@@ -1,0 +1,162 @@
+[gd_scene load_steps=20 format=3 uid="uid://bn0kg8xksinyc"]
+
+[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_amt72"]
+[ext_resource type="Texture2D" uid="uid://ubox7asqsalj" path="res://assets/sprites/UI/dunes background.png" id="2_8ufxr"]
+[ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_grftt"]
+[ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="4_6rwoy"]
+[ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="5_xfffk"]
+[ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="6_onnn4"]
+[ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="7_l83nc"]
+[ext_resource type="PackedScene" uid="uid://dyruqot1bthjn" path="res://scenes/level_cave_1.tscn" id="8_bfguw"]
+[ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="8_mevk6"]
+[ext_resource type="PackedScene" uid="uid://mk8x6lo0ft6t" path="res://scenes/level_objects/chest.tscn" id="10_6isk1"]
+[ext_resource type="PackedScene" uid="uid://j46c37k23ijy" path="res://scenes/level_objects/blacksmith.tscn" id="11_lmg64"]
+[ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="12_th1j4"]
+[ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="13_bgpm5"]
+[ext_resource type="PackedScene" uid="uid://bvgm67ftgfnlp" path="res://scenes/level_objects/stone_spike.tscn" id="14_pot2m"]
+[ext_resource type="PackedScene" uid="uid://oq2a4voisjg1" path="res://scenes/level_objects/spawner.tscn" id="15_8r67b"]
+[ext_resource type="PackedScene" uid="uid://be4kmjavgki6v" path="res://scenes/enemies/scorpion.tscn" id="15_h7yf2"]
+[ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="17_i64vm"]
+
+[sub_resource type="Gradient" id="Gradient_s5sk3"]
+colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xkrum"]
+gradient = SubResource("Gradient_s5sk3")
+fill_to = Vector2(0, 1)
+
+[node name="level_name" type="Node2D"]
+script = ExtResource("1_amt72")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player/multiplayer_player.tscn")
+spawn_path = NodePath("../players")
+spawn_limit = 2
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="SkyGradient" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_xkrum")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
+layer = -99
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxMountain" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_offset = Vector2(0, -108)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Mountains" type="TextureRect" parent="Background/ParallaxBackground/ParallaxMountain"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("2_8ufxr")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ParallaxSmallClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_offset = Vector2(0, -216)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_grftt")
+scroll_speed = 8.0
+
+[node name="SmallClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxSmallClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("4_6rwoy")
+stretch_mode = 1
+
+[node name="ParallaxLargeClouds" type="ParallaxLayer" parent="Background/ParallaxBackground"]
+motion_scale = Vector2(1.2, 1.2)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_grftt")
+scroll_speed = 4.0
+
+[node name="LargeClouds" type="TextureRect" parent="Background/ParallaxBackground/ParallaxLargeClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("5_xfffk")
+stretch_mode = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, 8)
+tile_set = ExtResource("6_onnn4")
+format = 2
+layer_0/name = "foreground"
+layer_0/tile_data = PackedInt32Array(-983028, 1114113, 1, -983029, 1114113, 1, -983030, 1114113, 1, -983027, 1114113, 1, -983026, 1114113, 1, -983031, 1114113, 1, -983032, 1114113, 1, -983033, 1114113, 1, -983034, 1114113, 1, -983035, 1114113, 1, -983037, 1114113, 1, -983036, 1114113, 1, -983021, 1114113, 1, -983025, 1114113, 1, -983024, 1114113, 1, -983023, 1114113, 1, -983022, 1114113, 1, -1245157, 1114113, 1, -1179621, 1114113, 1, -851939, 1114113, 1, -851938, 1114113, 1, -851937, 1114113, 1, -851936, 1114113, 1, -524262, 1114113, 1, -1114085, 1114113, 1, -1048549, 1114113, 1, -524261, 1114113, 1, -1048548, 1114113, 1, -524260, 1114113, 1, -524259, 1114113, 1, -1245154, 1114113, 1, -524258, 1114113, 1, -1245153, 1114113, 1, -524257, 1114113, 1, -1245152, 1114113, 1, -524256, 1114113, 1, -524255, 1114113, 1, -524254, 1114113, 1, -1048547, 1114113, 1, -917472, 1114113, 1, -983008, 1114113, 1, -1048544, 1114113, 1, -1114080, 1114113, 1, -1179616, 1114113, 1, -1310693, 1114113, 1, -1376229, 1114113, 1, -1441765, 1114113, 1, -1441764, 1114113, 1, -1441763, 1114113, 1, -1441762, 1114113, 1, -1441761, 1114113, 1, -1441760, 1114113, 1, -983019, 1114113, 1, -917483, 1114113, 1, -851947, 1114113, 1, -786411, 1114113, 1, -720875, 1114113, 1, -655339, 1114113, 1, -589803, 1114113, 1, -524267, 1114113, 1, -983018, 1114113, 1, -524266, 1114113, 1, -983017, 917505, 6, -917481, 917505, 6, -851945, 917505, 6, -786409, 917505, 6, -720873, 917505, 6, -524265, 1114113, 1, -524264, 1114113, 1, -524263, 1114113, 1, -655337, 917505, 6, -720871, 1114113, 1, -786407, 1114113, 1, -851943, 1114113, 1, -917479, 1114113, 1, -983015, 1114113, 1, -983016, 1114113, 1, -983020, 1114113, 1, -1114079, 1114113, 1, -1114078, 1114113, 1, -1114077, 1114113, 1, -1179613, 1114113, 1, -1245149, 1114113, 1, -1245148, 1114113, 1, -1441759, 1114113, 1, -1441758, 1114113, 1, -1441757, 1114113, 1, -1441756, 1114113, 1, -1441755, 1114113, 1, -1245147, 1114113, 1, -983038, 1114113, 1, -1048576, 1114113, 1, -1114112, 1114113, 1, -1114110, 1114113, 1, -1048574, 1114113, 1, -983040, 1114113, 1, -1114111, 1114113, 1)
+layer_1/name = "midground"
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "background"
+layer_2/modulate = Color(0.54902, 0.470588, 0.647059, 1)
+layer_2/z_index = -2
+layer_2/tile_data = PackedInt32Array()
+
+[node name="portal_gate" parent="." instance=ExtResource("7_l83nc")]
+position = Vector2(24, -264)
+next_level = ExtResource("8_bfguw")
+
+[node name="players" type="Node2D" parent="."]
+position = Vector2(64, -232)
+
+[node name="player" parent="players" instance=ExtResource("8_mevk6")]
+z_index = 5
+
+[node name="spawn_point" type="Marker2D" parent="."]
+position = Vector2(64, -232)
+
+[node name="chest" parent="." instance=ExtResource("10_6isk1")]
+position = Vector2(176, -232)
+coin_amount = 15
+
+[node name="blacksmith" parent="." instance=ExtResource("11_lmg64")]
+position = Vector2(208, -232)
+blacksmith_listings = Array[String](["double_jump", "double_jump", "double_jump"])
+
+[node name="tome" parent="." instance=ExtResource("12_th1j4")]
+position = Vector2(96, -240)
+spell_type = "bow"
+
+[node name="tome2" parent="." instance=ExtResource("12_th1j4")]
+position = Vector2(112, -240)
+spell_type = "flame"
+
+[node name="tome3" parent="." instance=ExtResource("12_th1j4")]
+position = Vector2(128, -240)
+spell_type = "meteor"
+
+[node name="ladder" parent="." instance=ExtResource("13_bgpm5")]
+position = Vector2(376, -184)
+scale = Vector2(1, 6)
+
+[node name="stone_spike" parent="." instance=ExtResource("14_pot2m")]
+position = Vector2(536, -264)
+
+[node name="stone_spike2" parent="." instance=ExtResource("14_pot2m")]
+position = Vector2(552, -264)
+
+[node name="spawner" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8r67b")]
+position = Vector2(304, -232)
+spawn_enemy_type = Array[PackedScene]([ExtResource("15_h7yf2")])
+tile_map = NodePath("../TileMap")
+spawn_range = 2
+max_spawn_uses = 1000
+
+[node name="spawner2" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8r67b")]
+position = Vector2(344, -232)
+spawn_enemy_type = Array[PackedScene]([ExtResource("17_i64vm")])
+tile_map = NodePath("../TileMap")
+spawn_range = 2
+max_spawn_uses = 1000

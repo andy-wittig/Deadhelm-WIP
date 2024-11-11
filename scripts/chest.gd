@@ -10,8 +10,7 @@ var chest_open := false
 func _process(delta):
 	chest_closed_sprite.material.set_shader_parameter("enabled", false)
 	for body in get_overlapping_bodies():
-		if (body.get_name() == "player"
-		|| body.player_id == multiplayer.get_unique_id()):
+		if (body.is_in_group("players")):
 			chest_closed_sprite.material.set_shader_parameter("enabled", true)
 			if Input.is_action_just_pressed("pickup") && not chest_open:
 				if (!GameManager.multiplayer_mode_enabled):

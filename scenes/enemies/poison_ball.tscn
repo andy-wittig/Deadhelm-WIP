@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7vbqxao0wl7i"]
+
+[ext_resource type="Script" path="res://scripts/poison_ball.gd" id="1_pktwp"]
+[ext_resource type="Texture2D" uid="uid://bi0tsotbvdoql" path="res://assets/sprites/enemies/scorpion/scorpion_poison_ball.png" id="2_per40"]
+[ext_resource type="Texture2D" uid="uid://njeyukupnf3k" path="res://assets/sprites/vfx/poison_pieces.png" id="3_waixn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_84edy"]
+radius = 4.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e6ubm"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_uj8qt"]
+_data = [Vector2(0, 0.747253), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_mkktk"]
+offsets = PackedFloat32Array(0.193333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="poison_ball" type="Area2D" groups=["enemy_projectile"]]
+z_index = 10
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_pktwp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_84edy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_per40")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="TrailParticle" type="CPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_e6ubm")
+amount = 20
+lifetime = 0.6
+speed_scale = 0.6
+explosiveness = 0.1
+lifetime_randomness = 0.6
+texture = ExtResource("3_waixn")
+emission_shape = 1
+emission_sphere_radius = 4.0
+gravity = Vector2(-100, 0)
+initial_velocity_max = 8.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+scale_amount_curve = SubResource("Curve_uj8qt")
+color_ramp = SubResource("Gradient_mkktk")
+anim_offset_max = 1.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

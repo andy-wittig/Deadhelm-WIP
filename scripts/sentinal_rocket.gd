@@ -7,8 +7,8 @@ const PLAYER_DAMAGE := 10
 var direction: Vector2
 
 func _process(delta):
-	self.rotation = direction.angle()
-	position += direction * SPEED * delta
+	rotation = direction.angle()
+	global_position += direction * SPEED * delta
 
 @rpc("call_local")
 func destroy_self():

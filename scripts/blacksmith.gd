@@ -62,7 +62,7 @@ func _process(delta):
 					if (player.double_jump_active):
 						blacksmith_items[blacksmith_listings[i]][3] = false
 			
-			if (player.coins_collected <= cost):
+			if (player.coins_collected < cost):
 				blacksmith_items[blacksmith_listings[i]][3] = false
 				
 			if (blacksmith_items[blacksmith_listings[i]][3]):

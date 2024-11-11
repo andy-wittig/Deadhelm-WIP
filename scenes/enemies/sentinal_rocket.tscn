@@ -1,28 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvlciayh0hfyd"]
+[gd_scene load_steps=8 format=3 uid="uid://bvlciayh0hfyd"]
 
 [ext_resource type="Script" path="res://scripts/sentinal_rocket.gd" id="1_wamim"]
 [ext_resource type="Texture2D" uid="uid://bp6d6qaa1f1wj" path="res://assets/sprites/enemies/projectiles/sentinal rocket.png" id="2_50onj"]
+[ext_resource type="Texture2D" uid="uid://smaw6s5mex0t" path="res://assets/sprites/vfx/smoke_effect.png" id="3_r0tbt"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_84edy"]
-radius = 6.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j3b1m"]
+radius = 2.0
+height = 14.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ggjnp"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_uj8qt"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.69616), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_mkktk"]
-colors = PackedColorArray(0.301961, 0.207843, 0.2, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.433333, 1)
+colors = PackedColorArray(1, 1, 1, 0.882353, 1, 1, 1, 0)
 
 [node name="sentinal_rocket" type="Area2D" groups=["enemy_projectile"]]
+z_index = 10
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_wamim")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_84edy")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_j3b1m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 10
 rotation = 3.14159
 texture = ExtResource("2_50onj")
 
@@ -31,19 +41,23 @@ wait_time = 4.0
 autostart = true
 
 [node name="TrailParticle" type="CPUParticles2D" parent="."]
-amount = 50
+z_index = -1
+material = SubResource("CanvasItemMaterial_ggjnp")
+amount = 30
 lifetime = 0.4
 speed_scale = 0.6
 explosiveness = 0.1
 lifetime_randomness = 0.6
+texture = ExtResource("3_r0tbt")
+emission_shape = 1
+emission_sphere_radius = 2.0
 gravity = Vector2(-100, 0)
 initial_velocity_max = 8.0
 orbit_velocity_min = -0.2
 orbit_velocity_max = 0.2
-scale_amount_min = 1.5
-scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_uj8qt")
 color_ramp = SubResource("Gradient_mkktk")
+anim_offset_max = 1.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

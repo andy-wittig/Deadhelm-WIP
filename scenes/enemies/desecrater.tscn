@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://y0thy4gylqg"]
 
 [ext_resource type="Script" path="res://scripts/desecrater.gd" id="1_bn7vt"]
-[ext_resource type="Texture2D" uid="uid://2itwy4ed42y4" path="res://assets/sprites/enemies/desecrater.png" id="1_f2gjn"]
+[ext_resource type="Texture2D" uid="uid://2itwy4ed42y4" path="res://assets/sprites/enemies/desecrater_idle.png" id="1_f2gjn"]
 [ext_resource type="Texture2D" uid="uid://diy5hwvkm4jy" path="res://assets/sprites/vfx/dissipate.png" id="3_4wrys"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i8fgl"]
