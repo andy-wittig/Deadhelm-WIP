@@ -99,10 +99,8 @@ func _physics_process(delta):
 					
 				if (!is_on_floor()):
 					animated_sprite.play("leap")
-					velocity.x = direction * SPEED
 				else:
 					animated_sprite.play("idle")
-					velocity.x = move_toward(velocity.x, 0, SPEED)
 		state_type.CHASE:
 			if ((multiplayer.is_server() || !GameManager.multiplayer_mode_enabled) && player != null):
 				if (player.global_position.x - global_position.x > 8):
@@ -117,17 +115,11 @@ func _physics_process(delta):
 						jump_timer = JUMP_WAIT
 					else:
 						jump_timer -= delta
-					
-					#if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
-					#&& is_on_floor()):
-						#velocity.y = JUMP_VELOCITY
 						
 					if (!is_on_floor()):
 						animated_sprite.play("leap")
-						velocity.x = direction * SPEED
 					else:
 						animated_sprite.play("idle")
-						velocity.x = move_toward(velocity.x, 0, SPEED)
 				else:
 					state = state_type.ATTACK
 		state_type.ATTACK:
@@ -146,6 +138,11 @@ func _physics_process(delta):
 			velocity.y += gravity * HANG_TIME_MULTIPLIER * delta
 		else:
 			velocity.y += gravity * delta
+			
+	if (!is_on_floor()):
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	velocity += knock_back
 	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_SPEED)

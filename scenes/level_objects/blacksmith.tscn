@@ -1,6 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://j46c37k23ijy"]
+[gd_scene load_steps=34 format=3 uid="uid://j46c37k23ijy"]
 
+[ext_resource type="Script" path="res://scripts/blacksmith.gd" id="1_5m3gt"]
 [ext_resource type="Texture2D" uid="uid://c3thu02tav6qw" path="res://assets/sprites/level_objects/blacksmith_sheet.png" id="1_ecw4u"]
+[ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="2_kn40m"]
+[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_w7mir"]
+[ext_resource type="Texture2D" uid="uid://cx806jtspcq0l" path="res://assets/sprites/UI/shop/blacksmith_background.png" id="3_3tb8k"]
+[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_fx6vr"]
+[ext_resource type="Shader" path="res://shaders/black_and_white.gdshader" id="5_ksk32"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fe5ug"]
+resource_local_to_scene = true
+shader = ExtResource("2_kn40m")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/enabled = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1a8su"]
 atlas = ExtResource("1_ecw4u")
@@ -55,9 +67,160 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.277778, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fy251"]
+size = Vector2(46, 16)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bc8s7"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvmuj"]
+bg_color = Color(0.368627, 0.356863, 0.54902, 0.588235)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ebuqc"]
+light_mode = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2y6y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62f8v"]
+bg_color = Color(0.690196, 0.654902, 0.721569, 0.686275)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ltppu"]
+bg_color = Color(0.368627, 0.356863, 0.54902, 0.686275)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0aoy"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73pvg"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ty16h"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ukgyn"]
+shader = ExtResource("5_ksk32")
+shader_parameter/tint = null
+shader_parameter/enabled = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_machw"]
+shader = ExtResource("5_ksk32")
+shader_parameter/tint = null
+shader_parameter/enabled = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0kagb"]
+shader = ExtResource("5_ksk32")
+shader_parameter/tint = null
+shader_parameter/enabled = false
+
+[sub_resource type="Animation" id="Animation_hkmag"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlacksmithControl:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlacksmithControl:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, -80)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BlacksmithControl:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mglit"]
+resource_name = "open_menu"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlacksmithControl:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(80, 0), Vector2(80, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlacksmithControl:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-40, -48), Vector2(-40, -80)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BlacksmithControl:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r3mmh"]
+_data = {
+"RESET": SubResource("Animation_hkmag"),
+"open_menu": SubResource("Animation_mglit")
+}
+
 [node name="blacksmith" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_5m3gt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_fe5ug")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_xmlnv")
 autoplay = "default"
@@ -87,3 +250,187 @@ angle_max = 360.0
 scale_amount_curve = SubResource("Curve_u4ymv")
 color_ramp = SubResource("Gradient_8ch5r")
 anim_offset_max = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_fy251")
+
+[node name="ItemDescriptionLabel" type="Label" parent="."]
+visible = false
+z_index = 100
+material = SubResource("CanvasItemMaterial_bc8s7")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -55.0
+offset_top = -48.0
+offset_right = 55.0
+offset_bottom = -40.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_w7mir")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_uvmuj")
+text = "item descriptions"
+horizontal_alignment = 1
+
+[node name="BlacksmithControl" type="Control" parent="."]
+z_index = 100
+material = SubResource("CanvasItemMaterial_ebuqc")
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -40.0
+offset_top = -80.0
+offset_right = 40.0
+offset_bottom = -48.0
+
+[node name="ShopMenuSprite" type="Sprite2D" parent="BlacksmithControl"]
+clip_children = 2
+use_parent_material = true
+position = Vector2(40, 16)
+texture = ExtResource("3_3tb8k")
+
+[node name="PriceLabel1" type="Label" parent="BlacksmithControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 31.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("4_fx6vr")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+
+[node name="PriceLabel2" type="Label" parent="BlacksmithControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 30.0
+offset_top = 21.0
+offset_right = 51.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("4_fx6vr")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+
+[node name="PriceLabel3" type="Label" parent="BlacksmithControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 50.0
+offset_top = 21.0
+offset_right = 71.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("4_fx6vr")
+theme_override_font_sizes/font_size = 8
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="ItemTexture1" type="TextureRect" parent="BlacksmithControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 12.0
+offset_top = 4.0
+offset_right = 28.0
+offset_bottom = 20.0
+
+[node name="ItemTexture2" type="TextureRect" parent="BlacksmithControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 4.0
+offset_right = 48.0
+offset_bottom = 20.0
+
+[node name="ItemTexture3" type="TextureRect" parent="BlacksmithControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 52.0
+offset_top = 4.0
+offset_right = 68.0
+offset_bottom = 20.0
+
+[node name="PurchaseButton1" type="Button" parent="BlacksmithControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 11.0
+offset_top = 3.0
+offset_right = 29.0
+offset_bottom = 21.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2y6y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_62f8v")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ltppu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_m0aoy")
+
+[node name="PurchaseButton2" type="Button" parent="BlacksmithControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 31.0
+offset_top = 3.0
+offset_right = 49.0
+offset_bottom = 21.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2y6y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_62f8v")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ltppu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_73pvg")
+
+[node name="PurchaseButton3" type="Button" parent="BlacksmithControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 51.0
+offset_top = 3.0
+offset_right = 69.0
+offset_bottom = 21.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2y6y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_62f8v")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ltppu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ty16h")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="BlacksmithControl"]
+position = Vector2(40, 12.5)
+scale = Vector2(0.29, 0.095)
+copy_mode = 2
+
+[node name="SoldOutShader1" type="ColorRect" parent="BlacksmithControl/BackBufferCopy"]
+material = SubResource("ShaderMaterial_ukgyn")
+offset_left = -100.0
+offset_top = -100.0
+offset_right = -38.0
+offset_bottom = 100.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="SoldOutShader2" type="ColorRect" parent="BlacksmithControl/BackBufferCopy"]
+material = SubResource("ShaderMaterial_machw")
+offset_left = -31.0
+offset_top = -100.0
+offset_right = 31.0
+offset_bottom = 100.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="SoldOutShader3" type="ColorRect" parent="BlacksmithControl/BackBufferCopy"]
+material = SubResource("ShaderMaterial_0kagb")
+offset_left = 38.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r3mmh")
+}
+
+[connection signal="mouse_entered" from="BlacksmithControl/PurchaseButton1" to="." method="_on_purchase_button_1_mouse_entered"]
+[connection signal="pressed" from="BlacksmithControl/PurchaseButton1" to="." method="_on_purchase_button_1_pressed"]
+[connection signal="mouse_entered" from="BlacksmithControl/PurchaseButton2" to="." method="_on_purchase_button_2_mouse_entered"]
+[connection signal="pressed" from="BlacksmithControl/PurchaseButton2" to="." method="_on_purchase_button_2_pressed"]
+[connection signal="mouse_entered" from="BlacksmithControl/PurchaseButton3" to="." method="_on_purchase_button_3_mouse_entered"]
+[connection signal="pressed" from="BlacksmithControl/PurchaseButton3" to="." method="_on_purchase_button_3_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

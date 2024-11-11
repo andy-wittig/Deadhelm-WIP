@@ -39,6 +39,7 @@ enum state_type {SITTING, MOVING, CLIMBING, ZIPLINE}
 var state := state_type.SITTING
 var spell_direction: Vector2
 var double_jump_active := false
+var double_jump := 0
 #var facing_direction := 1
 #Player Inventory Variables
 var selected_slot_pos := 0
@@ -86,6 +87,7 @@ func get_player_info():
 		"max_health" : max_health,
 		"player_lives" : player_lives,
 		"coins_collected" : coins_collected,
+		"double_jump_active" : double_jump_active,
 		"slot_1" : inventory["slot_1"].get_slot_item(),
 		"slot_2" : inventory["slot_2"].get_slot_item(),
 		"slot_3" : inventory["slot_3"].get_slot_item(),
@@ -259,6 +261,7 @@ func _physics_process(delta):
 			#handle gravity and jumping
 			if is_on_floor():
 				air_time = 0
+				double_jump = 0
 				coyote_time_counter = COYOTE_TIME
 			else:
 				air_time += delta
@@ -275,8 +278,14 @@ func _physics_process(delta):
 				jump_buffer_time = JUMP_BUFFER
 			else:
 				jump_buffer_time -= delta
-				
-			if (jump_buffer_time > 0 && coyote_time_counter > 0):
+			
+			if (double_jump_active):
+				if (jump_buffer_time > 0 && double_jump < 2):
+					double_jump += 1
+					dust_particles.emitting = true
+					velocity.y = JUMP_VELOCITY
+					jump_buffer_time = 0
+			elif (jump_buffer_time > 0 && coyote_time_counter > 0):
 				dust_particles.emitting = true
 				velocity.y = JUMP_VELOCITY
 				jump_buffer_time = 0
