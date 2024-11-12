@@ -21,3 +21,6 @@ func _on_return_button_pressed():
 	game.end_level()
 	menu_layer.current_menu = menu_layer.menu.MAIN
 	
+func _on_retry_button_pressed():
+	get_tree().call_group("players", "reset_player")
+	menu_layer.current_menu = menu_layer.menu.HIDDEN

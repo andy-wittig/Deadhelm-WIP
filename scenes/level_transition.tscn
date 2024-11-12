@@ -96,7 +96,7 @@ _data = {
 "fade_in": SubResource("Animation_ncjqg")
 }
 
-[node name="level_transition" type="CanvasLayer"]
+[node name="level_transition" type="CanvasLayer" groups=["transition"]]
 script = ExtResource("1_7bd5d")
 
 [node name="TextureRect" type="TextureRect" parent="."]

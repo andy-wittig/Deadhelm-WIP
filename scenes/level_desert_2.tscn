@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bn0kg8xksinyc"]
+[gd_scene load_steps=22 format=3 uid="uid://bn0kg8xksinyc"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_amt72"]
 [ext_resource type="Texture2D" uid="uid://ubox7asqsalj" path="res://assets/sprites/UI/dunes background.png" id="2_8ufxr"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://be4kmjavgki6v" path="res://scenes/enemies/scorpion.tscn" id="15_h7yf2"]
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="17_i64vm"]
 [ext_resource type="PackedScene" uid="uid://dyutn277xh3h5" path="res://scenes/level_desert_1.tscn" id="18_ugdt5"]
+[ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="19_sderi"]
 
 [sub_resource type="Gradient" id="Gradient_s5sk3"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
@@ -165,3 +166,9 @@ max_spawn_uses = 1000
 [node name="portal_gate2" parent="." instance=ExtResource("7_l83nc")]
 position = Vector2(80, -168)
 next_level = ExtResource("18_ugdt5")
+
+[node name="HurtPlayerArea" parent="." instance=ExtResource("19_sderi")]
+position = Vector2(24, -272)
+damage = 100
+attack_wait = 0.0
+knock_back_force = 0

@@ -157,10 +157,12 @@ func _process(delta):
 				
 	if (player_health <= 0 && player_lives > 0):
 		if (!marked_dead):
-			player_lives -= 1
 			global_position = get_tree().get_root().get_node("game/Level/%s/spawn_point" % GameManager.current_level).global_position
-			$level_transition.get_node("AnimationPlayer").play("fade_in")
+			player_lives -= 1
 			player_health = max_health
+			
+			if (player_lives > 0): 
+				get_tree().call_group("transition", "player_death")
 			
 	#set spell spawn marker position
 	var dial_center = player_center.global_position
@@ -393,6 +395,18 @@ func disable_player():
 	visible = false
 	#$Camera2D.enabled = false
 	marked_dead = true
+	
+func reset_player():
+	set_process(true)
+	set_physics_process(true)
+	player_collider.set_deferred("disabled", false)
+	visible = true
+	marked_dead = false
+	
+	global_position = get_tree().get_root().get_node("game/Level/%s/spawn_point" % GameManager.current_level).global_position
+	$level_transition.get_node("AnimationPlayer").play("fade_in")
+	player_lives = MAX_LIVES
+	player_health = max_health
 	
 #INVENTORY FUNCTIONS
 func inventory_scrolling(scroll_amount: int):
