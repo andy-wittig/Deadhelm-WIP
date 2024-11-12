@@ -65,14 +65,14 @@ ADAM MCKOWN
 [u][b]MUSIC[/b][/u]
 
 ADAM MCKOWN - MAIN OST
-JUDE LOPEZ
+JUDE LOPEZ - DESERT JAZZ
 
 [u][b]PLAY TESTERS[/b][/u]
 
 ZACHARY DAVIS
+ADAM MCKOWN
+JUDE LOPEZ
 EMA WORTHEN
-SARAH NGUYEN
-EDEN
 [/center]"
 
 [node name="backButton" type="Button" parent="VBoxContainer"]

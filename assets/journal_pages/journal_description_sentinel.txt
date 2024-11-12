@@ -1,7 +1,7 @@
 [center]
 [b][u]DESCRIPTION[/u][/b]
 
-Sentinel
+Sentinal
 [img={width%}128{height%}]res://assets/sprites/enemies/sentinel/sentinal.png[/img]
 
 Enemy description goes here.

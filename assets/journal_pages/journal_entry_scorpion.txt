@@ -1,5 +1,5 @@
 [center]
 [b][u]JOURNAL[/u][/b]
 
-Sentinal lore goes here.
+Scorpion lore goes here.
 [/center]

@@ -4,21 +4,23 @@ extends Control
 
 var page_dict = {
 	0 : ["res://assets/journal_pages/journal_entry_blasphemer.txt",
-	"res://assets/journal_pages/journal_description_blasphemer.txt", true],
+	"res://assets/journal_pages/journal_description_blasphemer.txt", false],
 	1 : ["res://assets/journal_pages/journal_entry_desecrator.txt",
-	"res://assets/journal_pages/journal_description_desecrator.txt", true],
+	"res://assets/journal_pages/journal_description_desecrator.txt", false],
 	2 : ["res://assets/journal_pages/journal_entry_bombshell.txt",
-	"res://assets/journal_pages/journal_description_bombshell.txt", true],
+	"res://assets/journal_pages/journal_description_bombshell.txt", false],
 	3 : ["res://assets/journal_pages/journal_entry_bomb_frog.txt",
-	"res://assets/journal_pages/journal_description_bomb_frog.txt", true],
+	"res://assets/journal_pages/journal_description_bomb_frog.txt", false],
 	4 : ["res://assets/journal_pages/journal_entry_sentinel.txt",
-	"res://assets/journal_pages/journal_description_sentinel.txt", true],
+	"res://assets/journal_pages/journal_description_sentinel.txt", false],
 	5 : ["res://assets/journal_pages/journal_entry_fester.txt",
-	"res://assets/journal_pages/journal_description_fester.txt", true],
+	"res://assets/journal_pages/journal_description_fester.txt", false],
 	6 : ["res://assets/journal_pages/journal_entry_irritus.txt",
-	"res://assets/journal_pages/journal_description_irritus.txt", true],
+	"res://assets/journal_pages/journal_description_irritus.txt", false],
 	7 : ["res://assets/journal_pages/journal_entry_golem.txt",
-	"res://assets/journal_pages/journal_description_golem.txt", true],
+	"res://assets/journal_pages/journal_description_golem.txt", false],
+	8 : ["res://assets/journal_pages/journal_entry_scorpion.txt",
+	"res://assets/journal_pages/journal_description_scorpion.txt", false],
 }
 
 var locked_page := "

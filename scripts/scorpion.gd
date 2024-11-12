@@ -165,7 +165,7 @@ func hurt_enemy(damage: int, other_pos: Vector2, force: float):
 	
 @rpc("call_local", "any_peer")
 func destroy_self():
-	get_tree().call_group("unlock_enemy", "unlock_page", 5)
+	get_tree().call_group("unlock_enemy", "unlock_page", 8)
 	
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	soul.position = position

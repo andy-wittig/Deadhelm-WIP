@@ -195,3 +195,8 @@ coin_amount = 2
 
 [node name="ladder" parent="." instance=ExtResource("18_xe535")]
 position = Vector2(344, -544)
+
+[node name="dialog_area3" parent="." instance=ExtResource("17_ctpbg")]
+position = Vector2(360, -280)
+message = "Press {button} to open your journal and read about enemies you've encountered."
+button_hint = "open_journal"

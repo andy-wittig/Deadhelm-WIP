@@ -6,7 +6,7 @@ var menu_opened := false
 var player: CharacterBody2D
 
 @onready var blacksmith_items = {
-	"double_jump" : ["res://assets/sprites/UI/shop/double_jump.png", 15, "provides a second jump ability", false],
+	"double_jump" : ["res://assets/sprites/UI/shop/double_jump.png", 20, "provides a second jump ability", false],
 }
 @onready var price_labels := [
 	$BlacksmithControl/PriceLabel1,

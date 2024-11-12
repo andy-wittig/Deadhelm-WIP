@@ -69,5 +69,5 @@ func check_enemy_spawnable():
 
 func _on_spawn_wait_timer_timeout():
 		spawned_count += 1
-		check_enemy_spawnable()
 		spawn_enemy(spawn_pos)
+		check_enemy_spawnable()

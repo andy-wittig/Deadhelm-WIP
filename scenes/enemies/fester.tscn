@@ -12,8 +12,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ji213"]
 resource_local_to_scene = true
 shader = ExtResource("2_myen5")
-shader_parameter/enabled = true
-shader_parameter/tint = Color(0.92549, 0.152941, 0.247059, 1)
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i7fxb"]
 atlas = ExtResource("3_l4ax2")
@@ -247,12 +247,12 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ps2ld")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -8)
 target_position = Vector2(13, 0)
 collision_mask = 16
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -8)
 target_position = Vector2(-13, 0)
 collision_mask = 16
 
@@ -264,8 +264,6 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_5jea4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-deterministic = true
-reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_31xmi")
 }

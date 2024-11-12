@@ -9,17 +9,18 @@ const MESSAGE_SPEED_MULTIPLIER := 0.6
 
 func _ready():
 	$Control/MessageLabel.visible = false
+
+func start_message():
+	$AnimationPlayer.play("RESET")
+	
 	if (button_hint != ""):
 		$Control/MessageLabel.text = message.format({"button": 
 			InputMap.action_get_events(button_hint)[0].as_text().replace(" (Physical)", "")})
 	else:
 		$Control/MessageLabel.text = message
-
-func start_message():
-	$AnimationPlayer.play("RESET")
+	
 	$Control/MessageLabel.visible = true
 	
-	print ($Control/MessageLabel.visible)
 	var tween: Tween = create_tween()
 	var text_length = $Control/MessageLabel.get_total_character_count()
 	tween.tween_property($Control/MessageLabel, "visible_ratio", 1.0, sqrt(text_length) * MESSAGE_SPEED_MULTIPLIER).from(0.0)

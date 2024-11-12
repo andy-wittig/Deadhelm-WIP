@@ -9,10 +9,10 @@ var controls_list = [
 	"climb",
 	"pickup",
 	"drop_item",
+	"open_journal",
 	"scroll_up",
 	"scroll_down",
 	"left_click",
-	"show_chat",
 	"in-game_menu",
 ]
 
@@ -48,7 +48,7 @@ func _ready():
 		button.add_theme_font_override("font", load("res://assets/fonts/PixelOperator8.ttf"))
 		label.set("theme_override_font_sizes/font_size", 16)
 		button.set("theme_override_font_sizes/font_size", 16)
-		label.text = action
+		label.text = action.replace("_", " ")
 		button.action = action
 		remap_container.add_child(label)
 		remap_container.add_child(button)
@@ -108,4 +108,4 @@ class custom_action extends Button:
 			button_pressed = false
 		
 	func update_action_text():
-		text = InputMap.action_get_events(action)[0].as_text()
+		text = InputMap.action_get_events(action)[0].as_text().replace(" (Physical)", "")

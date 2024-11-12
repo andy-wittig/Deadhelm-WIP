@@ -7,7 +7,7 @@ var menu_started := false
 
 func menu_opened():
 	if (!menu_started):
-		$VBoxContainer/returnButton.grab_focus()
+		$VBoxContainer/RetryButton.grab_focus()
 		menu_started = true
 	
 func _on_return_button_pressed():
