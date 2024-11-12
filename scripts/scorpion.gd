@@ -1,11 +1,11 @@
 extends CharacterBody2D
 #Constants
-const SPEED := 42.0
+const SPEED := 38.0
 const JUMP_VELOCITY := -180.0
 const KNOCK_BACK_FALLOFF := 40.0
 const ROAM_CHANGE_WAIT := 6
 const ATTACK_RADIUS := 64
-const ATTACK_WAIT := 1
+const ATTACK_WAIT := 1.5
 const MAX_HEALTH := 50
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
@@ -103,16 +103,18 @@ func _physics_process(delta):
 					velocity.x = direction * SPEED
 				else:
 					%CooldownTimer.start(ATTACK_WAIT)
-					
+					state = state_type.ATTACK
+		state_type.ATTACK:
+			velocity.x = 0
+			
+			if (!attack_started):
+				animated_sprite.play("attack")
+				if (animated_sprite.frame == 4 && player != null):
 					var poison_ball = load("res://scenes/enemies/poison_ball.tscn").instantiate()
 					poison_ball.direction = (player.player_center.global_position - $PoisonBallMarker.global_position).normalized()
 					poison_ball.global_position = $PoisonBallMarker.global_position
 					get_parent().add_child(poison_ball)
-					
-					state = state_type.ATTACK
-		state_type.ATTACK:
-			animated_sprite.play("attack")
-			velocity.x = 0
+					attack_started = true
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -123,7 +125,13 @@ func _physics_process(delta):
 		
 	move_and_slide()
 	
+func _on_animated_scorpion_sprite_animation_finished():
+	if (attack_started):
+		animated_sprite.play("idle")
+	
 func _on_cooldown_timer_timeout():
+	attack_started = false
+	
 	if (chasing_player):
 		state = state_type.CHASE
 	else:

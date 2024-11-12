@@ -37,9 +37,11 @@ var state := state_type.MOVING
 signal enemy_was_hurt
 
 func _ready():
-	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-		init_position = global_position
-		%RoamTimer.start()
+	call_deferred("get_start_pos")
+	%RoamTimer.start()
+	
+func get_start_pos():
+	init_position = global_position
 
 func apply_knockback(other_pos: Vector2, force: float):
 		var other_dir = (other_pos - global_position).normalized()
@@ -88,7 +90,6 @@ func update_rand_direction():
 	var rand_x = init_position.x + randi_range(-ROAM_RANGE, ROAM_RANGE)
 	var rand_y = init_position.y + randi_range(-ROAM_RANGE, ROAM_RANGE)
 	roam_direction = (Vector2(rand_x, rand_y) - global_position).normalized()
-	%RoamTimer.start(randf_range(2, ROAM_CHANGE_WAIT))
 
 func _process(_delta):
 	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
@@ -129,17 +130,13 @@ func _physics_process(delta):
 	match state:
 		state_type.MOVING:	
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				if ray_cast_right.is_colliding():
-					roam_direction = Vector2.LEFT
-				elif ray_cast_left.is_colliding():
-					roam_direction = Vector2.RIGHT
-				elif ray_cast_up.is_colliding():
-					roam_direction = Vector2.DOWN
-				elif ray_cast_down.is_colliding():
-					roam_direction = Vector2.UP
+				if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
+				|| ray_cast_up.is_colliding() || ray_cast_down.is_colliding()):
+					roam_direction = -roam_direction
 					
 				if (init_position.distance_to(global_position) >= ROAM_RANGE):
 					roam_direction = (init_position - global_position).normalized()
+					print (roam_direction)
 					
 				velocity = roam_direction * SPEED
 				
@@ -162,6 +159,7 @@ func _on_roam_timer_timeout():
 	if (!chasing_player && !marked_for_death):
 		if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 			update_rand_direction()
+			%RoamTimer.start(randf_range(2, ROAM_CHANGE_WAIT))
 
 func _on_attack_timer_timeout():
 	if (!marked_for_death):

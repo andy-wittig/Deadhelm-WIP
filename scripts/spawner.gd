@@ -69,8 +69,5 @@ func check_enemy_spawnable():
 
 func _on_spawn_wait_timer_timeout():
 		spawned_count += 1
-		if (!GameManager.multiplayer_mode_enabled):
-			spawn_enemy(spawn_pos)
-		elif (multiplayer.is_server()):
-			rpc_id(1, "spawn_enemy", spawn_pos)	
 		check_enemy_spawnable()
+		spawn_enemy(spawn_pos)
