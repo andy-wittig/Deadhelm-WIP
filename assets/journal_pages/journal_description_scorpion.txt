@@ -3,7 +3,7 @@
 
 Scorpion
 
-[img={width%}128{height%}]res://assets/sprites/enemies/scorpion/scorpion.png[/img]
+[img={width%}96{height%}]res://assets/sprites/enemies/scorpion/scorpion.png[/img]
 
 Enemy description goes here.
 [/center]

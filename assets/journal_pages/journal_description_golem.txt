@@ -2,7 +2,7 @@
 [b][u]DESCRIPTION[/u][/b]
 
 Golem
-[img={width%}128{height%}]res://assets/sprites/enemies/golem/golem.png[/img]
+[img={width%}96{height%}]res://assets/sprites/enemies/golem/golem.png[/img]
 
 Enemy description goes here.
 [/center]

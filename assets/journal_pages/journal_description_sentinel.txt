@@ -2,7 +2,7 @@
 [b][u]DESCRIPTION[/u][/b]
 
 Sentinal
-[img={width%}128{height%}]res://assets/sprites/enemies/sentinel/sentinal.png[/img]
+[img={width%}96{height%}]res://assets/sprites/enemies/sentinel/sentinal.png[/img]
 
 Enemy description goes here.
 [/center]

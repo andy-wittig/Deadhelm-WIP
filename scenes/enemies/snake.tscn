@@ -5,33 +5,33 @@
 [ext_resource type="Texture2D" uid="uid://605xxy7i2wqg" path="res://assets/sprites/enemies/snake/snake_attack_sheet.png" id="2_uiua0"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="4_574s8"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m3i8p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj4qx"]
+atlas = ExtResource("2_uiua0")
+region = Rect2(0, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_regd5"]
 atlas = ExtResource("2_uiua0")
 region = Rect2(16, 0, 16, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p0fi4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhfsc"]
 atlas = ExtResource("2_uiua0")
 region = Rect2(32, 0, 16, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bjado"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtgy3"]
 atlas = ExtResource("2_uiua0")
 region = Rect2(48, 0, 16, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbcw2"]
-atlas = ExtResource("2_uiua0")
-region = Rect2(80, 0, 16, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p7pqa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3t57"]
 atlas = ExtResource("2_uiua0")
 region = Rect2(64, 0, 16, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oid8o"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdlda"]
+atlas = ExtResource("2_uiua0")
+region = Rect2(80, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhclv"]
 atlas = ExtResource("2_uiua0")
 region = Rect2(96, 0, 16, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qh1oe"]
-atlas = ExtResource("2_uiua0")
-region = Rect2(112, 0, 16, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ynrsm"]
 atlas = ExtResource("1_6qqgl")
@@ -53,25 +53,25 @@ region = Rect2(48, 0, 16, 48)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m3i8p")
+"texture": SubResource("AtlasTexture_qj4qx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p0fi4")
+"texture": SubResource("AtlasTexture_regd5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bjado")
+"texture": SubResource("AtlasTexture_rhfsc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bbcw2")
+"texture": SubResource("AtlasTexture_qtgy3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_p7pqa")
+"texture": SubResource("AtlasTexture_o3t57")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_oid8o")
+"texture": SubResource("AtlasTexture_gdlda")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qh1oe")
+"texture": SubResource("AtlasTexture_lhclv")
 }],
 "loop": false,
 "name": &"attack",

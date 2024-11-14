@@ -2,7 +2,7 @@
 [b][u]DESCRIPTION[/u][/b]
 
 Bomb Frog
-[img={width%}128{height%}]res://assets/sprites/enemies/bomb_frog/bomb_frog_primed.png[/img]
+[img={width%}96{height%}]res://assets/sprites/enemies/bomb_frog/bomb_frog_primed.png[/img]
 
 Enemy description goes here.
 [/center]

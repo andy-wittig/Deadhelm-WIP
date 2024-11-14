@@ -1,0 +1,5 @@
+[center]
+[b][u]JOURNAL[/u][/b]
+
+Snake lore goes here.
+[/center]

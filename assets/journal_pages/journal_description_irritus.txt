@@ -2,7 +2,7 @@
 [b][u]DESCRIPTION[/u][/b]
 
 Irritus
-[img={width%}128{height%}]res://assets/sprites/enemies/irritus/irritus.png[/img]
+[img={width%}96{height%}]res://assets/sprites/enemies/irritus/irritus.png[/img]
 
 Enemy description goes here.
 [/center]
