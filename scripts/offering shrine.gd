@@ -2,9 +2,11 @@ extends Node2D
 
 var player = null
 var souls_input := 0
+var uses := 0
 var can_interact := true
 
 @export var soul_cost := 10
+@export var use_limit := 1
 @export var spell_type: String
 @export var random_drop_enabled := false
 @export var drop_list: Array[String]
@@ -26,16 +28,22 @@ func spawn_tome():
 	
 func _ready():
 	soul_label.visible = false
-	if (random_drop_enabled) :
-		$DiceSprite.visible = true
-	else:
-		$DiceSprite.visible = false
+	$DiceSprite.visible = random_drop_enabled
 	
 func _process(delta):
+	if (uses >= use_limit):
+		$ShrineSprite.texture = load("res://assets/sprites/level_objects/offering shrine disabled.png")
+		$CPUParticles2D.emitting = false
+		$CPUParticles2D2.emitting = false
+		$PointLight2D.visible = false
+		$PointLight2D2.visible = false
+		set_process(false)
+		
 	if (random_drop_enabled):
 		soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls\n" + "unkown"
 	else:
 		soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls\n" + spell_type + " spell"
+	
 	sprite.material.set_shader_parameter("enabled", false)
 	soul_label.visible = false
 	
@@ -48,12 +56,11 @@ func _process(delta):
 				if (Input.is_action_just_pressed("pickup")):
 					if (souls_input >= soul_cost):
 						can_interact = false
+						$ShrineSprite.texture = load("res://assets/sprites/level_objects/offering shrine disabled.png")
 						$BuyTimer.start()
 						souls_input = 0
-						if (multiplayer.is_server()):
-							rpc("spawn_tome")
-						elif (!GameManager.multiplayer_mode_enabled):
-							spawn_tome()
+						uses += 1
+						spawn_tome()
 					else:
 						collect_soul(body)
 
@@ -64,4 +71,6 @@ func collect_soul(body):
 		shrine_chime_audio.play()
 
 func _on_buy_timer_timeout():
-	can_interact = true
+	if (uses < use_limit):
+		$ShrineSprite.texture = load("res://assets/sprites/level_objects/offering shrine.png")
+		can_interact = true

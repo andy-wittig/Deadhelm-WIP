@@ -499,7 +499,7 @@ coin_amount = 4
 [node name="offering shrine" parent="." instance=ExtResource("15_fpcoq")]
 position = Vector2(960, -112)
 soul_cost = 6
-spell_type = "meteor"
+spell_type = "bow"
 
 [node name="spawner" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("16_t436x")]
 position = Vector2(416, -688)
@@ -514,6 +514,7 @@ spawn_enemy_type = Array[PackedScene]([ExtResource("18_ussrc"), ExtResource("24_
 tile_map = NodePath("../TileMap")
 spawn_range = 3
 spawn_wait = 2.0
+max_spawn_uses = 3
 
 [node name="leaping mushroom" parent="." instance=ExtResource("19_bc45r")]
 position = Vector2(632, -752)

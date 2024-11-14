@@ -31,6 +31,9 @@ func _process(delta):
 			"level_cave_1":
 				if (music_player.get_stream() != music_selection["cave_track_1"]):
 					music_player.set_stream(music_selection["cave_track_1"])
+			"level_desert_2":
+				if (music_player.get_stream() != music_selection["desert_track_2"]):
+					music_player.set_stream(music_selection["desert_track_2"])
 	else:
 		if (music_player.get_stream() != music_selection["title_screen_track"]):
 			music_player.set_stream(music_selection["title_screen_track"])
