@@ -52,7 +52,8 @@ theme_override_fonts/bold_font = ExtResource("3_wvv72")
 theme_override_font_sizes/normal_font_size = 16
 theme_override_font_sizes/bold_font_size = 24
 bbcode_enabled = true
-text = "[center][img]res://assets/sprites/UI/studio logo.png[/img]
+text = "[center]
+[img]res://assets/sprites/UI/strange_few_studios.PNG[/img]
 
 [u][b]GAME DESIGN - CODING - ARTWORK[/b][/u]
 
