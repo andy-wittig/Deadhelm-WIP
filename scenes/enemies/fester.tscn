@@ -91,7 +91,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 6.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -229,7 +229,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqk5t"]
-size = Vector2(40, 16)
+size = Vector2(12, 16)
 
 [node name="fester" type="CharacterBody2D" groups=["enemies"]]
 z_index = 4
@@ -241,8 +241,10 @@ script = ExtResource("1_0ytq8")
 material = SubResource("ShaderMaterial_ji213")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_47d34")
-animation = &"run"
+animation = &"attack"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 
 [node name="FesterCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
@@ -272,13 +274,12 @@ libraries = {
 "": SubResource("AnimationLibrary_31xmi")
 }
 
-[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("5_hyjv3")]
+[node name="HurtPlayerArea" parent="." instance=ExtResource("5_hyjv3")]
 damage = 8
 knock_back_force = 45
-shape = NodePath("CollisionShape2D2")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
-position = Vector2(0, -8)
+position = Vector2(-16, -8)
 shape = SubResource("RectangleShape2D_kqk5t")
 
 [node name="RoamTimer" type="Timer" parent="."]

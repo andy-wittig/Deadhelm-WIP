@@ -1,9 +1,6 @@
-extends Area2D
+extends Node2D
 
 const LIFE_TIME := 8
-
-@onready var hurt_enemy_area = $hurt_enemy_area
-@onready var destroy_timer = $DestroyTimer
 
 func _ready():
 	await get_tree().create_timer(LIFE_TIME / 2).timeout

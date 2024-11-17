@@ -26,13 +26,12 @@ autostart = true
 [node name="SpellSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_00xyu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_n0imb")
-
-[node name="hurt_enemy_area" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("3_m3mlw")]
+[node name="hurt_enemy_area" parent="." instance=ExtResource("3_m3mlw")]
 damage = 4
 attack_wait = 0.2
 knock_back = 100.0
-shape = NodePath("../CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt_enemy_area"]
+shape = SubResource("CircleShape2D_n0imb")
 
 [connection signal="timeout" from="DestroyTimer" to="." method="on_destroy_timer_timeout"]

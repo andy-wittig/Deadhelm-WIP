@@ -3,13 +3,9 @@ extends Area2D
 @export var damage: int
 @export var attack_wait := 2.0
 @export var knock_back_force := 100
-@export var shape: CollisionShape2D
 
 var active := true
 var can_hurt := true
-
-func _ready():
-	$CollisionShape2D.set_shape(shape.get_shape())
 
 func _process(_delta):
 	if (active && can_hurt):

@@ -10,6 +10,4 @@ script = ExtResource("1_beraj")
 [node name="HurtPlayerTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
 [connection signal="timeout" from="HurtPlayerTimer" to="." method="_on_hurt_player_timer_timeout"]

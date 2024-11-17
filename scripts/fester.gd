@@ -5,7 +5,7 @@ const JUMP_VELOCITY := -180.0
 const KNOCK_BACK_FALLOFF := 10.0
 const ROAM_CHANGE_WAIT := 6
 const ATTACK_RADIUS := 20
-const ATTACK_WAIT := 2
+const ATTACK_WAIT := 1.5
 const MAX_HEALTH := 65
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()
@@ -73,8 +73,10 @@ func _physics_process(delta):
 	#flip sprite
 	if (direction > 0):
 		animated_sprite.flip_h = true
+		$HurtPlayerArea/CollisionShape2D2.position = Vector2(16, -8)
 	elif (direction < 0):
 		animated_sprite.flip_h = false
+		$HurtPlayerArea/CollisionShape2D2.position = Vector2(-16, -8)
 		
 	match state:
 		state_type.IDLE:
