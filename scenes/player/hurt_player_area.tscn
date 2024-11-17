@@ -1,19 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj5ky0bvhedwe"]
+[gd_scene load_steps=2 format=3 uid="uid://cj5ky0bvhedwe"]
 
 [ext_resource type="Script" path="res://scripts/hurt_player_area.gd" id="1_beraj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_snhai"]
-size = Vector2(16, 16)
 
 [node name="HurtPlayerArea" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_beraj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_snhai")
-
 [node name="HurtPlayerTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [connection signal="timeout" from="HurtPlayerTimer" to="." method="_on_hurt_player_timer_timeout"]

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct1vd1qwksnqo"]
+[gd_scene load_steps=4 format=3 uid="uid://ct1vd1qwksnqo"]
 
 [ext_resource type="Texture2D" uid="uid://cnmwscx5wsamy" path="res://assets/sprites/level_objects/wooden_spike.png" id="1_mt1sa"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="2_dpyq2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrmg4"]
+size = Vector2(12, 8)
 
 [node name="wooden_spike" type="Node2D"]
 
@@ -9,8 +12,11 @@
 position = Vector2(0, -8)
 texture = ExtResource("1_mt1sa")
 
-[node name="HurtPlayerArea" parent="." instance=ExtResource("2_dpyq2")]
-position = Vector2(0, -3)
-scale = Vector2(0.6, 0.4)
+[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("2_dpyq2")]
 damage = 5
 knock_back_force = 40
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_nrmg4")

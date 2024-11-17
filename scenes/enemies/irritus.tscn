@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bxe376frrevrf"]
+[gd_scene load_steps=27 format=3 uid="uid://bxe376frrevrf"]
 
 [ext_resource type="Script" path="res://scripts/irritus.gd" id="1_3o7hq"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_l4048"]
@@ -198,6 +198,9 @@ _data = {
 "hurt_blink": SubResource("Animation_8rcyp")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uc10q"]
+radius = 14.0
+
 [node name="irritus" type="CharacterBody2D" groups=["enemies"]]
 z_index = 4
 collision_layer = 8
@@ -242,11 +245,16 @@ libraries = {
 "": SubResource("AnimationLibrary_31xmi")
 }
 
-[node name="HurtPlayerArea" parent="." instance=ExtResource("6_sfiq4")]
+[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("6_sfiq4")]
 position = Vector2(0, -5)
 scale = Vector2(0.5, 0.5)
 damage = 20
 knock_back_force = 55
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_uc10q")
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true

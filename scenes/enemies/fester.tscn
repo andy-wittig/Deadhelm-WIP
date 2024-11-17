@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dkt3s7wbnw3ek"]
+[gd_scene load_steps=32 format=3 uid="uid://dkt3s7wbnw3ek"]
 
 [ext_resource type="Script" path="res://scripts/fester.gd" id="1_0ytq8"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_myen5"]
@@ -228,6 +228,9 @@ _data = {
 "hurt_blink": SubResource("Animation_8rcyp")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqk5t"]
+size = Vector2(40, 16)
+
 [node name="fester" type="CharacterBody2D" groups=["enemies"]]
 z_index = 4
 collision_layer = 8
@@ -257,6 +260,7 @@ target_position = Vector2(-13, 0)
 collision_mask = 16
 
 [node name="ChasePlayer" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -268,11 +272,14 @@ libraries = {
 "": SubResource("AnimationLibrary_31xmi")
 }
 
-[node name="HurtPlayerArea" parent="." instance=ExtResource("5_hyjv3")]
-position = Vector2(0, -11)
-scale = Vector2(2, 0.5)
+[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("5_hyjv3")]
 damage = 8
 knock_back_force = 45
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_kqk5t")
 
 [node name="RoamTimer" type="Timer" parent="."]
 unique_name_in_owner = true

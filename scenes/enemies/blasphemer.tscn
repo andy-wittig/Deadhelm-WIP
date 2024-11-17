@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cy85nfl1yblvo"]
+[gd_scene load_steps=19 format=3 uid="uid://cy85nfl1yblvo"]
 
 [ext_resource type="Script" path="res://scripts/blasphemer.gd" id="1_ir5ew"]
 [ext_resource type="Texture2D" uid="uid://yahxduawgq3j" path="res://assets/sprites/enemies/blasphemer.png" id="1_qghqt"]
@@ -13,6 +13,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("AnimationPlayer:current_animation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ronsc"]
+size = Vector2(12, 96)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dcj0j"]
 particles_animation = true
@@ -96,13 +99,15 @@ script = ExtResource("1_ir5ew")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hipyl")
 
-[node name="HurtPlayerArea" parent="." instance=ExtResource("2_gii73")]
-visible = false
+[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("2_gii73")]
 position = Vector2(0, 48)
-scale = Vector2(1, 6)
 damage = 5
 attack_wait = 0.5
 knock_back_force = 45
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
+shape = SubResource("RectangleShape2D_ronsc")
 
 [node name="BlasphemerSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -2)

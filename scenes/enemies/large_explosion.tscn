@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://ivmmm63jrd1e"]
+[gd_scene load_steps=13 format=3 uid="uid://ivmmm63jrd1e"]
 
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="1_6v63i"]
 [ext_resource type="Texture2D" uid="uid://f3vn5wxvkvwh" path="res://assets/sprites/vfx/explosion.png" id="1_er8tt"]
 [ext_resource type="Script" path="res://scripts/large_explosion.gd" id="1_h2vsb"]
 [ext_resource type="Texture2D" uid="uid://dknfs0prokvpk" path="res://assets/sprites/vfx/impact.png" id="2_2ke4m"]
 [ext_resource type="AudioStream" uid="uid://dxg1pvyixkgnr" path="res://assets/sound effects/explosion.wav" id="5_hyw8t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e218e"]
+radius = 32.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_81gea"]
 particles_animation = true
@@ -38,10 +41,13 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 z_index = 6
 script = ExtResource("1_h2vsb")
 
-[node name="HurtPlayerArea" parent="." instance=ExtResource("1_6v63i")]
-scale = Vector2(2.5, 2.5)
+[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("1_6v63i")]
 damage = 12
 knock_back_force = 55
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
+shape = SubResource("CircleShape2D_e218e")
 
 [node name="ExplosionParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_81gea")
@@ -91,7 +97,6 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 
 [node name="DestroyTimer" type="Timer" parent="."]
-wait_time = 0.8
 one_shot = true
 autostart = true
 
@@ -99,4 +104,10 @@ autostart = true
 stream = ExtResource("5_hyw8t")
 volume_db = -10.0
 
+[node name="DeactivateTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
+[connection signal="timeout" from="DeactivateTimer" to="." method="_on_deactivate_timer_timeout"]

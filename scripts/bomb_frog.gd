@@ -7,8 +7,8 @@ const HANG_TIME_MULTIPLIER := 0.6
 const KNOCK_BACK_SPEED := 250.0
 const DETONATE_TIME := 0.6
 const ROAM_CHANGE_WAIT := 6
-const JUMP_WAIT := 1.4
-const ATTACK_RADIUS := 16
+const JUMP_WAIT := 1.0
+const ATTACK_RADIUS := 24
 const MAX_HEALTH := 40
 #Movement Variables
 var rand_state_timer = RandomNumberGenerator.new()

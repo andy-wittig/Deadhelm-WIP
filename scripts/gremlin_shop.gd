@@ -83,7 +83,7 @@ func _process(delta):
 					if (player.double_jump_active):
 						shop_items[shop_listings[i]][3] = false
 			
-			if (player.coins_collected <= cost):
+			if (player.coins_collected < cost):
 				shop_items[shop_listings[i]][3] = false		
 				
 			if (shop_items[shop_listings[i]][3]):

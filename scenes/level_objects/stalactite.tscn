@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bevvq8dlvdjip"]
+[gd_scene load_steps=13 format=3 uid="uid://bevvq8dlvdjip"]
 
 [ext_resource type="Texture2D" uid="uid://flm0ssvuccmi" path="res://assets/sprites/level_objects/stalactite.png" id="1_kttog"]
 [ext_resource type="Script" path="res://scripts/stalactite.gd" id="1_nmj2m"]
@@ -11,6 +11,9 @@ properties/0/replication_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ngn05"]
 radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p5kj2"]
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_ovc7j"]
 length = 0.001
@@ -98,10 +101,15 @@ replication_config = SubResource("SceneReplicationConfig_ucilh")
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ngn05")
 
-[node name="HurtPlayerArea" parent="." instance=ExtResource("2_nqyc6")]
-scale = Vector2(0.5, 0.5)
+[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("2_nqyc6")]
 damage = 10
 knock_back_force = 45
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
+position = Vector2(0, -2)
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_p5kj2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_kttog")

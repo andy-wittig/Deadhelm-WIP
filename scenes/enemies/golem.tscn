@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bkmgf0sqr7pk3"]
+[gd_scene load_steps=47 format=3 uid="uid://bkmgf0sqr7pk3"]
 
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="1_a41dw"]
 [ext_resource type="Script" path="res://scripts/golem.gd" id="1_v0or6"]
@@ -268,6 +268,9 @@ _data = {
 "hurt_blink": SubResource("Animation_qrb02")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwmws"]
+size = Vector2(64, 5)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l1t6g"]
 particles_animation = true
 particles_anim_h_frames = 2
@@ -362,12 +365,15 @@ libraries = {
 [node name="enemy_healthbar" parent="." instance=ExtResource("2_gx71o")]
 position = Vector2(0, -50)
 
-[node name="HurtPlayerArea" parent="." instance=ExtResource("4_d7ck2")]
-visible = false
-scale = Vector2(4, 0.5)
+[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("4_d7ck2")]
 damage = 12
 attack_wait = 1.0
 knock_back_force = 60
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_dwmws")
 
 [node name="RoamTimer" type="Timer" parent="."]
 unique_name_in_owner = true

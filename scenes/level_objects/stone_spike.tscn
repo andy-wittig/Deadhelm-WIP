@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvgm67ftgfnlp"]
+[gd_scene load_steps=4 format=3 uid="uid://bvgm67ftgfnlp"]
 
 [ext_resource type="Texture2D" uid="uid://dqsj7awmok7sf" path="res://assets/sprites/level_objects/stone_spike.png" id="1_haanx"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="2_faeep"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cuh6m"]
+size = Vector2(12, 8)
 
 [node name="stone_spike" type="Node2D"]
 
@@ -9,8 +12,11 @@
 position = Vector2(0, -8)
 texture = ExtResource("1_haanx")
 
-[node name="HurtPlayerArea" parent="." instance=ExtResource("2_faeep")]
-position = Vector2(0, -3)
-scale = Vector2(0.6, 0.4)
+[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("2_faeep")]
 damage = 8
 knock_back_force = 40
+shape = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_cuh6m")

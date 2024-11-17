@@ -415,7 +415,7 @@ soul_cost = 4
 use_limit = 2
 spell_type = "flame"
 random_drop_enabled = true
-drop_list = Array[String](["flame", "meteor", "poison_bottle"])
+drop_list = Array[String](["flame", "meteor", "poison bottle"])
 
 [node name="blasphemer" parent="Level Objects" instance=ExtResource("20_uwsce")]
 position = Vector2(1376, -736)
@@ -436,7 +436,7 @@ bounce_force = -300.0
 position = Vector2(696, -1424)
 spawn_enemy_type = Array[PackedScene]([ExtResource("23_oen2k"), ExtResource("23_oen2k"), ExtResource("24_2xbli"), ExtResource("24_2xbli")])
 tile_map = NodePath("../../TileMap")
-spawn_range = 6
+spawn_range = 5
 spawn_wait = 2.0
 max_spawn_uses = 3
 
