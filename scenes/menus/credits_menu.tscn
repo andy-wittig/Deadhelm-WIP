@@ -74,6 +74,8 @@ ZACHARY DAVIS
 ADAM MCKOWN
 JUDE LOPEZ
 EMA WORTHEN
+MARTIN KERR
+
 [/center]"
 
 [node name="backButton" type="Button" parent="VBoxContainer"]
