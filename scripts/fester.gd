@@ -1,6 +1,6 @@
 extends CharacterBody2D
 #Constants
-const SPEED := 24.0
+const SPEED := 30.0
 const JUMP_VELOCITY := -180.0
 const KNOCK_BACK_FALLOFF := 10.0
 const ROAM_CHANGE_WAIT := 6
