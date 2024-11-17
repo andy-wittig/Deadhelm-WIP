@@ -20,12 +20,8 @@ func _process(delta):
 	
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("enemies")):
-			if (multiplayer.is_server()):
-				body.hurt_enemy.rpc(15, global_position, 200)
-				rpc("destroy_self")
-			elif (!GameManager.multiplayer_mode_enabled):
-				body.hurt_enemy(15, global_position, 200)
-				destroy_self()
+			body.hurt_enemy(15, direction, 200)
+			destroy_self()
 	
 @rpc("any_peer", "call_local")
 func destroy_self():

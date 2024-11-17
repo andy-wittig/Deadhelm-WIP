@@ -22,6 +22,7 @@ colors = PackedColorArray(0.976471, 0.976471, 0.976471, 0, 0.976471, 0.976471, 0
 radius = 32.0
 
 [node name="poison_cloud" type="Node2D"]
+z_index = 10
 script = ExtResource("1_g5h1e")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

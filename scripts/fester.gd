@@ -126,9 +126,12 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	velocity += knock_back
-	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
-	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
+	if (abs(knock_back) > Vector2.ZERO):
+		velocity = knock_back
+		knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
+		knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
+	
+	print (knock_back)
 		
 	move_and_slide()
 	
@@ -153,15 +156,14 @@ func _on_change_state_timer_timeout():
 			state = randi_range(0, 1)
 			%RoamTimer.start(randf_range(0, ROAM_CHANGE_WAIT))
 
-func apply_knockback(other_pos: Vector2, force: float):
-	var other_dir = (other_pos - global_position).normalized()
-	knock_back = -other_dir * force
+func apply_knockback(force_direction: Vector2, force: float):
+	knock_back = force_direction.normalized() * force
 	
 @rpc("any_peer", "call_local")
-func hurt_enemy(damage: int, other_pos: Vector2, force: float):
+func hurt_enemy(damage: int, direction: Vector2, force: float):
 	emit_signal("enemy_was_hurt")
 	animation_player.play("hurt_blink")
-	apply_knockback(other_pos, force)
+	apply_knockback(direction, force)
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
 	get_parent().add_child(impact)

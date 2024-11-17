@@ -10,7 +10,7 @@ func _hurt_enemy_timer(enemy):
 			if (timer.is_in_group("destroy_timer")):
 				timer.queue_free()
 			else:
-				enemy.hurt_enemy(damage, global_position, knock_back)
+				enemy.hurt_enemy(damage, enemy.global_position - global_position, knock_back)
 
 func _on_body_entered(body):
 	if (body.is_in_group("enemies")):

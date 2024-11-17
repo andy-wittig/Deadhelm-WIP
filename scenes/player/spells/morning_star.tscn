@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyxwy2wukqds1"]
+[gd_scene load_steps=7 format=3 uid="uid://cyxwy2wukqds1"]
 
 [ext_resource type="Script" path="res://scripts/morning_star.gd" id="1_5ua8k"]
 [ext_resource type="Texture2D" uid="uid://bxnnk3jso1cjy" path="res://assets/sprites/level_objects/spells/morning_star.png" id="2_00xyu"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_go2kk"]
 bounce = 0.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ddkn"]
+radius = 6.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n0imb"]
 radius = 6.0
@@ -18,6 +21,9 @@ mass = 4.0
 physics_material_override = SubResource("PhysicsMaterial_go2kk")
 angular_damp = 8.0
 script = ExtResource("1_5ua8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5ddkn")
 
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 4.0
