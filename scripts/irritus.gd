@@ -33,7 +33,7 @@ enum state_type {
 var state := state_type.MOVING
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var irritus_ghost = preload("res://scenes/vfx/irritus_ghost.tscn")
+var irritus_ghost = preload("res://scenes/vfx/ghost_effect.tscn")
 
 @onready var chase_player = $ChasePlayer
 @onready var ray_cast_right = $RayCastRight
@@ -155,6 +155,8 @@ func _on_attack_timer_timeout():
 		
 func _on_ghost_timer_timeout():
 	var ghost = irritus_ghost.instantiate()
+	ghost.sprite_path = "res://assets/sprites/enemies/irritus/irritus.png"
+	ghost.sprite_offset = Vector2(0, -12)
 	ghost.position = position
 	get_parent().add_child(ghost)
 	

@@ -41,3 +41,5 @@ func _process(_delta):
 	placeholder_spell.rotation = player.spell_direction.angle()
 	$ParticlePath1.rotation = player.spell_direction.angle()
 	$ParticlePath2.rotation = player.spell_direction.angle()
+	
+	placeholder_spell.scale.y = player.mouse_facing

@@ -38,6 +38,7 @@ var attack_cooldown := false
 enum state_type {SITTING, MOVING, CLIMBING, ZIPLINE}
 var state := state_type.SITTING
 var spell_direction: Vector2
+var mouse_facing := 0
 var double_jump_active := false
 var double_jump := 0
 #var facing_direction := 1
@@ -170,6 +171,10 @@ func _process(delta):
 	if (Input.get_connected_joypads().is_empty()):
 		var aim_pos = get_global_mouse_position()
 		spell_direction = (aim_pos - dial_center).normalized()
+		
+		if (aim_pos.x > global_position.x): mouse_facing = 1
+		else: mouse_facing = -1
+		
 	elif (!Input.get_connected_joypads().is_empty()):
 		var aim_vec = Input.get_vector("aim_left", "aim_right", "aim_up", "aim_down")
 		

@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://casbh3lhge4pm"]
+
+[ext_resource type="Script" path="res://scripts/phantasmal_push.gd" id="1_6hxrw"]
+[ext_resource type="Texture2D" uid="uid://cj7n5l0ttlr2i" path="res://assets/sprites/level_objects/spells/phantasmal_push.png" id="1_vwoiv"]
+[ext_resource type="Shader" path="res://shaders/distort.gdshader" id="2_s2edq"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tkxgn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d8ycc"]
+seamless = true
+noise = SubResource("FastNoiseLite_tkxgn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oqoy0"]
+shader = ExtResource("2_s2edq")
+shader_parameter/speed = 0.1
+shader_parameter/strength = 0.04
+shader_parameter/noise = SubResource("NoiseTexture2D_d8ycc")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8id73"]
+size = Vector2(8, 20)
+
+[node name="phantasmal_push" type="Area2D"]
+z_index = 10
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_6hxrw")
+
+[node name="HandSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+material = SubResource("ShaderMaterial_oqoy0")
+texture = ExtResource("1_vwoiv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8id73")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.08
+autostart = true
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjfj07wnt8m8r"]
+
+[ext_resource type="Script" path="res://scripts/ghost_effect.gd" id="1_fxtxl"]
+
+[node name="ghost_effect" type="Node2D"]
+z_index = 4
+script = ExtResource("1_fxtxl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

@@ -14,7 +14,7 @@ func destroy_self():
 	queue_free()
 	
 func _ready():
-	spell_label.text = spell_type + " tome"
+	spell_label.text = spell_type.replace("_", " ")
 	spell_label.visible = false
 	
 func _process(delta):

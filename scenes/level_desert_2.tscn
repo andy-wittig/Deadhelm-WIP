@@ -353,6 +353,10 @@ spell_type = "poison bottle"
 position = Vector2(24, -240)
 spell_type = "morning_star"
 
+[node name="tome7" parent="." instance=ExtResource("12_th1j4")]
+position = Vector2(8, -240)
+spell_type = "phantasmal_push"
+
 [node name="tome3" parent="." instance=ExtResource("12_th1j4")]
 position = Vector2(104, -240)
 spell_type = "meteor"
