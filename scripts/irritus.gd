@@ -6,10 +6,10 @@ const JUMP_VELOCITY := -180.0
 const JUMP_ATTACK_VELOCITY := -280.0
 const HANG_TIME_THRESHHOLD := 30.0
 const HANG_TIME_MULTIPLIER := 0.2
-const KNOCK_BACK_FORCE := 200.0
+const KNOCK_BACK_FALLOFF := 10.0
 const ROAM_CHANGE_WAIT := 5
 const ATTACK_RADIUS := 48
-const ATTACK_WAIT := 3
+const ATTACK_WAIT := 2.0
 const ATTACK_TIME := 0.5
 const MAX_HEALTH := 30
 #Movement Variables
@@ -140,16 +140,17 @@ func _physics_process(delta):
 		else:
 			velocity.y += gravity * delta
 	
-	velocity += knock_back
-	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FORCE)
-	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FORCE)
+	if (abs(knock_back) > Vector2.ZERO):
+		velocity = knock_back
+		knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
+		knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 		
 	move_and_slide()
 	
 func _on_attack_timer_timeout():
 	if (chasing_player):
 		hurt_player_area.active = true
-		var dash_vector = (player.global_position - global_position).normalized()
+		var dash_vector = (player.player_center.global_position - global_position).normalized()
 		velocity = dash_vector * DASH_SPEED
 		
 func _on_ghost_timer_timeout():
@@ -174,15 +175,14 @@ func _on_change_state_timer_timeout():
 			print(state)
 			%RoamTimer.start(randf_range(0, ROAM_CHANGE_WAIT))
 
-func apply_knockback(other_pos: Vector2, force: float):
-	var other_dir = (other_pos - global_position).normalized()
-	knock_back = -other_dir * force
+func apply_knockback(force_direction: Vector2, force: float):
+	knock_back = force_direction.normalized() * force
 	
 @rpc("any_peer", "call_local")
-func hurt_enemy(damage: int, other_pos: Vector2, force: float):
+func hurt_enemy(damage: int, direction: Vector2, force: float):
 	emit_signal("enemy_was_hurt")
 	animation_player.play("hurt_blink")
-	apply_knockback(other_pos, force)
+	apply_knockback(direction, force)
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
 	get_parent().add_child(impact)

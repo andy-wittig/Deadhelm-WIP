@@ -2,7 +2,7 @@ extends CharacterBody2D
 #Constants
 const SPEED := 30.0
 const JUMP_VELOCITY := -180.0
-const KNOCK_BACK_FALLOFF := 10.0
+const KNOCK_BACK_FALLOFF := 30.0
 const ROAM_CHANGE_WAIT := 6
 const ATTACK_RADIUS := 20
 const ATTACK_WAIT := 1.5
@@ -130,8 +130,6 @@ func _physics_process(delta):
 		velocity = knock_back
 		knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
 		knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
-	
-	print (knock_back)
 		
 	move_and_slide()
 	

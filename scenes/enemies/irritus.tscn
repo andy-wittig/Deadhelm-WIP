@@ -103,7 +103,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gfx5x"]
-radius = 5.0
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jea4"]
 radius = 79.0
@@ -215,7 +215,7 @@ animation = &"jump"
 autoplay = "idle"
 
 [node name="IrritusCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5)
+position = Vector2(0, -7)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_gfx5x")
 
@@ -245,12 +245,11 @@ libraries = {
 "": SubResource("AnimationLibrary_31xmi")
 }
 
-[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("6_sfiq4")]
+[node name="HurtPlayerArea" parent="." instance=ExtResource("6_sfiq4")]
 position = Vector2(0, -5)
 scale = Vector2(0.5, 0.5)
 damage = 20
 knock_back_force = 55
-shape = NodePath("CollisionShape2D2")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
 position = Vector2(0, -4)

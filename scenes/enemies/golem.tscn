@@ -365,11 +365,10 @@ libraries = {
 [node name="enemy_healthbar" parent="." instance=ExtResource("2_gx71o")]
 position = Vector2(0, -50)
 
-[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("4_d7ck2")]
+[node name="HurtPlayerArea" parent="." instance=ExtResource("4_d7ck2")]
 damage = 12
 attack_wait = 1.0
 knock_back_force = 60
-shape = NodePath("CollisionShape2D2")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
 position = Vector2(0, -2.5)

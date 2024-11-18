@@ -1,8 +1,8 @@
 extends CharacterBody2D
 #Constants
-const SPEED := 35.0
+const SPEED := 30.0
 const JUMP_VELOCITY := -180.0
-const KNOCK_BACK_FORCE := 100.0
+const KNOCK_BACK_FALLOFF := 75.0
 const ROAM_CHANGE_WAIT := 4
 const ATTACK_RADIUS := 24
 const ATTACK_WAIT := 2
@@ -129,21 +129,24 @@ func _physics_process(delta):
 				attack_indicator.visible = false
 				hurt_player_area.active = true
 				
+			if (golem_sprite.frame == 7):
+				hurt_player_area.active = false
+				
 			velocity.x = 0
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	velocity += knock_back
-	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FORCE)
-	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FORCE)
+	if (abs(knock_back) > Vector2.ZERO):
+		velocity = knock_back
+		knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
+		knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 		
 	move_and_slide()
 	
 func _on_golem_sprite_animation_finished():
 	if (attack_started):
 		golem_sprite.play("idle")
-		hurt_player_area.active = false
 	
 func _on_cooldown_timer_timeout():
 	attack_started = false
@@ -161,14 +164,13 @@ func _on_change_state_timer_timeout():
 			state = randi_range(0, 1)
 			%RoamTimer.start(randf_range(0, ROAM_CHANGE_WAIT))
 
-func apply_knockback(other_pos: Vector2, force: float):
-	var other_dir = (other_pos - global_position).normalized()
-	knock_back = -other_dir * force
+func apply_knockback(force_direction: Vector2, force: float):
+	knock_back = force_direction.normalized() * force
 	
 @rpc("any_peer", "call_local")
-func hurt_enemy(damage: int, other_pos: Vector2, force: float):
+func hurt_enemy(damage: int, direction: Vector2, force: float):
 	emit_signal("enemy_was_hurt")
-	apply_knockback(other_pos, force)
+	apply_knockback(direction, force)
 	animation_player.play("hurt_blink")
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bn0kg8xksinyc"]
+[gd_scene load_steps=45 format=3 uid="uid://bn0kg8xksinyc"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_amt72"]
 [ext_resource type="Texture2D" uid="uid://ubox7asqsalj" path="res://assets/sprites/UI/dunes background.png" id="2_8ufxr"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dmhxqps832npn" path="res://scenes/enemies/sentinal.tscn" id="17_i64vm"]
 [ext_resource type="PackedScene" uid="uid://dkt3s7wbnw3ek" path="res://scenes/enemies/fester.tscn" id="17_n5so8"]
 [ext_resource type="PackedScene" uid="uid://dyutn277xh3h5" path="res://scenes/level_desert_1.tscn" id="18_ugdt5"]
+[ext_resource type="PackedScene" uid="uid://bxe376frrevrf" path="res://scenes/enemies/irritus.tscn" id="19_oxsgo"]
 [ext_resource type="PackedScene" uid="uid://dis3wy3nmnpfo" path="res://scenes/level_grasslands_3.tscn" id="19_ruw2m"]
 [ext_resource type="PackedScene" uid="uid://dg6fah6kis3e" path="res://scenes/level_grasslands_2.tscn" id="20_50mlr"]
 [ext_resource type="PackedScene" uid="uid://x68gbtsp2ngh" path="res://scenes/level_objects/large_block.tscn" id="20_ty7no"]
@@ -325,11 +326,11 @@ z_index = 5
 position = Vector2(88, -232)
 
 [node name="chest" parent="." instance=ExtResource("10_6isk1")]
-position = Vector2(176, -232)
+position = Vector2(424, -120)
 coin_amount = 20
 
 [node name="blacksmith" parent="." instance=ExtResource("11_lmg64")]
-position = Vector2(208, -232)
+position = Vector2(456, -120)
 blacksmith_listings = Array[String](["double_jump", "double_jump", "double_jump"])
 
 [node name="tome" parent="." instance=ExtResource("12_th1j4")]
@@ -377,6 +378,20 @@ max_spawn_uses = 1000
 [node name="spawner6" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8r67b")]
 position = Vector2(256, -232)
 spawn_enemy_type = Array[PackedScene]([ExtResource("17_n5so8")])
+tile_map = NodePath("../TileMap")
+spawn_range = 4
+max_spawn_uses = 1000
+
+[node name="spawner7" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8r67b")]
+position = Vector2(224, -232)
+spawn_enemy_type = Array[PackedScene]([ExtResource("26_wiqvy")])
+tile_map = NodePath("../TileMap")
+spawn_range = 4
+max_spawn_uses = 1000
+
+[node name="spawner8" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("15_8r67b")]
+position = Vector2(192, -232)
+spawn_enemy_type = Array[PackedScene]([ExtResource("19_oxsgo")])
 tile_map = NodePath("../TileMap")
 spawn_range = 4
 max_spawn_uses = 1000

@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED := 70.0
+const SPEED := 80.0
 
 var player: CharacterBody2D
 var direction: Vector2

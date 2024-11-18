@@ -4,7 +4,7 @@ const SPEED := 70.0
 const JUMP_VELOCITY := -280.0
 const HANG_TIME_THRESHHOLD := 40.0
 const HANG_TIME_MULTIPLIER := 0.6
-const KNOCK_BACK_SPEED := 250.0
+const KNOCK_BACK_FALLOFF := 25.0
 const DETONATE_TIME := 0.6
 const ROAM_CHANGE_WAIT := 6
 const JUMP_WAIT := 1.0
@@ -144,9 +144,10 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	velocity += knock_back
-	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_SPEED)
-	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_SPEED)
+	if (abs(knock_back) > Vector2.ZERO):
+		velocity = knock_back
+		knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
+		knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 		
 	move_and_slide()
 	
@@ -182,15 +183,14 @@ func detonate():
 		
 		player.set_screen_shake(0.8)
 
-func apply_knockback(other_pos: Vector2, force: float):
-	var other_dir = (other_pos - global_position).normalized()
-	knock_back = -other_dir * force
+func apply_knockback(force_direction: Vector2, force: float):
+	knock_back = force_direction.normalized() * force
 	
 @rpc("any_peer", "call_local")
-func hurt_enemy(damage: int, other_pos: Vector2, force: float):
+func hurt_enemy(damage: int, direction: Vector2, force: float):
 	emit_signal("enemy_was_hurt")
 	animation_player.play("hurt_blink")
-	apply_knockback(other_pos, force)
+	apply_knockback(direction, force)
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
 	get_parent().add_child(impact)
