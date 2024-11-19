@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bivvhhgkgcqec"]
+
+[ext_resource type="Script" path="res://scripts/breakable_crate.gd" id="1_631w3"]
+[ext_resource type="Texture2D" uid="uid://dc2j1vtclce1g" path="res://assets/sprites/level_objects/breakable_crate.png" id="1_c0e4x"]
+[ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="2_la1h1"]
+[ext_resource type="Texture2D" uid="uid://px2pkbnyohno" path="res://assets/sprites/vfx/wooden_pieces.png" id="4_dwr8s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xpxr"]
+size = Vector2(16, 16)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h8xf4"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_rqkha"]
+offsets = PackedFloat32Array(0.646667, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="breakable_crate" type="StaticBody2D" groups=["enemies"]]
+collision_layer = 24
+collision_mask = 0
+script = ExtResource("1_631w3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_c0e4x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1xpxr")
+
+[node name="enemy_healthbar" parent="." instance=ExtResource("2_la1h1")]
+z_index = 1
+position = Vector2(0, -10)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_h8xf4")
+emitting = false
+amount = 4
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.5
+randomness = 0.5
+texture = ExtResource("4_dwr8s")
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 45.0
+initial_velocity_max = 45.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+angle_max = 360.0
+color_ramp = SubResource("Gradient_rqkha")
+anim_offset_max = 1.0

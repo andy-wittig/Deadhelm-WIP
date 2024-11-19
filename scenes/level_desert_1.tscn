@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dyutn277xh3h5"]
+[gd_scene load_steps=53 format=3 uid="uid://dyutn277xh3h5"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_pel5v"]
 [ext_resource type="Texture2D" uid="uid://ubox7asqsalj" path="res://assets/sprites/UI/dunes background.png" id="2_im1ct"]
@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://bpw1cvbvhtqe4" path="res://scenes/level_objects/falling_platform.tscn" id="31_t706t"]
 [ext_resource type="PackedScene" uid="uid://x68gbtsp2ngh" path="res://scenes/level_objects/large_block.tscn" id="32_llje8"]
 [ext_resource type="PackedScene" uid="uid://dr0q1k18gv2n5" path="res://scenes/level_objects/lamp_post.tscn" id="33_5pbw3"]
+[ext_resource type="PackedScene" uid="uid://bivvhhgkgcqec" path="res://scenes/level_objects/breakable_crate.tscn" id="34_r4464"]
 
 [sub_resource type="Gradient" id="Gradient_so2so"]
 colors = PackedColorArray(0.913725, 0.521569, 0.215686, 1, 0.968627, 0.952941, 0.717647, 1)
@@ -657,3 +658,12 @@ position = Vector2(504, -688)
 
 [node name="lamp_post" parent="." instance=ExtResource("33_5pbw3")]
 position = Vector2(648, -64)
+
+[node name="breakable_crate" parent="." instance=ExtResource("34_r4464")]
+position = Vector2(744, -136)
+
+[node name="breakable_crate2" parent="." instance=ExtResource("34_r4464")]
+position = Vector2(744, -152)
+
+[node name="breakable_crate3" parent="." instance=ExtResource("34_r4464")]
+position = Vector2(744, -168)

@@ -369,7 +369,7 @@ func heal_player(health: int):
 	animation_player.play("player_heal")
 	
 	player_health += health
-	if (player_health > 100): player_health = 100
+	if (player_health > max_health): player_health = max_health
 	
 	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
 	damage_indicator.damage_amount = health
