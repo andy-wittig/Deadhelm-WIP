@@ -29,7 +29,7 @@ func set_spell_position():
 	flame_animated_sprite.rotation = player.spell_direction.angle()
 	flame_orb_sprite.rotation = player.spell_direction.angle()
 	
-	if (!player.is_on_floor()):
+	if (player.velocity.y < 0):
 		player.apply_knockback(global_position, PLAYER_KNOCK_BACK)
 
 func _on_destroy_timer_timeout():

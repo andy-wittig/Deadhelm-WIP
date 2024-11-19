@@ -248,7 +248,7 @@ libraries = {
 [node name="HurtPlayerArea" parent="." instance=ExtResource("6_sfiq4")]
 position = Vector2(0, -5)
 scale = Vector2(0.5, 0.5)
-damage = 20
+damage = 12
 knock_back_force = 55
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]

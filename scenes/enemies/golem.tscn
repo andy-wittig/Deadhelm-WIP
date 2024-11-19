@@ -165,7 +165,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 6.0
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o0ern"]
@@ -327,8 +327,9 @@ script = ExtResource("1_v0or6")
 material = SubResource("ShaderMaterial_bg4no")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_m63n4")
-animation = &"attack"
+animation = &"run"
 autoplay = "idle"
+frame_progress = 0.161021
 
 [node name="BodyCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)

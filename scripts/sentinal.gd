@@ -1,6 +1,7 @@
 extends CharacterBody2D
 #Constants
 const SPEED := 28.0
+const AIR_FRICTION := 0.05
 const KNOCK_BACK_FALLOFF := 25.0
 const ROAM_RANGE := 48
 const ROAM_CHANGE_WAIT := 6
@@ -135,17 +136,18 @@ func _physics_process(delta):
 					
 				if (init_position.distance_to(global_position) >= ROAM_RANGE):
 					roam_direction = (init_position - global_position).normalized()
-					print (roam_direction)
 					
 				velocity = roam_direction * SPEED
 				
 		state_type.CHASE:
 			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
 				roam_direction = (player.player_center.global_position - global_position).normalized()
-				if player.global_position.distance_to(global_position) > 64:
+				if (player.global_position.distance_to(global_position) > 64):
 					velocity = roam_direction * SPEED
+				elif (player.global_position.distance_to(global_position) < 48):
+					velocity = -roam_direction * SPEED
 				else:
-					velocity = Vector2.ZERO
+					velocity = lerp(velocity, Vector2.ZERO, AIR_FRICTION)
 	
 	#Knockback implementation
 	if (abs(knock_back) > Vector2.ZERO):
