@@ -44,9 +44,11 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("1_k5orc")
 theme_override_font_sizes/font_size = 24
 tab_alignment = 1
+current_tab = 1
 clip_tabs = false
 
 [node name="DISPLAY" type="TabBar" parent="VBoxContainer/SettingsTabs"]
+visible = false
 layout_mode = 2
 focus_neighbor_bottom = NodePath("VBoxContainer/CheckWindowed")
 tab_alignment = 1
@@ -84,7 +86,6 @@ theme_override_font_sizes/font_size = 24
 text = "VSYNC ENABLED:"
 
 [node name="SOUND" type="TabBar" parent="VBoxContainer/SettingsTabs"]
-visible = false
 layout_mode = 2
 focus_neighbor_bottom = NodePath("VBoxContainer/GridContainer/MusicSlider")
 
@@ -107,6 +108,17 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/v_separation = 32
 columns = 2
+
+[node name="MuteLabel" type="Label" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 24
+text = "MUTE:"
+
+[node name="MuteButton" type="CheckButton" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="MusicLabel" type="Label" parent="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -175,6 +187,7 @@ text = "back"
 
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed" to="." method="_on_check_windowed_toggled"]
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckVsync" to="." method="_on_check_vsync_toggled"]
+[connection signal="toggled" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MuteButton" to="." method="_on_mute_button_toggled"]
 [connection signal="value_changed" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/backButton" to="." method="_on_back_button_pressed"]

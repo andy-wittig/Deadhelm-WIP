@@ -21,6 +21,7 @@ var menu_started := false
 @onready var check_windowed = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed
 @onready var check_vsync = $VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckVsync
 @onready var remap_container = $VBoxContainer/SettingsTabs/CONTROLS/ScrollContainer/RemapContainer
+@onready var mute_button = $VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MuteButton
 @onready var music_slider = $VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MusicSlider
 @onready var sfx_slider = $VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/SFXSlider
 @onready var MUSIC_BUS_ID = AudioServer.get_bus_index("Music")
@@ -57,12 +58,18 @@ func menu_opened():
 	if (!menu_started):
 		$VBoxContainer/SettingsTabs.get_tab_bar().grab_focus()
 		menu_started = true
+		
+func _on_mute_button_toggled(toggle):
+	AudioServer.set_bus_mute(MUSIC_BUS_ID, toggle)
+	AudioServer.set_bus_mute(SFX_BUS_ID, toggle)
 
 func _on_music_slider_value_changed(value):
+	mute_button.set_pressed_no_signal(false)
 	AudioServer.set_bus_volume_db(MUSIC_BUS_ID, linear_to_db(value))
 	AudioServer.set_bus_mute(MUSIC_BUS_ID, value < 0.05)
 
 func _on_sfx_slider_value_changed(value):
+	mute_button.set_pressed_no_signal(false)
 	AudioServer.set_bus_volume_db(SFX_BUS_ID, linear_to_db(value))
 	AudioServer.set_bus_mute(SFX_BUS_ID, value < 0.05)
 

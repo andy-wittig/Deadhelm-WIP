@@ -3,7 +3,7 @@ extends Control
 @onready var menu_layer = $"../.."
 
 var spell_pages = [
-	["res://assets/journal_pages/journal_lightning_spell.txt", true],
+	["res://assets/journal_pages/journal_lightning_spell.txt", false],
 	["res://assets/journal_pages/journal_shield_spell.txt", true],
 ]
 
@@ -36,7 +36,7 @@ var locked_page := "
 
 [img={width%}128{height%}]res://assets/sprites/UI/player_information/placeholder_lock.png[/img]
 
-Discover and defeat new enemies to unlock this page.
+You'll have to keep searching to unlock this entry...
 [/center]"
 
 var chapter = {
