@@ -1,0 +1,8 @@
+[center]
+[b][u]SPELL DESCRIPTION[/u][/b]
+
+Lightning Tome
+[img={width%}96{height%}]res://assets/sprites/level_objects/spells/lightning orb.png[/img]
+
+This spell is cool.
+[/center]
