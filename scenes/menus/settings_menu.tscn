@@ -44,11 +44,9 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("1_k5orc")
 theme_override_font_sizes/font_size = 24
 tab_alignment = 1
-current_tab = 1
 clip_tabs = false
 
 [node name="DISPLAY" type="TabBar" parent="VBoxContainer/SettingsTabs"]
-visible = false
 layout_mode = 2
 focus_neighbor_bottom = NodePath("VBoxContainer/CheckWindowed")
 tab_alignment = 1
@@ -86,6 +84,7 @@ theme_override_font_sizes/font_size = 24
 text = "VSYNC ENABLED:"
 
 [node name="SOUND" type="TabBar" parent="VBoxContainer/SettingsTabs"]
+visible = false
 layout_mode = 2
 focus_neighbor_bottom = NodePath("VBoxContainer/GridContainer/MusicSlider")
 

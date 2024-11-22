@@ -47,6 +47,17 @@ var selected_slot_pos := 0
 var currently_selected_slot = null
 var spell_instance = null
 
+#Sound Effects
+var sound_library := {
+	"coin" : load("res://assets/sound effects/player/coin_pickup.mp3"),
+	"tome" : load("res://assets/sound effects/player/tome_pickup.wav"),
+	"hurt" : load("res://assets/sound effects/player/player_hurt.mp3"),
+	"soul" : load("res://assets/sound effects/player/soul_pickup.wav"),
+	"cast" : load("res://assets/sound effects/player/spell_cast_sound.mp3"),
+}
+@onready var audio_player = $AudioStreamPlayer
+@onready var footstep_audio = $FootstepAudio
+
 #Sprite Paths
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
@@ -68,13 +79,6 @@ const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart
 @onready var soul_label = $hud/Control/StatsContainer/SoulCounter/SoulCounterLabel
 @onready var money_label = $hud/Control/StatsContainer/MoneyCounter/MoneyCounterLabel
 @onready var portal_progress = $hud/Control/PortalProgess/ProgressBar
-#Audio Paths
-@onready var coin_pickup_audio_player = $"Sound Effects/CoinPickupAudio"
-@onready var tome_pickup_audio = $"Sound Effects/TomePickupAudio"
-@onready var soul_pickup_audio = $"Sound Effects/SoulPickupAudio"
-@onready var player_hurt_audio = $"Sound Effects/PlayerHurtAudio"
-@onready var footstep_audio = $"Sound Effects/FootstepAudio"
-@onready var spell_cast_audio = $"Sound Effects/SpellCastAudio"
 #Mechanics Paths
 @onready var player_center = $PlayerCenter
 @onready var player_collider = $PlayerCollider
@@ -220,7 +224,7 @@ func _process(delta):
 						can_fire = false
 	
 	if (can_fire):
-		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("left_click")):
+		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("cast_spell")):
 			spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
 			dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
 			get_parent().add_child(dial_instance)
@@ -231,12 +235,12 @@ func _process(delta):
 			dial_created = true
 		
 		#trigger mystic dial
-		if (dial_created && Input.is_action_just_released("left_click")):
+		if (dial_created && Input.is_action_just_released("cast_spell")):
 			var spell_path = currently_selected_slot.get_spell_instance()
 			var new_spell = load(spell_path).instantiate()
 			new_spell.player = self
 			get_tree().get_root().get_node("game/Level").add_child(new_spell)
-			spell_cast_audio.play()
+			play_sound("cast")
 			
 			currently_selected_slot.start_cooldown(currently_selected_slot.get_slot_item())
 			dial_instance.destroy()
@@ -248,8 +252,6 @@ func _process(delta):
 		
 	if Input.is_action_just_pressed("cheat_button_2"):
 		global_position = portal_gate.global_position
-			
-	move_and_slide()
 
 func _physics_process(delta):
 	#simple state machine
@@ -359,6 +361,8 @@ func _physics_process(delta):
 	velocity += knock_back
 	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
 	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
+	
+	move_and_slide()
 
 #PLAYER LOGIC FUNCTIONS
 func apply_knockback(other_pos: Vector2, force: float):
@@ -379,7 +383,7 @@ func heal_player(health: int):
 
 func hurt_player(damage: int, other_pos: Vector2, force: float):
 	animation_player.play("player_hurt")
-	player_hurt_audio.play()
+	play_sound("hurt")
 	set_screen_shake(0.5)
 	apply_knockback(other_pos, force)
 	
@@ -463,19 +467,27 @@ func collect_buff(buff: String):
 			double_jump_active = true
 
 func collect_soul():
-	soul_pickup_audio.play()
+	play_sound("soul")
 	souls_collected += 1
 	
 func collect_coin():
-	coin_pickup_audio_player.play()
+	play_sound("coin")
 	coins_collected += 1
 	
 func colllect_spell(spell_type):
 	for slot in inventory:
 		if inventory[slot].get_slot_item() == "empty":
 			inventory[slot].set_slot_item(spell_type)
-			tome_pickup_audio.play()
+			play_sound("tome")
 			break
 			
 func set_screen_shake(amount: float):
 	camera.add_trauma(amount)
+	
+func play_sound(sound_name: String):
+	const PITCH_RANGE := 0.2
+	var pitch_shift := randf_range(-PITCH_RANGE, PITCH_RANGE)
+	audio_player.pitch_scale = 1 + pitch_shift
+	audio_player.set_stream(sound_library[sound_name])
+	audio_player.play()
+	

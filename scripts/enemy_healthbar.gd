@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var enemy_parent = get_parent()
 @onready var progress_bar = $ProgressBar
+@onready var hurt_audio = $HurtAudio
 
 func _ready():
 	progress_bar.max_value = enemy_parent.MAX_HEALTH

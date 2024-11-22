@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://23aywy6jutlg"]
 
-[ext_resource type="Script" path="res://scripts/destroy_timer.gd" id="1_3nkrh"]
+[ext_resource type="Script" path="res://scripts/impact.gd" id="1_woaxh"]
 [ext_resource type="Texture2D" uid="uid://dknfs0prokvpk" path="res://assets/sprites/vfx/impact.png" id="2_q4byr"]
 [ext_resource type="AudioStream" uid="uid://y1pn7kv1jm7v" path="res://assets/sound effects/impact.wav" id="3_kce12"]
 
@@ -20,7 +20,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="impact" type="Node2D"]
 z_index = 5
-script = ExtResource("1_3nkrh")
+script = ExtResource("1_woaxh")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_ummjq")
@@ -50,7 +50,6 @@ autostart = true
 [node name="DestoryAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_kce12")
 volume_db = -15.0
-autoplay = true
 bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

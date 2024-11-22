@@ -3,7 +3,7 @@ extends Control
 @onready var menu_layer = $"../.."
 
 var spell_pages = [
-	["res://assets/journal_pages/journal_lightning_spell.txt", false],
+	["res://assets/journal_pages/journal_lightning_spell.txt", true],
 	["res://assets/journal_pages/journal_shield_spell.txt", true],
 ]
 
@@ -12,6 +12,8 @@ var enemy_pages = [
 	["res://assets/journal_pages/journal_description_blasphemer.txt", true],
 	["res://assets/journal_pages/journal_entry_desecrator.txt", true],
 	["res://assets/journal_pages/journal_description_desecrator.txt", true],
+	["res://assets/journal_pages/journal_entry_impactor.txt", true],
+	["res://assets/journal_pages/journal_description_impactor.txt", true],
 	["res://assets/journal_pages/journal_entry_bombshell.txt", true],
 	["res://assets/journal_pages/journal_description_bombshell.txt", true],
 	["res://assets/journal_pages/journal_entry_bomb_frog.txt", true],
@@ -50,6 +52,8 @@ var menu_started := false
 
 @onready var left_page = $VBoxContainer/Pages/LeftPage
 @onready var right_page = $VBoxContainer/Pages/RighPage
+@onready var left_page_number = $VBoxContainer/PageNumber/LeftPageNumber
+@onready var right_page_number = $VBoxContainer/PageNumber/RightPageNumber
 @onready var tab_bar = $VBoxContainer/TabBar
 
 func _ready():
@@ -87,19 +91,21 @@ func _on_back_button_pressed():
 func _on_prev_page_button_pressed():
 	journal_page -= 2
 	journal_page = clamp(journal_page, 0, journal_length - 2)
-	$VBoxContainer/PageNumber/LeftPageNumber.text = str((journal_page) + 1)
-	$VBoxContainer/PageNumber/RightPageNumber.text = str((journal_page) + 2)
+	left_page_number.text = str((journal_page) + 1)
+	right_page_number.text = str((journal_page) + 2)
 	load_pages(chapter[current_chapter][journal_page][0], chapter[current_chapter][journal_page + 1][0])
 
 func _on_next_page_button_pressed():
 	journal_page += 2
 	journal_page = clamp(journal_page, 0, journal_length - 2) 
-	$VBoxContainer/PageNumber/LeftPageNumber.text = str((journal_page) + 1)
-	$VBoxContainer/PageNumber/RightPageNumber.text = str((journal_page) + 2)
+	left_page_number.text = str((journal_page) + 1)
+	right_page_number.text = str((journal_page) + 2)
 	load_pages(chapter[current_chapter][journal_page][0], chapter[current_chapter][journal_page + 1][0])
 
 func _on_tab_bar_tab_changed(tab):
 	current_chapter = chapter.keys()[tab_bar.current_tab]
 	journal_page = 0
 	journal_length = chapter[current_chapter].size()
+	left_page_number.text = "1"
+	right_page_number.text = "2"
 	load_pages(chapter[current_chapter][0][0], chapter[current_chapter][1][0])

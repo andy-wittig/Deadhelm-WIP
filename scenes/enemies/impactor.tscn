@@ -1,9 +1,115 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpr3s11nxajtn"]
+[gd_scene load_steps=15 format=3 uid="uid://cpr3s11nxajtn"]
 
 [ext_resource type="Texture2D" uid="uid://bjov6lui3py4i" path="res://assets/sprites/enemies/impactor.png" id="1_04ual"]
+[ext_resource type="Script" path="res://scripts/impactor.gd" id="1_6w1hv"]
+[ext_resource type="Texture2D" uid="uid://kqwt4fwqhkog" path="res://assets/sprites/vfx/impactor_ball_pieces.png" id="3_w24ix"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycj7a"]
+atlas = ExtResource("1_04ual")
+region = Rect2(128, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpe2c"]
+atlas = ExtResource("1_04ual")
+region = Rect2(160, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk4i3"]
+atlas = ExtResource("1_04ual")
+region = Rect2(192, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8eqlw"]
+atlas = ExtResource("1_04ual")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywbvp"]
+atlas = ExtResource("1_04ual")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xaft4"]
+atlas = ExtResource("1_04ual")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5k16"]
+atlas = ExtResource("1_04ual")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eytnl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycj7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpe2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk4i3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8eqlw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywbvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xaft4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5k16")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 8.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x6o52"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_2avnt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.747253), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_t6h65"]
+offsets = PackedFloat32Array(0.75, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="impactor" type="Node2D"]
+script = ExtResource("1_6w1hv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-texture = ExtResource("1_04ual")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_eytnl")
+animation = &"shoot"
+autoplay = "shoot"
+frame_progress = 0.49178
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_x6o52")
+position = Vector2(0, -8)
+emitting = false
+amount = 6
+lifetime = 0.8
+one_shot = true
+preprocess = 0.2
+explosiveness = 0.4
+randomness = 0.5
+texture = ExtResource("3_w24ix")
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(1, -1)
+spread = 90.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 35.0
+initial_velocity_max = 35.0
+damping_min = 8.0
+damping_max = 8.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_2avnt")
+color_ramp = SubResource("Gradient_t6h65")
+anim_offset_max = 1.0
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -7,7 +7,7 @@
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_te3kg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d5aop"]
-size = Vector2(4, 24)
+size = Vector2(4, 23.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pcp2b"]
 radius = 2.0
@@ -36,7 +36,7 @@ hit_from_inside = true
 collide_with_areas = true
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 2.18557e-08)
+position = Vector2(0.75, 9.26853e-07)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_d5aop")
 

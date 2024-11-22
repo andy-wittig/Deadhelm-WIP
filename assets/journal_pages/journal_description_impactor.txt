@@ -1,0 +1,8 @@
+[center]
+[b][u]DESCRIPTION[/u][/b]
+
+Impactor
+[img={width%}96{height%}]res://assets/sprites/enemies/impactor_journal.png[/img]
+
+Enemy description goes here.
+[/center]

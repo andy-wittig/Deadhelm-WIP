@@ -8,11 +8,14 @@ var controls_list = [
 	"jump",
 	"climb",
 	"pickup",
+	"cast_spell",
 	"drop_item",
 	"open_journal",
 	"scroll_up",
 	"scroll_down",
-	"left_click",
+	"slot_1",
+	"slot_2",
+	"slot_3",
 	"in-game_menu",
 ]
 

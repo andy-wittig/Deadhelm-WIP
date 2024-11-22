@@ -1,0 +1,5 @@
+[center]
+[b][u]JOURNAL[/u][/b]
+
+Impactor lore goes here.
+[/center]

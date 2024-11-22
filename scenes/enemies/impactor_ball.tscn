@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://bimyv6qtd5y2g"]
+
+[ext_resource type="Script" path="res://scripts/impactor_ball.gd" id="1_cx8no"]
+[ext_resource type="Texture2D" uid="uid://bihdj8fr708ki" path="res://assets/sprites/enemies/projectiles/impactor_ball.png" id="1_el4nr"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1rf2u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mh562"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_hkadt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uv2ya"]
+resource_name = "fade_out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hmtjx"]
+_data = {
+"RESET": SubResource("Animation_hkadt"),
+"fade_out": SubResource("Animation_uv2ya")
+}
+
+[node name="impactor_ball" type="RigidBody2D"]
+z_index = 10
+collision_layer = 16
+collision_mask = 16
+physics_material_override = SubResource("PhysicsMaterial_1rf2u")
+continuous_cd = 1
+script = ExtResource("1_cx8no")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_el4nr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mh562")
+
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hmtjx")
+}
+
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
