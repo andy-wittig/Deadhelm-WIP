@@ -485,7 +485,7 @@ func set_screen_shake(amount: float):
 	camera.add_trauma(amount)
 	
 func play_sound(sound_name: String):
-	const PITCH_RANGE := 0.2
+	const PITCH_RANGE := 0.1
 	var pitch_shift := randf_range(-PITCH_RANGE, PITCH_RANGE)
 	audio_player.pitch_scale = 1 + pitch_shift
 	audio_player.set_stream(sound_library[sound_name])
