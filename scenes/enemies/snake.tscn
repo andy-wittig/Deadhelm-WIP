@@ -111,10 +111,9 @@ frame_progress = 1.0
 
 [node name="AttackTimer" type="Timer" parent="."]
 
-[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("4_574s8")]
-damage = 15
+[node name="HurtPlayerArea" parent="." instance=ExtResource("4_574s8")]
+damage = 10
 attack_wait = 1.0
-shape = NodePath("CollisionShape2D2")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
 position = Vector2(0, -24)
