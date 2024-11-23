@@ -277,7 +277,7 @@ func _physics_process(delta):
 				air_time = clamp(air_time, 0, MAX_AIR_TIME)
 				
 				if (abs(velocity.y) < HANG_TIME_THRESHHOLD):
-					velocity.y += (GRAVITY + (EXTRA_GRAVITY * air_time)) * HANG_TIME_MULTIPLIER * delta
+					velocity.y += (GRAVITY + (EXTRA_GRAVITY * air_time) ) * HANG_TIME_MULTIPLIER * delta
 				else:
 					velocity.y += (GRAVITY + (EXTRA_GRAVITY * air_time)) * delta
 				
@@ -352,15 +352,20 @@ func _physics_process(delta):
 				friction_multiplier = 0.1
 		
 	#Apply movement
-	if (direction && state != state_type.ZIPLINE):
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, FRICTION_FORCE * friction_multiplier)
-
-	#knock-back
-	velocity += knock_back
+	if (state != state_type.ZIPLINE):
+		if (abs(knock_back.x) > 0 || direction):
+			velocity.x = (direction * SPEED) + knock_back.x
+		else:
+			velocity.x = move_toward(velocity.x, 0, FRICTION_FORCE * friction_multiplier)
+	
+	velocity.y += knock_back.y
+	
+	#knock-back falloff
 	knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
-	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
+	knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF * 1.5)
+	
+	if (knock_back.length_squared() < 0.01):
+		knock_back = Vector2.ZERO
 	
 	move_and_slide()
 

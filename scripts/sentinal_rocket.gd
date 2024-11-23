@@ -1,7 +1,7 @@
 extends Area2D
 
 const SPEED := 80.0
-const ROCKET_KNOCK_BACK := 50
+const ROCKET_KNOCK_BACK := 120
 const PLAYER_DAMAGE := 10
 
 var direction: Vector2
