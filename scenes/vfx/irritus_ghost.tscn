@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://hbmpohpelele"]
+
+[ext_resource type="Script" path="res://scripts/ghost_effect.gd" id="1_jmhhu"]
+[ext_resource type="Texture2D" uid="uid://4583yrsgdw6r" path="res://assets/sprites/enemies/irritus/irritus_jump_sprite.png" id="1_sdqsl"]
+
+[node name="irritus_ghost" type="Node2D"]
+script = ExtResource("1_jmhhu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1_sdqsl")

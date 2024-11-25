@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g8qn0ulsilf0"
-path="res://.godot/imported/player fall.png-eb423919627fe59c4bef70d011d9eefc.ctex"
+uid="uid://434dfymmmnr7"
+path="res://.godot/imported/player_upper_run_sheet.png-b49064f137be4cbde44d6b72343b379a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/player fall.png"
-dest_files=["res://.godot/imported/player fall.png-eb423919627fe59c4bef70d011d9eefc.ctex"]
+source_file="res://assets/sprites/player/player_upper_run_sheet.png"
+dest_files=["res://.godot/imported/player_upper_run_sheet.png-b49064f137be4cbde44d6b72343b379a.ctex"]
 
 [params]
 

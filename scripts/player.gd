@@ -35,17 +35,22 @@ var coins_collected := 0
 var dial_instance = null
 var dial_created := false
 var attack_cooldown := false
-enum state_type {SITTING, MOVING, CLIMBING, ZIPLINE}
-var state := state_type.SITTING
 var spell_direction: Vector2
 var mouse_facing := 0
 var double_jump_active := false
 var double_jump := 0
-#var facing_direction := 1
 #Player Inventory Variables
 var selected_slot_pos := 0
 var currently_selected_slot = null
 var spell_instance = null
+#States
+enum state_type {SITTING, MOVING, CLIMBING, ZIPLINE}
+var state := state_type.SITTING
+
+enum animation_type {SIT, RUN, IDLE, CLIMB, JUMP, FALL}
+var animation_state := animation_type.SIT
+
+var animation_queue : Array[String] = []
 
 #Sound Effects
 var sound_library := {
@@ -59,7 +64,8 @@ var sound_library := {
 @onready var footstep_audio = $FootstepAudio
 
 #Sprite Paths
-@onready var animated_sprite = $AnimatedSprite2D
+@onready var upper_sprite = $UpperSprite
+@onready var lower_sprite = $LowerSprite
 @onready var animation_player = $AnimationPlayer
 const DEAD_HEART_UI = preload("res://assets/sprites/UI/player_information/dead_heart_ui.png")
 const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart_ui.png")
@@ -261,7 +267,8 @@ func _physics_process(delta):
 				state = state_type.MOVING
 			else:
 				$Camera2D.zoom = Vector2(5, 5)
-				animated_sprite.play("sit")
+				upper_sprite.play("sit")
+				lower_sprite.play("sit")
 				
 				if (Input.is_anything_pressed()):
 					animation_player.play("zoom_out")
@@ -303,23 +310,23 @@ func _physics_process(delta):
 				velocity.y *= 0.5
 				coyote_time_counter = 0
 				
-			#play animation
+			#Change Animation States
 			if is_on_floor():
 				if (direction == 0):
-					animated_sprite.play("idle")
+					change_animation_state(animation_type.IDLE)
 					footstep_audio.stop()
 				else:
-					animated_sprite.play("run")
+					change_animation_state(animation_type.RUN)
 					if (!footstep_audio.is_playing()):
 						footstep_audio.play()
 			else:
 				footstep_audio.stop()
 				if (velocity.y < 0):
-					animated_sprite.play("jump")
+					change_animation_state(animation_type.JUMP)
 				else:
-					animated_sprite.play("fall")
+					change_animation_state(animation_type.FALL)
 		state_type.CLIMBING:
-			animated_sprite.play("climb")
+			change_animation_state(animation_type.CLIMB)
 			velocity.y = 0
 			
 			if (Input.is_action_pressed("move_up")):
@@ -327,7 +334,7 @@ func _physics_process(delta):
 			elif (Input.is_action_pressed("move_down")):
 				velocity.y = CLIMB_SPEED
 		state_type.ZIPLINE:
-			animated_sprite.play("climb")
+			change_animation_state(animation_type.CLIMB)
 			velocity = Vector2.ZERO
 
 	#get input direction
@@ -335,21 +342,21 @@ func _physics_process(delta):
 	
 	#flips sprite
 	if (direction > 0):
-		animated_sprite.flip_h = false
-		#facing_direction = 1
+		upper_sprite.flip_h = false
+		lower_sprite.flip_h = false
 	elif (direction < 0):
-		animated_sprite.flip_h = true
-		#facing_direction = -1
+		upper_sprite.flip_h = true
+		lower_sprite.flip_h = true
 		
 	#Slippery Surfaces
-	var test_tile: TileData
-	var tile_map := get_tree().get_root().get_node("game/Level/%s/TileMap" % GameManager.current_level)
-	friction_multiplier = 1.0
-	for layer in range(tile_map.get_layers_count()):
-		test_tile = tile_map.get_cell_tile_data(layer, tile_map.local_to_map(Vector2(global_position.x, global_position.y + 1)))
-		if (test_tile != null):
-			if (test_tile.get_custom_data("slippery")):
-				friction_multiplier = 0.1
+	#var test_tile: TileData
+	#var tile_map := get_tree().get_root().get_node("game/Level/%s/TileMap" % GameManager.current_level)
+	#friction_multiplier = 1.0
+	#for layer in range(tile_map.get_layers_count()):
+	#	test_tile = tile_map.get_cell_tile_data(layer, tile_map.local_to_map(Vector2(global_position.x, global_position.y + 1)))
+	#	if (test_tile != null):
+	#		if (test_tile.get_custom_data("slippery")):
+	#			friction_multiplier = 0.1
 		
 	#Apply movement
 	if (state != state_type.ZIPLINE):
@@ -368,6 +375,64 @@ func _physics_process(delta):
 		knock_back = Vector2.ZERO
 	
 	move_and_slide()
+	
+func change_animation_state(new_state : animation_type):	
+	if (dial_created):
+		if (animation_queue.size() == 0):
+			animation_queue.push_back("cast")
+			upper_sprite.play(animation_queue[0])
+	else:
+		animation_queue.clear()
+		
+	if (animation_state != new_state):
+		animation_queue.clear()
+	
+	match new_state:
+		animation_type.RUN:
+			if (dial_created):
+				if (!animation_queue.has("cast_run")):
+					animation_queue.push_back("cast_run")
+					upper_sprite.play(animation_queue[0])
+			else:
+				upper_sprite.play("run")
+			lower_sprite.play("run")
+		animation_type.IDLE:
+			if (dial_created):
+				if (!animation_queue.has("cast_idle")):
+					animation_queue.push_back("cast_idle")
+					upper_sprite.play(animation_queue[0])
+			else:
+				upper_sprite.play("idle")
+			lower_sprite.play("idle")
+		animation_type.SIT:
+			upper_sprite.play("sit")
+			lower_sprite.play("sit")
+		animation_type.JUMP:
+			if (dial_created):
+				if (!animation_queue.has("cast_hold")):
+					animation_queue.push_back("cast_hold")
+					upper_sprite.play(animation_queue[0])
+			else:
+				upper_sprite.play("jump")
+			lower_sprite.play("jump")
+		animation_type.FALL:
+			if (dial_created):
+				if (!animation_queue.has("cast_hold")):
+					animation_queue.push_back("cast_hold")
+					upper_sprite.play(animation_queue[0])
+			else:
+				upper_sprite.play("fall")
+			lower_sprite.play("fall")
+		animation_type.CLIMB:
+			upper_sprite.play("climb")
+			lower_sprite.play("climb")
+	
+	animation_state = new_state
+	
+func _on_upper_sprite_animation_finished():
+	if (animation_queue.size() > 0):
+		animation_queue.pop_front()
+		upper_sprite.play(animation_queue[0])
 
 #PLAYER LOGIC FUNCTIONS
 func apply_knockback(other_pos: Vector2, force: float):
@@ -495,4 +560,3 @@ func play_sound(sound_name: String):
 	audio_player.pitch_scale = 1 + pitch_shift
 	audio_player.set_stream(sound_library[sound_name])
 	audio_player.play()
-	

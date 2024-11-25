@@ -15,10 +15,11 @@ _data = [Vector2(0, 1), 0.0, 5.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_b57uw"]
-offsets = PackedFloat32Array(0.673611, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.146667, 0.673611, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="falling_leaves" type="Node2D"]
+z_index = 10
 
 [node name="LeafParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_ovq8q")

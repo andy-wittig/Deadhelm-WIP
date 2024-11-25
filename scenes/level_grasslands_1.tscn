@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=33 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_xitry"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://dv7ii30ng3m2" path="res://scenes/level_objects/rock_wall.tscn" id="24_dqexj"]
 [ext_resource type="PackedScene" uid="uid://dunbwsblhvliw" path="res://scenes/level_objects/totem.tscn" id="25_pbkwx"]
 [ext_resource type="PackedScene" uid="uid://dr0q1k18gv2n5" path="res://scenes/level_objects/lamp_post.tscn" id="27_0qcml"]
-[ext_resource type="PackedScene" uid="uid://bn0kg8xksinyc" path="res://scenes/level_desert_2.tscn" id="27_b1lxi"]
 
 [sub_resource type="Gradient" id="Gradient_hcj03"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
@@ -295,6 +294,6 @@ message_wait = 2
 [node name="lamp_post" parent="." instance=ExtResource("27_0qcml")]
 position = Vector2(328, -464)
 
-[node name="portal_gate2" parent="." instance=ExtResource("5_lsitk")]
-position = Vector2(96, -416)
-next_level = ExtResource("27_b1lxi")
+[node name="tome2" parent="." instance=ExtResource("23_cni07")]
+position = Vector2(168, -440)
+spell_type = "lightning"

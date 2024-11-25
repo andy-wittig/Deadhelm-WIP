@@ -47,6 +47,7 @@ _data = {
 
 [node name="impactor_ball" type="RigidBody2D"]
 z_index = 10
+disable_mode = 2
 collision_layer = 16
 collision_mask = 16
 physics_material_override = SubResource("PhysicsMaterial_1rf2u")

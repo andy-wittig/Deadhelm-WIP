@@ -1,12 +1,13 @@
 extends RigidBody2D
 
-const FORCE_AMOUNT := 18
+const FORCE_AMOUNT := 20
 var dir : int
 
 @onready var animation_player = $AnimationPlayer
 @onready var collision_shape = $CollisionShape2D
 
 func _ready():
+	apply_central_impulse(Vector2(FORCE_AMOUNT * 2 * dir, 0))
 	add_constant_central_force(Vector2(FORCE_AMOUNT * dir, 0))
 
 func _on_destroy_timer_timeout():
