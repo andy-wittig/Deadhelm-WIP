@@ -69,7 +69,6 @@ grow_vertical = 2
 layout_direction = 3
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_k5orc")
 theme_override_font_sizes/font_size = 24
 text = "WINDOWED:"
@@ -78,10 +77,20 @@ text = "WINDOWED:"
 layout_direction = 3
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_k5orc")
 theme_override_font_sizes/font_size = 24
 text = "VSYNC ENABLED:"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CheckCursor" type="CheckButton" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 24
+text = "HIDE CURSOR"
 
 [node name="SOUND" type="TabBar" parent="VBoxContainer/SettingsTabs"]
 visible = false
@@ -186,6 +195,7 @@ text = "back"
 
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed" to="." method="_on_check_windowed_toggled"]
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckVsync" to="." method="_on_check_vsync_toggled"]
+[connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckCursor" to="." method="_on_check_cursor_toggled"]
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MuteButton" to="." method="_on_mute_button_toggled"]
 [connection signal="value_changed" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]

@@ -431,7 +431,6 @@ max_spawn_uses = 3
 
 [node name="leaping mushroom4" parent="Level Objects" instance=ExtResource("16_ydhre")]
 position = Vector2(1016, -1168)
-bounce_force = -300.0
 
 [node name="spawner2" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("21_4eac5")]
 position = Vector2(696, -1424)

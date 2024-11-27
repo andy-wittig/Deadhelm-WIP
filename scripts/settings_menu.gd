@@ -61,7 +61,8 @@ func menu_opened():
 	if (!menu_started):
 		$VBoxContainer/SettingsTabs.get_tab_bar().grab_focus()
 		menu_started = true
-		
+
+#SOUND
 func _on_mute_button_toggled(toggle):
 	AudioServer.set_bus_mute(MUSIC_BUS_ID, toggle)
 	AudioServer.set_bus_mute(SFX_BUS_ID, toggle)
@@ -79,6 +80,13 @@ func _on_sfx_slider_value_changed(value):
 func _on_back_button_pressed():
 	menu_started = false
 	menu_layer.return_to_prev_menu()
+	
+#DISPLAY
+func _on_check_cursor_toggled(toggled):
+	if (toggled):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_check_windowed_toggled(toggled):
 	if (toggled):
@@ -92,6 +100,7 @@ func _on_check_vsync_toggled(toggled):
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
+#CONTROLS
 class custom_action extends Button:
 	var action: String
 	

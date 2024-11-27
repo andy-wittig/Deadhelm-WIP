@@ -222,18 +222,9 @@ position = Vector2(272, -320)
 
 [node name="player" parent="players" instance=ExtResource("8_mevk6")]
 z_index = 5
-position = Vector2(608, -384)
 
 [node name="spawn_point" type="Marker2D" parent="."]
 position = Vector2(272, -320)
-
-[node name="tome" parent="." instance=ExtResource("12_th1j4")]
-position = Vector2(952, -376)
-spell_type = "bow"
-
-[node name="tome2" parent="." instance=ExtResource("12_th1j4")]
-position = Vector2(344, -312)
-spell_type = "flame"
 
 [node name="tome3" parent="." instance=ExtResource("12_th1j4")]
 position = Vector2(392, -312)

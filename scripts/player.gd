@@ -69,6 +69,8 @@ var sound_library := {
 @onready var animation_player = $AnimationPlayer
 const DEAD_HEART_UI = preload("res://assets/sprites/UI/player_information/dead_heart_ui.png")
 const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart_ui.png")
+var point_cursor = load("res://assets/sprites/UI/cursor pointer.png")
+var hold_cursor = load("res://assets/sprites/UI/cursor can drop.png")
 #UI Paths
 @onready var inventory = {
 	"slot_1" : $hud/Control/Slots/ItemSlot1.get_node("Item"),
@@ -222,6 +224,7 @@ func _process(delta):
 		can_fire = false
 		if (dial_created):
 			dial_instance.destroy()
+			dial_created = false
 	else: #ensure spells of same class can't be used at the same time
 		var currently_selected_class = currently_selected_slot.get_slot_item_class()
 		for slot in inventory:
@@ -378,10 +381,12 @@ func _physics_process(delta):
 	
 func change_animation_state(new_state : animation_type):	
 	if (dial_created):
+		Input.set_custom_mouse_cursor(hold_cursor, Input.CURSOR_ARROW)
 		if (animation_queue.size() == 0):
 			animation_queue.push_back("cast")
 			upper_sprite.play(animation_queue[0])
 	else:
+		Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
 		animation_queue.clear()
 		
 	if (animation_state != new_state):

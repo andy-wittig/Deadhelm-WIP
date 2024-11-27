@@ -224,7 +224,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"cast",
-"speed": 16.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -798,9 +798,10 @@ z_index = 1
 material = SubResource("ShaderMaterial_0v5y2")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_2q11b")
-animation = &"jump"
+animation = &"cast"
 autoplay = "idle"
-frame_progress = 0.97543
+frame = 4
+frame_progress = 1.0
 
 [node name="LowerSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_naasp")
