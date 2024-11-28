@@ -1,23 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8v8h4yeenklg"]
+[gd_scene load_steps=10 format=3 uid="uid://b8v8h4yeenklg"]
 
 [ext_resource type="Texture2D" uid="uid://xrx8dx5uq8wa" path="res://assets/sprites/level_objects/spells/shield.png" id="1_58ub7"]
 [ext_resource type="Script" path="res://scripts/shield.gd" id="1_dlmlp"]
 [ext_resource type="Shader" path="res://shaders/distort.gdshader" id="2_12jkt"]
 [ext_resource type="AudioStream" uid="uid://dhfjh66frhodl" path="res://assets/sound effects/player/shield_sound.mp3" id="4_5j37i"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8e8ne"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("ShieldSprite:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y8f53"]
 noise_type = 4
 frequency = 0.008
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5xy6c"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3emn2"]
 seamless = true
 noise = SubResource("FastNoiseLite_y8f53")
 
@@ -25,7 +17,7 @@ noise = SubResource("FastNoiseLite_y8f53")
 shader = ExtResource("2_12jkt")
 shader_parameter/speed = 0.08
 shader_parameter/strength = 0.09
-shader_parameter/noise = SubResource("NoiseTexture2D_5xy6c")
+shader_parameter/noise = SubResource("NoiseTexture2D_3emn2")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gnrc1"]
 size = Vector2(11, 16)
@@ -41,9 +33,6 @@ z_index = 10
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_dlmlp")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_8e8ne")
 
 [node name="ShieldSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_c3gb2")

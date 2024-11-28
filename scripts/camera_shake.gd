@@ -24,7 +24,7 @@ func shake():
 	
 	position = new_offset
 	
-func _physics_process(delta):
+func _process(delta):
 	if (trauma):
 		trauma = max(trauma - decay * delta, 0)
 		shake()

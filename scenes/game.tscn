@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=38 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
@@ -16,12 +16,93 @@
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
 [ext_resource type="PackedScene" uid="uid://b0378gpwb8g1x" path="res://scenes/menus/gameover_menu.tscn" id="11_bodm6"]
 [ext_resource type="Texture2D" uid="uid://dm11bfh1qcc23" path="res://assets/sprites/UI/title_background_sky.png" id="13_1o8hw"]
-[ext_resource type="Texture2D" uid="uid://baxrvat8rbb0w" path="res://assets/sprites/UI/title_background_foreground.png" id="13_e5jav"]
+[ext_resource type="Texture2D" uid="uid://g6ptohieeaq0" path="res://assets/sprites/UI/title_background_foreground_sheet.png" id="14_ww188"]
 [ext_resource type="Texture2D" uid="uid://fgw4c7gfxo7e" path="res://assets/sprites/UI/title_background_mountains.png" id="14_yyt2w"]
 [ext_resource type="Texture2D" uid="uid://bn661yg7bx1x8" path="res://assets/sprites/UI/title_background_shorline.png" id="15_s3i31"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgunp"]
 shader = ExtResource("4_7fi5r")
+
+[sub_resource type="Animation" id="Animation_334a0"]
+resource_name = "bounce"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(510, 32), Vector2(510, 40)]
+}
+
+[sub_resource type="Animation" id="Animation_vno7m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(510, 32)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m03xp"]
+_data = {
+"RESET": SubResource("Animation_vno7m"),
+"bounce": SubResource("Animation_334a0")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wogm"]
+atlas = ExtResource("14_ww188")
+region = Rect2(0, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lkji"]
+atlas = ExtResource("14_ww188")
+region = Rect2(160, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npkbm"]
+atlas = ExtResource("14_ww188")
+region = Rect2(320, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knhrt"]
+atlas = ExtResource("14_ww188")
+region = Rect2(480, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtgx1"]
+atlas = ExtResource("14_ww188")
+region = Rect2(640, 0, 160, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a4tg8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wogm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lkji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npkbm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knhrt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtgx1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_i7rq8"]
 frequency = 0.02
@@ -204,16 +285,19 @@ offset_bottom = 164.0
 grow_horizontal = 2
 texture = ExtResource("3_i7ejn")
 
-[node name="Foreground" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuLayer/MenuControl/TitleBackground/Title"]
+libraries = {
+"": SubResource("AnimationLibrary_m03xp")
+}
+autoplay = "bounce"
+
+[node name="Foreground" type="AnimatedSprite2D" parent="MenuLayer/MenuControl/TitleBackground"]
 z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("13_e5jav")
+scale = Vector2(12, 12)
+sprite_frames = SubResource("SpriteFrames_a4tg8")
+autoplay = "default"
+frame_progress = 0.473926
+centered = false
 
 [node name="Mountains" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 z_index = 1
