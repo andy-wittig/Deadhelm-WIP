@@ -199,13 +199,14 @@ func _process(delta):
 	
 	#HANDLE INVENTORY INPUT
 	#scrolling
-	if (Input.is_action_just_pressed("scroll_up")):
-		inventory_scrolling(1)
+	if (GameManager.access_ingame_menu):
+		if (Input.is_action_just_pressed("scroll_up")):
+			inventory_scrolling(1)
+			
+		if (Input.is_action_just_pressed("scroll_down")):
+			inventory_scrolling(-1)
 		
-	if (Input.is_action_just_pressed("scroll_down")):
-		inventory_scrolling(-1)
-	#hotkeys
-	inventory_hotkey()
+		inventory_hotkey()
 	
 	for slot in inventory:
 		inventory[slot].currently_selected = false
@@ -220,7 +221,9 @@ func _process(delta):
 	#mystic dial and spell spawning
 	var can_fire := true
 	
-	if (currently_selected_slot.get_slot_item() == "empty" || currently_selected_slot.is_dragging()): 
+	if (currently_selected_slot.get_slot_item() == "empty" 
+	|| currently_selected_slot.is_dragging()
+	|| !GameManager.access_ingame_menu): 
 		can_fire = false
 		if (dial_created):
 			dial_instance.destroy()
@@ -491,7 +494,17 @@ func reset_player():
 	$level_transition.get_node("AnimationPlayer").play("fade_in")
 	player_lives = MAX_LIVES
 	player_health = max_health
+
+func set_screen_shake(amount: float):
+	camera.add_trauma(amount)
 	
+func play_sound(sound_name: String):
+	const PITCH_RANGE := 0.1
+	var pitch_shift := randf_range(-PITCH_RANGE, PITCH_RANGE)
+	audio_player.pitch_scale = 1 + pitch_shift
+	audio_player.set_stream(sound_library[sound_name])
+	audio_player.play()
+
 #INVENTORY FUNCTIONS
 func inventory_scrolling(scroll_amount: int):
 		selected_slot_pos += scroll_amount
@@ -555,13 +568,3 @@ func colllect_spell(spell_type):
 			inventory[slot].set_slot_item(spell_type)
 			play_sound("tome")
 			break
-			
-func set_screen_shake(amount: float):
-	camera.add_trauma(amount)
-	
-func play_sound(sound_name: String):
-	const PITCH_RANGE := 0.1
-	var pitch_shift := randf_range(-PITCH_RANGE, PITCH_RANGE)
-	audio_player.pitch_scale = 1 + pitch_shift
-	audio_player.set_stream(sound_library[sound_name])
-	audio_player.play()

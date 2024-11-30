@@ -16,11 +16,11 @@ noise = SubResource("FastNoiseLite_y8f53")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c3gb2"]
 shader = ExtResource("2_12jkt")
 shader_parameter/speed = 0.08
-shader_parameter/strength = 0.09
+shader_parameter/strength = 0.04
 shader_parameter/noise = SubResource("NoiseTexture2D_3emn2")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnrc1"]
-size = Vector2(11, 16)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lwnhv"]
+radius = 6.0
 
 [sub_resource type="Gradient" id="Gradient_tvdib"]
 offsets = PackedFloat32Array(0, 0.142857, 0.534162, 1)
@@ -39,15 +39,13 @@ material = SubResource("ShaderMaterial_c3gb2")
 texture = ExtResource("1_58ub7")
 
 [node name="ShieldCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_gnrc1")
+shape = SubResource("CapsuleShape2D_lwnhv")
 
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(1, 0)
 amount = 20
 lifetime = 1.5
 speed_scale = 0.5
