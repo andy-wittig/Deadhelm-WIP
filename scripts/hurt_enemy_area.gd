@@ -4,13 +4,16 @@ extends Area2D
 @export var attack_wait := 2.0
 @export var knock_back := 0.0
 
+var enabled := true
+
 func _hurt_enemy_timer(enemy):
 	if (enemy != null):
 		for timer in get_tree().get_nodes_in_group(enemy.name + str(get_instance_id())):
 			if (timer.is_in_group("destroy_timer")):
 				timer.queue_free()
 			else:
-				enemy.hurt_enemy(damage, enemy.global_position - global_position, knock_back)
+				if (enabled):
+					enemy.hurt_enemy(damage, enemy.global_position - global_position, knock_back)
 
 func _on_body_entered(body):
 	if (body.is_in_group("enemies")):

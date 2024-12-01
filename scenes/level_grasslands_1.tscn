@@ -296,7 +296,7 @@ position = Vector2(328, -464)
 
 [node name="tome2" parent="." instance=ExtResource("23_cni07")]
 position = Vector2(168, -440)
-spell_type = "shield"
+spell_type = "lightning"
 
 [node name="tome3" parent="." instance=ExtResource("23_cni07")]
 position = Vector2(192, -464)

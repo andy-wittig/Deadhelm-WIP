@@ -50,7 +50,7 @@ func check_enemy_spawnable():
 	for layer in range(tile_map.get_layers_count()):
 		test_tile = tile_map.get_cell_tile_data(layer, tile_map.local_to_map(spawn_pos))
 		if (test_tile != null):
-			if (test_tile.get_custom_data("spawnable_tile") == false):
+			if (test_tile.get_custom_data("solid") == false):
 				check_enemy_spawnable()
 				return
 	

@@ -1,32 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://drk6c4fy4xida"]
+[gd_scene load_steps=21 format=3 uid="uid://drk6c4fy4xida"]
 
 [ext_resource type="Script" path="res://scripts/lightning.gd" id="1_3o1lo"]
 [ext_resource type="Texture2D" uid="uid://bguhdhn0jqswj" path="res://assets/sprites/level_objects/spells/lightning orb.png" id="2_nnea1"]
-[ext_resource type="Shader" path="res://shaders/disolve.gdshader" id="3_s3207"]
 [ext_resource type="Texture2D" uid="uid://c4rd0cdnp1us0" path="res://assets/sprites/level_objects/spells/lightning.png" id="3_vgx2h"]
 [ext_resource type="PackedScene" uid="uid://c6hvdac7cbih0" path="res://scenes/player/hurt_enemy_area.tscn" id="4_ocpje"]
+[ext_resource type="Texture2D" uid="uid://bkmhllngt54q7" path="res://assets/sprites/vfx/lightning_effect.png" id="5_dilc4"]
 [ext_resource type="AudioStream" uid="uid://c08nlxh066age" path="res://assets/sound effects/player/lightning_sound.mp3" id="5_u7j72"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2ofr8"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("LightningOrbSprite:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath("LightningAnimatedSprite:rotation")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qwcmj"]
-resource_local_to_scene = true
-shader = ExtResource("3_s3207")
-shader_parameter/sensitivity = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r375t"]
-resource_local_to_scene = true
-shader = ExtResource("3_s3207")
-shader_parameter/sensitivity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vleht"]
 atlas = ExtResource("3_vgx2h")
@@ -64,9 +43,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcp61"]
-size = Vector2(16, 12)
-
 [sub_resource type="Gradient" id="Gradient_5l4kf"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
@@ -77,166 +53,142 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.9, 0.8)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x5wd3"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
 [sub_resource type="Curve" id="Curve_x1vgv"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.497533), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.494505), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_x8n8r"]
-colors = PackedColorArray(0.427451, 0.917647, 0.839216, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.25, 0.75, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="Animation" id="Animation_hjchv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcp61"]
+size = Vector2(16, 12)
+
+[sub_resource type="Animation" id="Animation_ae3jy"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LightningAnimatedSprite/PointLight2D:energy")
+tracks/0/path = NodePath("LightningAnimatedSprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.5]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LightningAnimatedSprite:material:shader_parameter/sensitivity")
+tracks/1/path = NodePath("PointLight2D:energy")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("LightningOrbSprite:material:shader_parameter/sensitivity")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"values": [0.5]
 }
 
-[sub_resource type="Animation" id="Animation_tiaav"]
-resource_name = "disolve"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LightningAnimatedSprite:material:shader_parameter/sensitivity")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LightningOrbSprite:material:shader_parameter/sensitivity")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-
-[sub_resource type="Animation" id="Animation_s1sa0"]
-resource_name = "lightning_flash"
+[sub_resource type="Animation" id="Animation_h2oav"]
+resource_name = "fade"
 length = 0.2
-loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LightningAnimatedSprite/PointLight2D:energy")
-tracks/0/interp = 2
+tracks/0/path = NodePath("LightningAnimatedSprite:modulate")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.5, 1.0]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ejyiq"]
 _data = {
-"RESET": SubResource("Animation_hjchv"),
-"disolve": SubResource("Animation_tiaav"),
-"lightning_flash": SubResource("Animation_s1sa0")
+"RESET": SubResource("Animation_ae3jy"),
+"fade": SubResource("Animation_h2oav")
 }
 
 [node name="lightning" type="Area2D"]
-modulate = Color(1, 1, 1, 0.862745)
 z_index = 10
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_3o1lo")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_2ofr8")
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-8, 0)
+target_position = Vector2(16, 0)
+collision_mask = 16
+hit_from_inside = true
 
 [node name="LightningOrbSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_qwcmj")
 texture = ExtResource("2_nnea1")
 
 [node name="LightningAnimatedSprite" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_r375t")
 sprite_frames = SubResource("SpriteFrames_pqn1j")
 animation = &"lightning"
 autoplay = "lightning"
 frame_progress = 0.73225
 offset = Vector2(16, 0)
 
-[node name="hurt_enemy_area" parent="LightningAnimatedSprite" instance=ExtResource("4_ocpje")]
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(24, 0)
+energy = 0.5
+texture = SubResource("GradientTexture2D_vxjdv")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_x5wd3")
+amount = 6
+lifetime = 0.3
+explosiveness = 0.4
+randomness = 0.8
+lifetime_randomness = 0.2
+local_coords = true
+texture = ExtResource("5_dilc4")
+emission_shape = 1
+emission_sphere_radius = 4.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+damping_min = 8.0
+damping_max = 10.0
+angle_min = -90.0
+scale_amount_curve = SubResource("Curve_x1vgv")
+color_ramp = SubResource("Gradient_x8n8r")
+anim_offset_max = 1.0
+
+[node name="hurt_enemy_area" parent="." instance=ExtResource("4_ocpje")]
 position = Vector2(12, 0)
 scale = Vector2(2, 1)
 damage = 5
 attack_wait = 0.4
 knock_back = 100.0
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="LightningAnimatedSprite/hurt_enemy_area"]
+[node name="EnemyCollider" type="CollisionShape2D" parent="hurt_enemy_area"]
 position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_hcp61")
-
-[node name="PointLight2D" type="PointLight2D" parent="LightningAnimatedSprite"]
-position = Vector2(24, 0)
-energy = 0.5
-texture = SubResource("GradientTexture2D_vxjdv")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="LightningAnimatedSprite"]
-amount = 20
-lifetime = 0.8
-explosiveness = 0.1
-randomness = 0.5
-lifetime_randomness = 0.2
-emission_shape = 1
-emission_sphere_radius = 6.0
-spread = 90.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 20.0
-initial_velocity_max = 20.0
-angular_velocity_min = 10.0
-angular_velocity_max = 15.0
-radial_accel_min = 20.0
-radial_accel_max = 20.0
-damping_min = 8.0
-damping_max = 10.0
-angle_min = -360.0
-angle_max = 360.0
-scale_amount_min = 1.5
-scale_amount_max = 2.0
-scale_amount_curve = SubResource("Curve_x1vgv")
-color_ramp = SubResource("Gradient_x8n8r")
 
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 2.5
@@ -253,7 +205,7 @@ bus = &"SFX"
 libraries = {
 "": SubResource("AnimationLibrary_ejyiq")
 }
-autoplay = "lightning_flash"
+autoplay = "RESET"
 
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #Physics Constants
 const SPEED := 75.0
-const GRAVITY := 950.0
+const GRAVITY := 950
 const EXTRA_GRAVITY := 200.0
 const CLIMB_SPEED := 75.0
 const ZIPLINE_SPEED := 100
@@ -34,6 +34,7 @@ var coins_collected := 0
 #Player Mechanics Variables
 var dial_instance = null
 var dial_created := false
+var cast_complete := false
 var attack_cooldown := false
 var spell_direction: Vector2
 var mouse_facing := 0
@@ -257,6 +258,7 @@ func _process(delta):
 			currently_selected_slot.start_cooldown(currently_selected_slot.get_slot_item())
 			dial_instance.destroy()
 			dial_created = false
+			cast_complete = true
 			
 	#Developer Cheats
 	if (Input.is_action_just_pressed("cheat_button_1")):
@@ -401,16 +403,20 @@ func change_animation_state(new_state : animation_type):
 				if (!animation_queue.has("cast_run")):
 					animation_queue.push_back("cast_run")
 					upper_sprite.play(animation_queue[0])
-			else:
+			elif (!cast_complete):
 				upper_sprite.play("run")
+			else:
+				upper_sprite.play("cast_done")
 			lower_sprite.play("run")
 		animation_type.IDLE:
 			if (dial_created):
 				if (!animation_queue.has("cast_idle")):
 					animation_queue.push_back("cast_idle")
 					upper_sprite.play(animation_queue[0])
-			else:
+			elif (!cast_complete):
 				upper_sprite.play("idle")
+			else:
+				upper_sprite.play("cast_done")
 			lower_sprite.play("idle")
 		animation_type.SIT:
 			upper_sprite.play("sit")
@@ -420,16 +426,20 @@ func change_animation_state(new_state : animation_type):
 				if (!animation_queue.has("cast_hold")):
 					animation_queue.push_back("cast_hold")
 					upper_sprite.play(animation_queue[0])
-			else:
+			elif (!cast_complete):
 				upper_sprite.play("jump")
+			else:
+				upper_sprite.play("cast_done")
 			lower_sprite.play("jump")
 		animation_type.FALL:
 			if (dial_created):
 				if (!animation_queue.has("cast_hold")):
 					animation_queue.push_back("cast_hold")
 					upper_sprite.play(animation_queue[0])
-			else:
+			elif (!cast_complete):
 				upper_sprite.play("fall")
+			else:
+				upper_sprite.play("cast_done")
 			lower_sprite.play("fall")
 		animation_type.CLIMB:
 			upper_sprite.play("climb")
@@ -441,6 +451,9 @@ func _on_upper_sprite_animation_finished():
 	if (animation_queue.size() > 0):
 		animation_queue.pop_front()
 		upper_sprite.play(animation_queue[0])
+		
+	if (cast_complete):
+		cast_complete = false
 
 #PLAYER LOGIC FUNCTIONS
 func apply_knockback(other_pos: Vector2, force: float):

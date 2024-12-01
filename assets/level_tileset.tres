@@ -1,6 +1,8 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://uu7b6cnjtk3k"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://uu7b6cnjtk3k"]
 
 [ext_resource type="Texture2D" uid="uid://d30jjelyeh4xq" path="res://assets/sprites/level_objects/tilesheet final.png" id="1_syuli"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4gcgp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8vhur"]
 texture = ExtResource("1_syuli")
@@ -815,7 +817,8 @@ texture = ExtResource("1_syuli")
 [resource]
 physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 0
-custom_data_layer_0/name = "spawnable_tile"
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_4gcgp")
+custom_data_layer_0/name = "solid"
 custom_data_layer_0/type = 1
 custom_data_layer_1/name = "slippery"
 custom_data_layer_1/type = 1

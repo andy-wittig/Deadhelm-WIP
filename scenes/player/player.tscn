@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=3 uid="uid://b5rai463xckyn"]
+[gd_scene load_steps=107 format=3 uid="uid://b5rai463xckyn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_6jjtq"]
 [ext_resource type="PackedScene" uid="uid://cv3ipj46sh6tq" path="res://scenes/player/hud.tscn" id="2_5bfwm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://da8ubrhjai5oj" path="res://assets/sprites/player/player_upper_climb.png" id="6_qj3mk"]
 [ext_resource type="Texture2D" uid="uid://bfvbcvwihbxrw" path="res://assets/sprites/player/player_upper_cast_idle.png" id="7_r8830"]
 [ext_resource type="Texture2D" uid="uid://5qqi5atcscl" path="res://assets/sprites/player/player_upper_fall.png" id="7_u5acw"]
+[ext_resource type="Texture2D" uid="uid://bkprh0xkutkg3" path="res://assets/sprites/player/player_upper_cast_done.png" id="7_usw20"]
 [ext_resource type="Texture2D" uid="uid://c2pkgnpq33u55" path="res://assets/sprites/player/player_upper_idle_sheet.png" id="8_kwpes"]
 [ext_resource type="Texture2D" uid="uid://c1xy45lijke1k" path="res://assets/sprites/player/player_upper_cast_run.png" id="8_ltio8"]
 [ext_resource type="Texture2D" uid="uid://c4lyd42kmsqqh" path="res://assets/sprites/player/player_upper_jump.png" id="9_ukpq1"]
@@ -44,13 +45,21 @@ region = Rect2(32, 0, 32, 32)
 atlas = ExtResource("6_nltnw")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jgfrk"]
-atlas = ExtResource("6_nltnw")
-region = Rect2(96, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_1dlg5"]
 atlas = ExtResource("6_nltnw")
 region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7xc"]
+atlas = ExtResource("7_usw20")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogc4i"]
+atlas = ExtResource("7_usw20")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyq20"]
+atlas = ExtResource("7_usw20")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5tln"]
 atlas = ExtResource("6_nltnw")
@@ -217,14 +226,25 @@ animations = [{
 "texture": SubResource("AtlasTexture_a5ege")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jgfrk")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_1dlg5")
 }],
 "loop": false,
 "name": &"cast",
-"speed": 18.0
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7xc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogc4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyq20")
+}],
+"loop": false,
+"name": &"cast_done",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -798,10 +818,8 @@ z_index = 1
 material = SubResource("ShaderMaterial_0v5y2")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_2q11b")
-animation = &"cast"
+animation = &"cast_done"
 autoplay = "idle"
-frame = 4
-frame_progress = 1.0
 
 [node name="LowerSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_naasp")
