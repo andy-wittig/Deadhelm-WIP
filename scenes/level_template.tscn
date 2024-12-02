@@ -154,7 +154,7 @@ spell_type = "phantasmal_push"
 
 [node name="tome7" parent="." instance=ExtResource("15_lmdlk")]
 position = Vector2(320, -40)
-spell_type = "poison_bottle"
+spell_type = "poison bottle"
 
 [node name="tome8" parent="." instance=ExtResource("15_lmdlk")]
 position = Vector2(336, -40)

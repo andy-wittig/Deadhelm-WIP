@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvvvkp1wrpxoh"]
+[gd_scene load_steps=6 format=3 uid="uid://bvvvkp1wrpxoh"]
 
-[ext_resource type="Texture2D" uid="uid://bvb08qtuwfkpu" path="res://assets/sprites/vfx/bombshell_turtle_pieces.png" id="1_0hmuk"]
-[ext_resource type="Script" path="res://scripts/bombshell_turtle_death.gd" id="1_8psym"]
-[ext_resource type="AudioStream" uid="uid://c6m4neb6yhhqo" path="res://assets/sound effects/enemies/bombshell_turtle_death.wav" id="2_32xrh"]
+[ext_resource type="Script" path="res://scripts/chunk_effect.gd" id="1_d40cn"]
+[ext_resource type="Texture2D" uid="uid://bvb08qtuwfkpu" path="res://assets/sprites/vfx/bombshell_turtle_pieces.png" id="2_dgbsv"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6uywm"]
 resource_local_to_scene = true
@@ -20,20 +19,20 @@ interpolation_mode = 2
 offsets = PackedFloat32Array(0.180124, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="bombshell_turtle_death" type="Node2D"]
+[node name="chunk_effect" type="Node2D"]
 z_index = 10
-script = ExtResource("1_8psym")
+script = ExtResource("1_d40cn")
 
 [node name="ChunkParticles" type="CPUParticles2D" parent="."]
 z_index = -1
 material = SubResource("CanvasItemMaterial_6uywm")
-position = Vector2(0, -6)
 emitting = false
+amount = 10
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 local_coords = true
-texture = ExtResource("1_0hmuk")
+texture = ExtResource("2_dgbsv")
 emission_shape = 1
 emission_sphere_radius = 2.0
 direction = Vector2(0, 0)
@@ -47,10 +46,9 @@ scale_amount_curve = SubResource("Curve_6ltat")
 color_ramp = SubResource("Gradient_qnhx3")
 anim_offset_max = 1.0
 
-[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_32xrh")
-pitch_scale = 1.2
-autoplay = true
-bus = &"SFX"
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
 
-[connection signal="finished" from="DeathAudio" to="." method="_on_death_audio_finished"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_timer_timeout"]

@@ -198,7 +198,8 @@ func hurt_enemy(damage: int, direction: Vector2, force: float):
 @rpc("call_local", "any_peer")
 func destroy_self():
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
-	var death_effect = load("res://scenes/vfx/bombshell_turtle_death.tscn").instantiate()
+	var death_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
+	death_effect.particle_texture_path = "res://assets/sprites/vfx/bombshell_turtle_pieces.png"
 	soul.position = position
 	soul.rarities["diamond"] = 70
 	soul.rarities["emerald"] = 18

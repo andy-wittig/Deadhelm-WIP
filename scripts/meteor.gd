@@ -26,10 +26,14 @@ func _process(delta):
 @rpc("any_peer", "call_local")
 func destroy_self():
 	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
+	var chunk_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
+	chunk_effect.particle_texture_path = "res://assets/sprites/vfx/meteor_pieces.png"
+	chunk_effect.global_position = global_position
 	disolve_effect.spell_texture = $MeteorSprite.texture
 	disolve_effect.global_position = global_position
 	disolve_effect.rotation = rotation
 	get_parent().add_child(disolve_effect)
+	get_parent().add_child(chunk_effect)
 	disolve_effect.reset_physics_interpolation()
 	queue_free()
 	
