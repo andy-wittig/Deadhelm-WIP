@@ -50,7 +50,8 @@ func start_game():
 	GameManager.started_game = true
 	if (!GameManager.multiplayer_mode_enabled || multiplayer.is_server()):
 		FileAccess.open("user://player_info.save", FileAccess.WRITE)
-		change_level.call_deferred(load("res://scenes/level_template.tscn"))
+		#change_level.call_deferred(load("res://scenes/level_template.tscn"))
+		change_level.call_deferred(load("res://scenes/level_grasslands_1.tscn"))
 	
 func change_level(scene: PackedScene):
 	var level = $Level

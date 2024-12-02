@@ -1,8 +1,9 @@
 extends Camera2D
 
+@export var target: CharacterBody2D
 @export var noise : FastNoiseLite
 
-const LERP_SPEED := 0.9
+const LERP_SPEED := .9
 const OFFSET_DAMP := 0.4
 
 var decay := 0.9
@@ -24,13 +25,13 @@ func shake():
 	
 	position = new_offset
 	
-func _process(delta):
+func _physics_process(delta):
 	if (trauma):
 		trauma = max(trauma - decay * delta, 0)
 		shake()
 	
 	if (abs(get_parent().velocity) > Vector2.ZERO):
 		position = position.lerp(Vector2(
-			clamp(get_parent().velocity.x * OFFSET_DAMP, -32, 32), 
-			clamp(get_parent().velocity.y * OFFSET_DAMP, -32, 32)),
+			clamp(target.velocity.x * OFFSET_DAMP, -32, 32), 
+			clamp(target.velocity.y * OFFSET_DAMP, -32, 32)),
 			delta * LERP_SPEED)

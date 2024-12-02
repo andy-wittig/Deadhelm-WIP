@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://341qtet028jn" path="res://assets/sprites/player/player_lower_run_sheet.png" id="16_rclf3"]
 [ext_resource type="Texture2D" uid="uid://dph1bg6ofyifx" path="res://assets/sprites/player/player_lower_sit_sheet.png" id="17_b2fmw"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_nnqmg"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tirl6"]
 frequency = 0.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0v5y2"]
@@ -796,9 +796,11 @@ collision_mask = 16
 safe_margin = 0.01
 script = ExtResource("1_6jjtq")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(0, -16)
+ignore_rotation = false
 zoom = Vector2(4, 4)
+process_callback = 0
 limit_left = 0
 limit_bottom = 0
 limit_smoothed = true
@@ -807,7 +809,8 @@ position_smoothing_speed = 6.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("2_m6nil")
-noise = SubResource("FastNoiseLite_nnqmg")
+target = NodePath("..")
+noise = SubResource("FastNoiseLite_tirl6")
 
 [node name="hud" parent="." instance=ExtResource("2_5bfwm")]
 
