@@ -9,7 +9,7 @@ func get_sprite_path():
 	return $ShieldSprite.texture.resource_path
 	
 func _ready():
-	shield_sprite.rotation = player.spell_direction.angle()
+	rotation = player.spell_direction.angle()
 	global_position = player.spell_spawn.global_position
 
 func _on_area_entered(area):
@@ -23,6 +23,7 @@ func _on_destroy_timer_timeout():
 	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
 	disolve_effect.spell_texture = $ShieldSprite.texture
 	disolve_effect.global_position = global_position
-	disolve_effect.spell_rotation = $ShieldSprite.rotation
+	disolve_effect.rotation = rotation
 	get_parent().add_child(disolve_effect)
+	disolve_effect.reset_physics_interpolation()
 	queue_free()

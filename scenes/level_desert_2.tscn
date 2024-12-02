@@ -222,6 +222,7 @@ position = Vector2(272, -320)
 
 [node name="player" parent="players" instance=ExtResource("8_mevk6")]
 z_index = 5
+position = Vector2(592, -176)
 
 [node name="spawn_point" type="Marker2D" parent="."]
 position = Vector2(272, -320)

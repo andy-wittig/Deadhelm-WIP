@@ -11,23 +11,12 @@ func get_sprite_path():
 	return $FlameOrbSprite.texture.resource_path
 	
 func _ready():
-	if (GameManager.multiplayer_mode_enabled):
-		if (multiplayer.get_unique_id() == player.player_id): 
-			set_spell_position()
-	else:
-		set_spell_position()
+	global_position = player.spell_spawn.global_position
+	rotation = player.spell_direction.angle()
 	
 func _process(_delta):
-	if (GameManager.multiplayer_mode_enabled):
-		if (multiplayer.get_unique_id() == player.player_id):
-			set_spell_position()
-	else:
-		set_spell_position()
-
-func set_spell_position():
 	global_position = player.spell_spawn.global_position
-	flame_animated_sprite.rotation = player.spell_direction.angle()
-	flame_orb_sprite.rotation = player.spell_direction.angle()
+	rotation = player.spell_direction.angle()
 	
 	if (player.velocity.y < 0):
 		player.apply_knockback(global_position, PLAYER_KNOCK_BACK)
@@ -35,7 +24,10 @@ func set_spell_position():
 func _on_destroy_timer_timeout():
 	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
 	disolve_effect.player = player
+	disolve_effect.global_position = global_position
+	disolve_effect.rotation = rotation
 	disolve_effect.spell_texture = $FlameAnimatedSprite.get_sprite_frames().get_frame_texture("flame", 0)
 	disolve_effect.spell_offset = $FlameAnimatedSprite.offset
 	get_parent().add_child(disolve_effect)
+	disolve_effect.reset_physics_interpolation()
 	queue_free()

@@ -28,8 +28,9 @@ func destroy_self():
 	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
 	disolve_effect.spell_texture = $MeteorSprite.texture
 	disolve_effect.global_position = global_position
-	disolve_effect.spell_rotation = $MeteorSprite.rotation
+	disolve_effect.rotation = rotation
 	get_parent().add_child(disolve_effect)
+	disolve_effect.reset_physics_interpolation()
 	queue_free()
 	
 func _on_destroy_timer_timeout():

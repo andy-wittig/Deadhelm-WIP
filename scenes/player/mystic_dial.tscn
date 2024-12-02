@@ -1,9 +1,26 @@
-[gd_scene load_steps=25 format=3 uid="uid://oh3fs6ugskct"]
+[gd_scene load_steps=23 format=3 uid="uid://oh3fs6ugskct"]
 
 [ext_resource type="Texture2D" uid="uid://b86co1pvkl007" path="res://assets/sprites/player/mystic dial.png" id="1_tn40v"]
 [ext_resource type="Script" path="res://scripts/mystic_dial.gd" id="1_x6f12"]
 [ext_resource type="Texture2D" uid="uid://bsbd0mgvk5p7o" path="res://assets/sprites/vfx/mystic effect.png" id="3_hhvmr"]
 [ext_resource type="Texture2D" uid="uid://bsuyliq874gxv" path="res://assets/sprites/vfx/spell_spawn_effect.png" id="4_uhfer"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5afcx"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sako6"]
+load_path = "res://.godot/imported/mystic effect.png-3723cecb40e370e18b77ef678e2aa9a3.ctex"
+
+[sub_resource type="Curve" id="Curve_p6y7x"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_irjvi"]
+offsets = PackedFloat32Array(0, 0.246667, 0.626667, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1, 1, 0)
 
 [sub_resource type="Animation" id="Animation_myx2l"]
 length = 0.001
@@ -34,34 +51,10 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ParticlePath1/PathFollow2D:progress_ratio")
+tracks/2/path = NodePath("SpawnEffect:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ParticlePath2/PathFollow2D:progress_ratio")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("SpawnEffect:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -87,6 +80,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_3qcdt"]
 resource_name = "fade_out"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -102,35 +96,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ParticlePath1/PathFollow2D:progress_ratio")
-tracks/1/interp = 1
+tracks/1/path = NodePath("SpawnEffect:modulate")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ParticlePath2/PathFollow2D:progress_ratio")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("SpawnEffect:modulate")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -142,49 +112,6 @@ _data = {
 "dial_rotate": SubResource("Animation_sgfuw"),
 "fade_out": SubResource("Animation_3qcdt")
 }
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5afcx"]
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 2
-particles_anim_loop = false
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sako6"]
-load_path = "res://.godot/imported/mystic effect.png-3723cecb40e370e18b77ef678e2aa9a3.ctex"
-
-[sub_resource type="Curve" id="Curve_p6y7x"]
-_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_irjvi"]
-offsets = PackedFloat32Array(0, 0.246667, 0.626667, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1, 1, 0)
-
-[sub_resource type="Curve2D" id="Curve2D_x5rtt"]
-_data = {
-"points": PackedVector2Array(-5.52501, 29.7789, 0, -30, -24, 0, 0, -30, 0, 30, 24, 0)
-}
-point_count = 2
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bohdq"]
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 2
-particles_anim_loop = false
-
-[sub_resource type="Curve" id="Curve_4clv3"]
-_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.5, 0.75), 0.0, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="Gradient" id="Gradient_cw4dc"]
-offsets = PackedFloat32Array(0, 0.44, 0.813333, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1, 1, 0)
-
-[sub_resource type="Curve2D" id="Curve2D_rnrog"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 30, -24, 0, 0, 30, 0, 0, 24, 0)
-}
-point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w2mc8"]
 atlas = ExtResource("4_uhfer")
@@ -236,6 +163,20 @@ animations = [{
 "speed": 18.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bohdq"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_4clv3"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.5, 0.75), 0.0, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_cw4dc"]
+offsets = PackedFloat32Array(0, 0.239583, 0.677083, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1, 1, 0)
+
 [node name="mystic dial" type="Node2D"]
 z_index = 5
 script = ExtResource("1_x6f12")
@@ -247,12 +188,6 @@ texture = ExtResource("1_tn40v")
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 0.8
 one_shot = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_qm5rv")
-}
-autoplay = "dial_rotate"
 
 [node name="MysticDialAudio" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
@@ -288,67 +223,57 @@ scale_amount_curve = SubResource("Curve_p6y7x")
 color_ramp = SubResource("Gradient_irjvi")
 anim_offset_max = 1.0
 
-[node name="ParticlePath1" type="Path2D" parent="."]
-curve = SubResource("Curve2D_x5rtt")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="ParticlePath1"]
-position = Vector2(-24, 0)
-rotation = -1.5708
-
-[node name="MysticPathParticles" type="CPUParticles2D" parent="ParticlePath1/PathFollow2D"]
-material = SubResource("CanvasItemMaterial_bohdq")
-rotation = 3.14159
-emitting = false
-amount = 15
-lifetime = 0.4
-one_shot = true
-texture = ExtResource("3_hhvmr")
-emission_shape = 1
-emission_sphere_radius = 2.0
-direction = Vector2(0, 0)
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 15.0
-initial_velocity_max = 15.0
-damping_min = 15.0
-damping_max = 15.0
-angle_max = 360.0
-scale_amount_curve = SubResource("Curve_4clv3")
-color_ramp = SubResource("Gradient_cw4dc")
-anim_offset_max = 1.0
-
-[node name="ParticlePath2" type="Path2D" parent="."]
-curve = SubResource("Curve2D_rnrog")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="ParticlePath2"]
-position = Vector2(-24, 0)
-rotation = 1.5708
-
-[node name="MysticPathParticles" type="CPUParticles2D" parent="ParticlePath2/PathFollow2D"]
-material = SubResource("CanvasItemMaterial_bohdq")
-rotation = 3.14159
-emitting = false
-amount = 15
-lifetime = 0.4
-one_shot = true
-texture = ExtResource("3_hhvmr")
-emission_shape = 1
-emission_sphere_radius = 2.0
-direction = Vector2(0, 0)
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 15.0
-initial_velocity_max = 15.0
-damping_min = 15.0
-damping_max = 15.0
-angle_max = 360.0
-scale_amount_curve = SubResource("Curve_4clv3")
-color_ramp = SubResource("Gradient_cw4dc")
-anim_offset_max = 1.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qm5rv")
+}
+autoplay = "dial_rotate"
 
 [node name="SpawnEffect" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_wkfi3")
 animation = &"effect"
+
+[node name="PathParticle1" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_bohdq")
+emitting = false
+amount = 15
+lifetime = 0.4
+one_shot = true
+texture = ExtResource("3_hhvmr")
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+damping_min = 15.0
+damping_max = 15.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_4clv3")
+color_ramp = SubResource("Gradient_cw4dc")
+anim_offset_max = 1.0
+
+[node name="PathParticle2" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_bohdq")
+emitting = false
+amount = 15
+lifetime = 0.4
+one_shot = true
+texture = ExtResource("3_hhvmr")
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+damping_min = 15.0
+damping_max = 15.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_4clv3")
+color_ramp = SubResource("Gradient_cw4dc")
+anim_offset_max = 1.0
 
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

@@ -11,13 +11,12 @@ var player : CharacterBody2D
 func _ready():
 	sprite.offset = spell_offset
 	sprite.texture = spell_texture
-	sprite.rotation = spell_rotation
 	sprite.scale = spell_scale
 	
 func _process(_delta):
 	if (player != null):
 		global_position = player.spell_spawn.global_position
-		sprite.rotation = player.spell_direction.angle()
+		rotation = player.spell_direction.angle()
 
 func _on_animation_player_animation_finished(anim_name):
 	queue_free()

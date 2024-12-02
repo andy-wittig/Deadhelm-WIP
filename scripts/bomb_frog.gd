@@ -193,8 +193,9 @@ func hurt_enemy(damage: int, direction: Vector2, force: float):
 	apply_knockback(direction, force)
 	
 	var impact = load("res://scenes/vfx/impact.tscn").instantiate()
-	get_parent().add_child(impact)
 	impact.position = Vector2(position.x, position.y - 6)
+	get_parent().add_child(impact)
+	impact.reset_physics_interpolation()
 	
 	enemy_health -= damage
 	enemy_health = max(enemy_health, 0)

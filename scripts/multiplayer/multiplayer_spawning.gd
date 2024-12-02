@@ -1,6 +1,6 @@
 extends Node2D
 
-var multiplayer_scene = preload("res://scenes/player/multiplayer_player.tscn")
+var multiplayer_scene = load("res://scenes/player/multiplayer_player.tscn")
 
 @onready var players_spawn_node = $players
 
@@ -48,4 +48,3 @@ func _remove_single_player():
 	print ("Removing single player")
 	var player_to_remove = players_spawn_node.get_node("player")
 	player_to_remove.queue_free()
-

@@ -14,9 +14,9 @@ func get_sprite_path():
 	
 func _ready():
 	direction = player.spell_direction
-	hand_sprite.rotation = direction.angle()
-	hand_sprite.scale.y = player.mouse_facing
-	position = player.spell_spawn.global_position
+	rotation = direction.angle()
+	scale.y = player.mouse_facing
+	global_position = player.spell_spawn.global_position
 
 func _process(delta):
 	position += direction * SPEED * delta
@@ -30,9 +30,10 @@ func destroy_self():
 	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
 	disolve_effect.spell_texture = hand_sprite.texture
 	disolve_effect.global_position = global_position
-	disolve_effect.spell_rotation = hand_sprite.rotation
-	disolve_effect.spell_scale = hand_sprite.scale
+	disolve_effect.rotation = rotation
+	disolve_effect.scale = scale
 	get_parent().add_child(disolve_effect)
+	disolve_effect.reset_physics_interpolation()
 	queue_free()
 	
 func _on_destroy_timer_timeout():
@@ -41,8 +42,7 @@ func _on_destroy_timer_timeout():
 func _on_ghost_timer_timeout():
 	var ghost = ghost_effect.instantiate()
 	ghost.sprite_path = "res://assets/sprites/level_objects/spells/phantasmal_push.png"
-	ghost.sprite_offset = Vector2(0, 0)
-	ghost.sprite_rotation = hand_sprite.rotation
-	ghost.sprite_scale = hand_sprite.scale
+	ghost.rotation = rotation
+	ghost.scale = scale
 	ghost.position = position
 	get_parent().add_child(ghost)

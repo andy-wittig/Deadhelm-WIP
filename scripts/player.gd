@@ -240,10 +240,10 @@ func _process(delta):
 		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("cast_spell")):
 			spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
 			dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
-			get_parent().add_child(dial_instance)
-			dial_instance.position.x = player_center.global_position.x
-			dial_instance.position.y = player_center.global_position.y
 			dial_instance.player = self
+			dial_instance.global_position = player_center.global_position
+			get_parent().add_child(dial_instance)
+			dial_instance.reset_physics_interpolation()
 			dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
 			dial_created = true
 		
@@ -252,7 +252,9 @@ func _process(delta):
 			var spell_path = currently_selected_slot.get_spell_instance()
 			var new_spell = load(spell_path).instantiate()
 			new_spell.player = self
+			new_spell.global_position = spell_spawn.global_position
 			get_tree().get_root().get_node("game/Level").add_child(new_spell)
+			new_spell.reset_physics_interpolation()
 			play_sound("cast")
 			
 			currently_selected_slot.start_cooldown(currently_selected_slot.get_slot_item())

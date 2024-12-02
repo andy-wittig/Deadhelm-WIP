@@ -19,8 +19,9 @@ func on_destroy_timer_timeout():
 	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
 	disolve_effect.spell_texture = $SpellSprite.texture
 	disolve_effect.global_position = global_position
-	disolve_effect.spell_rotation = $SpellSprite.rotation
+	disolve_effect.rotation = rotation
 	get_parent().add_child(disolve_effect)
+	disolve_effect.reset_physics_interpolation()
 	
 	var explosion = load("res://scenes/player/spells/morning_star_explosion.tscn").instantiate()
 	explosion.global_position = global_position

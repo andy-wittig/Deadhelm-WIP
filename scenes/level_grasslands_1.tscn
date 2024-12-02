@@ -293,11 +293,3 @@ message_wait = 2
 
 [node name="lamp_post" parent="." instance=ExtResource("27_0qcml")]
 position = Vector2(328, -464)
-
-[node name="tome2" parent="." instance=ExtResource("23_cni07")]
-position = Vector2(168, -440)
-spell_type = "lightning"
-
-[node name="tome3" parent="." instance=ExtResource("23_cni07")]
-position = Vector2(192, -464)
-spell_type = "flame"
