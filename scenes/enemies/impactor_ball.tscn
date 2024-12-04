@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://bihdj8fr708ki" path="res://assets/sprites/enemies/projectiles/impactor_ball.png" id="1_el4nr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1rf2u"]
+friction = 0.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mh562"]
-radius = 6.0
+radius = 8.0
 
 [sub_resource type="Animation" id="Animation_hkadt"]
 length = 0.001

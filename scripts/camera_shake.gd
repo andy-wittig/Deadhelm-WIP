@@ -8,7 +8,7 @@ const OFFSET_DAMP := 0.4
 
 var decay := 0.9
 var max_offset := Vector2(16, 16)
-var max_roll := 0.1
+var max_roll := 0.08
 var trauma := 0.0
 var noise_y := 0
 	

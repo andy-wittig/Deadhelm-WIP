@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dyruqot1bthjn"]
+[gd_scene load_steps=38 format=3 uid="uid://dyruqot1bthjn"]
 
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="1_61iyt"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_15plg"]
@@ -16,10 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://bvgm67ftgfnlp" path="res://scenes/level_objects/stone_spike.tscn" id="10_bicai"]
 [ext_resource type="PackedScene" uid="uid://oq2a4voisjg1" path="res://scenes/level_objects/spawner.tscn" id="12_rrn3e"]
 [ext_resource type="PackedScene" uid="uid://6fmdfddl6dkc" path="res://scenes/level_objects/offering shrine.tscn" id="13_3vntk"]
-[ext_resource type="PackedScene" uid="uid://dkt3s7wbnw3ek" path="res://scenes/enemies/fester.tscn" id="14_132gn"]
 [ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="15_pvjjp"]
 [ext_resource type="PackedScene" uid="uid://dunbwsblhvliw" path="res://scenes/level_objects/totem.tscn" id="19_uunp8"]
-[ext_resource type="PackedScene" uid="uid://bkmgf0sqr7pk3" path="res://scenes/enemies/golem.tscn" id="20_i1og4"]
 [ext_resource type="PackedScene" uid="uid://dv7ii30ng3m2" path="res://scenes/level_objects/rock_wall.tscn" id="21_c1qg4"]
 [ext_resource type="PackedScene" uid="uid://xekuabglq1uh" path="res://scenes/level_objects/lantern.tscn" id="21_pc1p8"]
 [ext_resource type="PackedScene" uid="uid://cg0s11w7gjjxq" path="res://scenes/level_objects/zip_line.tscn" id="22_41dsn"]
@@ -599,7 +597,6 @@ coin_amount = 6
 position = Vector2(248, -176)
 spawn_enemy_type = Array[PackedScene]([ExtResource("10_01chv"), ExtResource("10_01chv"), ExtResource("10_01chv")])
 tile_map = NodePath("../../TileMap")
-spawn_range = 4
 spawn_wait = 2.0
 
 [node name="offering shrine" parent="Level Objects" instance=ExtResource("13_3vntk")]
@@ -619,10 +616,10 @@ spell_type = "poison bottle"
 
 [node name="spawner2" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("12_rrn3e")]
 position = Vector2(432, -976)
-spawn_enemy_type = Array[PackedScene]([ExtResource("14_132gn"), ExtResource("14_132gn"), ExtResource("20_i1og4")])
+spawn_enemy_type = Array[PackedScene]([ExtResource("10_01chv"), ExtResource("10_01chv"), ExtResource("10_01chv")])
 tile_map = NodePath("../../TileMap")
-spawn_range = 3
-spawn_wait = 4.0
+spawn_range = Vector2(3, 4)
+spawn_wait = 2.0
 max_spawn_uses = 3
 
 [node name="chest3" parent="Level Objects" instance=ExtResource("6_8vvf1")]

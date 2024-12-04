@@ -40,6 +40,7 @@ var spell_direction: Vector2
 var mouse_facing := 0
 var double_jump_active := false
 var double_jump := 0
+var invincible := false
 #Player Inventory Variables
 var selected_slot_pos := 0
 var currently_selected_slot = null
@@ -265,9 +266,12 @@ func _process(delta):
 	#Developer Cheats
 	if (Input.is_action_just_pressed("cheat_button_1")):
 		souls_collected += 10
-		
 	if Input.is_action_just_pressed("cheat_button_2"):
 		global_position = portal_gate.global_position
+	if Input.is_action_just_pressed("cheat_button_3"):
+		invincible = !invincible
+	if Input.is_action_just_pressed("cheat_button_4"):
+		global_position = get_global_mouse_position()
 
 func _physics_process(delta):
 	#simple state machine
@@ -475,19 +479,20 @@ func heal_player(health: int):
 	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 
 func hurt_player(damage: int, other_pos: Vector2, force: float):
-	animation_player.play("player_hurt")
-	play_sound("hurt")
-	set_screen_shake(0.5)
-	apply_knockback(other_pos, force)
-	
-	player_health -= damage
-	player_health = max(player_health, 0)
-	
-	var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
-	damage_indicator.damage_amount = damage
-	damage_indicator.damage_indicator_color = "ec273f"
-	damage_indicator.global_position = player_center.global_position
-	get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
+	if (!invincible):
+		animation_player.play("player_hurt")
+		play_sound("hurt")
+		set_screen_shake(0.5)
+		apply_knockback(other_pos, force)
+		
+		player_health -= damage
+		player_health = max(player_health, 0)
+		
+		var damage_indicator = load("res://scenes/player/damage_indicator.tscn").instantiate()
+		damage_indicator.damage_amount = damage
+		damage_indicator.damage_indicator_color = "ec273f"
+		damage_indicator.global_position = player_center.global_position
+		get_tree().get_root().get_node("game/Level").add_child(damage_indicator)
 	
 func disable_player():
 	set_process(false)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bevvq8dlvdjip"]
+[gd_scene load_steps=18 format=3 uid="uid://bevvq8dlvdjip"]
 
 [ext_resource type="Texture2D" uid="uid://flm0ssvuccmi" path="res://assets/sprites/level_objects/stalactite.png" id="1_kttog"]
 [ext_resource type="Script" path="res://scripts/stalactite.gd" id="1_nmj2m"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="2_nqyc6"]
+[ext_resource type="Texture2D" uid="uid://c115fn07p0kyp" path="res://assets/sprites/vfx/stalactite_pieces.png" id="4_dsu85"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ucilh"]
 properties/0/path = NodePath(".:position")
@@ -82,12 +83,33 @@ _data = {
 "fall": SubResource("Animation_eogp4")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_epxyl"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
 [sub_resource type="Curve" id="Curve_nay0b"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.494505), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_sg3fj"]
-colors = PackedColorArray(0.301961, 0.207843, 0.2, 1, 0.54902, 0.470588, 0.647059, 0)
+offsets = PackedFloat32Array(0.208333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_43w5w"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_kv3q7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.604396), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_0y8os"]
+offsets = PackedFloat32Array(0, 0.135417, 0.760417, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="stalactite" type="Area2D" groups=["enemy_projectile"]]
 z_index = 6
@@ -101,10 +123,9 @@ replication_config = SubResource("SceneReplicationConfig_ucilh")
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ngn05")
 
-[node name="HurtPlayerArea" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("2_nqyc6")]
+[node name="HurtPlayerArea" parent="." instance=ExtResource("2_nqyc6")]
 damage = 10
 knock_back_force = 45
-shape = NodePath("CollisionShape2D2")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
 position = Vector2(0, -2)
@@ -132,24 +153,44 @@ libraries = {
 "": SubResource("AnimationLibrary_fs65l")
 }
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="FallingParticles" type="CPUParticles2D" parent="."]
 z_index = -1
+material = SubResource("CanvasItemMaterial_epxyl")
 position = Vector2(0, -8)
 emitting = false
-amount = 12
 lifetime_randomness = 0.5
+texture = ExtResource("4_dsu85")
 emission_shape = 3
 emission_rect_extents = Vector2(4, 1)
 direction = Vector2(0, -1)
-gravity = Vector2(0, 0)
+gravity = Vector2(0, 90)
 initial_velocity_min = 12.0
 initial_velocity_max = 20.0
 damping_min = 15.0
 damping_max = 15.0
-scale_amount_min = 2.0
-scale_amount_max = 2.0
+angle_min = -720.0
+angle_max = 720.0
 scale_amount_curve = SubResource("Curve_nay0b")
 color_ramp = SubResource("Gradient_sg3fj")
+anim_offset_max = 1.0
+
+[node name="IdleParticles" type="CPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_43w5w")
+amount = 2
+lifetime = 2.0
+explosiveness = 0.6
+randomness = 0.8
+lifetime_randomness = 0.6
+texture = ExtResource("4_dsu85")
+emission_shape = 3
+emission_rect_extents = Vector2(4, 1)
+gravity = Vector2(0, 90)
+angle_min = -45.0
+angle_max = 45.0
+scale_amount_curve = SubResource("Curve_kv3q7")
+color_ramp = SubResource("Gradient_0y8os")
+anim_offset_max = 1.0
 
 [connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

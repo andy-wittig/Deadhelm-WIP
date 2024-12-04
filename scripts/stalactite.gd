@@ -9,7 +9,8 @@ var can_fall := true
 
 @onready var animation_player = $AnimationPlayer
 @onready var ray_cast = $RayCast2D
-@onready var fall_particles = $CPUParticles2D
+@onready var fall_particles = $FallingParticles
+@onready var idle_particles = $IdleParticles
 
 func _ready():
 	origin = global_position
@@ -26,6 +27,7 @@ func _process(delta):
 	if (stalactite_fall):
 		if ($FallTimer.get_time_left() == 0):
 			fall_particles.emitting = true
+			idle_particles.emitting = false
 			animation_player.play("fall")
 			$FallTimer.start()
 		position += Vector2.DOWN * FALL_VELOCITY * delta
@@ -38,6 +40,7 @@ func start_fall():
 func _on_fall_timer_timeout():
 	global_position = origin
 	fall_particles.emitting = false
+	idle_particles.emitting = true
 	animation_player.play("fade_in")
 	stalactite_fall = false
 	$WaitTimer.start()
