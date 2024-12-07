@@ -1,6 +1,5 @@
-[gd_scene load_steps=20 format=3 uid="uid://b00u5431eiqqh"]
+[gd_scene load_steps=19 format=3 uid="uid://b00u5431eiqqh"]
 
-[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_1cbdb"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_bo8sg"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_h72fo"]
 [ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_s6k1g"]
@@ -26,7 +25,6 @@ gradient = SubResource("Gradient_s5sk3")
 fill_to = Vector2(0, 1)
 
 [node name="level_name" type="Node2D"]
-script = ExtResource("1_1cbdb")
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -100
@@ -156,7 +154,7 @@ spell_type = "phantasmal_push"
 
 [node name="tome7" parent="." instance=ExtResource("15_lmdlk")]
 position = Vector2(320, -40)
-spell_type = "poison bottle"
+spell_type = "poison_bottle"
 
 [node name="tome8" parent="." instance=ExtResource("15_lmdlk")]
 position = Vector2(336, -40)
@@ -166,6 +164,5 @@ spell_type = "shield"
 position = Vector2(624, -128)
 spawn_enemy_type = Array[PackedScene]([ExtResource("17_brjha")])
 tile_map = NodePath("../TileMap")
-spawn_range = 4
 spawn_wait = 0.1
 max_spawn_uses = 1000

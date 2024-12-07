@@ -16,11 +16,6 @@ func _on_settings_button_pressed():
 
 func _on_leave_button_pressed():
 	menu_started = false
-	if (GameManager.multiplayer_mode_enabled): #multiplayer disconnect
-		if (multiplayer.is_server()): multiplayer.multiplayer_peer = null
-		else: multiplayer.multiplayer_peer.disconnect_peer(1)
-		GameManager.multiplayer_mode_enabled = false
-		GameManager.host_mode_enabled = false
 	GameManager.started_game = false
 	game.end_level()
 	menu_layer.current_menu = menu_layer.menu.MAIN

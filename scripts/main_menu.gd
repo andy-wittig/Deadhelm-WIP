@@ -2,7 +2,6 @@ extends CanvasLayer
 
 enum menu {
 	MAIN,
-	MULTIPLAYER,
 	SETTINGS,
 	CREDITS,
 	INGAME,
@@ -17,7 +16,6 @@ var menu_started := false
 	"main_menu" : $MenuControl/MenuContainer,
 	"title_background" : $MenuControl/TitleBackground,
 	"settings_menu" : $MenuControl/settings_menu,
-	"multiplayer_menu" : $MenuControl/multiplayer_menu,
 	"credits_menu" : $MenuControl/credits_menu,
 	"in_game_menu" : $MenuControl/in_game_menu,
 	"journal" : $MenuControl/JournalMenu,
@@ -49,13 +47,6 @@ func _process(_delta):
 					menu_scenes[scene].visible = true
 					if (scene == "main_menu"):
 						menu_opened()
-		menu.MULTIPLAYER:
-			for scene in menu_scenes:
-				if (scene != "multiplayer_menu" && scene != "title_background"):
-					menu_scenes[scene].visible = false
-				else:
-					menu_scenes[scene].visible = true
-					menu_scenes["multiplayer_menu"].menu_opened()
 		menu.SETTINGS:
 			for scene in menu_scenes:
 				if (scene != "settings_menu"):
@@ -119,10 +110,6 @@ func return_to_prev_menu():
 
 func _on_start_button_pressed():
 	get_owner().start_game()
-	menu_started = false
-
-func _on_multiplayer_button_pressed():
-	current_menu = menu.MULTIPLAYER
 	menu_started = false
 	
 func _on_settings_button_pressed():

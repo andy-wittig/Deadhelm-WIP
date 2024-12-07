@@ -18,7 +18,6 @@ var rarities = {
 	"onyx" : 0,
 }
 
-@rpc("any_peer", "call_local")
 func destroy_self():
 	var pickup_effect = load("res://scenes/vfx/item_pickup.tscn").instantiate()
 	pickup_effect.global_position = global_position
@@ -80,15 +79,10 @@ func _process(delta):
 	sprite.material.set_shader_parameter("enabled", false)
 	for body in detect_player.get_overlapping_bodies():
 		if (body.is_in_group("players")):
-			if (!GameManager.multiplayer_mode_enabled ||
-			body.player_id == multiplayer.get_unique_id()):
-				sprite.material.set_shader_parameter("enabled", true)
-				if (Input.is_action_just_pressed("pickup") && can_collect):
-					for i in range(soul_value):
-						body.collect_soul()
-					set_player_effect(body)
-					can_collect = false
-					if (!GameManager.multiplayer_mode_enabled):
-						destroy_self()
-					elif (multiplayer.is_server()):
-						rpc("destroy_self")
+			sprite.material.set_shader_parameter("enabled", true)
+			if (Input.is_action_just_pressed("pickup") && can_collect):
+				for i in range(soul_value):
+					body.collect_soul()
+				set_player_effect(body)
+				can_collect = false
+				destroy_self()

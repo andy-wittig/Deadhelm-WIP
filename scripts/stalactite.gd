@@ -19,10 +19,7 @@ func _process(delta):
 	if ray_cast.is_colliding():
 		var body = ray_cast.get_collider()
 		if (body.is_in_group("players") && can_fall):
-			if (!GameManager.multiplayer_mode_enabled):
-				start_fall()
-			elif (multiplayer.is_server()):
-				rpc("start_fall")
+			start_fall()
 			
 	if (stalactite_fall):
 		if ($FallTimer.get_time_left() == 0):
@@ -31,8 +28,7 @@ func _process(delta):
 			animation_player.play("fall")
 			$FallTimer.start()
 		position += Vector2.DOWN * FALL_VELOCITY * delta
-		
-@rpc("call_local", "any_peer")
+
 func start_fall():
 	stalactite_fall = true
 	can_fall = false
@@ -48,7 +44,6 @@ func _on_fall_timer_timeout():
 func _on_wait_timer_timeout():
 	animation_player.play("RESET")
 	can_fall = true
-	
-@rpc("call_local")
+
 func destroy_self():
 	queue_free()

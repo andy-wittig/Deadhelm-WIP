@@ -46,15 +46,13 @@ func _process(delta):
 		for area in $LineCollisionShapes.get_overlapping_areas():
 			if (area.is_in_group("players")):
 				var body = area.get_parent()
-				if (!GameManager.multiplayer_mode_enabled ||
-				body.player_id == multiplayer.get_unique_id()):
-					if (Input.is_action_just_pressed("pickup")):
-						body.state = body.state_type.ZIPLINE
-						zipline_active = true
-						player = body
-						
-						var offset = zipline_path.curve.get_closest_offset(zipline_path.to_local(player.player_center.global_position))
-						zipline_follow.progress = offset
+				if (Input.is_action_just_pressed("pickup")):
+					body.state = body.state_type.ZIPLINE
+					zipline_active = true
+					player = body
+					
+					var offset = zipline_path.curve.get_closest_offset(zipline_path.to_local(player.player_center.global_position))
+					zipline_follow.progress = offset
 	else:
 		zipline_follow.progress += player.ZIPLINE_SPEED * delta
 		player.global_position = zipline_follow.global_position - player.player_center.position

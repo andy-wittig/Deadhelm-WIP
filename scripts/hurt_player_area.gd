@@ -16,10 +16,7 @@ func _process(_delta):
 				can_hurt = false
 
 func apply_damage(body):
-	if (!GameManager.multiplayer_mode_enabled): #single player
-			body.hurt_player(damage, global_position, knock_back_force)
-	elif (multiplayer.is_server()): #multiplayer
-		body.hurt_player.rpc_id(body.player_id, damage, global_position, knock_back_force)	
+	body.hurt_player(damage, global_position, knock_back_force)	
 	
 func _on_hurt_player_timer_timeout():
 	can_hurt = true

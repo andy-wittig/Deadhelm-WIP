@@ -1,12 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqbypq7pvrrg7"]
+[gd_scene load_steps=3 format=3 uid="uid://cqbypq7pvrrg7"]
 
-[ext_resource type="Script" path="res://scripts/platform.gd" id="1_b5nxq"]
 [ext_resource type="Texture2D" uid="uid://d30jjelyeh4xq" path="res://assets/sprites/level_objects/tilesheet final.png" id="2_cq4ls"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6x6i1"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ki4nm"]
 size = Vector2(16, 9)
@@ -14,10 +8,6 @@ size = Vector2(16, 9)
 [node name="platform" type="AnimatableBody2D"]
 collision_layer = 16
 collision_mask = 0
-script = ExtResource("1_b5nxq")
-
-[node name="PlatformSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_6x6i1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 5.5)

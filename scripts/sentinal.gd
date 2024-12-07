@@ -46,8 +46,7 @@ func get_start_pos():
 
 func apply_knockback(force_direction: Vector2, force: float):
 		knock_back = force_direction.normalized() * force
-	
-@rpc("any_peer", "call_local")
+
 func hurt_enemy(damage: int, direction: Vector2, force: float):
 	emit_signal("enemy_was_hurt")
 	animation_player.play("enemy_blink")
@@ -60,8 +59,7 @@ func hurt_enemy(damage: int, direction: Vector2, force: float):
 	
 	enemy_health -= damage
 	enemy_health = max(enemy_health, 0)
-	
-@rpc("call_local", "any_peer")
+
 func destroy_self():
 	get_tree().call_group("unlock_enemy", "unlock_page", 4)
 	
@@ -80,8 +78,7 @@ func destroy_self():
 	
 	marked_for_death = true
 	queue_free()
-	
-@rpc("call_local")
+
 func attack(direction):
 	var rocket = load("res://scenes/enemies/sentinal_rocket.tscn").instantiate()
 	rocket.direction = direction
@@ -94,62 +91,54 @@ func update_rand_direction():
 	roam_direction = (Vector2(rand_x, rand_y) - global_position).normalized()
 
 func _process(_delta):
-	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-		for body in chase_player.get_overlapping_bodies():
-			if (body.is_in_group("players")):
-				if (!chasing_player):
-					player = body
-					chasing_player = true
-					%AttackTimer.start()
-					state = state_type.CHASE
-				return
-		#player left detection radius
-		player = null
-		chasing_player = false
-		%AttackTimer.stop()
-		state = state_type.MOVING
+	for body in chase_player.get_overlapping_bodies():
+		if (body.is_in_group("players")):
+			if (!chasing_player):
+				player = body
+				chasing_player = true
+				%AttackTimer.start()
+				state = state_type.CHASE
+			return
+	#player left detection radius
+	player = null
+	chasing_player = false
+	%AttackTimer.stop()
+	state = state_type.MOVING
 
 func _physics_process(delta):
-	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-		#Handle enemy death
-		if (enemy_health <= 0):
-			if (!marked_for_death):
-				if (!GameManager.multiplayer_mode_enabled):
-					destroy_self()
-				elif (multiplayer.is_server()):
-					rpc("destroy_self")
-			
-		#flip sprite
-		if (global_position.x + roam_direction.x > global_position.x):
-			body_sprite.flip_h = true
-			gun_sprite.rotation = deg_to_rad(-135)
-			gun_sprite.flip_v = true
-		elif (global_position.x + roam_direction.x < global_position.x):
-			body_sprite.flip_h = false
-			gun_sprite.rotation = deg_to_rad(-45)
-			gun_sprite.flip_v = false
+	#Handle enemy death
+	if (enemy_health <= 0):
+		if (!marked_for_death):
+			destroy_self()
+	#flip sprite
+	if (global_position.x + roam_direction.x > global_position.x):
+		body_sprite.flip_h = true
+		gun_sprite.rotation = deg_to_rad(-135)
+		gun_sprite.flip_v = true
+	elif (global_position.x + roam_direction.x < global_position.x):
+		body_sprite.flip_h = false
+		gun_sprite.rotation = deg_to_rad(-45)
+		gun_sprite.flip_v = false
 		
 	match state:
 		state_type.MOVING:	
-			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
-				|| ray_cast_up.is_colliding() || ray_cast_down.is_colliding()):
-					roam_direction = -roam_direction
-					
-				if (init_position.distance_to(global_position) >= ROAM_RANGE):
-					roam_direction = (init_position - global_position).normalized()
-					
-				velocity = roam_direction * SPEED
+			if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
+			|| ray_cast_up.is_colliding() || ray_cast_down.is_colliding()):
+				roam_direction = -roam_direction
+				
+			if (init_position.distance_to(global_position) >= ROAM_RANGE):
+				roam_direction = (init_position - global_position).normalized()
+				
+			velocity = roam_direction * SPEED
 				
 		state_type.CHASE:
-			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				roam_direction = (player.player_center.global_position - global_position).normalized()
-				if (player.global_position.distance_to(global_position) > 64):
-					velocity = roam_direction * SPEED
-				elif (player.global_position.distance_to(global_position) < 48):
-					velocity = -roam_direction * SPEED
-				else:
-					velocity = lerp(velocity, Vector2.ZERO, AIR_FRICTION)
+			roam_direction = (player.player_center.global_position - global_position).normalized()
+			if (player.global_position.distance_to(global_position) > 64):
+				velocity = roam_direction * SPEED
+			elif (player.global_position.distance_to(global_position) < 48):
+				velocity = -roam_direction * SPEED
+			else:
+				velocity = lerp(velocity, Vector2.ZERO, AIR_FRICTION)
 	
 	#Knockback implementation
 	if (abs(knock_back) > Vector2.ZERO):
@@ -161,13 +150,9 @@ func _physics_process(delta):
 			
 func _on_roam_timer_timeout():
 	if (!chasing_player && !marked_for_death):
-		if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-			update_rand_direction()
-			%RoamTimer.start(randf_range(2, ROAM_CHANGE_WAIT))
+		update_rand_direction()
+		%RoamTimer.start(randf_range(2, ROAM_CHANGE_WAIT))
 
 func _on_attack_timer_timeout():
 	if (!marked_for_death):
-		if multiplayer.is_server():
-			rpc("attack", roam_direction)
-		elif (!GameManager.multiplayer_mode_enabled):
-			attack(roam_direction)
+		attack(roam_direction)

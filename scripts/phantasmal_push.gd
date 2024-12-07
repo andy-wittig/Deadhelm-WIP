@@ -24,8 +24,7 @@ func _process(delta):
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("enemies")):
 			body.apply_knockback(direction, HAND_FORCE)
-	
-@rpc("any_peer", "call_local")
+
 func destroy_self():
 	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
 	disolve_effect.spell_texture = hand_sprite.texture

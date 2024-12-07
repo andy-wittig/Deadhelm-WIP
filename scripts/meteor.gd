@@ -22,8 +22,7 @@ func _process(delta):
 		if (body.is_in_group("enemies")):
 			body.hurt_enemy(15, direction, 200)
 			destroy_self()
-	
-@rpc("any_peer", "call_local")
+
 func destroy_self():
 	var disolve_effect = load("res://scenes/vfx/spell_disolve_effect.tscn").instantiate()
 	var chunk_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()

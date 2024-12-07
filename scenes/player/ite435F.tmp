@@ -52,4 +52,5 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
+[connection signal="gui_input" from="Item" to="Item" method="_on_slot_base_gui_input"]
 [connection signal="timeout" from="CooldownTimer" to="Item" method="_on_cooldown_timer_timeout"]

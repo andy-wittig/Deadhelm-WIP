@@ -44,33 +44,27 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 signal enemy_was_hurt
 	
 func _ready():
-	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-		direction = [-1, 1].pick_random()
-		%RoamTimer.start(randi_range(2, ROAM_CHANGE_WAIT))
+	direction = [-1, 1].pick_random()
+	%RoamTimer.start(randi_range(2, ROAM_CHANGE_WAIT))
 
 func _process(_delta):
 	if (not frog_detonated):
-		if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-			for body in chase_player.get_overlapping_bodies():
-				if (body.is_in_group("players")):
-					if (!chasing_player):
-						player = body
-						chasing_player = true
-						state = state_type.CHASE
-					return
+		for body in chase_player.get_overlapping_bodies():
+			if (body.is_in_group("players")):
+				if (!chasing_player):
+					player = body
+					chasing_player = true
+					state = state_type.CHASE
+				return
 		#player left detection radius
 		player = null
 		chasing_player = false
 
 func _physics_process(delta):
 	#deal with enemy death
-	if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-		if (enemy_health <= 0):
-			if (!marked_for_death):
-				if (!GameManager.multiplayer_mode_enabled):
-					destroy_self()
-				elif (multiplayer.is_server()):
-					rpc("destroy_self")
+	if (enemy_health <= 0):
+		if (!marked_for_death):
+			destroy_self()
 
 	#flip sprite
 	if (direction > 0):
@@ -80,29 +74,27 @@ func _physics_process(delta):
 		
 	match state:
 		state_type.IDLE:
-			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				animated_sprite.play("idle")
-				velocity.x = 0
+			animated_sprite.play("idle")
+			velocity.x = 0
 		state_type.MOVING:
-			if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-				if (jump_timer <= 0):
-					if (is_on_floor()):
-						velocity.y = JUMP_VELOCITY
-					jump_timer = JUMP_WAIT
-				else:
-					jump_timer -= delta
+			if (jump_timer <= 0):
+				if (is_on_floor()):
+					velocity.y = JUMP_VELOCITY
+				jump_timer = JUMP_WAIT
+			else:
+				jump_timer -= delta
+			
+			if ray_cast_right.is_colliding():
+				direction = -1
+			elif ray_cast_left.is_colliding():
+				direction = 1
 				
-				if ray_cast_right.is_colliding():
-					direction = -1
-				elif ray_cast_left.is_colliding():
-					direction = 1
-					
-				if (!is_on_floor()):
-					animated_sprite.play("leap")
-				else:
-					animated_sprite.play("idle")
+			if (!is_on_floor()):
+				animated_sprite.play("leap")
+			else:
+				animated_sprite.play("idle")
 		state_type.CHASE:
-			if ((multiplayer.is_server() || !GameManager.multiplayer_mode_enabled) && player != null):
+			if (player != null):
 				if (player.global_position.x - global_position.x > 8):
 					direction = 1
 				elif (player.global_position.x - global_position.x < -8):
@@ -153,10 +145,9 @@ func _physics_process(delta):
 	
 func _on_change_state_timer_timeout():
 	if (not chasing_player):
-		if (multiplayer.is_server() || !GameManager.multiplayer_mode_enabled):
-			direction = [-1, 1].pick_random()
-			state = randi_range(0, 1)
-			%RoamTimer.start(randf_range(0, ROAM_CHANGE_WAIT))
+		direction = [-1, 1].pick_random()
+		state = randi_range(0, 1)
+		%RoamTimer.start(randf_range(0, ROAM_CHANGE_WAIT))
 
 func _on_cooldown_timer_timeout():
 	player = null
@@ -166,16 +157,11 @@ func _on_cooldown_timer_timeout():
 func _on_attack_timer_timeout():
 	attack_timer_started = false
 	if (chasing_player):
-		if (!GameManager.multiplayer_mode_enabled):
-			detonate()
-		elif (multiplayer.is_server()):
-			rpc("detonate")
-			
+		detonate()
 		frog_detonated = true
 		%CooldownTimer.start(4)
 		state = state_type.MOVING
 
-@rpc("call_local")
 func detonate():
 		var explosion = load("res://scenes/enemies/large_explosion.tscn").instantiate()
 		explosion.position = position
@@ -185,8 +171,7 @@ func detonate():
 
 func apply_knockback(force_direction: Vector2, force: float):
 	knock_back = force_direction.normalized() * force
-	
-@rpc("any_peer", "call_local")
+
 func hurt_enemy(damage: int, direction: Vector2, force: float):
 	emit_signal("enemy_was_hurt")
 	animation_player.play("hurt_blink")
@@ -199,8 +184,7 @@ func hurt_enemy(damage: int, direction: Vector2, force: float):
 	
 	enemy_health -= damage
 	enemy_health = max(enemy_health, 0)
-	
-@rpc("call_local", "any_peer")
+
 func destroy_self():
 	get_tree().call_group("unlock_enemy", "unlock_page", 3)
 	

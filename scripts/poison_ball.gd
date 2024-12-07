@@ -10,7 +10,6 @@ func _process(delta):
 	$Sprite2D.rotation = direction.angle()
 	global_position += direction * SPEED * delta
 
-@rpc("call_local")
 func destroy_self():
 	queue_free()
 

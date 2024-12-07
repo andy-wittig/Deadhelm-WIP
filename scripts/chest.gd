@@ -13,12 +13,8 @@ func _process(delta):
 		if (body.is_in_group("players")):
 			chest_closed_sprite.material.set_shader_parameter("enabled", true)
 			if Input.is_action_just_pressed("pickup") && not chest_open:
-				if (!GameManager.multiplayer_mode_enabled):
-					open_chest()
-				elif (multiplayer.is_server()):
-					rpc("open_chest")
-				
-@rpc("any_peer", "call_local")
+				open_chest()
+
 func open_chest():
 	chest_closed_sprite.visible = false
 	chest_open_sprite.visible = true

@@ -93,14 +93,12 @@ func _process(delta):
 		
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("players")):
-			if (!GameManager.multiplayer_mode_enabled ||
-			body.player_id == multiplayer.get_unique_id()):
-				player = body
-				if (!menu_opened): shop_sprite.material.set_shader_parameter("enabled", true)
-				if (Input.is_action_just_pressed("pickup")):
-					menu_opened = !menu_opened
-					if (menu_opened): animation_player.play("open_menu")
-					else: animation_player.play_backwards("open_menu")
+			player = body
+			if (!menu_opened): shop_sprite.material.set_shader_parameter("enabled", true)
+			if (Input.is_action_just_pressed("pickup")):
+				menu_opened = !menu_opened
+				if (menu_opened): animation_player.play("open_menu")
+				else: animation_player.play_backwards("open_menu")
 			return
 	shop_sprite.material.set_shader_parameter("enabled", false)
 	animation_player.play_backwards("open_menu")

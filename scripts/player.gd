@@ -225,7 +225,8 @@ func _process(delta):
 	
 	if (currently_selected_slot.get_slot_item() == "empty" 
 	|| currently_selected_slot.is_dragging()
-	|| !GameManager.access_ingame_menu): 
+	|| !GameManager.access_ingame_menu):
+		Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
 		can_fire = false
 		if (dial_created):
 			dial_instance.destroy()
@@ -235,9 +236,15 @@ func _process(delta):
 		for slot in inventory:
 			if (inventory[slot].get_slot_item() != "empty" && inventory[slot].attack_cooldown):
 					if (inventory[slot].get_slot_item_class() == currently_selected_class):
+						Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
 						can_fire = false
 	
 	if (can_fire):
+		if (dial_created):
+			Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
+		else:
+			Input.set_custom_mouse_cursor(hold_cursor, Input.CURSOR_ARROW)
+		
 		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("cast_spell")):
 			spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
 			dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
@@ -262,7 +269,7 @@ func _process(delta):
 			dial_instance.destroy()
 			dial_created = false
 			cast_complete = true
-			
+	
 	#Developer Cheats
 	if (Input.is_action_just_pressed("cheat_button_1")):
 		souls_collected += 10
@@ -392,12 +399,10 @@ func _physics_process(delta):
 	
 func change_animation_state(new_state : animation_type):	
 	if (dial_created):
-		Input.set_custom_mouse_cursor(hold_cursor, Input.CURSOR_ARROW)
 		if (animation_queue.size() == 0):
 			animation_queue.push_back("cast")
 			upper_sprite.play(animation_queue[0])
 	else:
-		Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
 		animation_queue.clear()
 		
 	if (animation_state != new_state):

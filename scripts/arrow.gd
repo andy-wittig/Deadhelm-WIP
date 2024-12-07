@@ -24,8 +24,7 @@ func _process(delta):
 		if (body.is_in_group("enemies")):
 			body.hurt_enemy(20, direction, 200)
 			destroy_self()
-	
-@rpc("any_peer", "call_local")
+
 func destroy_self():
 	queue_free()
 	

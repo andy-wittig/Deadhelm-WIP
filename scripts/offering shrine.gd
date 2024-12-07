@@ -16,7 +16,6 @@ var can_interact := true
 @onready var detect_player = $DetectPlayer
 @onready var sprite = $ShrineSprite
 
-@rpc("any_peer", "call_local")
 func spawn_tome():
 	if (random_drop_enabled):
 		spell_type = drop_list[randi_range(0, drop_list.size() - 1)]
@@ -49,20 +48,18 @@ func _process(delta):
 	
 	for body in detect_player.get_overlapping_bodies():
 		if (body.is_in_group("players") && can_interact):
-			if (!GameManager.multiplayer_mode_enabled ||
-			body.player_id == multiplayer.get_unique_id()):
-				sprite.material.set_shader_parameter("enabled", true)
-				soul_label.visible = true
-				if (Input.is_action_just_pressed("pickup")):
-					if (souls_input >= soul_cost):
-						can_interact = false
-						$ShrineSprite.texture = load("res://assets/sprites/level_objects/offering shrine disabled.png")
-						$BuyTimer.start()
-						souls_input = 0
-						uses += 1
-						spawn_tome()
-					else:
-						collect_soul(body)
+			sprite.material.set_shader_parameter("enabled", true)
+			soul_label.visible = true
+			if (Input.is_action_just_pressed("pickup")):
+				if (souls_input >= soul_cost):
+					can_interact = false
+					$ShrineSprite.texture = load("res://assets/sprites/level_objects/offering shrine disabled.png")
+					$BuyTimer.start()
+					souls_input = 0
+					uses += 1
+					spawn_tome()
+				else:
+					collect_soul(body)
 
 func collect_soul(body):
 	if (body.souls_collected > 0):

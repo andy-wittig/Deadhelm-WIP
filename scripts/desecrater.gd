@@ -17,14 +17,10 @@ func _process(_delta):
 		if (ray_cast.is_colliding()):
 			var body = ray_cast.get_collider()
 			if (body.is_in_group("players")):
-				if (!GameManager.multiplayer_mode_enabled):
-					attack()
-				elif (multiplayer.is_server()):
-					rpc("attack")
+				attack()
 				attack_timer.start()
 				attack_wait = true
 
-@rpc("call_local")
 func attack():
 	$CPUParticles2D.emitting = true
 	var blackhole = load("res://scenes/enemies/desecrater_blackhole.tscn").instantiate()

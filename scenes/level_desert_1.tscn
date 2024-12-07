@@ -1,6 +1,5 @@
-[gd_scene load_steps=53 format=3 uid="uid://dyutn277xh3h5"]
+[gd_scene load_steps=52 format=3 uid="uid://dyutn277xh3h5"]
 
-[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_pel5v"]
 [ext_resource type="Texture2D" uid="uid://ubox7asqsalj" path="res://assets/sprites/UI/dunes background.png" id="2_im1ct"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_ykttf"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_2adtw"]
@@ -235,7 +234,6 @@ _data = {
 }
 
 [node name="level_desert_1" type="Node2D"]
-script = ExtResource("1_pel5v")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/multiplayer_player.tscn")
@@ -500,8 +498,10 @@ coin_amount = 4
 
 [node name="offering shrine" parent="." instance=ExtResource("15_fpcoq")]
 position = Vector2(960, -112)
-soul_cost = 6
-spell_type = "bow"
+soul_cost = 4
+use_limit = 2
+random_drop_enabled = true
+drop_list = Array[String](["poison_bottle", "meteor"])
 
 [node name="spawner" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("16_t436x")]
 position = Vector2(416, -688)

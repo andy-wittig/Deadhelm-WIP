@@ -1,15 +1,12 @@
-[gd_scene load_steps=38 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=36 format=3 uid="uid://cm4gh7qawwcbf"]
 
-[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_manager.gd" id="1_yvbvk"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
 [ext_resource type="Texture2D" uid="uid://370vg8cxmgmw" path="res://assets/sprites/UI/title_ui.png" id="3_i7ejn"]
-[ext_resource type="PackedScene" uid="uid://n15lqsti4eaq" path="res://scenes/menus/multiplayer_chat.tscn" id="3_urre7"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_1urpk"]
 [ext_resource type="Shader" path="res://shaders/sway.gdshader" id="4_7fi5r"]
 [ext_resource type="Shader" path="res://shaders/distort.gdshader" id="4_mlfnw"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
 [ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/menus/settings_menu.tscn" id="6_hxbga"]
-[ext_resource type="PackedScene" uid="uid://dsmtbe5hbqsrc" path="res://scenes/menus/multiplayer_menu.tscn" id="7_hkw8y"]
 [ext_resource type="PackedScene" uid="uid://c3tnfa07koleu" path="res://scenes/menus/in_game_menu.tscn" id="8_ar250"]
 [ext_resource type="PackedScene" uid="uid://bqgd6hcfgc75y" path="res://scenes/menus/credits_menu.tscn" id="9_0w2qv"]
 [ext_resource type="PackedScene" uid="uid://btplmre76e21a" path="res://scenes/menus/journal_menu.tscn" id="9_7yf88"]
@@ -19,6 +16,34 @@
 [ext_resource type="Texture2D" uid="uid://g6ptohieeaq0" path="res://assets/sprites/UI/title_background_foreground_sheet.png" id="14_ww188"]
 [ext_resource type="Texture2D" uid="uid://fgw4c7gfxo7e" path="res://assets/sprites/UI/title_background_mountains.png" id="14_yyt2w"]
 [ext_resource type="Texture2D" uid="uid://bn661yg7bx1x8" path="res://assets/sprites/UI/title_background_shorline.png" id="15_s3i31"]
+
+[sub_resource type="GDScript" id="GDScript_enk6v"]
+script/source = "extends Node
+	
+func start_game():
+	$MenuLayer.current_menu = $MenuLayer.menu.HIDDEN
+	GameManager.started_game = true
+	FileAccess.open(\"user://player_info.save\", FileAccess.WRITE)
+	change_level.call_deferred(load(\"res://scenes/level_template.tscn\"))
+	#change_level.call_deferred(load(\"res://scenes/level_grasslands_1.tscn\"))
+	
+func change_level(scene: PackedScene):
+	var level = $Level
+	for object in level.get_children(): #clear old level
+		level.remove_child(object)
+		object.queue_free()
+	
+	var new_scene = scene.instantiate()
+	GameManager.current_level = new_scene.get_name()
+	level.add_child(new_scene)
+	
+func end_level():
+	var level = $Level
+	GameManager.current_level = \"\"
+	for object in level.get_children():
+		level.remove_child(object)
+		object.queue_free()
+"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mgunp"]
 shader = ExtResource("4_7fi5r")
@@ -137,7 +162,7 @@ gradient = SubResource("Gradient_dqply")
 fill_to = Vector2(0, 1)
 
 [node name="game" type="Node"]
-script = ExtResource("1_yvbvk")
+script = SubResource("GDScript_enk6v")
 
 [node name="Level" type="Node" parent="."]
 
@@ -165,9 +190,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -256.0
-offset_top = -110.0
+offset_top = -88.0
 offset_right = 256.0
-offset_bottom = 110.0
+offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
@@ -179,22 +204,12 @@ size_flags_vertical = 3
 [node name="startButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../quitButton")
-focus_next = NodePath("../multiplayerButton")
 theme_override_fonts/font = ExtResource("4_1urpk")
 theme_override_font_sizes/font_size = 32
-text = "single player"
-
-[node name="multiplayerButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../startButton")
-focus_neighbor_bottom = NodePath("../settingsButton")
-theme_override_fonts/font = ExtResource("4_1urpk")
-theme_override_font_sizes/font_size = 32
-text = "multiplayer"
+text = "start game"
 
 [node name="settingsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
-focus_neighbor_top = NodePath("../multiplayerButton")
 focus_neighbor_bottom = NodePath("../creditsButton")
 theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 32
@@ -218,20 +233,7 @@ theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 32
 text = "quit game"
 
-[node name="multiplayer_chat" parent="MenuLayer/MenuControl" instance=ExtResource("3_urre7")]
-visible = false
-layout_mode = 1
-
 [node name="settings_menu" parent="MenuLayer/MenuControl" instance=ExtResource("6_hxbga")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-
-[node name="multiplayer_menu" parent="MenuLayer/MenuControl" instance=ExtResource("7_hkw8y")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -365,7 +367,6 @@ volume_db = -20.0
 bus = &"Music"
 
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer" method="_on_start_button_pressed"]
-[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/multiplayerButton" to="MenuLayer" method="_on_multiplayer_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/settingsButton" to="MenuLayer" method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/creditsButton" to="MenuLayer" method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/quitButton" to="MenuLayer" method="_on_quit_button_pressed"]

@@ -9,11 +9,9 @@ func _process(delta):
 	radio_sprite.material.set_shader_parameter("enabled", false)
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("players")):
-			if (!GameManager.multiplayer_mode_enabled ||
-			body.player_id == multiplayer.get_unique_id()):
-				radio_sprite.material.set_shader_parameter("enabled", true)
-				if (Input.is_action_just_pressed("pickup")):
-					radio_activate()
+			radio_sprite.material.set_shader_parameter("enabled", true)
+			if (Input.is_action_just_pressed("pickup")):
+				radio_activate()
 				
 func radio_activate():
 	music_particles.emitting = !music_particles.emitting

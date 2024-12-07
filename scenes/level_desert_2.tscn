@@ -1,6 +1,5 @@
-[gd_scene load_steps=43 format=3 uid="uid://bn0kg8xksinyc"]
+[gd_scene load_steps=42 format=3 uid="uid://bn0kg8xksinyc"]
 
-[ext_resource type="Script" path="res://scripts/multiplayer/multiplayer_spawning.gd" id="1_amt72"]
 [ext_resource type="Texture2D" uid="uid://ubox7asqsalj" path="res://assets/sprites/UI/dunes background.png" id="2_8ufxr"]
 [ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_grftt"]
 [ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="4_6rwoy"]
@@ -129,7 +128,6 @@ _data = {
 }
 
 [node name="level_desert_2" type="Node2D"]
-script = ExtResource("1_amt72")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player/multiplayer_player.tscn")
