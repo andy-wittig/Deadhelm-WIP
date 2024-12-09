@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var zipline_path : Path2D
+enum FACING_DIR {left, right}
+@export var facing : FACING_DIR
 
 var zipline_line: Line2D
 var zipline_follow: PathFollow2D
@@ -54,12 +56,16 @@ func _process(delta):
 					var offset = zipline_path.curve.get_closest_offset(zipline_path.to_local(player.player_center.global_position))
 					zipline_follow.progress = offset
 	else:
-		zipline_follow.progress += player.ZIPLINE_SPEED * delta
+		if (facing == FACING_DIR.left):
+			zipline_follow.progress -= player.player_facing * player.ZIPLINE_SPEED * delta
+		elif (facing == FACING_DIR.right):
+			zipline_follow.progress += player.player_facing * player.ZIPLINE_SPEED * delta
 		player.global_position = zipline_follow.global_position - player.player_center.position
 		sparks_particle.emitting = true
 		sparks_particle.global_position = zipline_follow.global_position
 		
 		if (zipline_follow.progress_ratio == 1.0 ||
+		zipline_follow.progress_ratio == 0.0 ||
 		Input.is_action_just_pressed("move_up") || 
 		Input.is_action_just_pressed("move_down") ||
 		Input.is_action_just_pressed("pickup")):

@@ -186,7 +186,7 @@ func destroy_self():
 	get_tree().call_group("unlock_enemy", "unlock_page", 6)
 	
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
-	var death_effect = load("res://scenes/vfx/bombshell_turtle_death.tscn").instantiate()
+	var death_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
 	soul.position = position
 	soul.rarities["diamond"] = 80
 	soul.rarities["emerald"] = 8

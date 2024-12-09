@@ -44,12 +44,14 @@ size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("1_k5orc")
 theme_override_font_sizes/font_size = 24
 tab_alignment = 1
+current_tab = 0
 clip_tabs = false
 
 [node name="DISPLAY" type="TabBar" parent="VBoxContainer/SettingsTabs"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("VBoxContainer/CheckWindowed")
 tab_alignment = 1
+metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SettingsTabs/DISPLAY"]
 layout_mode = 1
@@ -96,6 +98,7 @@ text = "HIDE CURSOR"
 visible = false
 layout_mode = 2
 focus_neighbor_bottom = NodePath("VBoxContainer/GridContainer/MusicSlider")
+metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SettingsTabs/SOUND"]
 layout_mode = 1
@@ -164,6 +167,7 @@ layout_mode = 2
 [node name="CONTROLS" type="TabBar" parent="VBoxContainer/SettingsTabs"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/SettingsTabs/CONTROLS"]
 layout_mode = 1

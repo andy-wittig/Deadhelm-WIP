@@ -204,6 +204,7 @@ lifetime = 0.4
 speed_scale = 0.5
 randomness = 1.0
 lifetime_randomness = 0.2
+local_coords = true
 texture = SubResource("CompressedTexture2D_sako6")
 emission_shape = 1
 emission_sphere_radius = 6.0

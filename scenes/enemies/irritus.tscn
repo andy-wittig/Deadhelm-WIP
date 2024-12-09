@@ -220,13 +220,13 @@ rotation = 1.5708
 shape = SubResource("CircleShape2D_gfx5x")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
-position = Vector2(0, -5)
-target_position = Vector2(6, 0)
+position = Vector2(0, -7)
+target_position = Vector2(8, 0)
 collision_mask = 16
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
-position = Vector2(0, -5)
-target_position = Vector2(-6, 0)
+position = Vector2(0, -7)
+target_position = Vector2(-8, 0)
 collision_mask = 16
 
 [node name="ChasePlayer" type="Area2D" parent="."]

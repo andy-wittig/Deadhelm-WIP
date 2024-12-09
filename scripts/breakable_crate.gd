@@ -27,6 +27,9 @@ func hurt_enemy(damage: int, direction: Vector2, force: float):
 	enemy_health -= damage
 	enemy_health = max(enemy_health, 0)
 	
+func apply_knockback(var1: Vector2, var2: float):
+	pass
+	
 func destroy_self():
 	#var effect = load("").instantiate()
 	#effect.position = position

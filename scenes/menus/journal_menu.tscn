@@ -51,8 +51,8 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("3_5nlnu")
 theme_override_font_sizes/font_size = 24
-tab_count = 2
 clip_tabs = false
+tab_count = 2
 tab_0/title = "Spells"
 tab_1/title = "Enemies"
 

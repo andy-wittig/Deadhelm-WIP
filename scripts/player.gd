@@ -40,6 +40,7 @@ var spell_direction: Vector2
 var mouse_facing := 0
 var double_jump_active := false
 var double_jump := 0
+var player_facing := 1
 var invincible := false
 #Player Inventory Variables
 var selected_slot_pos := 0
@@ -194,8 +195,9 @@ func _process(delta):
 		
 		if (aim_vec.length() > 0):
 			spell_direction = aim_vec.normalized()
-		elif (direction != 0):
-			spell_direction = Vector2(direction, 0).normalized()
+			
+		if (aim_vec.x >= 0): mouse_facing = 1
+		else: mouse_facing = -1
 	
 	spell_spawn.global_position = dial_center + spell_direction * DIAL_RADIUS
 	
@@ -363,9 +365,11 @@ func _physics_process(delta):
 	
 	#flips sprite
 	if (direction > 0):
+		player_facing = 1
 		upper_sprite.flip_h = false
 		lower_sprite.flip_h = false
 	elif (direction < 0):
+		player_facing = -1
 		upper_sprite.flip_h = true
 		lower_sprite.flip_h = true
 		
