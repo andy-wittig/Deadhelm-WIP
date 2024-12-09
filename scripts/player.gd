@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #Physics Constants
 const SPEED := 75.0
-const GRAVITY := 950
+const GRAVITY := 940
 const EXTRA_GRAVITY := 200.0
 const CLIMB_SPEED := 75.0
 const ZIPLINE_SPEED := 100
@@ -232,6 +232,7 @@ func _process(delta):
 		can_fire = false
 		if (dial_created):
 			dial_instance.destroy()
+			dial_instance = null
 			dial_created = false
 	else: #ensure spells of same class can't be used at the same time
 		var currently_selected_class = currently_selected_slot.get_slot_item_class()
@@ -248,14 +249,15 @@ func _process(delta):
 			Input.set_custom_mouse_cursor(hold_cursor, Input.CURSOR_ARROW)
 		
 		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("cast_spell")):
-			spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
-			dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
-			dial_instance.player = self
-			dial_instance.global_position = player_center.global_position
-			get_parent().add_child(dial_instance)
-			dial_instance.reset_physics_interpolation()
-			dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
-			dial_created = true
+			if (!dial_created):
+				spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
+				dial_instance = load("res://scenes/player/mystic_dial.tscn").instantiate()
+				dial_instance.player = self
+				dial_instance.global_position = player_center.global_position
+				get_parent().add_child(dial_instance)
+				dial_instance.reset_physics_interpolation()
+				dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
+				dial_created = true
 		
 		#trigger mystic dial
 		if (dial_created && Input.is_action_just_released("cast_spell")):
@@ -269,6 +271,7 @@ func _process(delta):
 			
 			currently_selected_slot.start_cooldown(currently_selected_slot.get_slot_item())
 			dial_instance.destroy()
+			dial_instance = null
 			dial_created = false
 			cast_complete = true
 	
@@ -278,7 +281,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("cheat_button_2"):
 		global_position = portal_gate.global_position
 	if Input.is_action_just_pressed("cheat_button_3"):
-		invincible = !invincible
+		#invincible = !invincible
+		Engine.set_time_scale(0.1)
 	if Input.is_action_just_pressed("cheat_button_4"):
 		global_position = get_global_mouse_position()
 

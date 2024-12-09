@@ -10,6 +10,7 @@ var starting_path_pos : Vector2
 @onready var path_particle_1 = $PathParticle1
 @onready var path_particle_2 = $PathParticle2
 @onready var spawn_effect = $SpawnEffect
+@onready var destroy_timer = $DestroyTimer
 
 func destroy():
 	placeholder_spell.visible = false
@@ -20,7 +21,7 @@ func destroy():
 	starting_path_pos = -(player.spell_spawn.global_position - global_position)
 	path_started = true
 	animation_player.play("fade_out")
-	$DestroyTimer.start()
+	destroy_timer.start()
 	
 func _on_destroy_timer_timeout():
 	queue_free()
