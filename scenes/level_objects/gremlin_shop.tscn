@@ -59,7 +59,13 @@ bg_color = Color(0.368627, 0.356863, 0.54902, 0.588235)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3rxjk"]
 light_mode = 1
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8tdva"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jx00o"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7vrk"]
 bg_color = Color(0.690196, 0.654902, 0.721569, 0.686275)
@@ -71,13 +77,7 @@ border_width_bottom = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qbb2u"]
 bg_color = Color(0.368627, 0.356863, 0.54902, 0.686275)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jx00o"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8tdva"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrmgq"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -228,6 +228,7 @@ text = "item descriptions"
 horizontal_alignment = 1
 
 [node name="ShopControl" type="Control" parent="."]
+visible = false
 z_index = 100
 material = SubResource("CanvasItemMaterial_3rxjk")
 clip_contents = true
@@ -313,10 +314,10 @@ offset_top = 3.0
 offset_right = 29.0
 offset_bottom = 21.0
 mouse_filter = 1
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
+theme_override_styles/focus = SubResource("StyleBoxFlat_jx00o")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
-theme_override_styles/focus = SubResource("StyleBoxFlat_jx00o")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
 
 [node name="PurchaseButton2" type="Button" parent="ShopControl"]
 use_parent_material = true
@@ -326,10 +327,10 @@ offset_top = 3.0
 offset_right = 49.0
 offset_bottom = 21.0
 mouse_filter = 1
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qrmgq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
-theme_override_styles/focus = SubResource("StyleBoxFlat_qrmgq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
 
 [node name="PurchaseButton3" type="Button" parent="ShopControl"]
 use_parent_material = true
@@ -339,10 +340,10 @@ offset_top = 3.0
 offset_right = 69.0
 offset_bottom = 21.0
 mouse_filter = 1
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
+theme_override_styles/focus = SubResource("StyleBoxFlat_312kc")
 theme_override_styles/hover = SubResource("StyleBoxFlat_j7vrk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_qbb2u")
-theme_override_styles/focus = SubResource("StyleBoxFlat_312kc")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8tdva")
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="ShopControl"]
 position = Vector2(40, 12.5)
