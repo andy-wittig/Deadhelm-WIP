@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var attack_wait := 1.0
+@export var ball_lifetime := 6
 @export var facing_dir := 1
 
 @onready var attack_timer = $AttackTimer
@@ -16,5 +17,6 @@ func _on_attack_timer_timeout():
 	var impactor_ball = load("res://scenes/enemies/impactor_ball.tscn").instantiate()
 	impactor_ball.global_position = Vector2(global_position.x, global_position.y - 6)
 	impactor_ball.dir = facing_dir
+	impactor_ball.lifetime = ball_lifetime
 	get_tree().get_root().get_node("game/Level").add_child(impactor_ball)
 	particles.emitting = true
