@@ -5,20 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://bsbd0mgvk5p7o" path="res://assets/sprites/vfx/mystic effect.png" id="3_hhvmr"]
 [ext_resource type="Texture2D" uid="uid://bsuyliq874gxv" path="res://assets/sprites/vfx/spell_spawn_effect.png" id="4_uhfer"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5afcx"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_njx3t"]
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 2
 particles_anim_loop = false
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sako6"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8f6g4"]
 load_path = "res://.godot/imported/mystic effect.png-3723cecb40e370e18b77ef678e2aa9a3.ctex"
 
-[sub_resource type="Curve" id="Curve_p6y7x"]
+[sub_resource type="Curve" id="Curve_622a2"]
 _data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_irjvi"]
+[sub_resource type="Gradient" id="Gradient_j0j8x"]
 offsets = PackedFloat32Array(0, 0.246667, 0.626667, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.686275, 1, 1, 1, 0.686275, 1, 1, 1, 0)
 
@@ -55,6 +55,18 @@ tracks/2/path = NodePath("SpawnEffect:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MysticParticles:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -100,6 +112,18 @@ tracks/1/path = NodePath("SpawnEffect:modulate")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MysticParticles:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -195,7 +219,7 @@ pitch_scale = 0.75
 autoplay = true
 
 [node name="MysticParticles" type="CPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_5afcx")
+material = SubResource("CanvasItemMaterial_njx3t")
 position = Vector2(-1.90735e-06, 5.68434e-14)
 rotation = -1.5708
 scale = Vector2(1, 0.954545)
@@ -205,7 +229,7 @@ speed_scale = 0.5
 randomness = 1.0
 lifetime_randomness = 0.2
 local_coords = true
-texture = SubResource("CompressedTexture2D_sako6")
+texture = SubResource("CompressedTexture2D_8f6g4")
 emission_shape = 1
 emission_sphere_radius = 6.0
 direction = Vector2(0, 0)
@@ -220,8 +244,8 @@ radial_accel_max = 5.0
 damping_min = 10.0
 damping_max = 10.0
 angle_max = 360.0
-scale_amount_curve = SubResource("Curve_p6y7x")
-color_ramp = SubResource("Gradient_irjvi")
+scale_amount_curve = SubResource("Curve_622a2")
+color_ramp = SubResource("Gradient_j0j8x")
 anim_offset_max = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -235,8 +259,11 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_wkfi3")
 animation = &"effect"
 
-[node name="PathParticle1" type="CPUParticles2D" parent="."]
+[node name="ParticleOrigin" type="Node2D" parent="."]
+
+[node name="PathParticle1" type="CPUParticles2D" parent="ParticleOrigin"]
 material = SubResource("CanvasItemMaterial_bohdq")
+position = Vector2(24, 0)
 emitting = false
 amount = 15
 lifetime = 0.4
@@ -254,8 +281,9 @@ scale_amount_curve = SubResource("Curve_4clv3")
 color_ramp = SubResource("Gradient_cw4dc")
 anim_offset_max = 1.0
 
-[node name="PathParticle2" type="CPUParticles2D" parent="."]
+[node name="PathParticle2" type="CPUParticles2D" parent="ParticleOrigin"]
 material = SubResource("CanvasItemMaterial_bohdq")
+position = Vector2(-24, 0)
 emitting = false
 amount = 15
 lifetime = 0.4

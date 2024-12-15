@@ -181,15 +181,12 @@ scale = Vector2(1, 6)
 
 [node name="platform2" parent="game objects/platform objects" instance=ExtResource("8_1mk3m")]
 position = Vector2(520, -288)
-script = null
 
 [node name="platform4" parent="game objects/platform objects" instance=ExtResource("8_1mk3m")]
 position = Vector2(504, -312)
-script = null
 
 [node name="platform3" parent="game objects/platform objects" instance=ExtResource("8_1mk3m")]
 position = Vector2(536, -264)
-script = null
 
 [node name="hurt zones" type="Node" parent="game objects"]
 
@@ -239,7 +236,6 @@ autoplay = "blasphemer_move"
 
 [node name="platform" parent="." instance=ExtResource("8_1mk3m")]
 position = Vector2(728, -192)
-script = null
 
 [node name="falling_leaves" parent="." instance=ExtResource("18_t7lxe")]
 position = Vector2(128, -480)
@@ -249,7 +245,6 @@ position = Vector2(160, -112)
 
 [node name="platform2" parent="." instance=ExtResource("8_1mk3m")]
 position = Vector2(328, 112)
-script = null
 
 [node name="spawn_point" type="Marker2D" parent="."]
 position = Vector2(144, -432)
@@ -264,7 +259,6 @@ spell_type = "lightning"
 
 [node name="platform3" parent="." instance=ExtResource("8_1mk3m")]
 position = Vector2(424, -432)
-script = null
 
 [node name="rock_wall" parent="." instance=ExtResource("24_dqexj")]
 position = Vector2(200, -320)

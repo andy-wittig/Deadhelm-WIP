@@ -7,8 +7,9 @@ var starting_path_pos : Vector2
 
 @onready var animation_player = $AnimationPlayer
 @onready var mystic_particles = $MysticParticles
-@onready var path_particle_1 = $PathParticle1
-@onready var path_particle_2 = $PathParticle2
+@onready var path_particle_1 = $ParticleOrigin/PathParticle1
+@onready var path_particle_2 = $ParticleOrigin/PathParticle2
+@onready var particle_origin = $ParticleOrigin
 @onready var spawn_effect = $SpawnEffect
 @onready var destroy_timer = $DestroyTimer
 
@@ -18,7 +19,6 @@ func destroy():
 	spawn_effect.play("effect")
 	path_particle_1.emitting = true
 	path_particle_2.emitting = true
-	starting_path_pos = -(player.spell_spawn.global_position - global_position)
 	path_started = true
 	animation_player.play("fade_out")
 	destroy_timer.start()
@@ -30,8 +30,7 @@ func set_placeholder_sprite(sprite_path):
 	placeholder_spell.set_texture(load(sprite_path))
 	
 func _ready():
-	global_position.x = player.player_center.global_position.x
-	global_position.y = player.player_center.global_position.y
+	global_position = player.player_center.global_position
 	placeholder_spell = Sprite2D.new()
 	placeholder_spell.modulate.a = 0.6
 	add_child(placeholder_spell)
@@ -48,7 +47,5 @@ func _process(delta):
 	spawn_effect.global_position = player.spell_spawn.global_position
 	
 	if (path_started):
-		starting_path_pos = starting_path_pos.rotated(10 * delta)
-		$PathParticle1.position = starting_path_pos
-		$PathParticle2.position = -starting_path_pos
+		particle_origin.rotation += 10 * delta
 		

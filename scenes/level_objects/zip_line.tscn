@@ -18,6 +18,7 @@ offsets = PackedFloat32Array(0.62, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="zip_line" type="Node2D"]
+z_index = 2
 script = ExtResource("1_mqn24")
 
 [node name="SparksParticle" type="CPUParticles2D" parent="."]
