@@ -72,6 +72,7 @@ var sound_library := {
 @onready var animation_player = $AnimationPlayer
 const DEAD_HEART_UI = preload("res://assets/sprites/UI/player_information/dead_heart_ui.png")
 const ALIVE_HEART_UI = preload("res://assets/sprites/UI/player_information/heart_ui.png")
+var fist_cursor = load("res://assets/sprites/UI/cursor_fist.png")
 var point_cursor = load("res://assets/sprites/UI/cursor pointer.png")
 var hold_cursor = load("res://assets/sprites/UI/cursor can drop.png")
 #UI Paths
@@ -228,7 +229,6 @@ func _process(delta):
 	if (currently_selected_slot.get_slot_item() == "empty" 
 	|| currently_selected_slot.is_dragging()
 	|| !GameManager.access_ingame_menu):
-		Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
 		can_fire = false
 		if (dial_created):
 			dial_instance.destroy()
@@ -239,15 +239,21 @@ func _process(delta):
 		for slot in inventory:
 			if (inventory[slot].get_slot_item() != "empty" && inventory[slot].attack_cooldown):
 					if (inventory[slot].get_slot_item_class() == currently_selected_class):
-						Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
 						can_fire = false
 	
-	if (can_fire):
-		if (dial_created):
-			Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
+	#Cursor Logic
+	if (GameManager.access_ingame_menu):
+		if (can_fire):
+			if (dial_created):
+				Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
+			else:
+				Input.set_custom_mouse_cursor(hold_cursor, Input.CURSOR_ARROW)
 		else:
-			Input.set_custom_mouse_cursor(hold_cursor, Input.CURSOR_ARROW)
-		
+			Input.set_custom_mouse_cursor(fist_cursor, Input.CURSOR_ARROW)
+	else:
+		Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)
+	
+	if (can_fire):
 		if (!currently_selected_slot.attack_cooldown && Input.is_action_just_pressed("cast_spell")):
 			if (!dial_created):
 				spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
@@ -529,6 +535,9 @@ func reset_player():
 	$level_transition.get_node("AnimationPlayer").play("fade_in")
 	player_lives = MAX_LIVES
 	player_health = max_health
+	
+func enable_collision(enabled: bool):
+	player_collider.disabled = !enabled
 
 func set_screen_shake(amount: float):
 	camera.add_trauma(amount)

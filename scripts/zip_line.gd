@@ -49,6 +49,7 @@ func _process(delta):
 			if (area.is_in_group("players")):
 				var body = area.get_parent()
 				if (Input.is_action_just_pressed("pickup")):
+					body.enable_collision(false)
 					body.state = body.state_type.ZIPLINE
 					zipline_active = true
 					player = body
@@ -69,6 +70,7 @@ func _process(delta):
 		Input.is_action_just_pressed("move_up") || 
 		Input.is_action_just_pressed("move_down") ||
 		Input.is_action_just_pressed("pickup")):
+			player.enable_collision(true)
 			player.state = player.state_type.MOVING
 			zipline_follow.progress = 0
 			zipline_active = false

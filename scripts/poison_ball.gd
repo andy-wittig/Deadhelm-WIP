@@ -19,5 +19,5 @@ func _on_destroy_timer_timeout():
 func _on_body_entered(body):
 	if (body.is_in_group("players")):
 		body.hurt_player(PLAYER_DAMAGE, global_position, KNOCK_BACK)
-		body.set_screen_shake(0.6)
+		body.set_screen_shake(0.4)
 		destroy_self()

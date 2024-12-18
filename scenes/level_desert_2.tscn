@@ -438,9 +438,11 @@ autoplay = "move"
 
 [node name="snake8" parent="." instance=ExtResource("28_dq6xl")]
 position = Vector2(1144, -352)
+cooldown = 3
 
 [node name="snake9" parent="." instance=ExtResource("28_dq6xl")]
 position = Vector2(1168, -352)
+cooldown = 3
 
 [node name="wooden_spike8" parent="." instance=ExtResource("23_bla3g")]
 position = Vector2(1000, -368)
@@ -538,7 +540,7 @@ scale = Vector2(1, 3)
 
 [node name="impactor2" parent="." instance=ExtResource("34_l2p71")]
 position = Vector2(896, -400)
-attack_wait = 3.0
+attack_wait = 4.0
 ball_lifetime = 4
 facing_dir = -1
 
