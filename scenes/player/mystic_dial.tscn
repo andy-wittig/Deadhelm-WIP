@@ -184,7 +184,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"effect",
-"speed": 18.0
+"speed": 14.0
 }]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bohdq"]
@@ -219,15 +219,15 @@ pitch_scale = 0.75
 autoplay = true
 
 [node name="MysticParticles" type="CPUParticles2D" parent="."]
+z_index = 1
 material = SubResource("CanvasItemMaterial_njx3t")
 position = Vector2(-1.90735e-06, 5.68434e-14)
 rotation = -1.5708
 scale = Vector2(1, 0.954545)
 amount = 4
-lifetime = 0.4
+lifetime = 0.6
 speed_scale = 0.5
 randomness = 1.0
-lifetime_randomness = 0.2
 local_coords = true
 texture = SubResource("CompressedTexture2D_8f6g4")
 emission_shape = 1

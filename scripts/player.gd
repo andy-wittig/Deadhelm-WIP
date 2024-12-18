@@ -261,12 +261,10 @@ func _process(delta):
 		
 		#trigger mystic dial
 		if (dial_created && Input.is_action_just_released("cast_spell")):
-			var spell_path = currently_selected_slot.get_spell_instance()
-			var new_spell = load(spell_path).instantiate()
-			new_spell.player = self
-			new_spell.global_position = spell_spawn.global_position
-			get_tree().get_root().get_node("game/Level").add_child(new_spell)
-			new_spell.reset_physics_interpolation()
+			spell_instance.player = self
+			spell_instance.global_position = spell_spawn.global_position
+			get_tree().get_root().get_node("game/Level").add_child(spell_instance)
+			spell_instance.reset_physics_interpolation()
 			play_sound("cast")
 			
 			currently_selected_slot.start_cooldown(currently_selected_slot.get_slot_item())
@@ -274,6 +272,10 @@ func _process(delta):
 			dial_instance = null
 			dial_created = false
 			cast_complete = true
+	elif (dial_created && Input.is_action_just_released("cast_spell")):
+		dial_instance.destroy()
+		dial_instance = null
+		dial_created = false
 	
 	#Developer Cheats
 	if (Input.is_action_just_pressed("cheat_button_1")):
@@ -549,6 +551,7 @@ func inventory_scrolling(scroll_amount: int):
 			selected_slot_pos = inventory.size() - 1
 		
 		currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
+		update_spell_placeholder()
 		
 func inventory_hotkey():
 	if (Input.is_action_just_pressed("slot_1")):
@@ -557,6 +560,11 @@ func inventory_hotkey():
 		currently_selected_slot = inventory[inventory.keys()[1]]
 	if (Input.is_action_just_pressed("slot_3")):
 		currently_selected_slot = inventory[inventory.keys()[2]]
+		
+func update_spell_placeholder():
+	if (dial_created && currently_selected_slot.get_spell_instance() != null):
+			spell_instance = load(currently_selected_slot.get_spell_instance()).instantiate()
+			dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
 		
 func drop_inventory_item(spell_type, pos):
 	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()

@@ -32,7 +32,7 @@ func set_placeholder_sprite(sprite_path):
 func _ready():
 	global_position = player.player_center.global_position
 	placeholder_spell = Sprite2D.new()
-	placeholder_spell.modulate.a = 0.6
+	placeholder_spell.modulate.a = 0.8
 	add_child(placeholder_spell)
 	
 func _process(delta):
