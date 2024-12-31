@@ -50,6 +50,7 @@ func _ready():
 func _process(delta):
 	if (!GameManager.access_ingame_menu): #close shop if ingame menu is overlapping
 		menu_opened = false
+		GameManager.access_shop_menu = true
 		animation_player.play_backwards("open_menu")
 		
 	if (menu_opened):
@@ -97,6 +98,7 @@ func _process(delta):
 			if (!menu_opened): shop_sprite.material.set_shader_parameter("enabled", true)
 			if (Input.is_action_just_pressed("pickup")):
 				menu_opened = !menu_opened
+				GameManager.access_shop_menu = !GameManager.access_shop_menu
 				if (menu_opened): animation_player.play("open_menu")
 				else: animation_player.play_backwards("open_menu")
 			return

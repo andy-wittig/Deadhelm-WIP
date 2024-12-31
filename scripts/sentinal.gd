@@ -121,11 +121,7 @@ func _physics_process(delta):
 		gun_sprite.flip_v = false
 		
 	match state:
-		state_type.MOVING:	
-			if (ray_cast_right.is_colliding() || ray_cast_left.is_colliding()
-			|| ray_cast_up.is_colliding() || ray_cast_down.is_colliding()):
-				roam_direction = -roam_direction
-				
+		state_type.MOVING:		
 			if (init_position.distance_to(global_position) >= ROAM_RANGE):
 				roam_direction = (init_position - global_position).normalized()
 				

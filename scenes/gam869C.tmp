@@ -1,0 +1,373 @@
+[gd_scene load_steps=36 format=3 uid="uid://cm4gh7qawwcbf"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
+[ext_resource type="Texture2D" uid="uid://370vg8cxmgmw" path="res://assets/sprites/UI/title_ui.png" id="3_i7ejn"]
+[ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_1urpk"]
+[ext_resource type="Shader" path="res://shaders/sway.gdshader" id="4_7fi5r"]
+[ext_resource type="Shader" path="res://shaders/distort.gdshader" id="4_mlfnw"]
+[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
+[ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/menus/settings_menu.tscn" id="6_hxbga"]
+[ext_resource type="PackedScene" uid="uid://c3tnfa07koleu" path="res://scenes/menus/in_game_menu.tscn" id="8_ar250"]
+[ext_resource type="PackedScene" uid="uid://bqgd6hcfgc75y" path="res://scenes/menus/credits_menu.tscn" id="9_0w2qv"]
+[ext_resource type="PackedScene" uid="uid://btplmre76e21a" path="res://scenes/menus/journal_menu.tscn" id="9_7yf88"]
+[ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
+[ext_resource type="PackedScene" uid="uid://b0378gpwb8g1x" path="res://scenes/menus/gameover_menu.tscn" id="11_bodm6"]
+[ext_resource type="Texture2D" uid="uid://dm11bfh1qcc23" path="res://assets/sprites/UI/title_background_sky.png" id="13_1o8hw"]
+[ext_resource type="Texture2D" uid="uid://g6ptohieeaq0" path="res://assets/sprites/UI/title_background_foreground_sheet.png" id="14_ww188"]
+[ext_resource type="Texture2D" uid="uid://fgw4c7gfxo7e" path="res://assets/sprites/UI/title_background_mountains.png" id="14_yyt2w"]
+[ext_resource type="Texture2D" uid="uid://bn661yg7bx1x8" path="res://assets/sprites/UI/title_background_shorline.png" id="15_s3i31"]
+
+[sub_resource type="GDScript" id="GDScript_enk6v"]
+script/source = "extends Node
+	
+func start_game():
+	$MenuLayer.current_menu = $MenuLayer.menu.HIDDEN
+	GameManager.started_game = true
+	FileAccess.open(\"user://player_info.save\", FileAccess.WRITE)
+	change_level.call_deferred(load(\"res://scenes/level_template.tscn\"))
+	#change_level.call_deferred(load(\"res://scenes/level_grasslands_1.tscn\"))
+	
+func change_level(scene: PackedScene):
+	var level = $Level
+	for object in level.get_children(): #clear old level
+		level.remove_child(object)
+		object.queue_free()
+	
+	var new_scene = scene.instantiate()
+	GameManager.current_level = new_scene.get_name()
+	level.add_child(new_scene)
+	
+func end_level():
+	var level = $Level
+	GameManager.current_level = \"\"
+	for object in level.get_children():
+		level.remove_child(object)
+		object.queue_free()
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgunp"]
+shader = ExtResource("4_7fi5r")
+
+[sub_resource type="Animation" id="Animation_vno7m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(510, 32)]
+}
+
+[sub_resource type="Animation" id="Animation_334a0"]
+resource_name = "bounce"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(510, 32), Vector2(510, 40)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m03xp"]
+_data = {
+"RESET": SubResource("Animation_vno7m"),
+"bounce": SubResource("Animation_334a0")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wogm"]
+atlas = ExtResource("14_ww188")
+region = Rect2(0, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lkji"]
+atlas = ExtResource("14_ww188")
+region = Rect2(160, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npkbm"]
+atlas = ExtResource("14_ww188")
+region = Rect2(320, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knhrt"]
+atlas = ExtResource("14_ww188")
+region = Rect2(480, 0, 160, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtgx1"]
+atlas = ExtResource("14_ww188")
+region = Rect2(640, 0, 160, 90)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a4tg8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wogm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lkji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npkbm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knhrt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtgx1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i7rq8"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_elora"]
+noise = SubResource("FastNoiseLite_i7rq8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jb632"]
+shader = ExtResource("4_mlfnw")
+shader_parameter/speed = 0.05
+shader_parameter/strength = 0.005
+shader_parameter/noise = SubResource("NoiseTexture2D_elora")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b3gn5"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2rdnd"]
+seamless = true
+noise = SubResource("FastNoiseLite_b3gn5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_da0k7"]
+shader = ExtResource("4_mlfnw")
+shader_parameter/speed = 0.05
+shader_parameter/strength = 0.005
+shader_parameter/noise = SubResource("NoiseTexture2D_2rdnd")
+
+[sub_resource type="Gradient" id="Gradient_dqply"]
+colors = PackedColorArray(1, 0.819608, 0.835294, 0.784314, 0.2, 0.533333, 0.870588, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lr8m4"]
+gradient = SubResource("Gradient_dqply")
+fill_to = Vector2(0, 1)
+
+[node name="game" type="Node"]
+script = SubResource("GDScript_enk6v")
+
+[node name="Level" type="Node" parent="."]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_th4ch")
+
+[node name="MenuControl" type="Control" parent="MenuLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MenuContainer" type="VBoxContainer" parent="MenuLayer/MenuControl"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -88.0
+offset_right = 256.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+
+[node name="Spacer" type="Control" parent="MenuLayer/MenuControl/MenuContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="startButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../quitButton")
+theme_override_fonts/font = ExtResource("4_1urpk")
+theme_override_font_sizes/font_size = 32
+text = "start game"
+
+[node name="settingsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../creditsButton")
+theme_override_fonts/font = ExtResource("5_3g5wa")
+theme_override_font_sizes/font_size = 32
+text = "settings"
+
+[node name="creditsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../settingsButton")
+focus_neighbor_bottom = NodePath("../quitButton")
+theme_override_fonts/font = ExtResource("5_3g5wa")
+theme_override_font_sizes/font_size = 32
+text = "credits
+"
+
+[node name="quitButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../creditsButton")
+focus_neighbor_bottom = NodePath("../startButton")
+theme_override_fonts/font = ExtResource("5_3g5wa")
+theme_override_font_sizes/font_size = 32
+text = "quit game"
+
+[node name="settings_menu" parent="MenuLayer/MenuControl" instance=ExtResource("6_hxbga")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="in_game_menu" parent="MenuLayer/MenuControl" instance=ExtResource("8_ar250")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="JournalMenu" parent="MenuLayer/MenuControl" instance=ExtResource("9_7yf88")]
+visible = false
+layout_mode = 1
+
+[node name="credits_menu" parent="MenuLayer/MenuControl" instance=ExtResource("9_0w2qv")]
+visible = false
+layout_mode = 1
+
+[node name="gameover_menu" parent="MenuLayer/MenuControl" instance=ExtResource("11_bodm6")]
+visible = false
+layout_mode = 1
+
+[node name="TitleBackground" type="Control" parent="MenuLayer/MenuControl"]
+z_index = -100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Title" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = 2
+material = SubResource("ShaderMaterial_mgunp")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -450.0
+offset_top = 32.0
+offset_right = 450.0
+offset_bottom = 164.0
+grow_horizontal = 2
+texture = ExtResource("3_i7ejn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuLayer/MenuControl/TitleBackground/Title"]
+libraries = {
+"": SubResource("AnimationLibrary_m03xp")
+}
+autoplay = "bounce"
+
+[node name="Foreground" type="AnimatedSprite2D" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = 1
+scale = Vector2(12, 12)
+sprite_frames = SubResource("SpriteFrames_a4tg8")
+autoplay = "default"
+frame_progress = 0.473926
+centered = false
+
+[node name="Mountains" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_yyt2w")
+
+[node name="Shorline" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+material = SubResource("ShaderMaterial_jb632")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_s3i31")
+
+[node name="Sky" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_1o8hw")
+
+[node name="SkylineReflection" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = -1
+material = SubResource("ShaderMaterial_da0k7")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -360.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_yyt2w")
+flip_v = true
+
+[node name="WaterRect" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_lr8m4")
+
+[node name="Music" type="Node" parent="."]
+script = ExtResource("10_mudwi")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Music"]
+volume_db = -20.0
+bus = &"Music"
+
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/settingsButton" to="MenuLayer" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/creditsButton" to="MenuLayer" method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/quitButton" to="MenuLayer" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/quitButton" to="MenuLayer/MenuControl" method="_on_quit_button_pressed"]

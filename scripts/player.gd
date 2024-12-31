@@ -90,7 +90,7 @@ var hold_cursor = load("res://assets/sprites/UI/cursor can drop.png")
 @onready var healthbar_label = $hud/Control/HealthContainer/Healthbar/HealthbarLabel
 @onready var soul_label = $hud/Control/StatsContainer/SoulCounter/SoulCounterLabel
 @onready var money_label = $hud/Control/StatsContainer/MoneyCounter/MoneyCounterLabel
-@onready var portal_progress = $hud/Control/PortalProgess/ProgressBar
+@onready var portal_progress = $hud/Control/StatsContainer/PortalProgess/ProgressBar
 #Mechanics Paths
 @onready var player_center = $PlayerCenter
 @onready var player_collider = $PlayerCollider
@@ -204,7 +204,7 @@ func _process(delta):
 	
 	#HANDLE INVENTORY INPUT
 	#scrolling
-	if (GameManager.access_ingame_menu):
+	if (GameManager.access_ingame_menu && GameManager.access_shop_menu):
 		if (Input.is_action_just_pressed("scroll_up")):
 			inventory_scrolling(1)
 			
@@ -228,7 +228,7 @@ func _process(delta):
 	
 	if (currently_selected_slot.get_slot_item() == "empty" 
 	|| currently_selected_slot.is_dragging()
-	|| !GameManager.access_ingame_menu):
+	|| !GameManager.access_ingame_menu) || !GameManager.access_shop_menu:
 		can_fire = false
 		if (dial_created):
 			dial_instance.destroy()
@@ -242,7 +242,7 @@ func _process(delta):
 						can_fire = false
 	
 	#Cursor Logic
-	if (GameManager.access_ingame_menu):
+	if (GameManager.access_ingame_menu && GameManager.access_shop_menu && !marked_dead):
 		if (can_fire):
 			if (dial_created):
 				Input.set_custom_mouse_cursor(point_cursor, Input.CURSOR_ARROW)

@@ -79,7 +79,13 @@ bg_color = Color(0.368627, 0.356863, 0.54902, 0.588235)
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ebuqc"]
 light_mode = 1
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2y6y"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0aoy"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62f8v"]
 bg_color = Color(0.690196, 0.654902, 0.721569, 0.686275)
@@ -91,13 +97,7 @@ border_width_bottom = 1
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ltppu"]
 bg_color = Color(0.368627, 0.356863, 0.54902, 0.686275)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0aoy"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2y6y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73pvg"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -359,10 +359,10 @@ offset_top = 3.0
 offset_right = 29.0
 offset_bottom = 21.0
 mouse_filter = 1
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h2y6y")
+theme_override_styles/focus = SubResource("StyleBoxFlat_m0aoy")
 theme_override_styles/hover = SubResource("StyleBoxFlat_62f8v")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ltppu")
-theme_override_styles/focus = SubResource("StyleBoxFlat_m0aoy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2y6y")
 
 [node name="PurchaseButton2" type="Button" parent="BlacksmithControl"]
 use_parent_material = true
@@ -372,10 +372,10 @@ offset_top = 3.0
 offset_right = 49.0
 offset_bottom = 21.0
 mouse_filter = 1
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h2y6y")
+theme_override_styles/focus = SubResource("StyleBoxFlat_73pvg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_62f8v")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ltppu")
-theme_override_styles/focus = SubResource("StyleBoxFlat_73pvg")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2y6y")
 
 [node name="PurchaseButton3" type="Button" parent="BlacksmithControl"]
 use_parent_material = true
@@ -385,10 +385,10 @@ offset_top = 3.0
 offset_right = 69.0
 offset_bottom = 21.0
 mouse_filter = 1
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h2y6y")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ty16h")
 theme_override_styles/hover = SubResource("StyleBoxFlat_62f8v")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ltppu")
-theme_override_styles/focus = SubResource("StyleBoxFlat_ty16h")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2y6y")
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="BlacksmithControl"]
 position = Vector2(40, 12.5)

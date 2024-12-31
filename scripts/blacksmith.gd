@@ -38,6 +38,7 @@ func _ready():
 func _process(delta):
 	if (!GameManager.access_ingame_menu): #close shop if ingame menu is overlapping
 		menu_opened = false
+		GameManager.access_shop_menu = true
 		animation_player.play_backwards("open_menu")
 		
 	if (menu_opened):
@@ -75,6 +76,7 @@ func _process(delta):
 			player = body
 			if (!menu_opened): blacksmith_sprite.material.set_shader_parameter("enabled", true)
 			if (Input.is_action_just_pressed("pickup")):
+				GameManager.access_shop_menu = !GameManager.access_shop_menu
 				menu_opened = !menu_opened
 				if (menu_opened): animation_player.play("open_menu")
 				else: animation_player.play_backwards("open_menu")

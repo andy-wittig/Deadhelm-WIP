@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0378gpwb8g1x"]
+[gd_scene load_steps=6 format=3 uid="uid://b0378gpwb8g1x"]
 
 [ext_resource type="Script" path="res://scripts/gameover_menu.gd" id="1_fmqb6"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_mcwat"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_i504a"]
+[ext_resource type="Shader" path="res://shaders/black_and_white.gdshader" id="2_s3bgm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_27dy0"]
+shader = ExtResource("2_s3bgm")
+shader_parameter/tint = null
+shader_parameter/enabled = true
 
 [node name="gameover_menu" type="Control"]
 layout_mode = 3
@@ -13,6 +19,17 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 script = ExtResource("1_fmqb6")
+
+[node name="GreyScaleCanvas" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="GreyScaleCanvas"]
+material = SubResource("ShaderMaterial_27dy0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -41,6 +58,21 @@ text = "YOU HAVE FALLEN."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Spacer1" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ContinueLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("1_mcwat")
+theme_override_font_sizes/font_size = 24
+text = "Continues:"
+
 [node name="Spacer2" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -58,7 +90,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_i504a")
 theme_override_font_sizes/font_size = 24
-text = "accept defeat
+text = "end game
 "
 
 [connection signal="pressed" from="VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]

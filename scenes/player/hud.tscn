@@ -111,40 +111,35 @@ layout_mode = 2
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 
-[node name="PortalProgess" type="HBoxContainer" parent="Control"]
+[node name="StatsContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -64.0
-offset_bottom = 16.0
+offset_bottom = 56.0
 grow_horizontal = 0
+size_flags_horizontal = 0
+
+[node name="PortalProgess" type="HBoxContainer" parent="Control/StatsContainer"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_constants/separation = 0
 
-[node name="ProgressBar" type="TextureProgressBar" parent="Control/PortalProgess"]
+[node name="ProgressBar" type="TextureProgressBar" parent="Control/StatsContainer/PortalProgess"]
 layout_mode = 2
 texture_under = ExtResource("6_fciug")
 texture_over = ExtResource("7_xji1y")
 texture_progress = ExtResource("8_v8e1b")
 
-[node name="PortalTexture" type="TextureRect" parent="Control/PortalProgess"]
+[node name="PortalTexture" type="TextureRect" parent="Control/StatsContainer/PortalProgess"]
 layout_mode = 2
 texture = ExtResource("9_3ys8q")
 
-[node name="StatsContainer" type="VBoxContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -36.0
-offset_right = 48.0
-grow_vertical = 0
-size_flags_horizontal = 0
-
 [node name="MoneyCounter" type="TextureRect" parent="Control/StatsContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
 texture = ExtResource("1_auw1f")
 
 [node name="MoneyCounterLabel" type="Label" parent="Control/StatsContainer/MoneyCounter"]
@@ -161,6 +156,7 @@ text = "$0
 
 [node name="SoulCounter" type="TextureRect" parent="Control/StatsContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
 texture = ExtResource("3_e6gxi")
 
 [node name="SoulCounterLabel" type="Label" parent="Control/StatsContainer/SoulCounter"]

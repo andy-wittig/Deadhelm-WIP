@@ -184,6 +184,7 @@ libraries = {
 autoplay = "body_rock"
 
 [node name="chase player" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -191,19 +192,19 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_wl36a")
 
 [node name="RayCastDown" type="RayCast2D" parent="."]
-target_position = Vector2(0, 7)
+target_position = Vector2(0, 8)
 collision_mask = 16
 
 [node name="RayCastUp" type="RayCast2D" parent="."]
-target_position = Vector2(0, -7)
+target_position = Vector2(0, -8)
 collision_mask = 16
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
-target_position = Vector2(7, 0)
+target_position = Vector2(8, 0)
 collision_mask = 16
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
-target_position = Vector2(-7, 0)
+target_position = Vector2(-8, 0)
 collision_mask = 16
 
 [node name="Rocket Marker" type="Marker2D" parent="."]

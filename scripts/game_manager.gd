@@ -2,7 +2,8 @@ extends Node
 var started_game := false
 var current_level: String
 var access_ingame_menu := true
-
+var access_shop_menu := true
+var continues := 0
 var can_drop_cursor = load("res://assets/sprites/UI/cursor can drop.png")
 var can_not_drop_cursor = load("res://assets/sprites/UI/cursor cancel.png")
 
