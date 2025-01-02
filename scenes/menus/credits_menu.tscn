@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqgd6hcfgc75y"]
+[gd_scene load_steps=5 format=3 uid="uid://bqgd6hcfgc75y"]
 
 [ext_resource type="Script" path="res://scripts/credits_menu.gd" id="1_f3ai8"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_tuvr7"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_wvv72"]
+[ext_resource type="Texture2D" uid="uid://bnfltg8uk073d" path="res://assets/sprites/UI/text_back.png" id="4_1ym0m"]
 
 [node name="credits_menu" type="Control"]
 layout_mode = 3
@@ -80,10 +81,13 @@ MARTIN KERR
 [/center]"
 
 [node name="backButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_tuvr7")
 theme_override_font_sizes/font_size = 32
 text = "back"
+icon = ExtResource("4_1ym0m")
+expand_icon = true
 
 [connection signal="pressed" from="VBoxContainer/backButton" to="." method="_on_back_button_pressed"]

@@ -833,14 +833,8 @@ autoplay = "idle"
 frame_progress = 0.823542
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_refxm")
-
-[node name="InteractArea" type="Area2D" parent="."]
-position = Vector2(0, -16)
-collision_layer = 256
-collision_mask = 0
 
 [node name="SpellSpawn" type="Node2D" parent="."]
 position = Vector2(0, -16)

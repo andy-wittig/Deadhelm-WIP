@@ -84,6 +84,7 @@ func _process(delta):
 	blacksmith_sprite.material.set_shader_parameter("enabled", false)
 	animation_player.play_backwards("open_menu")
 	menu_opened = false
+	GameManager.access_shop_menu = true
 
 func _on_animation_player_animation_finished(anim_name):
 	if (!menu_opened):

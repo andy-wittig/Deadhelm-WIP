@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3tnfa07koleu"]
+[gd_scene load_steps=7 format=3 uid="uid://c3tnfa07koleu"]
 
 [ext_resource type="Script" path="res://scripts/in_game_menu.gd" id="1_6tw1o"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_j41ku"]
 [ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/menus/settings_menu.tscn" id="2_djsis"]
+[ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_t46ta"]
+[ext_resource type="Texture2D" uid="uid://bnfltg8uk073d" path="res://assets/sprites/UI/text_back.png" id="3_yc3ei"]
+[ext_resource type="Texture2D" uid="uid://7j2gwfbq4l34" path="res://assets/sprites/UI/text_settings.png" id="5_3k4t3"]
 
 [node name="in_game_menu" type="Control"]
 layout_mode = 3
@@ -29,16 +32,22 @@ grow_vertical = 2
 theme_override_constants/separation = 4
 
 [node name="BackButton" type="Button" parent="MenuOptions"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_j41ku")
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_t46ta")
 theme_override_font_sizes/font_size = 32
 text = "back"
+icon = ExtResource("3_yc3ei")
+expand_icon = true
 
 [node name="SettingsButton" type="Button" parent="MenuOptions"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_j41ku")
 theme_override_font_sizes/font_size = 32
 text = "settings"
+icon = ExtResource("5_3k4t3")
+expand_icon = true
 
 [node name="LeaveButton" type="Button" parent="MenuOptions"]
 layout_mode = 2

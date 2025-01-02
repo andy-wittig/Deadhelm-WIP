@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://8f6vlpb4dim"]
+[gd_scene load_steps=5 format=3 uid="uid://8f6vlpb4dim"]
 
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_k5orc"]
 [ext_resource type="Script" path="res://scripts/settings_menu.gd" id="1_w6ast"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_5htnj"]
+[ext_resource type="Texture2D" uid="uid://bnfltg8uk073d" path="res://assets/sprites/UI/text_back.png" id="4_417ov"]
 
 [node name="settings_menu" type="Control"]
 layout_mode = 3
@@ -70,18 +71,18 @@ grow_vertical = 2
 [node name="CheckWindowed" type="CheckBox" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
 layout_direction = 3
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_k5orc")
 theme_override_font_sizes/font_size = 24
 text = "WINDOWED:"
+alignment = 1
 
 [node name="CheckVsync" type="CheckBox" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
 layout_direction = 3
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_k5orc")
 theme_override_font_sizes/font_size = 24
 text = "VSYNC ENABLED:"
+alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
 layout_mode = 2
@@ -89,10 +90,17 @@ theme_override_constants/separation = 8
 
 [node name="CheckCursor" type="CheckButton" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_k5orc")
 theme_override_font_sizes/font_size = 24
 text = "HIDE CURSOR"
+alignment = 1
+
+[node name="CheckHud" type="CheckButton" parent="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_k5orc")
+theme_override_font_sizes/font_size = 24
+text = "HIDE HUD"
+alignment = 1
 
 [node name="SOUND" type="TabBar" parent="VBoxContainer/SettingsTabs"]
 visible = false
@@ -191,15 +199,19 @@ size_flags_vertical = 4
 columns = 2
 
 [node name="backButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_5htnj")
 theme_override_font_sizes/font_size = 32
 text = "back"
+icon = ExtResource("4_417ov")
+expand_icon = true
 
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckWindowed" to="." method="_on_check_windowed_toggled"]
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckVsync" to="." method="_on_check_vsync_toggled"]
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckCursor" to="." method="_on_check_cursor_toggled"]
+[connection signal="toggled" from="VBoxContainer/SettingsTabs/DISPLAY/VBoxContainer/CheckHud" to="." method="_on_check_hud_toggled"]
 [connection signal="toggled" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MuteButton" to="." method="_on_mute_button_toggled"]
 [connection signal="value_changed" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SettingsTabs/SOUND/VBoxContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]

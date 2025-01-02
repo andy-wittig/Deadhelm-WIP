@@ -86,6 +86,7 @@ var hold_cursor = load("res://assets/sprites/UI/cursor can drop.png")
 	$hud/Control/HealthContainer/LivesContainer.get_node("Heart2"),
 	$hud/Control/HealthContainer/LivesContainer.get_node("Heart3"),
 ]
+@onready var hud = $hud
 @onready var healthbar = $hud/Control/HealthContainer/Healthbar
 @onready var healthbar_label = $hud/Control/HealthContainer/Healthbar/HealthbarLabel
 @onready var soul_label = $hud/Control/StatsContainer/SoulCounter/SoulCounterLabel
@@ -535,6 +536,9 @@ func reset_player():
 	$level_transition.get_node("AnimationPlayer").play("fade_in")
 	player_lives = MAX_LIVES
 	player_health = max_health
+	
+func toggle_hud():
+	hud.visible = !hud.visible
 	
 func enable_collision(enabled: bool):
 	player_collider.disabled = !enabled

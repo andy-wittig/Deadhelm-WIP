@@ -1,11 +1,14 @@
-[gd_scene load_steps=36 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=40 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
 [ext_resource type="Texture2D" uid="uid://370vg8cxmgmw" path="res://assets/sprites/UI/title_ui.png" id="3_i7ejn"]
+[ext_resource type="Texture2D" uid="uid://daft7vtf5ceqb" path="res://assets/sprites/UI/text_button.png" id="3_vs43y"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_1urpk"]
 [ext_resource type="Shader" path="res://shaders/sway.gdshader" id="4_7fi5r"]
 [ext_resource type="Shader" path="res://shaders/distort.gdshader" id="4_mlfnw"]
+[ext_resource type="Texture2D" uid="uid://7j2gwfbq4l34" path="res://assets/sprites/UI/text_settings.png" id="5_1f5mw"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
+[ext_resource type="Texture2D" uid="uid://bpiay5stynsig" path="res://assets/sprites/UI/text_credits.png" id="6_5nwc3"]
 [ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/menus/settings_menu.tscn" id="6_hxbga"]
 [ext_resource type="PackedScene" uid="uid://c3tnfa07koleu" path="res://scenes/menus/in_game_menu.tscn" id="8_ar250"]
 [ext_resource type="PackedScene" uid="uid://bqgd6hcfgc75y" path="res://scenes/menus/credits_menu.tscn" id="9_0w2qv"]
@@ -16,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://g6ptohieeaq0" path="res://assets/sprites/UI/title_background_foreground_sheet.png" id="14_ww188"]
 [ext_resource type="Texture2D" uid="uid://fgw4c7gfxo7e" path="res://assets/sprites/UI/title_background_mountains.png" id="14_yyt2w"]
 [ext_resource type="Texture2D" uid="uid://bn661yg7bx1x8" path="res://assets/sprites/UI/title_background_shorline.png" id="15_s3i31"]
+[ext_resource type="Texture2D" uid="uid://baxrvat8rbb0w" path="res://assets/sprites/UI/title_background_foreground.png" id="15_t40n0"]
 
 [sub_resource type="GDScript" id="GDScript_enk6v"]
 script/source = "extends Node
@@ -45,9 +49,6 @@ func end_level():
 		object.queue_free()
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgunp"]
-shader = ExtResource("4_7fi5r")
-
 [sub_resource type="Animation" id="Animation_vno7m"]
 length = 0.001
 tracks/0/type = "value"
@@ -62,6 +63,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(510, 32)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Foreground:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 32)]
+}
 
 [sub_resource type="Animation" id="Animation_334a0"]
 resource_name = "bounce"
@@ -74,10 +87,22 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(510, 32), Vector2(510, 40)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Foreground:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 12), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m03xp"]
@@ -85,6 +110,9 @@ _data = {
 "RESET": SubResource("Animation_vno7m"),
 "bounce": SubResource("Animation_334a0")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgunp"]
+shader = ExtResource("4_7fi5r")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wogm"]
 atlas = ExtResource("14_ww188")
@@ -126,7 +154,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 4.0
+"speed": 5.0
 }]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_i7rq8"]
@@ -189,9 +217,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
+offset_left = -192.0
 offset_top = -88.0
-offset_right = 256.0
+offset_right = 192.0
 offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -207,6 +235,8 @@ focus_neighbor_top = NodePath("../quitButton")
 theme_override_fonts/font = ExtResource("4_1urpk")
 theme_override_font_sizes/font_size = 32
 text = "start game"
+icon = ExtResource("3_vs43y")
+expand_icon = true
 
 [node name="settingsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
@@ -214,6 +244,8 @@ focus_neighbor_bottom = NodePath("../creditsButton")
 theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 32
 text = "settings"
+icon = ExtResource("5_1f5mw")
+expand_icon = true
 
 [node name="creditsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
@@ -223,6 +255,8 @@ theme_override_fonts/font = ExtResource("5_3g5wa")
 theme_override_font_sizes/font_size = 32
 text = "credits
 "
+icon = ExtResource("6_5nwc3")
+expand_icon = true
 
 [node name="quitButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
@@ -273,6 +307,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuLayer/MenuControl/TitleBackground"]
+root_node = NodePath("../Title")
+libraries = {
+"": SubResource("AnimationLibrary_m03xp")
+}
+autoplay = "bounce"
+
 [node name="Title" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 z_index = 2
 material = SubResource("ShaderMaterial_mgunp")
@@ -287,19 +328,25 @@ offset_bottom = 164.0
 grow_horizontal = 2
 texture = ExtResource("3_i7ejn")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuLayer/MenuControl/TitleBackground/Title"]
-libraries = {
-"": SubResource("AnimationLibrary_m03xp")
-}
-autoplay = "bounce"
-
 [node name="Foreground" type="AnimatedSprite2D" parent="MenuLayer/MenuControl/TitleBackground"]
 z_index = 1
+position = Vector2(0, 32)
 scale = Vector2(12, 12)
 sprite_frames = SubResource("SpriteFrames_a4tg8")
 autoplay = "default"
 frame_progress = 0.473926
 centered = false
+
+[node name="ForegroundLand" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_t40n0")
 
 [node name="Mountains" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 z_index = 1

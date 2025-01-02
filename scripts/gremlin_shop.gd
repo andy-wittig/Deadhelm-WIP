@@ -104,6 +104,7 @@ func _process(delta):
 			return
 	shop_sprite.material.set_shader_parameter("enabled", false)
 	animation_player.play_backwards("open_menu")
+	GameManager.access_shop_menu = true
 	menu_opened = false
 
 func _on_animation_player_animation_finished(anim_name):
