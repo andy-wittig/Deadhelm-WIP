@@ -8,7 +8,7 @@
 Rapidly scorch enemies and direct the flames underneathe to boost through the air.
 
 [table={2}]
-[cell]|Stats|[/cell][cell]|Value|[/cell]
+[cell bg=e8d282]|Stats|[/cell][cell bg=e8d282]|Value|[/cell]
 [cell border=black][left]type:[/left][/cell][cell border=black]short-range[/cell]
 [cell border=black][left]cool-down:[/left][/cell][cell border=black]3[/cell]
 [cell border=black][left]damage:[/left][/cell][cell border=black]2[/cell]

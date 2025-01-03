@@ -8,7 +8,7 @@
 Absorbs incoming projectiles.
 
 [table={2}]
-[cell]|Stats|[/cell][cell]|Value|[/cell]
+[cell bg=e8d282]|Stats|[/cell][cell bg=e8d282]|Value|[/cell]
 [cell border=black][left]type:[/left][/cell][cell border=black]defense[/cell]
 [cell border=black][left]cool-down:[/left][/cell][cell border=black]7[/cell]
 [cell border=black][left]damage:[/left][/cell][cell border=black]N/A[/cell]
