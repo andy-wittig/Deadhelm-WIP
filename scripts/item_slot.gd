@@ -39,7 +39,7 @@ var attack_cooldown := false
 	"shield" : 7,
 	"lightning" : 3,
 	"flame" : 3,
-	"poison_bottle" : 10,
+	"poison_bottle" : 8,
 	"bow" : 2,
 	"morning_star" : 5,
 	"phantasmal_push" : 5,

@@ -1,8 +1,19 @@
 [center]
 [b][u]SPELL DESCRIPTION[/u][/b]
 
-Lightning Tome
 [img={width%}96{height%}]res://assets/sprites/level_objects/spells/lightning orb.png[/img]
 
-This spell is cool.
+[center][u]Lightning Tome[/u][/center]
+
+Zap enemies with bolts of lightning to deal damage, cannot pass through walls.
+
+[table={2}]
+[cell]|Stats|[/cell][cell]|Value|[/cell]
+[cell border=black][left]type:[/left][/cell][cell border=black]short-range[/cell]
+[cell border=black][left]cool-down:[/left][/cell][cell border=black]3[/cell]
+[cell border=black][left]damage:[/left][/cell][cell border=black]5[/cell]
+[cell border=black][left]speed:[/left][/cell][cell border=black]N/A[/cell]
+[cell border=black][left]knock-back:[/left][/cell][cell border=black]100[/cell]
+[cell border=black][left]damage-rate:[/left][/cell][cell border=black]0.4[/cell]
+[/table]
 [/center]

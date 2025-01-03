@@ -39,7 +39,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -288.0
-offset_top = -236.0
+offset_top = -224.0
 offset_right = 288.0
 offset_bottom = 192.0
 grow_horizontal = 2
@@ -48,7 +48,7 @@ grow_vertical = 2
 [node name="TabBar" type="TabBar" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("3_5nlnu")
 theme_override_font_sizes/font_size = 24
 clip_tabs = false
@@ -56,10 +56,9 @@ tab_count = 2
 tab_0/title = "Spells"
 tab_1/title = "Enemies"
 
-[node name="Pages" type="GridContainer" parent="VBoxContainer"]
+[node name="Pages" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-columns = 2
 
 [node name="LeftPage" type="RichTextLabel" parent="VBoxContainer/Pages"]
 layout_mode = 2
@@ -71,7 +70,10 @@ theme_override_fonts/bold_font = ExtResource("3_5nlnu")
 theme_override_font_sizes/normal_font_size = 16
 theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
-scroll_active = false
+
+[node name="Spacer" type="Control" parent="VBoxContainer/Pages"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
 
 [node name="RighPage" type="RichTextLabel" parent="VBoxContainer/Pages"]
 layout_mode = 2
@@ -83,7 +85,6 @@ theme_override_fonts/bold_font = ExtResource("3_5nlnu")
 theme_override_font_sizes/normal_font_size = 16
 theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
-scroll_active = false
 
 [node name="PageNumber" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -108,10 +109,10 @@ text = "2
 
 [node name="PrevPageButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 672.0
-offset_top = 648.0
-offset_right = 688.0
-offset_bottom = 664.0
+offset_left = 660.0
+offset_top = 672.0
+offset_right = 676.0
+offset_bottom = 688.0
 scale = Vector2(6, 6)
 texture_normal = ExtResource("5_cc30i")
 texture_pressed = ExtResource("6_t05xq")
@@ -119,10 +120,10 @@ flip_h = true
 
 [node name="NextPageButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 1152.0
-offset_top = 648.0
-offset_right = 1168.0
-offset_bottom = 664.0
+offset_left = 1164.0
+offset_top = 672.0
+offset_right = 1180.0
+offset_bottom = 688.0
 scale = Vector2(6, 6)
 texture_normal = ExtResource("5_cc30i")
 texture_pressed = ExtResource("6_t05xq")

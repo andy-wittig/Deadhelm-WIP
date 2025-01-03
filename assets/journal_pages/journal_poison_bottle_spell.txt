@@ -1,0 +1,19 @@
+[center]
+[b][u]SPELL DESCRIPTION[/u][/b]
+
+[img={width%}96{height%}]res://assets/sprites/level_objects/spells/poison_bottle.png[/img]
+
+[center][u]Poison Bottle Tome[/u][/center]
+
+Creates a poisonous cloud that deals radial damage.
+
+[table={2}]
+[cell]|Stats|[/cell][cell]|Value|[/cell]
+[cell border=black][left]type:[/left][/cell][cell border=black]throwing[/cell]
+[cell border=black][left]cool-down:[/left][/cell][cell border=black]8[/cell]
+[cell border=black][left]damage:[/left][/cell][cell border=black]4[/cell]
+[cell border=black][left]speed:[/left][/cell][cell border=black]N/A[/cell]
+[cell border=black][left]knock-back:[/left][/cell][cell border=black]0[/cell]
+[cell border=black][left]damage-rate:[/left][/cell][cell border=black]0.6[/cell]
+[/table]
+[/center]

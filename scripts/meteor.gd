@@ -1,6 +1,8 @@
 extends Area2D
 
 const SPEED := 80.0
+const DAMAGE := 15
+const KNOCK_BACK := 200
 
 var player: CharacterBody2D
 var direction: Vector2
@@ -20,7 +22,7 @@ func _process(delta):
 	
 	for body in get_overlapping_bodies():
 		if (body.is_in_group("enemies")):
-			body.hurt_enemy(15, direction, 200)
+			body.hurt_enemy(DAMAGE, direction, KNOCK_BACK)
 			destroy_self()
 
 func destroy_self():

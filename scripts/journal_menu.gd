@@ -5,6 +5,12 @@ extends Control
 var spell_pages = [
 	["res://assets/journal_pages/journal_lightning_spell.txt", true],
 	["res://assets/journal_pages/journal_shield_spell.txt", true],
+	["res://assets/journal_pages/journal_flame_spell.txt", true],
+	["res://assets/journal_pages/journal_bow_spell.txt", true],
+	["res://assets/journal_pages/journal_poison_bottle_spell.txt", true],
+	["res://assets/journal_pages/journal_meteor_spell.txt", true],
+	["res://assets/journal_pages/journal_phantasmal_push_spell.txt", true],
+	["res://assets/journal_pages/journal_morning_star_spell.txt", true],
 ]
 
 var enemy_pages = [

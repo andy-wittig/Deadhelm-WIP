@@ -1,0 +1,19 @@
+[center]
+[b][u]SPELL DESCRIPTION[/u][/b]
+
+[img={width%}96{height%}]res://assets/sprites/level_objects/spells/bow.png[/img]
+
+[center][u]Bow Tome[/u][/center]
+
+Unleash arrows that pierce enemies and transform into make-shift platforms.
+
+[table={2}]
+[cell]|Stats|[/cell][cell]|Value|[/cell]
+[cell border=black][left]type:[/left][/cell][cell border=black]long-range[/cell]
+[cell border=black][left]cool-down:[/left][/cell][cell border=black]2[/cell]
+[cell border=black][left]damage:[/left][/cell][cell border=black]20[/cell]
+[cell border=black][left]speed:[/left][/cell][cell border=black]100[/cell]
+[cell border=black][left]knock-back:[/left][/cell]200[cell border=black]200[/cell]
+[cell border=black][left]damage-rate:[/left][/cell][cell border=black]N/A[/cell]
+[/table]
+[/center]

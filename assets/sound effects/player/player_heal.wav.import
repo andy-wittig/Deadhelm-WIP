@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bn0bt75heuro"
+path="res://.godot/imported/player_heal.wav-d0182b42ebfac663fc25707b82d8b349.sample"
+
+[deps]
+
+source_file="res://assets/sound effects/player/player_heal.wav"
+dest_files=["res://.godot/imported/player_heal.wav-d0182b42ebfac663fc25707b82d8b349.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

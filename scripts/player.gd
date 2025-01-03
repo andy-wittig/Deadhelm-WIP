@@ -62,6 +62,7 @@ var sound_library := {
 	"hurt" : load("res://assets/sound effects/player/player_hurt.mp3"),
 	"soul" : load("res://assets/sound effects/player/soul_pickup.wav"),
 	"cast" : load("res://assets/sound effects/player/spell_cast_sound.mp3"),
+	"heal" : load("res://assets/sound effects/player/player_heal.wav"),
 }
 @onready var audio_player = $AudioStreamPlayer
 @onready var footstep_audio = $FootstepAudio
@@ -490,7 +491,7 @@ func apply_knockback(other_pos: Vector2, force: float):
 
 func heal_player(health: int):
 	animation_player.play("player_heal")
-	
+	play_sound("heal")
 	player_health += health
 	if (player_health > max_health): player_health = max_health
 	

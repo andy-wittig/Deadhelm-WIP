@@ -1,6 +1,8 @@
 extends StaticBody2D
 
 const SPEED := 100.0
+const DAMAGE := 20
+const KNOCK_BACK := 200
 
 var player: CharacterBody2D
 var direction: Vector2
@@ -22,7 +24,7 @@ func _process(delta):
 	
 	for body in $Area2D.get_overlapping_bodies():
 		if (body.is_in_group("enemies")):
-			body.hurt_enemy(20, direction, 200)
+			body.hurt_enemy(DAMAGE, direction, KNOCK_BACK)
 			destroy_self()
 
 func destroy_self():

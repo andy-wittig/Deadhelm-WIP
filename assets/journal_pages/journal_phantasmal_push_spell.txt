@@ -1,18 +1,18 @@
 [center]
 [b][u]SPELL DESCRIPTION[/u][/b]
 
-[img={width%}96{height%}]res://assets/sprites/level_objects/spells/shield.png[/img]
+[img={width%}96{height%}]res://assets/sprites/level_objects/spells/phantasmal_push.png[/img]
 
-[center][u]Shield Tome[/u][/center]
+[center][u]Phantasmal Push Tome[/u][/center]
 
-Absorbs incoming projectiles.
+Forces enemies out of the way.
 
 [table={2}]
 [cell]|Stats|[/cell][cell]|Value|[/cell]
 [cell border=black][left]type:[/left][/cell][cell border=black]defense[/cell]
-[cell border=black][left]cool-down:[/left][/cell][cell border=black]7[/cell]
+[cell border=black][left]cool-down:[/left][/cell][cell border=black]5[/cell]
 [cell border=black][left]damage:[/left][/cell][cell border=black]N/A[/cell]
-[cell border=black][left]speed:[/left][/cell][cell border=black]N/A[/cell]
+[cell border=black][left]speed:[/left][/cell][cell border=black]50[/cell]
 [cell border=black][left]knock-back:[/left][/cell][cell border=black]N/A[/cell]
 [cell border=black][left]damage-rate:[/left][/cell][cell border=black]N/A[/cell]
 [/table]
