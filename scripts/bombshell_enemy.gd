@@ -186,9 +186,9 @@ func destroy_self():
 	var death_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
 	death_effect.particle_texture_path = "res://assets/sprites/vfx/bombshell_turtle_pieces.png"
 	soul.position = position
-	soul.rarities["diamond"] = 70
-	soul.rarities["emerald"] = 18
-	soul.rarities["gold"] = 2
+	soul.rarities["diamond"] = 75
+	soul.rarities["emerald"] = 10
+	soul.rarities["gold"] = 5
 	soul.rarities["ruby"] = 10
 	death_effect.position = position
 	get_parent().add_child(soul)

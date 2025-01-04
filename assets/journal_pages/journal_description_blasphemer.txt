@@ -1,8 +1,9 @@
 [center]
 [b][u]DESCRIPTION[/u][/b]
 
-Blasphemer
 [img={width%}96{height%}]res://assets/sprites/enemies/blasphemer.png[/img]
 
-Enemy description goes here.
+[u]Blasphemer[/u]
+
+Blasts streams of flames that inflict damage upon touch.
 [/center]

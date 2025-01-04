@@ -349,13 +349,14 @@ func _physics_process(delta):
 				
 			#Change Animation States
 			if is_on_floor():
-				if (direction == 0):
+				if (velocity.x == 0):
 					change_animation_state(animation_type.IDLE)
-					footstep_audio.stop()
+					$FootstepAudio/AudioFade.play("fade_out")
 				else:
 					change_animation_state(animation_type.RUN)
 					if (!footstep_audio.is_playing()):
 						footstep_audio.play()
+						$FootstepAudio/AudioFade.play("fade_in")
 			else:
 				footstep_audio.stop()
 				if (velocity.y < 0):

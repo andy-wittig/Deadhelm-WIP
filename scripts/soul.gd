@@ -9,6 +9,7 @@ var soul_rarity = null
 @onready var detect_player = $DetectPlayer
 
 @export var randomly_choose_soul := true
+@export var soul_type := ""
 
 var rarities = {
 	"diamond" : 60,
@@ -45,7 +46,7 @@ func _ready():
 	if (randomly_choose_soul):
 		soul_rarity = choose_rarity()
 	else:
-		soul_rarity = "diamond"
+		soul_rarity = soul_type
 
 	match soul_rarity:
 		"diamond":

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://btplmre76e21a"]
+[gd_scene load_steps=10 format=3 uid="uid://btplmre76e21a"]
 
 [ext_resource type="Script" path="res://scripts/journal_menu.gd" id="1_du11q"]
 [ext_resource type="Texture2D" uid="uid://dlgm2y2w4sr2k" path="res://assets/sprites/UI/player_information/journal.png" id="1_rafl2"]
@@ -7,11 +7,75 @@
 [ext_resource type="Texture2D" uid="uid://bus5i2amk0km5" path="res://assets/sprites/UI/player_information/next_arrow.png" id="5_cc30i"]
 [ext_resource type="Texture2D" uid="uid://qtlmyb4phdrd" path="res://assets/sprites/UI/player_information/next_arrow_pressed.png" id="6_t05xq"]
 
+[sub_resource type="Animation" id="Animation_nbl4c"]
+resource_name = "fade_in"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -96), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8kbhj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 256)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7b27d"]
+_data = {
+"RESET": SubResource("Animation_8kbhj"),
+"fade_in": SubResource("Animation_nbl4c")
+}
+
 [node name="JournalMenu" type="Control" groups=["unlock_enemy"]]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -128.0
+offset_bottom = -128.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_du11q")
@@ -127,6 +191,11 @@ offset_bottom = 688.0
 scale = Vector2(6, 6)
 texture_normal = ExtResource("5_cc30i")
 texture_pressed = ExtResource("6_t05xq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7b27d")
+}
 
 [connection signal="tab_changed" from="VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="pressed" from="PrevPageButton" to="." method="_on_prev_page_button_pressed"]

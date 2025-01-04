@@ -1,8 +1,9 @@
 [center]
 [b][u]DESCRIPTION[/u][/b]
 
-Desecrator
 [img={width%}96{height%}]res://assets/sprites/enemies/desecrater.png[/img]
 
-Enemy description goes here.
+[u]Desecrator[/u]
+
+Summons blackholes that forcefully draw nearby entities in.
 [/center]

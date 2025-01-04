@@ -33,8 +33,10 @@ func _process(_delta):
 				
 		if Input.is_action_just_pressed("open_journal"):
 			if (current_menu == menu.HIDDEN):
+				$"../Audio/JournalOpened".play()
 				current_menu = menu.JOURNAL
 			elif (current_menu == menu.JOURNAL):
+				$"../Audio/JournalClosed".play()
 				current_menu = menu.HIDDEN
 				$MenuControl/JournalMenu.menu_started = false
 	

@@ -1,8 +1,19 @@
 [center]
 [b][u]DESCRIPTION[/u][/b]
 
-Bombshell
 [img={width%}96{height%}]res://assets/sprites/enemies/bombshell_turtle/bombshell.png[/img]
 
-Enemy description goes here.
+[u]Bombshell[/u]
+
+When threatened by a nearby presence, releases an array of deadly spikes.
+
+[table={2}]
+[cell bg=e8d282]|Stats|[/cell][cell bg=e8d282]|Value|[/cell]
+[cell border=black][left]health:[/left][/cell][cell border=black]30[/cell]
+[cell border=black][left]damage:[/left][/cell][cell border=black]6[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/diamond_soul.png[/img][/left][/cell][cell border=black]75%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/emerald_soul.png[/img][/left][/cell][cell border=black]10%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/gold_soul.png[/img][/left][/cell][cell border=black]5%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/ruby_soul.png[/img][/left][/cell][cell border=black]10%[/cell]
+[/table]
 [/center]

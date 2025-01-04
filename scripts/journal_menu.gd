@@ -86,6 +86,7 @@ func unlock_page(chapter_type : String, page_number : int):
 
 func menu_opened():
 	if (!menu_started):
+		$AnimationPlayer.play("fade_in")
 		tab_bar.grab_focus()
 		menu_started = true
 		load_pages(chapter[current_chapter][0][0], chapter[current_chapter][1][0])

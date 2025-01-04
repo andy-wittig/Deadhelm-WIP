@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://b5rai463xckyn"]
+[gd_scene load_steps=111 format=3 uid="uid://b5rai463xckyn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_6jjtq"]
 [ext_resource type="PackedScene" uid="uid://cv3ipj46sh6tq" path="res://scenes/player/hud.tscn" id="2_5bfwm"]
@@ -789,6 +789,96 @@ size = Vector2(8, 19)
 [sub_resource type="CircleShape2D" id="CircleShape2D_bkxj2"]
 radius = 4.12311
 
+[sub_resource type="Animation" id="Animation_ftkpb"]
+resource_name = "fade_out"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-10.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_h2vhv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-5.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_sxfkq"]
+resource_name = "fade_in"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -10.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtqgx"]
+_data = {
+"RESET": SubResource("Animation_h2vhv"),
+"fade_in": SubResource("Animation_sxfkq"),
+"fade_out": SubResource("Animation_ftkpb")
+}
+
 [node name="player" type="CharacterBody2D" groups=["players"]]
 z_index = 2
 collision_layer = 2
@@ -891,6 +981,13 @@ bus = &"SFX"
 [node name="FootstepAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_u6xwe")
 volume_db = -5.0
+pitch_scale = 0.9
 bus = &"SFX"
+parameters/looping = true
+
+[node name="AudioFade" type="AnimationPlayer" parent="FootstepAudio"]
+libraries = {
+"": SubResource("AnimationLibrary_rtqgx")
+}
 
 [connection signal="animation_finished" from="UpperSprite" to="." method="_on_upper_sprite_animation_finished"]
