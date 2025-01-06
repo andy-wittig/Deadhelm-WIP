@@ -188,10 +188,10 @@ func destroy_self():
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	var death_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
 	soul.position = position
-	soul.rarities["diamond"] = 80
-	soul.rarities["emerald"] = 8
-	soul.rarities["gold"] = 4
-	soul.rarities["ruby"] = 8
+	soul.rarities["diamond"] = 60
+	soul.rarities["emerald"] = 15
+	soul.rarities["gold"] = 10
+	soul.rarities["ruby"] = 15
 	death_effect.position = position
 	get_parent().add_child(soul)
 	get_parent().add_child(death_effect)

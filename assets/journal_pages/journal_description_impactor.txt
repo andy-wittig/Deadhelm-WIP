@@ -4,5 +4,5 @@
 Impactor
 [img={width%}96{height%}]res://assets/sprites/enemies/impactor_journal.png[/img]
 
-Enemy description goes here.
+Summons a meteoric rock that knocks down anything in it's path.
 [/center]

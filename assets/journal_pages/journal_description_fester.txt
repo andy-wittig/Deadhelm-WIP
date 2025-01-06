@@ -1,8 +1,19 @@
 [center]
 [b][u]DESCRIPTION[/u][/b]
 
-Fester
 [img={width%}96{height%}]res://assets/sprites/enemies/fester/fester.png[/img]
 
-Enemy description goes here.
+[u]Fester[/u]
+
+Serpentine creature that lashes at targets with razor sharp appendages.
+
+[table={2}]
+[cell bg=e8d282]|Stats|[/cell][cell bg=e8d282]|Value|[/cell]
+[cell border=black][left]health:[/left][/cell][cell border=black]65[/cell]
+[cell border=black][left]damage:[/left][/cell][cell border=black]8[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/diamond_soul.png[/img][/left][/cell][cell border=black]60%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/emerald_soul.png[/img][/left][/cell][cell border=black]20%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/gold_soul.png[/img][/left][/cell][cell border=black]10%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/ruby_soul.png[/img][/left][/cell][cell border=black]10%[/cell]
+[/table]
 [/center]

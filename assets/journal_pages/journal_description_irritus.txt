@@ -1,8 +1,19 @@
 [center]
 [b][u]DESCRIPTION[/u][/b]
 
-Irritus
 [img={width%}96{height%}]res://assets/sprites/enemies/irritus/irritus.png[/img]
 
-Enemy description goes here.
+[u]Irritus[/u]
+
+Leaps into air flinging spiked metal legs into it's target.
+
+[table={2}]
+[cell bg=e8d282]|Stats|[/cell][cell bg=e8d282]|Value|[/cell]
+[cell border=black][left]health:[/left][/cell][cell border=black]30[/cell]
+[cell border=black][left]damage:[/left][/cell][cell border=black]12[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/diamond_soul.png[/img][/left][/cell][cell border=black]60%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/emerald_soul.png[/img][/left][/cell][cell border=black]15%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/gold_soul.png[/img][/left][/cell][cell border=black]10%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/ruby_soul.png[/img][/left][/cell][cell border=black]15%[/cell]
+[/table]
 [/center]

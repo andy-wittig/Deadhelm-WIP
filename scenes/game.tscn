@@ -30,8 +30,8 @@ func start_game():
 	$MenuLayer.current_menu = $MenuLayer.menu.HIDDEN
 	GameManager.started_game = true
 	FileAccess.open(\"user://player_info.save\", FileAccess.WRITE)
-	#change_level.call_deferred(load(\"res://scenes/level_template.tscn\"))
-	change_level.call_deferred(load(\"res://scenes/level_grasslands_1.tscn\"))
+	change_level.call_deferred(load(\"res://scenes/level_template.tscn\"))
+	#change_level.call_deferred(load(\"res://scenes/level_grasslands_1.tscn\"))
 	
 func change_level(scene: PackedScene):
 	var level = $Level

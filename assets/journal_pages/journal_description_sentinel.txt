@@ -1,8 +1,19 @@
 [center]
 [b][u]DESCRIPTION[/u][/b]
 
-Sentinal
 [img={width%}96{height%}]res://assets/sprites/enemies/sentinel/sentinal.png[/img]
 
-Enemy description goes here.
+[u]Sentinal[/u]
+
+Flying machine that fires rocket projectiles at it's targets.
+
+[table={2}]
+[cell bg=e8d282]|Stats|[/cell][cell bg=e8d282]|Value|[/cell]
+[cell border=black][left]health:[/left][/cell][cell border=black]40[/cell]
+[cell border=black][left]damage:[/left][/cell][cell border=black]10[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/diamond_soul.png[/img][/left][/cell][cell border=black]60%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/emerald_soul.png[/img][/left][/cell][cell border=black]25%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/gold_soul.png[/img][/left][/cell][cell border=black]5%[/cell]
+[cell border=black][left]drop:[img={width%}32]res://assets/sprites/level_objects/ruby_soul.png[/img][/left][/cell][cell border=black]10%[/cell]
+[/table]
 [/center]

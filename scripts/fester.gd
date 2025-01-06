@@ -1,6 +1,6 @@
 extends CharacterBody2D
 #Constants
-const SPEED := 30.0
+const SPEED := 35.0
 const JUMP_VELOCITY := -180.0
 const KNOCK_BACK_FALLOFF := 30.0
 const ROAM_CHANGE_WAIT := 6
@@ -166,8 +166,8 @@ func destroy_self():
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 	soul.position = position
 	soul.rarities["diamond"] = 60
-	soul.rarities["emerald"] = 25
-	soul.rarities["gold"] = 5
+	soul.rarities["emerald"] = 20
+	soul.rarities["gold"] = 10
 	soul.rarities["ruby"] = 10
 	get_parent().add_child(soul)
 	

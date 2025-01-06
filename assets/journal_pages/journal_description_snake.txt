@@ -1,8 +1,9 @@
 [center]
 [b][u]DESCRIPTION[/u][/b]
 
-Snake
 [img={width%}96{height%}]res://assets/sprites/enemies/snake/snake.png[/img]
 
-Enemy description goes here.
+[u]Snake[/u]
+
+Strikes any target attempting to cross it's deadly path.
 [/center]
