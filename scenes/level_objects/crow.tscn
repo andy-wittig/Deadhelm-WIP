@@ -1,0 +1,182 @@
+[gd_scene load_steps=19 format=3 uid="uid://cj1nwgg1gcdkv"]
+
+[ext_resource type="Texture2D" uid="uid://cpggee1orqx6x" path="res://assets/sprites/level_objects/crow_flying.png" id="1_4jcl1"]
+[ext_resource type="Script" path="res://scripts/crow.gd" id="1_gows1"]
+[ext_resource type="Texture2D" uid="uid://b2a8o7tlcsshd" path="res://assets/sprites/level_objects/crow_idle.png" id="1_tbjc7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21c2v"]
+atlas = ExtResource("1_4jcl1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gas7o"]
+atlas = ExtResource("1_4jcl1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0qm8"]
+atlas = ExtResource("1_4jcl1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iblrr"]
+atlas = ExtResource("1_4jcl1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0c78"]
+atlas = ExtResource("1_4jcl1")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqu0l"]
+atlas = ExtResource("1_tbjc7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewefs"]
+atlas = ExtResource("1_tbjc7")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2els8"]
+atlas = ExtResource("1_tbjc7")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfqcg"]
+atlas = ExtResource("1_tbjc7")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kihsn"]
+atlas = ExtResource("1_tbjc7")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xu8b4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21c2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gas7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0qm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iblrr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0c78")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqu0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewefs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2els8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfqcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kihsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqu0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewefs")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="Animation" id="Animation_52ots"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CrowAnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CrowAnimatedSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_065li"]
+resource_name = "bounce"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CrowAnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -8), Vector2(0, -2), Vector2(0, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CrowAnimatedSprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wcv5h"]
+_data = {
+"RESET": SubResource("Animation_52ots"),
+"bounce": SubResource("Animation_065li")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a87p4"]
+radius = 64.0
+
+[node name="crow" type="Area2D"]
+z_index = 1
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_gows1")
+
+[node name="CrowAnimatedSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_xu8b4")
+animation = &"fly"
+autoplay = "idle"
+frame_progress = 0.479231
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wcv5h")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a87p4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
