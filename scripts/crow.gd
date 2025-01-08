@@ -6,7 +6,7 @@ extends Area2D
 
 var roost_point : Vector2
 var flying := false
-const FLY_SPEED := 50
+const FLY_SPEED := 60
 
 func _ready():
 	roost_locations.push_front(global_position)

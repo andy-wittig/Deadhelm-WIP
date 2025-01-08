@@ -4,6 +4,7 @@ extends Area2D
 
 @onready var chest_closed_sprite = $ChestClosedSprite
 @onready var chest_open_sprite = $ChestOpenSprite
+@onready var chest_open_audio = $ChestOpenAudio
 
 var chest_open := false
 
@@ -16,9 +17,11 @@ func _process(delta):
 				open_chest()
 
 func open_chest():
+	chest_open_audio.play()
 	chest_closed_sprite.visible = false
 	chest_open_sprite.visible = true
 	chest_open = true
+	
 	for i in range(coin_amount):
 		var coin = load("res://scenes/level_objects/coin.tscn").instantiate()
 		coin.global_position = $Marker2D.global_position

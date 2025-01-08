@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://mk8x6lo0ft6t"]
+[gd_scene load_steps=8 format=3 uid="uid://mk8x6lo0ft6t"]
 
 [ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="1_686hf"]
 [ext_resource type="Script" path="res://scripts/chest.gd" id="1_bk8mp"]
 [ext_resource type="Texture2D" uid="uid://grg6tpd5eugc" path="res://assets/sprites/level_objects/chest_closed.png" id="1_r8vbb"]
 [ext_resource type="Texture2D" uid="uid://df1mttjpghv60" path="res://assets/sprites/level_objects/chest_open.png" id="2_3h6m4"]
+[ext_resource type="AudioStream" uid="uid://irevumkbifb2" path="res://assets/sound effects/level_object_sounds/chest_open.wav" id="5_jjcxf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xebwc"]
 resource_local_to_scene = true
@@ -35,5 +36,9 @@ shape = SubResource("RectangleShape2D_k7l5o")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -8)
+
+[node name="ChestOpenAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jjcxf")
+bus = &"SFX"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
