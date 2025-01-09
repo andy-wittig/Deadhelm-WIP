@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://clwl5miectp5r"
+path="res://.godot/imported/desecrator_fire.mp3-26b2450064ec0b0889974ec6514e3987.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/enemies/desecrator_fire.mp3"
+dest_files=["res://.godot/imported/desecrator_fire.mp3-26b2450064ec0b0889974ec6514e3987.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

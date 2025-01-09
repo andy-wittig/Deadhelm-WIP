@@ -23,6 +23,8 @@ func _process(_delta):
 
 func attack():
 	$CPUParticles2D.emitting = true
+	$FireAudio.play()
+	
 	var blackhole = load("res://scenes/enemies/desecrater_blackhole.tscn").instantiate()
 	blackhole.global_position = global_position
 	blackhole.direction = Vector2(-scale.x, 0)

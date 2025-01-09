@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cyf6nm57ycmtr"
+path="res://.godot/imported/desecrator.wav-7238226a7529fed2a40d080da933459c.sample"
+
+[deps]
+
+source_file="res://assets/sound effects/enemies/desecrator.wav"
+dest_files=["res://.godot/imported/desecrator.wav-7238226a7529fed2a40d080da933459c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

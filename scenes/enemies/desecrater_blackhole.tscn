@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://b7n0d4png6rh5"]
+[gd_scene load_steps=20 format=3 uid="uid://b7n0d4png6rh5"]
 
 [ext_resource type="Script" path="res://scripts/desecrater_blackhole.gd" id="1_3ktav"]
 [ext_resource type="Texture2D" uid="uid://bjemmo2ns8q7n" path="res://assets/sprites/enemies/projectiles/desecrater blackhole.png" id="1_w0i00"]
 [ext_resource type="Shader" path="res://shaders/screen_distort.gdshader" id="3_0ww3p"]
 [ext_resource type="Texture2D" uid="uid://diy5hwvkm4jy" path="res://assets/sprites/vfx/dissipate.png" id="3_8jb33"]
+[ext_resource type="AudioStream" uid="uid://cyf6nm57ycmtr" path="res://assets/sound effects/enemies/desecrator.wav" id="5_bqeqa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8ahte"]
 radius = 6.0
@@ -163,6 +164,12 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("PlaceholderTexture2D_ss3j0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_bqeqa")
+pitch_scale = 1.15
+autoplay = true
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

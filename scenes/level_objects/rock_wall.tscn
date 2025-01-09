@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dv7ii30ng3m2"]
+[gd_scene load_steps=11 format=3 uid="uid://dv7ii30ng3m2"]
 
 [ext_resource type="Texture2D" uid="uid://o4yq6k6ved13" path="res://assets/sprites/level_objects/rock_wall.png" id="1_rv0wa"]
 [ext_resource type="Texture2D" uid="uid://cbdvfr13mqgwe" path="res://assets/sprites/vfx/rock_pieces.png" id="2_k3gqw"]
+[ext_resource type="AudioStream" uid="uid://y0dfw7j7sjet" path="res://assets/sound effects/level_object_sounds/rock_wall_crumble.mp3" id="3_avybl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qihh"]
 size = Vector2(12, 48)
@@ -46,6 +47,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("RockCrumbleAudio:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RockCrumbleAudio:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
 
 [sub_resource type="Animation" id="Animation_ws1g0"]
 resource_name = "move"
@@ -73,6 +98,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 48)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RockCrumbleAudio:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RockCrumbleAudio:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(5.5, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nvuoq"]
@@ -116,6 +165,12 @@ angle_max = 360.0
 scale_amount_curve = SubResource("Curve_n0jvd")
 color_ramp = SubResource("Gradient_5xvna")
 anim_offset_max = 1.0
+
+[node name="RockCrumbleAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_avybl")
+volume_db = -80.0
+pitch_scale = 0.9
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

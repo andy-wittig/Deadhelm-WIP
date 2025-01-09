@@ -382,10 +382,11 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_oxjwb")
 
 [node name="SquabbleTimer" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 18.0
 autostart = true
 
 [node name="SquabbleAudio" type="AudioStreamPlayer2D" parent="."]
+max_distance = 256.0
 attenuation = 6.49802
 bus = &"SFX"
 
