@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cg0s11w7gjjxq"]
+[gd_scene load_steps=7 format=3 uid="uid://cg0s11w7gjjxq"]
 
 [ext_resource type="Script" path="res://scripts/zip_line.gd" id="1_mqn24"]
 [ext_resource type="Texture2D" uid="uid://bckpftyf2flwy" path="res://assets/sprites/vfx/sparks_effect.png" id="2_1pnq7"]
+[ext_resource type="AudioStream" uid="uid://byhiqtk8vk7wv" path="res://assets/sound effects/level_object_sounds/zipline.mp3" id="3_mgqx2"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4ge55"]
 particles_animation = true
@@ -45,3 +46,9 @@ anim_speed_max = 1.0
 [node name="LineCollisionShapes" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 256
+
+[node name="ZiplineAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mgqx2")
+volume_db = -8.0
+bus = &"SFX"
+parameters/looping = true

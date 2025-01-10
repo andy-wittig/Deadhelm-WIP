@@ -43,12 +43,14 @@ func _ready():
 
 func _process(delta):
 	if (!zipline_active):
+		$ZiplineAudio.stop()
 		sparks_particle.emitting = false
 		
 		for area in $LineCollisionShapes.get_overlapping_areas():
 			if (area.is_in_group("players")):
 				var body = area.get_parent()
 				if (Input.is_action_just_pressed("pickup")):
+					$ZiplineAudio.play()
 					body.enable_collision(false)
 					body.state = body.state_type.ZIPLINE
 					zipline_active = true
@@ -61,6 +63,7 @@ func _process(delta):
 			zipline_follow.progress -= player.player_facing * player.ZIPLINE_SPEED * delta
 		elif (facing == FACING_DIR.right):
 			zipline_follow.progress += player.player_facing * player.ZIPLINE_SPEED * delta
+			
 		player.global_position = zipline_follow.global_position - player.player_center.position
 		sparks_particle.emitting = true
 		sparks_particle.global_position = zipline_follow.global_position

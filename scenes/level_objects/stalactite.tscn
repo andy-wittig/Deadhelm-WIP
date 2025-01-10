@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://bevvq8dlvdjip"]
+[gd_scene load_steps=19 format=3 uid="uid://bevvq8dlvdjip"]
 
 [ext_resource type="Texture2D" uid="uid://flm0ssvuccmi" path="res://assets/sprites/level_objects/stalactite.png" id="1_kttog"]
 [ext_resource type="Script" path="res://scripts/stalactite.gd" id="1_nmj2m"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="2_nqyc6"]
 [ext_resource type="Texture2D" uid="uid://c115fn07p0kyp" path="res://assets/sprites/vfx/stalactite_pieces.png" id="4_dsu85"]
+[ext_resource type="AudioStream" uid="uid://ch4pjoyk1jt63" path="res://assets/sound effects/level_object_sounds/stalactite.mp3" id="5_4vsxe"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ucilh"]
 properties/0/path = NodePath(".:position")
@@ -191,6 +192,11 @@ angle_max = 45.0
 scale_amount_curve = SubResource("Curve_kv3q7")
 color_ramp = SubResource("Gradient_0y8os")
 anim_offset_max = 1.0
+
+[node name="LooseRockAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_4vsxe")
+attenuation = 6.5
+bus = &"SFX"
 
 [connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

@@ -30,6 +30,7 @@ func _process(delta):
 		position += Vector2.DOWN * FALL_VELOCITY * delta
 
 func start_fall():
+	$LooseRockAudio.play()
 	stalactite_fall = true
 	can_fall = false
 		
