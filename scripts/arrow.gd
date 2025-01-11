@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-const SPEED := 100.0
+const SPEED := 125.0
 const DAMAGE := 20
 const KNOCK_BACK := 200
 

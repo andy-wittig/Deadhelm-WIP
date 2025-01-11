@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cpvs8dtjcvw2y"
+path="res://.godot/imported/drop_item.wav-73d52c118d7a712d21ee59a743ef530f.sample"
+
+[deps]
+
+source_file="res://assets/sound effects/player/drop_item.wav"
+dest_files=["res://.godot/imported/drop_item.wav-73d52c118d7a712d21ee59a743ef530f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

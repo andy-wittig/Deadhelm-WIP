@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://clj453y1ct468"]
+[gd_scene load_steps=31 format=3 uid="uid://clj453y1ct468"]
 
 [ext_resource type="Script" path="res://scripts/gremlin_shop.gd" id="1_3bcr4"]
 [ext_resource type="Texture2D" uid="uid://cotkyff0ssvqr" path="res://assets/sprites/level_objects/gremlin_shop_sheet.png" id="1_u7smj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://brcfqdgnchh52" path="res://assets/sprites/UI/shop/shop_background_ui.png" id="4_gampp"]
 [ext_resource type="Shader" path="res://shaders/black_and_white.gdshader" id="6_fbnqo"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="7_fblmp"]
+[ext_resource type="AudioStream" uid="uid://dgfn7m0tldc73" path="res://assets/sound effects/shop_gremlin/shop_open.wav" id="8_uj6rw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7qr2j"]
 resource_local_to_scene = true
@@ -394,6 +395,9 @@ bus = &"SFX"
 libraries = {
 "": SubResource("AnimationLibrary_3j6qn")
 }
+
+[node name="ShopOpenAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_uj6rw")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="ShopControl/PurchaseButton1" to="." method="_on_purchase_button_1_mouse_entered"]

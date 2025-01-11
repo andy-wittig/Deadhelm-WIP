@@ -63,6 +63,8 @@ var sound_library := {
 	"soul" : load("res://assets/sound effects/player/soul_pickup.wav"),
 	"cast" : load("res://assets/sound effects/player/spell_cast_sound.mp3"),
 	"heal" : load("res://assets/sound effects/player/player_heal.wav"),
+	"jump" : load("res://assets/sound effects/player/jump.mp3"),
+	"drop_item" : load("res://assets/sound effects/player/drop_item.wav"),
 }
 @onready var audio_player = $AudioStreamPlayer
 @onready var footstep_audio = $FootstepAudio
@@ -149,6 +151,7 @@ func _ready():
 	load_player_info()
 	currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
 	currently_selected_slot.currently_selected = true
+	audio_player.play()
 	
 func _process(delta):
 	#handle UI elements
@@ -334,12 +337,16 @@ func _physics_process(delta):
 			
 			if (double_jump_active):
 				if (jump_buffer_time > 0 && double_jump < 2):
-					double_jump += 1
+					play_sound("jump", -12.0)
 					dust_particles.emitting = true
+				
+					double_jump += 1
 					velocity.y = JUMP_VELOCITY
 					jump_buffer_time = 0
 			elif (jump_buffer_time > 0 && coyote_time_counter > 0):
+				play_sound("jump", -12.0)
 				dust_particles.emitting = true
+				
 				velocity.y = JUMP_VELOCITY
 				jump_buffer_time = 0
 			
@@ -505,7 +512,7 @@ func heal_player(health: int):
 func hurt_player(damage: int, other_pos: Vector2, force: float):
 	if (!invincible):
 		animation_player.play("player_hurt")
-		play_sound("hurt")
+		play_sound("hurt", -15.0)
 		set_screen_shake(0.5)
 		apply_knockback(other_pos, force)
 		
@@ -548,12 +555,11 @@ func enable_collision(enabled: bool):
 func set_screen_shake(amount: float):
 	camera.add_trauma(amount)
 	
-func play_sound(sound_name: String):
-	const PITCH_RANGE := 0.1
+func play_sound(sound_name: String, volume : float = 0.0):
+	const PITCH_RANGE := 0.15
 	var pitch_shift := randf_range(-PITCH_RANGE, PITCH_RANGE)
-	audio_player.pitch_scale = 1 + pitch_shift
-	audio_player.set_stream(sound_library[sound_name])
-	audio_player.play()
+	var playback : AudioStreamPlaybackPolyphonic = audio_player.get_stream_playback()
+	playback.play_stream(sound_library[sound_name], 0.0, volume, 1 + pitch_shift, 0, "SFX")
 
 #INVENTORY FUNCTIONS
 func inventory_scrolling(scroll_amount: int):
@@ -582,6 +588,7 @@ func update_spell_placeholder():
 			dial_instance.set_placeholder_sprite(spell_instance.get_sprite_path())
 		
 func drop_inventory_item(spell_type, pos):
+	play_sound("drop_item")
 	var tome = load("res://scenes/player/spells/tome.tscn").instantiate()
 	tome.spell_type = spell_type
 	tome.position.x = pos.x

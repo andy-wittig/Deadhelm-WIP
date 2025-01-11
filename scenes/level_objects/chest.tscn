@@ -39,6 +39,7 @@ position = Vector2(0, -8)
 
 [node name="ChestOpenAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_jjcxf")
+volume_db = -5.0
 bus = &"SFX"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
