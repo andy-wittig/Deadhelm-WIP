@@ -398,6 +398,7 @@ libraries = {
 
 [node name="ShopOpenAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_uj6rw")
+bus = &"SFX"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="ShopControl/PurchaseButton1" to="." method="_on_purchase_button_1_mouse_entered"]

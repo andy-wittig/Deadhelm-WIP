@@ -520,15 +520,15 @@ max_spawn_uses = 3
 
 [node name="leaping mushroom" parent="." instance=ExtResource("19_bc45r")]
 position = Vector2(632, -752)
-bounce_force = -400.0
+bounce_force = -450.0
 
 [node name="leaping mushroom2" parent="." instance=ExtResource("19_bc45r")]
 position = Vector2(992, -304)
-bounce_force = -300.0
+bounce_force = -325.0
 
 [node name="leaping mushroom3" parent="." instance=ExtResource("19_bc45r")]
 position = Vector2(1064, -448)
-bounce_force = -425.0
+bounce_force = -450.0
 
 [node name="stone_spike" parent="." instance=ExtResource("7_313vx")]
 position = Vector2(776, -816)

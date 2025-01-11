@@ -15,3 +15,5 @@ func _on_body_entered(body):
 	if (body.is_in_group("players")):
 		body.knock_back = Vector2(1.0, 0.1) * bounce_force * -dir
 		animated_sprite.play("bounce")
+		if (!$AudioStreamPlayer2D.playing):
+				$AudioStreamPlayer2D.play()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqmwy1s43rlf1"]
+[gd_scene load_steps=12 format=3 uid="uid://dqmwy1s43rlf1"]
 
 [ext_resource type="Texture2D" uid="uid://c3hwnfbwhao7a" path="res://assets/sprites/level_objects/leaping_mushroom_side.png" id="1_sk300"]
 [ext_resource type="Script" path="res://scripts/side_leaping_mushroom.gd" id="1_tseuu"]
+[ext_resource type="AudioStream" uid="uid://bpwbojus0h87y" path="res://assets/sound effects/level_object_sounds/mushroom_bounce.mp3" id="3_ej0yy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmodx"]
 atlas = ExtResource("1_sk300")
@@ -69,6 +70,11 @@ frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6nbfk")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ej0yy")
+volume_db = -5.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

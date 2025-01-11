@@ -403,10 +403,11 @@ position = Vector2(600, -336)
 coin_amount = 8
 
 [node name="leaping mushroom2" parent="Level Objects" instance=ExtResource("16_ydhre")]
-position = Vector2(328, -1344)
+position = Vector2(320, -1344)
 
 [node name="leaping mushroom3" parent="Level Objects" instance=ExtResource("16_ydhre")]
 position = Vector2(152, -928)
+bounce_force = -400.0
 
 [node name="chest3" parent="Level Objects" instance=ExtResource("18_bvbum")]
 position = Vector2(176, -1344)
@@ -429,6 +430,7 @@ max_spawn_uses = 3
 
 [node name="leaping mushroom4" parent="Level Objects" instance=ExtResource("16_ydhre")]
 position = Vector2(1016, -1168)
+bounce_force = -375.0
 
 [node name="spawner2" parent="Level Objects" node_paths=PackedStringArray("tile_map") instance=ExtResource("21_4eac5")]
 position = Vector2(696, -1424)

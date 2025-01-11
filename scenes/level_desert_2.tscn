@@ -468,11 +468,11 @@ position = Vector2(1072, -464)
 
 [node name="leaping mushroom" parent="." instance=ExtResource("35_isvtu")]
 position = Vector2(728, -368)
-bounce_force = -400.0
+bounce_force = -425.0
 
 [node name="leaping mushroom2" parent="." instance=ExtResource("35_isvtu")]
 position = Vector2(600, -432)
-bounce_force = -400.0
+bounce_force = -425.0
 
 [node name="chest3" parent="." instance=ExtResource("10_6isk1")]
 position = Vector2(1024, -176)
@@ -557,6 +557,7 @@ scale = Vector2(1, 5)
 
 [node name="leaping mushroom3" parent="." instance=ExtResource("35_isvtu")]
 position = Vector2(1104, -672)
+bounce_force = -400.0
 
 [node name="side_leaping_mushroom3" parent="." instance=ExtResource("30_1jmdf")]
 position = Vector2(1088, -760)

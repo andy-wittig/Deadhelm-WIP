@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bpwbojus0h87y"
+path="res://.godot/imported/mushroom_bounce.mp3-0f6c9f89ec3c4e9e33156daaf7e956b3.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/level_object_sounds/mushroom_bounce.mp3"
+dest_files=["res://.godot/imported/mushroom_bounce.mp3-0f6c9f89ec3c4e9e33156daaf7e956b3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
