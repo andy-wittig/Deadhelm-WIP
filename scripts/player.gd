@@ -294,8 +294,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("cheat_button_2"):
 		global_position = portal_gate.global_position
 	if Input.is_action_just_pressed("cheat_button_3"):
-		#invincible = !invincible
-		Engine.set_time_scale(0.1)
+		invincible = !invincible
+		#Engine.set_time_scale(0.1)
 	if Input.is_action_just_pressed("cheat_button_4"):
 		global_position = get_global_mouse_position()
 

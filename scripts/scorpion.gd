@@ -164,6 +164,9 @@ func destroy_self():
 	soul.rarities["gold"] = 10
 	soul.rarities["ruby"] = 10
 	get_parent().add_child(soul)
+	var death_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
+	death_effect.global_position = Vector2(global_position.x, global_position.y - 10)
+	get_parent().add_child(death_effect)
 	
 	marked_for_death = true
 	queue_free()

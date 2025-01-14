@@ -183,16 +183,16 @@ func hurt_enemy(damage: int, direction: Vector2, force: float):
 
 func destroy_self():
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
-	var death_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
-	death_effect.particle_texture_path = "res://assets/sprites/vfx/bombshell_turtle_pieces.png"
 	soul.position = position
 	soul.rarities["diamond"] = 75
 	soul.rarities["emerald"] = 10
 	soul.rarities["gold"] = 5
 	soul.rarities["ruby"] = 10
-	death_effect.position = position
 	get_parent().add_child(soul)
+	var death_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
+	death_effect.global_position = Vector2(global_position.x, global_position.y - 6)
 	get_parent().add_child(death_effect)
+	
 	
 	marked_for_death = true
 	get_tree().call_group("unlock_enemy", "unlock_page", 2)

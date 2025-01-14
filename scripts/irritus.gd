@@ -186,14 +186,14 @@ func destroy_self():
 	get_tree().call_group("unlock_enemy", "unlock_page", 6)
 	
 	var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
-	var death_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
 	soul.position = position
 	soul.rarities["diamond"] = 60
 	soul.rarities["emerald"] = 15
 	soul.rarities["gold"] = 10
 	soul.rarities["ruby"] = 15
-	death_effect.position = position
 	get_parent().add_child(soul)
+	var death_effect = load("res://scenes/vfx/chunk_effect.tscn").instantiate()
+	death_effect.global_position = Vector2(global_position.x, global_position.y - 6)
 	get_parent().add_child(death_effect)
 	
 	marked_for_death = true

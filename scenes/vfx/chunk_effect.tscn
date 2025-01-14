@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvvvkp1wrpxoh"]
+[gd_scene load_steps=8 format=3 uid="uid://bvvvkp1wrpxoh"]
 
 [ext_resource type="Script" path="res://scripts/chunk_effect.gd" id="1_d40cn"]
-[ext_resource type="Texture2D" uid="uid://bvb08qtuwfkpu" path="res://assets/sprites/vfx/bombshell_turtle_pieces.png" id="2_dgbsv"]
+[ext_resource type="Texture2D" uid="uid://b4tphs7ibr5ok" path="res://assets/sprites/vfx/soul_pieces.png" id="2_r7xar"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6uywm"]
 resource_local_to_scene = true
@@ -16,38 +16,69 @@ point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_qnhx3"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0.180124, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.15625, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_ujahm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.6), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_co8m0"]
+offsets = PackedFloat32Array(0.645833, 1)
+colors = PackedColorArray(0.92549, 0.152941, 0.247059, 1, 0.92549, 0.152941, 0.247059, 0)
 
 [node name="chunk_effect" type="Node2D"]
 z_index = 10
 script = ExtResource("1_d40cn")
 
 [node name="ChunkParticles" type="CPUParticles2D" parent="."]
-z_index = -1
+z_index = 1
 material = SubResource("CanvasItemMaterial_6uywm")
 emitting = false
-amount = 10
-lifetime = 0.5
+amount = 6
 one_shot = true
-explosiveness = 1.0
+preprocess = 0.1
+explosiveness = 0.7
+randomness = 0.5
 local_coords = true
-texture = ExtResource("2_dgbsv")
+texture = ExtResource("2_r7xar")
 emission_shape = 1
-emission_sphere_radius = 2.0
+emission_sphere_radius = 12.0
 direction = Vector2(0, 0)
 spread = 180.0
-gravity = Vector2(0, 100)
-initial_velocity_min = 40.0
+gravity = Vector2(0, 80)
+initial_velocity_min = 25.0
 initial_velocity_max = 40.0
+damping_min = 10.0
+damping_max = 20.0
 angle_min = -720.0
 angle_max = 720.0
 scale_amount_curve = SubResource("Curve_6ltat")
 color_ramp = SubResource("Gradient_qnhx3")
 anim_offset_max = 1.0
 
+[node name="BloodParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 30
+lifetime = 0.6
+one_shot = true
+preprocess = 0.1
+explosiveness = 0.2
+randomness = 0.8
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 16.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, 240)
+initial_velocity_min = 60.0
+initial_velocity_max = 65.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_ujahm")
+color = Color(0.92549, 0.152941, 0.247059, 1)
+color_ramp = SubResource("Gradient_co8m0")
+
 [node name="DestroyTimer" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
 autostart = true
 
