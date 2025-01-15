@@ -337,14 +337,14 @@ func _physics_process(delta):
 			
 			if (double_jump_active):
 				if (jump_buffer_time > 0 && double_jump < 2):
-					play_sound("jump", -12.0)
+					play_sound("jump", -12.0, 1.2)
 					dust_particles.emitting = true
 				
 					double_jump += 1
 					velocity.y = JUMP_VELOCITY
 					jump_buffer_time = 0
 			elif (jump_buffer_time > 0 && coyote_time_counter > 0):
-				play_sound("jump", -12.0)
+				play_sound("jump", -12.0, 1.2)
 				dust_particles.emitting = true
 				
 				velocity.y = JUMP_VELOCITY
@@ -555,11 +555,11 @@ func enable_collision(enabled: bool):
 func set_screen_shake(amount: float):
 	camera.add_trauma(amount)
 	
-func play_sound(sound_name: String, volume : float = 0.0):
+func play_sound(sound_name: String, volume : float = 0.0, pitch : float = 1.0):
 	const PITCH_RANGE := 0.15
 	var pitch_shift := randf_range(-PITCH_RANGE, PITCH_RANGE)
 	var playback : AudioStreamPlaybackPolyphonic = audio_player.get_stream_playback()
-	playback.play_stream(sound_library[sound_name], 0.0, volume, 1 + pitch_shift, 0, "SFX")
+	playback.play_stream(sound_library[sound_name], 0.0, volume, pitch + pitch_shift, 0, "SFX")
 
 #INVENTORY FUNCTIONS
 func inventory_scrolling(scroll_amount: int):

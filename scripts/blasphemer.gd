@@ -7,19 +7,29 @@ extends Node2D
 @onready var flame_light = $FlameLight
 @onready var animation_player = $AnimationPlayer
 @onready var attack_timer = $AttackTimer
+@onready var fire_audio = $FireAudio
+
+var attacking := false
 
 func _ready():
 	get_tree().call_group("unlock_enemy", "unlock_page", 0)
 	attack_timer.start(attack_rate)
 
-func _on_attack_timer_timeout():
-	hurt_player_area.active = not hurt_player_area.active
-	flame_light.enabled = not flame_light.enabled
-	
-	if (hurt_player_area.active):
-		animation_player.play("flame")
+func _process(_delta):
+	if (attacking):
+		hurt_player_area.active = true
+		flame_light.enabled = true
 		fire_particles.emitting = true
+		animation_player.play("flame")
+		if (!fire_audio.playing):
+			$FireAudio/AnimationPlayer.play("audio_start")
 	else:
-		animation_player.play("RESET")
+		hurt_player_area.active = false
+		flame_light.enabled = false
 		fire_particles.emitting = false
+		animation_player.play("RESET")
+		$FireAudio/AnimationPlayer.play("audio_fade")
+
+func _on_attack_timer_timeout():
+	attacking = !attacking
 	
