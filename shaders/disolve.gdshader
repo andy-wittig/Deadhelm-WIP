@@ -1,13 +1,13 @@
 shader_type canvas_item;
 
-float random(vec2 uv) 
+float random(vec2 uv)
 {
 	return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 438.5453);
 }
 
 uniform float sensitivity : hint_range(0.0, 1.0) = 0.0;
 
-void fragment() 
+void fragment()
 {
 	float size_x = float(textureSize(TEXTURE, 0).x);
 	float size_y = float(textureSize(TEXTURE, 0).y);

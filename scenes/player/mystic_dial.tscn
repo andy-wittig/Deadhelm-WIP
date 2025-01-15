@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://oh3fs6ugskct"]
+[gd_scene load_steps=25 format=3 uid="uid://oh3fs6ugskct"]
 
 [ext_resource type="Texture2D" uid="uid://b86co1pvkl007" path="res://assets/sprites/player/mystic dial.png" id="1_tn40v"]
 [ext_resource type="Script" path="res://scripts/mystic_dial.gd" id="1_x6f12"]
@@ -194,6 +194,10 @@ _data = {
 "fade_out": SubResource("Animation_3qcdt")
 }
 
+[sub_resource type="Gradient" id="Gradient_8h67u"]
+offsets = PackedFloat32Array(0, 0.15625, 0.53125, 1)
+colors = PackedColorArray(0.968627, 0.952941, 0.717647, 0, 0.968627, 0.952941, 0.717647, 1, 0.968627, 0.952941, 0.717647, 1, 0.968627, 0.952941, 0.717647, 0)
+
 [node name="mystic dial" type="Node2D"]
 z_index = 5
 script = ExtResource("1_x6f12")
@@ -275,6 +279,44 @@ one_shot = true
 
 [node name="MysticDialAudio" type="AudioStreamPlayer" parent="."]
 autoplay = true
+
+[node name="LeftHandParticle" type="CPUParticles2D" parent="."]
+position = Vector2(-8, -4)
+emitting = false
+lifetime = 0.5
+one_shot = true
+preprocess = 0.2
+explosiveness = 0.1
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, -40)
+initial_velocity_max = 4.0
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+angle_min = -720.0
+angle_max = 720.0
+color_ramp = SubResource("Gradient_8h67u")
+
+[node name="RightHandParticle" type="CPUParticles2D" parent="."]
+position = Vector2(8, -4)
+emitting = false
+lifetime = 0.5
+one_shot = true
+preprocess = 0.2
+explosiveness = 0.1
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, -40)
+initial_velocity_max = 4.0
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+angle_min = -720.0
+angle_max = 720.0
+color_ramp = SubResource("Gradient_8h67u")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

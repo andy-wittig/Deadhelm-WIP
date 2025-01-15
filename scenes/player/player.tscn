@@ -944,6 +944,7 @@ libraries = {
 }
 
 [node name="DustParticles" type="CPUParticles2D" parent="."]
+physics_interpolation_mode = 2
 material = SubResource("CanvasItemMaterial_rncr1")
 emitting = false
 amount = 4
