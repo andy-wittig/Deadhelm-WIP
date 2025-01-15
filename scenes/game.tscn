@@ -113,8 +113,37 @@ _data = {
 "bounce": SubResource("Animation_334a0")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgunp"]
-shader = ExtResource("4_7fi5r")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b3gn5"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2rdnd"]
+seamless = true
+noise = SubResource("FastNoiseLite_b3gn5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_da0k7"]
+shader = ExtResource("4_mlfnw")
+shader_parameter/speed = 0.05
+shader_parameter/strength = 0.005
+shader_parameter/noise = SubResource("NoiseTexture2D_2rdnd")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i7rq8"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_elora"]
+noise = SubResource("FastNoiseLite_i7rq8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jb632"]
+shader = ExtResource("4_mlfnw")
+shader_parameter/speed = 0.05
+shader_parameter/strength = 0.005
+shader_parameter/noise = SubResource("NoiseTexture2D_elora")
+
+[sub_resource type="Gradient" id="Gradient_dqply"]
+colors = PackedColorArray(1, 0.819608, 0.835294, 0.784314, 0.2, 0.533333, 0.870588, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lr8m4"]
+gradient = SubResource("Gradient_dqply")
+fill_to = Vector2(0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wogm"]
 atlas = ExtResource("14_ww188")
@@ -159,37 +188,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_i7rq8"]
-frequency = 0.02
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_elora"]
-noise = SubResource("FastNoiseLite_i7rq8")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jb632"]
-shader = ExtResource("4_mlfnw")
-shader_parameter/speed = 0.05
-shader_parameter/strength = 0.005
-shader_parameter/noise = SubResource("NoiseTexture2D_elora")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_b3gn5"]
-frequency = 0.02
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2rdnd"]
-seamless = true
-noise = SubResource("FastNoiseLite_b3gn5")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_da0k7"]
-shader = ExtResource("4_mlfnw")
-shader_parameter/speed = 0.05
-shader_parameter/strength = 0.005
-shader_parameter/noise = SubResource("NoiseTexture2D_2rdnd")
-
-[sub_resource type="Gradient" id="Gradient_dqply"]
-colors = PackedColorArray(1, 0.819608, 0.835294, 0.784314, 0.2, 0.533333, 0.870588, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_lr8m4"]
-gradient = SubResource("Gradient_dqply")
-fill_to = Vector2(0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgunp"]
+shader = ExtResource("4_7fi5r")
 
 [node name="game" type="Node"]
 script = SubResource("GDScript_enk6v")
@@ -318,74 +318,7 @@ libraries = {
 }
 autoplay = "bounce"
 
-[node name="Title" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
-z_index = 2
-material = SubResource("ShaderMaterial_mgunp")
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -450.0
-offset_top = 32.0
-offset_right = 450.0
-offset_bottom = 164.0
-grow_horizontal = 2
-texture = ExtResource("3_i7ejn")
-
-[node name="Foreground" type="AnimatedSprite2D" parent="MenuLayer/MenuControl/TitleBackground"]
-z_index = 1
-position = Vector2(0, 32)
-scale = Vector2(12, 12)
-sprite_frames = SubResource("SpriteFrames_a4tg8")
-autoplay = "default"
-frame_progress = 0.473926
-centered = false
-
-[node name="ForegroundLand" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("15_t40n0")
-
-[node name="Mountains" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("14_yyt2w")
-
-[node name="Shorline" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
-material = SubResource("ShaderMaterial_jb632")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("15_s3i31")
-
-[node name="Sky" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("13_1o8hw")
-
 [node name="SkylineReflection" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
-z_index = -1
 material = SubResource("ShaderMaterial_da0k7")
 layout_mode = 1
 anchors_preset = 15
@@ -399,6 +332,27 @@ mouse_filter = 2
 texture = ExtResource("14_yyt2w")
 flip_v = true
 
+[node name="Sky" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_1o8hw")
+
+[node name="Shorline" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+material = SubResource("ShaderMaterial_jb632")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_s3i31")
+
 [node name="WaterRect" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
 layout_mode = 1
 anchors_preset = 15
@@ -409,6 +363,47 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_lr8m4")
+
+[node name="Mountains" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("14_yyt2w")
+
+[node name="ForegroundLand" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_t40n0")
+
+[node name="Foreground" type="AnimatedSprite2D" parent="MenuLayer/MenuControl/TitleBackground"]
+position = Vector2(0, 32)
+scale = Vector2(12, 12)
+sprite_frames = SubResource("SpriteFrames_a4tg8")
+autoplay = "default"
+frame_progress = 0.473926
+centered = false
+
+[node name="Title" type="TextureRect" parent="MenuLayer/MenuControl/TitleBackground"]
+material = SubResource("ShaderMaterial_mgunp")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -450.0
+offset_top = 32.0
+offset_right = 450.0
+offset_bottom = 164.0
+grow_horizontal = 2
+texture = ExtResource("3_i7ejn")
 
 [node name="Audio" type="Node" parent="."]
 script = ExtResource("10_mudwi")
