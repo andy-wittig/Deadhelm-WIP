@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bkmgf0sqr7pk3"]
+[gd_scene load_steps=48 format=3 uid="uid://bkmgf0sqr7pk3"]
 
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="1_a41dw"]
 [ext_resource type="Script" path="res://scripts/golem.gd" id="1_v0or6"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="4_d7ck2"]
 [ext_resource type="Texture2D" uid="uid://cn4en6pclngws" path="res://assets/sprites/enemies/golem/golem idle sheet.png" id="4_mco43"]
 [ext_resource type="Texture2D" uid="uid://bplegj60fn7m8" path="res://assets/sprites/enemies/golem/golem_run_sheet.png" id="5_qtfgs"]
+[ext_resource type="AudioStream" uid="uid://b232rpve7dybg" path="res://assets/sound effects/enemies/golem_roar.mp3" id="8_jwc8y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bg4no"]
 resource_local_to_scene = true
@@ -327,9 +328,8 @@ script = ExtResource("1_v0or6")
 material = SubResource("ShaderMaterial_bg4no")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_m63n4")
-animation = &"run"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.161021
 
 [node name="BodyCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
@@ -429,6 +429,14 @@ anim_offset_max = 1.0
 z_index = -1
 scale = Vector2(1, 0.125)
 texture = SubResource("GradientTexture2D_1o3xv")
+
+[node name="SmashAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_jwc8y")
+volume_db = -5.0
+max_distance = 384.0
+attenuation = 4.0
+max_polyphony = 2
+bus = &"SFX"
 
 [connection signal="animation_finished" from="GolemSprite" to="." method="_on_golem_sprite_animation_finished"]
 [connection signal="timeout" from="RoamTimer" to="." method="_on_change_state_timer_timeout"]

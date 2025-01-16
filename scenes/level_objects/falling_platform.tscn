@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bpw1cvbvhtqe4"]
+[gd_scene load_steps=14 format=3 uid="uid://bpw1cvbvhtqe4"]
 
 [ext_resource type="Texture2D" uid="uid://c5rj60maisssl" path="res://assets/sprites/level_objects/falling_platform.png" id="1_7ls2w"]
 [ext_resource type="Script" path="res://scripts/falling_platform.gd" id="1_aplwb"]
 [ext_resource type="Texture2D" uid="uid://cbdvfr13mqgwe" path="res://assets/sprites/vfx/rock_pieces.png" id="3_rkne8"]
+[ext_resource type="AudioStream" uid="uid://y0dfw7j7sjet" path="res://assets/sound effects/level_object_sounds/rock_wall_crumble.mp3" id="4_bus8q"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hclq5"]
 particles_animation = true
@@ -74,6 +75,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CrumbleAudio:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CrumbleAudio:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-20.0]
+}
 
 [sub_resource type="Animation" id="Animation_hoaqk"]
 resource_name = "break"
@@ -125,6 +150,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CrumbleAudio:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CrumbleAudio:volume_db")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-20.0, -20.0, -80.0]
 }
 
 [sub_resource type="Animation" id="Animation_ykhi5"]
@@ -228,6 +277,14 @@ libraries = {
 [node name="ResetTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="CrumbleAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bus8q")
+volume_db = -20.0
+pitch_scale = 1.4
+max_distance = 384.0
+attenuation = 4.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

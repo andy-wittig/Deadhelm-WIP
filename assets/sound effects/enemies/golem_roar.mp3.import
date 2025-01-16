@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b232rpve7dybg"
+path="res://.godot/imported/golem_roar.mp3-f2129dfb5e68f5204662d2ba89eeb911.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/enemies/golem_roar.mp3"
+dest_files=["res://.godot/imported/golem_roar.mp3-f2129dfb5e68f5204662d2ba89eeb911.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

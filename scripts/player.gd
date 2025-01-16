@@ -276,7 +276,7 @@ func _process(delta):
 			spell_instance.global_position = spell_spawn.global_position
 			get_tree().get_root().get_node("game/Level").add_child(spell_instance)
 			spell_instance.reset_physics_interpolation()
-			play_sound("cast")
+			play_sound("cast", -5.0)
 			
 			currently_selected_slot.start_cooldown(currently_selected_slot.get_slot_item())
 			dial_instance.destroy()

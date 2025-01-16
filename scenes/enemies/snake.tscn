@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://crkpyisokc1w4"]
+[gd_scene load_steps=19 format=3 uid="uid://crkpyisokc1w4"]
 
 [ext_resource type="Script" path="res://scripts/snake.gd" id="1_3b13e"]
 [ext_resource type="Texture2D" uid="uid://c8jeegyrueuit" path="res://assets/sprites/enemies/snake/snake_idle_sheet.png" id="1_6qqgl"]
 [ext_resource type="Texture2D" uid="uid://605xxy7i2wqg" path="res://assets/sprites/enemies/snake/snake_attack_sheet.png" id="2_uiua0"]
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="4_574s8"]
+[ext_resource type="AudioStream" uid="uid://dmi7i4dbgpbd6" path="res://assets/sound effects/enemies/snake.mp3" id="5_cg0s3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qj4qx"]
 atlas = ExtResource("2_uiua0")
@@ -118,6 +119,12 @@ attack_wait = 1.0
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtPlayerArea"]
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_g4pv5")
+
+[node name="AttackAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_cg0s3")
+max_distance = 384.0
+attenuation = 4.0
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

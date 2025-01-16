@@ -20,3 +20,4 @@ func _on_attack_timer_timeout():
 	impactor_ball.lifetime = ball_lifetime
 	get_tree().get_root().get_node("game/Level").add_child(impactor_ball)
 	particles.emitting = true
+	$SpawnAudio.play()

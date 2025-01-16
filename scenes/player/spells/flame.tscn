@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://cdk16mvpa1vlp"]
+[gd_scene load_steps=21 format=3 uid="uid://cdk16mvpa1vlp"]
 
 [ext_resource type="Script" path="res://scripts/flame.gd" id="1_10q3v"]
 [ext_resource type="Texture2D" uid="uid://cg4mbvaqta81t" path="res://assets/sprites/level_objects/spells/flame orb.png" id="2_bao0b"]
 [ext_resource type="Texture2D" uid="uid://bwt4ymhvl6rc7" path="res://assets/sprites/level_objects/spells/flame.png" id="3_dfk2l"]
 [ext_resource type="PackedScene" uid="uid://c6hvdac7cbih0" path="res://scenes/player/hurt_enemy_area.tscn" id="4_8rpvf"]
 [ext_resource type="Texture2D" uid="uid://cj6nlav1h7hk3" path="res://assets/sprites/vfx/flame_effect.png" id="5_djqd4"]
+[ext_resource type="AudioStream" uid="uid://346uwtvftsv2" path="res://assets/sound effects/enemies/fire.mp3" id="6_vmdsk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5tbe0"]
 atlas = ExtResource("3_dfk2l")
@@ -187,6 +188,12 @@ anim_offset_max = 1.0
 wait_time = 2.5
 one_shot = true
 autostart = true
+
+[node name="FlameAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_vmdsk")
+volume_db = -8.0
+autoplay = true
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

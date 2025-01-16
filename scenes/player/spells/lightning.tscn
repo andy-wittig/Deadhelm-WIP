@@ -197,7 +197,7 @@ autostart = true
 
 [node name="LightningSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_u7j72")
-volume_db = -5.0
+volume_db = -8.0
 autoplay = true
 bus = &"SFX"
 

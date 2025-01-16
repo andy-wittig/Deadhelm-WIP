@@ -22,6 +22,7 @@ func _process(delta):
 	
 func _on_attack_timer_timeout():
 	$AnimatedSprite2D.play("attack")
+	$AttackAudio.play()
 	attack_started = true
 	
 func _on_animated_sprite_2d_animation_finished():

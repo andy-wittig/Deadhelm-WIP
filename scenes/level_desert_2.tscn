@@ -472,7 +472,7 @@ bounce_force = -425.0
 
 [node name="leaping mushroom2" parent="." instance=ExtResource("35_isvtu")]
 position = Vector2(600, -432)
-bounce_force = -425.0
+bounce_force = -450.0
 
 [node name="chest3" parent="." instance=ExtResource("10_6isk1")]
 position = Vector2(1024, -176)

@@ -108,6 +108,7 @@ func _physics_process(delta):
 						
 		state_type.ATTACK:
 			if (!attack_started):
+				$SmashAudio.play()
 				golem_sprite.play("attack")
 				animation_player.play("attack_indicator")
 				attack_indicator.visible = true

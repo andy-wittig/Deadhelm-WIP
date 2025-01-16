@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://q0ycwjf4ylgv"
+path="res://.godot/imported/impactor.mp3-6b9326718234061105c422a69b208ddb.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/enemies/impactor.mp3"
+dest_files=["res://.godot/imported/impactor.mp3-6b9326718234061105c422a69b208ddb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
