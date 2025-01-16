@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b48d6rppddv77"
+path="res://.godot/imported/blacksmith_open.mp3-6a35d8e6194a9e87cb39a2f06f19ee2c.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/shop_gremlin/blacksmith_open.mp3"
+dest_files=["res://.godot/imported/blacksmith_open.mp3-6a35d8e6194a9e87cb39a2f06f19ee2c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

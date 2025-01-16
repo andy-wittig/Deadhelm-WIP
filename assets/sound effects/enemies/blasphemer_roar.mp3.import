@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bhaq6eoj0pkx2"
+path="res://.godot/imported/blasphemer_roar.mp3-c3cbd72ec9b6edd0f4fce977292cff9a.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/enemies/blasphemer_roar.mp3"
+dest_files=["res://.godot/imported/blasphemer_roar.mp3-c3cbd72ec9b6edd0f4fce977292cff9a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

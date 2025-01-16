@@ -78,7 +78,9 @@ func _process(delta):
 			if (Input.is_action_just_pressed("pickup")):
 				GameManager.access_shop_menu = !GameManager.access_shop_menu
 				menu_opened = !menu_opened
-				if (menu_opened): animation_player.play("open_menu")
+				if (menu_opened): 
+					$ShopOpenAudio.play()
+					animation_player.play("open_menu")
 				else: animation_player.play_backwards("open_menu")
 			return
 	blacksmith_sprite.material.set_shader_parameter("enabled", false)

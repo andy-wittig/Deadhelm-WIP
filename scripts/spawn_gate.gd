@@ -10,14 +10,18 @@ var portal_activated := false
 @onready var soul_label = $SoulLabel
 @onready var shrine_chime_audio = $ShrineChimeAudio
 @onready var gate_sprite = $GateSprite
-	
+@onready var portal_audio = $PortalAudio
+
 func _process(delta):
 	if (souls_input >= soul_cost):
 		$PortalActive/PortalWarpTexture.visible = true
 		$PortalActive/PortalGlowLight.visible = true
 		$PortalActive/PortalActiveParticle.emitting = true
 		$PortalActive/PortalActiveParticle2.emitting = true
-		soul_label.text = "enter portal"
+		if (!portal_audio.playing):
+			portal_audio.play()
+		
+		soul_label.text = "delve beyond"
 		portal_activated = true
 	else:
 		soul_label.text = str(souls_input) + "/" + str(soul_cost) + " souls"

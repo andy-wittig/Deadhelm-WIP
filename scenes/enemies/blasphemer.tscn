@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cy85nfl1yblvo"]
+[gd_scene load_steps=25 format=3 uid="uid://cy85nfl1yblvo"]
 
 [ext_resource type="Script" path="res://scripts/blasphemer.gd" id="1_ir5ew"]
 [ext_resource type="Texture2D" uid="uid://yahxduawgq3j" path="res://assets/sprites/enemies/blasphemer.png" id="1_qghqt"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cj6nlav1h7hk3" path="res://assets/sprites/vfx/flame_effect.png" id="4_41w33"]
 [ext_resource type="Texture2D" uid="uid://smaw6s5mex0t" path="res://assets/sprites/vfx/smoke_effect.png" id="4_uoav3"]
 [ext_resource type="AudioStream" uid="uid://346uwtvftsv2" path="res://assets/sound effects/enemies/fire.mp3" id="6_2fjn2"]
+[ext_resource type="AudioStream" uid="uid://bhaq6eoj0pkx2" path="res://assets/sound effects/enemies/blasphemer_roar.mp3" id="7_71irm"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hipyl"]
 properties/0/path = NodePath("FireParticles:emitting")
@@ -119,6 +120,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../RoarAudio:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_stc6e"]
 resource_name = "audio_fade"
@@ -174,6 +187,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [-80.0, -80.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../RoarAudio:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8p5t1"]
@@ -264,15 +289,22 @@ autoplay = "flame"
 
 [node name="AttackTimer" type="Timer" parent="."]
 
-[node name="FireAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_2fjn2")
-max_distance = 256.0
-attenuation = 0.5
-bus = &"SFX"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="FireAudio"]
+[node name="AudioAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../FireAudio")
 libraries = {
 "": SubResource("AnimationLibrary_8p5t1")
 }
+
+[node name="FireAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_2fjn2")
+max_distance = 512.0
+attenuation = 4.0
+bus = &"SFX"
+
+[node name="RoarAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_71irm")
+max_distance = 512.0
+attenuation = 4.0
+bus = &"SFX"
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

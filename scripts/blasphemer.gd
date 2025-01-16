@@ -22,13 +22,13 @@ func _process(_delta):
 		fire_particles.emitting = true
 		animation_player.play("flame")
 		if (!fire_audio.playing):
-			$FireAudio/AnimationPlayer.play("audio_start")
+			$AudioAnimationPlayer.play("audio_start")
 	else:
 		hurt_player_area.active = false
 		flame_light.enabled = false
 		fire_particles.emitting = false
 		animation_player.play("RESET")
-		$FireAudio/AnimationPlayer.play("audio_fade")
+		$AudioAnimationPlayer.play("audio_fade")
 
 func _on_attack_timer_timeout():
 	attacking = !attacking

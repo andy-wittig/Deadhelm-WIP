@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://j46c37k23ijy"]
+[gd_scene load_steps=35 format=3 uid="uid://j46c37k23ijy"]
 
 [ext_resource type="Script" path="res://scripts/blacksmith.gd" id="1_5m3gt"]
 [ext_resource type="Texture2D" uid="uid://c3thu02tav6qw" path="res://assets/sprites/level_objects/blacksmith_sheet.png" id="1_ecw4u"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cx806jtspcq0l" path="res://assets/sprites/UI/shop/blacksmith_background.png" id="3_3tb8k"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_fx6vr"]
 [ext_resource type="Shader" path="res://shaders/black_and_white.gdshader" id="5_ksk32"]
+[ext_resource type="AudioStream" uid="uid://b48d6rppddv77" path="res://assets/sound effects/shop_gremlin/blacksmith_open.mp3" id="8_nya5j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fe5ug"]
 resource_local_to_scene = true
@@ -426,6 +427,10 @@ color = Color(1, 1, 1, 0)
 libraries = {
 "": SubResource("AnimationLibrary_r3mmh")
 }
+
+[node name="ShopOpenAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_nya5j")
+bus = &"SFX"
 
 [connection signal="mouse_entered" from="BlacksmithControl/PurchaseButton1" to="." method="_on_purchase_button_1_mouse_entered"]
 [connection signal="pressed" from="BlacksmithControl/PurchaseButton1" to="." method="_on_purchase_button_1_pressed"]
