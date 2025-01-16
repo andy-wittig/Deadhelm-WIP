@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyr8pj6clc56g"
+path="res://.godot/imported/wing_flap.mp3-550ea5ae5099e83bb125e4a9ed302218.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/level_object_sounds/wing_flap.mp3"
+dest_files=["res://.godot/imported/wing_flap.mp3-550ea5ae5099e83bb125e4a9ed302218.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

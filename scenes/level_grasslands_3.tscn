@@ -428,6 +428,7 @@ position = Vector2(1376, -736)
 position = Vector2(1232, -352)
 spawn_enemy_type = Array[PackedScene]([ExtResource("22_pov0j"), ExtResource("22_pov0j"), ExtResource("22_pov0j")])
 tile_map = NodePath("../../TileMap")
+spawn_range = Vector2(3, 2)
 spawn_wait = 3.0
 max_spawn_uses = 3
 
@@ -439,6 +440,7 @@ bounce_force = -375.0
 position = Vector2(696, -1424)
 spawn_enemy_type = Array[PackedScene]([ExtResource("23_oen2k"), ExtResource("23_oen2k"), ExtResource("24_2xbli"), ExtResource("24_2xbli")])
 tile_map = NodePath("../../TileMap")
+spawn_range = Vector2(4, 4)
 spawn_wait = 2.0
 max_spawn_uses = 3
 

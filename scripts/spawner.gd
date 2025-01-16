@@ -45,6 +45,7 @@ func check_enemy_spawnable():
 	if (spawned_count >= spawn_enemy_type.size()):
 		currently_spawning = false
 		vortex_sprite.visible = false
+		$VortexSprite/VortexParticles.emitting = false
 		spawned_count = 0
 		spawn_timer.stop()
 		return
@@ -62,7 +63,9 @@ func check_enemy_spawnable():
 	vortex_sprite.visible = true
 	$VortexSprite/AnimationPlayer.stop()
 	$VortexSprite/AnimationPlayer.play("rotate")
+	$VortexSprite/VortexParticles.emitting = true
 	vortex_sprite.global_position = spawn_pos
+	vortex_sprite.reset_physics_interpolation()
 	spawn_timer.start(spawn_wait)
 
 func _on_spawn_wait_timer_timeout():

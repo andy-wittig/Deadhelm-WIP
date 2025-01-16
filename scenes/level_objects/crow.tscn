@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://cj1nwgg1gcdkv"]
+[gd_scene load_steps=20 format=3 uid="uid://cj1nwgg1gcdkv"]
 
 [ext_resource type="Texture2D" uid="uid://cpggee1orqx6x" path="res://assets/sprites/level_objects/crow_flying.png" id="1_4jcl1"]
 [ext_resource type="Script" path="res://scripts/crow.gd" id="1_gows1"]
 [ext_resource type="Texture2D" uid="uid://b2a8o7tlcsshd" path="res://assets/sprites/level_objects/crow_idle.png" id="1_tbjc7"]
+[ext_resource type="AudioStream" uid="uid://cyr8pj6clc56g" path="res://assets/sound effects/level_object_sounds/wing_flap.mp3" id="4_t7s8p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_21c2v"]
 atlas = ExtResource("1_4jcl1")
@@ -178,5 +179,12 @@ libraries = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_a87p4")
+
+[node name="FlapAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_t7s8p")
+volume_db = 5.0
+max_distance = 384.0
+attenuation = 4.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://oq2a4voisjg1"]
+[gd_scene load_steps=24 format=3 uid="uid://oq2a4voisjg1"]
 
 [ext_resource type="Texture2D" uid="uid://dv6vdn27h5kil" path="res://assets/sprites/level_objects/spawner.png" id="1_24323"]
 [ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="1_fh3nh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cfmpjnypd34os" path="res://assets/sprites/level_objects/spawner orb.png" id="2_x51t5"]
 [ext_resource type="AudioStream" uid="uid://djv22vihe4t0" path="res://assets/sound effects/level_object_sounds/spawn_sound.wav" id="6_0gyn2"]
 [ext_resource type="Texture2D" uid="uid://cm28gshhasnsg" path="res://assets/sprites/level_objects/spawner_vortex.png" id="6_2lawv"]
+[ext_resource type="Texture2D" uid="uid://53moshl2716b" path="res://assets/sprites/vfx/spawner_sparks_effect.png" id="7_tow61"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4hknq"]
 size = Vector2(30, 11)
@@ -184,6 +185,20 @@ _data = {
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.500835), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nchxh"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_y768i"]
+_data = [Vector2(0, 0.747253), 0.0, 0.0, 0, 0, Vector2(1, 0.252747), 0.91271, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5ynb6"]
+offsets = PackedFloat32Array(0.739583, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
 [sub_resource type="Animation" id="Animation_rvwvd"]
 length = 0.001
 tracks/0/type = "value"
@@ -225,7 +240,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_0ovuf"]
 resource_name = "rotate"
-length = 2.0
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -234,7 +248,7 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 6.28319]
@@ -246,7 +260,7 @@ tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0.5, 0.5), Vector2(1, 1)]
@@ -258,10 +272,10 @@ tracks/2/path = NodePath(".:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.588235)]
+"values": [Color(1, 1, 1, 0.0980392), Color(1, 1, 1, 0.647059)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x85qc"]
@@ -334,6 +348,27 @@ visible = false
 modulate = Color(1, 1, 1, 0.588235)
 z_index = 1
 texture = ExtResource("6_2lawv")
+
+[node name="VortexParticles" type="CPUParticles2D" parent="VortexSprite"]
+material = SubResource("CanvasItemMaterial_nchxh")
+rotation = 1.98907
+scale = Vector2(1.19674, 1.19674)
+explosiveness = 0.1
+texture = ExtResource("7_tow61")
+emission_shape = 1
+emission_sphere_radius = 12.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 12.0
+initial_velocity_max = 18.0
+damping_min = 12.0
+damping_max = 18.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_curve = SubResource("Curve_y768i")
+color_ramp = SubResource("Gradient_5ynb6")
+anim_offset_max = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="VortexSprite"]
 libraries = {

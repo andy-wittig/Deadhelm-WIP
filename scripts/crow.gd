@@ -14,11 +14,14 @@ func _ready():
 func _process(delta):
 	if (flying):
 		crow_animated_sprite.play("fly")
+		if (!$FlapAudio.playing):
+			$FlapAudio.play()
 		global_position += (roost_point - global_position).normalized() * delta * FLY_SPEED
 		if (abs(global_position - roost_point) <= Vector2(0.1, 0.1)):
 			global_position = roost_point
 			$AnimationPlayer.play("RESET")
 			crow_animated_sprite.play("idle")
+			$FlapAudio.stop()
 			flying = false
 
 func _on_body_entered(body):
