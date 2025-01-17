@@ -1,4 +1,5 @@
 extends Node
+var DEBUG_MODE := false
 var started_game := false
 var current_level: String
 var access_ingame_menu := true

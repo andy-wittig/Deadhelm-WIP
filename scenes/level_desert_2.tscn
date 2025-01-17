@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="5_xfffk"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="6_onnn4"]
 [ext_resource type="PackedScene" uid="uid://rrv0mvcmyxnk" path="res://scenes/level_objects/portal_gate.tscn" id="7_l83nc"]
-[ext_resource type="PackedScene" uid="uid://dyruqot1bthjn" path="res://scenes/level_cave_1.tscn" id="8_bfguw"]
+[ext_resource type="PackedScene" uid="uid://dljiyqmwd2lvy" path="res://scenes/level_demo_complete.tscn" id="7_pyinx"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="8_mevk6"]
 [ext_resource type="PackedScene" uid="uid://mk8x6lo0ft6t" path="res://scenes/level_objects/chest.tscn" id="10_6isk1"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="13_bgpm5"]
@@ -275,7 +275,7 @@ layer_2/tile_data = PackedInt32Array(-1376185, 851969, 0, -1376184, 851969, 0, -
 
 [node name="portal_gate" parent="." instance=ExtResource("7_l83nc")]
 position = Vector2(896, -832)
-next_level = ExtResource("8_bfguw")
+next_level = ExtResource("7_pyinx")
 soul_cost = 14
 
 [node name="players" type="Node2D" parent="."]

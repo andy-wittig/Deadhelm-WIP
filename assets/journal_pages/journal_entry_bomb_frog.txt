@@ -1,5 +1,5 @@
 [center]
 [b][u]JOURNAL[/u][/b]
 
-Bomb Frog lore goes here.
+Bomb frogs share a similar curse to the bombshell turtles, with bombs constantly being created by a curse within the frog. These bombs ignite at the nearest movement of any nearby creature.
 [/center]

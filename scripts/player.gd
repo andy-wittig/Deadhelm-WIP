@@ -289,15 +289,16 @@ func _process(delta):
 		dial_created = false
 	
 	#Developer Cheats
-	if (Input.is_action_just_pressed("cheat_button_1")):
-		souls_collected += 10
-	if Input.is_action_just_pressed("cheat_button_2"):
-		global_position = portal_gate.global_position
-	if Input.is_action_just_pressed("cheat_button_3"):
-		invincible = !invincible
-		#Engine.set_time_scale(0.1)
-	if Input.is_action_just_pressed("cheat_button_4"):
-		global_position = get_global_mouse_position()
+	if (GameManager.DEBUG_MODE):
+		if (Input.is_action_just_pressed("cheat_button_1")):
+			souls_collected += 10
+		if Input.is_action_just_pressed("cheat_button_2"):
+			global_position = portal_gate.global_position
+		if Input.is_action_just_pressed("cheat_button_3"):
+			invincible = !invincible
+			#Engine.set_time_scale(0.1)
+		if Input.is_action_just_pressed("cheat_button_4"):
+			global_position = get_global_mouse_position()
 
 func _physics_process(delta):
 	#simple state machine

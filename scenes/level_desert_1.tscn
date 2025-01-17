@@ -674,3 +674,6 @@ scale = Vector2(1, 4)
 
 [node name="lantern2" parent="." instance=ExtResource("23_pokdo")]
 position = Vector2(1000, -624)
+
+[node name="platform4" parent="." instance=ExtResource("5_x1jms")]
+position = Vector2(936, -192)
