@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #Physics Constants
-const SPEED := 75.0
+const SPEED := 70.0
 const GRAVITY := 940
 const EXTRA_GRAVITY := 200.0
 const CLIMB_SPEED := 75.0
@@ -152,6 +152,7 @@ func _ready():
 	currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
 	currently_selected_slot.currently_selected = true
 	audio_player.play()
+	toggle_hud()
 	
 func _process(delta):
 	#handle UI elements
@@ -548,7 +549,7 @@ func reset_player():
 	player_health = max_health
 	
 func toggle_hud():
-	hud.visible = !hud.visible
+	hud.visible = GameManager.visible_hud
 	
 func enable_collision(enabled: bool):
 	player_collider.disabled = !enabled

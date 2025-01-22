@@ -89,6 +89,7 @@ func _on_check_cursor_toggled(toggled):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 func _on_check_hud_toggled(toggled_on):
+	GameManager.visible_hud = !GameManager.visible_hud
 	get_tree().call_group("players", "toggle_hud")
 
 func _on_check_windowed_toggled(toggled):
