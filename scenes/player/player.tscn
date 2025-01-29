@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=3 uid="uid://b5rai463xckyn"]
+[gd_scene load_steps=117 format=3 uid="uid://b5rai463xckyn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_6jjtq"]
 [ext_resource type="PackedScene" uid="uid://cv3ipj46sh6tq" path="res://scenes/player/hud.tscn" id="2_5bfwm"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://c4lyd42kmsqqh" path="res://assets/sprites/player/player_upper_jump.png" id="9_ukpq1"]
 [ext_resource type="Texture2D" uid="uid://434dfymmmnr7" path="res://assets/sprites/player/player_upper_run_sheet.png" id="10_f4yvp"]
 [ext_resource type="Texture2D" uid="uid://cckk26g46lu5i" path="res://assets/sprites/player/player_upper_sit_sheet.png" id="11_pakeh"]
+[ext_resource type="Texture2D" uid="uid://ddbb13ifqoma5" path="res://assets/sprites/player/player_upper_climb_ladder.png" id="11_vjn67"]
 [ext_resource type="Texture2D" uid="uid://c8lnnkhdi7xs4" path="res://assets/sprites/player/player_lower_climb.png" id="12_n143v"]
 [ext_resource type="AudioStream" uid="uid://6sp2eef7ldlu" path="res://assets/sound effects/player/footstep_sound.mp3" id="12_u6xwe"]
 [ext_resource type="Texture2D" uid="uid://dbxommivnfl5s" path="res://assets/sprites/player/player_lower_fall.png" id="13_yw8aw"]
@@ -127,6 +128,22 @@ region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujwp2"]
 atlas = ExtResource("6_qj3mk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjspf"]
+atlas = ExtResource("11_vjn67")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjbhs"]
+atlas = ExtResource("11_vjn67")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvdu6"]
+atlas = ExtResource("11_vjn67")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80naj"]
+atlas = ExtResource("11_vjn67")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fn4c"]
@@ -322,6 +339,23 @@ animations = [{
 "loop": true,
 "name": &"climb",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjspf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjbhs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvdu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80naj")
+}],
+"loop": true,
+"name": &"climb_ladder",
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -919,8 +953,9 @@ z_index = 1
 material = SubResource("ShaderMaterial_0v5y2")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_2q11b")
-animation = &"cast_done"
+animation = &"climb_ladder"
 autoplay = "idle"
+frame_progress = 0.0923535
 
 [node name="LowerSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_naasp")

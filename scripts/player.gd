@@ -50,7 +50,7 @@ var spell_instance = null
 enum state_type {SITTING, MOVING, CLIMBING, ZIPLINE}
 var state := state_type.SITTING
 
-enum animation_type {SIT, RUN, IDLE, CLIMB, JUMP, FALL}
+enum animation_type {SIT, RUN, IDLE, CLIMB, CLIMB_LADDER, JUMP, FALL}
 var animation_state := animation_type.SIT
 
 var animation_queue : Array[String] = []
@@ -373,13 +373,16 @@ func _physics_process(delta):
 				else:
 					change_animation_state(animation_type.FALL)
 		state_type.CLIMBING:
-			change_animation_state(animation_type.CLIMB)
 			velocity.y = 0
 			
 			if (Input.is_action_pressed("move_up")):
+				change_animation_state(animation_type.CLIMB_LADDER)
 				velocity.y = -CLIMB_SPEED
 			elif (Input.is_action_pressed("move_down")):
+				change_animation_state(animation_type.CLIMB_LADDER)
 				velocity.y = CLIMB_SPEED
+			else:
+				change_animation_state(animation_type.CLIMB)
 		state_type.ZIPLINE:
 			change_animation_state(animation_type.CLIMB)
 			velocity = Vector2.ZERO
@@ -482,6 +485,9 @@ func change_animation_state(new_state : animation_type):
 			lower_sprite.play("fall")
 		animation_type.CLIMB:
 			upper_sprite.play("climb")
+			lower_sprite.play("climb")
+		animation_type.CLIMB_LADDER:
+			upper_sprite.play("climb_ladder")
 			lower_sprite.play("climb")
 	
 	animation_state = new_state
