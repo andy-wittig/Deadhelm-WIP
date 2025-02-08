@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dljiyqmwd2lvy"]
+[gd_scene load_steps=13 format=3 uid="uid://dljiyqmwd2lvy"]
 
+[ext_resource type="Script" path="res://scripts/runtime_stop.gd" id="1_p4of7"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="1_rj1b4"]
 [ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="2_eii5r"]
 [ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="3_caiov"]
@@ -18,6 +19,7 @@ gradient = SubResource("Gradient_s5sk3")
 fill_to = Vector2(0, 1)
 
 [node name="level_demo_complete" type="Node2D"]
+script = ExtResource("1_p4of7")
 
 [node name="portal_gate" parent="." instance=ExtResource("6_ue444")]
 

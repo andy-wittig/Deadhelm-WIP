@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=45 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
 [ext_resource type="Texture2D" uid="uid://370vg8cxmgmw" path="res://assets/sprites/UI/title_ui.png" id="3_i7ejn"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://btplmre76e21a" path="res://scenes/menus/journal_menu.tscn" id="9_7yf88"]
 [ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
 [ext_resource type="PackedScene" uid="uid://b0378gpwb8g1x" path="res://scenes/menus/gameover_menu.tscn" id="11_bodm6"]
+[ext_resource type="PackedScene" uid="uid://drtehqda68hd6" path="res://scenes/menus/stats_menu.tscn" id="12_rx4po"]
 [ext_resource type="Texture2D" uid="uid://dm11bfh1qcc23" path="res://assets/sprites/UI/title_background_sky.png" id="13_1o8hw"]
 [ext_resource type="Texture2D" uid="uid://g6ptohieeaq0" path="res://assets/sprites/UI/title_background_foreground_sheet.png" id="14_ww188"]
 [ext_resource type="Texture2D" uid="uid://fgw4c7gfxo7e" path="res://assets/sprites/UI/title_background_mountains.png" id="14_yyt2w"]
@@ -32,6 +33,10 @@ func start_game():
 	$MenuLayer.current_menu = $MenuLayer.menu.HIDDEN
 	GameManager.started_game = true
 	FileAccess.open(\"user://player_info.save\", FileAccess.WRITE)
+	FileAccess.open(\"user://runtime.save\", FileAccess.WRITE)
+	GameManager.runtime_enabled = true
+	GameManager.current_run_time = 0
+		
 	if (GameManager.DEBUG_MODE):
 		change_level.call_deferred(load(\"res://scenes/level_template.tscn\"))
 	else:
@@ -326,6 +331,10 @@ visible = false
 layout_mode = 1
 
 [node name="gameover_menu" parent="MenuLayer/MenuControl" instance=ExtResource("11_bodm6")]
+visible = false
+layout_mode = 1
+
+[node name="stats_menu" parent="MenuLayer/MenuControl" instance=ExtResource("12_rx4po")]
 visible = false
 layout_mode = 1
 

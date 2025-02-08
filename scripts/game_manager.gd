@@ -14,3 +14,10 @@ var runtime_enabled := true
 func _ready():
 	Input.set_custom_mouse_cursor(can_drop_cursor, Input.CURSOR_CAN_DROP)
 	Input.set_custom_mouse_cursor(can_not_drop_cursor, Input.CURSOR_FORBIDDEN)
+	
+func save_runtime():
+	runtime_enabled = false
+	var runtime_file = FileAccess.open("user://runtime.save", FileAccess.READ_WRITE)
+	runtime_file.seek_end()
+	runtime_file.store_float(current_run_time)
+	get_tree().call_group("stats", "load_runtime")

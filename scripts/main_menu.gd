@@ -6,6 +6,7 @@ enum menu {
 	CREDITS,
 	INGAME,
 	JOURNAL,
+	STATS,
 	HIDDEN,
 	GAMEOVER,
 }
@@ -19,6 +20,7 @@ var menu_started := false
 	"credits_menu" : $MenuControl/credits_menu,
 	"in_game_menu" : $MenuControl/in_game_menu,
 	"journal" : $MenuControl/JournalMenu,
+	"stats" : $MenuControl/stats_menu,
 	"gameover_menu" : $MenuControl/gameover_menu,
 }
 
@@ -104,6 +106,8 @@ func return_to_prev_menu():
 		if (current_menu == menu.INGAME):
 			current_menu = menu.HIDDEN
 		elif (current_menu == menu.SETTINGS):
+			current_menu = menu.INGAME
+		elif (current_menu == menu.STATS):
 			current_menu = menu.INGAME
 		elif (current_menu == menu.JOURNAL):
 			current_menu = menu.HIDDEN
