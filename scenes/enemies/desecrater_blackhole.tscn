@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b7n0d4png6rh5"]
+[gd_scene load_steps=18 format=3 uid="uid://b7n0d4png6rh5"]
 
 [ext_resource type="Script" path="res://scripts/desecrater_blackhole.gd" id="1_3ktav"]
 [ext_resource type="Texture2D" uid="uid://bjemmo2ns8q7n" path="res://assets/sprites/enemies/projectiles/desecrater blackhole.png" id="1_w0i00"]
@@ -64,18 +64,6 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.28, 0.726667, 1)
 colors = PackedColorArray(0.0627451, 0.0705882, 0.109804, 0, 0, 0, 0, 0.784314, 0, 0, 0, 0.784314, 0.0627451, 0.0705882, 0.109804, 0)
 
-[sub_resource type="Gradient" id="Gradient_cvkb7"]
-interpolation_mode = 2
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_eaw5t"]
-gradient = SubResource("Gradient_cvkb7")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.8, 0.8)
-
 [sub_resource type="Curve" id="Curve_0mcbe"]
 _data = [Vector2(0.125, 0), 0.0, -0.11623, 0, 0, Vector2(0.23628, 0.00521123), 0.0, 0.0, 0, 0, Vector2(0.315, 0), -0.276465, 28.7806, 0, 0]
 point_count = 3
@@ -133,17 +121,13 @@ emission_sphere_radius = 12.0
 direction = Vector2(0, 0)
 gravity = Vector2(0, 0)
 orbit_velocity_max = 1.0
+radial_accel_min = -100.0
 angle_min = -720.0
 angle_max = 720.0
 scale_amount_curve = SubResource("Curve_40vqe")
 color_ramp = SubResource("Gradient_2bbjm")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.4
-blend_mode = 1
-texture = SubResource("GradientTexture2D_eaw5t")
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 copy_mode = 2

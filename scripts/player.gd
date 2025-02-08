@@ -95,6 +95,7 @@ var hold_cursor = load("res://assets/sprites/UI/cursor can drop.png")
 @onready var soul_label = $hud/Control/StatsContainer/SoulCounter/SoulCounterLabel
 @onready var money_label = $hud/Control/StatsContainer/MoneyCounter/MoneyCounterLabel
 @onready var portal_progress = $hud/Control/StatsContainer/PortalProgess/ProgressBar
+@onready var runtime_label = $hud/Control/RuntimeLabel
 #Mechanics Paths
 @onready var player_center = $PlayerCenter
 @onready var player_collider = $PlayerCollider
@@ -171,6 +172,15 @@ func _process(delta):
 	healthbar.value = player_health
 	soul_label.text = str(souls_collected)
 	money_label.text = "$" + str(coins_collected)
+	
+	#handle run-time
+	if (GameManager.runtime_enabled):
+		var time = floori(GameManager.current_run_time)
+		var hours = (time / 3600) % 24
+		var minutes = (time / 60) % 60
+		var seconds = (time) % 60
+		var fractional_seconds = int(fmod(snapped(GameManager.current_run_time, 0.01), 1) * 100)
+		runtime_label.text = str("%02d:%02d:%02d.%02d" % [hours, minutes, seconds, fractional_seconds])
 	
 	#handle player death
 	if (player_lives <= 0):
@@ -399,6 +409,11 @@ func _physics_process(delta):
 		player_facing = -1
 		upper_sprite.flip_h = true
 		lower_sprite.flip_h = true
+		
+	#count runtime
+	if (GameManager.runtime_enabled):
+		GameManager.current_run_time += delta
+	#GameManager.current_run_time = snapped(GameManager.current_run_time, 0.01)
 		
 	#Slippery Surfaces
 	#var test_tile: TileData
