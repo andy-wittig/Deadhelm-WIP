@@ -10,6 +10,7 @@ var can_not_drop_cursor = load("res://assets/sprites/UI/cursor cancel.png")
 var visible_hud := true
 var current_run_time : float
 var runtime_enabled := true
+var show_runtime := false
 
 func _ready():
 	Input.set_custom_mouse_cursor(can_drop_cursor, Input.CURSOR_CAN_DROP)
@@ -18,6 +19,9 @@ func _ready():
 func save_runtime():
 	runtime_enabled = false
 	var runtime_file = FileAccess.open("user://runtime.save", FileAccess.READ_WRITE)
+	
 	runtime_file.seek_end()
-	runtime_file.store_float(current_run_time)
+	runtime_file.store_line(str(current_run_time))
+	runtime_file.close()
+	
 	get_tree().call_group("stats", "load_runtime")

@@ -174,13 +174,16 @@ func _process(delta):
 	money_label.text = "$" + str(coins_collected)
 	
 	#handle run-time
-	if (GameManager.runtime_enabled):
+	if (GameManager.show_runtime):
+		runtime_label.visible = true
 		var time = floori(GameManager.current_run_time)
 		var hours = (time / 3600) % 24
 		var minutes = (time / 60) % 60
 		var seconds = (time) % 60
 		var fractional_seconds = int(fmod(snapped(GameManager.current_run_time, 0.01), 1) * 100)
 		runtime_label.text = str("%02d:%02d:%02d.%02d" % [hours, minutes, seconds, fractional_seconds])
+	else:
+		runtime_label.visible = false
 	
 	#handle player death
 	if (player_lives <= 0):
@@ -313,6 +316,9 @@ func _process(delta):
 			global_position = get_global_mouse_position()
 
 func _physics_process(delta):
+	#count runtime
+	if (GameManager.runtime_enabled):
+		GameManager.current_run_time += delta
 	#simple state machine
 	match state:
 		state_type.SITTING:
@@ -411,9 +417,6 @@ func _physics_process(delta):
 		upper_sprite.flip_h = true
 		lower_sprite.flip_h = true
 		
-	#count runtime
-	if (GameManager.runtime_enabled):
-		GameManager.current_run_time += delta
 	#GameManager.current_run_time = snapped(GameManager.current_run_time, 0.01)
 		
 	#Slippery Surfaces

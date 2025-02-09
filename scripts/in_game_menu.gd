@@ -13,6 +13,10 @@ func menu_opened():
 func _on_settings_button_pressed():
 	menu_started = false
 	menu_layer.current_menu = menu_layer.menu.SETTINGS
+	
+func _on_stats_button_pressed():
+	menu_started = false
+	menu_layer.current_menu = menu_layer.menu.STATS
 
 func _on_leave_button_pressed():
 	menu_started = false

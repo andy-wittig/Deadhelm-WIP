@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=46 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
 [ext_resource type="Texture2D" uid="uid://370vg8cxmgmw" path="res://assets/sprites/UI/title_ui.png" id="3_i7ejn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://7j2gwfbq4l34" path="res://assets/sprites/UI/text_settings.png" id="5_1f5mw"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
 [ext_resource type="Texture2D" uid="uid://bpiay5stynsig" path="res://assets/sprites/UI/text_credits.png" id="6_5nwc3"]
+[ext_resource type="Texture2D" uid="uid://buqidjcxi5dji" path="res://assets/sprites/UI/text_speedrun.png" id="6_6xmvd"]
 [ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/menus/settings_menu.tscn" id="6_hxbga"]
 [ext_resource type="PackedScene" uid="uid://c3tnfa07koleu" path="res://scenes/menus/in_game_menu.tscn" id="8_ar250"]
 [ext_resource type="PackedScene" uid="uid://bqgd6hcfgc75y" path="res://scenes/menus/credits_menu.tscn" id="9_0w2qv"]
@@ -32,8 +33,7 @@ script/source = "extends Node
 func start_game():
 	$MenuLayer.current_menu = $MenuLayer.menu.HIDDEN
 	GameManager.started_game = true
-	FileAccess.open(\"user://player_info.save\", FileAccess.WRITE)
-	FileAccess.open(\"user://runtime.save\", FileAccess.WRITE)
+	FileAccess.open(\"user://player_info.save\", FileAccess.WRITE) #resets file
 	GameManager.runtime_enabled = true
 	GameManager.current_run_time = 0
 		
@@ -282,6 +282,17 @@ text = "settings"
 icon = ExtResource("5_1f5mw")
 expand_icon = true
 
+[node name="StatsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../settingsButton")
+focus_neighbor_bottom = NodePath("../quitButton")
+theme_override_fonts/font = ExtResource("5_3g5wa")
+theme_override_font_sizes/font_size = 32
+text = "stats
+"
+icon = ExtResource("6_6xmvd")
+expand_icon = true
+
 [node name="creditsButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../settingsButton")
@@ -488,6 +499,7 @@ bus = &"SFX"
 
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/startButton" to="MenuLayer" method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/settingsButton" to="MenuLayer" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/StatsButton" to="MenuLayer" method="_on_stats_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/creditsButton" to="MenuLayer" method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/quitButton" to="MenuLayer" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/quitButton" to="MenuLayer/MenuControl" method="_on_quit_button_pressed"]

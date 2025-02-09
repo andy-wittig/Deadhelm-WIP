@@ -20,7 +20,7 @@ var menu_started := false
 	"credits_menu" : $MenuControl/credits_menu,
 	"in_game_menu" : $MenuControl/in_game_menu,
 	"journal" : $MenuControl/JournalMenu,
-	"stats" : $MenuControl/stats_menu,
+	"stats_menu" : $MenuControl/stats_menu,
 	"gameover_menu" : $MenuControl/gameover_menu,
 }
 
@@ -60,6 +60,16 @@ func _process(_delta):
 						menu_scenes["title_background"].visible = true
 					menu_scenes[scene].visible = true
 					menu_scenes["settings_menu"].menu_opened()
+					GameManager.access_ingame_menu = false
+		menu.STATS:
+			for scene in menu_scenes:
+				if (scene != "stats_menu"):
+					menu_scenes[scene].visible = false
+				else:
+					if (!GameManager.started_game):
+						menu_scenes["title_background"].visible = true
+					menu_scenes[scene].visible = true
+					menu_scenes["stats_menu"].menu_opened()
 					GameManager.access_ingame_menu = false
 		menu.CREDITS:
 			for scene in menu_scenes:
@@ -120,6 +130,10 @@ func _on_start_button_pressed():
 	
 func _on_settings_button_pressed():
 	current_menu = menu.SETTINGS
+	menu_started = false
+	
+func _on_stats_button_pressed():
+	current_menu = menu.STATS
 	menu_started = false
 	
 func _on_credits_button_pressed():
