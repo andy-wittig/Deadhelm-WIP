@@ -29,9 +29,13 @@ func _process(_delta):
 		if Input.is_action_just_pressed("in-game_menu"):
 			if (current_menu == menu.HIDDEN):
 				current_menu = menu.INGAME
-			elif (current_menu == menu.INGAME || current_menu == menu.SETTINGS || current_menu == menu.JOURNAL):
+			elif (current_menu == menu.INGAME || current_menu == menu.SETTINGS 
+			|| current_menu == menu.JOURNAL || current_menu == menu.STATS):
 				current_menu = menu.HIDDEN
-				$MenuControl/in_game_menu.menu_started = false
+				menu_scenes["in_game_menu"].menu_started = false
+				menu_scenes["settings_menu"].menu_started = false
+				menu_scenes["journal"].menu_started = false
+				menu_scenes["stats_menu"].menu_started = false
 				
 		if Input.is_action_just_pressed("open_journal"):
 			if (current_menu == menu.HIDDEN):

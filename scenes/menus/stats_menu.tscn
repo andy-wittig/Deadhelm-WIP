@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://drtehqda68hd6"]
+[gd_scene load_steps=8 format=3 uid="uid://drtehqda68hd6"]
 
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_08qva"]
 [ext_resource type="Script" path="res://scripts/stats_menu.gd" id="1_tjpl0"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="2_05tye"]
 [ext_resource type="Texture2D" uid="uid://buqidjcxi5dji" path="res://assets/sprites/UI/text_speedrun.png" id="3_lvkqt"]
+[ext_resource type="Texture2D" uid="uid://68c1hxay7sfm" path="res://assets/sprites/UI/text_sort.png" id="4_ym5kf"]
 [ext_resource type="Texture2D" uid="uid://dcttpuxivq85w" path="res://assets/sprites/UI/text_delete.png" id="5_3t8f8"]
 [ext_resource type="Texture2D" uid="uid://bnfltg8uk073d" path="res://assets/sprites/UI/text_back.png" id="5_dj546"]
 
@@ -53,6 +54,16 @@ theme_override_fonts/font = ExtResource("2_05tye")
 theme_override_font_sizes/font_size = 24
 text = "show"
 
+[node name="SortButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("2_05tye")
+theme_override_font_sizes/font_size = 24
+text = "sort"
+icon = ExtResource("4_ym5kf")
+expand_icon = true
+
 [node name="DeleteButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -85,5 +96,6 @@ icon = ExtResource("5_dj546")
 expand_icon = true
 
 [connection signal="toggled" from="VBoxContainer/PanelContainer/HBoxContainer/EnabledButton" to="." method="_on_enabled_button_toggled"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/SortButton" to="." method="_on_sort_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

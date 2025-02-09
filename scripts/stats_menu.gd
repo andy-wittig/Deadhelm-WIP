@@ -13,6 +13,8 @@ func _ready():
 
 func menu_opened():
 	if (!menu_started):
+		print ("hey")
+		load_runtime()
 		update_runtime_list()
 		$VBoxContainer/PanelContainer/HBoxContainer/EnabledButton.grab_focus()
 		menu_started = true
@@ -51,6 +53,11 @@ func update_runtime_list():
 
 func _on_enabled_button_toggled(toggled_on):
 	GameManager.show_runtime = toggled_on
+	
+func _on_sort_button_pressed():
+	runtime_array.sort()
+	runtime_array.reverse()
+	update_runtime_list()
 
 func _on_delete_button_pressed():
 	if not FileAccess.file_exists("user://runtime.save"):
