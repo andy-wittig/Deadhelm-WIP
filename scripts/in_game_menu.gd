@@ -19,12 +19,14 @@ func _on_stats_button_pressed():
 	menu_layer.current_menu = menu_layer.menu.STATS
 
 func _on_leave_button_pressed():
-	menu_started = false
+	get_tree().call_group("players", "save_player_info")
 	GameManager.started_game = false
-	game.end_level()
+	menu_started = false
 	menu_layer.current_menu = menu_layer.menu.MAIN
+	game.end_level()
 
 func _on_quit_button_pressed():
+	get_tree().call_group("players", "save_player_info")
 	get_tree().quit()
 
 func _on_back_button_pressed():

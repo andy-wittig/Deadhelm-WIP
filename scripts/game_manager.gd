@@ -11,12 +11,16 @@ var visible_hud := true
 var current_run_time : float
 var runtime_enabled := true
 var show_runtime := false
+var game_completed := false
 
 func _ready():
 	Input.set_custom_mouse_cursor(can_drop_cursor, Input.CURSOR_CAN_DROP)
 	Input.set_custom_mouse_cursor(can_not_drop_cursor, Input.CURSOR_FORBIDDEN)
 	
 func save_runtime():
+	if not FileAccess.file_exists("user://runtime.save"):
+		FileAccess.open("user://runtime.save", FileAccess.WRITE)
+	
 	runtime_enabled = false
 	var runtime_file = FileAccess.open("user://runtime.save", FileAccess.READ_WRITE)
 	

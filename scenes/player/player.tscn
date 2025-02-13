@@ -946,7 +946,7 @@ noise = SubResource("FastNoiseLite_tirl6")
 
 [node name="hud" parent="." instance=ExtResource("2_5bfwm")]
 
-[node name="level_transition" parent="." instance=ExtResource("3_tjjnx")]
+[node name="level_transition" parent="." groups=["players"] instance=ExtResource("3_tjjnx")]
 
 [node name="UpperSprite" type="AnimatedSprite2D" parent="."]
 z_index = 1

@@ -24,7 +24,14 @@ var menu_started := false
 	"gameover_menu" : $MenuControl/gameover_menu,
 }
 
+@onready var continue_button = $MenuControl/MenuContainer/ContinueButton
+
+func _ready():
+	continue_button.disabled = !FileAccess.file_exists("user://player_info.save")
+
 func _process(_delta):
+	continue_button.disabled = !FileAccess.file_exists("user://player_info.save")
+	
 	if (GameManager.started_game):
 		if Input.is_action_just_pressed("in-game_menu"):
 			if (current_menu == menu.HIDDEN):
@@ -112,7 +119,7 @@ func _process(_delta):
 
 func menu_opened():
 	if (!menu_started):
-		$MenuControl/MenuContainer/startButton.grab_focus()
+		$MenuControl/MenuContainer/StartButton.grab_focus()
 		menu_started = true
 	
 func return_to_prev_menu():
@@ -130,6 +137,10 @@ func return_to_prev_menu():
 
 func _on_start_button_pressed():
 	get_owner().start_game()
+	menu_started = false
+	
+func _on_continue_button_pressed():
+	get_owner().continue_game()
 	menu_started = false
 	
 func _on_settings_button_pressed():

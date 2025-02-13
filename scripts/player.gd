@@ -110,6 +110,10 @@ func get_player_info():
 		"player_lives" : player_lives,
 		"coins_collected" : coins_collected,
 		"double_jump_active" : double_jump_active,
+		"player_position" : global_position,
+		"game_completed" : GameManager.game_completed,
+		"current_level" : GameManager.current_level,
+		"current_run_time" : GameManager.current_run_time,
 		"slot_1" : inventory["slot_1"].get_slot_item(),
 		"slot_2" : inventory["slot_2"].get_slot_item(),
 		"slot_3" : inventory["slot_3"].get_slot_item(),
@@ -150,6 +154,7 @@ func load_player_info():
 func _ready():
 	$Camera2D.reset_smoothing()
 	load_player_info()
+	save_player_info()
 	currently_selected_slot = inventory[inventory.keys()[selected_slot_pos]]
 	currently_selected_slot.currently_selected = true
 	audio_player.play()
