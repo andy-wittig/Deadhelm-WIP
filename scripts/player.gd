@@ -114,6 +114,7 @@ func get_player_info():
 		"game_completed" : GameManager.game_completed,
 		"current_level" : GameManager.current_level,
 		"current_run_time" : GameManager.current_run_time,
+		"continues" : GameManager.continues,
 		"slot_1" : inventory["slot_1"].get_slot_item(),
 		"slot_2" : inventory["slot_2"].get_slot_item(),
 		"slot_3" : inventory["slot_3"].get_slot_item(),

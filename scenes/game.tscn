@@ -62,6 +62,7 @@ func continue_game():
 		var player_data = json.get_data()
 		
 		GameManager.current_run_time = player_data[\"current_run_time\"]
+		GameManager.continues = player_data[\"continues\"]
 		GameManager.game_completed = player_data[\"game_completed\"]
 		GameManager.runtime_enabled = !GameManager.game_completed
 		current_level = player_data[\"current_level\"]
