@@ -664,3 +664,6 @@ func colllect_spell(spell_type):
 			inventory[slot].set_slot_item(spell_type)
 			play_sound("tome")
 			break
+			
+func _on_autosave_timer_timeout():
+	save_player_info()

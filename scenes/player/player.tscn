@@ -1034,4 +1034,9 @@ libraries = {
 "": SubResource("AnimationLibrary_rtqgx")
 }
 
+[node name="AutosaveTimer" type="Timer" parent="."]
+wait_time = 120.0
+autostart = true
+
 [connection signal="animation_finished" from="UpperSprite" to="." method="_on_upper_sprite_animation_finished"]
+[connection signal="timeout" from="AutosaveTimer" to="." method="_on_autosave_timer_timeout"]
