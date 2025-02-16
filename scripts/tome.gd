@@ -8,9 +8,6 @@ var player = null
 @onready var spell_label = $SpellLabel
 @onready var detect_player = $DetectPlayer
 @onready var sprite = $Sprite2D
-
-func destroy_self():
-	queue_free()
 	
 func _ready():
 	spell_label.text = spell_type.replace("_", " ")
@@ -27,4 +24,4 @@ func _process(delta):
 			&& not body.is_inventory_full() && can_collect):
 				body.colllect_spell(spell_type)
 				can_collect = false
-				destroy_self()
+				call_deferred("queue_free")
