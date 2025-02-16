@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="15_lmdlk"]
 [ext_resource type="PackedScene" uid="uid://oq2a4voisjg1" path="res://scenes/level_objects/spawner.tscn" id="16_3k57y"]
 [ext_resource type="PackedScene" uid="uid://bkmgf0sqr7pk3" path="res://scenes/enemies/golem.tscn" id="17_brjha"]
-[ext_resource type="PackedScene" uid="uid://cj1nwgg1gcdkv" path="res://scenes/level_objects/crow.tscn" id="17_yximt"]
+[ext_resource type="PackedScene" uid="uid://dnxbmu551ll6d" path="res://scenes/level_objects/push_totem.tscn" id="17_fkw7t"]
 
 [sub_resource type="Gradient" id="Gradient_s5sk3"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
@@ -168,6 +168,5 @@ tile_map = NodePath("../TileMap")
 spawn_wait = 0.1
 max_spawn_uses = 1000
 
-[node name="crow" parent="." instance=ExtResource("17_yximt")]
-position = Vector2(440, -64)
-roost_locations = Array[Vector2]([Vector2(512, -128), Vector2(704, -128)])
+[node name="push_totem" parent="." instance=ExtResource("17_fkw7t")]
+position = Vector2(392, -128)

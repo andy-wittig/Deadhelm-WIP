@@ -921,7 +921,7 @@ _data = {
 "fade_out": SubResource("Animation_ftkpb")
 }
 
-[node name="player" type="CharacterBody2D" groups=["players"]]
+[node name="player" type="CharacterBody2D" groups=["players", "pushable"]]
 z_index = 2
 collision_layer = 2
 collision_mask = 16

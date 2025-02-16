@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnxbmu551ll6d"]
+
+[ext_resource type="Script" path="res://scripts/push_totem.gd" id="1_1gm0a"]
+[ext_resource type="Texture2D" uid="uid://ctx38vqmxjwi" path="res://assets/sprites/level_objects/push_totem.png" id="1_6cf4a"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hb2wu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bo0a1"]
+radius = 8.0
+
+[node name="push_totem" type="RigidBody2D"]
+physics_interpolation_mode = 1
+collision_layer = 16
+collision_mask = 16
+physics_material_override = SubResource("PhysicsMaterial_hb2wu")
+center_of_mass_mode = 1
+center_of_mass = Vector2(0, 8)
+lock_rotation = true
+continuous_cd = 1
+script = ExtResource("1_1gm0a")
+
+[node name="TotemSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_6cf4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_bo0a1")
+
+[node name="LeftCast" type="RayCast2D" parent="."]
+position = Vector2(0, -3)
+target_position = Vector2(-12, 0)
+collision_mask = 18
+hit_from_inside = true
+
+[node name="RightCast" type="RayCast2D" parent="."]
+position = Vector2(0, -3)
+target_position = Vector2(12, 0)
+collision_mask = 18
+hit_from_inside = true
