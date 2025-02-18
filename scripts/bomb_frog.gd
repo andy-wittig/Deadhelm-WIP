@@ -1,7 +1,8 @@
 extends CharacterBody2D
 #Constants
 const SPEED := 70.0
-const JUMP_VELOCITY := -280.0
+const FRICTION_SPEED := 8.0
+const JUMP_VELOCITY := -260.0
 const HANG_TIME_THRESHHOLD := 40.0
 const HANG_TIME_MULTIPLIER := 0.6
 const KNOCK_BACK_FALLOFF := 25.0
@@ -134,7 +135,7 @@ func _physics_process(delta):
 	if (!is_on_floor()):
 		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, FRICTION_SPEED)
 	
 	if (abs(knock_back) > Vector2.ZERO):
 		velocity = knock_back

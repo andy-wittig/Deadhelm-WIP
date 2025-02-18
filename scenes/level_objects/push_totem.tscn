@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnxbmu551ll6d"]
+[gd_scene load_steps=10 format=3 uid="uid://dnxbmu551ll6d"]
 
 [ext_resource type="Script" path="res://scripts/push_totem.gd" id="1_1gm0a"]
 [ext_resource type="Texture2D" uid="uid://ctx38vqmxjwi" path="res://assets/sprites/level_objects/push_totem.png" id="1_6cf4a"]
+[ext_resource type="Texture2D" uid="uid://dlxl7b2gqxvpt" path="res://assets/sprites/level_objects/push_totem_activated.png" id="3_ek6qr"]
 [ext_resource type="Texture2D" uid="uid://cbdvfr13mqgwe" path="res://assets/sprites/vfx/rock_pieces.png" id="3_yhux3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hb2wu"]
@@ -40,6 +41,11 @@ script = ExtResource("1_1gm0a")
 position = Vector2(0, -8)
 texture = ExtResource("1_6cf4a")
 
+[node name="TotemActivatedSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+texture = ExtResource("3_ek6qr")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_oufb5")
@@ -49,12 +55,14 @@ position = Vector2(0, -8)
 target_position = Vector2(-10, 0)
 collision_mask = 128
 hit_from_inside = true
+collide_with_areas = true
 
 [node name="RightCast" type="RayCast2D" parent="."]
 position = Vector2(0, -8)
 target_position = Vector2(10, 0)
 collision_mask = 128
 hit_from_inside = true
+collide_with_areas = true
 
 [node name="PushParticle" type="CPUParticles2D" parent="."]
 z_index = 3

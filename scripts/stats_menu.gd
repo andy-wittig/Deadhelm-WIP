@@ -13,7 +13,6 @@ func _ready():
 
 func menu_opened():
 	if (!menu_started):
-		print ("hey")
 		load_runtime()
 		update_runtime_list()
 		$VBoxContainer/PanelContainer/HBoxContainer/EnabledButton.grab_focus()

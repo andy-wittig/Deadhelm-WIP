@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://be4kmjavgki6v"]
+[gd_scene load_steps=29 format=3 uid="uid://be4kmjavgki6v"]
 
 [ext_resource type="Script" path="res://scripts/scorpion.gd" id="1_njb0n"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_mew0e"]
 [ext_resource type="Texture2D" uid="uid://bgjtthhhnlfx2" path="res://assets/sprites/enemies/scorpion/scorpion attack sheet.png" id="3_turmy"]
+[ext_resource type="Texture2D" uid="uid://de5y51ndl7tj0" path="res://assets/sprites/enemies/scorpion/scorpion_fall.png" id="4_75tlt"]
 [ext_resource type="Texture2D" uid="uid://bg5gvyjker4v0" path="res://assets/sprites/enemies/scorpion/scorpion_idle_sheet.png" id="4_i6bxk"]
 [ext_resource type="Texture2D" uid="uid://cro3d3ddlbcdv" path="res://assets/sprites/enemies/scorpion/scorpion_run_sheet.png" id="5_fobkt"]
 [ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="8_0jott"]
@@ -89,6 +90,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("4_75tlt")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ojm2k")
 }, {
 "duration": 1.0,
@@ -122,9 +131,8 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ps2ld"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_fhnb5"]
 radius = 8.0
-height = 26.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jea4"]
 radius = 96.0
@@ -229,24 +237,22 @@ script = ExtResource("1_njb0n")
 material = SubResource("ShaderMaterial_ji213")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_47d34")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
-frame = 4
-frame_progress = 1.0
 
 [node name="ScorpionCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_ps2ld")
+shape = SubResource("CircleShape2D_fhnb5")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, -8)
-target_position = Vector2(14, 0)
+target_position = Vector2(12, 0)
 collision_mask = 16
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, -8)
-target_position = Vector2(-14, 0)
+target_position = Vector2(-12, 0)
 collision_mask = 16
 
 [node name="ChasePlayer" type="Area2D" parent="."]

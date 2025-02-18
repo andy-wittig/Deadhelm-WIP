@@ -198,3 +198,9 @@ position = Vector2(360, -192)
 
 [node name="stone_spike7" parent="." instance=ExtResource("18_ymrgt")]
 position = Vector2(328, -192)
+
+[node name="push_totem3" parent="." instance=ExtResource("17_fkw7t")]
+position = Vector2(384, -32)
+
+[node name="push_totem4" parent="." instance=ExtResource("17_fkw7t")]
+position = Vector2(408, -32)

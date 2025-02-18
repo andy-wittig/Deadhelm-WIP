@@ -109,6 +109,7 @@ func _physics_process(delta):
 					attack_started = true
 
 	if not is_on_floor():
+		animated_sprite.play("fall")
 		velocity.y += gravity * delta
 	
 	if (abs(knock_back) > Vector2.ZERO):
