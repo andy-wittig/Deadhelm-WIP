@@ -15,8 +15,8 @@ class_name BaseEnemy
 @export var JUMP_VELOCITY := -180
 @export var KNOCK_BACK_FALLOFF := 25
 @export var ATTACK_RADIUS := 16
-@export var HEALTH := 10
-var MAX_HEALTH := HEALTH
+@export var enemy_health : int
+@export var MAX_HEALTH : int
 
 #enemy mechanics
 @export var roam_timer_wait : float
@@ -78,8 +78,8 @@ func detect_player():
 	chasing_player = false
 	
 func handle_enemy_death():
-	if (HEALTH <= 0):
-		get_tree().call_group("unlock_enemy", "unlock_page", enemy_page)
+	if (enemy_health <= 0):
+		get_tree().call_group("unlock_enemy", "unlock_page", "Enemy", enemy_page)
 	
 		var soul = load("res://scenes/level_objects/soul.tscn").instantiate()
 		soul.position = position + enemy_center_offset
@@ -147,6 +147,7 @@ func _physics_process(delta):
 			start_enemy_attack()
 
 	if (!is_on_floor()):
+		enemy_sprite.play("fall")
 		velocity.y += gravity * delta
 		velocity.x = direction * SPEED
 	else:
@@ -204,5 +205,5 @@ func hurt_enemy(damage: int, direction: Vector2, force: float):
 	get_parent().add_child(impact)
 	impact.reset_physics_interpolation()
 	
-	HEALTH -= damage
-	HEALTH = max(HEALTH, 0)
+	enemy_health -= damage
+	enemy_health = max(enemy_health, 0)

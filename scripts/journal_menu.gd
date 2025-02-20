@@ -32,8 +32,8 @@ var enemy_pages = [
 	["res://assets/journal_pages/journal_description_irritus.txt", true],
 	["res://assets/journal_pages/journal_entry_golem.txt", true],
 	["res://assets/journal_pages/journal_description_golem.txt", true],
-	["res://assets/journal_pages/journal_entry_scorpion.txt", true],
-	["res://assets/journal_pages/journal_description_scorpion.txt", true],
+	["res://assets/journal_pages/journal_entry_scorpion.txt", false],
+	["res://assets/journal_pages/journal_description_scorpion.txt", false],
 	["res://assets/journal_pages/journal_entry_snake.txt", true],
 	["res://assets/journal_pages/journal_description_snake.txt", true],
 ]
@@ -82,7 +82,8 @@ func load_pages(page_1: String, page_2: String):
 		right_page.text = locked_page
 
 func unlock_page(chapter_type : String, page_number : int):
-	chapter[chapter_type][page_number][2] = true
+	chapter[chapter_type][page_number][1] = true
+	chapter[chapter_type][page_number + 1][1] = true
 
 func menu_opened():
 	if (!menu_started):

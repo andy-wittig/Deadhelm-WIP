@@ -227,32 +227,17 @@ _data = {
 "hurt_blink": SubResource("Animation_8rcyp")
 }
 
-[node name="scorpion" type="CharacterBody2D" node_paths=PackedStringArray("enemy_sprite", "animation_player", "left_raycast", "right_raycast", "chase_area") groups=["enemies"]]
+[node name="scorpion" type="CharacterBody2D" groups=["enemies"]]
 z_index = 4
 collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_njb0n")
-enemy_sprite = NodePath("AnimatedScorpionSprite")
-animation_player = NodePath("AnimationPlayer")
-left_raycast = NodePath("RayCastLeft")
-right_raycast = NodePath("RayCastRight")
-chase_area = NodePath("ChasePlayer")
-SPEED = 38
-KNOCK_BACK_FALLOFF = 40
-ATTACK_RADIUS = 64
-enemy_health = 50
-MAX_HEALTH = 50
-roam_timer_wait = 3.0
-cooldown_timer_wait = 2.0
-enemy_center_offset = Vector2(0, -8)
-drop_rarity = Array[int]([50, 30, 10, 10])
-enemy_page = 18
 
 [node name="AnimatedScorpionSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ji213")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_47d34")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="ScorpionCollider" type="CollisionShape2D" parent="."]
@@ -285,6 +270,13 @@ libraries = {
 "": SubResource("AnimationLibrary_31xmi")
 }
 
+[node name="RoamTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
 [node name="enemy_healthbar" parent="." instance=ExtResource("8_0jott")]
 position = Vector2(0, -24)
 
@@ -292,3 +284,7 @@ position = Vector2(0, -24)
 position = Vector2(0, -20)
 
 [connection signal="animation_finished" from="AnimatedScorpionSprite" to="." method="_on_animated_scorpion_sprite_animation_finished"]
+[connection signal="body_entered" from="ChasePlayer" to="." method="_on_chase_player_body_entered"]
+[connection signal="body_exited" from="ChasePlayer" to="." method="_on_chase_player_body_exited"]
+[connection signal="timeout" from="RoamTimer" to="." method="_on_change_state_timer_timeout"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

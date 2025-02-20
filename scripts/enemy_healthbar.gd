@@ -8,7 +8,7 @@ func _ready():
 	enemy_parent.connect("enemy_was_hurt", start_visible_timer)
 	
 func _process(_delta):
-	progress_bar.value = enemy_parent.HEALTH
+	progress_bar.value = enemy_parent.enemy_health
 	
 func start_visible_timer():
 	progress_bar.visible = true
