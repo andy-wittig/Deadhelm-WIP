@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b00u5431eiqqh"]
+[gd_scene load_steps=22 format=3 uid="uid://b00u5431eiqqh"]
 
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_bo8sg"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_h72fo"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bkmgf0sqr7pk3" path="res://scenes/enemies/golem.tscn" id="17_brjha"]
 [ext_resource type="PackedScene" uid="uid://dnxbmu551ll6d" path="res://scenes/level_objects/push_totem.tscn" id="17_fkw7t"]
 [ext_resource type="PackedScene" uid="uid://bvgm67ftgfnlp" path="res://scenes/level_objects/stone_spike.tscn" id="18_ymrgt"]
+[ext_resource type="PackedScene" uid="uid://gxesu1ob4cp4" path="res://scenes/enemies/test_enemy.tscn" id="19_6ivos"]
 
 [sub_resource type="Gradient" id="Gradient_s5sk3"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
@@ -204,3 +205,6 @@ position = Vector2(384, -32)
 
 [node name="push_totem4" parent="." instance=ExtResource("17_fkw7t")]
 position = Vector2(408, -32)
+
+[node name="test_enemy" parent="." instance=ExtResource("19_6ivos")]
+position = Vector2(664, -128)
