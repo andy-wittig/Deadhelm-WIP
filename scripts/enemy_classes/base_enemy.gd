@@ -64,7 +64,7 @@ func _ready():
 	
 	direction = [-1, 1].pick_random()
 	
-func chase_player():
+func detect_player():
 	for body in chase_area.get_overlapping_bodies():
 		if (body.is_in_group("players")):
 			if (!chasing_player):
@@ -97,8 +97,41 @@ func handle_enemy_death():
 		call_deferred("queue_free")
 
 func _process(_delta):
-	chase_player()
+	detect_player()
 	handle_enemy_death()
+
+func move_enemy():
+	enemy_sprite.play("run")
+			
+	if right_raycast.is_colliding():
+		direction = -1
+	elif left_raycast.is_colliding():
+		direction = 1
+		
+	velocity.x = direction * SPEED
+	
+func chase_player():
+	if (player != null):
+		#chase towards player's direction
+		if (player.global_position.x < global_position.x):
+			direction = -1
+		elif (player.global_position.x > global_position.x):
+			direction = 1
+		else:
+			direction = 0
+		
+		if (player.global_position.distance_to(global_position) > ATTACK_RADIUS):
+			enemy_sprite.play("run")
+			
+			if ((right_raycast.is_colliding() || left_raycast.is_colliding())
+			&& is_on_floor()):
+				velocity.y = JUMP_VELOCITY
+				
+			velocity.x = direction * SPEED
+		else: #player is within attacking range
+			cooldown_timer.start(cooldown_timer_wait)
+			enemy_sprite.stop()
+			state = state_type.ATTACK
 
 func _physics_process(delta):
 	match state:
@@ -107,40 +140,11 @@ func _physics_process(delta):
 			velocity.x = 0
 			#end idle
 		state_type.MOVING:
-			enemy_sprite.play("run")
-			
-			if right_raycast.is_colliding():
-				direction = -1
-			elif left_raycast.is_colliding():
-				direction = 1
-				
-			velocity.x = direction * SPEED
-			#end moving
+			move_enemy()
 		state_type.CHASE:
-			if (player != null):
-				#chase towards player's direction
-				if (player.global_position.x < global_position.x):
-					direction = -1
-				elif (player.global_position.x > global_position.x):
-					direction = 1
-				else:
-					direction = 0
-				
-				if (player.global_position.distance_to(global_position) > ATTACK_RADIUS):
-					enemy_sprite.play("run")
-					
-					if ((right_raycast.is_colliding() || left_raycast.is_colliding())
-					&& is_on_floor()):
-						velocity.y = JUMP_VELOCITY
-						
-					velocity.x = direction * SPEED
-				else: #player is within attacking range
-					cooldown_timer.start(cooldown_timer_wait)
-					enemy_sprite.stop()
-					state = state_type.ATTACK
+			chase_player()
 		state_type.ATTACK:
 			start_enemy_attack()
-			velocity.x = 0
 
 	if (!is_on_floor()):
 		velocity.y += gravity * delta
@@ -161,6 +165,8 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func start_enemy_attack():
+	velocity.x = 0
+	
 	if (!attack_started):
 		attack_started = true
 		enemy_sprite.play("attack")

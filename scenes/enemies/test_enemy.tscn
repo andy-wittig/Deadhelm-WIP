@@ -1,11 +1,15 @@
-[gd_scene load_steps=29 format=3 uid="uid://gxesu1ob4cp4"]
+[gd_scene load_steps=31 format=3 uid="uid://gxesu1ob4cp4"]
 
 [ext_resource type="Script" path="res://scripts/enemy_classes/test_enemy.gd" id="1_joodr"]
 [ext_resource type="Shader" uid="uid://ba4x50f4o2nba" path="res://shaders/blink.tres" id="2_ff3mr"]
+[ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="2_pnt8n"]
 [ext_resource type="Texture2D" uid="uid://coo0yufsxmf4l" path="res://assets/sprites/enemies/fester/fester_attack_sheet.png" id="3_fv60o"]
 [ext_resource type="Texture2D" uid="uid://dy6ylb8up0wjc" path="res://assets/sprites/enemies/fester/fester_idle_sheet.png" id="4_p0cuq"]
 [ext_resource type="Texture2D" uid="uid://c6d7qb3ig76k7" path="res://assets/sprites/enemies/fester/fester_run_sheet.png" id="5_wb1sq"]
 [ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="6_7kms6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ki1ox"]
+size = Vector2(20, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0qumd"]
 resource_local_to_scene = true
@@ -240,6 +244,14 @@ attack_timer_wait = 0.5
 cooldown_timer_wait = 4.0
 enemy_center_offset = Vector2(0, -6)
 
+[node name="HurtPlayerArea" parent="." instance=ExtResource("2_pnt8n")]
+damage = 8
+knock_back_force = 45
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtPlayerArea"]
+position = Vector2(-10, -8)
+shape = SubResource("RectangleShape2D_ki1ox")
+
 [node name="AnimatedFesterSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_0qumd")
 position = Vector2(0, -16)
@@ -265,6 +277,7 @@ collision_mask = 16
 hit_from_inside = true
 
 [node name="ChasePlayer" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
