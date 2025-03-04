@@ -14,7 +14,9 @@ class_name BaseEnemy
 @export var FRICTION_SPEED := 6
 @export var JUMP_VELOCITY := -180
 @export var KNOCK_BACK_FALLOFF := 25
-@export var ATTACK_RADIUS := 16
+@export var ATTACK_RANGE := 16
+@export var DODGE_RANGE := 8
+@export var DODGE_SPEED := 45
 @export var enemy_health : int
 @export var MAX_HEALTH : int
 
@@ -22,6 +24,7 @@ class_name BaseEnemy
 @export var roam_timer_wait : float
 @export var attack_timer_wait : float
 @export var cooldown_timer_wait : float
+@export var dodge_timer_wait : float
 @export var enemy_center_offset : Vector2
 @export var drop_rarity : Array[int] = [25, 25, 25, 25]
 @export var enemy_page : int
@@ -47,6 +50,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var roam_timer = Timer.new()
 var cooldown_timer = Timer.new()
 var attack_timer = Timer.new()
+var dodge_timer = Timer.new()
 
 signal enemy_was_hurt
 
@@ -54,14 +58,15 @@ func _ready():
 	add_child(roam_timer)
 	add_child(cooldown_timer)
 	add_child(attack_timer)
+	add_child(dodge_timer)
 	
 	roam_timer.one_shot = false
 	
 	attack_timer.timeout.connect(attack_finished)
 	cooldown_timer.timeout.connect(cooldown_finished)
 	roam_timer.timeout.connect(change_state)
-	roam_timer.start(randi_range(1, roam_timer_wait))
 	
+	roam_timer.start(randi_range(1, roam_timer_wait))
 	direction = [-1, 1].pick_random()
 	
 func detect_player():
@@ -113,14 +118,10 @@ func move_enemy():
 func chase_player():
 	if (player != null):
 		#chase towards player's direction
-		if (player.global_position.x < global_position.x):
-			direction = -1
-		elif (player.global_position.x > global_position.x):
-			direction = 1
-		else:
-			direction = 0
+		var distance_to_player = player.global_position.distance_to(global_position)
+		direction = sign(player.global_position.x - global_position.x)
 		
-		if (player.global_position.distance_to(global_position) > ATTACK_RADIUS):
+		if (distance_to_player > ATTACK_RANGE):
 			enemy_sprite.play("run")
 			
 			if ((right_raycast.is_colliding() || left_raycast.is_colliding())
@@ -149,7 +150,7 @@ func _physics_process(delta):
 	if (!is_on_floor()):
 		enemy_sprite.play("fall")
 		velocity.y += gravity * delta
-		velocity.x = direction * SPEED
+		velocity.x = direction * SPEED 
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION_SPEED)
 	
@@ -165,10 +166,15 @@ func _physics_process(delta):
 		
 	move_and_slide()
 	
-func start_enemy_attack():
-	velocity.x = 0
+func dodge_player():
+	if (dodge_timer.time_left <= 0):
+		dodge_timer.start(dodge_timer_wait)
+	else:
+		velocity.x = direction * DODGE_SPEED
 	
+func start_enemy_attack():
 	if (!attack_started):
+		velocity.x = 0
 		attack_started = true
 		enemy_sprite.play("attack")
 		attack_timer.start(attack_timer_wait)
