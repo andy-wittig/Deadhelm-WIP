@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=33 format=3 uid="uid://13lvf0sk6qwx"]
 
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_lefxa"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="23_cni07"]
 [ext_resource type="PackedScene" uid="uid://dv7ii30ng3m2" path="res://scenes/level_objects/rock_wall.tscn" id="24_dqexj"]
 [ext_resource type="PackedScene" uid="uid://dunbwsblhvliw" path="res://scenes/level_objects/totem.tscn" id="25_pbkwx"]
+[ext_resource type="PackedScene" uid="uid://dmdbtyan4m2lm" path="res://scenes/level_objects/bunny.tscn" id="26_5dbhu"]
 [ext_resource type="PackedScene" uid="uid://dr0q1k18gv2n5" path="res://scenes/level_objects/lamp_post.tscn" id="27_0qcml"]
 
 [sub_resource type="Gradient" id="Gradient_hcj03"]
@@ -292,3 +293,6 @@ message_wait = 2
 
 [node name="lamp_post" parent="." instance=ExtResource("27_0qcml")]
 position = Vector2(328, -464)
+
+[node name="bunny" parent="." instance=ExtResource("26_5dbhu")]
+position = Vector2(368, -448)

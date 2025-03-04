@@ -103,7 +103,7 @@ func _process(_delta):
 	detect_player()
 	handle_enemy_death()
 
-func move_enemy():
+func move_enemy(delta):
 	enemy_sprite.play("run")
 			
 	if right_raycast.is_colliding():
@@ -113,7 +113,7 @@ func move_enemy():
 		
 	velocity.x = direction * SPEED
 	
-func chase_player():
+func chase_player(delta):
 	if (player != null):
 		#chase towards player's direction
 		var distance_to_player = player.global_position.distance_to(global_position)
@@ -145,12 +145,17 @@ func _physics_process(delta):
 			enemy_sprite.play("idle")
 			velocity.x = 0
 		state_type.MOVING:
-			move_enemy()
+			move_enemy(delta)
 		state_type.CHASE:
-			chase_player()
+			chase_player(delta)
 		state_type.ATTACK:
 			start_enemy_attack()
 
+	calculate_velocity(delta)
+	
+	move_and_slide()
+	
+func calculate_velocity(delta):
 	if (abs(knock_back) > Vector2.ZERO):
 		velocity = knock_back
 		knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
@@ -163,8 +168,6 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION_SPEED)
-	
-	move_and_slide()
 	
 func start_enemy_attack():
 	if (!attack_started):

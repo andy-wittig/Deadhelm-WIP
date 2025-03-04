@@ -1,0 +1,120 @@
+[gd_scene load_steps=15 format=3 uid="uid://dmdbtyan4m2lm"]
+
+[ext_resource type="Texture2D" uid="uid://c4x13jkdsvvfc" path="res://assets/sprites/level_objects/bunny_idle.png" id="1_lmgd2"]
+[ext_resource type="Script" path="res://scripts/bunny.gd" id="1_phnto"]
+[ext_resource type="Texture2D" uid="uid://gevmqvy40yyr" path="res://assets/sprites/level_objects/bunny_runningpng.png" id="2_w8415"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjxpp"]
+atlas = ExtResource("1_lmgd2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6o3k"]
+atlas = ExtResource("1_lmgd2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exkbi"]
+atlas = ExtResource("1_lmgd2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5o2b"]
+atlas = ExtResource("1_lmgd2")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dle3s"]
+atlas = ExtResource("1_lmgd2")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o03e7"]
+atlas = ExtResource("2_w8415")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr1c0"]
+atlas = ExtResource("2_w8415")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0gwu"]
+atlas = ExtResource("2_w8415")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6dv6"]
+atlas = ExtResource("2_w8415")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7eg1r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjxpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6o3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exkbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5o2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dle3s")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o03e7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sr1c0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0gwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6dv6")
+}],
+"loop": true,
+"name": &"leap",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6otin"]
+radius = 5.0
+
+[node name="bunny" type="CharacterBody2D" node_paths=PackedStringArray("enemy_sprite", "left_raycast", "right_raycast")]
+z_index = 4
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_phnto")
+jump_timer_wait = 1.0
+enemy_sprite = NodePath("AnimatedBunnySprite")
+left_raycast = NodePath("LeftRayCast")
+right_raycast = NodePath("RightRayCast")
+SPEED = 30
+ATTACK_RANGE = 0
+DODGE_RANGE = 0
+DODGE_SPEED = 0
+roam_timer_wait = 2.0
+
+[node name="AnimatedBunnySprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_7eg1r")
+animation = &"leap"
+autoplay = "idle"
+frame_progress = 0.794298
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_6otin")
+
+[node name="RightRayCast" type="RayCast2D" parent="."]
+position = Vector2(0, -5)
+target_position = Vector2(8, 0)
+collision_mask = 16
+
+[node name="LeftRayCast" type="RayCast2D" parent="."]
+position = Vector2(0, -5)
+target_position = Vector2(-8, 0)
+collision_mask = 16
