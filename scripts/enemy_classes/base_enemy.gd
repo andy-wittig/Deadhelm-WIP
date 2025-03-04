@@ -122,9 +122,6 @@ func chase_player():
 		direction = sign(player.global_position.x - global_position.x)
 		
 		if (distance_to_player > ATTACK_RANGE):
-			if (distance_to_player < ATTACK_RANGE + DODGE_RANGE):
-				dodge_player()
-				
 			enemy_sprite.play("run")
 			
 			if ((right_raycast.is_colliding() || left_raycast.is_colliding())
@@ -153,7 +150,7 @@ func _physics_process(delta):
 	if (!is_on_floor()):
 		enemy_sprite.play("fall")
 		velocity.y += gravity * delta
-		velocity.x = direction * SPEED
+		velocity.x = direction * SPEED 
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION_SPEED)
 	
@@ -171,14 +168,13 @@ func _physics_process(delta):
 	
 func dodge_player():
 	if (dodge_timer.time_left <= 0):
-		#dodge logic here
-		velocity.x = direction * DODGE_SPEED
 		dodge_timer.start(dodge_timer_wait)
+	else:
+		velocity.x = direction * DODGE_SPEED
 	
 func start_enemy_attack():
-	velocity.x = 0
-	
 	if (!attack_started):
+		velocity.x = 0
 		attack_started = true
 		enemy_sprite.play("attack")
 		attack_timer.start(attack_timer_wait)
