@@ -4,6 +4,7 @@ extends BaseEnemy
 
 func start_enemy_attack():
 	if (!attack_started):
+		velocity.x = 0
 		enemy_sprite.play("attack")
 		if (enemy_sprite.frame == 4 && player != null):
 			var poison_ball = load("res://scenes/enemies/poison_ball.tscn").instantiate()
@@ -12,6 +13,8 @@ func start_enemy_attack():
 			get_parent().add_child(poison_ball)
 			
 			enemy_sprite.play("idle")
+			dodge_player()
 			attack_started = true
 			
-	velocity.x = 0
+func dodge_player():
+	extra_h_velocity = -direction * DODGE_SPEED

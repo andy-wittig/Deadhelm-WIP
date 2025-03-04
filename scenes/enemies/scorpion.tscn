@@ -131,8 +131,8 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fhnb5"]
-radius = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvy7n"]
+size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jea4"]
 radius = 128.0
@@ -237,16 +237,15 @@ animation_player = NodePath("AnimationPlayer")
 left_raycast = NodePath("RayCastLeft")
 right_raycast = NodePath("RayCastRight")
 chase_area = NodePath("ChasePlayer")
-SPEED = 38
+SPEED = 45
 KNOCK_BACK_FALLOFF = 40
 ATTACK_RANGE = 64
 DODGE_RANGE = 16
-DODGE_SPEED = 500
+DODGE_SPEED = 130
 enemy_health = 50
 MAX_HEALTH = 50
 roam_timer_wait = 3.0
 cooldown_timer_wait = 2.0
-dodge_timer_wait = 1.0
 enemy_center_offset = Vector2(0, -8)
 drop_rarity = Array[int]([50, 30, 10, 10])
 enemy_page = 18
@@ -261,7 +260,7 @@ autoplay = "idle"
 [node name="ScorpionCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 rotation = 1.5708
-shape = SubResource("CircleShape2D_fhnb5")
+shape = SubResource("RectangleShape2D_vvy7n")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, -8)

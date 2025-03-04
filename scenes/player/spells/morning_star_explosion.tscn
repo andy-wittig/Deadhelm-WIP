@@ -47,15 +47,13 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 z_index = 5
 script = ExtResource("1_08y1q")
 
-[node name="ExplosionShape" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_x7r4y")
-
-[node name="hurt_enemy_area" parent="." node_paths=PackedStringArray("shape") instance=ExtResource("2_6c0fa")]
-damage = 15
+[node name="hurt_enemy_area" parent="." instance=ExtResource("2_6c0fa")]
+damage = 20
 attack_wait = 1.0
-destroy_time = 1
-knock_back = 55.0
-shape = NodePath("../ExplosionShape")
+knock_back = 225.0
+
+[node name="ExplosionShape" type="CollisionShape2D" parent="hurt_enemy_area"]
+shape = SubResource("CircleShape2D_x7r4y")
 
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -92,13 +90,12 @@ anim_offset_max = 1.0
 
 [node name="ExplosionParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_tsuvc")
-amount = 6
 lifetime = 0.5
 explosiveness = 0.2
 lifetime_randomness = 0.2
 texture = SubResource("CompressedTexture2D_s30i0")
 emission_shape = 1
-emission_sphere_radius = 16.0
+emission_sphere_radius = 32.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)

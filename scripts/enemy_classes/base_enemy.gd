@@ -24,13 +24,13 @@ class_name BaseEnemy
 @export var roam_timer_wait : float
 @export var attack_timer_wait : float
 @export var cooldown_timer_wait : float
-@export var dodge_timer_wait : float
 @export var enemy_center_offset : Vector2
 @export var drop_rarity : Array[int] = [25, 25, 25, 25]
 @export var enemy_page : int
 
 var direction : int
 var knock_back : Vector2
+var extra_h_velocity : float
 
 #enemy chasing
 var player = null
@@ -50,7 +50,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var roam_timer = Timer.new()
 var cooldown_timer = Timer.new()
 var attack_timer = Timer.new()
-var dodge_timer = Timer.new()
 
 signal enemy_was_hurt
 
@@ -58,7 +57,6 @@ func _ready():
 	add_child(roam_timer)
 	add_child(cooldown_timer)
 	add_child(attack_timer)
-	add_child(dodge_timer)
 	
 	roam_timer.one_shot = false
 	
@@ -135,11 +133,17 @@ func chase_player():
 			state = state_type.ATTACK
 
 func _physics_process(delta):
+	extra_h_velocity = 0
+	
+	if (direction > 0):
+		enemy_sprite.flip_h = true
+	elif (direction < 0):	
+		enemy_sprite.flip_h = false
+	
 	match state:
 		state_type.IDLE:
 			enemy_sprite.play("idle")
 			velocity.x = 0
-			#end idle
 		state_type.MOVING:
 			move_enemy()
 		state_type.CHASE:
@@ -147,30 +151,20 @@ func _physics_process(delta):
 		state_type.ATTACK:
 			start_enemy_attack()
 
-	if (!is_on_floor()):
-		enemy_sprite.play("fall")
-		velocity.y += gravity * delta
-		velocity.x = direction * SPEED 
-	else:
-		velocity.x = move_toward(velocity.x, 0, FRICTION_SPEED)
-	
 	if (abs(knock_back) > Vector2.ZERO):
 		velocity = knock_back
 		knock_back.x = move_toward(knock_back.x, 0, KNOCK_BACK_FALLOFF)
 		knock_back.y = move_toward(knock_back.y, 0, KNOCK_BACK_FALLOFF)
 		
-	if (direction > 0):
-		enemy_sprite.flip_h = true
-	elif (direction < 0):	
-		enemy_sprite.flip_h = false
+	velocity.x += extra_h_velocity
 		
-	move_and_slide()
-	
-func dodge_player():
-	if (dodge_timer.time_left <= 0):
-		dodge_timer.start(dodge_timer_wait)
+	if (!is_on_floor()):
+		enemy_sprite.play("fall")
+		velocity.y += gravity * delta
 	else:
-		velocity.x = direction * DODGE_SPEED
+		velocity.x = move_toward(velocity.x, 0, FRICTION_SPEED)
+	
+	move_and_slide()
 	
 func start_enemy_attack():
 	if (!attack_started):
