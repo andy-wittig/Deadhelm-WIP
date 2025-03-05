@@ -37,12 +37,12 @@ func start_game():
 	GameManager.game_completed = false
 	GameManager.current_run_time = 0
 	FileAccess.open(\"user://player_info.save\", FileAccess.WRITE) #resets file
-		
+	
 	if (GameManager.DEBUG_MODE):
 		change_level.call_deferred(load(\"res://scenes/level_template.tscn\"))
 	else:
 		change_level.call_deferred(load(\"res://scenes/level_grasslands_1.tscn\"))
-		
+	
 func continue_game():
 	if not FileAccess.file_exists(\"user://player_info.save\"):
 		return

@@ -15,6 +15,7 @@ func start_enemy_attack():
 			enemy_sprite.play("idle")
 			dodge_player()
 			attack_started = true
+			attack_timer.start(attack_timer_wait)
 			
 func dodge_player():
 	extra_h_velocity = -direction * DODGE_SPEED

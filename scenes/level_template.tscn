@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b00u5431eiqqh"]
+[gd_scene load_steps=23 format=3 uid="uid://b00u5431eiqqh"]
 
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_bo8sg"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_h72fo"]
@@ -18,7 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://be4kmjavgki6v" path="res://scenes/enemies/scorpion.tscn" id="16_tj226"]
 [ext_resource type="PackedScene" uid="uid://dnxbmu551ll6d" path="res://scenes/level_objects/push_totem.tscn" id="17_fkw7t"]
 [ext_resource type="PackedScene" uid="uid://bvgm67ftgfnlp" path="res://scenes/level_objects/stone_spike.tscn" id="18_ymrgt"]
-[ext_resource type="PackedScene" uid="uid://dmdbtyan4m2lm" path="res://scenes/level_objects/bunny.tscn" id="19_37njn"]
+[ext_resource type="PackedScene" uid="uid://bsqcsoccs7aom" path="res://scenes/level_objects/bunny.tscn" id="19_37njn"]
+[ext_resource type="PackedScene" uid="uid://b28dfhxb5sp1c" path="res://scenes/enemies/bomb_frog.tscn" id="20_qa3xn"]
 
 [sub_resource type="Gradient" id="Gradient_s5sk3"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
@@ -208,3 +209,10 @@ position = Vector2(408, -32)
 
 [node name="bunny" parent="." instance=ExtResource("19_37njn")]
 position = Vector2(376, -160)
+
+[node name="bomb_frog" parent="." instance=ExtResource("20_qa3xn")]
+position = Vector2(568, -128)
+JUMP_VELOCITY = -180
+cooldown_timer_wait = 0.0
+enemy_center_offset = Vector2(0, 0)
+drop_rarity = Array[int]([25, 25, 25, 25])
