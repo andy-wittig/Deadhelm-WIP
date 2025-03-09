@@ -245,7 +245,6 @@ DODGE_SPEED = 130
 enemy_health = 50
 MAX_HEALTH = 50
 roam_timer_wait = 3.0
-cooldown_timer_wait = 2.0
 enemy_center_offset = Vector2(0, -8)
 drop_rarity = Array[int]([50, 30, 10, 10])
 enemy_page = 18

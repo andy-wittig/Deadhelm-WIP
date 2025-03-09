@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dmdbtyan4m2lm"]
+[gd_scene load_steps=15 format=3 uid="uid://bsqcsoccs7aom"]
 
 [ext_resource type="Texture2D" uid="uid://c4x13jkdsvvfc" path="res://assets/sprites/level_objects/bunny_idle.png" id="1_lmgd2"]
 [ext_resource type="Script" path="res://scripts/bunny.gd" id="1_phnto"]
@@ -88,6 +88,7 @@ z_index = 4
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("1_phnto")
+HANG_TIME_MULTIPLIER = 0.5
 jump_timer_wait = 1.0
 enemy_sprite = NodePath("AnimatedBunnySprite")
 left_raycast = NodePath("LeftRayCast")
@@ -103,7 +104,7 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_7eg1r")
 animation = &"leap"
 autoplay = "idle"
-frame_progress = 0.794298
+frame_progress = 0.150623
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)

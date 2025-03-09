@@ -46,7 +46,6 @@ func chase_player(delta):
 			else:
 				jump_timer -= delta
 		else: #player is within attacking range
-			cooldown_timer.start(cooldown_timer_wait)
 			enemy_sprite.stop()
 			state = state_type.ATTACK
 

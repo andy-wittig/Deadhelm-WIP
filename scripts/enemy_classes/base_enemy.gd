@@ -58,6 +58,8 @@ func _ready():
 	add_child(cooldown_timer)
 	add_child(attack_timer)
 	
+	attack_timer.one_shot = true
+	cooldown_timer.one_shot = true
 	roam_timer.one_shot = false
 	
 	attack_timer.timeout.connect(attack_finished)
@@ -128,7 +130,6 @@ func chase_player(delta):
 				
 			velocity.x = direction * SPEED
 		else: #player is within attacking range
-			cooldown_timer.start(cooldown_timer_wait)
 			enemy_sprite.stop()
 			state = state_type.ATTACK
 
@@ -177,8 +178,8 @@ func start_enemy_attack():
 		attack_timer.start(attack_timer_wait)
 
 func attack_finished():
-	if (attack_started):
-		enemy_sprite.play("idle")
+	enemy_sprite.play("idle")
+	cooldown_timer.start(cooldown_timer_wait)
 	
 func cooldown_finished():
 	attack_started = false
