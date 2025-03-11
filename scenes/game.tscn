@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://cm4gh7qawwcbf"]
+[gd_scene load_steps=48 format=3 uid="uid://cm4gh7qawwcbf"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
 [ext_resource type="Texture2D" uid="uid://370vg8cxmgmw" path="res://assets/sprites/UI/title_ui.png" id="3_i7ejn"]
@@ -8,6 +8,8 @@
 [ext_resource type="Shader" path="res://shaders/distort.gdshader" id="4_mlfnw"]
 [ext_resource type="Texture2D" uid="uid://7j2gwfbq4l34" path="res://assets/sprites/UI/text_settings.png" id="5_1f5mw"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
+[ext_resource type="Texture2D" uid="uid://sploq4sqossu" path="res://assets/sprites/UI/text_check.png" id="5_c7y8w"]
+[ext_resource type="Texture2D" uid="uid://dcttpuxivq85w" path="res://assets/sprites/UI/text_delete.png" id="6_4w6w2"]
 [ext_resource type="Texture2D" uid="uid://bpiay5stynsig" path="res://assets/sprites/UI/text_credits.png" id="6_5nwc3"]
 [ext_resource type="Texture2D" uid="uid://buqidjcxi5dji" path="res://assets/sprites/UI/text_speedrun.png" id="6_6xmvd"]
 [ext_resource type="PackedScene" uid="uid://8f6vlpb4dim" path="res://scenes/menus/settings_menu.tscn" id="6_hxbga"]
@@ -303,6 +305,28 @@ text = "new game"
 icon = ExtResource("3_vs43y")
 expand_icon = true
 
+[node name="ConfirmContainer" type="HBoxContainer" parent="MenuLayer/MenuControl/MenuContainer"]
+visible = false
+layout_mode = 2
+
+[node name="YesButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer/ConfirmContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_3g5wa")
+theme_override_font_sizes/font_size = 32
+text = "yes"
+icon = ExtResource("5_c7y8w")
+expand_icon = true
+
+[node name="NoButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer/ConfirmContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("5_3g5wa")
+theme_override_font_sizes/font_size = 32
+text = "no"
+icon = ExtResource("6_4w6w2")
+expand_icon = true
+
 [node name="ContinueButton" type="Button" parent="MenuLayer/MenuControl/MenuContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../quitButton")
@@ -539,6 +563,8 @@ stream = ExtResource("22_wtd3f")
 bus = &"SFX"
 
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/StartButton" to="MenuLayer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/ConfirmContainer/YesButton" to="MenuLayer" method="_on_yes_button_pressed"]
+[connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/ConfirmContainer/NoButton" to="MenuLayer" method="_on_no_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/ContinueButton" to="MenuLayer" method="_on_continue_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/settingsButton" to="MenuLayer" method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MenuLayer/MenuControl/MenuContainer/StatsButton" to="MenuLayer" method="_on_stats_button_pressed"]

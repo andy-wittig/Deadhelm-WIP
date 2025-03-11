@@ -4,6 +4,7 @@ extends Control
 @onready var game = $"../../.."
 @onready var item_list = $VBoxContainer/ItemList
 @onready var enabled_button = $VBoxContainer/PanelContainer/HBoxContainer/EnabledButton
+@onready var confirm_container = $VBoxContainer/ConfirmContainer
 
 var runtime_array : Array
 var menu_started := false
@@ -59,9 +60,16 @@ func _on_sort_button_pressed():
 	update_runtime_list()
 
 func _on_delete_button_pressed():
+	confirm_container.visible = !confirm_container.visible
+
+func _on_yes_button_pressed():
 	if not FileAccess.file_exists("user://runtime.save"):
 		return
 	var runtime_file = FileAccess.open("user://runtime.save", FileAccess.WRITE)
 	runtime_file.close()
 	runtime_array.clear()
 	update_runtime_list()
+	confirm_container.visible = false
+
+func _on_no_button_pressed():
+	confirm_container.visible = false

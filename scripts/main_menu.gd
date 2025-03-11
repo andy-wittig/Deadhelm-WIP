@@ -25,6 +25,7 @@ var menu_started := false
 }
 
 @onready var continue_button = $MenuControl/MenuContainer/ContinueButton
+@onready var confirm_container = $MenuControl/MenuContainer/ConfirmContainer
 
 func _ready():
 	continue_button.disabled = !FileAccess.file_exists("user://player_info.save")
@@ -136,8 +137,7 @@ func return_to_prev_menu():
 		current_menu = menu.MAIN
 
 func _on_start_button_pressed():
-	get_owner().start_game()
-	menu_started = false
+	confirm_container.visible = !confirm_container.visible
 	
 func _on_continue_button_pressed():
 	get_owner().continue_game()
@@ -157,3 +157,11 @@ func _on_credits_button_pressed():
 	
 func _on_quit_button_pressed():
 	get_tree().quit()
+
+func _on_yes_button_pressed():
+	confirm_container.visible = false
+	get_owner().start_game()
+	menu_started = false
+
+func _on_no_button_pressed():
+	confirm_container.visible = false

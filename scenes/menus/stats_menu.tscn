@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://drtehqda68hd6"]
+[gd_scene load_steps=11 format=3 uid="uid://drtehqda68hd6"]
 
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_08qva"]
 [ext_resource type="Script" path="res://scripts/stats_menu.gd" id="1_tjpl0"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://68c1hxay7sfm" path="res://assets/sprites/UI/text_sort.png" id="4_ym5kf"]
 [ext_resource type="Texture2D" uid="uid://dcttpuxivq85w" path="res://assets/sprites/UI/text_delete.png" id="5_3t8f8"]
 [ext_resource type="Texture2D" uid="uid://bnfltg8uk073d" path="res://assets/sprites/UI/text_back.png" id="5_dj546"]
+[ext_resource type="Texture2D" uid="uid://dd6de322p32e7" path="res://assets/sprites/UI/text_trash.png" id="6_gvtbv"]
+[ext_resource type="Texture2D" uid="uid://sploq4sqossu" path="res://assets/sprites/UI/text_check.png" id="7_wicf0"]
 
 [node name="stats_menu" type="Control" groups=["stats"]]
 layout_mode = 3
@@ -75,6 +77,30 @@ size_flags_horizontal = 10
 theme_override_fonts/font = ExtResource("2_05tye")
 theme_override_font_sizes/font_size = 24
 text = "erase"
+icon = ExtResource("6_gvtbv")
+expand_icon = true
+
+[node name="ConfirmContainer" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="YesButton" type="Button" parent="VBoxContainer/ConfirmContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_05tye")
+theme_override_font_sizes/font_size = 24
+text = "all"
+icon = ExtResource("7_wicf0")
+expand_icon = true
+
+[node name="NoButton" type="Button" parent="VBoxContainer/ConfirmContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_05tye")
+theme_override_font_sizes/font_size = 24
+text = "cancel"
 icon = ExtResource("5_3t8f8")
 expand_icon = true
 
@@ -103,4 +129,6 @@ expand_icon = true
 [connection signal="toggled" from="VBoxContainer/PanelContainer/HBoxContainer/EnabledButton" to="." method="_on_enabled_button_toggled"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/SortButton" to="." method="_on_sort_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ConfirmContainer/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ConfirmContainer/NoButton" to="." method="_on_no_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

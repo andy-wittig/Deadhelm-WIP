@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://be4kmjavgki6v" path="res://scenes/enemies/scorpion.tscn" id="16_tj226"]
 [ext_resource type="PackedScene" uid="uid://dnxbmu551ll6d" path="res://scenes/level_objects/push_totem.tscn" id="17_fkw7t"]
 [ext_resource type="PackedScene" uid="uid://bvgm67ftgfnlp" path="res://scenes/level_objects/stone_spike.tscn" id="18_ymrgt"]
-[ext_resource type="PackedScene" uid="uid://dmdbtyan4m2lm" path="res://scenes/level_objects/bunny.tscn" id="19_37njn"]
+[ext_resource type="PackedScene" uid="uid://bsqcsoccs7aom" path="res://scenes/level_objects/bunny.tscn" id="19_37njn"]
 [ext_resource type="PackedScene" uid="uid://7n3ccjwx0hrh" path="res://scenes/level_objects/cat.tscn" id="20_rdxb1"]
 
 [sub_resource type="Gradient" id="Gradient_s5sk3"]

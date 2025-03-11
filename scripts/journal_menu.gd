@@ -32,8 +32,8 @@ var enemy_pages = [
 	["res://assets/journal_pages/journal_description_irritus.txt", true],
 	["res://assets/journal_pages/journal_entry_golem.txt", true],
 	["res://assets/journal_pages/journal_description_golem.txt", true],
-	["res://assets/journal_pages/journal_entry_scorpion.txt", false],
-	["res://assets/journal_pages/journal_description_scorpion.txt", false],
+	["res://assets/journal_pages/journal_entry_scorpion.txt", true],
+	["res://assets/journal_pages/journal_description_scorpion.txt", true],
 	["res://assets/journal_pages/journal_entry_snake.txt", true],
 	["res://assets/journal_pages/journal_description_snake.txt", true],
 ]
