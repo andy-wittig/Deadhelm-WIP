@@ -19,6 +19,7 @@ const MAX_LIVES := 3
 const MAX_UPGRADED_HEALTH := 200
 #Physics Variables
 var knock_back: Vector2
+var belt_velocity: float
 var friction_multiplier := 1.0
 var coyote_time_counter: float
 var jump_buffer_time: float
@@ -102,6 +103,7 @@ var hold_cursor = load("res://assets/sprites/UI/cursor can drop.png")
 @onready var spell_spawn = $SpellSpawn
 @onready var camera = $Camera2D
 @onready var dust_particles = $DustParticles
+@onready var floor_ray_cast = $FloorRayCast
 
 func get_player_info():
 	var save_dict = {
@@ -424,7 +426,15 @@ func _physics_process(delta):
 		lower_sprite.flip_h = true
 		
 	#GameManager.current_run_time = snapped(GameManager.current_run_time, 0.01)
-		
+	
+	#Surfaces
+	belt_velocity = 0
+	if (floor_ray_cast.is_colliding()):
+		if (floor_ray_cast.get_collider().is_in_group("conveyer_belt")):
+			var conveyer_belt = floor_ray_cast.get_collider()
+			if (conveyer_belt != null):
+				belt_velocity = conveyer_belt.belt_speed * conveyer_belt.direction
+	
 	#Slippery Surfaces
 	#var test_tile: TileData
 	#var tile_map := get_tree().get_root().get_node("game/Level/%s/TileMap" % GameManager.current_level)
@@ -437,8 +447,8 @@ func _physics_process(delta):
 		
 	#Apply movement
 	if (state != state_type.ZIPLINE):
-		if (abs(knock_back.x) > 0 || direction):
-			velocity.x = (direction * SPEED) + knock_back.x
+		if (abs(knock_back.x) > 0 || direction || belt_velocity != 0):
+			velocity.x = (direction * SPEED) + knock_back.x + belt_velocity
 		else:
 			velocity.x = move_toward(velocity.x, 0, FRICTION_FORCE * friction_multiplier)
 	

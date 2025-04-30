@@ -547,7 +547,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("20_usb7k")
 
-[node name="Audio" type="Node" parent="."]
+[node name="Audio" type="Node" parent="." groups=["open_credits"]]
 script = ExtResource("10_mudwi")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="Audio"]

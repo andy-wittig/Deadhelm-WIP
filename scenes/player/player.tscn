@@ -1038,5 +1038,10 @@ libraries = {
 wait_time = 120.0
 autostart = true
 
+[node name="FloorRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 1)
+collision_mask = 16
+hit_from_inside = true
+
 [connection signal="animation_finished" from="UpperSprite" to="." method="_on_upper_sprite_animation_finished"]
 [connection signal="timeout" from="AutosaveTimer" to="." method="_on_autosave_timer_timeout"]

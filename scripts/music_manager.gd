@@ -1,42 +1,52 @@
 extends Node
 
 var random := RandomNumberGenerator.new()
+var credits_active := false
 
 @onready var music_selection = {
-	"grasslands_track_1" : load("res://assets/music/grasslands_track_1.mp3"),
-	"grasslands_track_2" : load("res://assets/music/grasslands_track_2.mp3"),
-	"desert_track_1" : load("res://assets/music/desert_track.mp3"),
-	"desert_track_2" : load("res://assets/music/desert_track_2.mp3"),
-	"cave_track_1" : load("res://assets/music/cave_track.mp3"),
-	"title_screen_track" : load("res://assets/music/title_screen.mp3"),
+	"grasslands_track_1" : load("res://assets/music/never-ending.wav"),
+	"grasslands_track_2" : load("res://assets/music/plains.mp3"),
+	"grasslands_track_3" : load("res://assets/music/glorious_sunrise.mp3"),
+	"desert_track_1" : load("res://assets/music/desert_trials.mp3"),
+	"desert_track_2" : load("res://assets/music/factory.wav"),
+	"cave_track_1" : load("res://assets/music/enter_deeper.mp3"),
+	"title_screen_track" : load("res://assets/music/hopeful_awakening.wav"),
+	"credits_track" : load("res://assets/music/credits.wav"),
+	"bonus_track" : load("res://assets/music/bonus_track.mp3"),
 }
 
 @onready var music_player = $MusicPlayer
+
+func credits_opened(active : bool):
+	credits_active = active
 
 func _process(delta):
 	if (GameManager.started_game):
 		match GameManager.current_level:
 			"level_grasslands_1":
-				if (music_player.get_stream() != music_selection["grasslands_track_2"]):
-					music_player.set_stream(music_selection["grasslands_track_2"])
-			"level_grasslands_2":
 				if (music_player.get_stream() != music_selection["grasslands_track_1"]):
 					music_player.set_stream(music_selection["grasslands_track_1"])
+			"level_grasslands_2":
+				if (music_player.get_stream() != music_selection["grasslands_track_2"]):
+					music_player.set_stream(music_selection["grasslands_track_2"])
 			"level_grasslands_3":
-				if (music_player.get_stream() != music_selection["desert_track_1"]):
-					music_player.set_stream(music_selection["desert_track_1"])		
+				if (music_player.get_stream() != music_selection["grasslands_track_3"]):
+					music_player.set_stream(music_selection["grasslands_track_3"])		
 			"level_desert_1":
+				if (music_player.get_stream() != music_selection["desert_track_1"]):
+					music_player.set_stream(music_selection["desert_track_1"])
+			"level_desert_2":
 				if (music_player.get_stream() != music_selection["desert_track_2"]):
 					music_player.set_stream(music_selection["desert_track_2"])
 			"level_cave_1":
 				if (music_player.get_stream() != music_selection["cave_track_1"]):
 					music_player.set_stream(music_selection["cave_track_1"])
-			"level_desert_2":
-				if (music_player.get_stream() != music_selection["desert_track_2"]):
-					music_player.set_stream(music_selection["desert_track_2"])
-	else:
+	elif (!credits_active):
 		if (music_player.get_stream() != music_selection["title_screen_track"]):
 			music_player.set_stream(music_selection["title_screen_track"])
+	else:
+		if (music_player.get_stream() != music_selection["credits_track"]):
+			music_player.set_stream(music_selection["credits_track"])
 		
 	if (!music_player.playing):
 		music_player.play()

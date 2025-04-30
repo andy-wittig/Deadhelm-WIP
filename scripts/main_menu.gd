@@ -153,6 +153,7 @@ func _on_stats_button_pressed():
 	
 func _on_credits_button_pressed():
 	current_menu = menu.CREDITS
+	get_tree().call_group("open_credits", "credits_opened", true)
 	menu_started = false
 	
 func _on_quit_button_pressed():
