@@ -5,6 +5,8 @@ extends Area2D
 @onready var boom_shader = $BackBufferCopy/BoomShader
 @onready var radio_station_audio = $RadioStationAudio
 
+var radio_active := false
+
 func _process(delta):
 	radio_sprite.material.set_shader_parameter("enabled", false)
 	for body in get_overlapping_bodies():
@@ -14,9 +16,7 @@ func _process(delta):
 				radio_activate()
 				
 func radio_activate():
-	music_particles.emitting = !music_particles.emitting
-	boom_shader.visible = !boom_shader.visible
-	if (radio_station_audio.playing):
-		radio_station_audio.stop()
-	else:
-		radio_station_audio.play()
+	radio_active = !radio_active
+	music_particles.emitting = radio_active
+	boom_shader.visible = radio_active
+	get_tree().call_group("audio_control", "radio_opened", radio_active)

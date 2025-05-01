@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://byxhh826s58u0"]
+[gd_scene load_steps=17 format=3 uid="uid://byxhh826s58u0"]
 
 [ext_resource type="Texture2D" uid="uid://byoptr1x3tx8e" path="res://assets/sprites/level_objects/radio.png" id="1_m3sl1"]
 [ext_resource type="Script" path="res://scripts/radio.gd" id="1_w17rl"]
 [ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="1_wdyif"]
 [ext_resource type="Texture2D" uid="uid://c5nhuyio2u7e2" path="res://assets/sprites/vfx/music_effect.png" id="2_2pw6t"]
 [ext_resource type="Shader" path="res://shaders/screen_distort.gdshader" id="3_ljgki"]
-[ext_resource type="AudioStream" uid="uid://dpfrd0slgy5fk" path="res://assets/music/radio_station.mp3" id="6_2t8tg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cosr1"]
 size = Vector2(16, 8)
@@ -132,7 +131,3 @@ libraries = {
 "": SubResource("AnimationLibrary_3w4qn")
 }
 autoplay = "speakers"
-
-[node name="RadioStationAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_2t8tg")
-bus = &"SFX"

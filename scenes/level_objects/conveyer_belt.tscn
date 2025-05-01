@@ -64,11 +64,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 8.0
+"speed": 6.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3ckq"]
-size = Vector2(16, 6)
+size = Vector2(16, 9)
 
 [node name="conveyer_belt" type="StaticBody2D" groups=["conveyer_belt"]]
 collision_layer = 16
@@ -79,8 +79,8 @@ script = ExtResource("1_ioamw")
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_f504w")
 autoplay = "default"
-frame_progress = 0.548396
+frame_progress = 0.080233
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -4.5)
 shape = SubResource("RectangleShape2D_m3ckq")

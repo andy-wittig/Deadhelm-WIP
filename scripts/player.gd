@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #Physics Constants
-const SPEED := 70.0
+const SPEED := 65.0
 const GRAVITY := 940
 const EXTRA_GRAVITY := 200.0
 const CLIMB_SPEED := 75.0
@@ -383,14 +383,14 @@ func _physics_process(delta):
 				
 			#Change Animation States
 			if is_on_floor():
-				if (velocity.x == 0):
-					change_animation_state(animation_type.IDLE)
-					$FootstepAudio/AudioFade.play("fade_out")
-				else:
+				if (direction != 0):
 					change_animation_state(animation_type.RUN)
 					if (!footstep_audio.is_playing()):
 						footstep_audio.play()
 						$FootstepAudio/AudioFade.play("fade_in")
+				else:
+					change_animation_state(animation_type.IDLE)
+					$FootstepAudio/AudioFade.play("fade_out")
 			else:
 				footstep_audio.stop()
 				if (velocity.y < 0):

@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://ced13t6gundxr" path="res://scenes/player/spells/tome.tscn" id="23_cni07"]
 [ext_resource type="PackedScene" uid="uid://dv7ii30ng3m2" path="res://scenes/level_objects/rock_wall.tscn" id="24_dqexj"]
 [ext_resource type="PackedScene" uid="uid://dunbwsblhvliw" path="res://scenes/level_objects/totem.tscn" id="25_pbkwx"]
-[ext_resource type="PackedScene" uid="uid://dmdbtyan4m2lm" path="res://scenes/level_objects/bunny.tscn" id="26_5dbhu"]
+[ext_resource type="PackedScene" uid="uid://bsqcsoccs7aom" path="res://scenes/level_objects/bunny.tscn" id="26_5dbhu"]
 [ext_resource type="PackedScene" uid="uid://dr0q1k18gv2n5" path="res://scenes/level_objects/lamp_post.tscn" id="27_0qcml"]
 
 [sub_resource type="Gradient" id="Gradient_hcj03"]

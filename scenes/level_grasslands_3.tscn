@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dis3wy3nmnpfo"]
+[gd_scene load_steps=49 format=3 uid="uid://dis3wy3nmnpfo"]
 
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_ybw4u"]
 [ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_s26fj"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://dr0q1k18gv2n5" path="res://scenes/level_objects/lamp_post.tscn" id="34_54cty"]
 [ext_resource type="PackedScene" uid="uid://bivvhhgkgcqec" path="res://scenes/level_objects/breakable_crate.tscn" id="35_alkns"]
 [ext_resource type="PackedScene" uid="uid://cj1nwgg1gcdkv" path="res://scenes/level_objects/crow.tscn" id="36_mse6i"]
+[ext_resource type="PackedScene" uid="uid://dt5rtbaccytl0" path="res://scenes/npcs/goblin_miner.tscn" id="37_8u1rn"]
 
 [sub_resource type="Gradient" id="Gradient_n6nku"]
 colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
@@ -588,3 +589,6 @@ button_hint = "climb"
 
 [node name="lantern2" parent="." instance=ExtResource("15_s6cwr")]
 position = Vector2(1272, -416)
+
+[node name="goblin_miner" parent="." instance=ExtResource("37_8u1rn")]
+position = Vector2(992, -720)

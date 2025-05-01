@@ -11,5 +11,5 @@ func menu_opened():
 
 func _on_back_button_pressed():
 	menu_started = false
-	get_tree().call_group("open_credits", "credits_opened", false)
+	get_tree().call_group("audio_control", "credits_opened", false)
 	menu_layer.return_to_prev_menu()
