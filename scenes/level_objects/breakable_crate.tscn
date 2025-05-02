@@ -18,10 +18,11 @@ particles_anim_loop = false
 offsets = PackedFloat32Array(0.75, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="breakable_crate" type="StaticBody2D" groups=["enemies"]]
+[node name="breakable_crate" type="StaticBody2D" node_paths=PackedStringArray("breaking_particles") groups=["enemies"]]
 collision_layer = 24
 collision_mask = 0
 script = ExtResource("1_631w3")
+breaking_particles = NodePath("WoodParticles")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_c0e4x")
@@ -33,7 +34,7 @@ shape = SubResource("RectangleShape2D_1xpxr")
 z_index = 1
 position = Vector2(0, -10)
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="WoodParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_h8xf4")
 emitting = false
 amount = 4

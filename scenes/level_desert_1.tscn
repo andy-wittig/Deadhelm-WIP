@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dyutn277xh3h5"]
+[gd_scene load_steps=54 format=3 uid="uid://dyutn277xh3h5"]
 
 [ext_resource type="Texture2D" uid="uid://ubox7asqsalj" path="res://assets/sprites/UI/dunes background.png" id="2_im1ct"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_ykttf"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://dr0q1k18gv2n5" path="res://scenes/level_objects/lamp_post.tscn" id="33_5pbw3"]
 [ext_resource type="PackedScene" uid="uid://7n3ccjwx0hrh" path="res://scenes/level_objects/cat.tscn" id="34_2mc3j"]
 [ext_resource type="PackedScene" uid="uid://bivvhhgkgcqec" path="res://scenes/level_objects/breakable_crate.tscn" id="34_r4464"]
+[ext_resource type="PackedScene" uid="uid://lycbb0pxjlri" path="res://scenes/level_objects/breakable_vase.tscn" id="35_vbd56"]
 
 [sub_resource type="Gradient" id="Gradient_so2so"]
 colors = PackedColorArray(0.913725, 0.521569, 0.215686, 1, 0.968627, 0.952941, 0.717647, 1)
@@ -687,3 +688,6 @@ scale = Vector2(1, 3)
 
 [node name="cat" parent="." instance=ExtResource("34_2mc3j")]
 position = Vector2(568, -48)
+
+[node name="breakable_vase" parent="." instance=ExtResource("35_vbd56")]
+position = Vector2(792, -104)

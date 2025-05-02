@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://lycbb0pxjlri"]
+
+[ext_resource type="Script" path="res://scripts/breakable_crate.gd" id="1_gjn0l"]
+[ext_resource type="Texture2D" uid="uid://b7ct413s5g7le" path="res://assets/sprites/level_objects/breakable_vase.png" id="1_k6fya"]
+[ext_resource type="PackedScene" uid="uid://honmn2s1smfo" path="res://scenes/enemies/enemy_healthbar.tscn" id="2_vrf3q"]
+[ext_resource type="Texture2D" uid="uid://c57j6rcpyf5y7" path="res://assets/sprites/vfx/vase_pieces.png" id="4_icq5g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_elpmm"]
+radius = 8.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c1xgt"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_clvt1"]
+offsets = PackedFloat32Array(0.75, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="breakable_vase" type="StaticBody2D" node_paths=PackedStringArray("breaking_particles") groups=["enemies"]]
+collision_layer = 24
+collision_mask = 0
+script = ExtResource("1_gjn0l")
+enemy_health = 10
+breaking_particles = NodePath("VaseParticles")
+can_drop_coins = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_k6fya")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_elpmm")
+
+[node name="enemy_healthbar" parent="." instance=ExtResource("2_vrf3q")]
+position = Vector2(0, -10)
+
+[node name="VaseParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_c1xgt")
+emitting = false
+amount = 4
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.5
+randomness = 0.5
+texture = ExtResource("4_icq5g")
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 45.0
+initial_velocity_max = 45.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+angle_max = 360.0
+color_ramp = SubResource("Gradient_clvt1")
+anim_offset_max = 1.0

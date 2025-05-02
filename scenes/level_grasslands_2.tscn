@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dg6fah6kis3e"]
+[gd_scene load_steps=22 format=3 uid="uid://dg6fah6kis3e"]
 
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_3vpgq"]
 [ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_nwsdv"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cg0s11w7gjjxq" path="res://scenes/level_objects/zip_line.tscn" id="14_b03pk"]
 [ext_resource type="PackedScene" uid="uid://mk8x6lo0ft6t" path="res://scenes/level_objects/chest.tscn" id="16_n7w4v"]
 [ext_resource type="PackedScene" uid="uid://df81gmo7ppw8s" path="res://scenes/level_objects/dialogue_area.tscn" id="17_ctpbg"]
+[ext_resource type="PackedScene" uid="uid://lycbb0pxjlri" path="res://scenes/level_objects/breakable_vase.tscn" id="18_5aucm"]
 [ext_resource type="PackedScene" uid="uid://clj453y1ct468" path="res://scenes/level_objects/gremlin_shop.tscn" id="18_w4tnm"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="18_xe535"]
 
@@ -198,3 +199,6 @@ position = Vector2(344, -544)
 position = Vector2(360, -280)
 message = "Press {button} to open your journal."
 button_hint = "open_journal"
+
+[node name="breakable_vase" parent="." instance=ExtResource("18_5aucm")]
+position = Vector2(576, -528)
