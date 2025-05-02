@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dljiyqmwd2lvy"]
+[gd_scene load_steps=12 format=3 uid="uid://dljiyqmwd2lvy"]
 
 [ext_resource type="Script" path="res://scripts/runtime_stop.gd" id="1_p4of7"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="1_rj1b4"]
 [ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="2_eii5r"]
+[ext_resource type="Texture2D" uid="uid://6fn0p5vwswhf" path="res://assets/sprites/UI/sky_background.png" id="3_6khqf"]
 [ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="3_caiov"]
 [ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="4_w6d2b"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="5_xna5m"]
@@ -10,13 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://df81gmo7ppw8s" path="res://scenes/level_objects/dialogue_area.tscn" id="9_xtj7i"]
 [ext_resource type="PackedScene" uid="uid://cqbypq7pvrrg7" path="res://scenes/level_objects/platform.tscn" id="10_75t81"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="13_j2cfm"]
-
-[sub_resource type="Gradient" id="Gradient_s5sk3"]
-colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xkrum"]
-gradient = SubResource("Gradient_s5sk3")
-fill_to = Vector2(0, 1)
 
 [node name="level_demo_complete" type="Node2D"]
 script = ExtResource("1_p4of7")
@@ -32,7 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_xkrum")
+texture = ExtResource("3_6khqf")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
 layer = -99

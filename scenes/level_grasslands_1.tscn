@@ -1,5 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://13lvf0sk6qwx"]
+[gd_scene load_steps=32 format=3 uid="uid://13lvf0sk6qwx"]
 
+[ext_resource type="Texture2D" uid="uid://6fn0p5vwswhf" path="res://assets/sprites/UI/sky_background.png" id="1_sc6bb"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_mhvn2"]
 [ext_resource type="PackedScene" uid="uid://b5rai463xckyn" path="res://scenes/player/player.tscn" id="3_lefxa"]
 [ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="4_6001q"]
@@ -26,13 +27,6 @@
 [ext_resource type="PackedScene" uid="uid://dunbwsblhvliw" path="res://scenes/level_objects/totem.tscn" id="25_pbkwx"]
 [ext_resource type="PackedScene" uid="uid://bsqcsoccs7aom" path="res://scenes/level_objects/bunny.tscn" id="26_5dbhu"]
 [ext_resource type="PackedScene" uid="uid://dr0q1k18gv2n5" path="res://scenes/level_objects/lamp_post.tscn" id="27_0qcml"]
-
-[sub_resource type="Gradient" id="Gradient_hcj03"]
-colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_a24ds"]
-gradient = SubResource("Gradient_hcj03")
-fill_to = Vector2(0, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xu020"]
 
@@ -90,7 +84,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_a24ds")
+texture = ExtResource("1_sc6bb")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
 layer = -99

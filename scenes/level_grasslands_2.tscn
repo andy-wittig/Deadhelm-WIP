@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://dg6fah6kis3e"]
+[gd_scene load_steps=21 format=3 uid="uid://dg6fah6kis3e"]
 
+[ext_resource type="Texture2D" uid="uid://6fn0p5vwswhf" path="res://assets/sprites/UI/sky_background.png" id="1_m4qmr"]
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_3vpgq"]
 [ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_nwsdv"]
 [ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="4_bwjwf"]
@@ -18,13 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://lycbb0pxjlri" path="res://scenes/level_objects/breakable_vase.tscn" id="18_5aucm"]
 [ext_resource type="PackedScene" uid="uid://clj453y1ct468" path="res://scenes/level_objects/gremlin_shop.tscn" id="18_w4tnm"]
 [ext_resource type="PackedScene" uid="uid://880fpfrmnvew" path="res://scenes/level_objects/ladder.tscn" id="18_xe535"]
-
-[sub_resource type="Gradient" id="Gradient_s5sk3"]
-colors = PackedColorArray(0.8, 0.6, 1, 1, 1, 0.635294, 0.67451, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xkrum"]
-gradient = SubResource("Gradient_s5sk3")
-fill_to = Vector2(0, 1)
 
 [sub_resource type="Curve2D" id="Curve2D_ln87x"]
 _data = {
@@ -48,7 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_xkrum")
+texture = ExtResource("1_m4qmr")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Background"]
 layer = -99
