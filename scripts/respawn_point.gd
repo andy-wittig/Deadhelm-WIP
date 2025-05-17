@@ -6,6 +6,8 @@ extends Area2D
 @onready var respawn_sprite = $RespawnSprite
 @onready var soul_label = $SoulLabel
 @onready var shrine_chime_audio = $ShrineChimeAudio
+@onready var glow_sprite = $GlowSprite
+@onready var orb_light = $OrbLight
 
 var souls_input := 0
 var respawn_activated := false
@@ -13,6 +15,8 @@ var respawn_activated := false
 func _process(delta):
 	if (souls_input >= soul_cost):
 		$OrbSprite.texture = load("res://assets/sprites/level_objects/spawner orb.png")
+		glow_sprite.visible = true
+		orb_light.visible = true
 		spawn_point.global_position = global_position
 		respawn_activated = true
 	else:

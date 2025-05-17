@@ -64,8 +64,10 @@ func _ready():
 func _process(delta):
 	if (currently_selected):
 		select_texture.visible = true
+		get_parent().position.y = -2
 	else:
 		select_texture.visible = false
+		get_parent().position.y = 0
 			
 	cooldown_progress.value = cooldown_timer.time_left
 	

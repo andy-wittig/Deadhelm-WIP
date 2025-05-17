@@ -22,7 +22,7 @@ func _process(delta):
 	position += direction * SPEED * delta
 	
 	for body in get_overlapping_bodies():
-		if (body.is_in_group("enemies")):
+		if (body.is_in_group("enemies") && !body.is_in_group("breakable")):
 			body.apply_knockback(direction, HAND_FORCE)
 
 func destroy_self():

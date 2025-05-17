@@ -18,8 +18,8 @@ particles_anim_loop = false
 offsets = PackedFloat32Array(0.75, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="breakable_vase" type="StaticBody2D" node_paths=PackedStringArray("breaking_particles") groups=["enemies"]]
-collision_layer = 24
+[node name="breakable_vase" type="StaticBody2D" node_paths=PackedStringArray("breaking_particles") groups=["breakable", "enemies"]]
+collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_gjn0l")
 enemy_health = 10
