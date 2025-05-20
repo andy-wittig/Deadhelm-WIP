@@ -6,6 +6,7 @@ enum menu {
 	CREDITS,
 	INGAME,
 	JOURNAL,
+	TEXTBOX,
 	STATS,
 	HIDDEN,
 	GAMEOVER,
@@ -20,6 +21,7 @@ var menu_started := false
 	"credits_menu" : $MenuControl/credits_menu,
 	"in_game_menu" : $MenuControl/in_game_menu,
 	"journal" : $MenuControl/JournalMenu,
+	"textbox" : $MenuControl/textboxMenu,
 	"stats_menu" : $MenuControl/stats_menu,
 	"gameover_menu" : $MenuControl/gameover_menu,
 }
@@ -38,12 +40,13 @@ func _process(_delta):
 			if (current_menu == menu.HIDDEN):
 				current_menu = menu.INGAME
 			elif (current_menu == menu.INGAME || current_menu == menu.SETTINGS 
-			|| current_menu == menu.JOURNAL || current_menu == menu.STATS):
+			|| current_menu == menu.JOURNAL || current_menu == menu.STATS || current_menu == menu.TEXTBOX):
 				current_menu = menu.HIDDEN
 				menu_scenes["in_game_menu"].menu_started = false
 				menu_scenes["settings_menu"].menu_started = false
 				menu_scenes["journal"].menu_started = false
 				menu_scenes["stats_menu"].menu_started = false
+				menu_scenes["textbox"].menu_started = false
 				
 		if Input.is_action_just_pressed("open_journal"):
 			if (current_menu == menu.HIDDEN):
@@ -106,6 +109,14 @@ func _process(_delta):
 					menu_scenes[scene].visible = true
 					menu_scenes[scene].menu_opened()
 					GameManager.access_ingame_menu = false
+		menu.TEXTBOX:
+			for scene in menu_scenes:
+				if (scene != "textbox"):
+					menu_scenes[scene].visible = false
+				else:
+					menu_scenes[scene].visible = true
+					menu_scenes[scene].menu_opened()
+					GameManager.access_ingame_menu = false
 		menu.HIDDEN:
 			for scene in menu_scenes:
 					menu_scenes[scene].visible = false
@@ -135,6 +146,14 @@ func return_to_prev_menu():
 			current_menu = menu.HIDDEN
 	else:
 		current_menu = menu.MAIN
+		
+func open_textbox(file_path : String):
+	if (current_menu == menu.HIDDEN):
+		menu_scenes["textbox"].start_textbox(file_path)
+		current_menu = menu.TEXTBOX
+	elif (current_menu == menu.TEXTBOX):
+		menu_scenes["textbox"].stop_textbox()
+		current_menu = menu.HIDDEN
 
 func _on_start_button_pressed():
 	confirm_container.visible = !confirm_container.visible

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b00u5431eiqqh"]
+[gd_scene load_steps=24 format=3 uid="uid://b00u5431eiqqh"]
 
 [ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_bo8sg"]
 [ext_resource type="TileSet" uid="uid://uu7b6cnjtk3k" path="res://assets/level_tileset.tres" id="2_h72fo"]
@@ -17,7 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://dnxbmu551ll6d" path="res://scenes/level_objects/push_totem.tscn" id="17_fkw7t"]
 [ext_resource type="PackedScene" uid="uid://bvgm67ftgfnlp" path="res://scenes/level_objects/stone_spike.tscn" id="18_ymrgt"]
 [ext_resource type="PackedScene" uid="uid://bsqcsoccs7aom" path="res://scenes/level_objects/bunny.tscn" id="19_37njn"]
+[ext_resource type="PackedScene" uid="uid://dfeqwxyvrqwld" path="res://scenes/level_village.tscn" id="20_85jvt"]
 [ext_resource type="PackedScene" uid="uid://7n3ccjwx0hrh" path="res://scenes/level_objects/cat.tscn" id="20_rdxb1"]
+[ext_resource type="PackedScene" uid="uid://dt5rtbaccytl0" path="res://scenes/npcs/goblin_miner.tscn" id="21_5v1b4"]
 [ext_resource type="PackedScene" uid="uid://bnwmrop4pg5k6" path="res://scenes/level_objects/conveyer_belt.tscn" id="21_cs101"]
 
 [sub_resource type="Gradient" id="Gradient_s5sk3"]
@@ -193,12 +195,6 @@ position = Vector2(360, -192)
 [node name="stone_spike7" parent="." instance=ExtResource("18_ymrgt")]
 position = Vector2(328, -192)
 
-[node name="push_totem3" parent="." instance=ExtResource("17_fkw7t")]
-position = Vector2(384, -32)
-
-[node name="push_totem4" parent="." instance=ExtResource("17_fkw7t")]
-position = Vector2(408, -32)
-
 [node name="bunny" parent="." instance=ExtResource("19_37njn")]
 position = Vector2(376, -160)
 
@@ -268,3 +264,10 @@ direction = -1
 [node name="conveyer_belt16" parent="." instance=ExtResource("21_cs101")]
 position = Vector2(680, -80)
 direction = -1
+
+[node name="portal_gate7" parent="." instance=ExtResource("7_lwigu")]
+position = Vector2(416, -32)
+next_level = ExtResource("20_85jvt")
+
+[node name="goblin_miner" parent="." instance=ExtResource("21_5v1b4")]
+position = Vector2(384, -32)

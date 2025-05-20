@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://dliasd852lraf"]
+
+[ext_resource type="Texture2D" uid="uid://6fn0p5vwswhf" path="res://assets/sprites/UI/sky_background.png" id="1_tywpb"]
+[ext_resource type="Texture2D" uid="uid://casg4w1omge0r" path="res://assets/sprites/UI/mountains background.png" id="2_gn3na"]
+[ext_resource type="Script" path="res://scripts/cloud_scrolling.gd" id="3_pgew2"]
+[ext_resource type="Texture2D" uid="uid://drencqjh7hep" path="res://assets/sprites/UI/small_clouds_background.png" id="4_govgq"]
+[ext_resource type="Texture2D" uid="uid://b16gxxs30hhgl" path="res://assets/sprites/UI/large_clouds_background.png" id="5_r82qx"]
+
+[node name="Background" type="CanvasLayer"]
+layer = -100
+
+[node name="SkyGradient" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_tywpb")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -99
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxMountain" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_offset = Vector2(0, -108)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Mountains" type="TextureRect" parent="ParallaxBackground/ParallaxMountain"]
+modulate = Color(1, 1, 1, 0.784314)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("2_gn3na")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="ParallaxSmallClouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(0, -216)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_pgew2")
+scroll_speed = 8.0
+
+[node name="SmallClouds" type="TextureRect" parent="ParallaxBackground/ParallaxSmallClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("4_govgq")
+stretch_mode = 1
+
+[node name="ParallaxLargeClouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1.2, 1.2)
+motion_mirroring = Vector2(1920, 1080)
+script = ExtResource("3_pgew2")
+scroll_speed = 4.0
+
+[node name="LargeClouds" type="TextureRect" parent="ParallaxBackground/ParallaxLargeClouds"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(5, 5)
+texture = ExtResource("5_r82qx")
+stretch_mode = 1

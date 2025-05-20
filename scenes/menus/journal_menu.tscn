@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://btplmre76e21a"]
+[gd_scene load_steps=11 format=3 uid="uid://btplmre76e21a"]
 
 [ext_resource type="Script" path="res://scripts/journal_menu.gd" id="1_du11q"]
 [ext_resource type="Texture2D" uid="uid://dlgm2y2w4sr2k" path="res://assets/sprites/UI/player_information/journal.png" id="1_rafl2"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_5nlnu"]
 [ext_resource type="Texture2D" uid="uid://bus5i2amk0km5" path="res://assets/sprites/UI/player_information/next_arrow.png" id="5_cc30i"]
 [ext_resource type="Texture2D" uid="uid://qtlmyb4phdrd" path="res://assets/sprites/UI/player_information/next_arrow_pressed.png" id="6_t05xq"]
+[ext_resource type="Texture2D" uid="uid://stp1y2xpcifu" path="res://assets/sprites/UI/player_information/next_arrow_focused.png" id="7_ofq2s"]
 
 [sub_resource type="Animation" id="Animation_8kbhj"]
 length = 0.001
@@ -31,12 +32,12 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_nbl4c"]
 resource_name = "fade_in"
-length = 0.6
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,7 +45,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, -96), Vector2(0, 0)]
@@ -56,7 +57,7 @@ tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -69,13 +70,10 @@ _data = {
 }
 
 [node name="JournalMenu" type="Control" groups=["unlock_enemy"]]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 256.0
-offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_du11q")
@@ -180,6 +178,7 @@ offset_bottom = 688.0
 scale = Vector2(6, 6)
 texture_normal = ExtResource("5_cc30i")
 texture_pressed = ExtResource("6_t05xq")
+texture_hover = ExtResource("7_ofq2s")
 flip_h = true
 
 [node name="NextPageButton" type="TextureButton" parent="."]
@@ -191,6 +190,7 @@ offset_bottom = 688.0
 scale = Vector2(6, 6)
 texture_normal = ExtResource("5_cc30i")
 texture_pressed = ExtResource("6_t05xq")
+texture_hover = ExtResource("7_ofq2s")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
