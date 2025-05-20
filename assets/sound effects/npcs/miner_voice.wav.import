@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cop6qgnt8sl2i"
+path="res://.godot/imported/miner_voice.wav-8b87582ab67c233f89b802717ec989e3.sample"
+
+[deps]
+
+source_file="res://assets/sound effects/npcs/miner_voice.wav"
+dest_files=["res://.godot/imported/miner_voice.wav-8b87582ab67c233f89b802717ec989e3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -41,12 +41,14 @@ func _process(_delta):
 				current_menu = menu.INGAME
 			elif (current_menu == menu.INGAME || current_menu == menu.SETTINGS 
 			|| current_menu == menu.JOURNAL || current_menu == menu.STATS || current_menu == menu.TEXTBOX):
-				current_menu = menu.HIDDEN
 				menu_scenes["in_game_menu"].menu_started = false
 				menu_scenes["settings_menu"].menu_started = false
 				menu_scenes["journal"].menu_started = false
 				menu_scenes["stats_menu"].menu_started = false
 				menu_scenes["textbox"].menu_started = false
+				
+				if (current_menu == menu.TEXTBOX) : menu_scenes["textbox"].stop_textbox()
+				current_menu = menu.HIDDEN
 				
 		if Input.is_action_just_pressed("open_journal"):
 			if (current_menu == menu.HIDDEN):
@@ -136,14 +138,12 @@ func menu_opened():
 	
 func return_to_prev_menu():
 	if (GameManager.started_game):
-		if (current_menu == menu.INGAME):
+		if (current_menu == menu.INGAME || current_menu == menu.JOURNAL || current_menu == menu.TEXTBOX):
 			current_menu = menu.HIDDEN
 		elif (current_menu == menu.SETTINGS):
 			current_menu = menu.INGAME
 		elif (current_menu == menu.STATS):
 			current_menu = menu.INGAME
-		elif (current_menu == menu.JOURNAL):
-			current_menu = menu.HIDDEN
 	else:
 		current_menu = menu.MAIN
 		

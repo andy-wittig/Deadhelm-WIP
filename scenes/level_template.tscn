@@ -271,3 +271,4 @@ next_level = ExtResource("20_85jvt")
 
 [node name="goblin_miner" parent="." instance=ExtResource("21_5v1b4")]
 position = Vector2(384, -32)
+npc_text_path = "res://scenes/npcs/miner_text.txt"

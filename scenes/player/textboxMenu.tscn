@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bffl0solbswui"]
+[gd_scene load_steps=11 format=3 uid="uid://bffl0solbswui"]
 
 [ext_resource type="Script" path="res://scripts/textbox.gd" id="1_upk8q"]
 [ext_resource type="Texture2D" uid="uid://b8xrml31othp6" path="res://assets/sprites/UI/player_information/textbox.png" id="2_yowuh"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://qtlmyb4phdrd" path="res://assets/sprites/UI/player_information/next_arrow_pressed.png" id="4_wj8ov"]
 [ext_resource type="Texture2D" uid="uid://stp1y2xpcifu" path="res://assets/sprites/UI/player_information/next_arrow_focused.png" id="5_6y8y8"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="6_cdpwl"]
+[ext_resource type="Texture2D" uid="uid://bucs4fcjtw1tn" path="res://assets/sprites/UI/player_information/exit_arrow.png" id="8_3r0x2"]
+[ext_resource type="Texture2D" uid="uid://bbly7o2yjhasf" path="res://assets/sprites/UI/player_information/exit_arrow_pressed.png" id="9_4jnog"]
+[ext_resource type="Texture2D" uid="uid://bdgggw3tu24g7" path="res://assets/sprites/UI/player_information/exit_arrow_focused.png" id="10_gt6lt"]
 
 [node name="textboxMenu" type="Control"]
 layout_mode = 3
@@ -39,7 +42,7 @@ position = Vector2(392, 920)
 scale = Vector2(4, 4)
 texture = ExtResource("3_yatjw")
 
-[node name="Text" type="Label" parent="."]
+[node name="TextLabel" type="Label" parent="."]
 layout_mode = 0
 offset_left = 516.0
 offset_top = 792.0
@@ -48,7 +51,7 @@ offset_bottom = 1048.0
 theme_override_colors/font_color = Color(0.0627451, 0.0705882, 0.109804, 1)
 theme_override_fonts/font = ExtResource("6_cdpwl")
 theme_override_font_sizes/font_size = 24
-text = "Wow this is all the text that will describe a character and their detailed adventures!"
+text = "Nothing to see here..."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -64,3 +67,17 @@ scale = Vector2(4, 4)
 texture_normal = ExtResource("3_igtwy")
 texture_pressed = ExtResource("4_wj8ov")
 texture_hover = ExtResource("5_6y8y8")
+
+[node name="ExitButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1476.0
+offset_top = 776.0
+offset_right = 1492.0
+offset_bottom = 792.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("8_3r0x2")
+texture_pressed = ExtResource("9_4jnog")
+texture_hover = ExtResource("10_gt6lt")
+
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
