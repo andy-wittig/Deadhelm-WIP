@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://bffl0solbswui"]
+[gd_scene load_steps=12 format=3 uid="uid://bffl0solbswui"]
 
 [ext_resource type="Script" path="res://scripts/textbox.gd" id="1_upk8q"]
 [ext_resource type="Texture2D" uid="uid://b8xrml31othp6" path="res://assets/sprites/UI/player_information/textbox.png" id="2_yowuh"]
+[ext_resource type="Texture2D" uid="uid://c062sxbodkrxu" path="res://assets/sprites/npcs/player_headshot.png" id="3_0emos"]
 [ext_resource type="Texture2D" uid="uid://bus5i2amk0km5" path="res://assets/sprites/UI/player_information/next_arrow.png" id="3_igtwy"]
-[ext_resource type="Texture2D" uid="uid://dkk7g7msbej1y" path="res://assets/sprites/npcs/miner_headshot.png" id="3_yatjw"]
 [ext_resource type="Texture2D" uid="uid://qtlmyb4phdrd" path="res://assets/sprites/UI/player_information/next_arrow_pressed.png" id="4_wj8ov"]
 [ext_resource type="Texture2D" uid="uid://stp1y2xpcifu" path="res://assets/sprites/UI/player_information/next_arrow_focused.png" id="5_6y8y8"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="6_cdpwl"]
 [ext_resource type="Texture2D" uid="uid://bucs4fcjtw1tn" path="res://assets/sprites/UI/player_information/exit_arrow.png" id="8_3r0x2"]
 [ext_resource type="Texture2D" uid="uid://bbly7o2yjhasf" path="res://assets/sprites/UI/player_information/exit_arrow_pressed.png" id="9_4jnog"]
 [ext_resource type="Texture2D" uid="uid://bdgggw3tu24g7" path="res://assets/sprites/UI/player_information/exit_arrow_focused.png" id="10_gt6lt"]
+[ext_resource type="AudioStream" uid="uid://bpbpa8ox1nn8e" path="res://assets/sound effects/npcs/miner_voice.mp3" id="11_83e5o"]
 
 [node name="textboxMenu" type="Control"]
 layout_mode = 3
@@ -40,7 +41,7 @@ texture = ExtResource("2_yowuh")
 [node name="HeadshotSprite" type="Sprite2D" parent="."]
 position = Vector2(392, 920)
 scale = Vector2(4, 4)
-texture = ExtResource("3_yatjw")
+texture = ExtResource("3_0emos")
 
 [node name="TextLabel" type="Label" parent="."]
 layout_mode = 0
@@ -78,6 +79,11 @@ scale = Vector2(4, 4)
 texture_normal = ExtResource("8_3r0x2")
 texture_pressed = ExtResource("9_4jnog")
 texture_hover = ExtResource("10_gt6lt")
+
+[node name="npcVoice" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_83e5o")
+volume_db = 20.0
+bus = &"SFX"
 
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

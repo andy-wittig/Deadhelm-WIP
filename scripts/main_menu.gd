@@ -147,9 +147,9 @@ func return_to_prev_menu():
 	else:
 		current_menu = menu.MAIN
 		
-func open_textbox(file_path : String):
+func open_textbox(file_path : String, headshot : Texture2D):
 	if (current_menu == menu.HIDDEN):
-		menu_scenes["textbox"].start_textbox(file_path)
+		menu_scenes["textbox"].start_textbox(file_path, headshot)
 		current_menu = menu.TEXTBOX
 	elif (current_menu == menu.TEXTBOX):
 		menu_scenes["textbox"].stop_textbox()

@@ -1,0 +1,83 @@
+[gd_scene load_steps=14 format=3 uid="uid://bilk5lx5tolcs"]
+
+[ext_resource type="Script" path="res://scripts/BaseNPC.gd" id="1_u012y"]
+[ext_resource type="Texture2D" uid="uid://cia7d3flwi15k" path="res://assets/sprites/npcs/goblin_fairy_idle_sheet.png" id="2_a33se"]
+[ext_resource type="Texture2D" uid="uid://kmhpgappb8ie" path="res://assets/sprites/npcs/fairy_headshot.png" id="2_fu2ju"]
+[ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="3_1sx76"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d5csp"]
+shader = ExtResource("3_1sx76")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/enabled = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l35b3"]
+atlas = ExtResource("2_a33se")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f6m6"]
+atlas = ExtResource("2_a33se")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qor28"]
+atlas = ExtResource("2_a33se")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwqfq"]
+atlas = ExtResource("2_a33se")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja840"]
+atlas = ExtResource("2_a33se")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50yfu"]
+atlas = ExtResource("2_a33se")
+region = Rect2(160, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h4t17"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l35b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2f6m6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qor28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwqfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja840")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50yfu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eby37"]
+size = Vector2(32, 32)
+
+[node name="goblin_fairy" type="Area2D" node_paths=PackedStringArray("NPC_sprite", "NPC_collider")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_u012y")
+NPC_sprite = NodePath("AnimatedSprite2D")
+NPC_collider = NodePath(".")
+headshot_texture = ExtResource("2_fu2ju")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_d5csp")
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_h4t17")
+autoplay = "default"
+frame_progress = 0.0519615
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_eby37")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bpbpa8ox1nn8e"
+path="res://.godot/imported/miner_voice.mp3-4cb89c6f9a0e2bc9c8295d8a6a1d0dc2.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/npcs/miner_voice.mp3"
+dest_files=["res://.godot/imported/miner_voice.mp3-4cb89c6f9a0e2bc9c8295d8a6a1d0dc2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

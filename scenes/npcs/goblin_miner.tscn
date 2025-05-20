@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dt5rtbaccytl0"]
+[gd_scene load_steps=13 format=3 uid="uid://dt5rtbaccytl0"]
 
 [ext_resource type="Texture2D" uid="uid://dabr0dfikv7vk" path="res://assets/sprites/npcs/goblin_miner_idle_sheet.png" id="1_ex7jt"]
 [ext_resource type="Script" path="res://scripts/BaseNPC.gd" id="1_vin2h"]
+[ext_resource type="Texture2D" uid="uid://dkk7g7msbej1y" path="res://assets/sprites/npcs/miner_headshot.png" id="2_kbce8"]
 [ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="2_unfrl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vy65e"]
@@ -61,6 +62,7 @@ collision_mask = 2
 script = ExtResource("1_vin2h")
 NPC_sprite = NodePath("AnimatedSprite2D")
 NPC_collider = NodePath(".")
+headshot_texture = ExtResource("2_kbce8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_vy65e")
