@@ -476,6 +476,15 @@ texture = ExtResource("1_syuli")
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+22:13/size_in_atlas = Vector2i(3, 3)
+22:13/0 = 0
+22:13/0/custom_data_0 = true
+9:11/0 = 0
+9:11/0/custom_data_0 = true
+7:8/0 = 0
+7:8/0/custom_data_0 = true
+8:8/0 = 0
+8:8/0/custom_data_0 = true
 
 [resource]
 physics_layer_0/collision_layer = 16

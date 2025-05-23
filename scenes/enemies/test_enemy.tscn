@@ -256,7 +256,7 @@ shape = SubResource("RectangleShape2D_ki1ox")
 material = SubResource("ShaderMaterial_0qumd")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_hcrcb")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="FesterCollider" type="CollisionShape2D" parent="."]

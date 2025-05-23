@@ -290,3 +290,7 @@ position = Vector2(328, -464)
 
 [node name="bunny" parent="." instance=ExtResource("26_5dbhu")]
 position = Vector2(368, -448)
+SPEED = 35.0
+ATTACK_RANGE = 16.0
+DODGE_RANGE = 8.0
+DODGE_SPEED = 45.0

@@ -10,13 +10,13 @@ class_name BaseEnemy
 @export var chase_area : Area2D
 
 #enemy movement
-@export var SPEED := 35
-@export var FRICTION_SPEED := 6
-@export var JUMP_VELOCITY := -180
-@export var KNOCK_BACK_FALLOFF := 25
-@export var ATTACK_RANGE := 16
-@export var DODGE_RANGE := 8
-@export var DODGE_SPEED := 45
+@export var SPEED := 35.0
+@export var FRICTION_SPEED := 6.0
+@export var JUMP_VELOCITY := -180.0
+@export var KNOCK_BACK_FALLOFF := 25.0
+@export var ATTACK_RANGE := 16.0
+@export var DODGE_RANGE := 8.0
+@export var DODGE_SPEED := 45.0
 @export var enemy_health : int
 @export var MAX_HEALTH : int
 
@@ -112,7 +112,7 @@ func move_enemy(delta):
 		direction = -1
 	elif left_raycast.is_colliding():
 		direction = 1
-		
+	
 	velocity.x = direction * SPEED
 	
 func chase_player(delta):

@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://c6h5mjths7ft8"]
+
+[ext_resource type="Texture2D" uid="uid://b5weaf1neb26q" path="res://assets/sprites/npcs/goblin_homeless_idle_sheet.png" id="1_fp7v1"]
+[ext_resource type="Script" path="res://scripts/BaseNPC.gd" id="1_n2d7n"]
+[ext_resource type="Texture2D" uid="uid://85w27tcuyqac" path="res://assets/sprites/npcs/homeless_headshot.png" id="2_s0m8d"]
+[ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="2_toki3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ceh3q"]
+shader = ExtResource("2_toki3")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/enabled = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0j65"]
+atlas = ExtResource("1_fp7v1")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fpdu"]
+atlas = ExtResource("1_fp7v1")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpsr5"]
+atlas = ExtResource("1_fp7v1")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty8vf"]
+atlas = ExtResource("1_fp7v1")
+region = Rect2(96, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7y8rq"]
+atlas = ExtResource("1_fp7v1")
+region = Rect2(128, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8bljv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0j65")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fpdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpsr5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty8vf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7y8rq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qq80e"]
+size = Vector2(32, 32)
+
+[node name="goblin_homeless" type="Area2D" node_paths=PackedStringArray("NPC_sprite", "NPC_collider")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_n2d7n")
+NPC_sprite = NodePath("AnimatedSprite2D")
+NPC_collider = NodePath(".")
+headshot_texture = ExtResource("2_s0m8d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ceh3q")
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_8bljv")
+autoplay = "default"
+frame_progress = 0.434367
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_qq80e")
