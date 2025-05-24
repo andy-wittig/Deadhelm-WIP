@@ -373,6 +373,8 @@ anchor_bottom = 0.5
 [node name="JournalMenu" parent="MenuLayer/MenuControl" instance=ExtResource("9_7yf88")]
 visible = false
 layout_mode = 1
+offset_top = 256.0
+offset_bottom = 256.0
 
 [node name="textboxMenu" parent="MenuLayer/MenuControl" instance=ExtResource("13_r675c")]
 visible = false

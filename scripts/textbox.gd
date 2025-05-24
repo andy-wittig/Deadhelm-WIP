@@ -58,5 +58,6 @@ func _on_next_button_pressed():
 		read_textline(text_page)
 
 func _on_exit_button_pressed():
+	get_tree().call_group("npc", "unlock_quest")
 	stop_textbox()
 	menu_layer.return_to_prev_menu()

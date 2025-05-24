@@ -5,13 +5,13 @@ var credits_active := false
 var radio_active := false
 
 @onready var music_selection = {
-	"grasslands_track_1" : load("res://assets/music/never-ending.wav"),
+	"grasslands_track_1" : load("res://assets/music/hopeful_awakening.wav"),
 	"grasslands_track_2" : load("res://assets/music/plains.mp3"),
-	"grasslands_track_3" : load("res://assets/music/glorious_sunrise.mp3"),
+	"grasslands_track_3" : load("res://assets/music/never-ending.wav"),
 	"desert_track_1" : load("res://assets/music/desert_trials.mp3"),
 	"desert_track_2" : load("res://assets/music/factory.wav"),
 	"cave_track_1" : load("res://assets/music/enter_deeper.mp3"),
-	"title_screen_track" : load("res://assets/music/hopeful_awakening.wav"),
+	"title_screen_track" : load("res://assets/music/plains.mp3"),
 	"credits_track" : load("res://assets/music/credits.wav"),
 	"bonus_track" : load("res://assets/music/bonus_track.mp3"),
 	"radio_station" : load("res://assets/music/radio_station.mp3"),

@@ -2,6 +2,8 @@ extends BaseEnemy
 
 @onready var hurt_player_area = $HurtPlayerArea
 
+var enemy_alive := true
+
 func _ready():
 	super()
 	hurt_player_area.active = false
@@ -23,3 +25,8 @@ func attack_finished():
 		hurt_player_area.active = false
 		cooldown_timer.start(cooldown_timer_wait)
 	
+func handle_enemy_death():
+	if (enemy_alive):
+		get_tree().call_group("kill_quest", "enemy_killed")
+		enemy_alive = false
+	super()

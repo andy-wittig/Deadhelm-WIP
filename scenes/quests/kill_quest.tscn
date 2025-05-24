@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gqjxpb3btrnb"]
+
+[ext_resource type="Script" path="res://scripts/kill_quest.gd" id="1_1f3d7"]
+
+[node name="kill_quest" type="Node2D" groups=["kill_quest"]]
+script = ExtResource("1_1f3d7")

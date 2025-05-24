@@ -54,7 +54,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qq80e"]
-size = Vector2(32, 32)
+size = Vector2(24, 32)
 
 [node name="goblin_homeless" type="Area2D" node_paths=PackedStringArray("NPC_sprite", "NPC_collider")]
 collision_layer = 0

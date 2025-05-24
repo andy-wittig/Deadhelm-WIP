@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cj5ky0bvhedwe" path="res://scenes/player/hurt_player_area.tscn" id="6_uqaqm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl8ue"]
+resource_local_to_scene = true
 shader = ExtResource("2_ogi5w")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)

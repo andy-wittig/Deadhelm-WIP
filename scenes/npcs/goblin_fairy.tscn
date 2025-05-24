@@ -1,37 +1,38 @@
-[gd_scene load_steps=14 format=3 uid="uid://bilk5lx5tolcs"]
+[gd_scene load_steps=18 format=3 uid="uid://bilk5lx5tolcs"]
 
-[ext_resource type="Script" path="res://scripts/BaseNPC.gd" id="1_u012y"]
-[ext_resource type="Texture2D" uid="uid://cia7d3flwi15k" path="res://assets/sprites/npcs/goblin_fairy_idle_sheet.png" id="2_a33se"]
-[ext_resource type="Texture2D" uid="uid://kmhpgappb8ie" path="res://assets/sprites/npcs/fairy_headshot.png" id="2_fu2ju"]
-[ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="3_1sx76"]
+[ext_resource type="Script" path="res://scripts/BaseNPC.gd" id="1_b5mm2"]
+[ext_resource type="Texture2D" uid="uid://kmhpgappb8ie" path="res://assets/sprites/npcs/fairy_headshot.png" id="2_gv5xu"]
+[ext_resource type="Shader" path="res://shaders/highlight.gdshader" id="3_wytu3"]
+[ext_resource type="Texture2D" uid="uid://cia7d3flwi15k" path="res://assets/sprites/npcs/goblin_fairy_idle_sheet.png" id="4_n00lk"]
+[ext_resource type="Texture2D" uid="uid://h5xbm3ic0v64" path="res://assets/sprites/npcs/quest_accepted_icon.png" id="5_46gm7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d5csp"]
-shader = ExtResource("3_1sx76")
+shader = ExtResource("3_wytu3")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/enabled = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l35b3"]
-atlas = ExtResource("2_a33se")
+atlas = ExtResource("4_n00lk")
 region = Rect2(0, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2f6m6"]
-atlas = ExtResource("2_a33se")
+atlas = ExtResource("4_n00lk")
 region = Rect2(32, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qor28"]
-atlas = ExtResource("2_a33se")
+atlas = ExtResource("4_n00lk")
 region = Rect2(64, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wwqfq"]
-atlas = ExtResource("2_a33se")
+atlas = ExtResource("4_n00lk")
 region = Rect2(96, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ja840"]
-atlas = ExtResource("2_a33se")
+atlas = ExtResource("4_n00lk")
 region = Rect2(128, 0, 32, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_50yfu"]
-atlas = ExtResource("2_a33se")
+atlas = ExtResource("4_n00lk")
 region = Rect2(160, 0, 32, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h4t17"]
@@ -61,15 +62,76 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eby37"]
-size = Vector2(32, 32)
+size = Vector2(24, 32)
 
-[node name="goblin_fairy" type="Area2D" node_paths=PackedStringArray("NPC_sprite", "NPC_collider")]
+[sub_resource type="Animation" id="Animation_ufglj"]
+resource_name = "bounce"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuestIcon:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -40), Vector2(0, -38)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("QuestIcon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.174533]
+}
+
+[sub_resource type="Animation" id="Animation_2a0dd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuestIcon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -38)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("QuestIcon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tydpr"]
+_data = {
+"RESET": SubResource("Animation_2a0dd"),
+"bounce": SubResource("Animation_ufglj")
+}
+
+[node name="goblin_fairy" type="Area2D" node_paths=PackedStringArray("NPC_sprite", "NPC_collider") groups=["npc"]]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_u012y")
+script = ExtResource("1_b5mm2")
 NPC_sprite = NodePath("AnimatedSprite2D")
 NPC_collider = NodePath(".")
-headshot_texture = ExtResource("2_fu2ju")
+headshot_texture = ExtResource("2_gv5xu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_d5csp")
@@ -81,3 +143,14 @@ frame_progress = 0.0519615
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_eby37")
+
+[node name="QuestIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -38)
+texture = ExtResource("5_46gm7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tydpr")
+}
+autoplay = "bounce"

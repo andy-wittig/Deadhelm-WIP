@@ -485,6 +485,8 @@ texture = ExtResource("1_syuli")
 7:8/0/custom_data_0 = true
 8:8/0 = 0
 8:8/0/custom_data_0 = true
+9:8/0 = 0
+9:8/0/custom_data_0 = true
 
 [resource]
 physics_layer_0/collision_layer = 16
