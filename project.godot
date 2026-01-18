@@ -13,11 +13,11 @@ config_version=5
 config/name="Deadhelm"
 config/version="1.0.0"
 run/main_scene="res://scenes/game.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=480
 boot_splash/bg_color=Color(0.419608, 0.14902, 0.262745, 1)
-boot_splash/image="res://assets/sprites/UI/strange_few_studios.PNG"
 boot_splash/fullsize=false
+boot_splash/image="res://assets/sprites/UI/strange_few_studios.PNG"
 config/icon="res://assets/sprites/UI/icon.png"
 
 [audio]

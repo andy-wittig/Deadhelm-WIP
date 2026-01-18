@@ -1,11 +1,11 @@
 [gd_scene load_steps=48 format=3 uid="uid://cm4gh7qawwcbf"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_th4ch"]
+[ext_resource type="Script" uid="uid://b3oxjyjjuaubq" path="res://scripts/main_menu.gd" id="2_th4ch"]
 [ext_resource type="Texture2D" uid="uid://370vg8cxmgmw" path="res://assets/sprites/UI/title_ui.png" id="3_i7ejn"]
 [ext_resource type="Texture2D" uid="uid://daft7vtf5ceqb" path="res://assets/sprites/UI/text_button.png" id="3_vs43y"]
 [ext_resource type="FontFile" uid="uid://bwho0ihf6hpw6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_1urpk"]
-[ext_resource type="Shader" path="res://shaders/sway.gdshader" id="4_7fi5r"]
-[ext_resource type="Shader" path="res://shaders/distort.gdshader" id="4_mlfnw"]
+[ext_resource type="Shader" uid="uid://edu6ouqktbdd" path="res://shaders/sway.gdshader" id="4_7fi5r"]
+[ext_resource type="Shader" uid="uid://dd6ugsgxlmuuh" path="res://shaders/distort.gdshader" id="4_mlfnw"]
 [ext_resource type="Texture2D" uid="uid://7j2gwfbq4l34" path="res://assets/sprites/UI/text_settings.png" id="5_1f5mw"]
 [ext_resource type="FontFile" uid="uid://s0bpnvolv2i8" path="res://assets/fonts/PixelOperator8.ttf" id="5_3g5wa"]
 [ext_resource type="Texture2D" uid="uid://sploq4sqossu" path="res://assets/sprites/UI/text_check.png" id="5_c7y8w"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c3tnfa07koleu" path="res://scenes/menus/in_game_menu.tscn" id="8_ar250"]
 [ext_resource type="PackedScene" uid="uid://bqgd6hcfgc75y" path="res://scenes/menus/credits_menu.tscn" id="9_0w2qv"]
 [ext_resource type="PackedScene" uid="uid://btplmre76e21a" path="res://scenes/menus/journal_menu.tscn" id="9_7yf88"]
-[ext_resource type="Script" path="res://scripts/music_manager.gd" id="10_mudwi"]
+[ext_resource type="Script" uid="uid://b30fw1slfmbt1" path="res://scripts/music_manager.gd" id="10_mudwi"]
 [ext_resource type="PackedScene" uid="uid://b0378gpwb8g1x" path="res://scenes/menus/gameover_menu.tscn" id="11_bodm6"]
 [ext_resource type="PackedScene" uid="uid://drtehqda68hd6" path="res://scenes/menus/stats_menu.tscn" id="12_rx4po"]
 [ext_resource type="Texture2D" uid="uid://dm11bfh1qcc23" path="res://assets/sprites/UI/title_background_sky.png" id="13_1o8hw"]
@@ -150,22 +150,22 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m03xp"]
 _data = {
-"RESET": SubResource("Animation_vno7m"),
-"bounce": SubResource("Animation_334a0")
+&"RESET": SubResource("Animation_vno7m"),
+&"bounce": SubResource("Animation_334a0")
 }
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b3gn5"]
 frequency = 0.02
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2rdnd"]
-seamless = true
 noise = SubResource("FastNoiseLite_b3gn5")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_da0k7"]
 shader = ExtResource("4_mlfnw")
+shader_parameter/noise = SubResource("NoiseTexture2D_2rdnd")
 shader_parameter/speed = 0.05
 shader_parameter/strength = 0.005
-shader_parameter/noise = SubResource("NoiseTexture2D_2rdnd")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_i7rq8"]
 frequency = 0.02
@@ -175,9 +175,9 @@ noise = SubResource("FastNoiseLite_i7rq8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jb632"]
 shader = ExtResource("4_mlfnw")
+shader_parameter/noise = SubResource("NoiseTexture2D_elora")
 shader_parameter/speed = 0.05
 shader_parameter/strength = 0.005
-shader_parameter/noise = SubResource("NoiseTexture2D_elora")
 
 [sub_resource type="Gradient" id="Gradient_dqply"]
 colors = PackedColorArray(1, 0.819608, 0.835294, 0.784314, 0.2, 0.533333, 0.870588, 1)
@@ -405,7 +405,7 @@ mouse_filter = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MenuLayer/MenuControl/TitleBackground"]
 root_node = NodePath("../Title")
 libraries = {
-"": SubResource("AnimationLibrary_m03xp")
+&"": SubResource("AnimationLibrary_m03xp")
 }
 autoplay = "bounce"
 
